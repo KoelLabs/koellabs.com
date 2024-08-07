@@ -68,6 +68,112 @@
     }
   }
 
-  body {
+
+  .color-bg{
+    background-image: radial-gradient(at 27% 37%,#0284C7 0,transparent 0),radial-gradient(at 97% 21%,#0284C7B0 0,transparent 50%),radial-gradient(at 52% 99%,#0284C7b0 0,transparent 50%),radial-gradient(at 10% 29%,#0284C7 0,transparent 50%),radial-gradient(at 97% 96%,#95c6e4 0,transparent 50%),radial-gradient(at 33% 50%,#ffffff 0,transparent 50%),radial-gradient(at 79% 53%,#ffffff00 0,transparent 50%)
+  }
+
+  .drops {
+    position: relative;
     overflow: hidden;
+  }
+  
+  .drops::before {
+    content: "";
+    position: absolute;
+    top: -100%; /* Start above the bar */
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent, #1e3a8a); ;
+    animation: drop-animation 15s linear infinite;
+  }
+  
+  @keyframes drop-animation {
+    0% {
+      top: -200%;
+    }
+    100% {
+      top: 200%;
+    }
+  }
+
+  .drops2 {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .drops2::before {
+    content: "";
+    position: absolute;
+    top: -100%; /* Start above the bar */
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent, #0284c7); ;
+    animation: drop-animation 10s linear infinite;
+  }
+  
+  .drops3 {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .drops3::before {
+    content: "";
+    position: absolute;
+    top: -100%; /* Start above the bar */
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent, #1e3a8a); ;
+    animation: drop-animation 18s linear infinite;
+  }
+  
+  .drops4 {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .drops4::before {
+    content: "";
+    position: absolute;
+    top: -100%; /* Start above the bar */
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent, #1d4ed8); ;
+    animation: drop-animation 22s linear infinite;
+  }
+  
+  
+ 
+
+  .shimmer path {
+    opacity: 0.5;
+    animation: shimmer 3s infinite;
+  }
+  .shimmer path:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .shimmer path:nth-child(2) {
+    animation-delay: 2s;
+  }
+  .shimmer path:nth-child(3) {
+    animation-delay: 4s;
+  }
+
+  @keyframes shimmer {
+    0%, 100% {
+      opacity: 0.5;
+      scale: 1;
+    }
+    50% {
+      opacity: 1;
+      scale: 1.05;
+    }
   }
