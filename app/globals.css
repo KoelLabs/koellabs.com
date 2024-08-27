@@ -177,3 +177,7 @@
       scale: 1.05;
     }
   }
+
+  html{
+    overflow-x: hidden;
+  }
