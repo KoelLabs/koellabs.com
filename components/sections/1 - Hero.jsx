@@ -48,7 +48,7 @@ export default function Hero() {
               Our platform uses cutting-edge technology to help you improve your pronunciation in a fun and engaging way via content that you already love.
             </p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4">
-              <Button className="w-full sm:w-32 bg-gradient-to-b py-0 border border-double border-black from-sky-900 to-blue-950">Get Started</Button>
+              <Button className="w-full sm:w-44 bg-gradient-to-b py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">Get Started for Free</Button>
               <Button className="w-full sm:w-32" variant="outline">Learn More</Button>
               
             </div>
