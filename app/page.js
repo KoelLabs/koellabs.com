@@ -1,4 +1,3 @@
-import HeroVideoDialogDemoTopInBottomOut from "@/components/example/hero-video-dialog-demo-top-in-bottom-out";
 import Hero from "@/components/sections/1 - Hero";
 import Logos from "@/components/sections/2 - Logo";
 import Header from "@/components/ui/1 - header";
