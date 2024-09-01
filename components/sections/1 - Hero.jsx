@@ -25,7 +25,7 @@ export default function Hero() {
             <h1 className="text-4xl font-bold tracking-[-0.04em] text-gray-900 sm:text-6xl">
               A Novel Way to Quickly <span className='bg-clip-text text-transparent bg-gradient-to-br from-sky-600 to-blue-950'> Master Pronunciation.</span>
             </h1>
-            <svg class='absolute -right-4 top-28 shimmer' xmlns="http://www.w3.org/2000/svg" width="44" height="47" fill="none" viewBox="0 0 44 47">
+            <svg className='absolute -right-4 top-28 shimmer' xmlns="http://www.w3.org/2000/svg" width="44" height="47" fill="none" viewBox="0 0 44 47">
               <path fill="url(#paint0_linear_1610_229)" d="M18.32 19.146c.042-.112.257-.068.251.052-.09 1.955-.097 6.527 1.578 9.074 1.675 2.548 5.874 4.355 7.705 5.048.112.042.067.257-.052.251-1.956-.09-6.527-.096-9.075 1.578-2.547 1.675-4.355 5.874-5.047 7.705-.043.112-.258.068-.252-.052.09-1.956.097-6.527-1.578-9.075-1.674-2.547-5.873-4.354-7.704-5.047-.113-.043-.068-.257.052-.252 1.955.09 6.527.097 9.074-1.578 2.548-1.674 4.355-5.873 5.048-7.704z"></path>
               <path fill="url(#paint1_linear_1610_229)" d="M33.683 9.777c.044-.111.269-.065.265.055-.052 1.525.01 4.562 1.15 6.298 1.141 1.736 3.905 2.996 5.325 3.553.112.044.065.27-.055.265-1.525-.051-4.561.01-6.297 1.15-1.736 1.142-2.996 3.905-3.554 5.326-.044.111-.269.065-.265-.055.052-1.525-.009-4.562-1.15-6.298-1.141-1.736-3.904-2.996-5.325-3.554-.112-.043-.065-.268.055-.264 1.525.051 4.561-.01 6.297-1.15 1.736-1.142 2.997-3.905 3.554-5.326z"></path>
               <path fill="url(#paint2_linear_1610_229)" d="M14.68 2.19c.047-.11.286-.06.285.059-.017 1.116.08 2.975.804 4.077.724 1.102 2.392 1.927 3.423 2.355.111.046.061.285-.058.284-1.117-.017-2.975.08-4.077.804-1.102.724-1.928 2.392-2.355 3.423-.046.11-.286.061-.284-.058.016-1.117-.08-2.975-.804-4.077-.724-1.102-2.392-1.928-3.424-2.355-.11-.046-.06-.286.059-.284 1.116.016 2.975-.08 4.077-.804 1.102-.724 1.927-2.392 2.355-3.424z"></path>
@@ -55,19 +55,19 @@ export default function Hero() {
           </div>
         </div>
 
-        <div class="mx-auto absolute top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[-1]">
-          <div class="h-full"></div>
-          <div class="w-[1px] h-full bg-neutral-200 drops"></div>
-          <div class="w-[1px] h-full bg-neutral-200 drops2"></div>
-          <div class="h-full"></div>
-          <div class="h-full"></div>
-          <div class="h-full"></div>
-          <div class="h-full"></div>
-          <div class="h-full"></div>
-          <div class="h-full"></div>
-          <div class="w-[1px] h-full bg-neutral-200 drops3"></div>
-          <div class="w-[1px] h-full bg-neutral-200 drops4"></div>
-          <div class="h-full"></div>
+        <div className="mx-auto absolute top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[-1]">
+          <div className="h-full"></div>
+          <div className="w-[1px] h-full bg-neutral-200 drops"></div>
+          <div className="w-[1px] h-full bg-neutral-200 drops2"></div>
+          <div className="h-full"></div>
+          <div className="h-full"></div>
+          <div className="h-full"></div>
+          <div className="h-full"></div>
+          <div className="h-full"></div>
+          <div className="h-full"></div>
+          <div className="w-[1px] h-full bg-neutral-200 drops3"></div>
+          <div className="w-[1px] h-full bg-neutral-200 drops4"></div>
+          <div className="h-full"></div>
 
         </div>
 
