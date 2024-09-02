@@ -103,26 +103,26 @@ export default function AuthScreen() {
       </div>
       <div className="hidden bg-muted lg:block relative rounded-xl m-4 overflow-hidden dark:bg-neutral-900/[0.25]">
         <div className="mx-auto absolute top-0 left-0 right-0 bottom-0 h-full flex justify-between z-[10] rotate-45 scale-[1.35]">
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage1"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage2"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage3"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage4"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage5"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage6"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage7"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage8"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage9"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage10"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage11"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage12"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage13"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage14"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage15"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage16"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage17"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage18"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage19"></div>
-          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 dropPage dropPage20"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops2"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops3"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops4"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops2"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops3"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops4"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops2"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops3"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops4"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops2"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops3"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops4"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops2"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops3"></div>
+          <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops4"></div>
         </div>
       </div>
     </div>
