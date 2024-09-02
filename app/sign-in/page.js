@@ -7,10 +7,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { MessageSquareText } from 'lucide-react';
+import React from 'react';
 
 export default function AuthScreen() {
-  const [email, setEmail] = useState(undefined);
-  const [password, setPassword] = useState(undefined);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2 xl:min-h-screen dark:bg-neutral-950/[0.99] ">
       <div className="flex items-center justify-center py-12 dark:bg-neutral-950/[0.99]">

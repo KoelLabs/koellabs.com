@@ -130,7 +130,7 @@ export default function Hero() {
         </div>
 
         <div className="flex justify-center sm:overflow-visible p-8">
-          <Card className=" max-w-[1200px] min-w-[500px] border-neutral-300/50 p-6 bg-white border-2 rounded-3xl shadow-2xl w-full h-fit mx-auto  z-[2] relative ">
+          <Card className=" max-w-[1200px] min-w-[500px] border-neutral-300/50 p-6 bg-white border-2 rounded-3xl shadow-2xl w-full h-fit mx-auto  z-[1] relative ">
             <HeroVideoDialog
               className="rounded-[500px]"
               animationStyle="top-in-bottom-out"

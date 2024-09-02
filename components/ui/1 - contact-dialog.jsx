@@ -32,7 +32,7 @@ export function ContactDialog({ ...props }) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger
-          className="tracking-tight text-neutral-700 font-medium cursor-pointer"
+          className="tracking-tight text-neutral-500 hover:text-neutral-700 cursor-pointer"
           {...props}
         >
           Contact
@@ -107,7 +107,7 @@ export function ContactDialog({ ...props }) {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger
-        className="tracking-tight text-neutral-700 font-medium cursor-pointer"
+        className="tracking-tight text-neutral-500 hover:text-neutral-700 cursor-pointer"
         {...props}
       >
         Contact
