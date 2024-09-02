@@ -4,13 +4,13 @@ import Header from '@/components/ui/1 - header';
 import Image from 'next/image';
 
 export default function Home() {
-    return (
-        <div className="flex-col flex w-screen relative scroll-smooth">
-            <div className="z-10 sticky top-0 mx-auto w-full">
-                <Header />
-            </div>
-            <Hero />
-            <Logos />
-        </div>
-    );
+  return (
+    <div className="flex-col flex w-screen relative scroll-smooth">
+      <div className="z-10 sticky top-0 mx-auto w-full">
+        <Header />
+      </div>
+      <Hero />
+      <Logos />
+    </div>
+  );
 }
