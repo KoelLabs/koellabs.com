@@ -18,5 +18,8 @@ node_modules
 .DS_Store
 *.pem
 
+# postgres
+data
+
 # local env files
 .env*.local

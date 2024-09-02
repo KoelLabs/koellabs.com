@@ -1,0 +1,19 @@
+services:
+    postgres:
+        image: postgres
+        env_file: '../.env.local'
+        ports:
+            - '5432:5432'
+        volumes:
+            - ../data:/var/lib/postgresql/data
+    webapp:
+        build:
+            context: ..
+            dockerfile: ./scripts/Dockerfile.dev
+        env_file: '../.env.local'
+        depends_on:
+            - postgres
+        ports:
+            - '3000:3000'
+        volumes:
+            - ..:/app
