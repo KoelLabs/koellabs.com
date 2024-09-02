@@ -4,6 +4,7 @@ import Header from '../ui/1 - header';
 import { ChevronRight, UserRoundPlus } from 'lucide-react';
 import Link from 'next/link';
 import { Card } from '../ui/card';
+import HeroVideoDialog from '../magicui/hero-video-dialog';
 
 export default function Hero() {
   return (
@@ -129,16 +130,14 @@ export default function Hero() {
         </div>
 
         <div className="flex justify-center sm:overflow-visible p-8">
-          <Card className=" max-w-[1200px] min-w-[500px] border-neutral-300/50 p-6 bg-white border-2 rounded-3xl shadow-2xl w-full h-[700px] mx-auto  z-[2] relative ">
-            <video
-              className="w-full h-full object-cover rounded-[12px] border border-neutral-200 transition-all"
-              preload="none"
-              playsInline
-              autoPlay
-              controls
-            >
-              <source className="" src="/tempVid.mp4" type="video/mp4" />
-            </video>
+          <Card className=" max-w-[1200px] min-w-[500px] border-neutral-300/50 p-6 bg-white border-2 rounded-3xl shadow-2xl w-full h-fit mx-auto  z-[2] relative ">
+            <HeroVideoDialog
+              className="rounded-[500px]"
+              animationStyle="top-in-bottom-out"
+              videoSrc=""
+              thumbnailSrc="/temp-thumb.png"
+              thumbnailAlt="Hero Video"
+            />
           </Card>
         </div>
       </div>

@@ -33,7 +33,7 @@ export default function Header() {
   };
 
   return (
-    <header className=" overflow-hidden h-fit w-full text-black sticky bg-neutral-100/90 backdrop-blur-md border border-neutral-200">
+    <header className="overflow-hidden h-fit w-full text-black bg-neutral-100/90 backdrop-blur-md border border-neutral-200">
       <nav className="flex justify-between items-center max-w-[1090px] px-8 w-full py-6 mx-auto">
         <ContextMenu>
           <ContextMenuTrigger>
