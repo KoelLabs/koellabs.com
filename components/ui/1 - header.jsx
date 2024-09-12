@@ -261,6 +261,9 @@ export default function Header() {
         </div>
         <div className="md:flex gap-2 hidden">
           <Button variant="outline" className="">
+            Sign In
+          </Button>
+          <Button className=" bg-gradient-to-b py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
             Get Started
           </Button>
         </div>
