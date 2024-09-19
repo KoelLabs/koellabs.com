@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/context-menu';
 import { Code, Copy } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 const links = [
   { href: '/', label: 'Home' },
@@ -261,7 +262,7 @@ export default function Header() {
         </div>
         <div className="md:flex gap-2 hidden">
           <Button variant="outline" className="">
-            Sign In
+            <Link href="sign-in">Sign In</Link>
           </Button>
           <Button className=" bg-gradient-to-b py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
             Get Started

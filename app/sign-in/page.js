@@ -6,17 +6,29 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
-import { MessageSquareText } from 'lucide-react';
+import { ArrowLeftCircle, MessageSquareText } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
 import React from 'react';
 
 export default function AuthScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
+
   return (
-    <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2 xl:min-h-screen dark:bg-neutral-950/[0.99] ">
-      <div className="flex items-center justify-center py-12 dark:bg-neutral-950/[0.99]">
+    <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2 xl:min-h-screen dark:bg-neutral-950/[0.99]">
+      <div className="flex items-center justify-center py-12 dark:bg-neutral-950/[0.99] relative">
         <div className="mx-auto grid w-full p-4 sm:w-[405px] gap-6">
           <div className="grid gap-2 text-center">
+            {router.back.value}
+            <button
+              className=" w-fit h-8 rounded-full bg-neutral-100/50 border-neutral-200/50 border flex flex-row justify- items-center absolute top-12 left-12"
+              onClick={() => router.back()}
+            >
+              <ArrowLeftCircle className="h-4 w-4 ml-2 mr-1.5 text-neutral-500" />
+              <p className="text-xs mr-4 text-neutral-500">Back</p>
+            </button>
             <h1 className="text-3xl font-bold tracking-tight ">
               <span className="relative mr-1 ml-6 text-transparent bg-clip-text bg-gradient-to-br from-black via-black to-sky-600 dark:from-neutral-100 dark:via-neutral-100 dark:to-neutral-100">
                 {' '}
@@ -332,7 +344,10 @@ export default function AuthScreen() {
                 <Label htmlFor="password" className="dark:text-white">
                   Password
                 </Label>
-                <Link href="/forgot-password" className="ml-auto inline-block text-sm underline">
+                <Link
+                  href="/forgot-password"
+                  className="ml-auto inline-block text-sm hover:underline text-sky-700 dark:text-sky-400"
+                >
                   Forgot your password?
                 </Link>
               </div>
@@ -471,7 +486,7 @@ export default function AuthScreen() {
           </div>
           <div className="mt- text-center text-sm dark:text-white">
             Don&apos;t have an account?{' '}
-            <Link href="#" className="underline">
+            <Link href="#" className="hover:underline text-sky-700 dark:text-sky-400">
               Sign Up
             </Link>
           </div>
