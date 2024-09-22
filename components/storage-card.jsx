@@ -1,22 +1,22 @@
-import { Database } from "lucide-react"
-
-import { Card, CardContent } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
+import { Star, Zap } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Badge } from './ui/badge';
 
 export function StorageCard() {
   return (
-    (<Card className="rounded-md text-xs shadow-sm">
-      <CardContent className="flex items-start gap-2.5 p-2.5">
-        <div
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-accent text-accent-foreground">
-          <Database className="h-5 w-5 text-muted-foreground" />
+    <Card className="rounded-md text-xs shadow-sm min-w-[233px]">
+      <CardContent className="flex flex-col items-start gap-2 p-4">
+        <div className="flex items-center tracking-tight w-full">
+          <h3 className="font-semibold text-sm">Welcome to the Beta!</h3>
+          <Badge variant="outline" className="ml-auto">
+            New
+          </Badge>
         </div>
-        <div className="grid flex-1 gap-1">
-          <p className="font-medium">Running out of space?</p>
-          <p className="text-muted-foreground">79.2 GB / 100 GB used</p>
-          <Progress value={79.2} className="mt-1" aria-label="79.2 GB / 100 GB used" />
-        </div>
+        <p className="text-muted-foreground">
+          Please let us know if you have any feedback, questions, or issues.
+        </p>
       </CardContent>
-    </Card>)
+    </Card>
   );
 }

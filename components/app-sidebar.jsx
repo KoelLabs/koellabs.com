@@ -1,31 +1,38 @@
-"use client"
+'use client';
 
 import {
   Atom,
   Bird,
   BookOpen,
   Bot,
+  ChevronLeft,
+  ChevronRight,
+  Clapperboard,
   Code2,
   Eclipse,
   Frame,
   History,
+  Home,
   LifeBuoy,
   Map,
+  Moon,
   PieChart,
+  Plus,
   Rabbit,
   Send,
   Settings2,
   SquareTerminal,
   Star,
   Turtle,
-} from "lucide-react"
-
-import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
-import { StorageCard } from "@/components/storage-card"
-import { TeamSwitcher } from "@/components/team-switcher"
+} from 'lucide-react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { NavMain } from '@/components/nav-main';
+import { NavProjects } from '@/components/nav-projects';
+import { NavSecondary } from '@/components/nav-secondary';
+import { NavUser } from '@/components/nav-user';
+import { StorageCard } from '@/components/storage-card';
+import { Button } from '@/components/ui/button';
+import { MotionConfig } from 'framer-motion';
 import {
   Sidebar,
   SidebarContent,
@@ -33,246 +40,301 @@ import {
   SidebarHeader,
   SidebarItem,
   SidebarLabel,
-} from "@/components/ui/sidebar"
+  SidebarTrigger,
+  useSidebar,
+} from '@/components/ui/sidebar';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
 const data = {
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: Atom,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: Eclipse,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Rabbit,
-      plan: "Free",
-    },
-  ],
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: 'ruslan_11',
+    email: 'ruslan@koellabs.com',
+    avatar: '',
   },
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-          icon: History,
-          description: "View your recent prompts",
-        },
-        {
-          title: "Starred",
-          url: "#",
-          icon: Star,
-          description: "Browse your starred prompts",
-        },
-        {
-          title: "Settings",
-          url: "#",
-          icon: Settings2,
-          description: "Configure your playground",
-        },
-      ],
+      title: 'Home',
+      url: '/dashboard',
+      icon: Home,
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-          icon: Rabbit,
-          description: "Our fastest model for general use cases.",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-          icon: Bird,
-          description: "Performance and speed for efficiency.",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-          icon: Turtle,
-          description: "The most powerful model for complex computations.",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "API",
-      url: "#",
-      icon: Code2,
-      items: [
-        {
-          title: "Chat",
-          url: "#",
-        },
-        {
-          title: "Completion",
-          url: "#",
-        },
-        {
-          title: "Images",
-          url: "#",
-        },
-        {
-          title: "Video",
-          url: "#",
-        },
-        {
-          title: "Speech",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
+      title: 'Settings',
+      url: '#',
       icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
     },
   ],
 
   navSecondary: [
     {
-      title: "Support",
-      url: "#",
+      title: 'Support',
+      url: '#',
       icon: LifeBuoy,
     },
     {
-      title: "Feedback",
-      url: "#",
+      title: 'Feedback',
+      url: '#',
       icon: Send,
     },
   ],
-  projects: [
+  videos: [
     {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
+      name: 'Friends Season 1 - Clip Joey and Chandler',
+      url: '#',
+      icon: Clapperboard,
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
+      name: 'Schitts Creek Season 3 - Clip David and Alexis',
+      url: '#',
+      icon: Clapperboard,
     },
     {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
-  searchResults: [
-    {
-      title: "Routing Fundamentals",
-      teaser:
-        "The skeleton of every application is routing. This page will introduce you to the fundamental concepts of routing for the web and how to handle routing in Next.js.",
-      url: "#",
-    },
-    {
-      title: "Layouts and Templates",
-      teaser:
-        "The special files layout.js and template.js allow you to create UI that is shared between routes. This page will guide you through how and when to use these special files.",
-      url: "#",
-    },
-    {
-      title: "Data Fetching, Caching, and Revalidating",
-      teaser:
-        "Data fetching is a core part of any application. This page goes through how you can fetch, cache, and revalidate data in React and Next.js.",
-      url: "#",
-    },
-    {
-      title: "Server and Client Composition Patterns",
-      teaser:
-        "When building React applications, you will need to consider what parts of your application should be rendered on the server or the client. ",
-      url: "#",
-    },
-    {
-      title: "Server Actions and Mutations",
-      teaser:
-        "Server Actions are asynchronous functions that are executed on the server. They can be used in Server and Client Components to handle form submissions and data mutations in Next.js applications.",
-      url: "#",
+      name: 'The Office Season 1 - Clip Jim and Dwight',
+      url: '#',
+      icon: Clapperboard,
     },
   ],
-}
+};
 
 export function AppSidebar() {
+  const shouldReduceMotion = useReducedMotion();
+  const { open, onOpenChange } = useSidebar();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isFullyOpen, setIsFullyOpen] = useState(open);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (open) {
+      const timer = setTimeout(() => setIsFullyOpen(true), 150); // 150ms is the duration of the sidebar animation
+      return () => clearTimeout(timer);
+    } else {
+      setIsFullyOpen(false);
+    }
+  }, [open]);
+
+  const toggleSidebar = () => {
+    onOpenChange(!open);
+  };
+
   return (
-    (<Sidebar>
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
-      </SidebarHeader>
-      <SidebarContent>
-        <SidebarItem>
-          <SidebarLabel>Platform</SidebarLabel>
-          <NavMain items={data.navMain} searchResults={data.searchResults} />
-        </SidebarItem>
-        <SidebarItem>
-          <SidebarLabel>Projects</SidebarLabel>
-          <NavProjects projects={data.projects} />
-        </SidebarItem>
-        <SidebarItem className="mt-auto">
-          <SidebarLabel>Help</SidebarLabel>
-          <NavSecondary items={data.navSecondary} />
-        </SidebarItem>
-        <SidebarItem>
-          <StorageCard />
-        </SidebarItem>
-      </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
-    </Sidebar>)
+    <Sidebar>
+      <MotionConfig reducedMotion="always">
+        <SidebarHeader>
+          <Link
+            href="/"
+            className={`flex items-center gap-2 font-semibold py-1 h-[36px] ${open ? '' : ''}`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="870"
+              height="870"
+              fill="none"
+              viewBox="0 0 870 870"
+              className="inline-block h-7 w-7 -mt-0.5"
+            >
+              <rect
+                width="214"
+                height="429"
+                x="671.179"
+                y="403"
+                fill="url(#paint0_linear_1691_806)"
+                fillOpacity="0.6"
+                rx="107"
+                transform="rotate(90 671.179 403)"
+              ></rect>
+              <rect
+                width="214"
+                height="429"
+                x="652.67"
+                y="662.406"
+                fill="url(#paint1_linear_1691_806)"
+                fillOpacity="0.6"
+                rx="107"
+                transform="rotate(135 652.67 662.406)"
+              ></rect>
+              <rect
+                width="214"
+                height="429"
+                x="671.179"
+                y="403"
+                fill="url(#paint2_linear_1691_806)"
+                fillOpacity="0.6"
+                rx="107"
+                transform="rotate(90 671.179 403)"
+              ></rect>
+              <rect
+                width="214"
+                height="429"
+                x="652.67"
+                y="662.406"
+                fill="url(#paint3_linear_1691_806)"
+                fillOpacity="0.6"
+                rx="107"
+                transform="rotate(135 652.67 662.406)"
+              ></rect>
+              <rect
+                width="214"
+                height="429"
+                x="671.179"
+                y="403"
+                fill="url(#paint4_linear_1691_806)"
+                fillOpacity="0.6"
+                rx="107"
+                transform="rotate(90 671.179 403)"
+              ></rect>
+              <rect
+                width="214"
+                height="429"
+                x="652.67"
+                y="662.406"
+                fill="url(#paint5_linear_1691_806)"
+                fillOpacity="0.6"
+                rx="107"
+                transform="rotate(135 652.67 662.406)"
+              ></rect>
+              <path
+                fill="#000"
+                d="M283.332 374.002c-55.404-20.556-106.308-146.637-104.047-152.731 2.261-6.094 123.083-68.461 178.487-47.905 55.404 20.556 83.654 82.134 63.098 137.538-20.556 55.404-82.134 83.654-137.538 63.098z"
+              ></path>
+              <defs>
+                <linearGradient
+                  id="paint0_linear_1691_806"
+                  x1="778.179"
+                  x2="778.179"
+                  y1="403"
+                  y2="832"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stopColor="#317EC5"></stop>
+                  <stop offset="1"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint1_linear_1691_806"
+                  x1="759.67"
+                  x2="759.67"
+                  y1="662.406"
+                  y2="1091.41"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stopColor="#317EC5"></stop>
+                  <stop offset="1"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint2_linear_1691_806"
+                  x1="778.179"
+                  x2="778.179"
+                  y1="403"
+                  y2="832"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stopColor="#317EC5"></stop>
+                  <stop offset="1"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint3_linear_1691_806"
+                  x1="759.67"
+                  x2="759.67"
+                  y1="662.406"
+                  y2="1091.41"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stopColor="#317EC5"></stop>
+                  <stop offset="1"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint4_linear_1691_806"
+                  x1="778.179"
+                  x2="778.179"
+                  y1="403"
+                  y2="832"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stopColor="#317EC5"></stop>
+                  <stop offset="1"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint5_linear_1691_806"
+                  x1="759.67"
+                  x2="759.67"
+                  y1="662.406"
+                  y2="1091.41"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stopColor="#317EC5"></stop>
+                  <stop offset="1"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+            <AnimatePresence>
+              {open && (
+                <motion.span
+                  initial={isLoaded ? { opacity: 0, width: 0 } : false}
+                  animate={{ opacity: 1, width: 'auto' }}
+                  exit={shouldReduceMotion ? false : { opacity: 0, width: 0 }}
+                  transition={
+                    shouldReduceMotion ? { duration: 0.0 } : { duration: 0.15, ease: 'easeInOut' }
+                  }
+                  className="tracking-tighter -ml-1.5 text-xl overflow-hidden whitespace-nowrap"
+                >
+                  Koel{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-black via-sky-950 to-sky-600">
+                    Labs
+                  </span>
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </Link>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={toggleSidebar}
+            className="ml-auto h-7 w-7 py-1"
+          >
+            {open ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+          </Button>
+        </SidebarHeader>
+        <SidebarContent>
+          <SidebarItem>
+            <SidebarLabel>{open && 'Platform'}</SidebarLabel>
+            <NavMain items={data.navMain} isCollapsed={!open} />
+          </SidebarItem>
+          {!open && <div className="h-[1px] bg-black/10 w-full"></div>}
+          <SidebarItem>
+            <SidebarLabel className="flex justify-between items-center">
+              {open && 'Your Videos'}{' '}
+              {open && (
+                <Button variant="ghost" size="icon" className="h-6 w-6 -mr-0.5">
+                  <Plus className="h-4 w-4" />
+                </Button>
+              )}
+            </SidebarLabel>
+            <NavProjects projects={data.videos} isCollapsed={!open} />
+          </SidebarItem>
+          <SidebarItem className="mt-auto">
+            <NavSecondary items={data.navSecondary} isCollapsed={!open} />
+          </SidebarItem>
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                initial={isLoaded ? { opacity: 0, width: 0 } : false}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.0, ease: 'easeInOut' }}
+              >
+                <SidebarItem>
+                  <StorageCard />
+                </SidebarItem>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </SidebarContent>
+        <SidebarFooter>
+          <NavUser user={data.user} isCollapsed={!open} />
+        </SidebarFooter>
+      </MotionConfig>
+    </Sidebar>
   );
 }
