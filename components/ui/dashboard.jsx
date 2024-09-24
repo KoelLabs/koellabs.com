@@ -12,9 +12,15 @@ import {
   ShoppingCart,
   Users,
 } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/base/badge';
+import { Button } from '@/components/ui/base/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/base/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,9 +28,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+} from '@/components/ui/base/dropdown-menu';
+import { Input } from '@/components/ui/base/input';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/base/sheet';
 export const description =
   'A products dashboard with a sidebar navigation and a main content area. The dashboard has a header with a search input and a user menu. The sidebar has a logo, navigation links, and a card with a call to action. The main content area shows an empty state with a call to action.';
 export function Dashboard() {

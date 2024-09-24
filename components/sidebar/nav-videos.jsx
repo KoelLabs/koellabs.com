@@ -2,20 +2,25 @@ import Link from 'next/link';
 import { MoreHorizontal, PlusSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/base/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+} from '@/components/ui/base/dropdown-menu';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/base/tooltip';
 
-export function NavProjects({ projects, className, isCollapsed }) {
+export function NavVideos({ videos, className, isCollapsed }) {
   return (
     <ul className={cn('grid gap-0.5', className)}>
-      {projects.map(item => (
+      {videos.map(item => (
         <li
           key={item.name}
           className="has-[[data-state=open]]:bg-accent has-[[data-state=open]]:text-accent-foreground group relative rounded-md hover:bg-accent hover:text-accent-foreground"
@@ -27,10 +32,15 @@ export function NavProjects({ projects, className, isCollapsed }) {
                   href={item.url}
                   className={cn(
                     'flex h-7 items-center gap-2.5 overflow-hidden rounded-md px-1.5 text-xs outline-none ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2',
-                    isCollapsed ? 'justify-center' : '',
+                    isCollapsed ? 'justify-center h-10' : '',
                   )}
                 >
-                  <item.icon className="h-4 w-4 shrink-0 translate-x-0.5 text-muted-foreground" />
+                  <item.icon
+                    className={cn(
+                      'shrink-0 text-muted-foreground h-4 w-4',
+                      isCollapsed ? '' : 'translate-x-0.5 h-4 w-4',
+                    )}
+                  />
                   <AnimatePresence>
                     {!isCollapsed && (
                       <div className="line-clamp-1 grow overflow-hidden pr-6 font-medium">

@@ -20,6 +20,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.33.0",
+    "embla-carousel-react": "^8.3.0",
     "framer-motion": "^11.3.30",
     "lucide-react": "^0.407.0",
     "next": "^14.2.13",
@@ -29,6 +30,7 @@
     "react-dom": "^18",
     "recharts": "^2.12.7",
     "tailwind-merge": "^2.5.2",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.4"
   },

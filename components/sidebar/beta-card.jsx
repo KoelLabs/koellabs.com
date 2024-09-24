@@ -1,9 +1,9 @@
 import { Star, Zap } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { Badge } from './ui/badge';
+import { Button } from '@/components/ui/base/button';
+import { Card, CardContent, CardFooter } from '@/components/ui/base/card';
+import { Badge } from '@/components/ui/base/badge';
 
-export function StorageCard() {
+export function BetaCard() {
   return (
     <Card className="rounded-md text-xs shadow-sm min-w-[233px]">
       <CardContent className="flex flex-col items-start gap-2 p-4">

@@ -4,8 +4,8 @@ import { PanelLeft } from 'lucide-react';
 
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/base/button';
+import { Sheet, SheetContent } from '@/components/ui/base/sheet';
 import { useReducedMotion } from 'framer-motion';
 
 export const SIDEBAR_STATE_COOKIE = 'sidebar:state';

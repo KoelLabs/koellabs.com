@@ -1,37 +1,22 @@
 'use client';
 
 import {
-  Atom,
-  Bird,
-  BookOpen,
-  Bot,
   ChevronLeft,
   ChevronRight,
   Clapperboard,
-  Code2,
-  Eclipse,
-  Frame,
-  History,
   Home,
   LifeBuoy,
-  Map,
-  Moon,
-  PieChart,
   Plus,
-  Rabbit,
   Send,
   Settings2,
-  SquareTerminal,
-  Star,
-  Turtle,
 } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { NavMain } from '@/components/nav-main';
-import { NavProjects } from '@/components/nav-projects';
-import { NavSecondary } from '@/components/nav-secondary';
-import { NavUser } from '@/components/nav-user';
-import { StorageCard } from '@/components/storage-card';
-import { Button } from '@/components/ui/button';
+import { NavMain } from '@/components/sidebar/nav-main';
+import { NavVideos } from '@/components/sidebar/nav-videos';
+import { NavSecondary } from '@/components/sidebar/nav-secondary';
+import { NavUser } from '@/components/sidebar/nav-user';
+import { BetaCard } from '@/components/sidebar/beta-card';
+import { Button } from '@/components/ui/base/button';
 import { MotionConfig } from 'framer-motion';
 import {
   Sidebar,
@@ -40,7 +25,6 @@ import {
   SidebarHeader,
   SidebarItem,
   SidebarLabel,
-  SidebarTrigger,
   useSidebar,
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
@@ -133,7 +117,106 @@ export function AppSidebar() {
               height="870"
               fill="none"
               viewBox="0 0 870 870"
-              className="inline-block h-7 w-7 -mt-0.5"
+              className=" h-7 w-7 -mt-0.5 hidden dark:inline-block"
+            >
+              <rect
+                width="214"
+                height="429"
+                x="671.178"
+                y="403"
+                fill="url(#paint0_linear_1675_354)"
+                fillOpacity="0.6"
+                rx="107"
+                transform="rotate(90 671.178 403)"
+              ></rect>
+              <rect
+                width="214"
+                height="429"
+                x="671.18"
+                y="403"
+                fill="url(#paint1_linear_1675_354)"
+                fillOpacity="0.6"
+                rx="107"
+                transform="rotate(90 671.18 403)"
+              ></rect>
+              <rect
+                width="214"
+                height="429"
+                x="652.67"
+                y="662.406"
+                fill="url(#paint2_linear_1675_354)"
+                fillOpacity="0.6"
+                rx="107"
+                transform="rotate(135 652.67 662.406)"
+              ></rect>
+              <rect
+                width="214"
+                height="429"
+                x="652.67"
+                y="662.406"
+                fill="url(#paint3_linear_1675_354)"
+                fillOpacity="0.6"
+                rx="107"
+                transform="rotate(135 652.67 662.406)"
+              ></rect>
+              <path
+                fill="#fff"
+                d="M349.176 383c-59.095 0-150.677-100.5-150.677-107s91.582-107 150.677-107c59.094 0 107 47.906 107 107s-47.906 107-107 107z"
+              ></path>
+              <defs>
+                <linearGradient
+                  id="paint0_linear_1675_354"
+                  x1="778.178"
+                  x2="778.178"
+                  y1="403"
+                  y2="832"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop></stop>
+                  <stop offset="1" stopColor="#fff"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint1_linear_1675_354"
+                  x1="778.18"
+                  x2="778.18"
+                  y1="403"
+                  y2="832"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop></stop>
+                  <stop offset="1" stopColor="#fff"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint2_linear_1675_354"
+                  x1="759.67"
+                  x2="759.67"
+                  y1="662.406"
+                  y2="1091.41"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop></stop>
+                  <stop offset="1" stopColor="#fff"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint3_linear_1675_354"
+                  x1="759.67"
+                  x2="759.67"
+                  y1="662.406"
+                  y2="1091.41"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop></stop>
+                  <stop offset="1" stopColor="#fff"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="870"
+              height="870"
+              fill="none"
+              viewBox="0 0 870 870"
+              className="inline-block h-7 w-7 -mt-0.5 dark:hidden"
             >
               <rect
                 width="214"
@@ -280,7 +363,7 @@ export function AppSidebar() {
                   className="tracking-tighter -ml-1.5 text-xl overflow-hidden whitespace-nowrap"
                 >
                   Koel{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-black via-sky-950 to-sky-600">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-black via-sky-950 to-sky-600 dark:from-white dark:via-white dark:to-black">
                     Labs
                   </span>
                 </motion.span>
@@ -311,7 +394,7 @@ export function AppSidebar() {
                 </Button>
               )}
             </SidebarLabel>
-            <NavProjects projects={data.videos} isCollapsed={!open} />
+            <NavVideos videos={data.videos} isCollapsed={!open} />
           </SidebarItem>
           <SidebarItem className="mt-auto">
             <NavSecondary items={data.navSecondary} isCollapsed={!open} />
@@ -325,7 +408,7 @@ export function AppSidebar() {
                 transition={{ duration: 0.0, ease: 'easeInOut' }}
               >
                 <SidebarItem>
-                  <StorageCard />
+                  <BetaCard />
                 </SidebarItem>
               </motion.div>
             )}

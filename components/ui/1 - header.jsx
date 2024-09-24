@@ -2,14 +2,14 @@
 import React from 'react';
 import { ContactDialog } from './1 - contact-dialog.jsx';
 import MobileDrawer from './1 - mobile-drawer.jsx';
-import { Button } from './button.jsx';
+import { Button } from '@/components/ui/base/button';
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuLabel,
   ContextMenuTrigger,
-} from '@/components/ui/context-menu';
+} from '@/components/ui/base/context-menu';
 import { Code, Copy } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';

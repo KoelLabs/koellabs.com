@@ -2,9 +2,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/base/button';
+import { Input } from '@/components/ui/base/input';
+import { Label } from '@/components/ui/base/label';
 import { useState } from 'react';
 import { ArrowLeftCircle, MessageSquareText } from 'lucide-react';
 import { useRouter } from 'next/navigation';
