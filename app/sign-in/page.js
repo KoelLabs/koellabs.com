@@ -2,22 +2,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/base/button';
+import { Input } from '@/components/ui/base/input';
+import { Label } from '@/components/ui/base/label';
 import { useState } from 'react';
-import { MessageSquareText } from 'lucide-react';
+import { ArrowLeftCircle, MessageSquareText } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
 import React from 'react';
 
 export default function AuthScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
+
   return (
-    <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2 xl:min-h-screen dark:bg-neutral-950/[0.99] ">
-      <div className="flex items-center justify-center py-12 dark:bg-neutral-950/[0.99]">
+    <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2 xl:min-h-screen dark:bg-neutral-950/[0.99] tracking-[-0.015em]">
+      <div className="flex items-center justify-center py-12 dark:bg-neutral-950/[0.99] relative">
         <div className="mx-auto grid w-full p-4 sm:w-[405px] gap-6">
           <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold tracking-tight ">
+            <h1 className="text-3xl font-semibold tracking-tighter ">
               <span className="relative mr-1 ml-6 text-transparent bg-clip-text bg-gradient-to-br from-black via-black to-sky-600 dark:from-neutral-100 dark:via-neutral-100 dark:to-neutral-100">
                 {' '}
                 <svg
@@ -323,7 +327,7 @@ export default function AuthScreen() {
                 type="email"
                 value={email}
                 className="dark:text-white"
-                placeholder="diana@example.com"
+                placeholder="Enter your email address"
                 required
               />
             </div>
@@ -332,8 +336,11 @@ export default function AuthScreen() {
                 <Label htmlFor="password" className="dark:text-white">
                   Password
                 </Label>
-                <Link href="/forgot-password" className="ml-auto inline-block text-sm underline">
-                  Forgot your password?
+                <Link
+                  href="/forgot-password"
+                  className="ml-auto inline-block text-sm hover:underline text-black dark:text-neutral-200 font-medium tracking-tight"
+                >
+                  Forgot Password
                 </Link>
               </div>
               <Input
@@ -341,15 +348,15 @@ export default function AuthScreen() {
                 className="dark:text-white"
                 type="password"
                 required
-                value={password}
+                placeholder="Enter your password"
                 onChange={e => setPassword(e.target.value)}
               />
             </div>
             <Button
-              className="w-full dark:text-white bg-gradient-to-br py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800"
+              className="w-full mt-2 dark:text-white bg-gradient-to-br py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800"
               type="submit"
             >
-              Login
+              Sign In
             </Button>
             <div className="flex flex-row gap-2 items-center">
               <div className="h-0.5 bg-neutral-200 dark:bg-neutral-800 w-full"></div>
@@ -469,9 +476,9 @@ export default function AuthScreen() {
               </Button>
             </div>
           </div>
-          <div className="mt- text-center text-sm dark:text-white">
+          <div className="mt- tracking-tight text-center text-sm dark:text-neutral-300 text-neutral-500">
             Don&apos;t have an account?{' '}
-            <Link href="#" className="underline">
+            <Link href="#" className="hover:underline text-black font-medium dark:text-neutral-200">
               Sign Up
             </Link>
           </div>

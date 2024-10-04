@@ -68,6 +68,22 @@
   }
 }
 
+/* .screen-minus-sidebar-max-width {
+  max-width: calc(100vw - 256px);
+}
+
+@media (max-width: 768px) {
+  .screen-minus-sidebar-max-width {
+    max-width: 100vw;
+  }
+} */
+
+@layer utilities {
+  .main-transition {
+    transition: max-width 150ms ease-in-out;
+  }
+}
+
 .color-bg {
   background-image: radial-gradient(at 27% 37%, #0284c7 0, transparent 0),
     radial-gradient(at 97% 21%, #0284c7b0 0, transparent 50%),

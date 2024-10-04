@@ -12,9 +12,15 @@ import {
   ShoppingCart,
   Users,
 } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/base/badge';
+import { Button } from '@/components/ui/base/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/base/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,9 +28,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+} from '@/components/ui/base/dropdown-menu';
+import { Input } from '@/components/ui/base/input';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/base/sheet';
 export const description =
   'A products dashboard with a sidebar navigation and a main content area. The dashboard has a header with a search input and a user menu. The sidebar has a logo, navigation links, and a card with a call to action. The main content area shows an empty state with a call to action.';
 export function Dashboard() {
@@ -32,7 +38,7 @@ export function Dashboard() {
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] bg-muted/10">
       <div className="hidden bg-muted/10 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
-          <div className="flex h-14 items-center px-4 lg:h-[60px] lg:px-6">
+          <div className="flex h-14 items-center justify-between px-4 lg:h-[60px] lg:px-6">
             <Link href="/" className="flex items-center gap-2 font-semibold mt-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +46,7 @@ export function Dashboard() {
                 height="870"
                 fill="none"
                 viewBox="0 0 870 870"
-                className="inline-block h-8 w-8"
+                className="inline-block h-8 w-8 -mt-0.5"
               >
                 <rect
                   width="214"
@@ -175,10 +181,7 @@ export function Dashboard() {
                   </linearGradient>
                 </defs>
               </svg>
-              <span className="tracking-tight -ml-1 text-xl">Koel</span>
-              {/* <Badge className="bg-gradient-to-br tracking-normal from-black via-black to-sky-700 border border-black text-center text-xs">
-                Beta
-              </Badge> */}
+              <span className="tracking-tighter -ml-1 text-2xl">Koel Labs</span>
             </Link>
             {/* <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
               <Bell className="h-4 w-4" />
@@ -189,24 +192,18 @@ export function Dashboard() {
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
               <Link
                 href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-primary bg-muted transition-all hover:text-primary"
               >
                 <Home className="h-4 w-4" />
-                Dashboard
+                Home
               </Link>
               <Link
                 href="#"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <ShoppingCart className="h-4 w-4" />
-                Orders
-                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                  6
-                </Badge>
-              </Link>
+              ></Link>
               <Link
                 href="#"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+                className="flex items-center gap-3 rounded-lg text-muted-foreground px-3 py-2 transition-all hover:text-primary"
               >
                 <Package className="h-4 w-4" />
                 Products{' '}
@@ -253,7 +250,7 @@ export function Dashboard() {
         </div>
       </div>
       <div className="flex flex-col">
-        <header className="flex h-14 items-center gap-4 bg-muted/10 px-4 lg:h-[60px] lg:px-6">
+        <header className="flex h-16 items-center gap-4 bg-muted/10 px-4 md:h-4 lg:px-6">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="shrink-0 md:hidden">
@@ -323,11 +320,10 @@ export function Dashboard() {
               </div>
             </SheetContent>
           </Sheet>
-          <div className="w-full flex-1"></div>
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 border rounded-tl-3xl  bg-white">
+        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 border md:rounded-tl-2xl  bg-white">
           <div className="flex items-center">
-            <h1 className="text-lg font-semibold md:text-2xl">Inventory</h1>
+            <h1 className="text-lg font-semibold md:text-2xl tracking-tight ">Dashboard</h1>
           </div>
           <div
             className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"

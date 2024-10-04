@@ -3,7 +3,7 @@
 import { useState, Fragment } from 'react';
 import { Radio, RadioGroup } from '@headlessui/react';
 import Header from '@/components/ui/1 - header';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/base/button';
 import React from 'react';
 import { Check, Minus, X } from 'lucide-react';
 import { Dashboard } from '@/components/ui/dashboard';
@@ -104,6 +104,7 @@ function classNames(...classes) {
 export default function page() {
   const [frequency, setFrequency] = useState(frequencies[0]);
   return (
+    // <Dashboard />
     <div className="flex-col flex w-screen relative scroll-smooth">
       <div className="z-[2] sticky top-0 mx-auto w-full">
         <Header />

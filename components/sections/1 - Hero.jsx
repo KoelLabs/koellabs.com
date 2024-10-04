@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button } from '../ui/button';
-import Header from '../ui/1 - header';
+import { Button } from '@/components/ui/base/button';
+import Header from '@/components/ui/1 - header';
 import { ChevronRight, UserRoundPlus } from 'lucide-react';
 import Link from 'next/link';
-import { Card } from '../ui/card';
-import HeroVideoDialog from '../magicui/hero-video-dialog';
+import { Card } from '@/components/ui/base/card';
+import HeroVideoDialog from '@/components/ui/magicui/hero-video-dialog';
 
 export default function Hero() {
   return (

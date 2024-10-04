@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { cn } from '@/utils/styles';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/base/button';
 import {
   Dialog,
   DialogContent,
@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from '@/components/ui/base/dialog';
 import {
   Drawer,
   DrawerClose,
@@ -21,8 +21,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/components/ui/drawer';
-import useMediaQuery from '@custom-react-hooks/use-media-query';
+} from '@/components/ui/base/drawer';
+import { useMediaQuery } from '@custom-react-hooks/use-media-query';
 
 export function ContactDialog({ ...props }) {
   const [open, setOpen] = React.useState(false);
