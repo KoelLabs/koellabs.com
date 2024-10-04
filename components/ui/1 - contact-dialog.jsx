@@ -22,7 +22,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/base/drawer';
-import useMediaQuery from '@custom-react-hooks/use-media-query';
+import { useMediaQuery } from '@custom-react-hooks/use-media-query';
 
 export function ContactDialog({ ...props }) {
   const [open, setOpen] = React.useState(false);

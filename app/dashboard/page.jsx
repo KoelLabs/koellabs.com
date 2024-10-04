@@ -3,6 +3,7 @@ import { AppSidebar } from '@/components/sidebar/app-sidebar';
 import { SidebarLayout, SidebarTrigger } from '@/components/ui/sidebar';
 import RecommendedClips from '@/components/ui/dashboard/RecommendedClips';
 import RevisitClips from '@/components/ui/dashboard/RevisitClips';
+import ImportVideos from '@/components/ui/dashboard/ImportVideos';
 
 const clips = [
   {
@@ -27,8 +28,9 @@ export default async function Page() {
   return (
     <SidebarLayout defaultOpen={cookies().get('sidebar:state')?.value === 'true'}>
       <AppSidebar />
-      <main className="flex flex-1 flex-col p-0 transition-all duration-150 ease-in-out screen-minus-sidebar-max-width">
+      <main className="flex flex-1 flex-col p-0 transition-all duration-150 ease-in-out w-full">
         <div className="h-full rounded-md relative">
+          <ImportVideos />
           <RecommendedClips />
           <RevisitClips clips={clips} />
           {/* <div className="p-4">

@@ -68,13 +68,19 @@
   }
 }
 
-.screen-minus-sidebar-max-width {
+/* .screen-minus-sidebar-max-width {
   max-width: calc(100vw - 256px);
 }
 
 @media (max-width: 768px) {
   .screen-minus-sidebar-max-width {
     max-width: 100vw;
+  }
+} */
+
+@layer utilities {
+  .main-transition {
+    transition: max-width 150ms ease-in-out;
   }
 }
 
