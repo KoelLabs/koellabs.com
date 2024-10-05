@@ -8,6 +8,13 @@
       "when": 1725242612674,
       "tag": "0000_married_dark_beast",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1728112130005,
+      "tag": "0001_zippy_snowbird",
+      "breakpoints": true
     }
   ]
 }

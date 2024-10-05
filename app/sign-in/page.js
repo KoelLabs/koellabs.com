@@ -9,6 +9,14 @@ import { useState } from 'react';
 import { ArrowLeftCircle, MessageSquareText } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
+import {
+  getUser,
+  googleLogin,
+  emailPasswordLogin,
+  emailPasswordSignUp,
+  emailPasswordReset,
+} from '@/utils/authClient';
+
 import React from 'react';
 
 export default function AuthScreen() {
@@ -329,6 +337,7 @@ export default function AuthScreen() {
                 className="dark:text-white"
                 placeholder="Enter your email address"
                 required
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
             <div className="grid gap-2">
@@ -336,12 +345,20 @@ export default function AuthScreen() {
                 <Label htmlFor="password" className="dark:text-white">
                   Password
                 </Label>
-                <Link
-                  href="/forgot-password"
-                  className="ml-auto inline-block text-sm hover:underline text-black dark:text-neutral-200 font-medium tracking-tight"
+                <Button
+                  className="ml-auto inline-block text-sm hover:underline text-black dark:text-neutral-200 font-medium tracking-tight bg-transparent hover:bg-transparent p-0"
+                  onClick={async () => {
+                    // TODO: use a dialog element or something similar that looks better than alert
+                    const error = await emailPasswordReset(email);
+                    if (error) {
+                      alert(error.message);
+                    } else {
+                      alert('Password reset email sent!');
+                    }
+                  }}
                 >
                   Forgot Password
-                </Link>
+                </Button>
               </div>
               <Input
                 id="password"
@@ -355,6 +372,15 @@ export default function AuthScreen() {
             <Button
               className="w-full mt-2 dark:text-white bg-gradient-to-br py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800"
               type="submit"
+              onClick={async () => {
+                const [user, error] = await emailPasswordLogin(email, password);
+                if (error) {
+                  alert(error.message); // TODO: display nicely
+                } else {
+                  console.log(user);
+                  // TODO: router.push(location.state?.from || '/dashboard');
+                }
+              }}
             >
               Sign In
             </Button>
@@ -368,7 +394,17 @@ export default function AuthScreen() {
             </div>
 
             <div className="grid sm:grid-cols-2 gap-4">
-              <Button className="w-full bg-white text-neutral-800 hover:bg-neutral-100 border border-neutral-200 dark:bg-neutral-900 dark:border-neutral-800 dark:text-white">
+              <Button
+                className="w-full bg-white text-neutral-800 hover:bg-neutral-100 border border-neutral-200 dark:bg-neutral-900 dark:border-neutral-800 dark:text-white"
+                onClick={async () => {
+                  const [user, error] = await googleLogin();
+                  if (error) {
+                    alert(error.message); // TODO: display nicely
+                  } else {
+                    console.log(user);
+                  }
+                }}
+              >
                 <svg
                   className="h-5 w-5 mr-1.5"
                   width="754"
@@ -478,9 +514,20 @@ export default function AuthScreen() {
           </div>
           <div className="mt- tracking-tight text-center text-sm dark:text-neutral-300 text-neutral-500">
             Don&apos;t have an account?{' '}
-            <Link href="#" className="hover:underline text-black font-medium dark:text-neutral-200">
+            <Button
+              className="hover:underline text-black font-medium dark:text-neutral-200 bg-transparent hover:bg-transparent p-0"
+              onClick={async () => {
+                const [user, error] = await emailPasswordSignUp(email, password);
+                if (error) {
+                  alert(error.message); // TODO: display nicely
+                } else {
+                  console.log(user);
+                  // TODO: router.push(location.state?.from || '/onboarding');
+                }
+              }}
+            >
               Sign Up
-            </Link>
+            </Button>
           </div>
         </div>
       </div>

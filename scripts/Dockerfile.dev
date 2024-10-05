@@ -23,7 +23,3 @@ COPY --from=build /app /app
 # Next.js collects anonymous telemetry data about general usage. Learn more here: https://nextjs.org/telemetry
 # The following environment variable disables this feature
 ENV NEXT_TELEMETRY_DISABLED 1
-
-EXPOSE 3000
-
-ENTRYPOINT [ "npm", "run", "dev" ]

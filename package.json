@@ -21,6 +21,8 @@
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.33.0",
     "embla-carousel-react": "^8.3.0",
+    "firebase": "^10.14.0",
+    "firebase-admin": "^12.6.0",
     "framer-motion": "^11.3.30",
     "lucide-react": "^0.407.0",
     "next": "^14.2.13",
@@ -55,6 +57,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "docker": ". ./scripts/docker-run-dev.sh",
     "format": "(fixpack || true) && (eslint . --fix || true) && prettier --write .",
     "lint": "npx eslint-config-prettier **/*.js && next lint && prettier --check .",
     "makemigrations": "drizzle-kit generate",
