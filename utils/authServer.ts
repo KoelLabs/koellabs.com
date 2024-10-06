@@ -1,7 +1,7 @@
-// import 'server-only';
-'use server';
+import 'server-only';
 
 // firebase admin SDK to verify login tokens
+import type { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
 import * as admin from 'firebase-admin';
 try {
   admin.app();
@@ -16,92 +16,63 @@ try {
 }
 // database access for user registration
 import { db, users } from '../db/schema';
-import { eq } from 'drizzle-orm';
 
-export type User = {
-  id: string;
-  name: string;
-  email: string;
-};
-
-/**
- * Verify a user's login token and return their user object
+/** 
+ * Verify a user's login token and return their user id
  * @param {string} token the user's login token
- * @returns {Promise<User | null>} the user object if successful, null otherwise
+ * @returns {Promise<string | null>} the user id if successful, null otherwise
  */
-export async function getVerifiedUser(token) {
+export async function getVerifiedUid(token) {
   'use server';
 
-  const id = await getVerifiedUserId(token);
-  if (!id) return null;
-
-  const user = await db
-    .select({
-      id: users.id,
-      email: users.email,
-      name: users.name,
-    })
-    .from(users)
-    .where(eq(users.id, id))[0];
-
-  return user;
-}
-
-/**
- * Verify a user's login token and return their user ID
- * @param token the user's login token
- * @returns {Promise<string | null>} the user ID if successful, null otherwise
- */
-export async function getVerifiedUserId(token) {
-  'use server';
+  // verify the token
+  let decodedToken: DecodedIdToken;
   try {
-    const decodedToken = await admin.auth().verifyIdToken(token, true);
-    return decodedToken.uid;
+    decodedToken = await admin.auth().verifyIdToken(token, true);
   } catch (e) {
-    console.error(e);
     return null;
   }
+
+  return decodedToken.uid;
 }
 
 /**
  * Verify a user's login token and insert or update their user info in the database
  * @param {string} token the user's login token
- * @returns {Promise<User>} the user object if successful, null otherwise
- * @throws {Error} if the token is invalid/has expired
+ * @returns {Promise<any>} the user object if successful, null otherwise
  */
-export async function getAndSetUser(token) {
+export async function getAndSetVerifiedUser(token) {
   'use server';
 
-  const decodedToken = await admin.auth().verifyIdToken(token, true);
+  // verify the token
+  let decodedToken: DecodedIdToken;
+  try {
+    decodedToken = await admin.auth().verifyIdToken(token, true);
+  } catch (e) {
+    return null;
+  }
+
+  // get latest user info from the token
   const decodedUser = {
     id: decodedToken.uid,
-    name: decodedToken.name ?? decodedToken.email.split('@')[0],
+    name: decodedToken.name ?? decodedToken.email?.split('@')[0],
     email: decodedToken.email_verified ? decodedToken.email : 'Unverified: ' + decodedToken.email,
-    picture: decodedToken.picture,
   };
 
-  const user = await db.select({
+  // upsert and get the user info in the database
+  const user = await db.insert(users).values(decodedUser).onConflictDoUpdate({target: users.id, set: decodedUser}).returning({
     id: users.id,
     name: users.name,
     email: users.email,
     streak: users.streak,
     createdAt: users.createdAt,
     updatedAt: users.updatedAt,
-  }).from(users).where(eq(users.id, decodedToken.uid));
+  });
 
-  if (user.length === 0) {
-    await db.insert(users).values({
-      id: decodedToken.uid,
-      name: decodedToken.name ?? decodedToken.email.split('@')[0],
-      email: decodedToken.email_verified ? decodedToken.email : 'Unverified: ' + decodedToken.email,
-    });
-  } else if (user[0].name !== decodedUser.name || user[0].email !== decodedUser.email) {
-    await db.update(users).set(decodedUser).where(eq(users.id, decodedToken.uid));
-  }
-
-  // return the client user object
+  // return the user object
   return {
     ...user[0],
     ...decodedUser,
+    picture: decodedToken.picture,
   };
 }

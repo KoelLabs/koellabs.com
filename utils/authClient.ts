@@ -12,7 +12,6 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
 } from 'firebase/auth';
-import { getAndSetUser } from './authServer';
 
 // Initialize auth
 const auth = getAuth(app);
@@ -22,44 +21,18 @@ getRedirectResult(auth); // initialize auth with redirect login results if avail
 
 /**
  * Gets the currently logged in user.
- * @returns the user object if the user is logged in, null otherwise
  */
 export async function getUser() {
-  if (auth.currentUser) {
-    // use firebase auth information if available (otherwise we rely on the existing idtoken session storage item if it has been set)
-    const idToken = await auth.currentUser.getIdToken(/* forceRefresh */ true);
-    window.sessionStorage.setItem('idtoken', idToken);
-  } else if (!window.sessionStorage.getItem('idtoken')) return null;
-  try {
-    return await getAndSetUser(window.sessionStorage.getItem('idtoken'));
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  return await fetch("/api/getUser").then((res) => res.ok ? res.json() : null);
 }
 
 /**
  * Signs out the currently logged in user.
  */
 export async function signOut() {
-  window.sessionStorage.removeItem('idtoken');
   await auth.signOut();
-}
-
-/**
- * Guarantees the user is logged in by redirecting to the login page if the user is not logged in.
- * Should be called before using any features that require the user to be logged in.
- *
- * Automatically reruns itself when the token expires.
- */
-export async function requireLogin(
-  loginUrl = '/sign-in?redirect=' + encodeURIComponent(location.href),
-) {
-  if (await getUser()) {
-    setTimeout(requireLogin, parseJwt((auth.currentUser as any).accessToken).exp * 1000 - Date.now());
-  } else {
-    window.location.assign(loginUrl);
-  }
+  await fetch("/api/logout");
+  window.location.reload();
 }
 
 // Email and Password Auth
@@ -67,15 +40,22 @@ export async function requireLogin(
  * Logs in a user with email and password.
  * @param {string} email the email of the user
  * @param {string} password the password of the user
- * @returns {Promise<[User, null] | [null, Error]>} the user object if successful, an error otherwise
+ * @returns {Promise<Error>} an error if unsuccessful
+ * @effect reloads the page if successful
  */
 export async function emailPasswordLogin(email, password) {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
-    return [await getUser(), null];
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    const idToken = await result.user.getIdToken();
+    await fetch("/api/login", {
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+      },
+    });
+    window.location.reload();
   } catch (error) {
     console.error(error.code, error.message);
-    return [null, error];
+    return error;
   }
 }
 
@@ -83,15 +63,22 @@ export async function emailPasswordLogin(email, password) {
  * Signs up a user with email and password.
  * @param {string} email the email of the user 
  * @param {string} password the password of the user
- * @returns {Promise<[User, null] | [null, Error]>} the user object if successful, an error otherwise
+ * @returns {Promise<Error>} an error if unsuccessful
+ * @effect reloads the page if successful
  */
 export async function emailPasswordSignUp(email, password) {
   try {
-    await createUserWithEmailAndPassword(auth, email, password);
-    return [await getUser(), null];
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    const idToken = await result.user.getIdToken();
+    await fetch("/api/login", {
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+      },
+    });
+    window.location.reload();
   } catch (error) {
     console.error(error.code, error.message);
-    return [null, error];
+    return error;
   }
 }
 
@@ -119,12 +106,19 @@ const microsoftProvider = new OAuthProvider('microsoft.com');
  * Logs in a user with Google, Microsoft or Facebook.
  * @param {AuthProvider} provider the provider to use for the login
  * @param {AuthProvider} providerCLS the provider class to use for the login
- * @returns {Promise<[User, null] | [null, Error]>} the user object if successful, an error otherwise
+ * @returns {Promise<Error>} an error if unsuccessful
+ * @effect reloads the page if successful
  */
 async function popupLogin(provider, providerCLS) {
   try {
-    await signInWithPopup(auth, provider);
-    return [await getUser(), null];
+    const result = await signInWithPopup(auth, provider);
+    const idToken = await result.user.getIdToken();
+    await fetch("/api/login", {
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+      },
+    });
+    window.location.reload();
   } catch (error) {
     console.error(
       error.code,
@@ -132,13 +126,14 @@ async function popupLogin(provider, providerCLS) {
       error.customData.email,
       providerCLS.credentialFromError(error),
     );
-    return [null, error];
+    return error;
   }
 }
 
 /**
  * Logs in a user with Google.
- * @returns {Promise<[User, null] | [null, Error]>} the user object if successful, an error otherwise
+ * @returns {Promise<Error>} an error if unsuccessful
+ * @effect reloads the page if successful
  * @see popupLogin
  * @see signInWithPopup
  */
@@ -148,7 +143,8 @@ export async function googleLogin() {
 
 /**
  * Logs in a user with Facebook.
- * @returns {Promise<[User, null] | [null, Error]>} the user object if successful, an error otherwise
+ * @returns {Promise<Error>} an error if unsuccessful
+ * @effect reloads the page if successful
  * @see popupLogin
  * @see signInWithPopup
  */
@@ -158,20 +154,11 @@ export async function facebookLogin() {
 
 /**
  * Logs in a user with Microsoft.
- * @returns {Promise<[User, null] | [null, Error]>} the user object if successful, an error otherwise
+ * @returns {Promise<Error>} an error if unsuccessful
+ * @effect reloads the page if successful
  * @see popupLogin
  * @see signInWithPopup
  */
 export async function microsoftLogin() {
   return await popupLogin(microsoftProvider, OAuthProvider);
-}
-
-// Utility Functions
-/**
- * Parses the main body of a JWT bearer token.
- * @param {string} token the base64 encoded token to parse
- * @returns the decoded and parsed token body as a JavaScript object.
- */
-function parseJwt(token) {
-  return JSON.parse(window.atob(token.split('.')[1]));
 }

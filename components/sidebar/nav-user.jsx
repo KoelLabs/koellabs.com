@@ -9,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/base/dropdown-menu';
+import { signOut } from '@/utils/authClient';
 
 export function NavUser({ user, isCollapsed }) {
   return (
@@ -67,7 +68,10 @@ export function NavUser({ user, isCollapsed }) {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="gap-2 text-red-600 hover:text-red-600">
+        <DropdownMenuItem 
+          className="gap-2 text-red-600 hover:text-red-600"
+          onClick={signOut}
+        >
           <LogOut className="h-4 w-4 text-muted-foreground text-red-600" />
           Log out
         </DropdownMenuItem>

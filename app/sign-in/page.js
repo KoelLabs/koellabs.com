@@ -10,7 +10,6 @@ import { ArrowLeftCircle, MessageSquareText } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import {
-  getUser,
   googleLogin,
   emailPasswordLogin,
   emailPasswordSignUp,
@@ -350,11 +349,7 @@ export default function AuthScreen() {
                   onClick={async () => {
                     // TODO: use a dialog element or something similar that looks better than alert
                     const error = await emailPasswordReset(email);
-                    if (error) {
-                      alert(error.message);
-                    } else {
-                      alert('Password reset email sent!');
-                    }
+                    alert(error ? error.message : 'Password reset email sent');
                   }}
                 >
                   Forgot Password
@@ -373,13 +368,9 @@ export default function AuthScreen() {
               className="w-full mt-2 dark:text-white bg-gradient-to-br py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800"
               type="submit"
               onClick={async () => {
-                const [user, error] = await emailPasswordLogin(email, password);
-                if (error) {
-                  alert(error.message); // TODO: display nicely
-                } else {
-                  console.log(user);
-                  // TODO: router.push(location.state?.from || '/dashboard');
-                }
+                const error = await emailPasswordLogin(email, password);
+                // TODO: display error message nicely
+                alert(error.message);
               }}
             >
               Sign In
@@ -397,12 +388,8 @@ export default function AuthScreen() {
               <Button
                 className="w-full bg-white text-neutral-800 hover:bg-neutral-100 border border-neutral-200 dark:bg-neutral-900 dark:border-neutral-800 dark:text-white"
                 onClick={async () => {
-                  const [user, error] = await googleLogin();
-                  if (error) {
-                    alert(error.message); // TODO: display nicely
-                  } else {
-                    console.log(user);
-                  }
+                  const error = await googleLogin();
+                  alert(error.message); // TODO: display nicely
                 }}
               >
                 <svg

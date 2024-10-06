@@ -29,12 +29,13 @@ import {
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { getUser } from '@/utils/authClient';
 
 const data = {
   user: {
     name: 'ruslan_11',
     email: 'ruslan@koellabs.com',
-    avatar: '',
+    picture: '',
   },
   navMain: [
     {
@@ -87,7 +88,11 @@ export function AppSidebar() {
   const [isFullyOpen, setIsFullyOpen] = useState(open);
 
   useEffect(() => {
-    setIsLoaded(true);
+    getUser().then((user) => {
+      console.log(user);
+      data.user = user;
+      setIsLoaded(true);
+    });
   }, []);
 
   useEffect(() => {
