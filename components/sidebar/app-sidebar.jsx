@@ -33,8 +33,8 @@ import { getUser } from '@/utils/authClient';
 
 const data = {
   user: {
-    name: 'ruslan_11',
-    email: 'ruslan@koellabs.com',
+    name: 'Loading...',
+    email: 'Loading...',
     picture: '',
   },
   navMain: [
