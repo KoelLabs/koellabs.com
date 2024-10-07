@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
   const idToken = request.cookies.get('idtoken');
   const isLoggedIn = idToken && await fetch(new URL('/api/isLoggedin', request.url), {
     headers: {
-      Authorization: `Bearer ${idToken}`
+      Authorization: `Bearer ${idToken['value']}`
     }
   }).then(res => res.json());
 
