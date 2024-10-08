@@ -88,7 +88,7 @@ export function NavUser({ user, isCollapsed, isLoading }) {
           <DropdownMenuSub>
             <DropdownMenuSubTrigger className="gap-2">
               <PanelsTopLeft className="h-4 w-4 text-muted-foreground" />
-              Themes
+              Theme
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
