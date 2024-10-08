@@ -36,6 +36,7 @@ const data = {
     name: 'Loading...',
     email: 'Loading...',
     picture: '',
+    isLoaded: false,
   },
   navMain: [
     {
@@ -88,9 +89,10 @@ export function AppSidebar() {
   const [isFullyOpen, setIsFullyOpen] = useState(open);
 
   useEffect(() => {
-    getUser().then((user) => {
+    getUser().then(user => {
       console.log(user);
       data.user = user;
+      data.user.isLoaded = true;
       setIsLoaded(true);
     });
   }, []);
@@ -420,7 +422,7 @@ export function AppSidebar() {
           </AnimatePresence>
         </SidebarContent>
         <SidebarFooter>
-          <NavUser user={data.user} isCollapsed={!open} />
+          <NavUser user={data.user} isCollapsed={!open} isLoading={!isLoaded} />
         </SidebarFooter>
       </MotionConfig>
     </Sidebar>
