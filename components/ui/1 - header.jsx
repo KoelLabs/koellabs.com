@@ -263,6 +263,9 @@ export default function Header() {
         <div className="md:flex gap-2 hidden">
           <Button variant="outline" className="">
             <Link href="sign-in">Sign In</Link>
+            <kbd className="-me-1 ms-3 inline-flex w-5 justify-center h-5 max-h-full items-center rounded border border-border px-1 font-[inherit] text-[0.625rem] font-medium text-muted-foreground/70 -ml-1">
+              L
+            </kbd>
           </Button>
           <Button className=" bg-gradient-to-b py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
             Get Started

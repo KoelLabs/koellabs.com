@@ -30,6 +30,7 @@ import {
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { getUser } from '@/utils/authClient';
+import { StreakCard } from '@/components/sidebar/streak-card';
 
 const data = {
   user: {
@@ -66,17 +67,17 @@ const data = {
   videos: [
     {
       name: 'Friends Season 1 - Clip Joey and Chandler',
-      url: '#',
+      id: 'eWOKwlFQJAjQ',
       icon: Clapperboard,
     },
     {
       name: 'Schitts Creek Season 3 - Clip David and Alexis',
-      url: '#',
+      id: '0A4Dq41bPQZ1',
       icon: Clapperboard,
     },
     {
       name: 'The Office Season 1 - Clip Jim and Dwight',
-      url: '#',
+      id: 'JQMDL16t8isF',
       icon: Clapperboard,
     },
   ],
@@ -389,7 +390,7 @@ export function AppSidebar() {
         <SidebarContent>
           <SidebarItem>
             <SidebarLabel>{open && 'Platform'}</SidebarLabel>
-            <NavMain items={data.navMain} isCollapsed={!open} />
+            <NavMain items={data.navMain} isCollapsed={!open} className={open ? '' : '-mb-3'} />
           </SidebarItem>
           {!open && <div className="h-[1px] bg-black/10 w-full"></div>}
           <SidebarItem>
@@ -401,7 +402,7 @@ export function AppSidebar() {
                 </Button>
               )}
             </SidebarLabel>
-            <NavVideos videos={data.videos} isCollapsed={!open} />
+            <NavVideos videos={data.videos} isCollapsed={!open} className={open ? '' : '-mb-3'} />
           </SidebarItem>
           <SidebarItem className="mt-auto">
             <NavSecondary items={data.navSecondary} isCollapsed={!open} />
@@ -413,7 +414,11 @@ export function AppSidebar() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.0, ease: 'easeInOut' }}
+                className="flex flex-col gap-3"
               >
+                {/* <SidebarItem>
+                  <StreakCard />
+                </SidebarItem> */}
                 <SidebarItem>
                   <BetaCard />
                 </SidebarItem>

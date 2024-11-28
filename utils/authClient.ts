@@ -23,7 +23,7 @@ getRedirectResult(auth); // initialize auth with redirect login results if avail
  * Gets the currently logged in user.
  */
 export async function getUser() {
-  return await fetch("/api/getUser").then((res) => res.ok ? res.json() : null);
+  return await fetch('/api/getUser').then(res => (res.ok ? res.json() : null));
 }
 
 /**
@@ -31,7 +31,7 @@ export async function getUser() {
  */
 export async function signOut() {
   await auth.signOut();
-  await fetch("/api/logout");
+  await fetch('/api/logout');
   window.location.reload();
 }
 
@@ -47,7 +47,7 @@ export async function emailPasswordLogin(email, password) {
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
     const idToken = await result.user.getIdToken();
-    await fetch("/api/login", {
+    await fetch('/api/login', {
       headers: {
         Authorization: `Bearer ${idToken}`,
       },
@@ -61,7 +61,7 @@ export async function emailPasswordLogin(email, password) {
 
 /**
  * Signs up a user with email and password.
- * @param {string} email the email of the user 
+ * @param {string} email the email of the user
  * @param {string} password the password of the user
  * @returns {Promise<Error>} an error if unsuccessful
  * @effect reloads the page if successful
@@ -70,7 +70,7 @@ export async function emailPasswordSignUp(email, password) {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     const idToken = await result.user.getIdToken();
-    await fetch("/api/login", {
+    await fetch('/api/login', {
       headers: {
         Authorization: `Bearer ${idToken}`,
       },
@@ -113,7 +113,7 @@ async function popupLogin(provider, providerCLS) {
   try {
     const result = await signInWithPopup(auth, provider);
     const idToken = await result.user.getIdToken();
-    await fetch("/api/login", {
+    await fetch('/api/login', {
       headers: {
         Authorization: `Bearer ${idToken}`,
       },

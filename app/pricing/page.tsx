@@ -101,12 +101,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function page() {
+export default function Page() {
   const [frequency, setFrequency] = useState(frequencies[0]);
   return (
     // <Dashboard />
     <div className="flex-col flex w-screen relative scroll-smooth">
-      <div className="z-[2] sticky top-0 mx-auto w-full">
+      {/* <div className="z-[2] sticky top-0 mx-auto w-full">
         <Header />
       </div>
       <div className="min-h-screen">
@@ -216,7 +216,7 @@ export default function page() {
                 </div>
               ))}
             </div>
-            {/* xs to lg */}
+            
             <div className="mx-auto mt-12 max-w-md space-y-8 sm:mt-16 lg:hidden">
               {tiers.map(tier => (
                 <section
@@ -277,7 +277,7 @@ export default function page() {
               ))}
             </div>
 
-            {/* lg+ */}
+           
             <div className="isolate mt-20 hidden lg:block">
               <div className="relative -mx-8">
                 {tiers.some(tier => tier.mostPopular) ? (
@@ -402,7 +402,7 @@ export default function page() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

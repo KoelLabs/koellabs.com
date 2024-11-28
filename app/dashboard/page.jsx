@@ -27,11 +27,8 @@ export default async function Page() {
     <div className="h-full rounded-md relative">
       <HelpCenter />
       <ImportVideos />
-      <RecommendedClips />
       <RevisitClips clips={clips} />
-      {/* <div className="p-4">
-            <div className="flex items-center justify-center gap-2 aspect-video border-2 border-dashed border-accent rounded-2xl bg-neutral-200/50 border-neutral-300 w-full"></div>
-          </div> */}
+      <RecommendedClips clips={clips} />
     </div>
   );
 }

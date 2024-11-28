@@ -16,23 +16,27 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/base/tooltip';
+import { usePathname } from 'next/navigation';
 
 export function NavVideos({ videos, className, isCollapsed }) {
+  const url = usePathname();
   return (
-    <ul className={cn('grid gap-0.5', className)}>
+    <ul className={cn('grid gap-0.5', isCollapsed ? '-mt-3' : '', className)}>
       {videos.map(item => (
         <li
           key={item.name}
           className="has-[[data-state=open]]:bg-accent has-[[data-state=open]]:text-accent-foreground group relative rounded-md hover:bg-accent hover:text-accent-foreground"
         >
-          <TooltipProvider>
+          <TooltipProvider delayDuration={0}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href={item.url}
+                  prefetch
+                  href={'/dashboard/' + item.id}
                   className={cn(
                     'flex h-7 items-center gap-2.5 overflow-hidden rounded-md px-1.5 text-xs outline-none ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2',
                     isCollapsed ? 'justify-center h-10' : '',
+                    url.includes(item.id) ? 'bg-accent text-accent-foreground' : '',
                   )}
                 >
                   <item.icon

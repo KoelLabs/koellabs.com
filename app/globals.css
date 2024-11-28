@@ -200,3 +200,31 @@
 html {
   overflow-x: hidden;
 }
+
+.box {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.box::before {
+  content: '';
+  position: absolute;
+  inset: 0px;
+  background: radial-gradient(49% 81% at 45% 47%, rgba(52, 125, 193, 0.515) 0%, #073aff00 100%),
+    radial-gradient(113% 91% at 17% -2%, rgba(131, 170, 207, 0.548) 0%, #ff000000 99%),
+    radial-gradient(142% 91% at 83% 7%, rgba(164, 138, 249, 0.526) 1%, #ff000000 99%),
+    radial-gradient(142% 91% at -6% 74%, rgba(174, 196, 255, 0.935) 1%, #ff000000 99%),
+    radial-gradient(142% 91% at 111% 84%, rgba(52, 125, 193, 0.57) 0%, #ffffffff 99%);
+  filter: blur(15px);
+  opacity: 0.7;
+  transform: translate3d(0px, 0px, -1px);
+  pointer-events: none;
+}
+
+.box-inside {
+  background: radial-gradient(49% 81% at 45% 47%, rgba(52, 125, 193, 0.249) 0%, #073aff00 100%),
+    radial-gradient(113% 91% at 17% -2%, rgba(131, 170, 207, 0.348) 0%, #ff000000 99%),
+    radial-gradient(142% 91% at 83% 7%, rgba(164, 138, 249, 0.326) 1%, #ff000000 99%),
+    radial-gradient(142% 91% at -6% 74%, rgba(174, 196, 255, 0.735) 1%, #ff000000 99%),
+    radial-gradient(142% 91% at 111% 84%, rgba(52, 125, 193, 0.37) 0%, #ffffffff 99%);
+}

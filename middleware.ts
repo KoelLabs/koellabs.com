@@ -1,15 +1,17 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-const PUBLIC_URLS = ['/sign-in', '/sign-up', '/'];
+const PUBLIC_URLS = ['/sign-in', '/sign-up', '/', '/dashboard', '/dashboard/eWOKwlFQJAjQ'];
 
 export async function middleware(request: NextRequest) {
   const idToken = request.cookies.get('idtoken');
-  const isLoggedIn = idToken && await fetch(new URL('/api/isLoggedin', request.url), {
-    headers: {
-      Authorization: `Bearer ${idToken['value']}`
-    }
-  }).then(res => res.json());
+  const isLoggedIn =
+    idToken &&
+    (await fetch(new URL('/api/isLoggedin', request.url), {
+      headers: {
+        Authorization: `Bearer ${idToken['value']}`,
+      },
+    }).then(res => res.json()));
 
   if (!isLoggedIn) {
     // Logged out
@@ -22,18 +24,14 @@ export async function middleware(request: NextRequest) {
     // Logged in
     if (request.nextUrl.pathname === '/sign-in') {
       // trying to access sign-in -> redirect to /dashboard
-      return NextResponse.redirect(new URL('/dashboard', request.url)); 
+      return NextResponse.redirect(new URL('/dashboard', request.url));
     } else {
-       // not trying to access sign-in -> continue
+      // not trying to access sign-in -> continue
       return NextResponse.next();
     }
-  } 
-  
+  }
 }
- 
+
 export const config = {
-  matcher: [
-    "/",
-    "/((?!_next|api|.*\\.).*)",
-  ],
-}
+  matcher: ['/', '/((?!_next|api|.*\\.).*)'],
+};
