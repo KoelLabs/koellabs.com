@@ -6,18 +6,21 @@ import HelpCenter from '@/components/ui/dashboard/HelpCenter';
 
 const clips = [
   {
-    title: 'Friends Season 1 - Clip Joey and Chandler',
-    duration: '1:26',
+    title: 'Friends - Funny Moments From Season 8',
+    duration: '8:46',
+    thumbnail: '/images/thumbnails/friends-season-8.webp',
     url: '#',
   },
   {
-    title: 'Schitts Creek Season 3 - Clip David and Alexis',
-    duration: '2:32',
+    title: "Schitt's Creek - Birthday Plans",
+    duration: '2:08',
+    thumbnail: '/images/thumbnails/schitts-creek-birthday-plans.jpg',
     url: '#',
   },
   {
-    title: 'The Office Season 1 - Clip Jim and Dwight',
-    duration: '1:12',
+    title: 'The Office US - Michael is a Terrible Secret Keeper',
+    duration: '4:29',
+    thumbnail: '/images/thumbnails/the-office-michael-secret-keeper.jpg',
     url: '#',
   },
 ];
