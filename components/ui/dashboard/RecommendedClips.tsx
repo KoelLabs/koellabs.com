@@ -5,13 +5,46 @@ import { Card, CardContent } from '@/components/ui/base/card';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/base/button';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
-// Mock data for clips with consistent durations
-const clips = Array.from({ length: 10 }, (_, i) => ({
-  id: i + 1,
-  title: `Clip ${i + 1}: An Interesting Video Title That Might Be Long`,
-  duration: `${(i % 5) + 1}:${((i * 13) % 60).toString().padStart(2, '0')}`,
-}));
+const clips = [
+  {
+    id: 2,
+    title: 'Parks and Recreation - Ben finally shoots his shot',
+    duration: '4:19',
+    thumbnail: '/images/thumbnails/parks-and-recreation-ben-shoots-his-shot.jpg',
+  },
+  {
+    id: 3,
+    title: 'Parks and Recreation - The Cursed Harvest Festival Interview',
+    duration: '2:14',
+    thumbnail: '/images/thumbnails/the-cursed-harvest-festival-interview.png',
+  },
+  {
+    id: 4,
+    title: 'The Office US - Where Is My Desk!?',
+    duration: '1:55',
+    thumbnail: '/images/thumbnails/where-is-my-desk.webp',
+  },
+  {
+    id: 5,
+    title: 'The Good Place - Janet Loves Jason',
+    duration: '1:37',
+    thumbnail: '/images/thumbnails/the-good-place-janet-loves-jason.png',
+  },
+  {
+    id: 6,
+    title: 'The Good Place - Say Hello to Real Eleanor',
+    duration: '2:37',
+    thumbnail: '/images/thumbnails/the-good-place-say-hello-to-real-eleanor.png',
+  },
+  {
+    id: 7,
+    title: "Meredith Wins Harper Avery - Grey's Anatomy 300th Episode",
+    duration: '1:26',
+    thumbnail: '/images/thumbnails/meredith-wins-harper-avery.jpg',
+  },
+];
 
 export default function ScrollableClips() {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -56,9 +89,16 @@ export default function ScrollableClips() {
         'w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-1 pb-3': isExpanded,
       })}
     >
-      <Card className="border text-neutral-500 dark:text-neutral-400 border-dashed border-accent dark:border-accent-dark rounded-lg bg-neutral-200/50 dark:bg-neutral-800/50 border-neutral-300 dark:border-neutral-700">
-        <CardContent className="flex aspect-video items-center justify-center p-2">
-          <span className="font-medium text-xs">Video {clip.id}</span>
+      <Card className="border text-neutral-500 dark:text-neutral-400 border border-accent dark:border-accent-dark rounded-lg bg-neutral-200/50 dark:bg-neutral-800/50 border-neutral-300 dark:border-neutral-700">
+        <CardContent className="flex aspect-video items-center justify-center p-0">
+          {/* <span className="font-medium text-xs">Video {clip.id}</span> */}
+          <Image
+            src={clip.thumbnail}
+            alt={clip.title}
+            width={400}
+            height={400}
+            className="w-full h-full rounded-[7px]"
+          />
         </CardContent>
       </Card>
       <div className="flex justify-between mt-1">

@@ -157,7 +157,6 @@ export default function ImportVideos() {
             <form action={formAction} className="space-y-2">
               <div className="flex items-center">
                 <Label htmlFor="youtubeUrl">YouTube URL</Label>
-                <YouTubeUrlHelpModal />
               </div>
               <div className="flex flex-col sm:flex-row gap-2 just">
                 <div className="space-y-2 w-full">
