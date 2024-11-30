@@ -2,6 +2,8 @@ import { Star, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/base/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/base/card';
 import { Badge } from '@/components/ui/base/badge';
+// import @radix-ui/react-slider
+import * as SliderPrimitive from '@radix-ui/react-slider';
 
 export function BetaCard() {
   return (
