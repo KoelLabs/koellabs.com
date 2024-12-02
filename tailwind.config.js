@@ -17,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        inter: ['"Inter"', 'sans-serif'],
+      },
       screens: {
         xss: '390px',
         special: '768px',
@@ -92,5 +95,14 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), require('tailwind-scrollbar-hide')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('tailwind-scrollbar-hide'),
+    require('@vidstack/react/tailwind.cjs')({
+      // Optimize output by specifying player selector.
+      selector: '.media-player',
+      // Change the media variants prefix.
+      prefix: 'media',
+    }),
+  ],
 };
