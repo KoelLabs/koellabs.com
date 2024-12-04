@@ -10,6 +10,7 @@ import Microphone from '../microphone';
 import VideoPlayer from '../videoPlayer';
 import { FeedbackGiver } from '@/components/FeedbackGiver';
 import { useMediaRemote } from '@vidstack/react';
+import { type MediaPlayerInstance } from '@vidstack/react';
 
 import {
   Dialog,
@@ -52,7 +53,7 @@ export default function Page() {
   const feedbackGiverRef = useRef<any>(null);
   const videoPlayerRef = useRef(null);
   const remote = useMediaRemote();
-  const player = remote?.setPlayer(videoPlayerRef.current);
+  const ref = useRef<MediaPlayerInstance>(remote);
 
   const pathname = usePathname();
   const value = 78.6;
@@ -460,6 +461,7 @@ export default function Page() {
       <div className="flex flex-col lg:flex-row w-full h-full gap-2">
         <div className="w-full lg:flex-[4] bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700 flex">
           <VideoPlayer
+            ref={ref}
             src={currentVideo?.video}
             title={currentVideo?.name}
             poster={currentVideo?.thumbnail}

@@ -9,32 +9,20 @@ import Image from 'next/image';
 
 const clips = [
   {
-    id: 2,
-    title: 'Parks and Recreation - Ben finally shoots his shot',
-    duration: '4:19',
-    thumbnail: '/images/thumbnails/parks-and-recreation-ben-shoots-his-shot.jpg',
-  },
-  {
-    id: 3,
-    title: 'Parks and Recreation - The Cursed Harvest Festival Interview',
-    duration: '2:14',
-    thumbnail: '/images/thumbnails/the-cursed-harvest-festival-interview.png',
-  },
-  {
     id: 4,
-    title: 'The Office US - Where Is My Desk!?',
+    title: 'Where Is My Desk!? - The Office US',
     duration: '1:55',
-    thumbnail: '/images/thumbnails/where-is-my-desk.webp',
+    thumbnail: '/images/thumbnails/where-is-my-desk.jpg',
   },
   {
     id: 5,
-    title: 'The Good Place - Janet Loves Jason',
+    title: 'Janet Loves Jason - The Good Place',
     duration: '1:37',
-    thumbnail: '/images/thumbnails/the-good-place-janet-loves-jason.png',
+    thumbnail: '/images/thumbnails/the-good-place-janet-loves-jason.jpg',
   },
   {
     id: 6,
-    title: 'The Good Place - Say Hello to Real Eleanor',
+    title: 'Say Hello to Real Eleanor - The Good Place',
     duration: '2:37',
     thumbnail: '/images/thumbnails/the-good-place-say-hello-to-real-eleanor.png',
   },
@@ -43,6 +31,18 @@ const clips = [
     title: "Meredith Wins Harper Avery - Grey's Anatomy 300th Episode",
     duration: '1:26',
     thumbnail: '/images/thumbnails/meredith-wins-harper-avery.jpg',
+  },
+  {
+    id: 2,
+    title: 'Ben finally shoots his shot - Parks and Recreation',
+    duration: '4:19',
+    thumbnail: '/images/thumbnails/parks-and-recreation-ben-shoots-his-shot.jpg',
+  },
+  {
+    id: 3,
+    title: 'The Cursed Harvest Festival Interview - Parks and Recreation',
+    duration: '2:14',
+    thumbnail: '/images/thumbnails/the-cursed-harvest-festival-interview.png',
   },
 ];
 

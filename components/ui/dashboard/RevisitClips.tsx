@@ -8,8 +8,16 @@ import { cn } from '@/lib/utils';
 
 interface Clip {
   title: string;
+  thumbnail: string;
+  vtt: string;
+  video: string;
+  link: string;
+  id: string;
+  badge: string;
+  dialect: string;
+  dialectIcon: string;
+  completedSections: number;
   duration: string;
-  url: string;
 }
 
 interface RevisitVideosProps {
@@ -59,10 +67,15 @@ export default function RevisitVideos({ clips }: RevisitVideosProps) {
         'w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-1': isExpanded,
       })}
     >
-      <a href={clip.url} className="block">
-        <Card className="border text-neutral-500 dark:text-neutral-400 border-dashed border-accent dark:border-accent-dark rounded-lg bg-neutral-200/50 dark:bg-neutral-800/50 border-neutral-300 dark:border-neutral-700">
+      <a href={`dashboard/${clip.id}`} className="block">
+        <Card className="border text-neutral-500 relative overflow-hidden dark:text-neutral-400 border-accent dark:border-accent-dark rounded-lg bg-neutral-200/50 dark:bg-neutral-800/50 border-neutral-300 dark:border-neutral-700">
           <CardContent className="flex aspect-video items-center justify-center p-2">
-            <span className="font-medium text-xs">Video {index + 1}</span>
+            {/* <span className="font-medium text-xs">Video {index + 1}</span> */}
+            <img
+              src={clip.thumbnail}
+              alt={clip.title}
+              className="w-full h-full object-cover absolute inset-0"
+            />
           </CardContent>
         </Card>
         <div className="flex justify-between mt-1">

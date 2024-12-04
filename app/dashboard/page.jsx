@@ -78,7 +78,7 @@ const clips = [
     duration: '1:40',
   },
   {
-    name: 'April joins the great resignation - Parks and Recreation',
+    title: 'April joins the great resignation - Parks and Recreation',
     thumbnail: '/images/thumbnails/parks-and-recreation-april-great-resignation-full-res.jpg',
     vtt: '/videos/parks-and-recreation-april-great-resignation.vtt',
     video: '/videos/parks-and-recreation-april-great-resignation.mp4',
@@ -110,6 +110,7 @@ const clips = [
         thumbnail: 'd4.png',
       },
     ],
+    duration: '3:36',
     completedSections: 0,
   },
 ];
