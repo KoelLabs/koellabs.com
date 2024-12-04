@@ -73,8 +73,6 @@ export default function Page() {
   const [phonemeIX, setPhonemeIX] = useState<Array<number>>([]);
 
   const pathname = usePathname();
-  const value = 78.6;
-  const data = [{ value: value }, { value: 100 - value }];
 
   // Store feedback for each section
   const [sectionFeedback, setSectionFeedback] = useState<{ [key: number]: SectionFeedback }>({});
@@ -414,7 +412,7 @@ export default function Page() {
         // Get side-by-side feedback
         const sideBySideFeedback = await feedbackGiverRef.current.getSideBySideDescription();
         setSideBySideFeedback(sideBySideFeedback);
-        setPhonemeIX(sideBySideFeedback.map((word) => 0));
+        setPhonemeIX(sideBySideFeedback.map(word => 0));
 
         // Save feedback for current section
         const currentSection = getCurrentSection();
@@ -457,6 +455,10 @@ export default function Page() {
     setIsClient(true);
   }, []);
 
+  const isSectionDone = (sectionNumber: number): boolean => {
+    return sectionFeedback.hasOwnProperty(sectionNumber) && sectionFeedback[sectionNumber] !== null;
+  };
+
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
@@ -475,6 +477,11 @@ export default function Page() {
         return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 border border-gray-200 dark:border-gray-900';
     }
   };
+
+  const data = [
+    { name: 'Correct', value: score },
+    { name: 'Incorrect', value: 100 - score },
+  ];
 
   return (
     <div className="h-fit w-full rounded-xl relative p-4 flex flex-col gap-2">
@@ -522,6 +529,9 @@ export default function Page() {
                     
                     ${isInPracticeSection() && getCurrentSection() !== index ? 'opacity-50' : ''}`}
                 >
+                  {isSectionDone(index) && (
+                    <CheckCircle2 className="h-4 w-4 text-[#1B997B] dark:text-[#9DD8C5] absolute left-2 top-2" />
+                  )}
                   <span className="text-neutral-700 dark:text-neutral-200 font-medium tracking-tighter z-[1]">
                     Section #{index + 1}
                   </span>
@@ -675,63 +685,162 @@ export default function Page() {
               currentVideo?.practicableSections[getCurrentSection()]?.target_by_word.map(
                 (word, index) => {
                   return (
-                  <Dialog key={index}>
-                    <DialogTrigger asChild>
-                      <button className={getWordStyle(index)}>{word[0]}</button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-[825px]">
-                      <DialogHeader>
-                        <DialogTitle className="text-xl tracking-tight">
-                          Feedback for &quot;{word[0]}&quot;
-                        </DialogTitle>
-                        <DialogDescription className="text-neutral-600 dark:text-neutral-400">
-                          {feedback.length > 0 && feedback[index] && (
-                            <div className="">
-                              <p className="">{feedback[index][1]}</p>
-                            </div>
-                          )}
-                        </DialogDescription>
-                      </DialogHeader>
-                      <div className="grid gap-4 py-4">
-                        <div className="space-y-2">
-                          {
-                            sideBySideFeedback.length > 0 ? (
+                    <Dialog key={index}>
+                      <DialogTrigger asChild>
+                        <button className={getWordStyle(index)}>{word[0]}</button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-[825px] border-2">
+                        <DialogHeader>
+                          <DialogTitle className="text-xl tracking-tight">
+                            Feedback for &quot;{word[0]}&quot;
+                          </DialogTitle>
+                          <DialogDescription className="text-neutral-600 dark:text-neutral-400">
+                            {feedback.length > 0 && feedback[index] && (
+                              <div className="">
+                                <p className="">{feedback[index][1]}</p>
+                              </div>
+                            )}
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                          <div className="space-y-2">
+                            {sideBySideFeedback.length > 0 ? (
                               <>
                                 <h4 className="font-medium text-sm">Side-by-Side Sound Sequence</h4>
-                                <p>Click through the sounds you made side-by-side with the sounds the actor made to understand the differences!</p>
+                                <p>
+                                  Click through the sounds you made side-by-side with the sounds the
+                                  actor made to understand the differences!
+                                </p>
                                 <div className="flex gap-4">
                                   <div className="flex flex-col gap-2 flex-1 flex-grow">
-                                    <h5 className="font-medium text-sm">The actor pronunciation ({sideBySideFeedback[index][1][phonemeIX[index]][0]['phonemicSpelling']})</h5>
-                                    <img src={'/visemes/viseme-id-' + sideBySideFeedback[index][1][phonemeIX[index]][0]['viseme_id'] + '.jpg'}></img>
-                                    <p>{
-                                      `${sideBySideFeedback[index][1][phonemeIX[index]][0]['description']} ${sideBySideFeedback[index][1][phonemeIX[index]][0]['exampleWord']} E.g., ${sideBySideFeedback[index][1][phonemeIX[index]][0]['example_words'].map(s => s.replace('*','<b>').replace('*','</b>')).join(', ')}.`
-                                    }</p>
+                                    <h5 className="font-medium text-sm">
+                                      The actor pronunciation (
+                                      {
+                                        sideBySideFeedback[index][1][phonemeIX[index]][0][
+                                          'phonemicSpelling'
+                                        ]
+                                      }
+                                      )
+                                    </h5>
+                                    <img
+                                      src={
+                                        '/visemes/viseme-id-' +
+                                        sideBySideFeedback[index][1][phonemeIX[index]][0][
+                                          'viseme_id'
+                                        ] +
+                                        '.jpg'
+                                      }
+                                    ></img>
+                                    <p>{`${sideBySideFeedback[index][1][phonemeIX[index]][0]['description']} ${sideBySideFeedback[index][1][phonemeIX[index]][0]['exampleWord']} E.g., ${sideBySideFeedback[index][1][phonemeIX[index]][0]['example_words'].map(s => s.replace('*', '<b>').replace('*', '</b>')).join(', ')}.`}</p>
                                   </div>
                                   <div className="flex flex-col gap-2 flex-1 flex-grow">
-                                    <h5 className="font-medium text-sm">Your Pronunciation ({sideBySideFeedback[index][1][phonemeIX[index]][1]['phonemicSpelling']})</h5>
-                                    <img src={'/visemes/viseme-id-' + sideBySideFeedback[index][1][phonemeIX[index]][1]['viseme_id'] + '.jpg'}></img>
-                                    <p>{
-                                      `${sideBySideFeedback[index][1][phonemeIX[index]][1]['description']} ${sideBySideFeedback[index][1][phonemeIX[index]][1]['exampleWord']} E.g., ${sideBySideFeedback[index][1][phonemeIX[index]][1]['example_words'].map(s => s.replace('*','<b>').replace('*','</b>')).join(', ')}.`
-                                    }</p>
+                                    <h5 className="font-medium text-sm">
+                                      Your Pronunciation (
+                                      {
+                                        sideBySideFeedback[index][1][phonemeIX[index]][1][
+                                          'phonemicSpelling'
+                                        ]
+                                      }
+                                      )
+                                    </h5>
+                                    <img
+                                      src={
+                                        '/visemes/viseme-id-' +
+                                        sideBySideFeedback[index][1][phonemeIX[index]][1][
+                                          'viseme_id'
+                                        ] +
+                                        '.jpg'
+                                      }
+                                    ></img>
+                                    <p>{`${sideBySideFeedback[index][1][phonemeIX[index]][1]['description']} ${sideBySideFeedback[index][1][phonemeIX[index]][1]['exampleWord']} E.g., ${sideBySideFeedback[index][1][phonemeIX[index]][1]['example_words'].map(s => s.replace('*', '<b>').replace('*', '</b>')).join(', ')}.`}</p>
                                   </div>
                                 </div>
-                                <button type="button" className="bg-blue-500 text-white rounded-md p-2" onClick={() => {setPhonemeIX(prev => {prev[index] = 0; return prev; }); const inter = setInterval(() => setPhonemeIX(prev => { if (prev[index] + 1 >= sideBySideFeedback[index][1].length - 1) clearInterval(inter); prev[index] = Math.min(prev[index] + 1, sideBySideFeedback[index][1].length - 1); return prev;}), 200)}}>Play</button>
-                                <button type="button" className="bg-blue-500 text-white rounded-md p-2" onClick={() => setPhonemeIX(prev => {prev[index] = Math.max(prev[index] - 1, 0); return prev; })}>Previous Phoneme</button>
-                                <button type="button" className="bg-blue-500 text-white rounded-md p-2" onClick={() => setPhonemeIX(prev => {prev[index] = Math.min(prev[index] + 1, sideBySideFeedback[index][1].length - 1); return prev; })}>Next Phoneme</button>
+                                <button
+                                  type="button"
+                                  className="bg-blue-500 text-white rounded-md p-2"
+                                  onClick={() => {
+                                    setPhonemeIX(prev => {
+                                      prev[index] = 0;
+                                      return prev;
+                                    });
+                                    const inter = setInterval(
+                                      () =>
+                                        setPhonemeIX(prev => {
+                                          if (
+                                            prev[index] + 1 >=
+                                            sideBySideFeedback[index][1].length - 1
+                                          )
+                                            clearInterval(inter);
+                                          prev[index] = Math.min(
+                                            prev[index] + 1,
+                                            sideBySideFeedback[index][1].length - 1,
+                                          );
+                                          return prev;
+                                        }),
+                                      200,
+                                    );
+                                  }}
+                                >
+                                  Play
+                                </button>
+                                <button
+                                  type="button"
+                                  className="bg-blue-500 text-white rounded-md p-2"
+                                  onClick={() =>
+                                    setPhonemeIX(prev => {
+                                      prev[index] = Math.max(prev[index] - 1, 0);
+                                      return prev;
+                                    })
+                                  }
+                                >
+                                  Previous Phoneme
+                                </button>
+                                <button
+                                  type="button"
+                                  className="bg-blue-500 text-white rounded-md p-2"
+                                  onClick={() =>
+                                    setPhonemeIX(prev => {
+                                      prev[index] = Math.min(
+                                        prev[index] + 1,
+                                        sideBySideFeedback[index][1].length - 1,
+                                      );
+                                      return prev;
+                                    })
+                                  }
+                                >
+                                  Next Phoneme
+                                </button>
                               </>
-                            ) : null
-                          }
-                          <h4 className="font-medium text-sm">Score</h4>
-                          <p className="text-neutral-600 dark:text-neutral-400">
-                            {wordScores[index]
-                              ? `${Math.round((wordsCorrect[index] ? wordScores[index] : 0.1) * 100)}%`
-                              : 'Not attempted yet'}
-                          </p>
+                            ) : null}
+                            <h4 className="font-medium tracking-tight">
+                              Weighted Accent Accuracy (%)
+                            </h4>
+                            <div className="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                              <div
+                                className="h-full bg-[#1B997B] transition-all duration-300"
+                                style={{
+                                  width: wordScores[index]
+                                    ? `${Math.round((wordsCorrect[index] ? wordScores[index] : 0.1) * 100)}%`
+                                    : '0%',
+                                }}
+                              />
+                            </div>
+                            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                              {wordScores[index]
+                                ? `${Math.round((wordsCorrect[index] ? wordScores[index] : 0.1) * 100)}%`
+                                : 'Not attempted yet'}
+                            </p>
+                          </div>
+                          {/* <div className="space-y-2">
+                          <h4 className="font-medium tracking-tight">
+                            Similar Words in Your Native Language
+                          </h4>
+                        </div> */}
                         </div>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                )},
+                      </DialogContent>
+                    </Dialog>
+                  );
+                },
               )}
           </div>
           {isInPracticeSection() && feedback.length > 0 && (
