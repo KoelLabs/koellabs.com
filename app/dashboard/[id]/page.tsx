@@ -20,6 +20,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/base/dialog';
+import { set } from 'zod';
 
 declare global {
   interface Window {
@@ -34,6 +35,7 @@ interface SectionFeedback {
   feedback: Array<[string, string]>;
   top3Feedback: Array<[string, string]>;
   score: number;
+  sideBySideFeedback: SideBySideFeedback;
 }
 
 interface WordFeedback {
@@ -41,6 +43,17 @@ interface WordFeedback {
   phonetic: string;
   feedback: string;
 }
+
+interface PhonemeDescription {
+  phonemicSpelling: string; // e.g. 'vuh'
+  description: string;
+  exampleWord: string;
+  example_words: Array<string>; // e.g. ['bo*tt*le', 'ke*tt*le']
+  viseme_id: number;
+}
+type SideBySidePhonemeFeedback = [PhonemeDescription, PhonemeDescription];
+type SideBySideWordFeedback = [string, Array<SideBySidePhonemeFeedback>];
+type SideBySideFeedback = Array<SideBySideWordFeedback>;
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
@@ -54,6 +67,10 @@ export default function Page() {
   const videoPlayerRef = useRef(null);
   const remote = useMediaRemote();
   const ref = useRef<MediaPlayerInstance>(remote);
+
+  // diagrams
+  const [sideBySideFeedback, setSideBySideFeedback] = useState<SideBySideFeedback>([]);
+  const [phonemeIX, setPhonemeIX] = useState<Array<number>>([]);
 
   const pathname = usePathname();
   const value = 78.6;
@@ -244,6 +261,7 @@ export default function Page() {
         setFeedback(savedFeedback.feedback);
         setTop3Feedback(savedFeedback.top3Feedback);
         setScore(savedFeedback.score);
+        setSideBySideFeedback(savedFeedback.sideBySideFeedback);
       } else {
         // Clear feedback for new sections
         setWordScores([]);
@@ -251,6 +269,7 @@ export default function Page() {
         setFeedback([]);
         setTop3Feedback([]);
         setScore(0);
+        setSideBySideFeedback([]);
       }
     }
   }, [currentTime, sectionFeedback]);
@@ -336,6 +355,7 @@ export default function Page() {
       setTop3Feedback([]); // Clear previous top 3 feedback
       setWordScores(new Array(practiceSection.target_by_word.length).fill(0));
       setNextWordIndex(0); // Start with the first word
+      setSideBySideFeedback([]);
 
       // Initialize FeedbackGiver with the current section's target and target_by_word
       feedbackGiverRef.current = new FeedbackGiver(
@@ -393,6 +413,11 @@ export default function Page() {
         const newScores = scoredWords.map((word: any) => word[3] || 0);
         const finalScore = Math.round(1000 * overall) / 10;
 
+        // Get side-by-side feedback
+        const sideBySideFeedback = await feedbackGiverRef.current.getSideBySideDescription();
+        setSideBySideFeedback(sideBySideFeedback);
+        setPhonemeIX(sideBySideFeedback.map((word) => 0));
+
         // Save feedback for current section
         const currentSection = getCurrentSection();
         if (currentSection !== null && currentSection !== -1) {
@@ -404,6 +429,7 @@ export default function Page() {
               feedback: perWordFeedback,
               top3Feedback: top3,
               score: finalScore,
+              sideBySideFeedback,
             },
           }));
 
@@ -649,7 +675,8 @@ export default function Page() {
           <div className="m-3">
             {isInPracticeSection() &&
               currentVideo?.practicableSections[getCurrentSection()]?.target_by_word.map(
-                (word, index) => (
+                (word, index) => {
+                  return (
                   <Dialog key={index}>
                     <DialogTrigger asChild>
                       <button className={getWordStyle(index)}>{word[0]}</button>
@@ -669,6 +696,33 @@ export default function Page() {
                       </DialogHeader>
                       <div className="grid gap-4 py-4">
                         <div className="space-y-2">
+                          {
+                            sideBySideFeedback.length > 0 ? (
+                              <>
+                                <h4 className="font-medium text-sm">Side-by-Side Sound Sequence</h4>
+                                <p>Click through the sounds you made side-by-side with the sounds the actor made to understand the differences!</p>
+                                <div className="flex gap-4">
+                                  <div className="flex flex-col gap-2 flex-1 flex-grow">
+                                    <h5 className="font-medium text-sm">The actor pronunciation ({sideBySideFeedback[index][1][phonemeIX[index]][0]['phonemicSpelling']})</h5>
+                                    <img src={'/visemes/viseme-id-' + sideBySideFeedback[index][1][phonemeIX[index]][0]['viseme_id'] + '.jpg'}></img>
+                                    <p>{
+                                      `${sideBySideFeedback[index][1][phonemeIX[index]][0]['description']} ${sideBySideFeedback[index][1][phonemeIX[index]][0]['exampleWord']} E.g., ${sideBySideFeedback[index][1][phonemeIX[index]][0]['example_words'].map(s => s.replace('*','<b>').replace('*','</b>')).join(', ')}.`
+                                    }</p>
+                                  </div>
+                                  <div className="flex flex-col gap-2 flex-1 flex-grow">
+                                    <h5 className="font-medium text-sm">Your Pronunciation ({sideBySideFeedback[index][1][phonemeIX[index]][1]['phonemicSpelling']})</h5>
+                                    <img src={'/visemes/viseme-id-' + sideBySideFeedback[index][1][phonemeIX[index]][1]['viseme_id'] + '.jpg'}></img>
+                                    <p>{
+                                      `${sideBySideFeedback[index][1][phonemeIX[index]][1]['description']} ${sideBySideFeedback[index][1][phonemeIX[index]][1]['exampleWord']} E.g., ${sideBySideFeedback[index][1][phonemeIX[index]][1]['example_words'].map(s => s.replace('*','<b>').replace('*','</b>')).join(', ')}.`
+                                    }</p>
+                                  </div>
+                                </div>
+                                <button type="button" className="bg-blue-500 text-white rounded-md p-2" onClick={() => {setPhonemeIX(prev => {prev[index] = 0; return prev; }); const inter = setInterval(() => setPhonemeIX(prev => { if (prev[index] + 1 >= sideBySideFeedback[index][1].length - 1) clearInterval(inter); prev[index] = Math.min(prev[index] + 1, sideBySideFeedback[index][1].length - 1); return prev;}), 200)}}>Play</button>
+                                <button type="button" className="bg-blue-500 text-white rounded-md p-2" onClick={() => setPhonemeIX(prev => {prev[index] = Math.max(prev[index] - 1, 0); return prev; })}>Previous Phoneme</button>
+                                <button type="button" className="bg-blue-500 text-white rounded-md p-2" onClick={() => setPhonemeIX(prev => {prev[index] = Math.min(prev[index] + 1, sideBySideFeedback[index][1].length - 1); return prev; })}>Next Phoneme</button>
+                              </>
+                            ) : null
+                          }
                           <h4 className="font-medium text-sm">Score</h4>
                           <p className="text-neutral-600 dark:text-neutral-400">
                             {wordScores[index]
@@ -679,7 +733,7 @@ export default function Page() {
                       </div>
                     </DialogContent>
                   </Dialog>
-                ),
+                )},
               )}
           </div>
           {isInPracticeSection() && feedback.length > 0 && (
