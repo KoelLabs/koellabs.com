@@ -1,3 +1,5 @@
+const serverhost = 'localhost:8080';
+
 export class FeedbackGiver {
   constructor(target, target_by_word, on_transcription, on_word_spoken) {
     this.target = target;
@@ -19,14 +21,14 @@ export class FeedbackGiver {
     this.recognition = null;
   }
 
-  set_transcription(transcription) {
+  #setTranscription(transcription) {
     this.transcription = transcription;
     this.on_transcription(this.transcription);
   }
 
   async getFeedback() {
     const res = await fetch(
-      `http://localhost:8080/feedback?target=${encodeURIComponent(
+      `http://${serverhost}/feedback?target=${encodeURIComponent(
         this.target,
       )}&tbw=${encodeURIComponent(
         JSON.stringify(this.target_by_word),
@@ -39,7 +41,7 @@ export class FeedbackGiver {
 
   async getCER() {
     const res = await fetch(
-      `http://localhost:8080/score_words_cer?target=${encodeURIComponent(
+      `http://${serverhost}/score_words_cer?target=${encodeURIComponent(
         this.target,
       )}&tbw=${encodeURIComponent(
         JSON.stringify(this.target_by_word),
@@ -52,7 +54,7 @@ export class FeedbackGiver {
 
   async getWFED() {
     const res = await fetch(
-      `http://localhost:8080/score_words_wfed?target=${encodeURIComponent(
+      `http://${serverhost}/score_words_wfed?target=${encodeURIComponent(
         this.target,
       )}&tbw=${encodeURIComponent(
         JSON.stringify(this.target_by_word),
@@ -63,16 +65,27 @@ export class FeedbackGiver {
     return [scoredWords, overall];
   }
 
+  async getSideBySideDescription() {
+    const res = await fetch(
+      `http://${serverhost}/side_by_side_description?target=${encodeURIComponent(`
+        ${this.target}
+        `)}&tbw=${encodeURIComponent(
+        JSON.stringify(this.target_by_word),
+      )}&speech=${encodeURIComponent(this.transcription)}`,
+    );
+    return await res.json();
+  }
+
   async start() {
     // Clear previous transcription
-    this.set_transcription('');
+    this.#setTranscription('');
 
     // Open WebSocket connection
-    this.socket = new WebSocket(`ws://localhost:8080/stream`);
+    this.socket = new WebSocket(`ws://${serverhost}/stream`);
 
     // Handle incoming transcriptions
     this.socket.onmessage = async event => {
-      this.set_transcription(event.data);
+      this.#setTranscription(event.data);
     };
 
     // Start capturing audio
@@ -87,7 +100,7 @@ export class FeedbackGiver {
     });
 
     // Load the AudioWorkletProcessor (which handles audio processing)
-    await this.audioContext.audioWorklet.addModule('http://localhost:3000/WavWorklet.js');
+    await this.audioContext.audioWorklet.addModule(`${location.origin}/WavWorklet.js`);
 
     // Create the AudioWorkletNode
     this.audioWorkletNode = new AudioWorkletNode(this.audioContext, 'wav-worklet');
@@ -106,10 +119,27 @@ export class FeedbackGiver {
       }
     };
 
-    this.startWordTranscription();
+    this.#startWordTranscription();
   }
 
-  startWordTranscription() {
+  async stop() {
+    if (this.audioWorkletNode) {
+      this.audioWorkletNode.disconnect();
+    }
+    if (this.socket) {
+      this.socket.close();
+    }
+    if (this.recognition) {
+      this.recognition.onend = null;
+      this.recognition.stop();
+    }
+    if (this.audioContext) {
+      await this.audioContext.close();
+      this.audioContext = null;
+    }
+  }
+
+  #startWordTranscription() {
     this.next_word_ix = 0;
     for (let i = 0; i < this.words.length; i++) {
       this.are_words_correct[i] = false;
@@ -179,17 +209,5 @@ export class FeedbackGiver {
         }
       }
     };
-  }
-
-  async stop() {
-    if (this.audioWorkletNode) {
-      this.audioWorkletNode.disconnect();
-    }
-    if (this.socket) {
-      this.socket.close();
-    }
-    if (this.audioContext) {
-      await this.audioContext.close();
-    }
   }
 }
