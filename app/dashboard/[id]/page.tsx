@@ -2,7 +2,16 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Badge } from '@/components/ui/base/badge';
-import { Play, Pause, CheckCircle2, Circle, PlayIcon, PauseIcon } from 'lucide-react';
+import {
+  Play,
+  Pause,
+  CheckCircle2,
+  Circle,
+  PlayIcon,
+  PauseIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+} from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { PieChart, Pie, Cell } from 'recharts';
 import { Button } from '@/components/ui/base/button';
@@ -691,8 +700,8 @@ export default function Page() {
                       <DialogTrigger asChild>
                         <button className={getWordStyle(index)}>{word[0]}</button>
                       </DialogTrigger>
-                      <DialogContent className="sm:max-w-[825px] border-2">
-                        <DialogHeader>
+                      <DialogContent className="sm:max-w-[825px] border-2 p-0">
+                        <DialogHeader className="pt-6 px-6">
                           <DialogTitle className="text-xl tracking-tight">
                             Feedback for &quot;{word[0]}&quot;
                           </DialogTitle>
@@ -705,115 +714,7 @@ export default function Page() {
                           </DialogDescription>
                         </DialogHeader>
                         <div className="grid gap-4 py-4">
-                          <div className="space-y-2">
-                            {sideBySideFeedback.length > 0 ? (
-                              <>
-                                <h4 className="font-medium text-sm">Side-by-Side Sound Sequence</h4>
-                                <p>
-                                  Click through the sounds you made side-by-side with the sounds the
-                                  actor made to understand the differences!
-                                </p>
-                                <div className="flex gap-4">
-                                  <div className="flex flex-col gap-2 flex-1 flex-grow">
-                                    <h5 className="font-medium text-sm">
-                                      The actor pronunciation (
-                                      {
-                                        sideBySideFeedback[index][1][phonemeIX[index]][0][
-                                          'phonemicSpelling'
-                                        ]
-                                      }
-                                      )
-                                    </h5>
-                                    <img
-                                      src={
-                                        '/visemes/viseme-id-' +
-                                        sideBySideFeedback[index][1][phonemeIX[index]][0][
-                                          'viseme_id'
-                                        ] +
-                                        '.jpg'
-                                      }
-                                    ></img>
-                                    <p>{`${sideBySideFeedback[index][1][phonemeIX[index]][0]['description']} ${sideBySideFeedback[index][1][phonemeIX[index]][0]['exampleWord']} E.g., ${sideBySideFeedback[index][1][phonemeIX[index]][0]['example_words'].map(s => s.replace('*', '<b>').replace('*', '</b>')).join(', ')}.`}</p>
-                                  </div>
-                                  <div className="flex flex-col gap-2 flex-1 flex-grow">
-                                    <h5 className="font-medium text-sm">
-                                      Your Pronunciation (
-                                      {
-                                        sideBySideFeedback[index][1][phonemeIX[index]][1][
-                                          'phonemicSpelling'
-                                        ]
-                                      }
-                                      )
-                                    </h5>
-                                    <img
-                                      src={
-                                        '/visemes/viseme-id-' +
-                                        sideBySideFeedback[index][1][phonemeIX[index]][1][
-                                          'viseme_id'
-                                        ] +
-                                        '.jpg'
-                                      }
-                                    ></img>
-                                    <p>{`${sideBySideFeedback[index][1][phonemeIX[index]][1]['description']} ${sideBySideFeedback[index][1][phonemeIX[index]][1]['exampleWord']} E.g., ${sideBySideFeedback[index][1][phonemeIX[index]][1]['example_words'].map(s => s.replace('*', '<b>').replace('*', '</b>')).join(', ')}.`}</p>
-                                  </div>
-                                </div>
-                                <button
-                                  type="button"
-                                  className="bg-blue-500 text-white rounded-md p-2"
-                                  onClick={() => {
-                                    setPhonemeIX(prev => {
-                                      prev[index] = 0;
-                                      return prev;
-                                    });
-                                    const inter = setInterval(
-                                      () =>
-                                        setPhonemeIX(prev => {
-                                          if (
-                                            prev[index] + 1 >=
-                                            sideBySideFeedback[index][1].length - 1
-                                          )
-                                            clearInterval(inter);
-                                          prev[index] = Math.min(
-                                            prev[index] + 1,
-                                            sideBySideFeedback[index][1].length - 1,
-                                          );
-                                          return prev;
-                                        }),
-                                      200,
-                                    );
-                                  }}
-                                >
-                                  Play
-                                </button>
-                                <button
-                                  type="button"
-                                  className="bg-blue-500 text-white rounded-md p-2"
-                                  onClick={() =>
-                                    setPhonemeIX(prev => {
-                                      prev[index] = Math.max(prev[index] - 1, 0);
-                                      return prev;
-                                    })
-                                  }
-                                >
-                                  Previous Phoneme
-                                </button>
-                                <button
-                                  type="button"
-                                  className="bg-blue-500 text-white rounded-md p-2"
-                                  onClick={() =>
-                                    setPhonemeIX(prev => {
-                                      prev[index] = Math.min(
-                                        prev[index] + 1,
-                                        sideBySideFeedback[index][1].length - 1,
-                                      );
-                                      return prev;
-                                    })
-                                  }
-                                >
-                                  Next Phoneme
-                                </button>
-                              </>
-                            ) : null}
+                          <div className="space-y-2 mb-2 border-y border-neutral-200 dark:border-neutral-700 py-3 pt-4 px-6">
                             <h4 className="font-medium tracking-tight">
                               Weighted Accent Accuracy (%)
                             </h4>
@@ -827,11 +728,144 @@ export default function Page() {
                                 }}
                               />
                             </div>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 mb-2">
                               {wordScores[index]
                                 ? `${Math.round(wordScores[index] * 100)}%`
                                 : 'Not attempted yet'}
                             </p>
+                          </div>
+                          <div className="space-y-4">
+                            {sideBySideFeedback.length > 0 ? (
+                              <>
+                                <div className="px-6 space-y-2">
+                                  <h4 className="font-medium tracking-tight">
+                                    Side-by-Side Sound Sequence
+                                  </h4>
+                                  <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+                                    Click through the sounds you made side-by-side with the sounds
+                                    the actor made to understand the differences!
+                                  </p>
+                                  <div className="flex gap-4">
+                                    <div className="flex flex-col gap-2 flex-1 flex-grow">
+                                      <h5 className="font-medium text-sm">
+                                        The actor pronunciation (
+                                        {
+                                          sideBySideFeedback[index][1][phonemeIX[index]][0][
+                                            'phonemicSpelling'
+                                          ]
+                                        }
+                                        )
+                                      </h5>
+                                      <img
+                                        src={
+                                          '/visemes/viseme-id-' +
+                                          sideBySideFeedback[index][1][phonemeIX[index]][0][
+                                            'viseme_id'
+                                          ] +
+                                          '.jpg'
+                                        }
+                                        className="w-[80%] mx-auto"
+                                      ></img>
+                                      <p
+                                        dangerouslySetInnerHTML={{
+                                          __html: `${sideBySideFeedback[index][1][phonemeIX[index]][0]['description']} ${sideBySideFeedback[index][1][phonemeIX[index]][0]['exampleWord']} E.g., ${sideBySideFeedback[index][1][phonemeIX[index]][0]['example_words'].map(s => s.replace('*', '<b>').replace('*', '</b>')).join(', ')}.`,
+                                        }}
+                                      ></p>
+                                    </div>
+                                    <div className="flex flex-col gap-2 flex-1 flex-grow">
+                                      <h5 className="font-medium text-sm">
+                                        Your Pronunciation (
+                                        {
+                                          sideBySideFeedback[index][1][phonemeIX[index]][1][
+                                            'phonemicSpelling'
+                                          ]
+                                        }
+                                        )
+                                      </h5>
+                                      <img
+                                        src={
+                                          '/visemes/viseme-id-' +
+                                          sideBySideFeedback[index][1][phonemeIX[index]][1][
+                                            'viseme_id'
+                                          ] +
+                                          '.jpg'
+                                        }
+                                        className="w-[80%] mx-auto"
+                                      ></img>
+                                      <p
+                                        className=""
+                                        dangerouslySetInnerHTML={{
+                                          __html: `${sideBySideFeedback[index][1][phonemeIX[index]][1]['description']} ${sideBySideFeedback[index][1][phonemeIX[index]][1]['exampleWord']} E.g., ${sideBySideFeedback[index][1][phonemeIX[index]][1]['example_words'].map(s => s.replace('*', '<b>').replace('*', '</b>')).join(', ')}.`,
+                                        }}
+                                      ></p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="flex gap-2 border-t border-neutral-200 dark:border-neutral-700 pb-3 p-6">
+                                  <button
+                                    type="button"
+                                    className="w-full px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 text-[#1B997B] dark:text-[#9DD8C5] bg-[#C7E9DE] dark:bg-[#1B997B]/20 border-[#9DD8C5] dark:border-[#1B997B] cursor-pointer border"
+                                    onClick={() => {
+                                      setPhonemeIX(prev => {
+                                        prev[index] = 0;
+                                        return prev;
+                                      });
+                                      const inter = setInterval(
+                                        () =>
+                                          setPhonemeIX(prev => {
+                                            if (
+                                              prev[index] + 1 >=
+                                              sideBySideFeedback[index][1].length - 1
+                                            )
+                                              clearInterval(inter);
+                                            prev[index] = Math.min(
+                                              prev[index] + 1,
+                                              sideBySideFeedback[index][1].length - 1,
+                                            );
+                                            return prev;
+                                          }),
+                                        200,
+                                      );
+                                    }}
+                                  >
+                                    <PlayIcon
+                                      className="mr-2 size-4 rounded-xl"
+                                      fill="currentColor"
+                                    />
+                                    Play Animated Sound Sequence
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="w-full max-w-fit px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
+                                    onClick={() =>
+                                      setPhonemeIX(prev => {
+                                        prev[index] = Math.max(prev[index] - 1, 0);
+                                        return prev;
+                                      })
+                                    }
+                                  >
+                                    <ArrowLeftIcon className="mr-2 size-4 rounded-xl" />
+                                    Previous Phoneme
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="w-full max-w-fit px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
+                                    onClick={() =>
+                                      setPhonemeIX(prev => {
+                                        prev[index] = Math.min(
+                                          prev[index] + 1,
+                                          sideBySideFeedback[index][1].length - 1,
+                                        );
+                                        return prev;
+                                      })
+                                    }
+                                  >
+                                    Next Phoneme
+                                    <ArrowRightIcon className="ml-2 size-4 rounded-xl" />
+                                  </button>
+                                </div>
+                              </>
+                            ) : null}
                           </div>
                           {/* <div className="space-y-2">
                           <h4 className="font-medium tracking-tight">
