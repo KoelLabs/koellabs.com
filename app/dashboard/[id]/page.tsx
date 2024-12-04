@@ -216,27 +216,27 @@ export default function Page() {
   const [wordScores, setWordScores] = useState<Array<number>>([]);
   const [wordStyles, setWordStyles] = useState<Array<string>>([]);
 
-  // // Update displayed feedback when section changes
-  // useEffect(() => {
-  //   const currentSection = getCurrentSection();
-  //   if (currentSection !== null && currentSection !== -1) {
-  //     const savedFeedback = sectionFeedback[currentSection];
-  //     if (savedFeedback) {
-  //       setWordScores(savedFeedback.wordScores);
-  //       setTranscription(savedFeedback.transcription);
-  //       setFeedback(savedFeedback.feedback);
-  //       setTop3Feedback(savedFeedback.top3Feedback);
-  //       setScore(savedFeedback.score);
-  //     } else {
-  //       // Clear feedback for new sections
-  //       setWordScores([]);
-  //       setTranscription('');
-  //       setFeedback([]);
-  //       setTop3Feedback([]);
-  //       setScore(0);
-  //     }
-  //   }
-  // }, [currentTime, sectionFeedback]);
+  // Update displayed feedback when section changes
+  useEffect(() => {
+    const currentSection = getCurrentSection();
+    if (currentSection !== null && currentSection !== -1) {
+      const savedFeedback = sectionFeedback[currentSection];
+      if (savedFeedback) {
+        setWordScores(savedFeedback.wordScores);
+        setTranscription(savedFeedback.transcription);
+        setFeedback(savedFeedback.feedback);
+        setTop3Feedback(savedFeedback.top3Feedback);
+        setScore(savedFeedback.score);
+      } else {
+        // Clear feedback for new sections
+        setWordScores([]);
+        setTranscription('');
+        setFeedback([]);
+        setTop3Feedback([]);
+        setScore(0);
+      }
+    }
+  }, [currentTime, sectionFeedback]);
 
   const getWordStyle = (index: number) => {
     const score = wordScores[index] || 0;
@@ -329,15 +329,15 @@ export default function Page() {
             const newScores = scoredWords.map((word: any) => word[3] || 0);
             setWordScores([...newScores]); // Create new array reference to trigger re-render
             // Update next word index
+
+            const finalScore = Math.round(1000 * overall) / 10;
+            setScore(finalScore);
           }
         },
         (words, are_words_correct, next_word_ix, percent_correct, is_done) => {
           setNextWordIndex(next_word_ix);
           if (is_done) {
-            setTimeout(() => {
-              setIsRecording(false);
-              feedbackGiverRef.current?.stop();
-            }, 1000);
+            setTimeout(stopRecording, 1000);
           }
         },
       );
@@ -367,10 +367,10 @@ export default function Page() {
         setFeedback(perWordFeedback);
         setTop3Feedback(top3);
 
-        // Get CER score
+        // Recalculate CER because it hasn't updated for some reason :/
         const [scoredWords, overall] = await feedbackGiverRef.current.getCER();
+        const newScores = scoredWords.map((word: any) => word[3] || 0);
         const finalScore = Math.round(1000 * overall) / 10;
-        setScore(finalScore);
 
         // Save feedback for current section
         const currentSection = getCurrentSection();
@@ -378,7 +378,7 @@ export default function Page() {
           setSectionFeedback(prev => ({
             ...prev,
             [currentSection]: {
-              wordScores: [...wordScores], // Create a new array to ensure state updates
+              wordScores: [...newScores], // Create a new array to ensure state updates
               transcription,
               feedback: perWordFeedback,
               top3Feedback: top3,
@@ -388,7 +388,7 @@ export default function Page() {
 
           // Update the completedSections count if needed
           if (currentVideo && typeof currentVideo.completedSections === 'number') {
-            if (overall > 0.8) {
+            if (score > 0.8) {
               currentVideo.completedSections += 1;
             }
           }
