@@ -814,8 +814,6 @@ export default function Page() {
                                 </button>
                               </>
                             ) : null}
-                            <h4 className="font-medium text-sm">Score</h4>
-                            {/* <p className="text-neutral-600 dark:text-neutral-400"> */}
                             <h4 className="font-medium tracking-tight">
                               Weighted Accent Accuracy (%)
                             </h4>
