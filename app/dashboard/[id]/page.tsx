@@ -11,6 +11,15 @@ import VideoPlayer from '../videoPlayer';
 import { FeedbackGiver } from '@/components/FeedbackGiver';
 import { useMediaRemote } from '@vidstack/react';
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/base/dialog';
+
 declare global {
   interface Window {
     YT: any;
@@ -24,6 +33,12 @@ interface SectionFeedback {
   feedback: Array<[string, string]>;
   top3Feedback: Array<[string, string]>;
   score: number;
+}
+
+interface WordFeedback {
+  word: string;
+  phonetic: string;
+  feedback: string;
 }
 
 export default function Page() {
@@ -215,6 +230,7 @@ export default function Page() {
   const [nextWordIndex, setNextWordIndex] = useState<number | null>(null);
   const [wordScores, setWordScores] = useState<Array<number>>([]);
   const [wordStyles, setWordStyles] = useState<Array<string>>([]);
+  const [wordsCorrect, setWordsCorrect] = useState<Array<boolean>>([]);
 
   // // Update displayed feedback when section changes
   // useEffect(() => {
@@ -241,6 +257,7 @@ export default function Page() {
   const getWordStyle = (index: number) => {
     const score = wordScores[index] || 0;
     const isNext = index === nextWordIndex;
+    const isCorrect = wordsCorrect[index] || true;
 
     let backgroundColor = '';
     if (score >= 0.8) backgroundColor = 'bg-emerald-400 dark:bg-emerald-600 border-emerald-500';
@@ -248,6 +265,8 @@ export default function Page() {
     else if (score >= 0.6) backgroundColor = 'bg-yellow-300 dark:bg-yellow-500 border-yellow-500';
     else if (score >= 0.3) backgroundColor = 'bg-orange-300 dark:bg-orange-500 border-orange-500';
     else if (score > 0) backgroundColor = 'bg-red-400 dark:bg-red-600 border-red-500';
+
+    if (!isCorrect && score > 0) backgroundColor = 'bg-red-400 dark:bg-red-600 border-red-500';
 
     const border = isRecording ? 'border-solid' : 'border-dashed';
 
@@ -333,10 +352,10 @@ export default function Page() {
         },
         (words, are_words_correct, next_word_ix, percent_correct, is_done) => {
           setNextWordIndex(next_word_ix);
+          setWordsCorrect([...are_words_correct]);
           if (is_done) {
             setTimeout(() => {
-              setIsRecording(false);
-              feedbackGiverRef.current?.stop();
+              stopRecording();
             }, 1000);
           }
         },
@@ -612,14 +631,14 @@ export default function Page() {
                       ? 'Recording in progress. Click the button again to stop and get feedback.'
                       : 'You are currently in a practice section. Press the button to the right to start practicing.'}
                   </p>
-                  {transcription && (
+                  {/* {transcription && (
                     <div className="mt-2">
                       <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
                         Transcription:
                       </p>
                       <p className="text-neutral-600 dark:text-neutral-400">{transcription}</p>
                     </div>
-                  )}
+                  )} */}
                 </>
               )}
             </div>
@@ -628,58 +647,95 @@ export default function Page() {
             {isInPracticeSection() &&
               currentVideo?.practicableSections[getCurrentSection()]?.target_by_word.map(
                 (word, index) => (
-                  <button key={index} className={getWordStyle(index)}>
-                    {word[0]}
-                  </button>
+                  <Dialog key={index}>
+                    <DialogTrigger asChild>
+                      <button className={getWordStyle(index)}>{word[0]}</button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[825px]">
+                      <DialogHeader>
+                        <DialogTitle className="text-xl tracking-tight">
+                          Feedback for &quot;{word[0]}&quot;
+                        </DialogTitle>
+                        <DialogDescription className="text-neutral-600 dark:text-neutral-400">
+                          {feedback.length > 0 && feedback[index] && (
+                            <div className="">
+                              <p className="">{feedback[index][1]}</p>
+                            </div>
+                          )}
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="grid gap-4 py-4">
+                        <div className="space-y-2">
+                          <h4 className="font-medium text-sm">Score</h4>
+                          <p className="text-neutral-600 dark:text-neutral-400">
+                            {wordScores[index]
+                              ? `${Math.round(wordScores[index] * 100)}%`
+                              : 'Not attempted yet'}
+                          </p>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 ),
               )}
           </div>
           {isInPracticeSection() && feedback.length > 0 && (
             <div className="m-4 space-y-2">
-              <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
-                Feedback:
+              <h2 className="font-semibold tracking-tighter text-xl text-neutral-900 dark:text-neutral-100">
+                Areas for Improvement
+              </h2>
+              <p className="text-neutral-600 dark:text-neutral-400">
+                These are suggestions for words that you may want to practice some more. Let's take
+                a look at them, and press to enter deep practice mode when you're ready.
               </p>
-              {feedback.map(([word, feedbackText], index) => (
-                <p key={index} className="text-neutral-600 dark:text-neutral-400">
-                  <span className="font-medium">{word}:</span> {feedbackText}
-                </p>
-              ))}
+              <ul className="list-inside">
+                {top3Feedback.map((feedback, index) => (
+                  <li
+                    key={index}
+                    className="text-neutral-800 dark:text-neutral-200 my-2 border border-neutral-200 dark:border-neutral-700 rounded-lg p-2 bg-neutral-200/50 dark:bg-neutral-800 flex"
+                  >
+                    <span className="font-semibold capitalize aspect-[17/9] text-black border-dashed bg-neutral-200 border-neutral-300 dark:border-neutral-700 p-3 border rounded-md flex items-center justify-center h-12 mr-2">
+                      {feedback[0]}
+                    </span>
+                    <div>{feedback[1]}</div>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
         </div>
-        <div className="max-w-[298px] relative h-[200px] w-full bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700 flex flex-col justify-between">
+        <div className="max-w-[298px] relative h-[200px] w-full bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700 flex flex-col">
           <h2 className="text-lg font-semibold tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100"></h2>
-          <div className="absolute inset-0 flex items-center justify-center group-hover:scale-100 scale-[0.9] transition-all duration-200 ease-out rounded-2xl">
-            <div className="bg-sky-900/20 flex items-center justify-center rounded-full backdrop-blur-md size-28">
-              <div
-                className={`flex items-center justify-center bg-gradient-to-b from-black to-sky-900 shadow-md rounded-full size-20 transition-all ease-out duration-200 relative group-hover:scale-[1.2] scale-100 ${
-                  isRecording ? 'bg-red-600' : ''
-                }`}
-              >
-                {isRecording ? (
-                  <Pause
-                    className="size-8 text-white fill-white group-hover:scale-105 scale-100 transition-transform duration-200 ease-out"
-                    onClick={() => {
-                      StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()]);
-                    }}
-                    style={{
-                      filter:
-                        'drop-shadow(0 4px 3px rgb(3 105 161 / 0.07)) drop-shadow(0 2px 2px rgb(3 105 161 / 0.06))',
-                    }}
-                  />
-                ) : (
-                  <PlayIcon
-                    className="size-8 text-white fill-white group-hover:scale-105 scale-100 transition-transform duration-200 ease-out"
-                    onClick={() => {
-                      StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()]);
-                    }}
-                    style={{
-                      filter:
-                        'drop-shadow(0 4px 3px rgb(3 105 161 / 0.07)) drop-shadow(0 2px 2px rgb(3 105 161 / 0.06))',
-                    }}
-                  />
-                )}
-              </div>
+          <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-700" />
+          <div className="m-3">
+            <div className={` ${isRecording ? 'bg-red-600' : ''}`}>
+              {isRecording ? (
+                <Pause
+                  className="size-8 text-white fill-white group-hover:scale-105 scale-100 transition-transform duration-200 ease-out"
+                  onClick={() => {
+                    StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()]);
+                  }}
+                  style={{
+                    filter:
+                      'drop-shadow(0 4px 3px rgb(3 105 161 / 0.07)) drop-shadow(0 2px 2px rgb(3 105 161 / 0.06))',
+                  }}
+                />
+              ) : (
+                // <PlayIcon
+                //   className="size-8 text-white fill-white group-hover:scale-105 scale-100 transition-transform duration-200 ease-out"
+                //   onClick={() => {
+                //     StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()]);
+                //   }}
+                //   style={{
+                //     filter:
+                //       'drop-shadow(0 4px 3px rgb(3 105 161 / 0.07)) drop-shadow(0 2px 2px rgb(3 105 161 / 0.06))',
+                //   }}
+                // />
+                <div className="w-full border text-[#1B997B] dark:text-[#9DD8C5] px-4 py-2 rounded-md items-center bg-[#C7E9DE] dark:bg-[#1B997B]/20 tracking-tight border-[#9DD8C5] dark:border-[#1B997B] flex justify-center">
+                  <PlayIcon className="mr-2 size-4 rounded-xl" fill="currentColor" />
+                  Start Practice Mode
+                </div>
+              )}
             </div>
           </div>
         </div>
