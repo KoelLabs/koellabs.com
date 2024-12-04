@@ -2,12 +2,14 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Badge } from '@/components/ui/base/badge';
-import { Play, Pause, CheckCircle2, Circle } from 'lucide-react';
+import { Play, Pause, CheckCircle2, Circle, PlayIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { PieChart, Pie, Cell } from 'recharts';
 import { Button } from '@/components/ui/base/button';
 import Microphone from '../microphone';
 import VideoPlayer from '../videoPlayer';
+import { FeedbackGiver } from '@/components/FeedbackGiver';
+import { useMediaRemote } from '@vidstack/react';
 
 declare global {
   interface Window {
@@ -16,12 +18,33 @@ declare global {
   }
 }
 
+interface SectionFeedback {
+  wordScores: number[];
+  transcription: string;
+  feedback: Array<[string, string]>;
+  top3Feedback: Array<[string, string]>;
+  score: number;
+}
+
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [transcription, setTranscription] = useState('');
+  const [isRecording, setIsRecording] = useState(false);
+  const [feedback, setFeedback] = useState<Array<[string, string]>>([]);
+  const [top3Feedback, setTop3Feedback] = useState<Array<[string, string]>>([]);
+  const [score, setScore] = useState(0);
+  const feedbackGiverRef = useRef<any>(null);
+  const videoPlayerRef = useRef(null);
+  const remote = useMediaRemote();
+  const player = remote?.setPlayer(videoPlayerRef.current);
 
   const pathname = usePathname();
   const value = 78.6;
   const data = [{ value: value }, { value: 100 - value }];
+
+  // Store feedback for each section
+  const [sectionFeedback, setSectionFeedback] = useState<{ [key: number]: SectionFeedback }>({});
 
   // dummy data to represent user's data of videos
   const videos = [
@@ -76,21 +99,63 @@ export default function Page() {
           start: 9.6,
           end: 13.7,
           thumbnail: 'd1.png',
+          target: 'ɔliŋkɑɹdsʔɑɹðəweɪvəvðifjutʃɹ',
+          target_by_word: [
+            ['Calling', 'ɔliŋ'],
+            ['cards', 'kɑɹdsʔ'],
+            ['are', 'ɑɹ'],
+            ['the', 'ðə'],
+            ['wave', 'weɪv'],
+            ['of', 'əv'],
+            ['the', 'ði'],
+            ['future', 'fjutʃɹ'],
+          ],
         },
         {
           start: 39,
           end: 43,
           thumbnail: 'd2.png',
+          target: 'hɑɹeɪtsoʊɹeɪʒɹhændɪfjuwɑɾɪɡɛtɹɪttʃ',
+          target_by_word: [
+            ['Alright', 'hɑɹeɪt'],
+            ['so', 'soʊ'],
+            ['raise', 'ɹeɪʒ'],
+            ['your', 'ɹ'],
+            ['hand', 'hænd'],
+            ['if', 'ɪf'],
+            ['you', 'ju'],
+            ['wanna', 'wɑɾɪ'],
+            ['get', 'ɡɛt'],
+            ['rich', 'ɹɪttʃ'],
+          ],
         },
         {
           start: 63,
           end: 64.5,
           thumbnail: 'd3.png',
+          target: 'itsnɑɾəpɪɹmidzɡim',
+          target_by_word: [
+            ['It’s', 'its'],
+            ['not', 'nɑɾ'],
+            ['a', 'ə'],
+            ['pyramid', 'pɪɹmid'],
+            ['scheme', 'zɡim'],
+          ],
         },
         {
           start: 77,
           end: 78.2,
           thumbnail: 'd4.png',
+          target: 'ʔaɪhæftikoʊmeɪkinkɔl',
+          target_by_word: [
+            ['I', 'ʔaɪ'],
+            ['have', 'hæf'],
+            ['to', 'ti'],
+            ['go', 'koʊ'],
+            ['make', 'meɪk'],
+            ['a', 'i'],
+            ['call', 'kɔl'],
+          ],
         },
       ],
       completedSections: 0,
@@ -134,6 +199,215 @@ export default function Page() {
 
   const currentVideo = videos.find(video => pathname?.includes(video.id));
 
+  const isInPracticeSection = () => {
+    if (!currentVideo) return false;
+    return currentVideo.practicableSections.some(
+      section => currentTime >= section.start && currentTime <= section.end,
+    );
+  };
+
+  const getCurrentSection = () => {
+    if (!currentVideo) return null;
+    return currentVideo.practicableSections.findIndex(
+      section => currentTime >= section.start && currentTime <= section.end,
+    );
+  };
+  const [nextWordIndex, setNextWordIndex] = useState<number | null>(null);
+  const [wordScores, setWordScores] = useState<Array<number>>([]);
+  const [wordStyles, setWordStyles] = useState<Array<string>>([]);
+
+  // // Update displayed feedback when section changes
+  // useEffect(() => {
+  //   const currentSection = getCurrentSection();
+  //   if (currentSection !== null && currentSection !== -1) {
+  //     const savedFeedback = sectionFeedback[currentSection];
+  //     if (savedFeedback) {
+  //       setWordScores(savedFeedback.wordScores);
+  //       setTranscription(savedFeedback.transcription);
+  //       setFeedback(savedFeedback.feedback);
+  //       setTop3Feedback(savedFeedback.top3Feedback);
+  //       setScore(savedFeedback.score);
+  //     } else {
+  //       // Clear feedback for new sections
+  //       setWordScores([]);
+  //       setTranscription('');
+  //       setFeedback([]);
+  //       setTop3Feedback([]);
+  //       setScore(0);
+  //     }
+  //   }
+  // }, [currentTime, sectionFeedback]);
+
+  const getWordStyle = (index: number) => {
+    const score = wordScores[index] || 0;
+    const isNext = index === nextWordIndex;
+
+    let backgroundColor = '';
+    if (score >= 0.8) backgroundColor = 'bg-emerald-400 dark:bg-emerald-600 border-emerald-500';
+    else if (score >= 0.7) backgroundColor = 'bg-green-300 dark:bg-green-500 border-green-500';
+    else if (score >= 0.6) backgroundColor = 'bg-yellow-300 dark:bg-yellow-500 border-yellow-500';
+    else if (score >= 0.3) backgroundColor = 'bg-orange-300 dark:bg-orange-500 border-orange-500';
+    else if (score > 0) backgroundColor = 'bg-red-400 dark:bg-red-600 border-red-500';
+
+    const border = isRecording ? 'border-solid' : 'border-dashed';
+
+    const highlight = isNext
+      ? 'border-blue-500 border-2'
+      : 'border-neutral-400 dark:border-neutral-600 border';
+
+    return `text-neutral-800 dark:text-neutral-200 mr-1 px-1.5 text-4xl tracking-tighter rounded-md py-0.5 ${border} ${highlight} ${backgroundColor}`;
+  };
+
+  useEffect(() => {
+    const newStyles = wordScores.map((score, index) => {
+      const isNext = index === nextWordIndex;
+      let backgroundColor = 'bg-transparent';
+      if (score >= 0.8) {
+        backgroundColor = 'bg-emerald-400 dark:bg-emerald-600';
+      } else if (score >= 0.7) {
+        backgroundColor = 'bg-green-300 dark:bg-green-500';
+      } else if (score >= 0.6) {
+        backgroundColor = 'bg-yellow-300 dark:bg-yellow-500';
+      } else if (score >= 0.3) {
+        backgroundColor = 'bg-orange-300 dark:bg-orange-500';
+      } else if (score > 0) {
+        backgroundColor = 'bg-red-400 dark:bg-red-600';
+      }
+
+      const border = isRecording ? 'border-solid' : 'border-dashed';
+      const highlight = isNext
+        ? 'border-blue-500 border-2'
+        : 'border-neutral-400 dark:border-neutral-600 border';
+
+      return `inline-block text-neutral-800 dark:text-neutral-200 mr-1 px-1.5 text-4xl tracking-tighter rounded-md py-0.5 ${border} ${highlight} ${backgroundColor}`;
+    });
+    setWordStyles(newStyles);
+  }, [wordScores, nextWordIndex, isRecording]);
+
+  const StartPracticeMode = async (section: any) => {
+    try {
+      // If already recording, stop the recording
+      if (isRecording) {
+        await stopRecording();
+        return;
+      }
+
+      const currentSection = getCurrentSection();
+      if (currentSection === null || currentSection === -1) {
+        console.error('No valid section found');
+        return;
+      }
+
+      const practiceSection = currentVideo?.practicableSections[currentSection];
+      if (
+        !practiceSection ||
+        !('target' in practiceSection) ||
+        !('target_by_word' in practiceSection) ||
+        !practiceSection.target ||
+        !practiceSection.target_by_word
+      ) {
+        console.error('No target or target_by_word provided in the current section');
+        return;
+      }
+
+      setIsRecording(true);
+      setTranscription(''); // Clear previous transcription
+      setFeedback([]); // Clear previous feedback
+      setTop3Feedback([]); // Clear previous top 3 feedback
+      setWordScores(new Array(practiceSection.target_by_word.length).fill(0));
+      setNextWordIndex(0); // Start with the first word
+
+      // Initialize FeedbackGiver with the current section's target and target_by_word
+      feedbackGiverRef.current = new FeedbackGiver(
+        practiceSection.target,
+        practiceSection.target_by_word,
+        async (newTranscription: string) => {
+          setTranscription(newTranscription);
+          if (feedbackGiverRef.current) {
+            const [scoredWords, overall] = await feedbackGiverRef.current.getCER();
+
+            const newScores = scoredWords.map((word: any) => word[3] || 0);
+            setWordScores([...newScores]); // Create new array reference to trigger re-render
+            // Update next word index
+          }
+        },
+        (words, are_words_correct, next_word_ix, percent_correct, is_done) => {
+          setNextWordIndex(next_word_ix);
+          if (is_done) {
+            setTimeout(() => {
+              setIsRecording(false);
+              feedbackGiverRef.current?.stop();
+            }, 1000);
+          }
+        },
+      );
+
+      // Start recording
+      await feedbackGiverRef.current.start();
+    } catch (error) {
+      console.error('Error in StartPracticeMode:', error);
+      setIsRecording(false);
+      setNextWordIndex(null);
+      // Reset the feedback giver
+      if (feedbackGiverRef.current) {
+        await feedbackGiverRef.current.stop();
+      }
+    }
+  };
+
+  const stopRecording = async () => {
+    try {
+      setIsRecording(false);
+      setNextWordIndex(null);
+      if (feedbackGiverRef.current) {
+        await feedbackGiverRef.current.stop();
+
+        // Get feedback after stopping
+        const [perWordFeedback, top3] = await feedbackGiverRef.current.getFeedback();
+        setFeedback(perWordFeedback);
+        setTop3Feedback(top3);
+
+        // Get CER score
+        const [scoredWords, overall] = await feedbackGiverRef.current.getCER();
+        const finalScore = Math.round(1000 * overall) / 10;
+        setScore(finalScore);
+
+        // Save feedback for current section
+        const currentSection = getCurrentSection();
+        if (currentSection !== null && currentSection !== -1) {
+          setSectionFeedback(prev => ({
+            ...prev,
+            [currentSection]: {
+              wordScores: [...wordScores], // Create a new array to ensure state updates
+              transcription,
+              feedback: perWordFeedback,
+              top3Feedback: top3,
+              score: finalScore,
+            },
+          }));
+
+          // Update the completedSections count if needed
+          if (currentVideo && typeof currentVideo.completedSections === 'number') {
+            if (overall > 0.8) {
+              currentVideo.completedSections += 1;
+            }
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error in stopRecording:', error);
+    }
+  };
+
+  // Add cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (feedbackGiverRef.current) {
+        feedbackGiverRef.current.stop();
+      }
+    };
+  }, []);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -160,55 +434,67 @@ export default function Page() {
   return (
     <div className="h-fit w-full rounded-xl relative p-4 flex flex-col gap-2">
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-2xl font-semibold tracking-tighter">
+        <h1 className="text-2xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
           {currentVideo ? currentVideo.name : 'No video selected'}
         </h1>
-        {currentVideo && (
-          <Badge
-            variant="outline"
-            className={`${getBadgeColor(currentVideo.badge)} px-2 py-1 text-xs font-medium rounded-lg`}
-          >
-            {currentVideo.badge}
-          </Badge>
-        )}
       </div>
-      <div className="flex w-full h-full gap-2">
-        <div className="aspect-video flex-[4] w-full h-full bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-950">
-          {/* <div ref={playerRef} className="w-full h-full" /> */}
+      <div className="flex flex-col lg:flex-row w-full h-full gap-2">
+        <div className="w-full lg:flex-[4] bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700 flex">
           <VideoPlayer
             src={currentVideo?.video}
             title={currentVideo?.name}
             poster={currentVideo?.thumbnail}
             practicableSections={currentVideo?.vtt}
+            onTimeUpdate={setCurrentTime}
+            onSeek={setCurrentTime}
           />
         </div>
-        <div className="aspect-[4/2] flex-1 w-full h-full bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-950 flex flex-col justify-between">
+        <div className="w-full lg:flex-1 bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700 flex flex-col justify-between">
           <div>
-            <h2 className="text-lg font-medium tracking-tighter m-3 mb-2">Practicable Sections</h2>
-            <div className="flex flex-col gap-1 mt-0 m-3 max-h-[380px] overflow-y-auto">
+            <div className="flex justify-between items-center">
+              <h2 className="text-lg font-medium tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100">
+                Practicable Sections{' '}
+              </h2>
+              <Badge
+                variant="outline"
+                className="text-xs rounded-full bg-white tracking-tight mr-3 mt-1"
+              >
+                Clickable
+              </Badge>
+            </div>
+            <div className="flex flex-col gap-1.5 mt-0 m-3 max-h-[380px] overflow-y-auto">
               {currentVideo?.practicableSections?.map((section, index) => (
-                <div
+                <button
                   key={index}
-                  className="flex relative justify-between items-end p-2 h-24 bg-neutral-10 rounded-lg w-full bg-cover bg-center dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-800"
-                  style={{
-                    backgroundImage: `url(../images/thumbnails/${section.thumbnail})`,
+                  onClick={() => {
+                    if (player) {
+                      player.seek(section.start);
+                      setCurrentTime(section.start);
+                    }
                   }}
+                  className={`flex relative justify-between items-end p-2 h-20 bg-neutral-200/55 border-neutral-300/50 dark:border-neutral-700 rounded-lg w-full bg-cover bg-center dark:bg-neutral-700/50 border 
+                    
+                    ${isInPracticeSection() && getCurrentSection() !== index ? 'opacity-50' : ''}`}
                 >
-                  <div className="absolute top-0 left-0 w-full z-0 h-full bg-gradient-to-b from-transparent via-black/50 to-black/80 opacity-80 rounded-lg"></div>
-                  <span className="text-white font-medium tracking-tighter z-[1]">
-                    {(section.end - section.start).toFixed(1)} Seconds
+                  <span className="text-neutral-700 dark:text-neutral-200 font-medium tracking-tighter z-[1]">
+                    Section #{index + 1}
                   </span>
-                  <span className="text-neutral-300 text-xs tracking-tight z-[1]">
+                  <span className="text-neutral-500 dark:text-neutral-400 text-xs font-mono tracking-tight z-[1]">
                     {formatTime(section.start)} - {formatTime(section.end)}
                   </span>
-                </div>
+                </button>
               ))}
             </div>
           </div>
           <div>
-            <div className="border-t border-neutral-200 dark:border-neutral-800">
+            <div className="border-t border-neutral-200 dark:border-neutral-700">
+              <h2 className="text-lg font-medium tracking-tighter m-2 text-center text-neutral-900 dark:text-neutral-100">
+                Overall Accent Similarity
+              </h2>
+            </div>
+            <div className="border-t border-neutral-200 dark:border-neutral-700">
               <div className="w-full h-full flex items-center justify-center relative">
-                {isClient && (
+                {isClient && score > 0 ? (
                   <PieChart width={400} height={180} id="recharts-pie-1">
                     <Pie
                       data={data}
@@ -226,19 +512,31 @@ export default function Page() {
                       <Cell fill="#C8E6DE" />
                     </Pie>
                   </PieChart>
+                ) : (
+                  <div className="h-[180px] flex items-center justify-center">
+                    <div className="text-center text-neutral-500 dark:text-neutral-400">
+                      <Circle className="mx-auto mb-2 h-12 w-12 opacity-20" />
+                      <p className="tracking-tight">No accent similarity data yet.</p>
+                      <p className="text-sm">Practice a section to see your score.</p>
+                    </div>
+                  </div>
                 )}
-                <div className="absolute inset-0 flex flex-col items-center justify-center -mb-16">
-                  <span className="text-4xl font-semibold tracking-tighter text-black">
-                    {value}%
-                  </span>
-                  <span className="text-lg text-neutral-600">Accent Similarity</span>
-                </div>
+                {score > 0 && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center -mb-16">
+                    <span className="text-4xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
+                      {score}%
+                    </span>
+                    <span className="text-lg text-neutral-600 dark:text-neutral-400">
+                      Accent Similarity
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
-            <div className="border-t flex border-neutral-200 dark:border-neutral-800 p-2 gap-0.5 justify-center">
+            <div className="border-t flex flex-wrap border-neutral-200 dark:border-neutral-700 p-2 gap-1 justify-center">
               <Badge
                 variant="outline"
-                className="w-fit px-2 py-1 text-xs font-medium rounded-md bg-[#E2EAFE] border tracking-tight border-[#CAD9FE] text-[#1B3E99]"
+                className="w-fit px-2.5 py-1 text-xs font-medium rounded-md bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border tracking-tight border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -270,7 +568,7 @@ export default function Page() {
 
               <Badge
                 variant="outline"
-                className={`${getBadgeColor(currentVideo?.badge)} px-2 py-1 text-xs font-medium rounded-md`}
+                className={`${getBadgeColor(currentVideo?.badge)} px-2.5 py-1 text-xs font-medium rounded-md`}
               >
                 <div
                   dangerouslySetInnerHTML={{ __html: currentVideo?.dialectIcon }}
@@ -281,7 +579,7 @@ export default function Page() {
 
               <Badge
                 variant="outline"
-                className="w-fit px-2 py-1 text-xs font-medium rounded-md bg-[#C7E9DE] border tracking-tight border-[#9DD8C5] text-[#1B997B]"
+                className="w-fit px-2.5 py-1 text-xs font-medium rounded-md bg-[#C7E9DE] dark:bg-[#1B997B]/20 border tracking-tight border-[#9DD8C5] dark:border-[#1B997B] text-[#1B997B] dark:text-[#9DD8C5]"
               >
                 <CheckCircle2 className="mr-1 h-[15px] w-[15px]" strokeWidth={2} />
                 {currentVideo?.completedSections}/{currentVideo?.practicableSections?.length} Done
@@ -290,31 +588,101 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="bg-neutral-100 border border-dashed border-neutral-200 rounded-lg p-4 w-full dark:bg-neutral-800 dark:border-neutral-950">
-        {/* <div className="flex flex-col max-w-[22rem] bg-neutral-100 rounded-md dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-950">
-          <div className="flex gap-3 justify-between items-center m-4 mb-2">
-            <h2 className="text-xl font-semibold tracking-tighter">Record</h2>
-            <p className="text-xs tracking-tight text-neutral-500">
-              Hold{' '}
-              <span className="rounded-full bg-neutral-200/50 border border-neutral-300 px-1.5 py-0.5">
-                Space
-              </span>
-            </p>
+      <div className="flex flex-col lg:flex-row gap-2">
+        <div className="bg-neutral-100 border border-neutral-200 rounded-lg w-full dark:bg-neutral-800 dark:border-neutral-700 flex flex-col relative justify-between">
+          <div>
+            {isInPracticeSection() && (
+              <div className="w-1 bg-blue-500 dark:bg-blue-400 rounded-l-3xl absolute left-0 top-0 h-full"></div>
+            )}
+
+            <div className="m-4">
+              <h2 className="font-semibold tracking-tighter text-xl text-neutral-900 dark:text-neutral-100">
+                Practice Area
+              </h2>
+              {!isInPracticeSection() && (
+                <p className="text-neutral-600 dark:text-neutral-400">
+                  You are not currently in a practice section. Please select a section to practice
+                  using the above menu or stick around to practice with the video.
+                </p>
+              )}
+              {isInPracticeSection() && (
+                <>
+                  <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+                    {isRecording
+                      ? 'Recording in progress. Click the button again to stop and get feedback.'
+                      : 'You are currently in a practice section. Press the button to the right to start practicing.'}
+                  </p>
+                  {transcription && (
+                    <div className="mt-2">
+                      <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                        Transcription:
+                      </p>
+                      <p className="text-neutral-600 dark:text-neutral-400">{transcription}</p>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
           </div>
-          <p className="text-sm tracking-tight text-neutral-600 mx-4 mb-4">
-            Start recording below using the microphone button or hold down the space bar
-          </p>
-          <div className="flex border-y border-neutral-200 dark:border-neutral-800 p-4">
-            <Button
-              variant="outline"
-              className="px-2 h-7 text-xs font-medium rounded-md bg-[#C7E9DE] border border-[#9DD8C5] text-[#1B997B] hover:bg-[#C7E9DE]/80 hover:text-[#1B997B]"
-            >
-              <Circle className="h-4 w-4 mr-1" fill="#1B997B" />
-              Start
-            </Button>
+          <div className="m-3">
+            {isInPracticeSection() &&
+              currentVideo?.practicableSections[getCurrentSection()]?.target_by_word.map(
+                (word, index) => (
+                  <button key={index} className={getWordStyle(index)}>
+                    {word[0]}
+                  </button>
+                ),
+              )}
           </div>
-        </div> */}
-        <Microphone />
+          {isInPracticeSection() && feedback.length > 0 && (
+            <div className="m-4 space-y-2">
+              <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                Feedback:
+              </p>
+              {feedback.map(([word, feedbackText], index) => (
+                <p key={index} className="text-neutral-600 dark:text-neutral-400">
+                  <span className="font-medium">{word}:</span> {feedbackText}
+                </p>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="max-w-[298px] relative h-[200px] w-full bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700 flex flex-col justify-between">
+          <h2 className="text-lg font-semibold tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100"></h2>
+          <div className="absolute inset-0 flex items-center justify-center group-hover:scale-100 scale-[0.9] transition-all duration-200 ease-out rounded-2xl">
+            <div className="bg-sky-900/20 flex items-center justify-center rounded-full backdrop-blur-md size-28">
+              <div
+                className={`flex items-center justify-center bg-gradient-to-b from-black to-sky-900 shadow-md rounded-full size-20 transition-all ease-out duration-200 relative group-hover:scale-[1.2] scale-100 ${
+                  isRecording ? 'bg-red-600' : ''
+                }`}
+              >
+                {isRecording ? (
+                  <Pause
+                    className="size-8 text-white fill-white group-hover:scale-105 scale-100 transition-transform duration-200 ease-out"
+                    onClick={() => {
+                      StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()]);
+                    }}
+                    style={{
+                      filter:
+                        'drop-shadow(0 4px 3px rgb(3 105 161 / 0.07)) drop-shadow(0 2px 2px rgb(3 105 161 / 0.06))',
+                    }}
+                  />
+                ) : (
+                  <PlayIcon
+                    className="size-8 text-white fill-white group-hover:scale-105 scale-100 transition-transform duration-200 ease-out"
+                    onClick={() => {
+                      StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()]);
+                    }}
+                    style={{
+                      filter:
+                        'drop-shadow(0 4px 3px rgb(3 105 161 / 0.07)) drop-shadow(0 2px 2px rgb(3 105 161 / 0.06))',
+                    }}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

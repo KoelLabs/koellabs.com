@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/base/button';
 import { Circle, RefreshCw } from 'lucide-react';
 
-export default function RecordingComponent() {
+export default function RecordingComponent({ feedbackGiver }) {
   const [status, setStatus] = useState<'idle' | 'recording' | 'recorded'>('idle');
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real-Time Transcription</title>
+  </head>
+  <body>
+    <h1>Real-Time Transcription</h1>
+    <button id="start">Start</button>
+    <button id="stop" disabled>Stop</button>
+    <button id="analyze">Analyze</button>
+    <p>Transcription: <span id="transcription"></span></p>
+    <p>Accent Similarity: <span id="score"></span>%</p>
+    <p id="scored_words"></p>
+    <p id="feedback"></p>
+
+    <script type="module">
+      import { FeedbackGiver } from './FeedbackGiver.js';
+
+      const transcriptionElement = document.getElementById('transcription');
+      const scoredWordsElement = document.getElementById('scored_words');
+      const feedbackElement = document.getElementById('feedback');
+      const scoreElement = document.getElementById('score');
+
+      function color_word(el) {
+        const score = parseFloat(el.dataset.pscore);
+        const isCorrect = el.dataset.wordCorrect === 'true';
+        if (isCorrect || score > 0.8) {
+          el.style.backgroundColor = `hsl(${score * 120}, 100%, 50%)`;
+        } else {
+          el.style.backgroundColor = `red`;
+        }
+      }
+
+      async function on_transcription(transcription) {
+        transcriptionElement.textContent = transcription;
+        const [scoredWords, overall] = await feedbackGiver.getCER();
+        console.log('Phoneme Score:', overall);
+        const wordElements = document.querySelectorAll('#scored_words span');
+        for (let i = 0; i < scoredWords.length; i++) {
+          const wordscore = scoredWords[i];
+          const score = wordscore.at(-1);
+          wordElements[i].dataset.pscore = score;
+          if (i < feedbackGiver.next_word_ix) {
+            color_word(wordElements[i]);
+          }
+        }
+        scoreElement.textContent = Math.round(1000 * overall) / 10;
+      }
+
+      function on_word_spoken(words, are_words_correct, next_word_ix, percentage_correct, is_done) {
+        console.log('Percentage Words Correct:', percentage_correct);
+        const wordElements = document.querySelectorAll('#scored_words span');
+        for (let i = 0; i < next_word_ix; i++) {
+          const el = wordElements[i];
+          el.dataset.wordCorrect = are_words_correct[i];
+          el.style.border = 'none';
+          color_word(el);
+        }
+        if (is_done) {
+          setTimeout(() => {
+            feedbackGiver.stop();
+            document.getElementById('start').disabled = false;
+            document.getElementById('stop').disabled = true;
+          }, 1000);
+        } else {
+          const el = wordElements[next_word_ix];
+          el.style.border = '3px solid red';
+        }
+      }
+
+      const target = 'ɔliŋkɑɹdsʔɑɹðəweɪvəvðifjutʃɹ';
+      const target_by_word = [
+        ['Calling', 'ɔliŋ'],
+        ['cards', 'kɑɹdsʔ'],
+        ['are', 'ɑɹ'],
+        ['the', 'ðə'],
+        ['wave', 'weɪv'],
+        ['of', 'əv'],
+        ['the', 'ði'],
+        ['future', 'fjutʃɹ'],
+      ];
+      const feedbackGiver = new FeedbackGiver(
+        target,
+        target_by_word,
+        on_transcription,
+        on_word_spoken,
+      );
+      for (const word of feedbackGiver.words) {
+        scoredWordsElement.innerHTML += `<span data-pscore="0" data-word-correct="false">${word}</span> `;
+      }
+
+      document.getElementById('analyze').addEventListener('click', async () => {
+        const [perWordFeedback, top3feedback] = await feedbackGiver.getFeedback();
+        feedbackElement.innerHTML = '';
+        for (const [word, feedback] of perWordFeedback) {
+          feedbackElement.innerHTML += `<p>${word}: ${feedback}</p>`;
+        }
+        feedbackElement.innerHTML += `<h2>Top 3 feedback</h2>`;
+        for (const [word, feedback] of top3feedback) {
+          feedbackElement.innerHTML += `<p>${word}: ${feedback}</p>`;
+        }
+      });
+
+      document.getElementById('start').addEventListener('click', () => {
+        const wordElements = document.querySelectorAll('#scored_words span');
+        for (const wordEl of wordElements) {
+          wordEl.style.backgroundColor = 'none';
+          wordEl.style.border = 'none';
+          wordEl.dataset.pscore = 0;
+          wordEl.dataset.wordCorrect = false;
+        }
+        document.getElementById('start').disabled = true;
+        document.getElementById('stop').disabled = false;
+        feedbackGiver.start();
+      });
+
+      document.getElementById('stop').addEventListener('click', () => {
+        feedbackGiver.stop();
+        document.getElementById('start').disabled = false;
+        document.getElementById('stop').disabled = true;
+      });
+    </script>
+  </body>
+</html>

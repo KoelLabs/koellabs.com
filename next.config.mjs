@@ -3,6 +3,7 @@ import path from 'path';
 const __dirname = new URL('.', import.meta.url).pathname;
 
 const nextConfig = {
+  reactStrictMode: false,
   webpack: config => {
     config.resolve.alias = {
       ...config.resolve.alias,
