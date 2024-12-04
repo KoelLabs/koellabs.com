@@ -806,23 +806,26 @@ export default function Page() {
                                     type="button"
                                     className="w-full px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 text-[#1B997B] dark:text-[#9DD8C5] bg-[#C7E9DE] dark:bg-[#1B997B]/20 border-[#9DD8C5] dark:border-[#1B997B] cursor-pointer border"
                                     onClick={() => {
+                                      // Create a new array copy to trigger re-render
                                       setPhonemeIX(prev => {
-                                        prev[index] = 0;
-                                        return prev;
+                                        const newArray = [...prev];
+                                        newArray[index] = 0;
+                                        return newArray;
                                       });
                                       const inter = setInterval(
                                         () =>
                                           setPhonemeIX(prev => {
+                                            const newArray = [...prev];
                                             if (
-                                              prev[index] + 1 >=
+                                              newArray[index] + 1 >=
                                               sideBySideFeedback[index][1].length - 1
                                             )
                                               clearInterval(inter);
-                                            prev[index] = Math.min(
-                                              prev[index] + 1,
+                                            newArray[index] = Math.min(
+                                              newArray[index] + 1,
                                               sideBySideFeedback[index][1].length - 1,
                                             );
-                                            return prev;
+                                            return newArray;
                                           }),
                                         200,
                                       );
@@ -839,8 +842,9 @@ export default function Page() {
                                     className="w-full max-w-fit px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
                                     onClick={() =>
                                       setPhonemeIX(prev => {
-                                        prev[index] = Math.max(prev[index] - 1, 0);
-                                        return prev;
+                                        const newArray = [...prev];
+                                        newArray[index] = Math.max(newArray[index] - 1, 0);
+                                        return newArray;
                                       })
                                     }
                                   >
@@ -852,11 +856,12 @@ export default function Page() {
                                     className="w-full max-w-fit px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
                                     onClick={() =>
                                       setPhonemeIX(prev => {
-                                        prev[index] = Math.min(
-                                          prev[index] + 1,
+                                        const newArray = [...prev];
+                                        newArray[index] = Math.min(
+                                          newArray[index] + 1,
                                           sideBySideFeedback[index][1].length - 1,
                                         );
-                                        return prev;
+                                        return newArray;
                                       })
                                     }
                                   >
