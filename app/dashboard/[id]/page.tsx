@@ -247,7 +247,6 @@ export default function Page() {
   };
   const [nextWordIndex, setNextWordIndex] = useState<number | null>(null);
   const [wordScores, setWordScores] = useState<Array<number>>([]);
-  const [wordStyles, setWordStyles] = useState<Array<string>>([]);
   const [wordsCorrect, setWordsCorrect] = useState<Array<boolean>>([]);
 
   // Update displayed feedback when section changes
@@ -277,7 +276,7 @@ export default function Page() {
   const getWordStyle = (index: number) => {
     const score = wordScores[index] || 0;
     const isNext = index === nextWordIndex;
-    const isCorrect = wordsCorrect[index] || true;
+    const isCorrect = (index >= (nextWordIndex ?? wordScores.length)) || (wordsCorrect[index]);
 
     let backgroundColor = '';
     if (score >= 0.8) backgroundColor = 'bg-emerald-400 dark:bg-emerald-600 border-emerald-500';
@@ -286,7 +285,7 @@ export default function Page() {
     else if (score >= 0.3) backgroundColor = 'bg-orange-300 dark:bg-orange-500 border-orange-500';
     else if (score > 0) backgroundColor = 'bg-red-400 dark:bg-red-600 border-red-500';
 
-    if (!isCorrect && score > 0) backgroundColor = 'bg-red-400 dark:bg-red-600 border-red-500';
+    if (!isCorrect && score < 0.8) backgroundColor = 'bg-red-400 dark:bg-red-600 border-red-500';
 
     const border = isRecording ? 'border-solid' : 'border-dashed';
 
@@ -298,7 +297,7 @@ export default function Page() {
   };
 
   useEffect(() => {
-    const newStyles = wordScores.map((score, index) => {
+    wordScores.map((score, index) => {
       const isNext = index === nextWordIndex;
       let backgroundColor = 'bg-transparent';
       if (score >= 0.8) {
@@ -320,7 +319,6 @@ export default function Page() {
 
       return `inline-block text-neutral-800 dark:text-neutral-200 mr-1 px-1.5 text-4xl tracking-tighter rounded-md py-0.5 ${border} ${highlight} ${backgroundColor}`;
     });
-    setWordStyles(newStyles);
   }, [wordScores, nextWordIndex, isRecording]);
 
   const StartPracticeMode = async (section: any) => {
@@ -726,7 +724,7 @@ export default function Page() {
                           <h4 className="font-medium text-sm">Score</h4>
                           <p className="text-neutral-600 dark:text-neutral-400">
                             {wordScores[index]
-                              ? `${Math.round(wordScores[index] * 100)}%`
+                              ? `${Math.round((wordsCorrect[index] ? wordScores[index] : 0.1) * 100)}%`
                               : 'Not attempted yet'}
                           </p>
                         </div>
