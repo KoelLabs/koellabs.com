@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Badge } from '@/components/ui/base/badge';
-import { Play, Pause, CheckCircle2, Circle, PlayIcon } from 'lucide-react';
+import { Play, Pause, CheckCircle2, Circle, PlayIcon, PauseIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { PieChart, Pie, Cell } from 'recharts';
 import { Button } from '@/components/ui/base/button';
@@ -704,40 +704,39 @@ export default function Page() {
             </div>
           )}
         </div>
-        <div className="max-w-[298px] relative h-[200px] w-full bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700 flex flex-col">
+        <div className="max-w-[298px] relative h-fit w-full bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700 flex flex-col">
           <h2 className="text-lg font-semibold tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100"></h2>
           <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-700" />
           <div className="m-3">
-            <div className={` ${isRecording ? 'bg-red-600' : ''}`}>
+            <div className="">
               {isRecording ? (
-                <Pause
-                  className="size-8 text-white fill-white group-hover:scale-105 scale-100 transition-transform duration-200 ease-out"
+                <div
+                  className="w-full border px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 border-[#FECACA] bg-[#FEE2E2] text-[#991B1B] dark:bg-[#451A1A] dark:text-[#FECACA] cursor-pointer"
                   onClick={() => {
                     StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()]);
                   }}
-                  style={{
-                    filter:
-                      'drop-shadow(0 4px 3px rgb(3 105 161 / 0.07)) drop-shadow(0 2px 2px rgb(3 105 161 / 0.06))',
-                  }}
-                />
+                >
+                  <PauseIcon className="mr-2 size-4 rounded-xl" fill="currentColor" />
+                  Stop Practice Mode
+                </div>
               ) : (
-                // <PlayIcon
-                //   className="size-8 text-white fill-white group-hover:scale-105 scale-100 transition-transform duration-200 ease-out"
-                //   onClick={() => {
-                //     StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()]);
-                //   }}
-                //   style={{
-                //     filter:
-                //       'drop-shadow(0 4px 3px rgb(3 105 161 / 0.07)) drop-shadow(0 2px 2px rgb(3 105 161 / 0.06))',
-                //   }}
-                // />
-                <div className="w-full border text-[#1B997B] dark:text-[#9DD8C5] px-4 py-2 rounded-md items-center bg-[#C7E9DE] dark:bg-[#1B997B]/20 tracking-tight border-[#9DD8C5] dark:border-[#1B997B] flex justify-center">
+                <div
+                  className={`w-full border px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 ${
+                    isInPracticeSection()
+                      ? 'text-[#1B997B] dark:text-[#9DD8C5] bg-[#C7E9DE] dark:bg-[#1B997B]/20 border-[#9DD8C5] dark:border-[#1B997B] cursor-pointer'
+                      : 'text-neutral-400 dark:text-neutral-600 bg-neutral-100 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700 cursor-not-allowed'
+                  }`}
+                  onClick={() => {
+                    StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()]);
+                  }}
+                >
                   <PlayIcon className="mr-2 size-4 rounded-xl" fill="currentColor" />
                   Start Practice Mode
                 </div>
               )}
             </div>
           </div>
+          <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-700 mb-5" />
         </div>
       </div>
     </div>
