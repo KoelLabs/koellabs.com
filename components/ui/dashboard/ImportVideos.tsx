@@ -34,6 +34,7 @@ import {
 import { Card, CardContent } from '@/components/ui/base/card';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/base/carousel';
 import { useMediaQuery } from '@custom-react-hooks/use-media-query';
+import { Badge } from '@/components/ui/base/badge';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -147,9 +148,14 @@ export default function ImportVideos() {
   return (
     <div className="w-full">
       <div className="flex justify-between items-center pt-4 px-4">
-        <h1 className="text-xl sm:text-2xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
-          Import Videos
-        </h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-xl sm:text-2xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
+            Import Videos{' '}
+          </h1>
+          <Badge variant="outline" className="tracking-tight">
+            Coming Soon
+          </Badge>
+        </div>
       </div>
       <div className="p-4">
         <div className="flex items-center justify-center border border-dashed border-neutral-200 dark:border-neutral-700 rounded-xl">
