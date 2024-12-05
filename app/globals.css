@@ -488,3 +488,15 @@ html {
   --media-chapters-time-gap: 6px;
   --media-chapters-with-thumbnails-min-width: 300px;
 }
+
+body {
+  background-color: ##fafafa;
+}
+
+main {
+  background-color: #fafafa;
+}
+
+nextjs-portal {
+  display: none;
+}
