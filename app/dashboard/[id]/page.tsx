@@ -721,14 +721,14 @@ export default function Page() {
                                 className="h-full bg-[#1B997B] transition-all duration-300"
                                 style={{
                                   width: wordScores[index]
-                                    ? `${Math.round((wordsCorrect[index] ? wordScores[index] : 0.1) * 100)}%`
+                                    ? `${Math.round((wordsCorrect[index] || wordScores[index] > 0.8 ? wordScores[index] : 0.1) * 100)}%`
                                     : '0%',
                                 }}
                               />
                             </div>
                             <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 mb-2">
                               {wordScores[index]
-                                ? `${Math.round((wordsCorrect[index] ? wordScores[index] : 0.1) * 100)}%`
+                                ? `${Math.round((wordsCorrect[index] || wordScores[index] > 0.8 ? wordScores[index] : 0.1) * 100)}%`
                                 : 'Not attempted yet'}
                             </p>
                           </div>
