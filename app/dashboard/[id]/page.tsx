@@ -137,7 +137,7 @@ export default function Page() {
       practicableSections: [
         {
           start: 9.6,
-          end: 13.7,
+          end: 14.7, // 13.7
           thumbnail: 'd1.png',
           target: 'ɔliŋkɑɹdsʔɑɹðəweɪvəvðifjutʃɹ',
           target_by_word: [
@@ -151,52 +151,52 @@ export default function Page() {
             ['future', 'fjutʃɹ'],
           ],
         },
-        {
-          start: 39,
-          end: 43,
-          thumbnail: 'd2.png',
-          target: 'hɑɹeɪtsoʊɹeɪʒɹhændɪfjuwɑɾɪɡɛtɹɪttʃ',
-          target_by_word: [
-            ['Alright', 'hɑɹeɪt'],
-            ['so', 'soʊ'],
-            ['raise', 'ɹeɪʒ'],
-            ['your', 'ɹ'],
-            ['hand', 'hænd'],
-            ['if', 'ɪf'],
-            ['you', 'ju'],
-            ['wanna', 'wɑɾɪ'],
-            ['get', 'ɡɛt'],
-            ['rich', 'ɹɪttʃ'],
-          ],
-        },
-        {
-          start: 63,
-          end: 64.5,
-          thumbnail: 'd3.png',
-          target: 'itsnɑɾəpɪɹmidzɡim',
-          target_by_word: [
-            ['It’s', 'its'],
-            ['not', 'nɑɾ'],
-            ['a', 'ə'],
-            ['pyramid', 'pɪɹmid'],
-            ['scheme', 'zɡim'],
-          ],
-        },
-        {
-          start: 77,
-          end: 78.2,
-          thumbnail: 'd4.png',
-          target: 'ʔaɪhæftikoʊmeɪkinkɔl',
-          target_by_word: [
-            ['I', 'ʔaɪ'],
-            ['have', 'hæf'],
-            ['to', 'ti'],
-            ['go', 'koʊ'],
-            ['make', 'meɪk'],
-            ['a', 'i'],
-            ['call', 'kɔl'],
-          ],
-        },
+        // {
+        //   start: 39,
+        //   end: 43,
+        //   thumbnail: 'd2.png',
+        //   target: 'hɑɹeɪtsoʊɹeɪʒɹhændɪfjuwɑɾɪɡɛtɹɪttʃ',
+        //   target_by_word: [
+        //     ['Alright', 'hɑɹeɪt'],
+        //     ['so', 'soʊ'],
+        //     ['raise', 'ɹeɪʒ'],
+        //     ['your', 'ɹ'],
+        //     ['hand', 'hænd'],
+        //     ['if', 'ɪf'],
+        //     ['you', 'ju'],
+        //     ['wanna', 'wɑɾɪ'],
+        //     ['get', 'ɡɛt'],
+        //     ['rich', 'ɹɪttʃ'],
+        //   ],
+        // },
+        // {
+        //   start: 63,
+        //   end: 64.5,
+        //   thumbnail: 'd3.png',
+        //   target: 'itsnɑɾəpɪɹmidzɡim',
+        //   target_by_word: [
+        //     ['It’s', 'its'],
+        //     ['not', 'nɑɾ'],
+        //     ['a', 'ə'],
+        //     ['pyramid', 'pɪɹmid'],
+        //     ['scheme', 'zɡim'],
+        //   ],
+        // },
+        // {
+        //   start: 77,
+        //   end: 78.2,
+        //   thumbnail: 'd4.png',
+        //   target: 'ʔaɪhæftikoʊmeɪkinkɔl',
+        //   target_by_word: [
+        //     ['I', 'ʔaɪ'],
+        //     ['have', 'hæf'],
+        //     ['to', 'ti'],
+        //     ['go', 'koʊ'],
+        //     ['make', 'meɪk'],
+        //     ['a', 'i'],
+        //     ['call', 'kɔl'],
+        //   ],
+        // },
       ],
       completedSections: 0,
     },
@@ -283,7 +283,7 @@ export default function Page() {
   const getWordStyle = (index: number) => {
     const score = wordScores[index] || 0;
     const isNext = index === nextWordIndex;
-    const isCorrect = (index >= (nextWordIndex ?? wordScores.length)) || (wordsCorrect[index]);
+    const isCorrect = index >= (nextWordIndex ?? wordScores.length) || wordsCorrect[index];
 
     let backgroundColor = '';
     if (score >= 0.8) backgroundColor = 'bg-emerald-400 dark:bg-emerald-600 border-emerald-500';
@@ -437,10 +437,8 @@ export default function Page() {
               sideBySideFeedback,
             },
           }));
-
-          // Update the completedSections count if needed
           if (currentVideo && typeof currentVideo.completedSections === 'number') {
-            if (score > 0.8) {
+            if (score > 0.1) {
               currentVideo.completedSections += 1;
             }
           }
@@ -477,13 +475,13 @@ export default function Page() {
   const getBadgeColor = (difficulty: string) => {
     switch (difficulty.toLowerCase()) {
       case 'hard':
-        return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 border border-red-200 dark:border-red-900';
+        return 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200 border border-red-200 dark:border-red-900';
       case 'medium':
-        return 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 border border-orange-200 dark:border-orange-900';
+        return 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200 border border-orange-200 dark:border-orange-900';
       case 'easy':
-        return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 border border-green-200 dark:border-green-900';
+        return 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200 border border-green-200 dark:border-green-900';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 border border-gray-200 dark:border-gray-900';
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/50 dark:text-gray-200 border border-gray-200 dark:border-gray-900';
     }
   };
 
@@ -517,24 +515,24 @@ export default function Page() {
               <h2 className="text-lg font-medium tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100">
                 Practicable Sections{' '}
               </h2>
-              <Badge
+              {/* <Badge
                 variant="outline"
                 className="text-xs rounded-full bg-white tracking-tight mr-3 mt-1"
               >
                 Clickable
-              </Badge>
+              </Badge> */}
             </div>
             <div className="flex flex-col gap-1.5 mt-0 m-3 max-h-[380px] overflow-y-auto">
               {currentVideo?.practicableSections?.map((section, index) => (
                 <button
                   key={index}
-                  onClick={() => {
-                    if (player) {
-                      player.seek(section.start);
-                      setCurrentTime(section.start);
-                    }
-                  }}
-                  className={`flex relative justify-between items-end p-2 h-20 bg-neutral-200/55 border-neutral-300/50 dark:border-neutral-700 rounded-lg w-full bg-cover bg-center dark:bg-neutral-700/50 border 
+                  // onClick={() => {
+                  //   if (player) {
+                  //     player.seek(section.start);
+                  //     setCurrentTime(section.start);
+                  //   }
+                  // }}
+                  className={`flex relative justify-between items-end p-2 h-20 bg-neutral-200/55 border-neutral-300/50 dark:border-neutral-700 rounded-lg w-full bg-cover bg-center dark:bg-neutral-700/50 border cursor-not-allowed 
                     
                     ${isInPracticeSection() && getCurrentSection() !== index ? 'opacity-50' : ''}`}
                 >
