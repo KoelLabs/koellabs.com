@@ -388,7 +388,7 @@ export function AppSidebar() {
           </Button>
         </SidebarHeader>
         <SidebarContent>
-          {/* <SidebarItem>
+          <SidebarItem>
             <SidebarLabel>{open && 'Platform'}</SidebarLabel>
             <NavMain items={data.navMain} isCollapsed={!open} className={open ? '' : '-mb-3'} />
           </SidebarItem>
@@ -406,7 +406,7 @@ export function AppSidebar() {
           </SidebarItem>
           <SidebarItem className="mt-auto">
             <NavSecondary items={data.navSecondary} isCollapsed={!open} />
-          </SidebarItem> */}
+          </SidebarItem>
           <AnimatePresence>
             {open && (
               <motion.div

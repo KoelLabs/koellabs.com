@@ -11,7 +11,7 @@ export default function Hero() {
     <div className="min-h-screen">
       <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] opacity-10 top-48"></div>
       <div className="mx-auto p-4 md:px-6 pt-0 lg:px-8 py-32 relative">
-        <div className="mx-auto max-w-2xl py-32">
+        <div className="mx-auto max-w-3xl py-32">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
           <div className="text-center relative">
             <div className="flex flex-row justify-center items-center my-6">
@@ -36,15 +36,23 @@ export default function Hero() {
               </div>
               <p className="font-[400] text-md text-neutral-700">Mozilla</p>
             </div>
-            <h1 className="text-4xl font-bold tracking-[-0.04em] text-gray-900 sm:text-6xl">
+            {/* <h1 className="text-4xl font-bold tracking-[-0.04em] text-gray-900 sm:text-6xl">
               A Novel Way to Quickly{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-br from-sky-600 to-blue-950">
                 {' '}
                 Master Pronunciation.
               </span>
+            </h1> */}
+
+            <h1 className="text-4xl font-bold tracking-[-0.04em] text-gray-900 sm:text-6xl">
+              Master Pronunciation with
+              <span className="bg-clip-text text-transparent bg-gradient-to-br from-sky-600 to-blue-950">
+                {' '}
+                Classic Movie Scenes
+              </span>
             </h1>
             <svg
-              className="absolute -right-4 top-28 shimmer"
+              className="absolute -right-4 top-4 shimmer"
               xmlns="http://www.w3.org/2000/svg"
               width="44"
               height="47"
@@ -99,13 +107,16 @@ export default function Hero() {
                 </linearGradient>
               </defs>
             </svg>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              Our platform uses cutting-edge technology to help you improve your pronunciation in a
-              fun and engaging way via content that you already love.
+            <p className="mt-6 text-lg leading-8 text-gray-600 max-w-xl mx-auto text-pretty">
+              {/* Our platform uses cutting-edge technology to help you improve your pronunciation in a
+              fun and engaging way via content that you already love. */}
+              Practice, perfect, and pronounce like a native language speaker with fun, immersive
+              movie and show clips at your fingertips.
             </p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4">
-              <Button className="w-full sm:w-44 bg-gradient-to-b py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
-                Get Started for Free
+              <Button className="w-full rounded-lg sm:w-40 bg-gradient-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
+                {/* Start Learning for Free w-44 */}
+                Join the Waitlist
               </Button>
               <Button className="w-full sm:w-32" variant="outline">
                 Learn More
