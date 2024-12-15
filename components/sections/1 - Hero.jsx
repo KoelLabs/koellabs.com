@@ -8,7 +8,7 @@ import HeroVideoDialog from '@/components/ui/magicui/hero-video-dialog';
 
 export default function Hero() {
   return (
-    <div className="min-h-screen">
+    <div className="">
       <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] opacity-10 top-48"></div>
       <div className="mx-auto p-4 md:px-6 pt-0 lg:px-8 py-32 relative">
         <div className="mx-auto max-w-3xl py-32">
@@ -44,15 +44,15 @@ export default function Hero() {
               </span>
             </h1> */}
 
-            <h1 className="text-4xl font-bold tracking-[-0.04em] text-gray-900 sm:text-6xl">
+            <h1 className="text-4xl font-bold tracking-[-0.04em] text-gray-900 sm:text-6xl overflow-visible">
               Master Pronunciation with
-              <span className="bg-clip-text text-transparent bg-gradient-to-br from-sky-600 to-blue-950">
+              <span className="bg-clip-text text-transparent bg-gradient-to-br mr-1 from-sky-600 to-blue-950 overflow-visible py-1">
                 {' '}
-                Classic Movie Scenes
+                Classic Movie Scenes{' '}
               </span>
             </h1>
             <svg
-              className="absolute -right-4 top-4 shimmer"
+              className="absolute right-9 bottom-[106px] rotate-12 shimmer"
               xmlns="http://www.w3.org/2000/svg"
               width="44"
               height="47"

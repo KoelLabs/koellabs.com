@@ -490,9 +490,44 @@ html {
 }
 
 body {
-  background-color: ##fafafa;
+  background-color: #fafafa;
 }
 
 main {
   background-color: #fafafa;
+}
+
+.path {
+  animation: pathAnimation 8s linear infinite;
+  stroke-dasharray: 612.5;
+  stroke-dashoffset: 0;
+}
+
+.path0 {
+  --stroke-dashoffset: 1000;
+}
+
+.path2 {
+  --stroke-dashoffset: 2000;
+}
+
+.path4 {
+  --stroke-dashoffset: 3000;
+}
+
+.path6 {
+  --stroke-dashoffset: 4000;
+}
+
+.path8 {
+  --stroke-dashoffset: 5000;
+}
+
+@keyframes pathAnimation {
+  0% {
+    stroke-dashoffset: var(--stroke-dashoffset);
+  }
+  100% {
+    stroke-dashoffset: var(--stroke-dashoffset/2);
+  }
 }
