@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const PUBLIC_URLS = ['/sign-in', '/sign-up', '/'];
+const PUBLIC_URLS = ['/sign-in', '/sign-up', '/', '/blog', '/blog/[slug]', '/pricing', '/about', '/contact'];
 
 export async function middleware(request: NextRequest) {
   const idToken = request.cookies.get('idtoken');
