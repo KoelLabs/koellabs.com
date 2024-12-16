@@ -67,10 +67,10 @@
     "dev": "next dev",
     "docker": ". ./scripts/docker-run-dev.sh",
     "format": "(fixpack || true) && (eslint . --fix || true) && prettier --write .",
-    "lint": "npx eslint-config-prettier **/*.js && next lint && prettier --check .",
+    "lint": "npx eslint-config-prettier **/*.jsx && next lint && prettier --check .",
     "makemigrations": "drizzle-kit generate",
     "migrate": "eval $(cat .env.local) && drizzle-kit migrate",
-    "scan": "echo \"Error: not implemented yet \" && exit 1",
+    "scan": "gitleaks detect && npm audit && zizmor .",
     "start": "next start",
     "test": "echo \"Error: not implemented yet \" && exit 1"
   }
