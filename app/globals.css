@@ -498,7 +498,7 @@ main {
 }
 
 .path {
-  animation: pathAnimation 8s linear infinite;
+  animation: pathAnimation 24s ease-in-out infinite;
   stroke-dasharray: 612.5;
   stroke-dashoffset: 0;
 }
@@ -527,7 +527,10 @@ main {
   0% {
     stroke-dashoffset: var(--stroke-dashoffset);
   }
+  50% {
+    stroke-dashoffset: 0;
+  }
   100% {
-    stroke-dashoffset: var(--stroke-dashoffset/2);
+    stroke-dashoffset: var(--stroke-dashoffset);
   }
 }
