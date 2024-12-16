@@ -17,7 +17,7 @@ try {
 // database access for user registration
 import { db, users } from '../db/schema';
 
-/** 
+/**
  * Verify a user's login token and return their user id
  * @param {string} token the user's login token
  * @returns {Promise<string | null>} the user id if successful, null otherwise
@@ -60,14 +60,18 @@ export async function getAndSetVerifiedUser(token) {
   };
 
   // upsert and get the user info in the database
-  const user = await db.insert(users).values(decodedUser).onConflictDoUpdate({target: users.id, set: decodedUser}).returning({
-    id: users.id,
-    name: users.name,
-    email: users.email,
-    streak: users.streak,
-    createdAt: users.createdAt,
-    updatedAt: users.updatedAt,
-  });
+  const user = await db
+    .insert(users)
+    .values(decodedUser)
+    .onConflictDoUpdate({ target: users.id, set: decodedUser })
+    .returning({
+      id: users.id,
+      name: users.name,
+      email: users.email,
+      streak: users.streak,
+      createdAt: users.createdAt,
+      updatedAt: users.updatedAt,
+    });
 
   // return the user object
   return {

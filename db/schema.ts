@@ -15,5 +15,8 @@ export const users = pgTable('users', {
   streak: integer('streak').notNull().default(0),
   stripeId: varchar('stripe_id'),
   createdAt: timestamp('created_at', { mode: 'date', precision: 3 }).notNull().defaultNow(),
-  updatedAt: timestamp('updated_at', { mode: 'date', precision: 3 }).notNull().defaultNow().$onUpdate(() => new Date())
+  updatedAt: timestamp('updated_at', { mode: 'date', precision: 3 })
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
 });
