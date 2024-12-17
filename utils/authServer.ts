@@ -28,7 +28,11 @@ export async function getVerifiedUid(token) {
   // verify the token
   let decodedToken: DecodedIdToken;
   try {
-    decodedToken = await admin.auth().verifyIdToken(token, true);
+    if (process.env.NODE_ENV === 'development' && process.env.DEV_LOGIN) {
+      decodedToken = JSON.parse(process.env.DEV_LOGIN);
+    } else {
+      decodedToken = await admin.auth().verifyIdToken(token, true);
+    }
   } catch (e) {
     return null;
   }
@@ -47,7 +51,11 @@ export async function getAndSetVerifiedUser(token) {
   // verify the token
   let decodedToken: DecodedIdToken;
   try {
-    decodedToken = await admin.auth().verifyIdToken(token, true);
+    if (process.env.NODE_ENV === 'development' && process.env.DEV_LOGIN) {
+      decodedToken = JSON.parse(process.env.DEV_LOGIN);
+    } else {
+      decodedToken = await admin.auth().verifyIdToken(token, true);
+    }
   } catch (e) {
     return null;
   }

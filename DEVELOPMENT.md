@@ -40,6 +40,9 @@ The docker container will also automatically `npm ci` from the package-lock.json
    - `npm run dev` to start the development server
    - `ctrl+c` to stop it
 
+### Disable Login Checks for Offline Development
+To bypass the auth system in development (for cases where you can't connect to the Firebase Auth server, e.g., you're offline or haven't provided a `FIREBASE_SERVICE_ACCOUNT` environment variable), you can disable the auth checks by uncommenting the `DEV_LOGIN` environment variable. You can change the email, username, etc. out for your own information if it is useful for testing.
+
 ### Formatting, Linting, Automated Tests and Secret Scanning
 
 All will run automatically via GitHub Actions on every push to the repository. You can also run them locally:
