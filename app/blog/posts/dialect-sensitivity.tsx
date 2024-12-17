@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   summary:
     'Dialect sensitivity is a crucial aspect of language learning. It refers to the ability of a language learning platform to adapt to the specific pronunciation and accent of a learner. This is important because it allows learners to better understand and speak the language, and it can also help them avoid making mistakes that could be embarrassing or even harmful in certain contexts.',
   category: 'Language Learning',
+  tags: [],
 };
 
 export default function PostBody() {
