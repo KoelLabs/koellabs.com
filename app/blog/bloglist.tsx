@@ -94,7 +94,7 @@ export default async function BlogList() {
                 <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:mt-16">
                   {posts
                     .filter(post => post.category === 'Announcement')
-                    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+                    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                     .slice(0, Math.min(2, posts.length))
                     .map(post => (
                       <PostCard key={post.slug} post={post} />
@@ -111,7 +111,7 @@ export default async function BlogList() {
               </h2>
               <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-2">
                 {posts
-                  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+                  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                   .slice(0, Math.min(2, posts.length))
                   .map(post => (
                     <PostCard key={post.slug} post={post} />
@@ -127,7 +127,7 @@ export default async function BlogList() {
               <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-2">
                 {posts
                   .filter(post => post.category === 'Technical Report')
-                  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+                  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                   .map(post => (
                     <PostCard key={post.slug} post={post} />
                   ))}

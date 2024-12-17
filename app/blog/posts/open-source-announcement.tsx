@@ -28,14 +28,18 @@ export const metadata: Metadata = {
 
 export default function PostBody() {
   return (
-    <div className="bg-white/50 py-24 sm:py-32">
-      <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
-        <h2 className="text-base/7 font-semibold text-sky-600">
-          {metadata.category}, {metadata.date}
-        </h2>
-        <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl">
+    <div className="bg-white/50 py-24 sm:py-32 relative">
+      <div className="bg-white absolute h-full w-full mt-96 border-y border-neutral-200"></div>
+      <div className="mx-auto max-w-2xl px-6 lg:max-w-5xl lg:px-8 z-10">
+        <h2 className="text-base/7 font-semibold text-sky-600 text-center">{metadata.category}</h2>
+        <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl text-center">
           {metadata.title}
         </h1>
+        <img
+          src={metadata.image}
+          alt={metadata.title}
+          className="w-full h-auto mt-16 rounded-lg z-10 relative"
+        />
         <br></br>
         <div className="relative lg:col-span-3">
           <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
