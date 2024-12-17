@@ -2,13 +2,11 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 const PUBLIC_URLS = [
-  new RegExp('/sign-in'),
-  new RegExp('/sign-up'),
-  new RegExp('/'),
-  new RegExp('/blog'),
-  new RegExp('/blog/.*'),
-  new RegExp('/pricing'),
-  new RegExp('/about'),
+  new RegExp('^/$'),
+  new RegExp('^/blog$'),
+  new RegExp('^/blog/.*$'),
+  new RegExp('^/pricing$'),
+  new RegExp('^/about$'),
 ];
 
 export async function middleware(request: NextRequest) {
@@ -27,6 +25,9 @@ export async function middleware(request: NextRequest) {
 
   if (!isLoggedIn) {
     // Logged out
+    if (request.nextUrl.pathname === '/sign-in') {
+      return NextResponse.next(); // trying to access sign-in -> continue
+    }
     return NextResponse.redirect(new URL('/sign-in', request.url)); // trying to access private page -> redirect to sign-in
   } else {
     // Logged in
