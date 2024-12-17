@@ -7,14 +7,14 @@ import { CodeBlock } from '@/components/ui/code-block';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'Beyond the Basics: A Deep Dive into Phonemic Transcription Metrics',
-  slug: 'phonemic-transcription-metrics',
-  date: '2024-12-16',
+  title: 'Dialect Sensitivity — Why it matters for the future of language acquisition',
+  slug: 'dialect-sensitivity',
+  date: '2024-12-17',
   published: true,
-  image: '/images/blogTemplate.png',
+  image: '/images/blogDialect.png',
   summary:
-    'The International Phonetic Alphabet (IPA) is like the Swiss Army knife of pronunciation—it gives us precise symbols to represent every sound humans make in language. In recent years, predicting these phonemic transcriptions from audio has become a popular machine learning task. But how do we calculate the accuracy of these models?',
-  category: 'Technical Report',
+    'Dialect sensitivity is a crucial aspect of language learning. It refers to the ability of a language learning platform to adapt to the specific pronunciation and accent of a learner. This is important because it allows learners to better understand and speak the language, and it can also help them avoid making mistakes that could be embarrassing or even harmful in certain contexts.',
+  category: 'Language Learning',
 };
 
 export default function PostBody() {
