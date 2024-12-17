@@ -2,6 +2,11 @@ import fs from 'fs/promises';
 import path from 'path';
 import { cache } from 'react';
 
+export type Tag = {
+  text: string;
+  url: string;
+};
+
 export type Metadata = {
   title: string;
   slug: string;
@@ -10,6 +15,7 @@ export type Metadata = {
   image: string;
   summary: string;
   category: 'Technical Report' | 'Announcement' | 'Tutorial' | 'Language Learning' | 'Other';
+  tags: Tag[];
 };
 
 export type Post = Metadata & {

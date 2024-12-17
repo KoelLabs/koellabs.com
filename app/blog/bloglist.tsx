@@ -7,17 +7,29 @@ import Link from 'next/link';
 
 function PostCard({ post }: { post: Post }) {
   return (
-    <div className="relative lg:col-span-3">
+    <div className="relative h-full">
       <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
-      <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]">
-        <img alt="" src={post.image} className="h-80 top-0 object-cover object-top" />
+      <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)] mb-4">
+        <img alt={post.title} src={post.image} className="h-80 top-0 object-cover object-top" />
         <div className="p-10 pt-4">
           <h3 className="text-sm/4 font-semibold text-sky-600">{post.date}</h3>
           <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">{post.title}</p>
           <p className="mt-2 max-w-lg text-sm/6 text-gray-600">{post.summary}</p>
         </div>
+        <div className="absolute bottom-0 right-0 flex justify-end p-4 gap-2 z-10">
+          {post.tags.map(tag => (
+            <Link
+              key={tag.text}
+              href={tag.url}
+              className="px-2 py-1 text-xs/6 text-gray-600 border border-gray-200 rounded-md hover:bg-gray-50"
+            >
+              {tag.text}
+            </Link>
+          ))}
+        </div>
       </div>
       <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
+      <Link href={`/blog/${post.slug}`} className="absolute bottom-0 left-0 h-full w-full"></Link>
     </div>
   );
 }
@@ -278,15 +290,13 @@ export default async function BlogList() {
               <h2 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl">
                 Announcements
               </h2>
-              <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+              <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-3">
                 {posts
                   .filter(post => post.category === 'Announcement')
                   .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-                  .slice(0, 3)
+                  .slice(0, Math.min(3, posts.length))
                   .map(post => (
-                    <Link key={post.slug} href={`/blog/${post.slug}`}>
-                      <PostCard key={post.slug} post={post} />
-                    </Link>
+                    <PostCard key={post.slug} post={post} />
                   ))}
               </div>
             </div>
@@ -297,14 +307,12 @@ export default async function BlogList() {
               <h2 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl">
                 Most recent posts
               </h2>
-              <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+              <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-3">
                 {posts
                   .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-                  .slice(0, 3)
+                  .slice(0, Math.min(3, posts.length))
                   .map(post => (
-                    <Link key={post.slug} href={`/blog/${post.slug}`}>
-                      <PostCard key={post.slug} post={post} />
-                    </Link>
+                    <PostCard key={post.slug} post={post} />
                   ))}
               </div>
             </div>
@@ -315,14 +323,12 @@ export default async function BlogList() {
               <h2 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl">
                 Technical Reports
               </h2>
-              <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+              <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-3">
                 {posts
                   .filter(post => post.category === 'Technical Report')
                   .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
                   .map(post => (
-                    <Link key={post.slug} href={`/blog/${post.slug}`}>
-                      <PostCard key={post.slug} post={post} />
-                    </Link>
+                    <PostCard key={post.slug} post={post} />
                   ))}
               </div>
             </div>
