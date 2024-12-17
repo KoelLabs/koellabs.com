@@ -42,11 +42,7 @@ export default function PostBody() {
         />
         <br></br>
         <div className="relative lg:col-span-3">
-          <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
-          <div
-            style={{ padding: '2em' }}
-            className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]"
-          >
+          <div className="relative flex h-full flex-col overflow-hidden tracking-[-0.010em] text-lg">
             <p>{metadata.summary}</p>
             <h3 className="mt-8 text-pretty text-2xl font-semibold tracking-tighter text-gray-950">
               The problem of pronunciation learning
@@ -140,7 +136,6 @@ export default function PostBody() {
               </a>
             </p>
           </div>
-          <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
         </div>
       </div>
     </div>
