@@ -53,7 +53,7 @@ function PostCard({ post }: { post: Post }) {
           ))}
         </div>
       </div>
-      <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem]" />
+      <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 rounded-[calc(theme(borderRadius.lg)+1px)]" />
       <Link href={`/blog/${post.slug}`} className="absolute bottom-0 left-0 h-full w-full"></Link>
     </div>
   );
