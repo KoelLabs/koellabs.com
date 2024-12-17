@@ -17,7 +17,7 @@ import Link from 'next/link';
 const links = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
-  { href: '/pricing', label: 'Pricing' },
+  // { href: '/pricing', label: 'Pricing' },
   { href: '/blog', label: 'Blog' },
 ];
 
@@ -193,7 +193,7 @@ export default function Header() {
               </span>
             </a>
           </ContextMenuTrigger>
-          <ContextMenuContent className="w-full p-1 flex flex-col">
+          {/* <ContextMenuContent className="w-full p-1 flex flex-col">
             <button onClick={handleClickLogo}>
               <ContextMenuItem className="text-neutral-900 tracking-tight text-sm font-medium">
                 <Copy className="mr-3 h-5 w-5" />
@@ -241,10 +241,10 @@ export default function Header() {
                 Copy Brandmark as SVG
               </ContextMenuItem>
             </button>
-          </ContextMenuContent>
+          </ContextMenuContent> */}
         </ContextMenu>
 
-        <ul className="md:flex justify-between items-center gap-6 hidden pr-8">
+        <ul className="md:flex justify-between items-center gap-6 hidden -pr-12">
           {links.map(({ href, label }) => (
             <li key={`${href}${label}`}>
               <a
@@ -261,14 +261,14 @@ export default function Header() {
           <MobileDrawer className="" />
         </div>
         <div className="md:flex gap-2 hidden">
-          <Button variant="outline" className="">
+          {/* <Button variant="outline" className="">
             <Link href="sign-in">Sign In</Link>
             <kbd className="-me-1 ms-3 inline-flex w-5 justify-center h-5 max-h-full items-center rounded border border-border px-1 font-[inherit] text-[0.625rem] font-medium text-muted-foreground/70 -ml-1">
               L
             </kbd>
-          </Button>
-          <Button className=" bg-gradient-to-b py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
-            Get Started
+          </Button> */}
+          <Button className=" bg-gradient-to-b py-0 px-6 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
+            Join the Waitlist
           </Button>
         </div>
       </nav>
