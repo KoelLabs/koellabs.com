@@ -1,3 +1,7 @@
+// This is the individual blog post page content. It is rendered insides [slug]/page.tsx.
+// The metadata object is used to display the blog post on the main blog page (app/blog/page.tsx).
+// It will also be used to set meta tags for SEO once I get around to adding that.
+
 import type { Metadata } from '../posts';
 
 export const metadata: Metadata = {
