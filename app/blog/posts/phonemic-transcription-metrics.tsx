@@ -148,11 +148,11 @@ Distance("Bop" → "Sop") = 0.8  // Large difference`}
 
             <div className="my-8">
               <Image
-                src="/placeholder.svg"
+                src="/images/blogDiagram.png"
                 alt="Diagram illustrating phonemic distances"
                 width={600}
                 height={400}
-                className="mx-auto"
+                className="mx-auto rounded-lg"
               />
             </div>
 
