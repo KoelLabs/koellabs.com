@@ -1,7 +1,8 @@
 import Hero from '@/components/sections/1 - Hero.jsx';
 import Logos from '@/components/sections/2 - Logo';
 import Header from '@/components/ui/1 - header';
-
+import CTA from '@/components/sections/3 - CTA';
+import Footer from '@/components/sections/4 - Footer';
 export default function Home() {
   return (
     <div className="flex-col flex w-screen relative scroll-smooth">
@@ -10,6 +11,8 @@ export default function Home() {
       </div>
       <Hero />
       <Logos />
+      <CTA />
+      <Footer />
     </div>
   );
 }

@@ -4,6 +4,9 @@ import React from 'react';
 import { getPosts } from './posts';
 import type { Post } from './posts';
 import Link from 'next/link';
+import { ArrowUpRightIcon } from 'lucide-react';
+import CTA from '@/components/sections/3 - CTA';
+import Footer from '@/components/sections/4 - Footer';
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -40,20 +43,23 @@ function PostCard({ post }: { post: Post }) {
           <div className="px-8 pb-8 pt-1">
             <p className="mt-2 max-w-lg text-sm/6 text-neutral-600">{post.summary}</p>
           </div>
+          <div className="h-px bg-neutral-200 mb-8"></div>
         </div>
-        <div className="absolute bottom-0 right-0 flex justify-end p-4 gap-2 z-10">
+        <div className="absolute bottom-0 right-0 flex justify-end p-4 gap-2 z-[1] mt-4">
           {post.tags.map(tag => (
             <Link
               key={tag.text}
+              target="_blank"
               href={tag.url}
-              className="px-2 py-1 text-xs/6 text-gray-600 border border-gray-200 rounded-md hover:bg-gray-50"
+              className="px-2 py-1 text-xs/6 text-neutral-600 border border-neutral-200 rounded-md hover:bg-neutral-50"
             >
               {tag.text}
+              <ArrowUpRightIcon className="w-4 h-4 mb-px inline-block" />
             </Link>
           ))}
         </div>
       </div>
-      <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 rounded-[calc(theme(borderRadius.lg)+1px)]" />
+      <div className="pointer-events-none absolute inset-px shadow ring-1 ring-black/5 rounded-[calc(theme(borderRadius.lg)+1px)]" />
       <Link href={`/blog/${post.slug}`} className="absolute bottom-0 left-0 h-full w-full"></Link>
     </div>
   );
@@ -64,7 +70,7 @@ export default async function BlogList() {
 
   return (
     <div className="relative">
-      <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[-2] blur-[64px] opacity-10 top-48"></div>
+      <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-[-2] blur-[64px] opacity-10 top-48"></div>
       <div className="mx-auto relative">
         <div className="mx-auto absolute h-full flex justify-between z-[-1]"></div>
 
@@ -85,20 +91,6 @@ export default async function BlogList() {
         </div>
 
         <div className="mx-auto w-full h-fit relative overflow-hidden">
-          <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10 mt-10">
-            <h2 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl">
-              Announcements
-            </h2>
-            <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:mt-16">
-              {posts
-                .filter(post => post.category === 'Announcement')
-                .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-                .slice(0, Math.min(2, posts.length))
-                .map(post => (
-                  <PostCard key={post.slug} post={post} />
-                ))}
-            </div>
-          </div>
           <div className="py-24">
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
               <h2 className="text-base/7 font-semibold text-sky-600">The Newsroom</h2>
@@ -118,6 +110,22 @@ export default async function BlogList() {
           <div className="bg-white/50 backdrop-blur-md py-24 sm:py-32">
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
               <h2 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl">
+                Announcements
+              </h2>
+              <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:mt-16">
+                {posts
+                  .filter(post => post.category === 'Announcement')
+                  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                  .slice(0, Math.min(2, posts.length))
+                  .map(post => (
+                    <PostCard key={post.slug} post={post} />
+                  ))}
+              </div>
+            </div>
+          </div>
+          <div className="py-24 sm:py-32 pb-0 sm:pb-0">
+            <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
+              <h2 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl">
                 Technical Reports
               </h2>
               <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-2">
@@ -130,6 +138,8 @@ export default async function BlogList() {
               </div>
             </div>
           </div>
+          <CTA hideBg={true} />
+          <Footer />
         </div>
       </div>
     </div>
