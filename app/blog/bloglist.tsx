@@ -5,6 +5,8 @@ import { getPosts } from './posts';
 import type { Post } from './posts';
 import Link from 'next/link';
 import { ArrowUpRightIcon } from 'lucide-react';
+import CTA from '@/components/sections/3 - CTA';
+import Footer from '@/components/sections/4 - Footer';
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -136,6 +138,8 @@ export default async function BlogList() {
               </div>
             </div>
           </div>
+          <CTA hideBg={true} />
+          <Footer />
         </div>
       </div>
     </div>
