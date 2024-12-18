@@ -52,29 +52,51 @@ export default function PostBody() {
               The problem of pronunciation learning
             </h3>
             <p className="mb-4">
-              Currently, 48% of foreign speakers are anxious about their accent [1]. In fact,
-              pronunciation is one of the hardest parts of learning a language. It's difficult to
-              hear the difference between what you're saying and what you should be saying
-              (sometimes its impossible without a teacher which is not affordable for many). Once
-              you hear the difference, it is also super hard to learn how to make sounds that you've
-              never made in your native language. We believe technology can bridge this gap, only
-              existing language learning tools do not value diversity of language and dialects. A
-              good solution should be able to understand and teach any accent, not just define a
-              "standard". Moreover, the feedback should be nuanced, actionable, and personalized
-              based on your native language background, not just a human-void ASR system saying
-              "yes" if it recognizes each word you're saying.
+              At Koel Labs, our goal is to make pronunciation learning more accessible and
+              inclusive. To represent the diversity of language and dialects, we're excited to
+              announce that everything from model weights and training code to datasets, research
+              papers, and the frontend UI is officially open source! We can build a better future
+              for language learning.
+            </p>
+
+            <h2 className="text-2xl font-semibold tracking-tight mt-8 mb-4">
+              The problem of pronunciation learning
+            </h2>
+
+            <p className="mb-4">
+              Currently, 48% of foreign speakers are anxious about their accents [1]. Pronunciation
+              is one of the most complex parts of learning a language. It's difficult to hear the
+              difference between what you're saying and what you should be saying (sometimes, it's
+              impossible without a teacher, which is not affordable for many). Once you hear the
+              difference, it is also super hard to learn to make sounds you've never made in your
+              native language.
             </p>
 
             <p className="mb-4">
-              We want to not only collect datasets that represent the diversity of language and
-              dialects, but also to make the entire process of training and evaluating models and
-              then interpreting the results to surface explainable feedback to users reflect the
-              diversity of backgrounds that language learners have. For us, as immigrants and
-              children of immigrants, pronunciation learning has a special meaning because we not
-              only see the importance for fitting into our new communities but also for fitting into
-              our extended families. For others, pronunciation learning has other meanings, and we
-              want to make sure that our tools can help everyone. This is why we're making the
-              project open source to drive discussion and ideas from a diverse set of backgrounds.
+              Technology can bridge this gap; only existing language learning tools do not value the
+              diversity of languages and dialects. A good solution should be able to understand and
+              teach any accent, not just define a "standard." Moreover, the feedback should be
+              nuanced, actionable, and personalized based on your native language background, not
+              just a human-void ASR system saying "yes" if it recognizes each word you're saying.
+            </p>
+
+            <p className="mb-4">
+              We want to collect datasets that represent the diversity of languages and dialects and
+              make the entire process of training and evaluating models and then interpreting the
+              results to surface explainable feedback to users reflect the diversity of backgrounds
+              that language learners have.
+            </p>
+
+            <p className="mb-4">
+              For us, as immigrants and children of immigrants, pronunciation learning has a special
+              meaning because we see not only the importance of fitting into our new communities but
+              also of fitting into our extended families.
+            </p>
+
+            <p className="mb-4">
+              For others, pronunciation learning has other meanings, and we want to make sure that
+              our tools can help everyone. This is why we're making the project open source — it
+              allows for discussion and ideas from a worldwide audience.
             </p>
 
             <h2 className="text-2xl font-semibold tracking-tight mt-8 mb-4">
@@ -84,45 +106,49 @@ export default function PostBody() {
             <p className="mb-4">
               We were fortunate to join the{' '}
               <a
-                className="text-sky-600 hover:underline"
                 href="https://blog.mozilla.org/en/mozilla/14-ai-projects-to-watch-mozillas-first-builders-accelerator-cohort-kicks-off/"
+                className="text-sky-600 hover:underline"
               >
                 2024 Mozilla Builders program
               </a>
-              . This has provided us with the resources to train state of the art audio models for a
-              first version of our tool targeting foreign English speakers. We are in the process of
-              publishing an academic paper on our approach and are planning on continuing to iterate
-              on the pipeline to support more languages, dialects, and use cases such as speech
-              pathology for speech impaired children.
+              . This has provided us with the resources to train state-of-the-art audio models for
+              the first version of our tool targeting foreign English speakers. We are in the
+              process of publishing an academic paper on our approach. We are planning on continuing
+              to iterate on the pipeline to support more languages, dialects, and use cases such as
+              speech pathology for speech-impaired children.
             </p>
 
             <p className="mb-4">
-              Checkout our models on{' '}
+              Our web application is not yet ready, but we are gearing up for a closed beta launch
+              soon. In the meantime, check out our models on{' '}
               <a
-                className="text-sky-600 hover:underline"
                 href="https://huggingface.co/KoelLabs/xlsr-timit-b0"
+                className="text-sky-600 hover:underline"
               >
                 Hugging Face
               </a>{' '}
               and training code on{' '}
-              <a className="text-sky-600 hover:underline" href="https://github.com/KoelLabs/ML">
+              <a href="https://github.com/KoelLabs/ML" className="text-sky-600 hover:underline">
                 GitHub
               </a>
               .
             </p>
 
             <h2 className="text-2xl font-semibold tracking-tight mt-8 mb-4">
-              How to get involved?
+              How do I get involved?
             </h2>
 
             <p className="mb-4">
-              We are already partnered with a number of leading researchers in HCI, Phonology and
-              Linguistics from institutions like CMU, BCU and UW. If your institutions is interested
-              in collaborating, please reach out to us at{' '}
+              If your institution is interested in collaborating, please reach out to us at{' '}
               <a href="mailto:info@koellabs.com" className="text-sky-600 hover:underline">
                 info@koellabs.com
               </a>
-              . If you are a developer, designer, or just interested in language learning, please
+              . We have already partnered with several leading HCI, Phonology, and Linguistics
+              researchers from institutions like CMU, BCU, and UW.
+            </p>
+
+            <p className="mb-4">
+              If you are a developer, designer, or just interested in language learning, please
               partake in the discussion on our GitHub after consulting our{' '}
               <a
                 href="https://github.com/KoelLabs/.github/blob/main/CONTRIBUTING.md"
@@ -144,10 +170,10 @@ export default function PostBody() {
             <hr className="my-8 border-t border-gray-200" />
 
             <p className="text-sm text-gray-600">
-              [1] Babbel Anciety Study. Retrieved from
+              [1] Babbel Anxiety Study. Retrieved from{' '}
               <a
                 href="https://www.babbel.com/en/magazine/accent-anxiety-study"
-                className="text-sky-600 hover:underline ml-1"
+                className="text-sky-600 hover:underline"
               >
                 https://www.babbel.com/en/magazine/accent-anxiety-study
               </a>
