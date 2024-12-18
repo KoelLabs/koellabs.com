@@ -10,7 +10,8 @@
      - If it repeatedly complains about the daemon not running, make sure Docker Desktop is running and add `export DOCKER_HOST=unix:///Users/$USER/Library/Containers/com.docker.docker/Data/docker.raw.sock` to your shell profile (e.g. `~/.zshrc`)
    - [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/) or `choco install docker-desktop` with [Chocolatey](https://chocolatey.org/)
    - [Docker Engine for Linux](https://docs.docker.com/engine/install/) or `sudo apt install docker.io` with APT on Ubuntu
-2. Duplicate the `.env.example` file and rename it to `.env.local`. Fill in the necessary environment variables.
+2. Duplicate the `.env.example` file and rename it to `.env.local`  with `cp .env.example .env.local`.
+   - Comment out `DEV_LOGIN` and add your `FIREBASE_SERVICE_ACCOUNT` to enable authentication checks (login with Google etc.). You can leave in the `DEV_LOGIN` for offline development and other cases where you can't connect to the Firebase Auth server.
 3. Run the application
    - `. ./scripts/docker-run-dev.sh` to start the development server (or `npm run docker` if you have Node.js installed)
    - `ctrl+c` to stop the server or `. ./scripts/docker-stop-dev.sh` if you've closed the terminal
@@ -35,13 +36,11 @@ The docker container will also automatically `npm ci` from the package-lock.json
 4. Create a new database named `postgres` with a user named `postgres` with the password `postgres`
 5. Install dependencies
    - `npm install` or `npm ci` for a clean install from the package-lock.json
-6. Duplicate the `.env.example` file and rename it to `.env.local`. Fill in the necessary environment variables.
+6. Duplicate the `.env.example` file and rename it to `.env.local` with `cp .env.example .env.local`.
+   - Comment out `DEV_LOGIN` and add your `FIREBASE_SERVICE_ACCOUNT` to enable authentication checks (login with Google etc.). You can leave in the `DEV_LOGIN` for offline development and other cases where you can't connect to the Firebase Auth server.
 7. Run the application
    - `npm run dev` to start the development server
    - `ctrl+c` to stop it
-
-### Disable Login Checks for Offline Development
-To bypass the auth system in development (for cases where you can't connect to the Firebase Auth server, e.g., you're offline or haven't provided a `FIREBASE_SERVICE_ACCOUNT` environment variable), you can disable the auth checks by uncommenting the `DEV_LOGIN` environment variable. You can change the email, username, etc. out for your own information if it is useful for testing.
 
 ### Formatting, Linting, Automated Tests and Secret Scanning
 
@@ -99,4 +98,4 @@ webapp/
 
 ## Deployment
 
-The pushes and merged pull requests to the `main` branch will automatically deploy to the production server. Pull requests will automatically be assigned a preview URL run on the test server.
+The pushes and merged pull requests to the `main` branch will automatically deploy to the production server. Pull requests will automatically be assigned a preview URL hosted via the test server.
