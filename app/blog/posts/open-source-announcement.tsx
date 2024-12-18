@@ -48,17 +48,6 @@ export default function PostBody() {
         <div className="relative lg:col-span-3">
           <div className="relative flex h-full flex-col overflow-hidden tracking-[-0.010em] text-lg">
             <p>{metadata.summary}</p>
-            <h3 className="mt-8 text-pretty text-2xl font-semibold tracking-tighter text-neutral-950 mb-4">
-              The problem of pronunciation learning
-            </h3>
-            <p className="mb-4">
-              At Koel Labs, our goal is to make pronunciation learning more accessible and
-              inclusive. To represent the diversity of language and dialects, we're excited to
-              announce that everything from model weights and training code to datasets, research
-              papers, and the frontend UI is officially open source! We can build a better future
-              for language learning.
-            </p>
-
             <h2 className="text-2xl font-semibold tracking-tight mt-8 mb-4">
               The problem of pronunciation learning
             </h2>
