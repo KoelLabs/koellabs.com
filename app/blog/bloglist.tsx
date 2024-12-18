@@ -123,7 +123,7 @@ export default async function BlogList() {
               </div>
             </div>
           </div>
-          <div className="py-24 sm:py-32">
+          <div className="py-24 sm:py-32 pb-0 sm:pb-0">
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
               <h2 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl">
                 Technical Reports
