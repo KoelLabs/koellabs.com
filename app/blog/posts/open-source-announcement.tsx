@@ -34,7 +34,7 @@ export default function PostBody() {
   return (
     <div className="bg-white/50 py-24 sm:py-32 relative">
       <div className="bg-white absolute h-full w-full mt-96 border-y border-neutral-200"></div>
-      <div className="mx-auto max-w-2xl px-6 lg:max-w-5xl lg:px-8 z-10">
+      <div className="mx-auto max-w-2xl px-6 pt-16 sm:pt-8 md:pt-0 lg:max-w-5xl lg:px-8 z-10">
         <h2 className="text-base/7 font-semibold text-sky-600 text-center">{metadata.category}</h2>
         <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl text-center">
           {metadata.title}
