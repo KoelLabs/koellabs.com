@@ -5,11 +5,11 @@
 import type { Metadata } from '../posts';
 
 export const metadata: Metadata = {
-  title: 'Open Source Project Launch',
+  title: 'Hello World! — Our Open Source Project Launch',
   slug: 'open-source-project',
   date: '2024-12-16',
   published: true,
-  image: '/images/bentoDialect.png',
+  image: '/images/blogLaunch.png',
   summary: `
     At Koel Labs, our goal is to make pronunciation learning more accessible and inclusive.
     To represent the diversity of language and dialects, we're excited to announce that everything 
@@ -48,10 +48,10 @@ export default function PostBody() {
         <div className="relative lg:col-span-3">
           <div className="relative flex h-full flex-col overflow-hidden tracking-[-0.010em] text-lg">
             <p>{metadata.summary}</p>
-            <h3 className="mt-8 text-pretty text-2xl font-semibold tracking-tighter text-gray-950">
+            <h3 className="mt-8 text-pretty text-2xl font-semibold tracking-tighter text-gray-950 mb-4">
               The problem of pronunciation learning
             </h3>
-            <p>
+            <p className="mb-4">
               Currently, 48% of foreign speakers are anxious about their accent [1]. In fact,
               pronunciation is one of the hardest parts of learning a language. It's difficult to
               hear the difference between what you're saying and what you should be saying
@@ -64,7 +64,8 @@ export default function PostBody() {
               based on your native language background, not just a human-void ASR system saying
               "yes" if it recognizes each word you're saying.
             </p>
-            <p className="mt-4">
+
+            <p className="mb-4">
               We want to not only collect datasets that represent the diversity of language and
               dialects, but also to make the entire process of training and evaluating models and
               then interpreting the results to surface explainable feedback to users reflect the
@@ -75,13 +76,15 @@ export default function PostBody() {
               want to make sure that our tools can help everyone. This is why we're making the
               project open source to drive discussion and ideas from a diverse set of backgrounds.
             </p>
-            <h3 className="mt-8 text-pretty text-2xl font-semibold tracking-tighter text-gray-950">
+
+            <h2 className="text-2xl font-semibold tracking-tight mt-8 mb-4">
               Current progress and plans
-            </h3>
-            <p>
+            </h2>
+
+            <p className="mb-4">
               We were fortunate to join the{' '}
               <a
-                className="text-sky-600"
+                className="text-sky-600 hover:underline"
                 href="https://blog.mozilla.org/en/mozilla/14-ai-projects-to-watch-mozillas-first-builders-accelerator-cohort-kicks-off/"
               >
                 2024 Mozilla Builders program
@@ -92,49 +95,59 @@ export default function PostBody() {
               on the pipeline to support more languages, dialects, and use cases such as speech
               pathology for speech impaired children.
             </p>
-            <p className="mt-4">
+
+            <p className="mb-4">
               Checkout our models on{' '}
-              <a className="text-sky-600" href="https://huggingface.co/KoelLabs/xlsr-timit-b0">
+              <a
+                className="text-sky-600 hover:underline"
+                href="https://huggingface.co/KoelLabs/xlsr-timit-b0"
+              >
                 Hugging Face
               </a>{' '}
               and training code on{' '}
-              <a className="text-sky-600" href="https://github.com/KoelLabs/ML">
+              <a className="text-sky-600 hover:underline" href="https://github.com/KoelLabs/ML">
                 GitHub
               </a>
               .
             </p>
 
-            <h3 className="mt-8 text-pretty text-2xl font-semibold tracking-tighter text-gray-950">
+            <h2 className="text-2xl font-semibold tracking-tight mt-8 mb-4">
               How to get involved?
-            </h3>
-            <p>
+            </h2>
+
+            <p className="mb-4">
               We are already partnered with a number of leading researchers in HCI, Phonology and
               Linguistics from institutions like CMU, BCU and UW. If your institutions is interested
               in collaborating, please reach out to us at{' '}
-              <a href="mailto:info@koellabs.com" className="text-sky-600">
+              <a href="mailto:info@koellabs.com" className="text-sky-600 hover:underline">
                 info@koellabs.com
               </a>
               . If you are a developer, designer, or just interested in language learning, please
               partake in the discussion on our GitHub after consulting our{' '}
               <a
                 href="https://github.com/KoelLabs/.github/blob/main/CONTRIBUTING.md"
-                className="text-sky-600"
+                className="text-sky-600 hover:underline"
               >
                 contribution guidelines
               </a>
               . Any feedback is welcome. User feedback is especially important to us, so if you are
               open to joining the beta testing program, please sign up{' '}
-              <a href="https://forms.gle/12A9e2YYd9Ptzi2X6" className="text-sky-600">
+              <a
+                href="https://forms.gle/12A9e2YYd9Ptzi2X6"
+                className="text-sky-600 hover:underline"
+              >
                 here
               </a>
               .
             </p>
+
             <hr className="my-8 border-t border-gray-200" />
-            <p>
+
+            <p className="text-sm text-gray-600">
               [1] Babbel Anciety Study. Retrieved from
               <a
                 href="https://www.babbel.com/en/magazine/accent-anxiety-study"
-                className="text-sky-600 m-1"
+                className="text-sky-600 hover:underline ml-1"
               >
                 https://www.babbel.com/en/magazine/accent-anxiety-study
               </a>

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'Dialect Sensitivity — Why it matters for the future of language acquisition',
   slug: 'dialect-sensitivity',
   date: '2024-12-17',
-  published: true,
+  published: false,
   image: '/images/blogDialect.png',
   summary:
     'Dialect sensitivity is a crucial aspect of language learning. It refers to the ability of a language learning platform to adapt to the specific pronunciation and accent of a learner. This is important because it allows learners to better understand and speak the language, and it can also help them avoid making mistakes that could be embarrassing or even harmful in certain contexts.',

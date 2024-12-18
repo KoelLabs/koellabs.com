@@ -85,20 +85,6 @@ export default async function BlogList() {
         </div>
 
         <div className="mx-auto w-full h-fit relative overflow-hidden">
-          <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10 mt-10">
-            <h2 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl">
-              Announcements
-            </h2>
-            <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:mt-16">
-              {posts
-                .filter(post => post.category === 'Announcement')
-                .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-                .slice(0, Math.min(2, posts.length))
-                .map(post => (
-                  <PostCard key={post.slug} post={post} />
-                ))}
-            </div>
-          </div>
           <div className="py-24">
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
               <h2 className="text-base/7 font-semibold text-sky-600">The Newsroom</h2>
@@ -116,6 +102,22 @@ export default async function BlogList() {
             </div>
           </div>
           <div className="bg-white/50 backdrop-blur-md py-24 sm:py-32">
+            <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
+              <h2 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl">
+                Announcements
+              </h2>
+              <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:mt-16">
+                {posts
+                  .filter(post => post.category === 'Announcement')
+                  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                  .slice(0, Math.min(2, posts.length))
+                  .map(post => (
+                    <PostCard key={post.slug} post={post} />
+                  ))}
+              </div>
+            </div>
+          </div>
+          <div className="py-24 sm:py-32">
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
               <h2 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl">
                 Technical Reports
