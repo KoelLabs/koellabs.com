@@ -9,7 +9,7 @@
 ![Zizmor](https://github.com/KoelLabs/webapp/actions/workflows/zizmor.yml/badge.svg)
 ![Gitleaks Secret Scanning](https://github.com/KoelLabs/webapp/actions/workflows/gitleaks.yml/badge.svg)
 
-Contains the website for Koel Labs and web interface for the pronunciation learning application.
+Contains the website for Koel Labs and the web interface for the pronunciation learning application.
 
 Read about all our repositories [here](https://github.com/KoelLabs).
 
@@ -30,4 +30,4 @@ Check out [CONTRIBUTING.md](CONTRIBUTING.md) for specific guidelines on contribu
 
 Application code in this repository is open-sourced under the [FSL-1.1-Apache-2.0](https://fsl.software/).
 
-We retain all rights to the Koel Labs brand, logos, blog posts and website content.
+We retain all rights to the Koel Labs brand, logos, blog posts, and website content.
