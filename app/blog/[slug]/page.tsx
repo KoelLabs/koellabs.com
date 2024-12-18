@@ -4,6 +4,7 @@
 import { getPost } from '../posts';
 import { notFound } from 'next/navigation';
 import Header from '@/components/ui/1 - header';
+import CTA from '@/components/sections/3 - CTA';
 
 export default async function PostPage({
   params,
@@ -28,6 +29,7 @@ export default async function PostPage({
           <div className="mx-auto w-full h-fit bg-neutral-50/20 backdrop-blur-md  relative overflow-hidden">
             <post.content />
           </div>
+          <CTA />
         </div>
       </div>
     </div>
