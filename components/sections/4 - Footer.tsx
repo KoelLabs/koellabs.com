@@ -235,7 +235,7 @@ export default function Footer() {
               </defs>
             </svg>
             Koel{' '}
-            <span className="ml-1 text-transparent bg-clip-text bg-gradient-to-br from-black via-sky-950 to-sky-500">
+            <span className=" -ml-px text-transparent bg-clip-text bg-gradient-to-br from-black via-sky-950 to-sky-500">
               Labs
             </span>
           </a>
