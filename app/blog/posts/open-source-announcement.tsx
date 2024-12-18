@@ -36,7 +36,7 @@ export default function PostBody() {
       <div className="bg-white absolute h-full w-full mt-96 border-y border-neutral-200"></div>
       <div className="mx-auto max-w-2xl px-6 lg:max-w-5xl lg:px-8 z-10">
         <h2 className="text-base/7 font-semibold text-sky-600 text-center">{metadata.category}</h2>
-        <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl text-center">
+        <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl text-center">
           {metadata.title}
         </h1>
         <img
@@ -48,7 +48,7 @@ export default function PostBody() {
         <div className="relative lg:col-span-3">
           <div className="relative flex h-full flex-col overflow-hidden tracking-[-0.010em] text-lg">
             <p>{metadata.summary}</p>
-            <h3 className="mt-8 text-pretty text-2xl font-semibold tracking-tighter text-gray-950 mb-4">
+            <h3 className="mt-8 text-pretty text-2xl font-semibold tracking-tighter text-neutral-950 mb-4">
               The problem of pronunciation learning
             </h3>
             <p className="mb-4">
@@ -167,9 +167,9 @@ export default function PostBody() {
               .
             </p>
 
-            <hr className="my-8 border-t border-gray-200" />
+            <hr className="my-8 border-t border-neutral-200" />
 
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-neutral-600">
               [1] Babbel Anxiety Study. Retrieved from{' '}
               <a
                 href="https://www.babbel.com/en/magazine/accent-anxiety-study"
