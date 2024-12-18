@@ -45,7 +45,7 @@ function PostCard({ post }: { post: Post }) {
           </div>
           <div className="h-px bg-neutral-200 mb-8"></div>
         </div>
-        <div className="absolute bottom-0 right-0 flex justify-end p-4 gap-2 z-10 mt-4">
+        <div className="absolute bottom-0 right-0 flex justify-end p-4 gap-2 z-[1] mt-4">
           {post.tags.map(tag => (
             <Link
               key={tag.text}
