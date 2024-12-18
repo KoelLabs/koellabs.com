@@ -4,6 +4,7 @@ import React from 'react';
 import { getPosts } from './posts';
 import type { Post } from './posts';
 import Link from 'next/link';
+import { ArrowUpRightIcon } from 'lucide-react';
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -40,20 +41,23 @@ function PostCard({ post }: { post: Post }) {
           <div className="px-8 pb-8 pt-1">
             <p className="mt-2 max-w-lg text-sm/6 text-neutral-600">{post.summary}</p>
           </div>
+          <div className="h-px bg-neutral-200 mb-8"></div>
         </div>
-        <div className="absolute bottom-0 right-0 flex justify-end p-4 gap-2 z-10">
+        <div className="absolute bottom-0 right-0 flex justify-end p-4 gap-2 z-10 mt-4">
           {post.tags.map(tag => (
             <Link
               key={tag.text}
+              target="_blank"
               href={tag.url}
-              className="px-2 py-1 text-xs/6 text-gray-600 border border-gray-200 rounded-md hover:bg-gray-50"
+              className="px-2 py-1 text-xs/6 text-neutral-600 border border-neutral-200 rounded-md hover:bg-neutral-50"
             >
               {tag.text}
+              <ArrowUpRightIcon className="w-4 h-4 mb-px inline-block" />
             </Link>
           ))}
         </div>
       </div>
-      <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 rounded-[calc(theme(borderRadius.lg)+1px)]" />
+      <div className="pointer-events-none absolute inset-px shadow ring-1 ring-black/5 rounded-[calc(theme(borderRadius.lg)+1px)]" />
       <Link href={`/blog/${post.slug}`} className="absolute bottom-0 left-0 h-full w-full"></Link>
     </div>
   );
