@@ -382,7 +382,7 @@ export default function CTA() {
                     placeholder="Email address"
                     autoComplete="email"
                     aria-label="Email address"
-                    className="block w-full rounded-2xl border border-neutral-200 bg-white/75 py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5"
+                    className="block w-full rounded-2xl border border-neutral-200 bg-white/75 py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-sky-950 focus:outline-none focus:ring-sky-950/5"
                   />
                   <div className="absolute inset-y-1 right-1 flex justify-end">
                     <button
