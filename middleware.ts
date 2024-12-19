@@ -7,6 +7,7 @@ const PUBLIC_URLS = [
   new RegExp('^/blog/.*$'),
   new RegExp('^/pricing$'),
   new RegExp('^/about$'),
+  new RegExp('^/contact$'),
 ];
 
 export async function middleware(request: NextRequest) {
