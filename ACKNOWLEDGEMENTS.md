@@ -7,8 +7,8 @@ with a short description of your contribution(s) below. For example:
 
 The Koel Labs Web Application was developed with contributions from the following individuals:
 
-- [Ruslan Mukhamedvaleev](https://www.ruslan.in/): Koel Labs co-founder and lead web-developer and designer.
-- [Alexander Metzger](https://www.linkedin.com/in/alexander-le-metzger): Koel Labs co-founder and CEO and lead backend+infrastructure+devops+ML engineer.
+- [Ruslan Mukhamedvaleev](https://www.ruslan.in/): Koel Labs co-founder and CPO — lead web-developer and designer.
+- [Alexander Metzger](https://www.linkedin.com/in/alexander-le-metzger): Koel Labs co-founder and CEO — lead backend+infrastructure+devops+ML engineer.
 
 <a href="https://github.com/KoelLabs/webapp/graphs/contributors">
   <img class="dark-light" src="https://contrib.rocks/image?repo=KoelLabs/webapp&anon=0&columns=20&max=100&r=true" />
