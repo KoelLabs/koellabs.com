@@ -10,7 +10,7 @@
      - If it repeatedly complains about the daemon not running, make sure Docker Desktop is running and add `export DOCKER_HOST=unix:///Users/$USER/Library/Containers/com.docker.docker/Data/docker.raw.sock` to your shell profile (e.g. `~/.zshrc`)
    - [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/) or `choco install docker-desktop` with [Chocolatey](https://chocolatey.org/)
    - [Docker Engine for Linux](https://docs.docker.com/engine/install/) or `sudo apt install docker.io` with APT on Ubuntu
-2. Duplicate the `.env.example` file and rename it to `.env.local`  with `cp .env.example .env.local`.
+2. Duplicate the `.env.example` file and rename it to `.env.local` with `cp .env.example .env.local`.
    - Comment out `DEV_LOGIN` and add your `FIREBASE_SERVICE_ACCOUNT` to enable authentication checks (login with Google etc.). You can leave in the `DEV_LOGIN` for offline development and other cases where you can't connect to the Firebase Auth server.
 3. Run the application
    - `. ./scripts/docker-run-dev.sh` to start the development server (or `npm run docker` if you have Node.js installed)

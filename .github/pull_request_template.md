@@ -7,11 +7,10 @@
 
 ### Q/A checklist
 
-- [ ] If you added new dependencies, did you update the requirements.txt file? `pip freeze > requirements.txt`
-- [ ] Run formatting, linting, tests, and security checks `. scripts/alltests.sh`
+- [ ] If you added new dependencies, double-check there are no security vulnerabilities with `npm audit`, make sure they are well maintained, and generate a license report with `npm run license-report`. The report should be updated in [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md) and the license for the dependency should be compatible with the [FSL-1.1-Apache-2.0](https://fsl.software/) license.
+- [ ] Run formatting, linting, tests, and security checks (see [DEVELOPMENT.md](DEVELOPMENT.md))
 - [ ] Do a self code review of the changes - Read the diff at least twice.
 - [ ] I have written tests for any new features and regression tests for any bug fixes.
-- [ ] If you changed/updated/added ML models, did you update `scripts/Dockerfile.prod` to cache the weights?
 
 ### Legal Boilerplate
 

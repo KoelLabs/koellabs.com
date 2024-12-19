@@ -20,12 +20,14 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for how to setup your local development env
 0. `git clone https://github.com/KoelLabs/webapp.git`
 1. Install [Docker and Docker Compose](https://www.docker.com/get-started/)
 2. Duplicate the `.env.example` file and rename it to `.env.local` with `cp .env.example .env.local`.
-    - The default values should work to get started. You can optionally change `DEV_LOGIN` to include your username and email.
+   - The default values should work to get started. You can optionally change `DEV_LOGIN` to include your username and email.
 3. Run the application `. ./scripts/docker-run-dev.sh`
 
 ## Contributing
 
 Check out [CONTRIBUTING.md](CONTRIBUTING.md) for specific guidelines on contributing to this repository.
+
+We are grateful for all of [our contributors](ACKNOWLEDGEMENTS.md). If you contribute to this repository and wish to be acknowledged, please add your name to the list in your pull request.
 
 ## License
 
