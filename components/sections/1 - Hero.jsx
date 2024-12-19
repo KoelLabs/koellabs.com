@@ -10,8 +10,8 @@ export default function Hero() {
   return (
     <div className="relative">
       <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] opacity-10 top-48"></div>
-      <div className="mx-auto p-4 md:px-6 pt-0 lg:px-8 py-32 relative">
-        <div className="mx-auto max-w-3xl py-32">
+      <div className="mx-auto md:px-6 pt-0 lg:px-8 py-32 relative">
+        <div className="mx-auto p-4 max-w-3xl py-32">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
           <div className="text-center relative">
             <div className="flex flex-row justify-center items-center my-6">
@@ -44,7 +44,7 @@ export default function Hero() {
               </span>
             </h1> */}
 
-            <h1 className="text-4xl font-bold tracking-[-0.04em] text-gray-900 sm:text-6xl overflow-visible">
+            <h1 className="text-2xl sm:text-4xl font-bold tracking-[-0.04em] sm:max-w-[500px] lg:max-w-[1400px] mx-auto text-pretty text-gray-900 lg:text-6xl overflow-visible">
               Master Pronunciation with
               <span className="bg-clip-text text-transparent bg-gradient-to-br mr-1 from-sky-600 to-blue-950 overflow-visible py-1">
                 {' '}
@@ -52,7 +52,7 @@ export default function Hero() {
               </span>
             </h1>
             <svg
-              className="absolute right-9 bottom-[106px] rotate-12 shimmer"
+              className="absolute right-9 bottom-[126px] rotate-12 shimmer hidden lg:block"
               xmlns="http://www.w3.org/2000/svg"
               width="44"
               height="47"
@@ -107,7 +107,7 @@ export default function Hero() {
                 </linearGradient>
               </defs>
             </svg>
-            <p className="mt-6 text-lg leading-8 text-gray-600 max-w-xl mx-auto text-pretty">
+            <p className="mt-6 sm:text-lg leading-8 text-gray-600 max-w-xl mx-auto text-pretty">
               {/* Our platform uses cutting-edge technology to help you improve your pronunciation in a
               fun and engaging way via content that you already love. */}
               Practice, perfect, and pronounce like a native language speaker with fun, immersive
@@ -125,7 +125,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="mx-auto absolute top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[-1]">
+        <div className="mx-auto absolute opacity-25 sm:opacity-100 top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[-1]">
           <div className="h-full"></div>
           <div className="w-[1px] h-full bg-neutral-200 drops"></div>
           <div className="w-[1px] h-full bg-neutral-200 drops2"></div>
@@ -140,7 +140,7 @@ export default function Hero() {
           <div className="h-full"></div>
         </div>
 
-        <div className="flex justify-center sm:overflow-visible p-8">
+        <div className="flex justify-center sm:overflow-visible overflow-hidden">
           <Card className=" max-w-[1200px] min-w-[500px] border-neutral-300/50 p-6 bg-white border-2 rounded-3xl shadow-2xl w-full h-fit mx-auto  z-[1] relative ">
             <HeroVideoDialog
               className="rounded-[500px]"

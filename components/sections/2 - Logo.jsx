@@ -18,7 +18,7 @@ export default function Logos() {
             width="2450px"
             height="100%"
             fill="none"
-            className="absolute -left-1/2 scale-150 -right-1/2 block mx-auto opacity-10"
+            className="absolute -left-1/2 scale-150 -right-1/2 block mx-auto opacity-10 "
           >
             <path
               stroke="#E5E5E5"
@@ -255,8 +255,10 @@ export default function Logos() {
           </svg>
           <div className="bg-white/50 py-24 sm:py-32">
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
-              <h2 className="text-base/7 font-semibold text-sky-600">What is this?</h2>
-              <p className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl">
+              <h2 className="text-base/7 font-semibold text-sky-600 relative z-10">
+                What is this?
+              </h2>
+              <p className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10">
                 Your new favorite tool for pronunciation learning
               </p>
               <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
