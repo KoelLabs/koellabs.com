@@ -52,7 +52,7 @@ export default function Hero() {
               </span>
             </h1>
             <svg
-              className="absolute right-9 bottom-[126px] rotate-12 shimmer hidden lg:block"
+              className="absolute right-4 bottom-[126px] rotate-12 shimmer hidden lg:block"
               xmlns="http://www.w3.org/2000/svg"
               width="44"
               height="47"
