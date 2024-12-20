@@ -376,6 +376,10 @@ export default function Footer() {
               stroke="#878787"
               d="M.531 160.998V.918h33.845V71.5h2.11L94.095.918h40.567L75.256 72.595l60.109 88.403h-40.49l-43.85-65.814-16.649 20.323v45.491z"
             ></path>
+
+            <g className="" mask="url(#mask)">
+              <circle className="pulse-effect path-trace-footer" cx="50" cy="50" r="25"></circle>
+            </g>
           </svg>
         </div>
       </div>
