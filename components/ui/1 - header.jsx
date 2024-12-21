@@ -25,10 +25,11 @@ const links = [
 export default function Header() {
   var path = usePathname();
 
-  var firstPath = '/' + (path?.split('/')?.[1] || null);
+  var firstPath = '/' + (path?.split('/')?.[1] || '');
 
-  if (path === '') {
-    path = 'home';
+  if (firstPath === '/') {
+    firstPath = '/';
+    path = '/';
   }
 
   return (
