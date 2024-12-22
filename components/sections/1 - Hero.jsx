@@ -114,13 +114,17 @@ export default function Hero() {
               movie and show clips at your fingertips.
             </p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4">
-              <Button className="w-full rounded-lg sm:w-40 bg-gradient-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
-                {/* Start Learning for Free w-44 */}
-                Join the Waitlist
-              </Button>
-              <Button className="w-full sm:w-32" variant="outline">
-                Learn More
-              </Button>
+              <Link href="#join-the-waitlist">
+                <Button className="w-full rounded-lg sm:w-40 bg-gradient-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
+                  {/* Start Learning for Free w-44 */}
+                  Join the Waitlist
+                </Button>
+              </Link>
+              <Link href="#learn-more">
+                <Button className="w-full sm:w-32" variant="outline">
+                  Learn More
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

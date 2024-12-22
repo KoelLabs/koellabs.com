@@ -429,7 +429,9 @@ export default function Contact() {
           </div>
         </div>
       </div>
-
+      <div className="bg-white/50 backdrop-blur-md mb-10 border-y border-neutral-200">
+        <CTA hideBg />
+      </div>
       <Footer />
     </div>
   );

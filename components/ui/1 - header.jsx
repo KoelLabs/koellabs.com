@@ -262,9 +262,11 @@ export default function Header() {
               L
             </kbd>
           </Button> */}
-          <Button className=" bg-gradient-to-b py-0 px-6 rounded-lg border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
-            Join the Waitlist
-          </Button>
+          <Link href="#join-the-waitlist">
+            <Button className=" bg-gradient-to-b py-0 px-6 rounded-lg border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
+              Join the Waitlist
+            </Button>
+          </Link>
         </div>
       </nav>
     </header>
