@@ -1,5 +1,5 @@
 import Hero from '@/components/sections/1 - Hero.jsx';
-import Logos from '@/components/sections/2 - Logo';
+import Bento from '@/components/sections/2 - Bento';
 import Header from '@/components/ui/1 - header';
 import CTA from '@/components/sections/3 - CTA';
 import Footer from '@/components/sections/4 - Footer';
@@ -10,7 +10,7 @@ export default function Home() {
         <Header />
       </div>
       <Hero />
-      <Logos />
+      <Bento />
       <CTA />
       <Footer />
     </div>
