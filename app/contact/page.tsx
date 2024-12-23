@@ -1,11 +1,24 @@
+'use client';
+
 import CTA from '@/components/sections/3 - CTA';
 import Footer from '@/components/sections/4 - Footer';
 import Header from '@/components/ui/1 - header';
+import { Button } from '@/components/ui/base/button';
 import { Input } from '@/components/ui/base/input';
 import { Label } from '@/components/ui/base/label';
+import { Textarea } from '@/components/ui/base/textarea';
+import { useToast } from '@/hooks/use-toast';
+import { useCharacterLimit } from '@/lib/use-character-limit';
 import { ArrowRightIcon, AtSign, BookDashed, MailIcon, User } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Contact() {
+  const { toast } = useToast();
+
+  const maxLength = 500;
+  const [value, setValue] = useState('');
+  const { characterCount, handleChange, maxLength: limit } = useCharacterLimit({ maxLength });
+
   return (
     <div className={`min-h-screen`}>
       <div className="z-[2] sticky top-0 mx-auto w-full">
@@ -383,48 +396,108 @@ export default function Contact() {
               <p className="text-lg/8 text-neutral-700 mt-4">
                 We're here to help you with any questions, concerns, or feedback you may have.
               </p>
-              <div className="space-y-2  text-left mt-4">
-                <Label htmlFor="input-09">Name</Label>
-                <div className="relative">
-                  <Input
-                    id="input-09"
-                    className="peer ps-9 rounded-xl"
-                    placeholder="Name"
-                    type="text"
-                  />
-                  <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
-                    <User size={16} strokeWidth={2} aria-hidden="true" />
+              <form
+                action="https://docs.google.com/forms/d/e/1FAIpQLSchnrPOEE42wew5ppu-1EkvGKoAxI7JJ5UaphyLTsXmdZdx7Q/formResponse"
+                method="POST"
+                onSubmit={e => {
+                  e.preventDefault();
+                  const formData = new FormData(e.currentTarget);
+                  fetch(e.currentTarget.action, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors',
+                  });
+
+                  toast({
+                    title: 'Submitted',
+                    description: 'Thank you for contacting us!',
+                  });
+
+                  setValue('');
+                  e.currentTarget.reset();
+                }}
+                className="space-y-2"
+              >
+                <div className="space-y-2  text-left mt-4">
+                  <Label htmlFor="input-09">Name</Label>
+                  <div className="relative">
+                    <Input
+                      id="input-09"
+                      required
+                      autoComplete="name nickname given-name"
+                      name="entry.358867278"
+                      className="peer ps-9 rounded-xl"
+                      placeholder="Name"
+                      type="text"
+                    />
+                    <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+                      <User size={16} strokeWidth={2} aria-hidden="true" />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="space-y-2  text-left mt-3">
-                <Label htmlFor="input-09">Email</Label>
-                <div className="relative">
-                  <Input
-                    id="input-09"
-                    className="peer ps-9 rounded-xl"
-                    placeholder="Email"
-                    type="email"
-                  />
-                  <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
-                    <AtSign size={16} strokeWidth={2} aria-hidden="true" />
+                <div className="space-y-2  text-left mt-3">
+                  <Label htmlFor="input-09">Email</Label>
+                  <div className="relative">
+                    <Input
+                      id="input-09"
+                      required
+                      name="entry.65859822"
+                      className="peer ps-9 rounded-xl"
+                      placeholder="Email"
+                      type="email"
+                    />
+                    <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+                      <AtSign size={16} strokeWidth={2} aria-hidden="true" />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="space-y-2  text-left mt-3">
-                <Label htmlFor="input-09">Topic</Label>
-                <div className="relative">
-                  <Input
-                    id="input-09"
-                    className="peer ps-9 rounded-xl"
-                    placeholder="Topic"
-                    type="text"
-                  />
-                  <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
-                    <BookDashed size={16} strokeWidth={2} aria-hidden="true" />
+                <div className="space-y-2  text-left mt-3">
+                  <Label htmlFor="input-09">Topic</Label>
+                  <div className="relative">
+                    <Input
+                      id="input-09"
+                      required
+                      name="entry.1735979938"
+                      className="peer ps-9 rounded-xl"
+                      placeholder="Topic"
+                      type="text"
+                    />
+                    <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+                      <BookDashed size={16} strokeWidth={2} aria-hidden="true" />
+                    </div>
                   </div>
                 </div>
-              </div>
+                <div className="space-y-2 text-left mt-3">
+                  <Label htmlFor="textarea-16">Message</Label>
+                  <Textarea
+                    id="textarea-16"
+                    name="entry.1856129796"
+                    required
+                    value={value}
+                    maxLength={maxLength}
+                    placeholder="Message"
+                    onChange={e => {
+                      setValue(e.target.value);
+                      handleChange(e);
+                    }}
+                    aria-describedby="characters-left-textarea"
+                  />
+                  <p
+                    id="characters-left-textarea"
+                    className="mt-2 text-right text-xs text-muted-foreground"
+                    role="status"
+                    aria-live="polite"
+                  >
+                    <span className="tabular-nums">{limit - characterCount}</span> characters left
+                  </p>
+                </div>
+                <Button
+                  type="submit"
+                  className="mt-3 rounded-lg bg-gradient-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950 w-full"
+                >
+                  Submit
+                </Button>
+              </form>
             </div>
           </div>
         </div>
