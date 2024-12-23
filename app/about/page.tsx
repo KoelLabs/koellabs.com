@@ -81,11 +81,11 @@ export default function About() {
                   to be just that.
                 </p>
                 <div className="flex gap-x-2">
-                  <p className="text-pretty text-md font-medium text-black mt-6">—</p>
+                  <p className="text-pretty text-md font-medium text-black mt-8">—</p>
                   <img
                     alt="Koel Labs Signature"
                     src="/images/koelLabsSig.png"
-                    className="mt-4 w-1/2 sm:w-1/5"
+                    className="mt-6 w-1/2 sm:w-1/5"
                   />
                 </div>
               </div>
