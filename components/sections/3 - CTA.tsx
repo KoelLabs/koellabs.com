@@ -1,7 +1,10 @@
+'use client';
 import { ArrowRightIcon } from 'lucide-react';
 import { Button } from '../ui/base/button';
+import { useToast } from '@/hooks/use-toast';
 
 export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
+  const { toast } = useToast();
   return (
     <div id="join-the-waitlist" className={`relative`}>
       <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] opacity-10 top-48"></div>
@@ -379,22 +382,41 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
               </p>
               <div className="mt-8 flex items-center justify-center gap-x-6">
                 <div className="relative w-full lg:mx-4">
-                  <input
-                    type="email"
-                    placeholder="Email address"
-                    autoComplete="email"
-                    aria-label="Email address"
-                    className="block w-full rounded-2xl border border-neutral-200 bg-white/75 py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-sky-950 focus:outline-none focus:ring-sky-950/5"
-                  />
-                  <div className="absolute inset-y-1 right-1 flex justify-end">
-                    <button
-                      type="submit"
-                      aria-label="Submit"
-                      className="flex aspect-square h-full items-center justify-center rounded-xl bg-sky-700 text-white transition hover:bg-sky-800 bg-gradient-to-b border border-double outline-white/50 outline-offset-[-2px] border-black from-sky-900 to-blue-950"
-                    >
-                      <ArrowRightIcon className="w-4" />
-                    </button>
-                  </div>
+                  <form
+                    action="https://docs.google.com/forms/d/e/1FAIpQLScYXfLnmvyRogKKffPJ1R0c_sYWpAsAk_8lYWqEGWWSZGHX3Q/formResponse"
+                    method="POST"
+                    onSubmit={e => {
+                      e.preventDefault();
+                      const formData = new FormData(e.currentTarget);
+                      fetch(e.currentTarget.action, {
+                        method: 'POST',
+                        body: formData,
+                        mode: 'no-cors',
+                      });
+                      toast({
+                        title: 'Submitted',
+                        description: 'Thank you for joining the waitlist!',
+                      });
+                      e.currentTarget.reset();
+                    }}
+                  >
+                    <input
+                      type="email"
+                      name="entry.358867278"
+                      placeholder="Email address"
+                      aria-label="Email address"
+                      className="block w-full rounded-2xl border border-neutral-200 bg-white/75 py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-sky-950 focus:outline-none focus:ring-sky-950/5"
+                    />
+                    <div className="absolute inset-y-1 right-1 flex justify-end">
+                      <button
+                        type="submit"
+                        aria-label="Submit"
+                        className="flex aspect-square h-full items-center justify-center rounded-xl bg-sky-700 text-white transition hover:bg-sky-800 bg-gradient-to-b border border-double outline-white/50 outline-offset-[-2px] border-black from-sky-900 to-blue-950"
+                      >
+                        <ArrowRightIcon className="w-4" />
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>

@@ -9,7 +9,7 @@ import Image from 'next/image';
 export const metadata: Metadata = {
   title: 'Dialect Sensitivity — Why it matters for the future of language acquisition',
   slug: 'dialect-sensitivity',
-  date: '2024-12-17',
+  date: '2024-12-23',
   published: false,
   image: '/images/blogDialect.png',
   summary:

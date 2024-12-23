@@ -7,7 +7,7 @@ import type { Metadata } from '../posts';
 export const metadata: Metadata = {
   title: 'Hello World! — Our Open Source Project Launch',
   slug: 'open-source-project',
-  date: '2024-12-16',
+  date: '2024-12-23',
   published: true,
   image: '/images/blogLaunch.png',
   summary: `
