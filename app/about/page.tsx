@@ -70,16 +70,24 @@ export default function About() {
                 </span>
               </h1>
               <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
-                <p className="text-pretty text-lg font-medium text-neutral-500">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco.
+                <p className="text-pretty text-lg font-medium text-neutral-600">
+                  Current methods for pronunciation learning are often outdated, lack accessibility,
+                  and are ultimately boring. Large classrooms and most language apps fail to provide
+                  personalized feedback, leaving already struggling learners to self-evaluate, which
+                  is ineffective.
                 </p>
-                <p className="text-pretty text-lg font-medium text-neutral-500 mt-4">
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                  fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa.
+                <p className="text-pretty text-lg font-medium text-neutral-600 mt-4">
+                  Language learners, like us and our families, desperately need a change—and we aim
+                  to be just that.
                 </p>
+                <div className="flex gap-x-2">
+                  <p className="text-pretty text-md font-medium text-black mt-6">—</p>
+                  <img
+                    alt="Koel Labs Signature"
+                    src="/images/koelLabsSig.png"
+                    className="mt-4 w-1/2 sm:w-1/5"
+                  />
+                </div>
               </div>
               <div className="mt-10 aspect-[6/5] w-full md:max-w-lg rounded-[32px] object-cover sm:mt-16 lg:mt-8 xl:-mt-8 lg:max-w-none xl:row-span-2 xl:row-end-2 p-4 bg-white/75 backdrop-blur-md border border-neutral-300/50">
                 <img
