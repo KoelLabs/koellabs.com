@@ -30,12 +30,12 @@ function PostCard({ post }: { post: Post }) {
                 {post.category}
               </h3>
             </div>
-            <p className="mt-2 text-xl lg:text-2xl max-w-md text-pretty font-medium tracking-tight text-neutral-950">
+            <p className="mt-2 sm:text-xl lg:text-2xl max-w-md text-pretty font-medium tracking-tight text-neutral-950">
               {post.title}
             </p>
-            <div className="flex flex-row gap-1 my-4">
+            <div className="flex flex-col sm:flex-row gap-1 my-4">
               <p className="text-sm/4 text-neutral-800">{formatDate(post.date)}</p>
-              <p className="text-sm/4 text-neutral-800">•</p>
+              <p className="text-sm/4 text-neutral-800 hidden sm:block">•</p>
               <p className="text-sm/4 text-neutral-800">Koel Labs</p>
             </div>
           </div>
