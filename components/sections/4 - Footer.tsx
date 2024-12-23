@@ -1,14 +1,16 @@
+import { ArrowUpRightIcon } from 'lucide-react';
+
 const navigation = {
   product: [{ name: 'Join Waitlist', href: '#join-the-waitlist' }],
   company: [
-    { name: 'About', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Contact', href: 'mailto:info@koellabs.com' },
+    { name: 'About', href: '/about' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Contact', href: '/contact' },
   ],
   legal: [
-    { name: 'Terms of service', href: '#' },
-    { name: 'Privacy policy', href: '#' },
-    { name: 'License', href: '#' },
+    { name: 'Terms of service', href: 'https://github.com/koellabs' },
+    { name: 'Privacy policy', href: 'https://github.com/koellabs' },
+    { name: 'License', href: 'https://github.com/koellabs' },
   ],
   social: [
     {
@@ -273,9 +275,11 @@ export default function Footer() {
                     <li key={item.name}>
                       <a
                         href={item.href}
+                        target="_blank"
                         className="text-sm/6 text-neutral-600 hover:text-neutral-900"
                       >
                         {item.name}
+                        <ArrowUpRightIcon className="size-4 inline-block ml-1 mb-0.5 text-neutral-600" />
                       </a>
                     </li>
                   ))}

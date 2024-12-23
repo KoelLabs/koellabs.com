@@ -83,7 +83,7 @@ export default function About() {
               </div>
               <div className="mt-10 aspect-[6/5] w-full md:max-w-lg rounded-[32px] object-cover sm:mt-16 lg:mt-8 xl:-mt-8 lg:max-w-none xl:row-span-2 xl:row-end-2 p-4 bg-white/75 backdrop-blur-md border border-neutral-300/50">
                 <img
-                  alt=""
+                  alt="A photo of the Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the bay bridge in San Francisco."
                   src="/images/aboutShot.jpg"
                   className=" aspect-[6/5] w-full md:max-w-lg rounded-2xl object-cover object-right lg:max-w-none xl:row-span-2 xl:row-end-2 border border-neutral-300"
                 />
@@ -109,7 +109,7 @@ export default function About() {
                 {people.map(person => (
                   <li key={person.name}>
                     <img
-                      alt=""
+                      alt={`A photo of ${person.name}, ${person.role} at Koel Labs`}
                       src={person.imageUrl}
                       className="aspect-square w-full rounded-2xl object-cover"
                     />

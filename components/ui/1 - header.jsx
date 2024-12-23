@@ -194,7 +194,7 @@ export default function Header() {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          <ul className="flex items-center gap-x-4">
+          <ul className="flex items-center gap-x-5">
             {links.map(({ href, label }) => (
               <li key={`${href}${label}`}>
                 <a
