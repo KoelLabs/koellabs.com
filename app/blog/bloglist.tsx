@@ -30,13 +30,15 @@ function PostCard({ post }: { post: Post }) {
                 {post.category}
               </h3>
             </div>
-            <p className="mt-2 sm:text-xl lg:text-2xl max-w-md text-pretty font-medium tracking-tight text-neutral-950">
+            <p className="mt-2 text-xl sm:text-xl lg:text-2xl max-w-md text-pretty font-medium tracking-tight text-neutral-950">
               {post.title}
             </p>
             <div className="flex flex-col sm:flex-row gap-1 my-4">
               <p className="text-sm/4 text-neutral-800">{formatDate(post.date)}</p>
               <p className="text-sm/4 text-neutral-800 hidden sm:block">•</p>
-              <p className="text-sm/4 text-neutral-800">Koel Labs</p>
+              <p className="text-sm/4 text-neutral-800">
+                <span className="inline sm:hidden">By</span> Koel Labs
+              </p>
             </div>
           </div>
           <div className="h-px bg-neutral-200 my-4"></div>
@@ -74,7 +76,7 @@ export default async function BlogList() {
       <div className="mx-auto relative">
         <div className="mx-auto absolute h-full flex justify-between z-[-1]"></div>
 
-        <div className="mx-auto absolute top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[0]">
+        <div className="mx-auto absolute top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[0] opacity-25 sm:opacity-100">
           <div className="h-full"></div>
           <div className="h-full"></div>
           <div className="h-full"></div>
