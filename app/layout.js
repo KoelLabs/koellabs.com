@@ -3,6 +3,10 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 const inter = Inter({ subsets: ['latin'] });
 
+export const viewport = {
+  themeColor: 'white',
+};
+
 export const metadata = {
   metadataBase: new URL('https://koellabs.com'),
   title: 'Koel Labs',
