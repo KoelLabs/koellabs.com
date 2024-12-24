@@ -43,7 +43,7 @@ export default function Contact() {
       </div>
 
       <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
-        <div className="sm:p-4 border border-neutral-200 bg-white/50 backdrop-blur-sm sm:rounded-[36px]">
+        <div className="sm:p-4 sm:border sm:border-neutral-200 bg-white/50 backdrop-blur-sm sm:rounded-[36px]">
           <div className="relative isolate overflow-hidden bg-white/50 backdrop-blur-md border border-neutral-200 px-6 py-16 shadow-sm sm:rounded-3xl sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -419,10 +419,10 @@ export default function Contact() {
                 className="space-y-2"
               >
                 <div className="space-y-2  text-left mt-4">
-                  <Label htmlFor="input-09">Name</Label>
+                  <Label htmlFor="input-name">Name</Label>
                   <div className="relative">
                     <Input
-                      id="input-09"
+                      id="input-name"
                       required
                       autoComplete="name nickname given-name"
                       name="entry.358867278"
@@ -436,10 +436,10 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="space-y-2  text-left mt-3">
-                  <Label htmlFor="input-09">Email</Label>
+                  <Label htmlFor="input-email">Email</Label>
                   <div className="relative">
                     <Input
-                      id="input-09"
+                      id="input-email"
                       required
                       name="entry.65859822"
                       className="peer ps-9 rounded-xl"
@@ -452,10 +452,10 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="space-y-2  text-left mt-3">
-                  <Label htmlFor="input-09">Topic</Label>
+                  <Label htmlFor="input-topic">Topic</Label>
                   <div className="relative">
                     <Input
-                      id="input-09"
+                      id="input-topic"
                       required
                       name="entry.1735979938"
                       className="peer ps-9 rounded-xl"
@@ -468,9 +468,9 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="space-y-2 text-left mt-3">
-                  <Label htmlFor="textarea-16">Message</Label>
+                  <Label htmlFor="textarea-message">Message</Label>
                   <Textarea
-                    id="textarea-16"
+                    id="textarea-message"
                     name="entry.1856129796"
                     required
                     value={value}
