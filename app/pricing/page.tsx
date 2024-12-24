@@ -112,7 +112,7 @@ export default function Page() {
     //     <Header />
     //   </div>
     //   <div className="min-h-screen">
-    //     <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] opacity-10 top-48"></div>
+    //     <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
     //     <div className=" py-24 sm:py-32 z-[1] relative">
     //       <div className="mx-auto max-w-7xl px-6 lg:px-8">
     //         <div className="mx-auto max-w-4xl text-center">

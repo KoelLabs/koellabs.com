@@ -9,7 +9,7 @@ import HeroVideoDialog from '@/components/ui/magicui/hero-video-dialog';
 export default function Hero() {
   return (
     <div className="relative">
-      <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] opacity-10 top-48"></div>
+      <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
       <div className="mx-auto md:px-6 pt-0 lg:px-8 py-32 relative">
         <div className="mx-auto p-4 max-w-3xl py-32">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>

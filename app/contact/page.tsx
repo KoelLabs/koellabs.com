@@ -24,7 +24,7 @@ export default function Contact() {
       <div className="z-[2] sticky top-0 mx-auto w-full">
         <Header />
       </div>
-      <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] opacity-10 top-48"></div>
+      <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
       <div
         className={`mx-auto absolute top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[-1]`}
       >

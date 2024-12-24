@@ -7,7 +7,7 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
   const { toast } = useToast();
   return (
     <div id="join-the-waitlist" className={`relative`}>
-      <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] opacity-10 top-48"></div>
+      <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
       <div
         className={`mx-auto absolute top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[-1] ${hideBg ? 'hidden' : ''}`}
       >
@@ -27,7 +27,7 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
 
       <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
         <div className="sm:p-4 border border-neutral-200 bg-white/50 backdrop-blur-sm sm:rounded-[36px]">
-          <div className="relative isolate overflow-hidden bg-white/50 backdrop-blur-md border border-neutral-200 px-6 py-16 shadow-sm sm:rounded-3xl sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+          <div className="relative isolate overflow-hidden bg-white/50 border border-neutral-200 backdrop-blur-md px-6 py-16 shadow-sm sm:rounded-3xl sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="415"

@@ -82,7 +82,7 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className="bg-white/50 backdrop-blur-md border border-neutral-200">
+    <footer className="bg-white/50 border backdrop-blur-md border-neutral-200">
       <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <a href="/" className="text-2xl font-semibold  tracking-[-0.04em] h-fit w-fit">
