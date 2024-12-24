@@ -43,5 +43,15 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/((?!_next|api|.*\\.).*)'],
+  matcher: [
+    /*
+     * Match all request paths except for:
+     * - .swa (Azure Static Web Apps)
+     * - _next (Next.js internal paths)
+     * - api (API routes)
+     * - paths with file extensions (e.g., .css, .js, .png, etc.)
+     */
+    '/((?!_next|api|.*\\.|.swa).*)',
+    '/',
+  ],
 };

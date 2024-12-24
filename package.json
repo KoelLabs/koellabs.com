@@ -63,7 +63,7 @@
   "private": true,
   "proxy": "http://127.0.0.1:8080",
   "scripts": {
-    "build": "next build",
+    "build": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
     "dev": "next dev",
     "docker": ". ./scripts/docker-run-dev.sh",
     "format": "(fixpack || true) && (eslint . --fix || true) && prettier --write .",

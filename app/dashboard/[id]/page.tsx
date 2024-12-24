@@ -19,7 +19,7 @@ import Microphone from '../microphone';
 import VideoPlayer from '../videoPlayer';
 import { FeedbackGiver } from '@/components/FeedbackGiver';
 import { useMediaRemote } from '@vidstack/react';
-import { type MediaPlayerInstance } from '@vidstack/react';
+import { type MediaRemoteControl } from '@vidstack/react';
 
 import {
   Dialog,
@@ -75,7 +75,7 @@ export default function Page() {
   const feedbackGiverRef = useRef<any>(null);
   const videoPlayerRef = useRef(null);
   const remote = useMediaRemote();
-  const ref = useRef<MediaPlayerInstance>(remote);
+  const ref = useRef<MediaRemoteControl>(remote);
 
   // diagrams
   const [sideBySideFeedback, setSideBySideFeedback] = useState<SideBySideFeedback>([]);
@@ -104,21 +104,29 @@ export default function Page() {
           start: 2,
           end: 9,
           thumbnail: 'd1.png',
+          target: '',
+          target_by_word: [],
         },
         {
           start: 143,
           end: 153,
           thumbnail: 'd2.png',
+          target: '',
+          target_by_word: [],
         },
         {
           start: 200,
           end: 210,
           thumbnail: 'd3.png',
+          target: '',
+          target_by_word: [],
         },
         {
           start: 250,
           end: 262,
           thumbnail: 'd4.png',
+          target: '',
+          target_by_word: [],
         },
       ],
       completedSections: 0,
@@ -216,21 +224,29 @@ export default function Page() {
           start: 5.5,
           end: 9,
           thumbnail: 'd1.png',
+          target: '',
+          target_by_word: [],
         },
         {
           start: 23.2,
           end: 25,
           thumbnail: 'd2.png',
+          target: '',
+          target_by_word: [],
         },
         {
           start: 60,
           end: 66,
           thumbnail: 'd3.png',
+          target: '',
+          target_by_word: [],
         },
         {
           start: 106,
           end: 108,
           thumbnail: 'd4.png',
+          target: '',
+          target_by_word: [],
         },
       ],
       completedSections: 0,
@@ -472,8 +488,8 @@ export default function Page() {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  const getBadgeColor = (difficulty: string) => {
-    switch (difficulty.toLowerCase()) {
+  const getBadgeColor = (difficulty: string | undefined) => {
+    switch (difficulty?.toLowerCase()) {
       case 'hard':
         return 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200 border border-red-200 dark:border-red-900';
       case 'medium':
@@ -500,7 +516,6 @@ export default function Page() {
       <div className="flex flex-col lg:flex-row w-full h-full gap-2">
         <div className="w-full lg:flex-[4] bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700 flex">
           <VideoPlayer
-            ref={ref}
             src={currentVideo?.video}
             title={currentVideo?.name}
             poster={currentVideo?.thumbnail}
@@ -634,7 +649,7 @@ export default function Page() {
                 className={`${getBadgeColor(currentVideo?.badge)} px-2.5 py-1 text-xs font-medium rounded-md`}
               >
                 <div
-                  dangerouslySetInnerHTML={{ __html: currentVideo?.dialectIcon }}
+                  dangerouslySetInnerHTML={{ __html: currentVideo?.dialectIcon ?? '' }}
                   className="mr-1"
                 />
                 {currentVideo?.badge}
@@ -689,7 +704,7 @@ export default function Page() {
           </div>
           <div className="m-3">
             {isInPracticeSection() &&
-              currentVideo?.practicableSections[getCurrentSection()]?.target_by_word.map(
+              currentVideo?.practicableSections[getCurrentSection()!]?.target_by_word.map(
                 (word, index) => {
                   return (
                     <Dialog key={index}>
@@ -914,7 +929,7 @@ export default function Page() {
                 <div
                   className="w-full border px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 border-[#FECACA] bg-[#FEE2E2] text-[#991B1B] dark:bg-[#451A1A] dark:text-[#FECACA] cursor-pointer"
                   onClick={() => {
-                    StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()]);
+                    StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()!]);
                   }}
                 >
                   <PauseIcon className="mr-2 size-4 rounded-xl" fill="currentColor" />
@@ -928,7 +943,7 @@ export default function Page() {
                       : 'text-neutral-400 dark:text-neutral-600 bg-neutral-100 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700 cursor-not-allowed'
                   }`}
                   onClick={() => {
-                    StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()]);
+                    StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()!]);
                   }}
                 >
                   <PlayIcon className="mr-2 size-4 rounded-xl" fill="currentColor" />

@@ -1,7 +1,7 @@
 import 'server-only';
 
 // firebase admin SDK to verify login tokens
-import type { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
+import { type DecodedIdToken } from 'firebase-admin/auth';
 import * as admin from 'firebase-admin';
 try {
   admin.app();
@@ -64,7 +64,9 @@ export async function getAndSetVerifiedUser(token) {
   const decodedUser = {
     id: decodedToken.uid,
     name: decodedToken.name ?? decodedToken.email?.split('@')[0],
-    email: decodedToken.email_verified ? decodedToken.email : 'Unverified: ' + decodedToken.email,
+    email: decodedToken.email_verified
+      ? (decodedToken.email as string)
+      : 'Unverified: ' + decodedToken.email,
   };
 
   // upsert and get the user info in the database
