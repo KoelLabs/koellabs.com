@@ -149,7 +149,7 @@ export default function Hero() {
             <HeroVideoDialog
               className="rounded-[500px]"
               animationStyle="top-in-bottom-out"
-              videoSrc="https://www.youtube.com/watch?v=BJS4_VUs7nQ"
+              videoSrc="https://www.youtube.com/watch?v=oWEe9op0bb0"
               thumbnailSrc="/images/demoDayKoel.png"
               thumbnailAlt="Hero Video"
             />
