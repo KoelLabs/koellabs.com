@@ -55,7 +55,7 @@ export default function About() {
           <div className="lg:w-[1px] h-full bg-neutral-200 drops2"></div>
           <div className="h-full"></div>
           <div className="w-[1px] h-full bg-neutral-200 drops3"></div>
-          <div className="w-[1px] h-full bg-neutral-200 drops3"></div>
+          <div className="w-[1px] h-full bg-neutral-200 drops4"></div>
           <div className="h-full"></div>
           <div className="h-full"></div>
         </div>
@@ -93,7 +93,7 @@ export default function About() {
                 <img
                   alt="A photo of the Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the bay bridge in San Francisco."
                   src="/images/aboutShot.jpg"
-                  className=" aspect-[6/5] w-full md:max-w-lg rounded-2xl object-cover object-right lg:max-w-none xl:row-span-2 xl:row-end-2 border border-neutral-300"
+                  className=" aspect-[6/5] scale w-full md:max-w-lg rounded-2xl object-cover object-right lg:max-w-none xl:row-span-2 xl:row-end-2 border border-neutral-300"
                 />
               </div>
             </div>
