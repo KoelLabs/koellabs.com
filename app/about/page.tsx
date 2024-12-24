@@ -56,7 +56,7 @@ export default function About() {
           <div className="h-full"></div>
           <div className="w-[1px] h-full bg-neutral-200 drops3"></div>
           <div className="w-[1px] h-full bg-neutral-200 drops4"></div>
-          <div className="h-full"></div>
+          <div className="h-full w-[15px]"></div>
           <div className="h-full"></div>
         </div>
         <div className="">
@@ -71,8 +71,8 @@ export default function About() {
               </h1>
               <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
                 <p className="text-pretty text-lg font-medium text-neutral-600">
-                  Current methods for pronunciation learning are often outdated, lack accessibility,
-                  and are ultimately boring. Large classrooms and most language apps fail to provide
+                  Current methods for pronunciation learning are outdated, lack accessibility, and
+                  are ultimately boring. Large classrooms and most language apps fail to provide
                   personalized feedback, leaving already struggling learners to self-evaluate, which
                   is ineffective.
                 </p>
@@ -100,14 +100,15 @@ export default function About() {
           </div>
           <div className="bg-white/50 backdrop-blur-md border border-neutral-300/50">
             <div className="mx-auto max-w-7xl px-6 lg:px-8 py-36">
-              <div className="mx-auto max-w-2xl lg:mx-0">
+              <div className="mx-auto max-w-6xl lg:mx-0">
                 <p className="text-lg font-semibold text-sky-600 mb-2">The Team</p>
                 <h2 className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
                   Our Co-Founders
                 </h2>
                 <p className="mt-6 text-lg/8 text-gray-600">
-                  We are three students who are immigrants or children of immigrants. All three of
-                  us have experienced learning languages and pronunciation firsthand.
+                  Koel Labs began with three students sharing a common vision. As immigrants and
+                  children of immigrants, the experience of language barriers shaped our
+                  understanding of how pronunciation challenges impact confidence and opportunities.
                 </p>
               </div>
               <ul
@@ -147,6 +148,220 @@ export default function About() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+          <div className="overflow-hidden bg-white/50 backdrop-blur-md border border-neutral-300/50 mt-24 py-24 sm:py-32">
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+              <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+                <div className="lg:ml-auto lg:pl-4 lg:pt-4">
+                  <div className="lg:max-w-2xl">
+                    <p className="text-lg font-semibold text-sky-600 mb-2">
+                      Research and Collaboration
+                    </p>
+                    <h2 className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                      Our Way Forward
+                    </h2>
+                    <p className="mt-6 text-lg/8 text-gray-600">
+                      Driven by a commitment to collaborative science, we advance open-source
+                      research in language technologies while building practical, engaging
+                      solutions. This dedication stems from a core belief: transformative innovation
+                      builds upon collective knowledge.
+                    </p>
+
+                    <p className="mt-6 text-lg/8 text-gray-600">
+                      Through open-source contributions, our organization accelerates progress in
+                      linguistic technology, shaping a future where language learning knows no
+                      bounds.
+                    </p>
+
+                    <p className="mt-6 text-lg/8 text-gray-600">
+                      We work with linguists, natural-language processing researchers, and research
+                      labs worldwide. If you're interested in our work, please contact us to explore
+                      collaboration opportunities!
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start justify-end lg:order-first mr-8">
+                  <div className="w-full relative h-full bg-white/50 border border-neutral-200/50 rounded-3xl p-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="415"
+                      height="394"
+                      fill="none"
+                      className="absolute -right-[15%] lg:-top-[48%] scale-x-[-1] -z-10 size-[64rem] opacity-100 [mask-image:radial-gradient(closest-side,white,transparent)]"
+                      viewBox="0 0 415 394"
+                    >
+                      <circle
+                        cx="-17.089"
+                        cy="210.388"
+                        r="271.149"
+                        fill="url(#paint0_radial_2207_218)"
+                        fillOpacity="0.12"
+                        transform="rotate(-28.073 -17.09 210.388)"
+                      ></circle>
+                      <circle
+                        cx="-17.089"
+                        cy="210.388"
+                        r="270.649"
+                        stroke="#0284C7"
+                        strokeOpacity="0.1"
+                        transform="rotate(-28.073 -17.09 210.388)"
+                      ></circle>
+                      <ellipse
+                        cx="-16.646"
+                        cy="210.15"
+                        fill="url(#paint1_radial_2207_218)"
+                        fillOpacity="0.12"
+                        rx="319"
+                        ry="318.5"
+                        transform="rotate(-28.073 -16.646 210.15)"
+                      ></ellipse>
+                      <path
+                        stroke="#0284C7"
+                        strokeOpacity="0.1"
+                        d="M264.382 60.265c82.649 154.963 23.83 347.692-131.378 430.472s-348.029 24.261-430.678-130.702-23.83-347.692 131.378-430.472c155.209-82.78 348.029-24.261 430.678 130.702Z"
+                      ></path>
+                      <circle
+                        cx="-17.089"
+                        cy="210.387"
+                        r="221.872"
+                        fill="url(#paint2_radial_2207_218)"
+                        fillOpacity="0.12"
+                        transform="rotate(-28.073 -17.09 210.387)"
+                      ></circle>
+                      <circle
+                        cx="-17.089"
+                        cy="210.387"
+                        r="221.372"
+                        stroke="#0284C7"
+                        strokeOpacity="0.1"
+                        transform="rotate(-28.073 -17.09 210.387)"
+                      ></circle>
+                      <circle
+                        cx="-17.087"
+                        cy="210.385"
+                        r="164.5"
+                        fill="url(#paint3_radial_2207_218)"
+                        fillOpacity="0.12"
+                        transform="rotate(-28.073 -17.087 210.385)"
+                      ></circle>
+                      <circle
+                        cx="-17.087"
+                        cy="210.385"
+                        r="164"
+                        stroke="#0284C7"
+                        strokeOpacity="0.1"
+                        transform="rotate(-28.073 -17.087 210.385)"
+                      ></circle>
+                      <circle
+                        cx="-17.088"
+                        cy="210.387"
+                        r="104.5"
+                        fill="url(#paint4_radial_2207_218)"
+                        fillOpacity="0.12"
+                        transform="rotate(-28.073 -17.088 210.387)"
+                      ></circle>
+                      <circle
+                        cx="-17.088"
+                        cy="210.387"
+                        r="104"
+                        stroke="#0284C7"
+                        strokeOpacity="0.1"
+                        transform="rotate(-28.073 -17.088 210.387)"
+                      ></circle>
+                      <circle
+                        cx="-17.087"
+                        cy="210.385"
+                        r="41.5"
+                        fill="url(#paint5_radial_2207_218)"
+                        fillOpacity="0.12"
+                        transform="rotate(-28.073 -17.087 210.385)"
+                      ></circle>
+                      <circle
+                        cx="-17.087"
+                        cy="210.385"
+                        r="41"
+                        stroke="#0284C7"
+                        strokeOpacity="0.1"
+                        transform="rotate(-28.073 -17.087 210.385)"
+                      ></circle>
+                      <defs>
+                        <radialGradient
+                          id="paint0_radial_2207_218"
+                          cx="0"
+                          cy="0"
+                          r="1"
+                          gradientTransform="rotate(90 -113.739 96.65)scale(271.149)"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stopColor="#0284C7"></stop>
+                          <stop offset="1" stopColor="#0284C7"></stop>
+                        </radialGradient>
+                        <radialGradient
+                          id="paint1_radial_2207_218"
+                          cx="0"
+                          cy="0"
+                          r="1"
+                          gradientTransform="matrix(0 318.5 -319 0 -16.646 210.15)"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stopColor="#0284C7"></stop>
+                          <stop offset="1" stopColor="#0284C7"></stop>
+                        </radialGradient>
+                        <radialGradient
+                          id="paint2_radial_2207_218"
+                          cx="0"
+                          cy="0"
+                          r="1"
+                          gradientTransform="rotate(90 -113.738 96.649)scale(221.872)"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stopColor="#0284C7"></stop>
+                          <stop offset="1" stopColor="#0284C7"></stop>
+                        </radialGradient>
+                        <radialGradient
+                          id="paint3_radial_2207_218"
+                          cx="0"
+                          cy="0"
+                          r="1"
+                          gradientTransform="rotate(90 -113.737 96.65)scale(164.5)"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stopColor="#0284C7"></stop>
+                          <stop offset="1" stopColor="#0284C7"></stop>
+                        </radialGradient>
+                        <radialGradient
+                          id="paint4_radial_2207_218"
+                          cx="0"
+                          cy="0"
+                          r="1"
+                          gradientTransform="rotate(90 -113.737 96.65)scale(104.5)"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stopColor="#0284C7"></stop>
+                          <stop offset="1" stopColor="#0284C7"></stop>
+                        </radialGradient>
+                        <radialGradient
+                          id="paint5_radial_2207_218"
+                          cx="0"
+                          cy="0"
+                          r="1"
+                          gradientTransform="rotate(90 -113.736 96.649)scale(41.5)"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stopColor="#0284C7"></stop>
+                          <stop offset="1" stopColor="#0284C7"></stop>
+                        </radialGradient>
+                      </defs>
+                    </svg>
+                    <img
+                      alt="A photo of the Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the bay bridge in San Francisco."
+                      src="/images/researchDriven.png"
+                      className="w-full h-full rounded-2xl object-cover object-right lg:max-w-none xl:row-span-2 xl:row-end-2 border border-neutral-200"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
