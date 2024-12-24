@@ -60,10 +60,10 @@ export default function About() {
           <div className="h-full"></div>
         </div>
         <div className="">
-          <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8">
-            <div className="mx-auto max-w-2xl lg:mx-0 mt-24 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
+          <div className="mx-auto max-w-7xl px-6 py-16 pt-0 sm:py-40 lg:px-8">
+            <div className="mx-auto max-w-2xl lg:mx-0 mt-0 sm:mt-24 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
               {/* <h1 class="max-w-2xl text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl lg:col-span-2 xl:col-auto">We’re changing the way people connect</h1> */}
-              <h1 className="max-w-2xl xss:text-3xl text-balance text-2xl font-semibold tracking-tighter text-black sm:text-6xl lg:col-span-2 xl:col-auto">
+              <h1 className="max-w-2xl xss:text-3xl pt-12 text-balance text-2xl font-semibold tracking-tighter text-black sm:text-6xl lg:col-span-2 xl:col-auto">
                 We Want to Change{' '}
                 <span className="bg-clip-text text-transparent bg-gradient-to-br from-sky-600 to-blue-950">
                   Pronunciation Learning
@@ -72,9 +72,10 @@ export default function About() {
               <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
                 <p className="text-pretty text-lg font-medium text-neutral-600">
                   Current methods for pronunciation learning are outdated, lack accessibility, and
-                  are ultimately boring. Large classrooms and most language apps fail to provide
-                  personalized feedback, leaving already struggling learners to self-evaluate, which
-                  is ineffective.
+                  are ultimately boring. <br className="block sm:hidden" />{' '}
+                  <br className="block sm:hidden" />
+                  Large classrooms and most language apps fail to provide personalized feedback,
+                  leaving already struggling learners to self-evaluate, which is ineffective.
                 </p>
                 <p className="text-pretty text-lg font-medium text-neutral-600 mt-4">
                   Language learners, like us and our families, desperately need a change—and we aim
@@ -181,7 +182,7 @@ export default function About() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start justify-end lg:order-first mr-8">
+                <div className="flex items-start justify-end lg:order-first sm:mr-8 mr-0">
                   <div className="w-full relative h-full bg-white/50 border border-neutral-200/50 rounded-3xl p-4">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
