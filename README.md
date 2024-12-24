@@ -8,6 +8,7 @@
 
 ![Zizmor](https://github.com/KoelLabs/webapp/actions/workflows/zizmor.yml/badge.svg)
 ![Gitleaks Secret Scanning](https://github.com/KoelLabs/webapp/actions/workflows/gitleaks.yml/badge.svg)
+[![Automatic Deploys](https://github.com/KoelLabs/webapp/actions/workflows/azure-static-web-apps-salmon-sky-0a6b6c10f.yml/badge.svg)](koellabs.com)
 
 Contains the website for Koel Labs and the web interface for the pronunciation learning application.
 
