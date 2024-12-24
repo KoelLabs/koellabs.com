@@ -15,12 +15,10 @@ export default function Bento() {
         <div className="mx-auto w-full h-fit bg-neutral-50/20 backdrop-blur-md border-y border-neutral-200 relative overflow-hidden">
           <div className="bg-white/50 py-24 sm:py-32">
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
-              <h2 className="text-base/7 font-semibold text-sky-600 relative z-10">
-                What is this?
-              </h2>
-              <p className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10">
+              <p className="text-base/7 font-semibold text-sky-600 relative z-10">What is this?</p>
+              <h2 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10">
                 Your new favorite tool for pronunciation learning
-              </p>
+              </h2>
               <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
                 <div className="relative lg:col-span-3">
                   <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
