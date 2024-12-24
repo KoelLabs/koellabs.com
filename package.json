@@ -49,6 +49,7 @@
   "devDependencies": {
     "@types/node": "22.5.2",
     "@types/react": "18.3.5",
+    "css-minimizer-webpack-plugin": "^7.0.0",
     "dotenv": "^16.4.5",
     "drizzle-kit": "^0.24.2",
     "eslint": "^8",

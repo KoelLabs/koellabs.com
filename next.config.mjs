@@ -1,4 +1,5 @@
 import path from 'path';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 const __dirname = new URL('.', import.meta.url).pathname;
 
@@ -10,6 +11,21 @@ const nextConfig = {
       ...config.resolve.alias,
       '@': path.resolve(__dirname, './'),
     };
+
+    config.optimization.minimizer = [
+      config.optimization.minimizer[0],
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            'default',
+            {
+              colormin: false,
+            },
+          ],
+        },
+      }),
+    ];
+
     return config;
   },
 };
