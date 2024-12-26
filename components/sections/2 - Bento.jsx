@@ -68,7 +68,7 @@ export default function Bento() {
                     <img
                       alt=""
                       src="/images/bentoFeedback.png"
-                      className="h-80 object-cover object-left"
+                      className="h-80 object-cover object-center"
                     />
                     <div className="p-10 pt-4">
                       <h3 className="text-sm/4 font-semibold text-sky-600">Speed</h3>
