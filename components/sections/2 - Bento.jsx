@@ -12,19 +12,28 @@ export default function Bento() {
       <div className="mx-auto relative">
         <div className="mx-auto absolute h-full flex justify-between z-[-1]"></div>
 
-        <div className="mx-auto w-full h-fit bg-neutral-50/20 backdrop-blur-md border-y border-neutral-200 relative overflow-hidden">
+        <section
+          aria-labelledby="features-heading"
+          className="mx-auto w-full h-fit bg-neutral-50/20 backdrop-blur-md border-y border-neutral-200 relative overflow-hidden"
+        >
           <div className="bg-white/50 py-24 sm:py-32">
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
               <p className="text-base/7 font-semibold text-sky-600 relative z-10">What is this?</p>
-              <h2 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10">
+              <h2
+                id="features-heading"
+                className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
+              >
                 Your new favorite tool for pronunciation learning
               </h2>
-              <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
-                <div className="relative lg:col-span-3">
+              <ul
+                role="list"
+                className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2"
+              >
+                <li className="relative lg:col-span-3">
                   <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]">
+                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]">
                     <img
-                      alt=""
+                      alt="Screenshot showing the massive library of content available to practice with"
                       src="/images/bentoClips.png"
                       className="h-80 top-0 object-cover object-top"
                     />
@@ -38,14 +47,14 @@ export default function Bento() {
                         today with engaging scenes from iconic movies and shows.
                       </p>
                     </div>
-                  </div>
+                  </article>
                   <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
-                </div>
-                <div className="relative lg:col-span-3">
+                </li>
+                <li className="relative lg:col-span-3">
                   <div className="absolute inset-px rounded-lg bg-white lg:rounded-tr-[2rem]" />
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
+                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
                     <img
-                      alt=""
+                      alt="Screenshot showing detailed pronunciation feedback interface"
                       src="/images/bentoActionable.png"
                       className="h-80 object-cover object-left lg:object-top"
                     />
@@ -59,14 +68,14 @@ export default function Bento() {
                         impact, that gives you everything you need to start improving immediately.
                       </p>
                     </div>
-                  </div>
+                  </article>
                   <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-tr-[2rem]" />
-                </div>
-                <div className="relative lg:col-span-2">
+                </li>
+                <li className="relative lg:col-span-2">
                   <div className="absolute inset-px rounded-lg bg-white lg:rounded-bl-[2rem]" />
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]">
+                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]">
                     <img
-                      alt=""
+                      alt="Screenshot showing analysis interface"
                       src="/images/bentoFeedback.png"
                       className="h-80 object-cover object-center"
                     />
@@ -79,13 +88,17 @@ export default function Bento() {
                         Get the first layer of feedback almost immediately after speaking.
                       </p>
                     </div>
-                  </div>
+                  </article>
                   <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-bl-[2rem]" />
-                </div>
-                <div className="relative lg:col-span-2">
+                </li>
+                <li className="relative lg:col-span-2">
                   <div className="absolute inset-px rounded-lg bg-white" />
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
-                    <img alt="" src="/images/bentoComplex.png" className="h-80 object-cover" />
+                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
+                    <img
+                      alt="Screenshot showing deep practice mode"
+                      src="/images/bentoComplex.png"
+                      className="h-80 object-cover"
+                    />
                     <div className="p-10 pt-4">
                       <h3 className="text-sm/4 font-semibold text-sky-600">Dive in Deep</h3>
                       <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
@@ -96,13 +109,17 @@ export default function Bento() {
                         practical chunks.
                       </p>
                     </div>
-                  </div>
+                  </article>
                   <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5" />
-                </div>
-                <div className="relative lg:col-span-2">
+                </li>
+                <li className="relative lg:col-span-2">
                   <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]" />
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]">
-                    <img alt="" src="/images/bentoDialect.png" className="h-80 object-cover" />
+                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]">
+                    <img
+                      alt="An image of the worlds map to highlight the diversity of dialects"
+                      src="/images/bentoDialect.png"
+                      className="h-80 object-cover"
+                    />
                     <div className="p-10 pt-4">
                       <h3 className="text-sm/4 font-semibold text-sky-600">Dialect</h3>
                       <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
@@ -112,13 +129,13 @@ export default function Bento() {
                         Take control of your learning by choosing the dialect you want to practice.
                       </p>
                     </div>
-                  </div>
+                  </article>
                   <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]" />
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );

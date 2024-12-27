@@ -13,11 +13,13 @@ export default function Hero() {
       <div className="mx-auto md:px-6 pt-0 lg:px-8 py-32 relative">
         <div className="mx-auto p-4 max-w-3xl py-32">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
-          <div className="text-center relative">
+          <section aria-labelledby="hero-heading" className="text-center relative">
             <div className="flex flex-row justify-center items-center my-6">
               <p className="font-[400] text-md text-neutral-700">Backed by</p>
               <div className="h-6 bg-black w-6 rounded-md overflow-hidden ml-2 mr-1.5 p-0.5">
                 <svg
+                  aria-label="Mozilla Logo"
+                  role="img"
                   xmlns="http://www.w3.org/2000/svg"
                   x="0"
                   y="0"
@@ -36,15 +38,11 @@ export default function Hero() {
               </div>
               <p className="font-[400] text-md text-neutral-700">Mozilla</p>
             </div>
-            {/* <h1 className="text-4xl font-bold tracking-[-0.04em] text-gray-900 sm:text-6xl">
-              A Novel Way to Quickly{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-br from-sky-600 to-blue-950">
-                {' '}
-                Master Pronunciation.
-              </span>
-            </h1> */}
 
-            <h1 className="text-2xl sm:text-4xl font-bold tracking-[-0.04em] sm:max-w-[500px] lg:max-w-[1400px] mx-auto text-pretty text-gray-900 lg:text-6xl overflow-visible">
+            <h1
+              id="hero-heading"
+              className="text-2xl sm:text-4xl font-bold tracking-[-0.04em] sm:max-w-[500px] lg:max-w-[1400px] mx-auto text-pretty text-gray-900 lg:text-6xl overflow-visible"
+            >
               Master Pronunciation with
               <span className="bg-clip-text text-transparent bg-gradient-to-br mr-1 from-sky-600 to-blue-950 overflow-visible py-1">
                 {' '}
@@ -52,6 +50,7 @@ export default function Hero() {
               </span>
             </h1>
             <svg
+              aria-hidden="true"
               className="absolute right-4 bottom-[126px] rotate-12 shimmer hidden lg:block"
               xmlns="http://www.w3.org/2000/svg"
               width="44"
@@ -108,25 +107,30 @@ export default function Hero() {
               </defs>
             </svg>
             <p className="mt-6 sm:text-lg leading-8 text-gray-600 max-w-xl mx-auto text-pretty">
-              {/* Our platform uses cutting-edge technology to help you improve your pronunciation in a
-              fun and engaging way via content that you already love. */}
               Practice, perfect, and pronounce like a native language speaker with fun, immersive
               movie and show clips at your fingertips.
             </p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4 w-full">
-              <Link href="#join-the-waitlist" className="w-full sm:w-auto">
+              <Link
+                href="#join-the-waitlist"
+                className="w-full sm:w-auto"
+                aria-label="Join the waitlist"
+              >
                 <Button className="w-full rounded-lg sm:w-40 bg-gradient-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
-                  {/* Start Learning for Free w-44 */}
                   Join the Waitlist
                 </Button>
               </Link>
-              <Link href="#learn-more" className="w-full sm:w-auto">
+              <Link
+                href="#learn-more"
+                className="w-full sm:w-auto"
+                aria-label="Learn more about Koel Labs"
+              >
                 <Button className="w-full sm:w-32" variant="outline">
                   Learn More
                 </Button>
               </Link>
             </div>
-          </div>
+          </section>
         </div>
 
         <div className="mx-auto absolute opacity-25 sm:opacity-100 top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[-1]">
