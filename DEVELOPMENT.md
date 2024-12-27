@@ -6,7 +6,7 @@
 
 0. `git clone https://github.com/KoelLabs/webapp.git`
 1. Install Docker and Docker Compose
-   - [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/) or `brew cask install docker` with [Homebrew](https://brew.sh/)
+   - [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/) or `brew install --cask docker` with [Homebrew](https://brew.sh/)
      - If it repeatedly complains about the daemon not running, make sure Docker Desktop is running and add `export DOCKER_HOST=unix:///Users/$USER/Library/Containers/com.docker.docker/Data/docker.raw.sock` to your shell profile (e.g. `~/.zshrc`)
    - [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/) or `choco install docker-desktop` with [Chocolatey](https://chocolatey.org/)
    - [Docker Engine for Linux](https://docs.docker.com/engine/install/) or `sudo apt install docker.io` with APT on Ubuntu
