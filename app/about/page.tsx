@@ -29,6 +29,12 @@ const people = [
   },
 ];
 
+export const metadata = {
+  title: 'About Us | Meet the Team Behind Koel Labs',
+  description:
+    'Learn about the founders and mission of Koel Labs. We are dedicated to revolutionizing pronunciation learning through innovative AI technology and research collaboration.',
+};
+
 export default function About() {
   return (
     <div className="relative">
@@ -36,7 +42,7 @@ export default function About() {
         <Header />
       </div>
       <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
-      <div className="mx-auto pt-0  py-32 relative">
+      <main className="mx-auto pt-0 py-32 relative">
         <div className="mx-auto absolute opacity-25 sm:opacity-100 top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[-1]">
           <div className="h-full"></div>
           <div className="h-full"></div>
@@ -60,10 +66,15 @@ export default function About() {
           <div className="h-full"></div>
         </div>
         <div className="">
-          <div className="mx-auto max-w-7xl px-6 py-16 pt-0 sm:py-40 lg:px-8">
+          <section
+            aria-labelledby="mission-heading"
+            className="mx-auto max-w-7xl px-6 py-16 pt-0 sm:py-40 lg:px-8"
+          >
             <div className="mx-auto max-w-2xl lg:mx-0 mt-0 sm:mt-24 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
-              {/* <h1 class="max-w-2xl text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl lg:col-span-2 xl:col-auto">We’re changing the way people connect</h1> */}
-              <h1 className="max-w-2xl xss:text-3xl pt-12 text-balance text-2xl font-semibold tracking-tighter text-black sm:text-6xl lg:col-span-2 xl:col-auto">
+              <h1
+                id="mission-heading"
+                className="max-w-2xl xss:text-3xl pt-12 text-balance text-2xl font-semibold tracking-tighter text-black sm:text-6xl lg:col-span-2 xl:col-auto"
+              >
                 We Want to Change{' '}
                 <span className="bg-clip-text text-transparent bg-gradient-to-br from-sky-600 to-blue-950">
                   Pronunciation Learning
@@ -92,18 +103,24 @@ export default function About() {
               </div>
               <div className="mt-10 aspect-[6/5] w-full md:max-w-lg rounded-[32px] object-cover sm:mt-16 lg:mt-8 xl:-mt-8 lg:max-w-none xl:row-span-2 xl:row-end-2 p-4 bg-white/75 backdrop-blur-md border border-neutral-300/50">
                 <img
-                  alt="A photo of the Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the bay bridge in San Francisco."
+                  alt="The Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the San Francisco Bay Bridge"
                   src="/images/aboutShot.jpg"
-                  className=" aspect-[6/5] scale w-full md:max-w-lg rounded-2xl object-cover object-right lg:max-w-none xl:row-span-2 xl:row-end-2 border border-neutral-300"
+                  className="aspect-[6/5] scale w-full md:max-w-lg rounded-2xl object-cover object-right lg:max-w-none xl:row-span-2 xl:row-end-2 border border-neutral-300"
                 />
               </div>
             </div>
-          </div>
-          <div className="bg-white/50 backdrop-blur-md border border-neutral-300/50">
+          </section>
+          <section
+            aria-labelledby="team-heading"
+            className="bg-white/50 backdrop-blur-md border border-neutral-300/50"
+          >
             <div className="mx-auto max-w-7xl px-6 lg:px-8 py-36">
               <div className="mx-auto max-w-6xl lg:mx-0">
                 <p className="text-lg font-semibold text-sky-600 mb-2">The Team</p>
-                <h2 className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                <h2
+                  id="team-heading"
+                  className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl"
+                >
                   Our Co-Founders
                 </h2>
                 <p className="mt-6 text-lg/8 text-gray-600">
@@ -119,7 +136,7 @@ export default function About() {
                 {people.map(person => (
                   <li key={person.name}>
                     <img
-                      alt={`A photo of ${person.name}, ${person.role} at Koel Labs`}
+                      alt={`Photo of ${person.name}, ${person.role} at Koel Labs`}
                       src={person.imageUrl}
                       className="aspect-square w-full rounded-2xl object-cover"
                     />
@@ -129,7 +146,13 @@ export default function About() {
                     <p className="text-base/7 text-neutral-500">{person.role}</p>
                     <ul role="list" className="mt-6 flex gap-x-6">
                       <li>
-                        <a href={person.linkedinUrl} className="text-gray-400 hover:text-gray-500">
+                        <a
+                          href={person.linkedinUrl}
+                          className="text-gray-400 hover:text-gray-500"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${person.name}'s LinkedIn profile`}
+                        >
                           <span className="sr-only">LinkedIn</span>
                           <svg
                             fill="currentColor"
@@ -150,8 +173,11 @@ export default function About() {
                 ))}
               </ul>
             </div>
-          </div>
-          <div className="overflow-hidden bg-white/50 backdrop-blur-md border border-neutral-300/50 mt-24 py-24 sm:py-32">
+          </section>
+          <section
+            aria-labelledby="research-heading"
+            className="overflow-hidden bg-white/50 backdrop-blur-md border border-neutral-300/50 mt-24 py-24 sm:py-32"
+          >
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
                 <div className="lg:ml-auto lg:pl-4 lg:pt-4">
@@ -159,7 +185,10 @@ export default function About() {
                     <p className="text-lg font-semibold text-sky-600 mb-2">
                       Research and Collaboration
                     </p>
-                    <h2 className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                    <h2
+                      id="research-heading"
+                      className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl"
+                    >
                       Our Way Forward
                     </h2>
                     <p className="mt-6 text-lg/8 text-gray-600">
@@ -185,6 +214,7 @@ export default function About() {
                 <div className="flex items-start justify-end lg:order-first sm:mr-8 mr-0">
                   <div className="w-full relative h-full bg-white/50 border border-neutral-200/50 rounded-3xl p-4">
                     <svg
+                      aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       width="415"
                       height="394"
@@ -356,7 +386,7 @@ export default function About() {
                       </defs>
                     </svg>
                     <img
-                      alt="A photo of the Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the bay bridge in San Francisco."
+                      alt="A visualization representing Koel Labs' research-driven approach to language learning technology"
                       src="/images/researchDriven.png"
                       className="w-full h-full rounded-2xl object-cover object-right lg:max-w-none xl:row-span-2 xl:row-end-2 border border-neutral-200"
                     />
@@ -364,10 +394,10 @@ export default function About() {
                 </div>
               </div>
             </div>
-          </div>
+          </section>
+          <CTA hideBg />
         </div>
-        <CTA hideBg />
-      </div>
+      </main>
       <Footer />
     </div>
   );
