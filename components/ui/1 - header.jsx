@@ -390,21 +390,17 @@ export default function Header() {
               <div className="space-y-2 py-6">
                 <ul className="flex flex-col gap-y-2">
                   {links.map(({ href, label }) => (
-                    <li
-                      className="w-full p-2 rounded-lg hover:bg-neutral-100"
+                    <a
+                      className={
+                        firstPath.toLowerCase() === href.toLowerCase()
+                          ? 'text-black'
+                          : 'text-neutral-500 hover:text-neutral-700'
+                      }
+                      href={href}
                       key={`${href}${label}`}
                     >
-                      <a
-                        className={
-                          firstPath.toLowerCase() === href.toLowerCase()
-                            ? 'text-black'
-                            : 'text-neutral-500 hover:text-neutral-700'
-                        }
-                        href={href}
-                      >
-                        {label}
-                      </a>
-                    </li>
+                      <li className="w-full p-2 rounded-lg hover:bg-neutral-100">{label}</li>
+                    </a>
                   ))}
                 </ul>
               </div>
