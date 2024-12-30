@@ -116,6 +116,7 @@ export default function RootLayout({ children }) {
                     "https://github.com/digitalRM",
                     "https://www.linkedin.com/in/ruslan-muk/", 
                     "https://www.instagram.com/ruslan_mk11/",
+                    "https://www.ruslan.in",
                     "https://builders.mozilla.org/profile/ruslan-mukhamedvaleev/"
                   ]
                 }
