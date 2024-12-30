@@ -9,7 +9,7 @@ import Image from 'next/image';
 export const metadata: Metadata = {
   title: 'A Deep Dive into Phonemic Transcription Metrics',
   slug: 'phonemic-transcription-metrics',
-  date: '2024-12-23',
+  date: '2024-12-30',
   published: true,
   image: '/images/blogTemplate.png',
   summary:
