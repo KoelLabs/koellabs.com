@@ -112,7 +112,12 @@ export default function RootLayout({ children }) {
                   "name": "Ruslan Mukhamedvaleev",
                   "jobTitle": "Chief Product Officer",
                   "image": "https://koellabs.com/images/ruslanShot.png",
-                  "sameAs": "https://www.linkedin.com/in/ruslan-muk/"
+                  "sameAs": [
+                    "https://github.com/digitalRM",
+                    "https://www.linkedin.com/in/ruslan-muk/", 
+                    "https://www.instagram.com/ruslan_mk11/",
+                    "https://builders.mozilla.org/profile/ruslan-mukhamedvaleev/"
+                  ]
                 }
               ]
             }
