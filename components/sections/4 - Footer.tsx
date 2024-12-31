@@ -8,14 +8,14 @@ const navigation = {
     { name: 'Contact', href: '/contact' },
   ],
   legal: [
-    { name: 'Terms of service', href: 'https://github.com/koellabs' },
-    { name: 'Privacy policy', href: 'https://github.com/koellabs' },
-    { name: 'License', href: 'https://github.com/koellabs' },
+    { name: 'Terms of service', href: 'https://github.com/KoelLabs/.github/blob/main/TERMS.md' },
+    { name: 'Privacy policy', href: 'https://github.com/KoelLabs/.github/blob/main/PRIVACY.md' },
+    { name: 'License', href: 'https://github.com/KoelLabs#open-source-licensing' },
   ],
   social: [
     {
       name: 'LinkedIn',
-      href: 'https://www.linkedin.com/company/koellabs/',
+      href: 'https://www.linkedin.com/company/koel-labs/',
       icon: props => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <g clipPath="url(#clip0_2232_245)">
