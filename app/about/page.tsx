@@ -41,9 +41,9 @@ export default function About() {
       <div className="z-[2] sticky top-0 mx-auto w-full">
         <Header />
       </div>
-      <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
+      <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-[2] blur-[64px] transform-gpu opacity-10 top-48"></div>
       <main className="mx-auto pt-0 py-32 relative">
-        <div className="mx-auto absolute opacity-25 sm:opacity-100 top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[-1]">
+        <div className="mx-auto absolute opacity-25 sm:opacity-100 top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[0]">
           <div className="h-full"></div>
           <div className="h-full"></div>
           <div className="h-full"></div>
