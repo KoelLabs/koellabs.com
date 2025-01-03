@@ -334,7 +334,7 @@ export default function Footer() {
             ))}
           </div>
           <p className="mt-8 text-sm/6 text-neutral-600 md:order-1 md:mt-0">
-            &copy; 2024 Koel Labs. All rights reserved.
+            &copy; {new Date().getFullYear()} Koel Labs. All rights reserved.
           </p>
         </div>
         <div className="max-h-[224px] h-full w-full overflow-hidden bg-gradient-to-b relative">
