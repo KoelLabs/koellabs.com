@@ -358,7 +358,7 @@ export default function About() {
                     <img
                       alt="A photo of the Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the bay bridge in San Francisco."
                       src="/images/researchDrivenv2.png"
-                      className="w-full h-full rounded-2xl object-cover object-right lg:max-w-none xl:row-span-2 opacity-80 bg-white xl:row-end-2"
+                      className="w-full h-full rounded-[26px] object-cover object-right lg:max-w-none xl:row-span-2 opacity-80 bg-white xl:row-end-2"
                     />
                   </div>
                 </div>
