@@ -61,7 +61,7 @@ export default function About() {
         </div>
         <div className="">
           <div className="mx-auto max-w-7xl px-6 py-16 pt-0 sm:py-40 lg:px-8">
-            <div className="mx-auto max-w-2xl lg:mx-0 mt-0 sm:mt-24 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
+            <div className="mx-auto max-w-2xl lg:mx-0 mt-0 sm:mt-24 lg:my-12 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
               {/* <h1 class="max-w-2xl text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl lg:col-span-2 xl:col-auto">We’re changing the way people connect</h1> */}
               <h1 className="max-w-2xl xss:text-3xl pt-12 text-balance text-2xl font-semibold tracking-tighter text-black sm:text-6xl lg:col-span-2 xl:col-auto">
                 We Want to Change{' '}
