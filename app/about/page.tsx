@@ -183,7 +183,7 @@ export default function About() {
                   </div>
                 </div>
                 <div className="flex items-start justify-end lg:order-first sm:mr-8 mr-0">
-                  <div className="w-full relative h-full bg-white/50 border border-neutral-200/50 rounded-3xl p-4">
+                  <div className="w-full relative h-full bg-white/50 border border-neutral-200/50 rounded-[40px] p-4">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="415"
@@ -357,8 +357,8 @@ export default function About() {
                     </svg>
                     <img
                       alt="A photo of the Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the bay bridge in San Francisco."
-                      src="/images/researchDriven.png"
-                      className="w-full h-full rounded-2xl object-cover object-right lg:max-w-none xl:row-span-2 xl:row-end-2 border border-neutral-200"
+                      src="/images/researchDrivenv2.png"
+                      className="w-full h-full rounded-2xl object-cover object-right lg:max-w-none xl:row-span-2 opacity-80 bg-white xl:row-end-2"
                     />
                   </div>
                 </div>
