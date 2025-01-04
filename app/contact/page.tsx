@@ -424,6 +424,7 @@ export default function Contact() {
                     <Input
                       id="input-name"
                       required
+                      disabled
                       autoComplete="name nickname given-name"
                       name="entry.358867278"
                       className="peer ps-9 rounded-xl"
@@ -441,6 +442,7 @@ export default function Contact() {
                     <Input
                       id="input-email"
                       required
+                      disabled
                       name="entry.65859822"
                       className="peer ps-9 rounded-xl"
                       placeholder="Email"
@@ -457,6 +459,7 @@ export default function Contact() {
                     <Input
                       id="input-topic"
                       required
+                      disabled
                       name="entry.1735979938"
                       className="peer ps-9 rounded-xl"
                       placeholder="Topic"
@@ -474,6 +477,7 @@ export default function Contact() {
                     name="entry.1856129796"
                     required
                     value={value}
+                    disabled
                     maxLength={maxLength}
                     placeholder="Message"
                     onChange={e => {
@@ -493,10 +497,18 @@ export default function Contact() {
                 </div>
                 <Button
                   type="submit"
+                  disabled
                   className="mt-3 rounded-lg bg-gradient-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950 w-full"
                 >
                   Submit
                 </Button>
+                <p className="text-xs text-neutral-500 mt-2">
+                  This form is currently under maintenance. Please check back later, or contact us
+                  directly at{' '}
+                  <a className="text-sky-600 underline" href="mailto:info@koellabs.com">
+                    info@koellabs.com
+                  </a>
+                </p>
               </form>
             </div>
           </div>
