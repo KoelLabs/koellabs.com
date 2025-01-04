@@ -71,4 +71,4 @@ The Koel Labs Web Application was developed with contributions from the followin
 | eslint-config-next                  | perpetual      | MIT          | git+https://github.com/vercel/next.js.git                                      | n/a                                                                   |
 | eslint-config-prettier              | perpetual      | MIT          | git+https://github.com/prettier/eslint-config-prettier.git                     | Simon Lydell                                                          |
 | fixpack                             | perpetual      | MIT          | git://github.com/henrikjoreteg/fixpack.git                                     | Henrik Joreteg <henrik@andyet.net>                                    |
-| prettier                            | perpetual      | MIT          | git+https://github.com/prettier/prettier.git                                   | James Long                            
+| prettier                            | perpetual      | MIT          | git+https://github.com/prettier/prettier.git                                   | James Long                                                            |
