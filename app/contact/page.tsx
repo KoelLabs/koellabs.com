@@ -10,15 +10,171 @@ import { Textarea } from '@/components/ui/base/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { useCharacterLimit } from '@/lib/use-character-limit';
 import { ArrowRightIcon, AtSign, BookDashed, MailIcon, User } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
-export default function Contact() {
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+
+function ContactForm() {
   const { toast } = useToast();
 
   const maxLength = 500;
   const [value, setValue] = useState('');
   const { characterCount, handleChange, maxLength: limit } = useCharacterLimit({ maxLength });
 
+  // setup reCaptcha v3 (background score)
+  const { executeRecaptcha } = useGoogleReCaptcha();
+  // event handler for reCaptcha verification on form submission
+  const submitFormWithReCaptchaVerification = useCallback(
+    async (formData: FormData) => {
+      if (!executeRecaptcha) {
+        toast({
+          title: 'Error',
+          description:
+            'ReCAPTCHA not yet loaded. Cannot verify that you are a human, please wait a bit and try again. Double check you are not using a VPN or adblocker if the problem persists and, if all else fails, reach out via email.',
+          status: 'error',
+        });
+        return;
+      }
+
+      const token = await executeRecaptcha('contactFormSubmit');
+      const res = await fetch(
+        `/api/submitGoogleFormWithReCaptcha?formName=contact&token=${token}`,
+        {
+          method: 'POST',
+          body: formData,
+        },
+      );
+
+      if (res.ok) {
+        toast({
+          title: 'Submitted',
+          description: 'Thank you for contacting us!',
+        });
+        return true;
+      } else {
+        res.text().then(console.error);
+        toast({
+          title: 'Error',
+          description:
+            'Failed to verify your humanity. Make sure to disable VPNs and adblockers, double check you are not a robot, and email us if the issue persists.',
+          status: 'error',
+        });
+        return false;
+      }
+    },
+    [executeRecaptcha],
+  );
+
+  return (
+    <div className="mx-auto max-w-md text-center lg:flex-auto lg:py-32">
+      <p className="text-sm/4 font-semibold text-sky-600 mb-2">Contact Form</p>
+      <h2 className="text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl">
+        {/* Ready to start learning? */}
+        Let's get in touch
+      </h2>
+      <p className="text-lg/8 text-neutral-700 mt-4">
+        We're here to help you with any questions, concerns, or feedback you may have.
+      </p>
+      <form
+        method="POST"
+        onSubmit={e => {
+          e.preventDefault();
+          const target = e.currentTarget;
+          const formData = new FormData(target);
+          submitFormWithReCaptchaVerification(formData).then(success => {
+            if (success) {
+              setValue('');
+              target.reset();
+            }
+          });
+        }}
+        className="space-y-2"
+      >
+        <div className="space-y-2  text-left mt-4">
+          <Label htmlFor="input-name">Name</Label>
+          <div className="relative">
+            <Input
+              id="input-name"
+              required
+              autoComplete="name nickname given-name"
+              name="entry.358867278"
+              className="peer ps-9 rounded-xl"
+              placeholder="Name"
+              type="text"
+            />
+            <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+              <User size={16} strokeWidth={2} aria-hidden="true" />
+            </div>
+          </div>
+        </div>
+        <div className="space-y-2  text-left mt-3">
+          <Label htmlFor="input-email">Email</Label>
+          <div className="relative">
+            <Input
+              id="input-email"
+              required
+              name="entry.65859822"
+              className="peer ps-9 rounded-xl"
+              placeholder="Email"
+              type="email"
+            />
+            <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+              <AtSign size={16} strokeWidth={2} aria-hidden="true" />
+            </div>
+          </div>
+        </div>
+        <div className="space-y-2  text-left mt-3">
+          <Label htmlFor="input-topic">Topic</Label>
+          <div className="relative">
+            <Input
+              id="input-topic"
+              required
+              name="entry.1735979938"
+              className="peer ps-9 rounded-xl"
+              placeholder="Topic"
+              type="text"
+            />
+            <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+              <BookDashed size={16} strokeWidth={2} aria-hidden="true" />
+            </div>
+          </div>
+        </div>
+        <div className="space-y-2 text-left mt-3">
+          <Label htmlFor="textarea-message">Message</Label>
+          <Textarea
+            id="textarea-message"
+            name="entry.1856129796"
+            required
+            value={value}
+            maxLength={maxLength}
+            placeholder="Message"
+            onChange={e => {
+              setValue(e.target.value);
+              handleChange(e);
+            }}
+            aria-describedby="characters-left-textarea"
+          />
+          <p
+            id="characters-left-textarea"
+            className="mt-2 text-right text-xs text-muted-foreground"
+            role="status"
+            aria-live="polite"
+          >
+            <span className="tabular-nums">{limit - characterCount}</span> characters left
+          </p>
+        </div>
+        <Button
+          type="submit"
+          className="mt-3 rounded-lg bg-gradient-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950 w-full"
+        >
+          Submit
+        </Button>
+      </form>
+    </div>
+  );
+}
+
+export default function Contact() {
   return (
     <div className={`min-h-screen`}>
       <div className="z-[2] sticky top-0 mx-auto w-full">
@@ -387,130 +543,9 @@ export default function Contact() {
                 </radialGradient>
               </defs>
             </svg>
-            <div className="mx-auto max-w-md text-center lg:flex-auto lg:py-32">
-              <p className="text-sm/4 font-semibold text-sky-600 mb-2">Contact Form</p>
-              <h2 className="text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl">
-                {/* Ready to start learning? */}
-                Let's get in touch
-              </h2>
-              <p className="text-lg/8 text-neutral-700 mt-4">
-                We're here to help you with any questions, concerns, or feedback you may have.
-              </p>
-              <form
-                action="https://docs.google.com/forms/d/e/1FAIpQLSchnrPOEE42wew5ppu-1EkvGKoAxI7JJ5UaphyLTsXmdZdx7Q/formResponse"
-                method="POST"
-                onSubmit={e => {
-                  e.preventDefault();
-                  const formData = new FormData(e.currentTarget);
-                  fetch(e.currentTarget.action, {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'no-cors',
-                  });
-
-                  toast({
-                    title: 'Submitted',
-                    description: 'Thank you for contacting us!',
-                  });
-
-                  setValue('');
-                  e.currentTarget.reset();
-                }}
-                className="space-y-2"
-              >
-                <div className="space-y-2  text-left mt-4">
-                  <Label htmlFor="input-name">Name</Label>
-                  <div className="relative">
-                    <Input
-                      id="input-name"
-                      required
-                      disabled
-                      autoComplete="name nickname given-name"
-                      name="entry.358867278"
-                      className="peer ps-9 rounded-xl"
-                      placeholder="Name"
-                      type="text"
-                    />
-                    <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
-                      <User size={16} strokeWidth={2} aria-hidden="true" />
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-2  text-left mt-3">
-                  <Label htmlFor="input-email">Email</Label>
-                  <div className="relative">
-                    <Input
-                      id="input-email"
-                      required
-                      disabled
-                      name="entry.65859822"
-                      className="peer ps-9 rounded-xl"
-                      placeholder="Email"
-                      type="email"
-                    />
-                    <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
-                      <AtSign size={16} strokeWidth={2} aria-hidden="true" />
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-2  text-left mt-3">
-                  <Label htmlFor="input-topic">Topic</Label>
-                  <div className="relative">
-                    <Input
-                      id="input-topic"
-                      required
-                      disabled
-                      name="entry.1735979938"
-                      className="peer ps-9 rounded-xl"
-                      placeholder="Topic"
-                      type="text"
-                    />
-                    <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
-                      <BookDashed size={16} strokeWidth={2} aria-hidden="true" />
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-2 text-left mt-3">
-                  <Label htmlFor="textarea-message">Message</Label>
-                  <Textarea
-                    id="textarea-message"
-                    name="entry.1856129796"
-                    required
-                    value={value}
-                    disabled
-                    maxLength={maxLength}
-                    placeholder="Message"
-                    onChange={e => {
-                      setValue(e.target.value);
-                      handleChange(e);
-                    }}
-                    aria-describedby="characters-left-textarea"
-                  />
-                  <p
-                    id="characters-left-textarea"
-                    className="mt-2 text-right text-xs text-muted-foreground"
-                    role="status"
-                    aria-live="polite"
-                  >
-                    <span className="tabular-nums">{limit - characterCount}</span> characters left
-                  </p>
-                </div>
-                <Button
-                  type="submit"
-                  disabled
-                  className="mt-3 rounded-lg bg-gradient-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950 w-full"
-                >
-                  Submit
-                </Button>
-                <p className="text-xs text-neutral-500 mt-2">
-                  This form is currently under maintenance. Please check back later, or contact us
-                  directly at{' '}
-                  <a className="text-sky-600 underline" href="mailto:info@koellabs.com">
-                    info@koellabs.com
-                  </a>
-                </p>
-              </form>
-            </div>
+            <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}>
+              <ContactForm />
+            </GoogleReCaptchaProvider>
           </div>
         </div>
       </div>
