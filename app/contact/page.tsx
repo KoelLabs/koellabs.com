@@ -169,8 +169,8 @@ function ContactForm() {
         >
           Submit
         </Button>
-        <p className="text-xs text-neutral-700 mt-4">
-          This site is protected by reCAPTCHA and the Google{' '}
+        <p className="text-xs text-neutral-500 mt-2 pt-2">
+          This form is protected by reCAPTCHA and the Google{' '}
           <a className="underline" href="https://policies.google.com/privacy">
             Privacy Policy
           </a>{' '}
