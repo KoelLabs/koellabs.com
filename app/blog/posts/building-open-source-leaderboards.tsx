@@ -127,7 +127,7 @@ export default function PostBody() {
                 checking model status, and submitting new models
               </li>
               <li className="mb-2">
-                <span className="font-semibold text-sky-700">main.py:</span> Manages the back-end
+                <span className="font-semibold text-sky-700">tasks.py:</span> Manages the back-end
                 operations, interfacing with three JSON files in the queue directory:
                 <ul className="list-disc list-inside ml-4 mt-2">
                   <li>
