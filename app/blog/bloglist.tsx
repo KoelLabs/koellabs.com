@@ -57,7 +57,10 @@ function PostCard({ post }: { post: Post }) {
           </div>
           <div className="h-px bg-neutral-200 my-4" role="separator"></div>
           <div className="px-8 pb-8 pt-1">
-            <p className="mt-2 max-w-lg text-sm/6 text-neutral-600">{post.summary}</p>
+            <p className="mt-2 max-w-lg text-sm/6 text-neutral-600">
+              {post.summary.slice(0, 350)}
+              <span className="text-sky-600">{post.summary.length > 350 && '... Read More'}</span>
+            </p>
           </div>
           <div className="h-px bg-neutral-200 mb-8" role="separator"></div>
         </div>
