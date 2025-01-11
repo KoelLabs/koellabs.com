@@ -3,7 +3,6 @@
 // It will also be used to set meta tags for SEO once I get around to adding that.
 
 import type { Metadata } from '../posts';
-import { CodeBlock } from '@/components/ui/code-block';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
   published: true,
   image: '/images/blogLeaderboards.png',
   summary:
-    "Sometimes, the best machine learning models are hidden in plain sight. During our work on phonemic transcription, we stumbled upon a specialized ginic model that had been finetuned on Facebook's XLSR-53 model using the Buckeye corpus. This discovery proved significant: Ginic performs 1.4x better than Facebook, and iterating on their approach, our model performs 1.4x better than ginic. However, finding this model was more a product of extensive searching than systematic discovery, highlighting a broader challenge in the phoneme transcription space.",
+    "Sometimes, the best machine learning models are hidden in plain sight. During our work on phonemic transcription, we stumbled upon a specialized ginic model that had been finetuned on Facebook's XLSR-53 model using the Buckeye corpus. This discovery proved significant: Ginic performs 1.2x better than Facebook, and iterating on their approach, our model performs 2.2x better than ginic. However, finding this model was more a product of extensive searching than systematic discovery, highlighting a broader challenge in the phoneme transcription space.",
   category: 'Technical Report',
   tags: [
     {
@@ -47,28 +46,37 @@ export default function PostBody() {
             <p className="mb-4">
               Sometimes, the best machine learning models are hidden in plain sight. During our work
               on phonemic transcription, we stumbled upon a specialized{' '}
-              <a
+              <Link
                 className="text-sky-600 hover:underline"
                 href="https://huggingface.co/ginic"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 ginic model
-              </a>{' '}
+              </Link>{' '}
               that had been finetuned on{' '}
-              <a
+              <Link
                 className="text-sky-600 hover:underline"
                 href="https://huggingface.co/facebook/wav2vec2-large-xlsr-53"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Facebook's XLSR-53 model
-              </a>{' '}
-              using the Buckeye corpus. This discovery proved significant: Ginic performs 1.4x
-              better than Facebook, and iterating on their approach, our model performs 1.4x better
+              </Link>{' '}
+              using the Buckeye corpus. This discovery proved significant: Ginic performs 1.2x
+              better than Facebook, and iterating on their approach, our model performs 2.2x better
               than ginic. However, finding this model was more a product of extensive searching than
               systematic discovery, highlighting a broader challenge in the phoneme transcription
-              space.
+              space that led us to build{' '}
+              <Link
+                className="text-sky-600 hover:underline"
+                href="https://huggingface.co/spaces/KoelLabs/IPA-Transcription-EN"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                this open-source leaderboard
+              </Link>
+              .
             </p>
             <h2 className="text-2xl font-semibold mt-8 mb-4">
               The Need for Better Model Discovery and Standardized Evaluation
@@ -77,23 +85,23 @@ export default function PostBody() {
             <p className="mb-4">
               While leaderboards have become fundamental infrastructure in many areas of machine
               learning - from{' '}
-              <a
+              <Link
                 href="https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard#/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sky-600 hover:underline"
               >
                 large language models
-              </a>{' '}
+              </Link>{' '}
               to{' '}
-              <a
+              <Link
                 href="https://huggingface.co/spaces/hf-audio/open_asr_leaderboard"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sky-600 hover:underline"
               >
                 automatic speech recognition
-              </a>{' '}
+              </Link>{' '}
               - the field of phonemic transcription notably lacks such standardized evaluation
               frameworks. This gap isn't just about missing leaderboards - it reflects a broader
               absence of unified evaluation standards and comprehensive survey papers that could
@@ -141,14 +149,14 @@ export default function PostBody() {
             <p className="mb-4">
               Transparency was a key consideration in our design. Unlike some existing leaderboards
               like{' '}
-              <a
+              <Link
                 href="https://huggingface.co/spaces/hf-audio/open_asr_leaderboard"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sky-600 hover:underline"
               >
                 Open ASR
-              </a>{' '}
+              </Link>{' '}
               that require users to request model evaluation and wait, our system automates the
               process. Most models can be evaluated on the whole test set within hours of
               submission.
@@ -160,14 +168,6 @@ export default function PostBody() {
               detailed metadata about evaluations and model outputs, allowing users to understand
               precisely how models perform and evaluations are conducted. that require users to
               request model evaluation and wait, our system automates the process.
-            </p>
-
-            <p className="mb-4">
-              Most models can be evaluated on the whole test set within hours of submission.
-              Additionally, the front-end leaderboard and queue backend are visible to all Hugging
-              Face users - a deliberate choice to promote transparency. The results file provides
-              detailed metadata about evaluations and model outputs, allowing users to understand
-              precisely how models perform and evaluations are conducted.{' '}
             </p>
 
             <Image
@@ -201,18 +201,22 @@ export default function PostBody() {
               </li>
             </ol>
 
-            <div className="p-4 mb-4 bg-white/50 border border-neutral-200 rounded-xl">
-              <CodeBlock
-                code={`import { remark } from 'remark';
-import html from 'remark-html';
+            <p className="mb-4">
+              You can read more about these evaluation methods{' '}
+              <Link
+                href="/blog/phonemic-transcription-metrics"
+                className="text-sky-600 hover:underline"
+              >
+                in our blog post here
+              </Link>
+              .
+            </p>
 
-// Use remark to convert markdown into HTML string
-const processedContent = await remark()
-  .use(html)
-  .process(matterResult.content);
-const contentHtml = processedContent.toString();`}
-              />
-            </div>
+            <p className="mb-4">
+              We use the TIMIT speech corpus as our evaluation dataset, providing a standardized
+              benchmark widely recognized in the speech recognition community. The evaluation runs
+              on a consistent compute environment (16GB RAM, 2vCPUs) to ensure reproducibility.
+            </p>
 
             <h2 className="text-2xl font-semibold mt-8 mb-4">We Need More of These Projects</h2>
 
@@ -246,14 +250,14 @@ const contentHtml = processedContent.toString();`}
             <ol className="list-decimal list-inside mb-4 pl-4 italic">
               <li className="mb-2">
                 Navigate to{' '}
-                <a
+                <Link
                   href="https://huggingface.co/new-space"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sky-600 hover:underline"
                 >
                   https://huggingface.co/new-space
-                </a>
+                </Link>
               </li>
               <li className="mb-2">Select "Space SDK" as the template type</li>
               <li className="mb-2">Choose "Gradio" as the framework</li>
@@ -261,14 +265,14 @@ const contentHtml = processedContent.toString();`}
               <li className="mb-2">
                 You will be asked for an access token in the UI before you create the space. This
                 can be created in{' '}
-                <a
+                <Link
                   href="https://huggingface.co/login?next=%2Fsettings%2Ftokens"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sky-600 hover:underline"
                 >
                   your settings
-                </a>{' '}
+                </Link>{' '}
                 and needs read access for the leaderboard to function.
               </li>
             </ol>
@@ -283,20 +287,19 @@ const contentHtml = processedContent.toString();`}
               datasets/metrics and support for more model architectures and{' '}
               <Link
                 href="https://github.com/KoelLabs/.github/blob/main/CONTRIBUTING.md"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-sky-600 hover:underline"
               >
                 welcome contributions
               </Link>
               !
             </p>
+
             <p className="mb-4">
-              You can read more about these evaluation methods{' '}
-              <Link
-                href="/blog/phonemic-transcription-metrics"
-                className="text-sky-600 hover:underline"
-              >
-                in our blog post here
-              </Link>
+              The path to better model evaluation shouldn't be blocked by infrastructure complexity.
+              Whether using Hugging Face's template or our simpler architecture, the goal remains
+              the same: making model discovery and comparison more accessible to the community.
             </p>
           </div>
         </div>
