@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+        
+  <url>
+    <loc>https://koellabs.com/blog/building-open-source-leaderboards</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Koel Labs Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-01-11T00:00:00+00:00</news:publication_date>
+      <news:title>Building Open Source Hugging Face Leaderboards</news:title>
+      <news:keywords>hugging face,open source,leaderboards,speech technology,hugging face leaderboards, how to build hugging face leaderboards</news:keywords>
+    </news:news>
+  </url>        
   <url>
     <loc>https://koellabs.com/blog/phonemic-transcription-metrics</loc>
     <news:news>
