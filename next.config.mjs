@@ -19,7 +19,7 @@ const nextConfig = {
           preset: [
             'default',
             {
-              colormin: false,
+              colormin: { hsl: false }, // see https://github.com/cssnano/cssnano/issues/1515
             },
           ],
         },
