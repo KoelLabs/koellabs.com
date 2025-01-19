@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   slug: 'open-source-project',
   date: '2024-12-23',
   published: true,
-  image: '/images/blogLaunch.png',
+  image: '/images/blogOpenSource.png',
   summary: `
     At Koel Labs, our goal is to make pronunciation learning more accessible and inclusive.
     To represent the diversity of language and dialects, we're excited to announce that everything 

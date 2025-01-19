@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   slug: 'phonemic-transcription-metrics',
   date: '2024-12-30',
   published: true,
-  image: '/images/blogTemplate.png',
+  image: '/images/blogPhonetic.png',
   summary:
     'The International Phonetic Alphabet (IPA) is like the Swiss Army knife of pronunciation—it gives us precise symbols to represent every sound humans make in language. In recent years, predicting these phonemic transcriptions from audio has become a popular machine learning task. But how do we calculate the accuracy of these models?',
   category: 'Technical Report',
@@ -32,11 +32,14 @@ export default function PostBody() {
         <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl text-center">
           {metadata.title}
         </h1>
+
+        <div className="p-px mt-16 relative z-10 bg-gradient-to-b from-transparent via-neutral-200 to-transparent rounded-lg">
         <img
           src={metadata.image}
           alt="Phonemic Transcription Metrics"
-          className="w-full h-auto mt-16 rounded-lg z-10 relative"
+          className="w-full h-auto rounded-lg z-10 relative"
         />
+        </div>
         <br></br>
         <div className="relative lg:col-span-3">
           <div className="relative flex h-full flex-col overflow-hidden tracking-[-0.010em] text-lg">
