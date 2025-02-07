@@ -514,7 +514,7 @@ export default function Page() {
         </h1>
       </div>
       <div className="flex flex-col lg:flex-row w-full h-full gap-2">
-        <div className="w-full lg:flex-[4] bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700 flex">
+        <div className="w-full lg:flex-[4] bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex">
           <VideoPlayer
             src={currentVideo?.video}
             title={currentVideo?.name}
@@ -524,7 +524,7 @@ export default function Page() {
             onSeek={setCurrentTime}
           />
         </div>
-        <div className="w-full lg:flex-1 bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700 flex flex-col justify-between">
+        <div className="w-full lg:flex-1 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center">
               <h2 className="text-lg font-medium tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100">
@@ -547,7 +547,7 @@ export default function Page() {
                   //     setCurrentTime(section.start);
                   //   }
                   // }}
-                  className={`flex relative justify-between items-end p-2 h-20 bg-neutral-200/55 border-neutral-300/50 dark:border-neutral-700 rounded-lg w-full bg-cover bg-center dark:bg-neutral-700/50 border cursor-not-allowed 
+                  className={`flex relative justify-between items-end p-2 h-20 bg-neutral-50 border-neutral-200 dark:border-neutral-800 rounded-lg w-full bg-cover bg-center dark:bg-neutral-900/50 border cursor-not-allowed 
                     
                     ${isInPracticeSection() && getCurrentSection() !== index ? 'opacity-50' : ''}`}
                 >
@@ -565,12 +565,12 @@ export default function Page() {
             </div>
           </div>
           <div>
-            <div className="border-t border-neutral-200 dark:border-neutral-700">
+            <div className="border-t border-neutral-200 dark:border-neutral-800">
               <h2 className="text-lg font-medium tracking-tighter m-2 text-center text-neutral-900 dark:text-neutral-100">
                 Overall Accent Similarity
               </h2>
             </div>
-            <div className="border-t border-neutral-200 dark:border-neutral-700">
+            <div className="border-t border-neutral-200 dark:border-neutral-800">
               <div className="w-full h-full flex items-center justify-center relative">
                 {isClient && score > 0 ? (
                   <PieChart width={400} height={180} id="recharts-pie-1">
@@ -593,9 +593,13 @@ export default function Page() {
                 ) : (
                   <div className="h-[180px] flex items-center justify-center">
                     <div className="text-center text-neutral-500 dark:text-neutral-400">
-                      <Circle className="mx-auto mb-2 h-12 w-12 opacity-20" />
-                      <p className="tracking-tight">No accent similarity data yet.</p>
-                      <p className="text-sm">Practice a section to see your score.</p>
+                      <Circle className="mx-auto mb-2 h-12 w-12 opacity-20 dark:opacity-50" />
+                      <p className="tracking-tight text-neutral-600 dark:text-neutral-300 mt-4">
+                        No accent similarity data yet.
+                      </p>
+                      <p className="text-sm tracking-tight text-neutral-500 dark:text-neutral-400">
+                        Practice a section to see your score.
+                      </p>
                     </div>
                   </div>
                 )}
@@ -611,7 +615,7 @@ export default function Page() {
                 )}
               </div>
             </div>
-            <div className="border-t flex flex-wrap border-neutral-200 dark:border-neutral-700 p-2 gap-1 justify-center">
+            <div className="border-t flex flex-wrap border-neutral-200 dark:border-neutral-800 p-2 gap-1 justify-center">
               <Badge
                 variant="outline"
                 className="w-fit px-2.5 py-1 text-xs font-medium rounded-md bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border tracking-tight border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
@@ -667,7 +671,7 @@ export default function Page() {
         </div>
       </div>
       <div className="flex flex-col lg:flex-row gap-2">
-        <div className="bg-neutral-100 border border-neutral-200 rounded-lg w-full dark:bg-neutral-800 dark:border-neutral-700 flex flex-col relative justify-between">
+        <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 flex flex-col relative justify-between">
           <div>
             {isInPracticeSection() && (
               <div className="w-1 bg-blue-500 dark:bg-blue-400 rounded-l-3xl absolute left-0 top-0 h-full"></div>
@@ -920,9 +924,9 @@ export default function Page() {
             </div>
           )}
         </div>
-        <div className="max-w-[298px] relative h-fit w-full bg-neutral-100 border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-800 dark:border-neutral-700 flex flex-col">
+        <div className="max-w-[298px] relative h-fit w-full bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col">
           <h2 className="text-lg font-semibold tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100"></h2>
-          <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-700" />
+          <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-800" />
           <div className="m-3">
             <div className="">
               {isRecording ? (
@@ -940,7 +944,7 @@ export default function Page() {
                   className={`w-full border px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 ${
                     isInPracticeSection()
                       ? 'text-[#1B997B] dark:text-[#9DD8C5] bg-[#C7E9DE] dark:bg-[#1B997B]/20 border-[#9DD8C5] dark:border-[#1B997B] cursor-pointer'
-                      : 'text-neutral-400 dark:text-neutral-600 bg-neutral-100 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700 cursor-not-allowed'
+                      : 'text-neutral-400 dark:text-neutral-600 bg-neutral-100 dark:bg-neutral-900/50 border-neutral-200 dark:border-neutral-800 cursor-not-allowed'
                   }`}
                   onClick={() => {
                     StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()!]);
@@ -952,7 +956,7 @@ export default function Page() {
               )}
             </div>
           </div>
-          <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-700 mb-5" />
+          <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-800 mb-5" />
         </div>
       </div>
     </div>

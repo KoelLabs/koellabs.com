@@ -1,8 +1,5 @@
 'use server';
-import RecommendedClips from '@/components/ui/dashboard/RecommendedClips';
-import RevisitClips from '@/components/ui/dashboard/RevisitClips';
-import ImportVideos from '@/components/ui/dashboard/ImportVideos';
-import HelpCenter from '@/components/ui/dashboard/HelpCenter';
+import SearchCenter from '@/components/ui/dashboard/SearchCenter';
 
 const clips = [
   {
@@ -118,10 +115,7 @@ const clips = [
 export default async function Page() {
   return (
     <div className="h-full rounded-md relative">
-      <HelpCenter />
-      <ImportVideos />
-      <RevisitClips clips={clips} />
-      <RecommendedClips clips={clips} />
+      <SearchCenter clips={clips} />
     </div>
   );
 }
