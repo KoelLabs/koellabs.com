@@ -29,6 +29,46 @@ const shows = [
     name: "Grey's Anatomy",
     color: '#626A8C',
   },
+  {
+    id: 'friends',
+    name: 'Friends',
+    color: '#C01717',
+  },
+  {
+    id: 'seinfeld',
+    name: 'Seinfeld',
+    color: '#1C499E',
+  },
+  {
+    id: 'modern-family',
+    name: 'Modern Family',
+    color: '#FD7919',
+  },
+  {
+    id: 'the-big-bang-theory',
+    name: 'The Big Bang Theory',
+    color: '#FF3565',
+  },
+  {
+    id: 'breaking-bad',
+    name: 'Breaking Bad',
+    color: '#FFD600',
+  },
+  {
+    id: 'lost',
+    name: 'Lost',
+    color: '#47A4A6',
+  },
+  {
+    id: 'curious-george',
+    name: 'Curious George',
+    color: '#EB2C2E',
+  },
+  {
+    id: 'the-simpsons',
+    name: 'The Simpsons',
+    color: '#FFD600',
+  },
 ];
 
 // Fuse.js options
@@ -44,6 +84,7 @@ interface RecommendedClip {
   title: string;
   duration: string;
   thumbnail: string;
+  show: string;
 }
 
 const recommendedClips: RecommendedClip[] = [
@@ -52,36 +93,42 @@ const recommendedClips: RecommendedClip[] = [
     title: 'Where Is My Desk!? - The Office US',
     duration: '1:55',
     thumbnail: '/images/thumbnails/where-is-my-desk.jpg',
+    show: 'the-office',
   },
   {
     id: 5,
     title: 'Janet Loves Jason - The Good Place',
     duration: '1:37',
     thumbnail: '/images/thumbnails/the-good-place-janet-loves-jason.jpg',
+    show: 'the-good-place',
   },
   {
     id: 6,
     title: 'Say Hello to Real Eleanor - The Good Place',
     duration: '2:37',
     thumbnail: '/images/thumbnails/the-good-place-say-hello-to-real-eleanor.jpg',
+    show: 'the-good-place',
   },
   {
     id: 7,
     title: "Meredith Wins Harper Avery - Grey's Anatomy 300th Episode",
     duration: '1:26',
     thumbnail: '/images/thumbnails/meredith-wins-harper-avery.jpg',
+    show: 'greys-anatomy',
   },
   {
     id: 2,
     title: 'Ben finally shoots his shot - Parks and Recreation',
     duration: '4:19',
     thumbnail: '/images/thumbnails/parks-and-recreation-ben-shoots-his-shot.jpg',
+    show: 'parks-and-rec',
   },
   {
     id: 3,
     title: 'The Cursed Harvest Festival Interview - Parks and Recreation',
     duration: '2:14',
     thumbnail: '/images/thumbnails/the-cursed-harvest-festival-interview.jpg',
+    show: 'parks-and-rec',
   },
 ];
 
@@ -209,8 +256,8 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
 
       {/* Display filtered clips */}
       <div>
-        <ClipsList title="Revisit Videos" clips={filteredRevisitClips} isRevisitList={true} />
-        <ClipsList title="Recommended Videos" clips={filteredRecommendedClips} />
+        <ClipsList title="Previously Practiced" clips={filteredRevisitClips} isRevisitList={true} />
+        <ClipsList title="Recommended For You" clips={filteredRecommendedClips} />
       </div>
     </div>
   );
