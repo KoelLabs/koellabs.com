@@ -35,14 +35,15 @@ interface ClipsListProps {
 export default function ClipsList({ title, clips, isRevisitList = false }: ClipsListProps) {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = React.useState(false);
-  const [showRightArrow, setShowRightArrow] = React.useState(true);
+  const [showRightArrow, setShowRightArrow] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const handleScroll = () => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
       setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
+      // Only show right arrow if there's more content than viewport width
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10 && scrollWidth > clientWidth);
     }
   };
 
@@ -60,6 +61,8 @@ export default function ClipsList({ title, clips, isRevisitList = false }: Clips
     const scrollContainer = scrollContainerRef.current;
     if (scrollContainer) {
       scrollContainer.addEventListener('scroll', handleScroll);
+      // Initial check for overflow
+      handleScroll();
       return () => scrollContainer.removeEventListener('scroll', handleScroll);
     }
   }, []);

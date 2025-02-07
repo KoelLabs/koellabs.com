@@ -31,6 +31,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { getUser } from '@/utils/authClient';
 import { StreakCard } from '@/components/sidebar/streak-card';
+import { Badge } from '../ui/base/badge';
 
 const data = {
   user: {
@@ -47,7 +48,7 @@ const data = {
     },
     {
       title: 'Settings',
-      url: '#',
+      url: '/dashboard/settings',
       icon: Settings2,
     },
   ],
@@ -374,6 +375,9 @@ export function AppSidebar() {
                   <span className="text-transparent bg-clip-text bg-gradient-to-br from-black via-sky-950 to-sky-600 dark:from-white dark:via-white dark:to-black">
                     Labs
                   </span>
+                  <Badge variant="outline" className="ml-1.5 tracking-tight -translate-y-0.5">
+                    Beta
+                  </Badge>
                 </motion.span>
               )}
             </AnimatePresence>
