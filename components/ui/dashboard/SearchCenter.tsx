@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/base/button';
 import { Input } from '@/components/ui/base/input';
 import { Dot, Search } from 'lucide-react';
 import ClipsList from './ClipsList';
 import { useId } from 'react';
+import Fuse from 'fuse.js';
 
 const shows = [
   {
@@ -29,6 +30,14 @@ const shows = [
     color: '#626A8C',
   },
 ];
+
+// Fuse.js options
+const fuseOptions = {
+  keys: ['title'],
+  threshold: 0.3, // 0.0 = perfect match, 1.0 = match anything
+  distance: 100, // How far to search for matches
+  minMatchCharLength: 1,
+};
 
 interface RecommendedClip {
   id: number;
@@ -101,34 +110,39 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
   const [filteredRecommendedClips, setFilteredRecommendedClips] = useState(recommendedClips);
   const searchId = useId();
 
+  // Create Fuse instances for both clip lists
+  const revisitFuse = useMemo(() => new Fuse(clips, fuseOptions), [clips]);
+  const recommendedFuse = useMemo(() => new Fuse(recommendedClips, fuseOptions), []);
+
   // Filter clips based on search query and active show
   useEffect(() => {
-    let revisitFiltered = [...clips];
-    let recommendedFiltered = [...recommendedClips];
+    let revisitResults = [...clips];
+    let recommendedResults = [...recommendedClips];
 
-    // Filter by show
+    // First filter by show if one is selected
     if (activeShow) {
       const showMatch = shows.find(show => show.id === activeShow);
       const showName = showMatch?.name.toLowerCase() || '';
 
-      revisitFiltered = revisitFiltered.filter(clip => clip.title.toLowerCase().includes(showName));
-
-      recommendedFiltered = recommendedFiltered.filter(clip =>
+      revisitResults = revisitResults.filter(clip => clip.title.toLowerCase().includes(showName));
+      recommendedResults = recommendedResults.filter(clip =>
         clip.title.toLowerCase().includes(showName),
       );
     }
 
-    // Filter by search query
+    // Then apply fuzzy search if there's a query
     if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      revisitFiltered = revisitFiltered.filter(clip => clip.title.toLowerCase().includes(query));
-      recommendedFiltered = recommendedFiltered.filter(clip =>
-        clip.title.toLowerCase().includes(query),
-      );
+      // Create new Fuse instances with the show-filtered results
+      const filteredRevisitFuse = new Fuse(revisitResults, fuseOptions);
+      const filteredRecommendedFuse = new Fuse(recommendedResults, fuseOptions);
+
+      // Perform fuzzy search
+      revisitResults = filteredRevisitFuse.search(searchQuery).map(result => result.item);
+      recommendedResults = filteredRecommendedFuse.search(searchQuery).map(result => result.item);
     }
 
-    setFilteredRevisitClips(revisitFiltered);
-    setFilteredRecommendedClips(recommendedFiltered);
+    setFilteredRevisitClips(revisitResults);
+    setFilteredRecommendedClips(recommendedResults);
   }, [searchQuery, activeShow, clips]);
 
   const handleSearch = (e: React.FormEvent) => {
@@ -138,11 +152,13 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col gap-4 w-full h-fit p-4">
-        <h1 className="text-2xl font-semibold text-black tracking-tighter">Search Clips</h1>
+      <div className="flex flex-col gap-4 w-full h-fit">
+        <h1 className="text-2xl font-semibold text-black tracking-tighter pt-4 px-4">
+          Search Clips
+        </h1>
 
         {/* Search Bar */}
-        <form onSubmit={handleSearch} className="flex w-full gap-2">
+        <form onSubmit={handleSearch} className="flex w-full gap-2 px-4">
           <div className="space-y-2 w-full">
             <div className="flex gap-1 w-full relative">
               <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
@@ -164,7 +180,7 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
         </form>
 
         {/* Show Tabs */}
-        <div className="flex gap-1 overflow-x-auto pb-2 scrollbar-hide">
+        <div className="flex gap-1 overflow-x-auto overflow-y-hidden scrollbar-hide px-4 pb-6">
           <Button
             size="badge"
             variant="outline"

@@ -395,7 +395,7 @@ export function AppSidebar() {
           {!open && <div className="h-[1px] bg-black/10 w-full"></div>}
           <SidebarItem>
             <SidebarLabel className="flex justify-between items-center">
-              {open && 'Your Videos'}{' '}
+              {open && 'Your Clips'}{' '}
               {open && (
                 <Button variant="ghost" size="icon" className="h-6 w-6 -mr-0.5">
                   <Plus className="h-4 w-4" />
