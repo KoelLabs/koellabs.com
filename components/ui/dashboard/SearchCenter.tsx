@@ -110,16 +110,13 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
   const [filteredRecommendedClips, setFilteredRecommendedClips] = useState(recommendedClips);
   const searchId = useId();
 
-  // Create Fuse instances for both clip lists
   const revisitFuse = useMemo(() => new Fuse(clips, fuseOptions), [clips]);
   const recommendedFuse = useMemo(() => new Fuse(recommendedClips, fuseOptions), []);
 
-  // Filter clips based on search query and active show
   useEffect(() => {
     let revisitResults = [...clips];
     let recommendedResults = [...recommendedClips];
 
-    // First filter by show if one is selected
     if (activeShow) {
       const showMatch = shows.find(show => show.id === activeShow);
       const showName = showMatch?.name.toLowerCase() || '';
@@ -130,13 +127,10 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
       );
     }
 
-    // Then apply fuzzy search if there's a query
     if (searchQuery) {
-      // Create new Fuse instances with the show-filtered results
       const filteredRevisitFuse = new Fuse(revisitResults, fuseOptions);
       const filteredRecommendedFuse = new Fuse(recommendedResults, fuseOptions);
 
-      // Perform fuzzy search
       revisitResults = filteredRevisitFuse.search(searchQuery).map(result => result.item);
       recommendedResults = filteredRecommendedFuse.search(searchQuery).map(result => result.item);
     }
@@ -147,7 +141,6 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // The search is already handled by the useEffect, but we prevent form submission
   };
 
   return (
