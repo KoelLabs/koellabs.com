@@ -115,10 +115,10 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <MotionConfig reducedMotion="always">
-        <SidebarHeader>
+        <SidebarHeader className="py-2.5 pr-3">
           <Link
             href="/"
-            className={`flex items-center gap-2 font-semibold py-1 h-[36px] ${open ? '' : ''}`}
+            className={`flex items-center gap-2 -mb-px mt-px font-semibold py-1 h-[38px] ${open ? '' : ''}`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

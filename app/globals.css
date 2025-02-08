@@ -540,3 +540,52 @@ main {
     stroke-dashoffset: var(--stroke-dashoffset);
   }
 }
+
+@keyframes popUpAndSettle {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes popUpAndSettleLeft {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translate(-30px, -30px) rotate(-3deg);
+  }
+}
+
+@keyframes popUpAndSettleRight {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translate(30px, 30px) rotate(3deg);
+  }
+}
+
+.empty-state-center {
+  animation: popUpAndSettle 0.4s cubic-bezier(0.16, 1.5, 0.15, 1) forwards;
+}
+
+.empty-state-right {
+  animation: popUpAndSettleRight 0.4s cubic-bezier(0.16, 1.5, 0.15, 1) forwards;
+  animation-delay: 0.08s;
+  opacity: 0;
+}
+
+.empty-state-left {
+  animation: popUpAndSettleLeft 0.4s cubic-bezier(0.16, 1.5, 0.15, 1) forwards;
+  animation-delay: 0.16s;
+  opacity: 0;
+}

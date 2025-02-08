@@ -259,6 +259,152 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
         <ClipsList title="Previously Practiced" clips={filteredRevisitClips} isRevisitList={true} />
         <ClipsList title="Recommended For You" clips={filteredRecommendedClips} />
       </div>
+
+      {filteredRevisitClips.length === 0 && filteredRecommendedClips.length === 0 && (
+        <div className="flex flex-col gap-1 px-4 w-full justify-center items-center relative">
+          <div className="relative xl:mt-48 mt-24 mb-8">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="411"
+              height="239"
+              fill="none"
+              className="shadow-lg rounded-[14px] mb-12 z-10 relative empty-state-center"
+              viewBox="0 0 411 239"
+            >
+              <g clipPath="url(#clip0_2569_247)">
+                <rect
+                  width="410"
+                  height="238"
+                  x="0.5"
+                  y="0.5"
+                  fill="#fff"
+                  stroke="#E1E1E1"
+                  rx="13.5"
+                ></rect>
+                <rect width="392" height="194" x="10" y="11" fill="#F4F4F4" rx="6"></rect>
+                <rect
+                  width="308"
+                  height="16"
+                  fill="#F4F4F4"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 10 227)"
+                ></rect>
+                <rect
+                  width="36"
+                  height="16"
+                  fill="#F4F4F4"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 366 227)"
+                ></rect>
+                <path
+                  fill="#000"
+                  fillOpacity="0.04"
+                  d="M189.328 82.777c0-5.093 5.63-8.174 9.92-5.428l40.192 25.722c3.961 2.536 3.961 8.322 0 10.858l-40.192 25.722c-4.29 2.746-9.92-.335-9.92-5.428z"
+                ></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_2569_247">
+                  <rect width="411" height="239" fill="#fff" rx="14"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="411"
+              height="239"
+              fill="none"
+              className="shadow-lg rounded-[14px] mb-12 absolute top-0 left-0 translate-x-[30px] translate-y-[30px] rotate-[3deg] empty-state-right"
+              viewBox="0 0 411 239"
+            >
+              <g clipPath="url(#clip0_2569_247)">
+                <rect
+                  width="410"
+                  height="238"
+                  x="0.5"
+                  y="0.5"
+                  fill="#fff"
+                  stroke="#E1E1E1"
+                  rx="13.5"
+                ></rect>
+                <rect width="392" height="194" x="10" y="11" fill="#F4F4F4" rx="6"></rect>
+                <rect
+                  width="308"
+                  height="16"
+                  fill="#F4F4F4"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 10 227)"
+                ></rect>
+                <rect
+                  width="36"
+                  height="16"
+                  fill="#F4F4F4"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 366 227)"
+                ></rect>
+                <path
+                  fill="#000"
+                  fillOpacity="0.04"
+                  d="M189.328 82.777c0-5.093 5.63-8.174 9.92-5.428l40.192 25.722c3.961 2.536 3.961 8.322 0 10.858l-40.192 25.722c-4.29 2.746-9.92-.335-9.92-5.428z"
+                ></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_2569_247">
+                  <rect width="411" height="239" fill="#fff" rx="14"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="411"
+              height="239"
+              fill="none"
+              className="shadow-lg rounded-[14px] mb-12 absolute top-0 left-0 translate-x-[-30px] -translate-y-[30px] rotate-[-3deg] empty-state-left"
+              viewBox="0 0 411 239"
+            >
+              <g clipPath="url(#clip0_2569_247)">
+                <rect
+                  width="410"
+                  height="238"
+                  x="0.5"
+                  y="0.5"
+                  fill="#fff"
+                  stroke="#E1E1E1"
+                  rx="13.5"
+                ></rect>
+                <rect width="392" height="194" x="10" y="11" fill="#F4F4F4" rx="6"></rect>
+                <rect
+                  width="308"
+                  height="16"
+                  fill="#F4F4F4"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 10 227)"
+                ></rect>
+                <rect
+                  width="36"
+                  height="16"
+                  fill="#F4F4F4"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 366 227)"
+                ></rect>
+                <path
+                  fill="#000"
+                  fillOpacity="0.04"
+                  d="M189.328 82.777c0-5.093 5.63-8.174 9.92-5.428l40.192 25.722c3.961 2.536 3.961 8.322 0 10.858l-40.192 25.722c-4.29 2.746-9.92-.335-9.92-5.428z"
+                ></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_2569_247">
+                  <rect width="411" height="239" fill="#fff" rx="14"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <h2 className="text-lg font-medium text-black tracking-tighter">No clips found</h2>
+          <p className="text-sm text-muted-foreground">
+            Try searching for a different show or clip.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
