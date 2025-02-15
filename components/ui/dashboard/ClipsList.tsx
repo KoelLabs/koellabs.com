@@ -7,12 +7,16 @@ import { Button } from '@/components/ui/base/button';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Badge } from '@/components/ui/base/badge';
 
 interface BaseClip {
   id: string | number;
   title: string;
   duration: string;
   thumbnail: string;
+  difficulty: string;
+  dialect: string;
+  dialectFlag: string;
 }
 
 interface RevisitClip extends BaseClip {
@@ -21,8 +25,6 @@ interface RevisitClip extends BaseClip {
   video: string;
   link: string;
   badge: string;
-  dialect: string;
-  dialectIcon: string;
   completedSections: number;
 }
 
@@ -100,6 +102,28 @@ export default function ClipsList({ title, clips, isRevisitList = false }: Clips
           <p className="text-xs font-medium mr-1 text-neutral-500 dark:text-neutral-400">
             {clip.duration}
           </p>
+        </div>
+        <div className="flex justify-between mt-1.5">
+          <Badge
+            variant="outline"
+            className="inline-flex items-center justify-center rounded-full border px-2 py-0 text-xs font-normal leading-normal text-foreground gap-1.5"
+          >
+            <span
+              className={cn('size-1.5 rounded-full', {
+                'bg-green-500': clip.difficulty === 'Easy',
+                'bg-yellow-500': clip.difficulty === 'Medium',
+                'bg-red-500': clip.difficulty === 'Hard',
+              })}
+              aria-hidden="true"
+            ></span>
+            {clip.difficulty}
+          </Badge>
+          <Badge
+            variant="outline"
+            className="inline-flex items-center justify-center rounded-full border px-2 py-0 text-xs font-normal leading-normal text-foreground gap-2"
+          >
+            {clip.dialectFlag} {clip.dialect}
+          </Badge>
         </div>
       </>
     );

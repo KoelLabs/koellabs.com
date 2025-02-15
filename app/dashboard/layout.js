@@ -9,7 +9,7 @@ export default async function DashboardLayout({ children }) {
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
       <SidebarLayout defaultOpen={cookies().get('sidebar:state')?.value === 'true'}>
         <AppSidebar />
-        <main className="flex flex-1 flex-col p-0 transition-all duration-150 ease-in-out w-full dark:bg-neutral-900">
+        <main className="flex flex-1 flex-col p-0 transition-all duration-150 ease-in-out w-full dark:bg-black">
           {children}
         </main>
       </SidebarLayout>

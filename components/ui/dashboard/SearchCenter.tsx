@@ -85,6 +85,9 @@ interface RecommendedClip {
   duration: string;
   thumbnail: string;
   show: string;
+  difficulty: string;
+  dialect: string;
+  dialectFlag: string;
 }
 
 const recommendedClips: RecommendedClip[] = [
@@ -94,6 +97,9 @@ const recommendedClips: RecommendedClip[] = [
     duration: '1:55',
     thumbnail: '/images/thumbnails/where-is-my-desk.jpg',
     show: 'the-office',
+    difficulty: 'Hard',
+    dialect: 'US',
+    dialectFlag: '🇺🇸',
   },
   {
     id: 5,
@@ -101,6 +107,9 @@ const recommendedClips: RecommendedClip[] = [
     duration: '1:37',
     thumbnail: '/images/thumbnails/the-good-place-janet-loves-jason.jpg',
     show: 'the-good-place',
+    difficulty: 'Easy',
+    dialect: 'US',
+    dialectFlag: '🇺🇸',
   },
   {
     id: 6,
@@ -108,6 +117,9 @@ const recommendedClips: RecommendedClip[] = [
     duration: '2:37',
     thumbnail: '/images/thumbnails/the-good-place-say-hello-to-real-eleanor.jpg',
     show: 'the-good-place',
+    difficulty: 'Medium',
+    dialect: 'US',
+    dialectFlag: '🇺🇸',
   },
   {
     id: 7,
@@ -115,6 +127,9 @@ const recommendedClips: RecommendedClip[] = [
     duration: '1:26',
     thumbnail: '/images/thumbnails/meredith-wins-harper-avery.jpg',
     show: 'greys-anatomy',
+    difficulty: 'Medium',
+    dialect: 'US',
+    dialectFlag: '🇺🇸',
   },
   {
     id: 2,
@@ -122,6 +137,9 @@ const recommendedClips: RecommendedClip[] = [
     duration: '4:19',
     thumbnail: '/images/thumbnails/parks-and-recreation-ben-shoots-his-shot.jpg',
     show: 'parks-and-rec',
+    difficulty: 'Easy',
+    dialect: 'US',
+    dialectFlag: '🇺🇸',
   },
   {
     id: 3,
@@ -129,6 +147,9 @@ const recommendedClips: RecommendedClip[] = [
     duration: '2:14',
     thumbnail: '/images/thumbnails/the-cursed-harvest-festival-interview.jpg',
     show: 'parks-and-rec',
+    difficulty: 'Easy',
+    dialect: 'US',
+    dialectFlag: '🇺🇸',
   },
 ];
 
@@ -141,7 +162,8 @@ interface RevisitClip {
   id: string;
   badge: string;
   dialect: string;
-  dialectIcon: string;
+  difficulty: string;
+  dialectFlag: string;
   completedSections: number;
   duration: string;
 }
@@ -193,7 +215,7 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
   return (
     <div className="w-full">
       <div className="flex flex-col gap-4 w-full h-fit">
-        <h1 className="text-2xl font-semibold text-black tracking-tighter pt-4 px-4">
+        <h1 className="text-2xl font-semibold text-black dark:text-white tracking-tighter pt-4 px-4">
           Search Clips
         </h1>
 

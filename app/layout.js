@@ -65,7 +65,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth ">
       <head>
         <Script id="org-schema" type="application/ld+json">
           {`
@@ -125,7 +125,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} dark:bg-black`}>
         {children}
         <Toaster />
       </body>
