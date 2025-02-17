@@ -77,52 +77,30 @@ export function NavVideos({ videos, className, isCollapsed }) {
                     <span className="sr-only">Toggle</span>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent side="right" className=" rounded-lg">
-                  <DropdownMenuLabel className="text-xs text-muted-foreground font-normal">
-                    Clip Settings
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
+                <DropdownMenuContent side="right" className=" rounded-lg w-44">
                   <DropdownMenuItem>
-                    <div
-                      className="flex size-8 items-center justify-center rounded-lg border border-border bg-background mr-2"
-                      aria-hidden="true"
-                    >
+                    <div className="flex items-center justify-center mr-2" aria-hidden="true">
                       <PencilLine size={16} strokeWidth={2} className="opacity-60" />
                     </div>
                     <div className="mr-1">
-                      <div className="text-sm font-normal">Icon</div>
-                      <div className="text-xs text-muted-foreground">
-                        Change the icon of the clip
-                      </div>
+                      <div className="text-sm font-normal text-foreground/90">Change Icon</div>
                     </div>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <div
-                      className="flex size-8 items-center justify-center rounded-lg border border-border bg-background mr-2"
-                      aria-hidden="true"
-                    >
-                      <Trash2 size={16} strokeWidth={2} className=" text-red-500" />
+                    <div className="flex items-center justify-center mr-2 group" aria-hidden="true">
+                      <RotateCcw size={16} strokeWidth={2.2} className="text-red-500" />
                     </div>
                     <div>
-                      <div className="text-sm font-normal text-red-500">Delete</div>
-                      <div className="text-xs text-muted-foreground text-red-500">
-                        Delete from your library
-                      </div>
+                      <div className="text-sm font-normal text-red-500">Reset Progress</div>
                     </div>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <div
-                      className="flex size-8 items-center justify-center rounded-lg border border-border bg-background mr-2 group"
-                      aria-hidden="true"
-                    >
-                      <RotateCcw size={16} strokeWidth={2} className="text-red-500" />
+                    <div className="flex items-center justify-center mr-2" aria-hidden="true">
+                      <Trash2 size={16} strokeWidth={2} className=" text-red-500" />
                     </div>
                     <div>
-                      <div className="text-sm font-normal text-red-500">Reset</div>
-                      <div className="text-xs text-muted-foreground text-red-500">
-                        Reset the clip's progress
-                      </div>
+                      <div className="text-sm font-normal text-red-500">Delete Clip</div>
                     </div>
                   </DropdownMenuItem>
                 </DropdownMenuContent>

@@ -98,7 +98,7 @@ const recommendedClips: RecommendedClip[] = [
     thumbnail: '/images/thumbnails/where-is-my-desk.jpg',
     show: 'the-office',
     difficulty: 'Hard',
-    dialect: 'US',
+    dialect: 'US Midlands',
     dialectFlag: '🇺🇸',
   },
   {
@@ -108,7 +108,7 @@ const recommendedClips: RecommendedClip[] = [
     thumbnail: '/images/thumbnails/the-good-place-janet-loves-jason.jpg',
     show: 'the-good-place',
     difficulty: 'Easy',
-    dialect: 'US',
+    dialect: 'US Midwest',
     dialectFlag: '🇺🇸',
   },
   {
@@ -118,7 +118,7 @@ const recommendedClips: RecommendedClip[] = [
     thumbnail: '/images/thumbnails/the-good-place-say-hello-to-real-eleanor.jpg',
     show: 'the-good-place',
     difficulty: 'Medium',
-    dialect: 'US',
+    dialect: 'US Midwest',
     dialectFlag: '🇺🇸',
   },
   {
@@ -128,7 +128,7 @@ const recommendedClips: RecommendedClip[] = [
     thumbnail: '/images/thumbnails/meredith-wins-harper-avery.jpg',
     show: 'greys-anatomy',
     difficulty: 'Medium',
-    dialect: 'US',
+    dialect: 'US Midwest',
     dialectFlag: '🇺🇸',
   },
   {
@@ -138,7 +138,7 @@ const recommendedClips: RecommendedClip[] = [
     thumbnail: '/images/thumbnails/parks-and-recreation-ben-shoots-his-shot.jpg',
     show: 'parks-and-rec',
     difficulty: 'Easy',
-    dialect: 'US',
+    dialect: 'US Midwest',
     dialectFlag: '🇺🇸',
   },
   {
@@ -148,7 +148,7 @@ const recommendedClips: RecommendedClip[] = [
     thumbnail: '/images/thumbnails/the-cursed-harvest-festival-interview.jpg',
     show: 'parks-and-rec',
     difficulty: 'Easy',
-    dialect: 'US',
+    dialect: 'US Midwest',
     dialectFlag: '🇺🇸',
   },
 ];
@@ -234,7 +234,7 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
                 placeholder="Search for clips..."
                 type="text"
               />
-              <Button variant="outline" className="rounded-full tracking-tight">
+              <Button variant="outline" className="rounded-full tracking-tight h-10 px-4">
                 Search
               </Button>
             </div>

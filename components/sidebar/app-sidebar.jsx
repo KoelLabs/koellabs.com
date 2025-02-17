@@ -8,6 +8,7 @@ import {
   LifeBuoy,
   Plus,
   Send,
+  Settings,
   Settings2,
 } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
@@ -49,7 +50,7 @@ const data = {
     {
       title: 'Settings',
       url: '/dashboard/settings',
-      icon: Settings2,
+      icon: Settings,
     },
   ],
 
@@ -400,11 +401,6 @@ export function AppSidebar() {
           <SidebarItem>
             <SidebarLabel className="flex justify-between items-center">
               {open && 'Your Clips'}{' '}
-              {open && (
-                <Button variant="ghost" size="icon" className="h-6 w-6 -mr-0.5">
-                  <Plus className="h-4 w-4" />
-                </Button>
-              )}
             </SidebarLabel>
             <NavVideos videos={data.videos} isCollapsed={!open} className={open ? '' : '-mb-3'} />
           </SidebarItem>
