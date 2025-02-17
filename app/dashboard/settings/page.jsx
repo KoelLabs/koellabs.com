@@ -293,35 +293,6 @@ export default function SettingsPage() {
             <Card className="rounded-xl">
               <CardHeader className="p-5 border-b border-neutral-200 dark:border-neutral-800 rounded-t-xl bg-neutral-50 dark:bg-neutral-900">
                 <div>
-                  <h2 className="text-lg font-medium tracking-[-0.04em]">Active Sessions</h2>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Manage your active sessions across all of your devices.
-                  </p>
-                </div>
-              </CardHeader>
-              <CardContent className="p-6 space-y-8">
-                <div className="space-y-3 mb-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="logout-password" className="text-sm font-normal ml-0.5">
-                      Your Password
-                    </Label>
-                    <Input
-                      id="logout-password"
-                      name="password"
-                      type="password"
-                      className="text-sm rounded-lg"
-                    />
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="bg-neutral-50 dark:bg-neutral-900 rounded-b-xl border-t border-neutral-200 dark:border-neutral-800 p-4">
-                <Button>Log Out Other Sessions</Button>
-              </CardFooter>
-            </Card>
-
-            <Card className="rounded-xl">
-              <CardHeader className="p-5 border-b border-neutral-200 dark:border-neutral-800 rounded-t-xl bg-neutral-50 dark:bg-neutral-900">
-                <div>
                   <h2 className="text-lg font-medium tracking-[-0.04em] text-destructive">
                     Delete Account
                   </h2>
