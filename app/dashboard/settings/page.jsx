@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/base/select';
-
+import { useTheme } from 'next-themes';
 const themeItems = [
   { value: 'light', label: 'Light', image: '/images/light.png' },
   { value: 'dark', label: 'Dark', image: '/images/dark.png' },
@@ -26,6 +26,7 @@ const themeItems = [
 export default function SettingsPage() {
   const id = useId();
 
+  const { theme, setTheme } = useTheme();
   return (
     <div className="w-full">
       <div className="flex justify-between items-center pt-4">
@@ -38,7 +39,7 @@ export default function SettingsPage() {
 
       <div className="w-full p-4">
         <Tabs defaultValue="personal">
-          <TabsList className="grid w-fit grid-cols-2 border rounded-full">
+          <TabsList className="grid w-fit grid-cols-2 border rounded-full bg-neutral-50 dark:bg-neutral-800/50">
             <TabsTrigger value="personal" className="font-normal rounded-full">
               <span className="flex items-center gap-2">
                 <User2 className="h-4 w-4" />
@@ -197,7 +198,7 @@ export default function SettingsPage() {
                     <legend className="text-sm font-medium leading-none text-foreground">
                       Choose a theme
                     </legend>
-                    <RadioGroup className="flex gap-3" defaultValue="system">
+                    <RadioGroup className="flex gap-3" value={theme} onValueChange={setTheme}>
                       {themeItems.map(item => (
                         <label key={`${id}-${item.value}`}>
                           <RadioGroupItem
@@ -236,7 +237,7 @@ export default function SettingsPage() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="security" className="mt-6 space-y-6">
+          <TabsContent value="security" className="mt-4 space-y-6">
             <Card className="rounded-xl">
               <CardHeader className="p-5 border-b border-neutral-200 dark:border-neutral-800 rounded-t-xl bg-neutral-50 dark:bg-neutral-900">
                 <div>

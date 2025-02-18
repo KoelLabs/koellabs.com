@@ -231,7 +231,7 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
                 className="flex-1 tracking-tight w-full rounded-full focus-visible:ring-neutral-500 focus-visible:ring-1 pl-8"
-                placeholder="Search for clips..."
+                placeholder="Search for your favorite clips, shows, or movies..."
                 type="text"
               />
               <Button variant="outline" className="rounded-full tracking-tight h-10 px-4">
@@ -290,7 +290,187 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
               width="411"
               height="239"
               fill="none"
-              className="shadow-lg rounded-[14px] mb-12 z-10 relative empty-state-center"
+              viewBox="0 0 411 239"
+              className="shadow-lg rounded-[14px] mb-12 absolute top-0 left-0 translate-x-[30px] translate-y-[30px] rotate-[3deg] empty-state-right dark:block hidden"
+            >
+              <g clipPath="url(#clip0_2588_330)">
+                <rect width="411" height="239" fill="#27272A" rx="14"></rect>
+                <rect
+                  width="410"
+                  height="238"
+                  x="0.5"
+                  y="0.5"
+                  fill="#212121"
+                  stroke="#2F2F2F"
+                  rx="13.5"
+                ></rect>
+                <rect width="392" height="194" x="10" y="11" fill="#2F2F2F" rx="6"></rect>
+                <rect
+                  width="308"
+                  height="16"
+                  fill="#2F2F2F"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 10 227)"
+                ></rect>
+                <rect
+                  width="36"
+                  height="16"
+                  fill="#2F2F2F"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 366 227)"
+                ></rect>
+                <path
+                  fill="#3B3B3B"
+                  d="M189.328 82.777c0-5.093 5.63-8.174 9.92-5.428l40.192 25.722c3.961 2.536 3.961 8.322 0 10.858l-40.192 25.722c-4.29 2.746-9.92-.335-9.92-5.428z"
+                ></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_2588_330">
+                  <rect width="411" height="239" fill="#fff" rx="14"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="411"
+              height="239"
+              fill="none"
+              viewBox="0 0 411 239"
+              className="shadow-lg rounded-[14px] mb-12 z-10 relative empty-state-center hidden dark:block"
+            >
+              <g clipPath="url(#clip0_2588_330)">
+                <rect width="411" height="239" fill="#27272A" rx="14"></rect>
+                <rect
+                  width="410"
+                  height="238"
+                  x="0.5"
+                  y="0.5"
+                  fill="#212121"
+                  stroke="#2F2F2F"
+                  rx="13.5"
+                ></rect>
+                <rect width="392" height="194" x="10" y="11" fill="#2F2F2F" rx="6"></rect>
+                <rect
+                  width="308"
+                  height="16"
+                  fill="#2F2F2F"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 10 227)"
+                ></rect>
+                <rect
+                  width="36"
+                  height="16"
+                  fill="#2F2F2F"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 366 227)"
+                ></rect>
+                <path
+                  fill="#3B3B3B"
+                  d="M189.328 82.777c0-5.093 5.63-8.174 9.92-5.428l40.192 25.722c3.961 2.536 3.961 8.322 0 10.858l-40.192 25.722c-4.29 2.746-9.92-.335-9.92-5.428z"
+                ></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_2588_330">
+                  <rect width="411" height="239" fill="#fff" rx="14"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="411"
+              height="239"
+              fill="none"
+              viewBox="0 0 411 239"
+              className="shadow-lg rounded-[14px] mb-12 absolute top-0 left-0 translate-x-[30px] translate-y-[30px] rotate-[3deg] empty-state-right dark:block hidden"
+            >
+              <g clipPath="url(#clip0_2588_330)">
+                <rect width="411" height="239" fill="#27272A" rx="14"></rect>
+                <rect
+                  width="410"
+                  height="238"
+                  x="0.5"
+                  y="0.5"
+                  fill="#212121"
+                  stroke="#2F2F2F"
+                  rx="13.5"
+                ></rect>
+                <rect width="392" height="194" x="10" y="11" fill="#2F2F2F" rx="6"></rect>
+                <rect
+                  width="308"
+                  height="16"
+                  fill="#2F2F2F"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 10 227)"
+                ></rect>
+                <rect
+                  width="36"
+                  height="16"
+                  fill="#2F2F2F"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 366 227)"
+                ></rect>
+                <path
+                  fill="#3B3B3B"
+                  d="M189.328 82.777c0-5.093 5.63-8.174 9.92-5.428l40.192 25.722c3.961 2.536 3.961 8.322 0 10.858l-40.192 25.722c-4.29 2.746-9.92-.335-9.92-5.428z"
+                ></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_2588_330">
+                  <rect width="411" height="239" fill="#fff" rx="14"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="411"
+              height="239"
+              fill="none"
+              viewBox="0 0 411 239"
+              className="shadow-lg rounded-[14px] mb-12 absolute top-0 left-0 translate-x-[-30px] -translate-y-[30px] rotate-[-3deg] empty-state-left hidden dark:block"
+            >
+              <g clipPath="url(#clip0_2588_330)">
+                <rect width="411" height="239" fill="#27272A" rx="14"></rect>
+                <rect
+                  width="410"
+                  height="238"
+                  x="0.5"
+                  y="0.5"
+                  fill="#212121"
+                  stroke="#2F2F2F"
+                  rx="13.5"
+                ></rect>
+                <rect width="392" height="194" x="10" y="11" fill="#2F2F2F" rx="6"></rect>
+                <rect
+                  width="308"
+                  height="16"
+                  fill="#2F2F2F"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 10 227)"
+                ></rect>
+                <rect
+                  width="36"
+                  height="16"
+                  fill="#2F2F2F"
+                  rx="6"
+                  transform="matrix(1 0 0 -1 366 227)"
+                ></rect>
+                <path
+                  fill="#3B3B3B"
+                  d="M189.328 82.777c0-5.093 5.63-8.174 9.92-5.428l40.192 25.722c3.961 2.536 3.961 8.322 0 10.858l-40.192 25.722c-4.29 2.746-9.92-.335-9.92-5.428z"
+                ></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_2588_330">
+                  <rect width="411" height="239" fill="#fff" rx="14"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="411"
+              height="239"
+              fill="none"
+              className="shadow-lg rounded-[14px] mb-12 z-10 relative empty-state-center dark:hidden"
               viewBox="0 0 411 239"
             >
               <g clipPath="url(#clip0_2569_247)">
@@ -335,7 +515,7 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
               width="411"
               height="239"
               fill="none"
-              className="shadow-lg rounded-[14px] mb-12 absolute top-0 left-0 translate-x-[30px] translate-y-[30px] rotate-[3deg] empty-state-right"
+              className="shadow-lg rounded-[14px] mb-12 absolute top-0 left-0 translate-x-[30px] translate-y-[30px] rotate-[3deg] empty-state-right dark:hidden"
               viewBox="0 0 411 239"
             >
               <g clipPath="url(#clip0_2569_247)">
@@ -380,7 +560,7 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
               width="411"
               height="239"
               fill="none"
-              className="shadow-lg rounded-[14px] mb-12 absolute top-0 left-0 translate-x-[-30px] -translate-y-[30px] rotate-[-3deg] empty-state-left"
+              className="shadow-lg rounded-[14px] mb-12 absolute top-0 left-0 translate-x-[-30px] -translate-y-[30px] rotate-[-3deg] empty-state-left dark:hidden"
               viewBox="0 0 411 239"
             >
               <g clipPath="url(#clip0_2569_247)">
@@ -421,8 +601,10 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
               </defs>
             </svg>
           </div>
-          <h2 className="text-lg font-medium text-black tracking-tighter">No clips found</h2>
-          <p className="text-sm text-muted-foreground">
+          <h2 className="text-lg font-medium text-black dark:text-white tracking-tighter">
+            No clips found
+          </h2>
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground">
             Try searching for a different show or clip.
           </p>
         </div>
