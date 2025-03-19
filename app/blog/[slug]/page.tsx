@@ -50,11 +50,11 @@ export default async function PostPage({
 
   return (
     <div className="flex-col flex w-screen relative scroll-smooth">
-      <div className="z-[2] sticky top-0 mx-auto w-full">
+      <div className="z-2 sticky top-0 mx-auto w-full">
         <Header />
       </div>
       <div className="relative">
-        <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
+        <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-0 blur-[64px] transform-gpu opacity-10 top-48"></div>
         <main className="mx-auto relative">
           <div className="mx-auto absolute h-full flex justify-between z-[-1]"></div>
 

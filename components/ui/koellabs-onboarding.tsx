@@ -98,7 +98,7 @@ export default function OnboardingFlow({ user }: { user: string }) {
 
   return (
     <div className="flex justify-center items-center h-full bg-muted relative rounded-xl m-4 overflow-hidden dark:bg-neutral-900/[0.25] border border-neutral-200">
-      <div className="mx-auto absolute top-0 left-0 right-0 bottom-0 h-full flex justify-between z-[0] rotate-45 scale-[1.95]">
+      <div className="mx-auto absolute top-0 left-0 right-0 bottom-0 h-full flex justify-between z-0 rotate-45 scale-[1.95]">
         <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops"></div>
         <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900"></div>
         <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops3"></div>
@@ -141,12 +141,12 @@ export default function OnboardingFlow({ user }: { user: string }) {
         <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops4"></div>
       </div>
 
-      <Card className="w-[600px] p-0 rounded-2xl bg-white border border-neutral-200 z-[11] relative">
+      <Card className="w-[600px] p-0 rounded-2xl bg-white border border-neutral-200 z-11 relative">
         <CardHeader className="text-center bg-neutral-50 rounded-t-2xl py-9">
           <KoelBird className="w-16 h-16 mx-auto" />
           <CardTitle className="text-2xl tracking-tighter font-semibold">
             Welcome to Koel{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-br from-black via-sky-950 to-sky-600 dark:from-white dark:via-white dark:to-white">
+            <span className="text-transparent bg-clip-text bg-linear-to-br from-black via-sky-950 to-sky-600 dark:from-white dark:via-white dark:to-white">
               Labs!
             </span>
           </CardTitle>
@@ -279,7 +279,7 @@ export default function OnboardingFlow({ user }: { user: string }) {
             {step === 4 && (
               <div className="space-y-4">
                 <div className="flex flex-col gap-4">
-                  <div className="relative flex w-full items-start mt-3 gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 has-[[data-state=checked]]:border-ring">
+                  <div className="relative flex w-full items-start mt-3 gap-2 rounded-lg border border-input p-4 shadow-xs shadow-black/5 has-data-[state=checked]:border-ring">
                     <Checkbox
                       id="consent"
                       checked={consent}
@@ -306,7 +306,7 @@ export default function OnboardingFlow({ user }: { user: string }) {
                     </div>
                   </div>
 
-                  <div className="relative flex w-full items-start gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 has-[[data-state=checked]]:border-ring">
+                  <div className="relative flex w-full items-start gap-2 rounded-lg border border-input p-4 shadow-xs shadow-black/5 has-data-[state=checked]:border-ring">
                     <Checkbox
                       id="privacy"
                       checked={privacyPolicy}
@@ -340,7 +340,7 @@ export default function OnboardingFlow({ user }: { user: string }) {
                     </div>
                   </div>
 
-                  <div className="relative flex w-full items-start gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 has-[[data-state=checked]]:border-ring">
+                  <div className="relative flex w-full items-start gap-2 rounded-lg border border-input p-4 shadow-xs shadow-black/5 has-data-[state=checked]:border-ring">
                     <Checkbox
                       id="terms"
                       checked={termsOfService}

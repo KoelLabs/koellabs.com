@@ -8,7 +8,7 @@ import { Card } from '@/components/ui/base/card';
 export default function Bento() {
   return (
     <div id="learn-more" className="relative">
-      <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
+      <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-0 blur-[64px] transform-gpu opacity-10 top-48"></div>
       <div className="mx-auto relative">
         <div className="mx-auto absolute h-full flex justify-between z-[-1]"></div>
 
@@ -31,7 +31,7 @@ export default function Bento() {
               >
                 <li className="relative lg:col-span-3">
                   <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
-                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]">
+                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]">
                     <img
                       alt="Screenshot showing the massive library of content available to practice with"
                       src="/images/bentoClips.png"
@@ -48,11 +48,11 @@ export default function Bento() {
                       </p>
                     </div>
                   </article>
-                  <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
+                  <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
                 </li>
                 <li className="relative lg:col-span-3">
                   <div className="absolute inset-px rounded-lg bg-white lg:rounded-tr-[2rem]" />
-                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
+                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
                     <img
                       alt="Screenshot showing detailed pronunciation feedback interface"
                       src="/images/bentoActionable.png"
@@ -69,11 +69,11 @@ export default function Bento() {
                       </p>
                     </div>
                   </article>
-                  <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-tr-[2rem]" />
+                  <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-tr-[2rem]" />
                 </li>
                 <li className="relative lg:col-span-2">
                   <div className="absolute inset-px rounded-lg bg-white lg:rounded-bl-[2rem]" />
-                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]">
+                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]">
                     <img
                       alt="Screenshot showing analysis interface"
                       src="/images/bentoFeedback.png"
@@ -89,11 +89,11 @@ export default function Bento() {
                       </p>
                     </div>
                   </article>
-                  <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-bl-[2rem]" />
+                  <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-bl-[2rem]" />
                 </li>
                 <li className="relative lg:col-span-2">
                   <div className="absolute inset-px rounded-lg bg-white" />
-                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
+                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
                     <img
                       alt="Screenshot showing deep practice mode"
                       src="/images/bentoComplex.png"
@@ -110,11 +110,11 @@ export default function Bento() {
                       </p>
                     </div>
                   </article>
-                  <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5" />
+                  <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5" />
                 </li>
                 <li className="relative lg:col-span-2">
                   <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]" />
-                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]">
+                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]">
                     <img
                       alt="An image of the worlds map to highlight the diversity of dialects"
                       src="/images/bentoDialect.png"
@@ -130,7 +130,7 @@ export default function Bento() {
                       </p>
                     </div>
                   </article>
-                  <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]" />
+                  <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]" />
                 </li>
               </ul>
             </div>

@@ -7,7 +7,7 @@ import * as SliderPrimitive from '@radix-ui/react-slider';
 
 export function BetaCard() {
   return (
-    <Card className="rounded-md text-xs shadow-sm min-w-[233px]">
+    <Card className="rounded-md text-xs shadow-xs min-w-[233px]">
       <CardContent className="flex flex-col items-start gap-2 p-4">
         <div className="flex items-center tracking-tight w-full">
           <h3 className="font-semibold text-sm">Welcome to the Beta!</h3>

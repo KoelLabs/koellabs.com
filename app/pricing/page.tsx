@@ -108,15 +108,15 @@ export default function Page() {
     <NotFound />
     // <div className="flex-col flex w-screen relative scroll-smooth">
 
-    //   {/* <div className="z-[2] sticky top-0 mx-auto w-full">
+    //   {/* <div className="z-2 sticky top-0 mx-auto w-full">
     //     <Header />
     //   </div>
     //   <div className="min-h-screen">
-    //     <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
-    //     <div className=" py-24 sm:py-32 z-[1] relative">
+    //     <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-0 blur-[64px] transform-gpu opacity-10 top-48"></div>
+    //     <div className=" py-24 sm:py-32 z-1 relative">
     //       <div className="mx-auto max-w-7xl px-6 lg:px-8">
     //         <div className="mx-auto max-w-4xl text-center">
-    //           <h2 className="text-base font-semibold leading-7 text-transparent bg-clip-text bg-gradient-to-br from-black to-sky-600">
+    //           <h2 className="text-base font-semibold leading-7 text-transparent bg-clip-text bg-linear-to-br from-black to-sky-600">
     //             Pricing
     //           </h2>
     //           <p className="text-4xl font-bold tracking-[-0.04em] text-neutral-900 sm:text-5xl">
@@ -137,7 +137,7 @@ export default function Page() {
     //                 <Radio
     //                   key={option.value}
     //                   value={option}
-    //                   className="cursor-pointer rounded-full px-2.5 py-1 text-neutral-500 data-[checked]:bg-gradient-to-br data-[checked]:from-black data-[checked]:to-sky-800 data-[checked]:text-white"
+    //                   className="cursor-pointer rounded-full px-2.5 py-1 text-neutral-500 data-checked:bg-linear-to-br data-checked:from-black data-checked:to-sky-800 data-checked:text-white"
     //                 >
     //                   {option.label}
     //                 </Radio>
@@ -151,7 +151,7 @@ export default function Page() {
     //               key={tier.id}
     //               className={classNames(
     //                 tier.mostPopular
-    //                   ? 'ring-2 ring-sky-800 bg-gradient-to-b shadow-sky-950/50'
+    //                   ? 'ring-2 ring-sky-800 bg-linear-to-b shadow-sky-950/50'
     //                   : 'ring-1 ring-neutral-200 mt-8',
     //                 'rounded-3xl p-8 xl:p-10 bg-white shadow-lg flex flex-col justify-between',
     //               )}
@@ -208,9 +208,9 @@ export default function Page() {
     //                 aria-describedby={tier.id}
     //                 className={classNames(
     //                   tier.mostPopular
-    //                     ? 'border bg-gradient-to-br border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800 text-white shadow shadow-sky-950 hover:shadow-sky-700'
+    //                     ? 'border bg-linear-to-br border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800 text-white shadow-sm shadow-sky-950 hover:shadow-sky-700'
     //                     : 'text-black ring-1 ring-inset ring-sky-800/50 hover:ring-sky-900/60',
-    //                   'mt-8 transition-all hover:-translate-y-0.5 hover:shadow block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
+    //                   'mt-8 transition-all hover:-translate-y-0.5 hover:shadow-sm block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
     //                 )}
     //               >
     //                 {tier.clickMessage || 'Try for Free'}

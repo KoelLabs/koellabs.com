@@ -9,7 +9,7 @@ import HeroVideoDialog from '@/components/ui/magicui/hero-video-dialog';
 export default function Hero() {
   return (
     <div className="relative">
-      <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
+      <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-0 blur-[64px] transform-gpu opacity-10 top-48"></div>
       <div className="mx-auto md:px-6 pt-0 lg:px-8 py-32 relative">
         <div className="mx-auto p-4 max-w-3xl py-32">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
@@ -44,7 +44,7 @@ export default function Hero() {
               className="text-2xl sm:text-4xl font-bold tracking-[-0.04em] sm:max-w-[500px] lg:max-w-[1400px] mx-auto text-pretty text-gray-900 lg:text-6xl overflow-visible"
             >
               Master Pronunciation with
-              <span className="bg-clip-text text-transparent bg-gradient-to-br mr-1 from-sky-600 to-blue-950 overflow-visible py-1">
+              <span className="bg-clip-text text-transparent bg-linear-to-br mr-1 from-sky-600 to-blue-950 overflow-visible py-1">
                 {' '}
                 Classic Movie Scenes{' '}
               </span>
@@ -116,7 +116,7 @@ export default function Hero() {
                 className="w-full sm:w-auto"
                 aria-label="Join the waitlist"
               >
-                <Button className="w-full rounded-lg sm:w-40 bg-gradient-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
+                <Button className="w-full rounded-lg sm:w-40 bg-linear-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
                   Join the Waitlist
                 </Button>
               </Link>
@@ -149,7 +149,7 @@ export default function Hero() {
         </div>
 
         <div className="flex justify-center sm:overflow-visible overflow-hidden">
-          <Card className=" max-w-[1200px] min-w-[500px] border-neutral-300/50 p-6 bg-white border-2 rounded-3xl shadow-2xl w-full h-fit mx-auto  z-[0] relative ">
+          <Card className=" max-w-[1200px] min-w-[500px] border-neutral-300/50 p-6 bg-white border-2 rounded-3xl shadow-2xl w-full h-fit mx-auto  z-0 relative ">
             <HeroVideoDialog
               className="rounded-[500px]"
               animationStyle="top-in-bottom-out"

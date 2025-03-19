@@ -30,7 +30,7 @@ export default function AuthScreen() {
         <div className="mx-auto grid w-full p-4 sm:w-[405px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-semibold tracking-tighter ">
-              <span className="relative mr-1 ml-6 text-transparent bg-clip-text bg-gradient-to-br from-black via-black to-sky-600 dark:from-neutral-100 dark:via-neutral-100 dark:to-neutral-100">
+              <span className="relative mr-1 ml-6 text-transparent bg-clip-text bg-linear-to-br from-black via-black to-sky-600 dark:from-neutral-100 dark:via-neutral-100 dark:to-neutral-100">
                 {' '}
                 <svg
                   className="h-10 w-10 absolute -left-10 -mt-1 hidden dark:inline"
@@ -366,7 +366,7 @@ export default function AuthScreen() {
               />
             </div>
             <Button
-              className="w-full mt-2 dark:text-white bg-gradient-to-br py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800 h-10 rounded-lg"
+              className="w-full mt-2 dark:text-white bg-linear-to-br py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800 h-10 rounded-lg"
               type="submit"
               onClick={async () => {
                 const error = await emailPasswordLogin(email, password);
@@ -520,7 +520,7 @@ export default function AuthScreen() {
         </div>
       </div>
       <div className="hidden bg-muted lg:block relative rounded-xl m-4 overflow-hidden dark:bg-neutral-900/[0.25] border">
-        <div className="mx-auto absolute top-0 left-0 right-0 bottom-0 h-full flex justify-between z-[10] rotate-45 scale-[1.35]">
+        <div className="mx-auto absolute top-0 left-0 right-0 bottom-0 h-full flex justify-between z-10 rotate-45 scale-[1.35]">
           <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops"></div>
           <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops2"></div>
           <div className="w-[1px] h-full bg-neutral-200 dark:bg-neutral-900 drops3"></div>

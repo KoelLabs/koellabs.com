@@ -80,7 +80,7 @@ export default function HeroVideoDialog({
   const selectedAnimation = animationVariants[animationStyle];
 
   return (
-    <div className={cn('z-[1000]', className)}>
+    <div className={cn('z-1000', className)}>
       <Link href={videoSrc} target="_blank">
         <div className="relative cursor-pointer group">
           <img
@@ -93,7 +93,7 @@ export default function HeroVideoDialog({
           <div className="absolute inset-0 flex items-center justify-center group-hover:scale-100 scale-[0.9] transition-all duration-200 ease-out rounded-2xl">
             <div className="bg-sky-900/20 flex items-center justify-center rounded-full backdrop-blur-md size-28">
               <div
-                className={`flex items-center justify-center bg-gradient-to-b from-black to-sky-900 shadow-md rounded-full size-20 transition-all ease-out duration-200 relative group-hover:scale-[1.2] scale-100`}
+                className={`flex items-center justify-center bg-linear-to-b from-black to-sky-900 shadow-md rounded-full size-20 transition-all ease-out duration-200 relative group-hover:scale-[1.2] scale-100`}
               >
                 {/* <Play
                   className="size-8 text-white fill-white group-hover:scale-105 scale-100 transition-transform duration-200 ease-out group-hover:hidden"
@@ -120,7 +120,7 @@ export default function HeroVideoDialog({
               animate={{ opacity: 1 }}
               onClick={() => setIsVideoOpen(false)}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-md"
+              className="fixed inset-0 z-9999 flex items-center justify-center bg-black/50 backdrop-blur-md"
             >
               <motion.div
                 {...selectedAnimation}
@@ -130,7 +130,7 @@ export default function HeroVideoDialog({
                 <motion.button className="absolute -top-16 right-0 text-white text-xl bg-neutral-900/50 ring-1 backdrop-blur-md rounded-full p-2 dark:bg-neutral-100/50 dark:text-black">
                   <XIcon className="size-5" />
                 </motion.button>
-                <div className="size-full border-2 border-white rounded-2xl overflow-hidden isolate z-[5000] relative">
+                <div className="size-full border-2 border-white rounded-2xl overflow-hidden isolate z-5000 relative">
                   <iframe
                     src={videoSrc}
                     className="size-full rounded-2xl"

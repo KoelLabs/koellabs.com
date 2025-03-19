@@ -32,7 +32,7 @@ export default function PostBody() {
         <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl text-center">
           {metadata.title}
         </h1>
-        <div className="p-px mt-16 relative z-10 bg-gradient-to-b from-transparent via-neutral-200 to-transparent rounded-lg">
+        <div className="p-px mt-16 relative z-10 bg-linear-to-b from-transparent via-neutral-200 to-transparent rounded-lg">
           <img
             src="/images/blogLeaderboardsAlt.png"
             alt="Building Open Source Leaderboards"

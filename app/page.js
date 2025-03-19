@@ -6,7 +6,7 @@ import Footer from '@/components/sections/4 - Footer';
 export default function Home() {
   return (
     <div className="flex-col flex w-screen relative scroll-smooth">
-      <div className="z-[1] sticky top-0 mx-auto w-full">
+      <div className="z-1 sticky top-0 mx-auto w-full">
         <Header />
       </div>
       <Hero />

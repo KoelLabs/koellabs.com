@@ -32,10 +32,10 @@ const people = [
 export default function About() {
   return (
     <div className="relative">
-      <div className="z-[2] sticky top-0 mx-auto w-full">
+      <div className="z-2 sticky top-0 mx-auto w-full">
         <Header />
       </div>
-      <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
+      <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-0 blur-[64px] transform-gpu opacity-10 top-48"></div>
       <div className="mx-auto pt-0  py-32 relative">
         <div className="mx-auto absolute opacity-25 sm:opacity-100 top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[-1]">
           <div className="h-full"></div>
@@ -65,7 +65,7 @@ export default function About() {
               {/* <h1 class="max-w-2xl text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl lg:col-span-2 xl:col-auto">We’re changing the way people connect</h1> */}
               <h1 className="max-w-2xl xss:text-3xl pt-12 text-balance text-2xl font-semibold tracking-tighter text-black sm:text-6xl lg:col-span-2 xl:col-auto">
                 We Want to Change{' '}
-                <span className="bg-clip-text text-transparent bg-gradient-to-br from-sky-600 to-blue-950">
+                <span className="bg-clip-text text-transparent bg-linear-to-br from-sky-600 to-blue-950">
                   Pronunciation Learning
                 </span>
               </h1>
@@ -90,11 +90,11 @@ export default function About() {
                   />
                 </div>
               </div>
-              <div className="mt-10 aspect-[6/5] w-full md:max-w-lg rounded-[32px] object-cover sm:mt-16 lg:mt-8 xl:-mt-8 lg:max-w-none xl:row-span-2 xl:row-end-2 p-4 bg-white/75 backdrop-blur-md border border-neutral-300/50">
+              <div className="mt-10 aspect-6/5 w-full md:max-w-lg rounded-[32px] object-cover sm:mt-16 lg:mt-8 xl:-mt-8 lg:max-w-none xl:row-span-2 xl:row-end-2 p-4 bg-white/75 backdrop-blur-md border border-neutral-300/50">
                 <img
                   alt="A photo of the Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the bay bridge in San Francisco."
                   src="/images/aboutShot.jpeg"
-                  className=" aspect-[6/5] scale w-full md:max-w-lg rounded-2xl object-cover object-left lg:max-w-none xl:row-span-2 xl:row-end-2 border border-neutral-300"
+                  className=" aspect-6/5 scale w-full md:max-w-lg rounded-2xl object-cover object-left lg:max-w-none xl:row-span-2 xl:row-end-2 border border-neutral-300"
                 />
               </div>
             </div>

@@ -33,7 +33,7 @@ export default function PostBody() {
           {metadata.title}
         </h1>
 
-        <div className="p-px mt-16 relative z-10 bg-gradient-to-b from-transparent via-neutral-200 to-transparent rounded-lg">
+        <div className="p-px mt-16 relative z-10 bg-linear-to-b from-transparent via-neutral-200 to-transparent rounded-lg">
         <img
           src={metadata.image}
           alt="Phonemic Transcription Metrics"

@@ -514,7 +514,7 @@ export default function Page() {
         </h1>
       </div>
       <div className="flex flex-col lg:flex-row w-full h-full gap-2">
-        <div className="w-full lg:flex-[4] bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex">
+        <div className="w-full lg:flex-4 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex">
           <VideoPlayer
             src={currentVideo?.video}
             title={currentVideo?.name}
@@ -554,10 +554,10 @@ export default function Page() {
                   {isSectionDone(index) && (
                     <CheckCircle2 className="h-4 w-4 text-[#1B997B] dark:text-[#9DD8C5] absolute left-2 top-2" />
                   )}
-                  <span className="text-neutral-700 dark:text-neutral-200 font-medium tracking-tighter z-[1]">
+                  <span className="text-neutral-700 dark:text-neutral-200 font-medium tracking-tighter z-1">
                     Section #{index + 1}
                   </span>
-                  <span className="text-neutral-500 dark:text-neutral-400 text-xs font-mono tracking-tight z-[1]">
+                  <span className="text-neutral-500 dark:text-neutral-400 text-xs font-mono tracking-tight z-1">
                     {formatTime(section.start)} - {formatTime(section.end)}
                   </span>
                 </button>
@@ -761,7 +761,7 @@ export default function Page() {
                                     the actor made to understand the differences!
                                   </p>
                                   <div className="flex gap-4">
-                                    <div className="flex flex-col gap-2 flex-1 flex-grow">
+                                    <div className="flex flex-col gap-2 flex-1 grow">
                                       <h5 className="font-medium text-sm">
                                         The actor pronunciation (
                                         {
@@ -787,7 +787,7 @@ export default function Page() {
                                         }}
                                       ></p>
                                     </div>
-                                    <div className="flex flex-col gap-2 flex-1 flex-grow">
+                                    <div className="flex flex-col gap-2 flex-1 grow">
                                       <h5 className="font-medium text-sm">
                                         Your Pronunciation (
                                         {
@@ -914,7 +914,7 @@ export default function Page() {
                     key={index}
                     className="text-neutral-800 dark:text-neutral-200 my-2 border border-neutral-200 dark:border-neutral-700 rounded-lg p-2 bg-neutral-200/50 dark:bg-neutral-800 flex"
                   >
-                    <span className="font-semibold capitalize aspect-[17/9] text-black border-dashed bg-neutral-200 border-neutral-300 dark:border-neutral-700 p-3 border rounded-md flex items-center justify-center h-12 mr-2">
+                    <span className="font-semibold capitalize aspect-17/9 text-black border-dashed bg-neutral-200 border-neutral-300 dark:border-neutral-700 p-3 border rounded-md flex items-center justify-center h-12 mr-2">
                       {feedback[0]}
                     </span>
                     <div>{feedback[1]}</div>

@@ -373,7 +373,7 @@ export function AppSidebar() {
                   className="tracking-tighter -ml-1.5 text-xl overflow-hidden whitespace-nowrap"
                 >
                   Koel{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-black via-sky-950 to-sky-600 dark:from-white dark:via-white dark:to-black">
+                  <span className="text-transparent bg-clip-text bg-linear-to-br from-black via-sky-950 to-sky-600 dark:from-white dark:via-white dark:to-black">
                     Labs
                   </span>
                   <Badge variant="outline" className="ml-1.5 tracking-tight -translate-y-[3px]">

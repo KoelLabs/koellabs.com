@@ -229,7 +229,7 @@ export function Dashboard() {
               <CardHeader className="p-2 pt-0 md:p-4">
                 <CardTitle>
                   Unlock{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-black to-sky-600">
+                  <span className="text-transparent bg-clip-text bg-linear-to-br from-black to-sky-600">
                     Premium
                   </span>
                 </CardTitle>
@@ -240,7 +240,7 @@ export function Dashboard() {
               <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
                 <Button
                   size="sm"
-                  className="w-full border bg-gradient-to-br border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800 text-white"
+                  className="w-full border bg-linear-to-br border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800 text-white"
                 >
                   Upgrade
                 </Button>
@@ -326,7 +326,7 @@ export function Dashboard() {
             <h1 className="text-lg font-semibold md:text-2xl tracking-tight ">Dashboard</h1>
           </div>
           <div
-            className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
+            className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-xs"
             x-chunk="dashboard-02-chunk-1"
           >
             <div className="flex flex-col items-center gap-1 text-center">

@@ -178,7 +178,7 @@ export default function Header() {
               </defs>
             </svg>
             Koel{' '}
-            <span className="ml-1 text-transparent bg-clip-text bg-gradient-to-br from-black via-sky-950 to-sky-500">
+            <span className="ml-1 text-transparent bg-clip-text bg-linear-to-br from-black via-sky-950 to-sky-500">
               Labs
             </span>
           </a>
@@ -219,7 +219,7 @@ export default function Header() {
             </kbd>
           </Button> */}
           <Link href="#join-the-waitlist">
-            <Button className=" bg-gradient-to-b py-0 px-6 rounded-lg border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
+            <Button className=" bg-linear-to-b py-0 px-6 rounded-lg border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
               Join the Waitlist
             </Button>
           </Link>
@@ -372,7 +372,7 @@ export default function Header() {
                 </defs>
               </svg>
               Koel{' '}
-              <span className="ml-1 text-transparent bg-clip-text bg-gradient-to-br from-black via-sky-950 to-sky-500">
+              <span className="ml-1 text-transparent bg-clip-text bg-linear-to-br from-black via-sky-950 to-sky-500">
                 Labs
               </span>
             </a>
@@ -412,7 +412,7 @@ export default function Header() {
             </kbd>
           </Button> */}
                 <Link href="#join-the-waitlist">
-                  <Button className="w-full bg-gradient-to-b py-0 px-6 rounded-lg border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
+                  <Button className="w-full bg-linear-to-b py-0 px-6 rounded-lg border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
                     Join the Waitlist
                   </Button>
                 </Link>

@@ -228,7 +228,7 @@ export default function Footer() {
               </defs>
             </svg>
             Koel{' '}
-            <span className=" -ml-px text-transparent bg-clip-text bg-gradient-to-br from-black via-sky-950 to-sky-500">
+            <span className=" -ml-px text-transparent bg-clip-text bg-linear-to-br from-black via-sky-950 to-sky-500">
               Labs
             </span>
           </a>
@@ -313,7 +313,7 @@ export default function Footer() {
             <div className="mt-4 sm:ml-4 sm:mt-0 sm:shrink-0">
               <button
                 type="submit"
-                className="flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Subscribe
               </button>
@@ -337,8 +337,8 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Koel Labs. All rights reserved.
           </p>
         </div>
-        <div className="max-h-[224px] h-full w-full overflow-hidden bg-gradient-to-b relative">
-          <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent to-white z-10"></div>
+        <div className="max-h-[224px] h-full w-full overflow-hidden bg-linear-to-b relative">
+          <div className="absolute bottom-0 left-0 w-full h-full bg-linear-to-b from-transparent via-transparent to-white z-10"></div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="100%"

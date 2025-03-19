@@ -26,7 +26,7 @@ export function NavVideos({ videos, className, isCollapsed }) {
       {videos.map(item => (
         <li
           key={item.name}
-          className="has-[[data-state=open]]:bg-accent has-[[data-state=open]]:text-accent-foreground group relative rounded-md hover:bg-accent hover:text-accent-foreground"
+          className="has-data-[state=open]:bg-accent has-data-[state=open]:text-accent-foreground group relative rounded-md hover:bg-accent hover:text-accent-foreground"
         >
           {isCollapsed ? (
             <TooltipProvider delayDuration={0}>
@@ -36,7 +36,7 @@ export function NavVideos({ videos, className, isCollapsed }) {
                     prefetch
                     href={'/dashboard/' + item.id}
                     className={cn(
-                      'flex h-7 items-center gap-2.5 overflow-hidden rounded-md px-1.5 text-xs outline-none ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2',
+                      'flex h-7 items-center gap-2.5 overflow-hidden rounded-md px-1.5 text-xs outline-hidden ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2',
                       'justify-center h-10',
                       url.includes(item.id) ? 'bg-accent text-accent-foreground' : '',
                     )}
@@ -53,7 +53,7 @@ export function NavVideos({ videos, className, isCollapsed }) {
                 prefetch
                 href={'/dashboard/' + item.id}
                 className={cn(
-                  'flex h-7 items-center gap-2.5 overflow-hidden rounded-md px-1.5 text-xs outline-none ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2',
+                  'flex h-7 items-center gap-2.5 overflow-hidden rounded-md px-1.5 text-xs outline-hidden ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2',
                   url.includes(item.id) ? 'bg-accent text-accent-foreground' : '',
                 )}
               >

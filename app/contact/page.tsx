@@ -165,7 +165,7 @@ function ContactForm() {
         </div>
         <Button
           type="submit"
-          className="mt-3 rounded-lg bg-gradient-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950 w-full"
+          className="mt-3 rounded-lg bg-linear-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950 w-full"
         >
           Submit
         </Button>
@@ -188,10 +188,10 @@ function ContactForm() {
 export default function Contact() {
   return (
     <div className={`min-h-screen`}>
-      <div className="z-[2] sticky top-0 mx-auto w-full">
+      <div className="z-2 sticky top-0 mx-auto w-full">
         <Header />
       </div>
-      <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
+      <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-0 blur-[64px] transform-gpu opacity-10 top-48"></div>
       <div
         className={`mx-auto absolute top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[-1]`}
       >
@@ -210,8 +210,8 @@ export default function Contact() {
       </div>
 
       <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
-        <div className="sm:p-4 sm:border sm:border-neutral-200 bg-white/50 backdrop-blur-sm sm:rounded-[36px]">
-          <div className="relative isolate overflow-hidden bg-white/50 backdrop-blur-md border border-neutral-200 px-6 py-16 shadow-sm sm:rounded-3xl sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+        <div className="sm:p-4 sm:border sm:border-neutral-200 bg-white/50 backdrop-blur-xs sm:rounded-[36px]">
+          <div className="relative isolate overflow-hidden bg-white/50 backdrop-blur-md border border-neutral-200 px-6 py-16 shadow-xs sm:rounded-3xl sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="415"

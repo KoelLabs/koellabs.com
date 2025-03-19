@@ -18,7 +18,7 @@ const NavItem = memo(({ item, isCollapsed, isActive }) => (
             <Link
               href={item.url}
               className={cn(
-                'flex h-8 items-center gap-2 overflow-hidden rounded-md px-1.5 text-sm font-medium outline-none ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2',
+                'flex h-8 items-center gap-2 overflow-hidden rounded-md px-1.5 text-sm font-medium outline-hidden ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2',
                 isActive ? 'bg-accent text-accent-foreground' : '',
                 isCollapsed ? 'justify-center h-10 w-full px-0' : '',
               )}
@@ -34,7 +34,7 @@ const NavItem = memo(({ item, isCollapsed, isActive }) => (
       <Link
         href={item.url}
         className={cn(
-          'flex h-8 items-center gap-2 overflow-hidden rounded-md px-1.5 text-sm font-medium outline-none ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2',
+          'flex h-8 items-center gap-2 overflow-hidden rounded-md px-1.5 text-sm font-medium outline-hidden ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2',
           isActive ? 'bg-accent text-accent-foreground' : '',
         )}
       >

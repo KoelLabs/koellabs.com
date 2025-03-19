@@ -87,7 +87,7 @@ export default function CustomTimeline({
         <SliderPrimitive.Thumb
           className={`block h-3 w-3 rounded-full bg-white shadow-md transition-opacity absolute top-1/2 -translate-y-1/2 ${
             isHovering ? 'opacity-100' : 'opacity-0'
-          } hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500`}
+          } hover:opacity-100 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500`}
         />
       </SliderPrimitive.Root>
     </div>

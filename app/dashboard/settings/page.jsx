@@ -211,19 +211,19 @@ export default function SettingsPage() {
                             alt={item.label}
                             width={90}
                             height={90}
-                            className="relative object-cover cursor-pointer overflow-hidden rounded-lg border border-input shadow-sm shadow-black/5 outline-offset-2 transition-colors peer-[:focus-visible]:outline peer-[:focus-visible]:outline-2 peer-[:focus-visible]:outline-ring/70 peer-data-[disabled]:cursor-not-allowed peer-data-[state=checked]:border-ring peer-data-[state=checked]:bg-accent peer-data-[disabled]:opacity-50"
+                            className="relative object-cover cursor-pointer overflow-hidden rounded-lg border border-input shadow-xs shadow-black/5 outline-offset-2 transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-ring/70 peer-data-disabled:cursor-not-allowed peer-data-[state=checked]:border-ring peer-data-[state=checked]:bg-accent peer-data-disabled:opacity-50"
                           />
                           <span className="group mt-2 flex items-center gap-1 peer-data-[state=unchecked]:text-muted-foreground/70">
                             <Check
                               size={16}
                               strokeWidth={2}
-                              className="peer-data-[state=unchecked]:group-[]:hidden"
+                              className="in-[.group]:peer-data-[state=unchecked]:hidden"
                               aria-hidden="true"
                             />
                             <Minus
                               size={16}
                               strokeWidth={2}
-                              className="peer-data-[state=checked]:group-[]:hidden"
+                              className="in-[.group]:peer-data-[state=checked]:hidden"
                               aria-hidden="true"
                             />
                             <span className="text-xs font-medium">{item.label}</span>

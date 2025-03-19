@@ -27,7 +27,7 @@ function PostCard({ post }: { post: Post }) {
   return (
     <article className="relative">
       <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]" />
-      <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
+      <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
         <img
           alt={`Cover image for blog post: ${post.title}`}
           src={post.image}
@@ -64,7 +64,7 @@ function PostCard({ post }: { post: Post }) {
           </div>
           <div className="h-px bg-neutral-200 mb-8" role="separator"></div>
         </div>
-        <div className="absolute bottom-0 right-0 flex justify-end p-4 gap-2 z-[1] mt-4">
+        <div className="absolute bottom-0 right-0 flex justify-end p-4 gap-2 z-1 mt-4">
           {post.tags.map(tag => (
             <Link
               key={tag.text}
@@ -80,7 +80,7 @@ function PostCard({ post }: { post: Post }) {
           ))}
         </div>
       </div>
-      <div className="pointer-events-none absolute inset-px shadow ring-1 ring-black/5 rounded-[calc(theme(borderRadius.lg)+1px)]" />
+      <div className="pointer-events-none absolute inset-px shadow-sm ring-1 ring-black/5 rounded-[calc(var(--radius-lg)+1px)]" />
       <Link
         href={`/blog/${post.slug}`}
         className="absolute bottom-0 left-0 h-full w-full"
@@ -101,7 +101,7 @@ export default async function BlogList() {
 
         <div
           aria-hidden="true"
-          className="mx-auto absolute top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[0] opacity-25 sm:opacity-100"
+          className="mx-auto absolute top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-0 opacity-25 sm:opacity-100"
         >
           <div className="h-full"></div>
           <div className="h-full"></div>
