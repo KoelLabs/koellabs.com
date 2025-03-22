@@ -80,7 +80,7 @@ export default function NotFound() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-3">
               <Link href="/">
-                <Button className="w-full rounded-lg sm:w-40 bg-linear-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
+                <Button className="w-full rounded-lg sm:w-40 bg-linear-to-b border border-double outline-white/50 outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
                   <ArrowLeftIcon className="w-4 h-4 mr-2" />
                   Go back home
                 </Button>

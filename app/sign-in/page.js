@@ -366,7 +366,7 @@ export default function AuthScreen() {
               />
             </div>
             <Button
-              className="w-full mt-2 dark:text-white bg-linear-to-br py-0 border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800 h-10 rounded-lg"
+              className="w-full mt-2 dark:text-white bg-linear-to-br py-0 border border-double outline-white/50 outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800 h-10 rounded-lg"
               type="submit"
               onClick={async () => {
                 const error = await emailPasswordLogin(email, password);

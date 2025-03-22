@@ -215,9 +215,22 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
   return (
     <div className="w-full">
       <div className="flex flex-col gap-4 w-full h-fit">
-        <h1 className="text-2xl font-semibold text-black dark:text-white tracking-tighter pt-4 px-4">
-          Search Clips
-        </h1>
+        <div className="flex gap-2 w-full h-fit pt-4.5 px-4.5">
+          {/* <div
+            className="flex size-8 items-center justify-center rounded-lg bg-neutral-200"
+            aria-hidden="true"
+          >
+            <Search
+              size={16}
+              strokeWidth={2}
+              aria-hidden="true"
+              className="text-black/50 dark:text-white/50"
+            />
+          </div> */}
+          <h1 className="text-2xl font-semibold text-black dark:text-white tracking-tighter">
+            Search Clips
+          </h1>
+        </div>
 
         {/* Search Bar */}
         <form onSubmit={handleSearch} className="flex w-full gap-2 px-4">
@@ -250,7 +263,7 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
             className={`tracking-tight ${activeShow === null ? ' border border-neutral-500 dark:border-neutral-700' : ''}`}
           >
             <div className="w-4 overflow-hidden justify-center items-center grid pr-1.5 -ml-0.5">
-              <Dot className="w-14 h-14 text-black dark:text-white" />
+              <Dot className="size-12 text-black dark:text-white" />
             </div>
             All Shows
           </Button>
@@ -263,10 +276,7 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
               className={`tracking-tight ${activeShow === show.id ? ' border border-neutral-500 dark:border-neutral-700' : ''}`}
             >
               <div className="w-4 overflow-hidden justify-center items-center grid pr-1.5 -ml-0.5">
-                <Dot
-                  className="w-14 h-14 text-black dark:text-white"
-                  style={{ color: show.color }}
-                />
+                <Dot className="size-12 text-black dark:text-white" style={{ color: show.color }} />
               </div>
               {show.name}
             </Button>

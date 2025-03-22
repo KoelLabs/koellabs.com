@@ -76,7 +76,7 @@ export default function ClipsList({ title, clips, isRevisitList = false }: Clips
   const renderClip = (clip: BaseClip | RevisitClip, index: number) => {
     const clipContent = (
       <>
-        <Card className="border text-neutral-500 relative overflow-hidden dark:text-neutral-400 border-accent dark:border-accent-dark rounded-lg bg-neutral-200/50 dark:bg-neutral-800/50 border-neutral-300 dark:border-neutral-700">
+        <Card className="border text-neutral-500 relative overflow-hidden dark:text-neutral-400 rounded-lg bg-neutral-200/50 dark:bg-neutral-800/50 border-neutral-300 dark:border-neutral-800">
           <CardContent
             className={cn(
               'flex aspect-video items-center justify-center',
@@ -96,10 +96,10 @@ export default function ClipsList({ title, clips, isRevisitList = false }: Clips
           </CardContent>
         </Card>
         <div className="flex justify-between mt-1.5">
-          <h2 className="text-xs font-medium tracking-tight ml-1 line-clamp-1 text-neutral-700 dark:text-neutral-300">
+          <h2 className="text-sm font-medium tracking-tight ml-1 line-clamp-1 text-neutral-700 dark:text-neutral-300 h-full">
             {clip.title}
           </h2>
-          <p className="text-xs font-medium mr-1 text-neutral-500 dark:text-neutral-400">
+          <p className="text-sm font-medium mr-1 text-neutral-500 dark:text-neutral-400">
             {clip.duration}
           </p>
         </div>
@@ -155,7 +155,7 @@ export default function ClipsList({ title, clips, isRevisitList = false }: Clips
       {clips.length > 0 && (
         <>
           <div className="flex justify-between items-center p-4">
-            <h1 className="text-xl sm:text-2xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
+            <h1 className="text-xl sm:text-2xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100 pt-0.5 px-0.5">
               {title}
             </h1>
             {showViewAllButton && (
@@ -163,7 +163,7 @@ export default function ClipsList({ title, clips, isRevisitList = false }: Clips
                 onClick={toggleExpand}
                 variant="outline"
                 size="sm"
-                className="tracking-tight dark:border-neutral-700 dark:text-neutral-300"
+                className="tracking-tight dark:border-neutral-800 dark:text-neutral-300"
               >
                 {isExpanded ? 'Collapse' : 'View All'}
               </Button>

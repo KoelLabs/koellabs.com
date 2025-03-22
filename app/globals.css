@@ -194,6 +194,15 @@
     radial-gradient(at 79% 53%, #ffffff00 0, transparent 50%);
 }
 
+.color-bg-ui {
+  background-image: radial-gradient(at 27% 37%, #0284c7 0, transparent 0),
+    radial-gradient(at 100% 0%, #0285c7 0, transparent 40%),
+    radial-gradient(at 0% 100%, #0285c7 0, transparent 40%),
+    radial-gradient(at 100% 96%, #95c6e4 0, transparent 20%),
+    radial-gradient(at 13% 60%, #ffffff 0, transparent 50%),
+    radial-gradient(at 79% 53%, #ffffff 0, transparent 50%);
+}
+
 .drops {
   position: relative;
   overflow: hidden;
@@ -587,14 +596,6 @@ html {
   --media-chapters-time-font-weight: 500;
   --media-chapters-time-gap: 6px;
   --media-chapters-with-thumbnails-min-width: 300px;
-}
-
-body {
-  background-color: #fafafa;
-}
-
-main {
-  background-color: #fafafa;
 }
 
 .path {

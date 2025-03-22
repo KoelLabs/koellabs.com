@@ -159,52 +159,52 @@ export default function Page() {
             ['future', 'fjutʃɹ'],
           ],
         },
-        // {
-        //   start: 39,
-        //   end: 43,
-        //   thumbnail: 'd2.png',
-        //   target: 'hɑɹeɪtsoʊɹeɪʒɹhændɪfjuwɑɾɪɡɛtɹɪttʃ',
-        //   target_by_word: [
-        //     ['Alright', 'hɑɹeɪt'],
-        //     ['so', 'soʊ'],
-        //     ['raise', 'ɹeɪʒ'],
-        //     ['your', 'ɹ'],
-        //     ['hand', 'hænd'],
-        //     ['if', 'ɪf'],
-        //     ['you', 'ju'],
-        //     ['wanna', 'wɑɾɪ'],
-        //     ['get', 'ɡɛt'],
-        //     ['rich', 'ɹɪttʃ'],
-        //   ],
-        // },
-        // {
-        //   start: 63,
-        //   end: 64.5,
-        //   thumbnail: 'd3.png',
-        //   target: 'itsnɑɾəpɪɹmidzɡim',
-        //   target_by_word: [
-        //     ['It’s', 'its'],
-        //     ['not', 'nɑɾ'],
-        //     ['a', 'ə'],
-        //     ['pyramid', 'pɪɹmid'],
-        //     ['scheme', 'zɡim'],
-        //   ],
-        // },
-        // {
-        //   start: 77,
-        //   end: 78.2,
-        //   thumbnail: 'd4.png',
-        //   target: 'ʔaɪhæftikoʊmeɪkinkɔl',
-        //   target_by_word: [
-        //     ['I', 'ʔaɪ'],
-        //     ['have', 'hæf'],
-        //     ['to', 'ti'],
-        //     ['go', 'koʊ'],
-        //     ['make', 'meɪk'],
-        //     ['a', 'i'],
-        //     ['call', 'kɔl'],
-        //   ],
-        // },
+        {
+          start: 39,
+          end: 43,
+          thumbnail: 'd2.png',
+          target: 'hɑɹeɪtsoʊɹeɪʒɹhændɪfjuwɑɾɪɡɛtɹɪttʃ',
+          target_by_word: [
+            ['Alright', 'hɑɹeɪt'],
+            ['so', 'soʊ'],
+            ['raise', 'ɹeɪʒ'],
+            ['your', 'ɹ'],
+            ['hand', 'hænd'],
+            ['if', 'ɪf'],
+            ['you', 'ju'],
+            ['wanna', 'wɑɾɪ'],
+            ['get', 'ɡɛt'],
+            ['rich', 'ɹɪttʃ'],
+          ],
+        },
+        {
+          start: 63,
+          end: 64.5,
+          thumbnail: 'd3.png',
+          target: 'itsnɑɾəpɪɹmidzɡim',
+          target_by_word: [
+            ['It’s', 'its'],
+            ['not', 'nɑɾ'],
+            ['a', 'ə'],
+            ['pyramid', 'pɪɹmid'],
+            ['scheme', 'zɡim'],
+          ],
+        },
+        {
+          start: 77,
+          end: 78.2,
+          thumbnail: 'd4.png',
+          target: 'ʔaɪhæftikoʊmeɪkinkɔl',
+          target_by_word: [
+            ['I', 'ʔaɪ'],
+            ['have', 'hæf'],
+            ['to', 'ti'],
+            ['go', 'koʊ'],
+            ['make', 'meɪk'],
+            ['a', 'i'],
+            ['call', 'kɔl'],
+          ],
+        },
       ],
       completedSections: 0,
     },
@@ -502,14 +502,14 @@ export default function Page() {
   };
 
   const data = [
-    { name: 'Correct', value: score },
-    { name: 'Incorrect', value: 100 - score },
+    { name: 'Correct', value: 50 },
+    { name: 'Incorrect', value: 50 },
   ];
 
   return (
     <div className="h-fit w-full rounded-xl relative p-4 flex flex-col gap-2">
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-2xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
+        <h1 className="text-2xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100 pt-0.5 px-0.5 pb-2">
           {currentVideo ? currentVideo.name : 'No video selected'}
         </h1>
       </div>
@@ -572,8 +572,8 @@ export default function Page() {
             </div>
             <div className="border-t border-neutral-200 dark:border-neutral-800">
               <div className="w-full h-full flex items-center justify-center relative">
-                {isClient && score > 0 ? (
-                  <PieChart width={400} height={180} id="recharts-pie-1">
+                {isClient && score >= 0 ? (
+                  <PieChart width={400} height={180}>
                     <Pie
                       data={data}
                       cx="50%"
@@ -584,7 +584,6 @@ export default function Page() {
                       outerRadius={180}
                       paddingAngle={0}
                       dataKey="value"
-                      id="recharts-pie-1"
                     >
                       <Cell fill="#3D8F78" />
                       <Cell fill="#C8E6DE" />
@@ -712,7 +711,7 @@ export default function Page() {
                 (word, index) => {
                   return (
                     <Dialog key={index}>
-                      <DialogTrigger asChild>
+                      <DialogTrigger asChild className="cursor-pointer">
                         <button className={getWordStyle(index)}>{word[0]}</button>
                       </DialogTrigger>
                       <DialogContent className="sm:max-w-[825px] border-2 p-0">

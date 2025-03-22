@@ -53,7 +53,7 @@ export function NavUser({ user, isCollapsed, isLoading }) {
               alt={user.name}
               className="animate-in fade-in-50 zoom-in-90"
             />
-            <AvatarFallback className="rounded-md">{user.name[0] + user.name[1]}</AvatarFallback>
+            <AvatarFallback className="rounded-sm ">{user.name[0] + user.name[1]}</AvatarFallback>
           </Avatar>
           {!isCollapsed && (
             <>
@@ -73,7 +73,7 @@ export function NavUser({ user, isCollapsed, isLoading }) {
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm transition-all">
             <Avatar className="h-7 w-7 rounded-md">
               <AvatarImage src={user.picture} alt={user.name} />
-              <AvatarFallback>{user.name[0] + user.name[1]}</AvatarFallback>
+              <AvatarFallback className="bg-sky-400">{user.name[0] + user.name[1]}</AvatarFallback>
             </Avatar>
             <div className="grid flex-1">
               <div className="font-medium">{user.name}</div>

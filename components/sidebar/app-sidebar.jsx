@@ -33,7 +33,6 @@ import { useEffect, useState } from 'react';
 import { getUser } from '@/utils/authClient';
 import { StreakCard } from '@/components/sidebar/streak-card';
 import { Badge } from '../ui/base/badge';
-
 const data = {
   user: {
     name: 'Loading...',

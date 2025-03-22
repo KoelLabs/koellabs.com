@@ -28,10 +28,10 @@ export default function SettingsPage() {
 
   const { theme, setTheme } = useTheme();
   return (
-    <div className="w-full">
+    <div className="w-full bg-white rounded-xl dark:bg-black">
       <div className="flex justify-between items-center pt-4">
         <div className="flex items-center w-full gap-2 border-dashed border-neutral-300 dark:border-neutral-700">
-          <h1 className="text-xl sm:text-2xl font-semibold tracking-tighter px-4 text-neutral-900 dark:text-neutral-100">
+          <h1 className="text-xl sm:text-2xl font-semibold tracking-tighter px-4.5 pt-0.5 text-neutral-900 dark:text-neutral-100">
             Settings
           </h1>
         </div>
@@ -39,14 +39,14 @@ export default function SettingsPage() {
 
       <div className="w-full p-4">
         <Tabs defaultValue="personal">
-          <TabsList className="grid w-fit grid-cols-2 border rounded-full bg-neutral-50 dark:bg-neutral-800/50">
-            <TabsTrigger value="personal" className="font-normal rounded-full">
+          <TabsList className="grid w-fit grid-cols-2 border rounded-full bg-neutral-200/50 border-neutral-300 dark:bg-neutral-800/50 ">
+            <TabsTrigger value="personal" className="font-normal rounded-full cursor-pointer">
               <span className="flex items-center gap-2">
                 <User2 className="h-4 w-4" />
                 Personal
               </span>
             </TabsTrigger>
-            <TabsTrigger value="security" className="font-normal rounded-full">
+            <TabsTrigger value="security" className="font-normal rounded-full cursor-pointer">
               <span className="flex items-center gap-2">
                 <Lock className="h-4 w-4" />
                 Security
@@ -179,7 +179,7 @@ export default function SettingsPage() {
                 </div>
               </CardContent>
               <CardFooter className="bg-neutral-50 dark:bg-neutral-900 rounded-b-xl border-t border-neutral-200 dark:border-neutral-800 p-4">
-                <Button>Save Information</Button>
+                <Button size="settings">Save Information</Button>
               </CardFooter>
             </Card>
 
@@ -211,7 +211,7 @@ export default function SettingsPage() {
                             alt={item.label}
                             width={90}
                             height={90}
-                            className="relative object-cover cursor-pointer overflow-hidden rounded-lg border border-input shadow-xs shadow-black/5 outline-offset-2 transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-ring/70 peer-data-disabled:cursor-not-allowed peer-data-[state=checked]:border-ring peer-data-[state=checked]:bg-accent peer-data-disabled:opacity-50"
+                            className="relative object-cover cursor-pointer overflow-hidden rounded-lg border border-input shadow-xs shadow-black/5 outline-offset-2 transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-ring/70 peer-data-disabled:cursor-not-allowed peer-data-[state=checked]:border-ring peer-data-[state=checked]:bg-accent peer-data-disabled:opacity-50"
                           />
                           <span className="group mt-2 flex items-center gap-1 peer-data-[state=unchecked]:text-muted-foreground/70">
                             <Check
@@ -287,7 +287,7 @@ export default function SettingsPage() {
                 </div>
               </CardContent>
               <CardFooter className="bg-neutral-50 dark:bg-neutral-900 rounded-b-xl border-t border-neutral-200 dark:border-neutral-800 p-4">
-                <Button>Update Password</Button>
+                <Button size="settings">Update Password</Button>
               </CardFooter>
             </Card>
 
@@ -306,7 +306,9 @@ export default function SettingsPage() {
               </CardHeader>
               <CardContent className="p-5 space-y-8">
                 <div>
-                  <Button variant="destructive">Yes, Delete My Account</Button>
+                  <Button size="settings" variant="destructive">
+                    Yes, Delete My Account
+                  </Button>
                 </div>
               </CardContent>
             </Card>
