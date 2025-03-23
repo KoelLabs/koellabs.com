@@ -46,7 +46,7 @@ export default function Hero() {
               Master Pronunciation with
               <span className="bg-clip-text text-transparent bg-gradient-to-br mr-1 from-sky-600 to-blue-950 overflow-visible py-1">
                 {' '}
-                Classic Movie Scenes{' '}
+                Classic Movie <span className="pr-0.5">Scenes</span>{' '}
               </span>
             </h1>
             <svg
