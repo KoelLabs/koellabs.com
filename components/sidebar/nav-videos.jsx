@@ -58,12 +58,9 @@ export function NavVideos({ videos, className, isCollapsed }) {
                 )}
               >
                 <item.icon
-                  className={cn(
-                    'shrink-0 text-muted-foreground h-4 w-4',
-                    'translate-x-0.5 h-4 w-4',
-                  )}
+                  className={cn('shrink-0 text-foreground h-4 w-4', 'translate-x-0.5 h-4 w-4')}
                 />
-                <div className="line-clamp-1 grow overflow-hidden pr-6 font-medium">
+                <div className="line-clamp-1 text-foreground tracking-[-0.015em] grow overflow-hidden pr-6 font-medium">
                   {item.name}
                 </div>
               </Link>

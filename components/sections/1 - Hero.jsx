@@ -46,7 +46,7 @@ export default function Hero() {
               Master Pronunciation with
               <span className="bg-clip-text text-transparent bg-linear-to-br mr-1 from-sky-600 to-blue-950 overflow-visible py-1">
                 {' '}
-                Classic Movie Scenes{' '}
+                Classic Movie <span className="pr-0.5">Scenes</span>{' '}
               </span>
             </h1>
             <svg
@@ -116,7 +116,7 @@ export default function Hero() {
                 className="w-full sm:w-auto"
                 aria-label="Join the waitlist"
               >
-                <Button className="w-full rounded-lg sm:w-40 bg-linear-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
+                <Button className="w-full rounded-lg sm:w-40 bg-linear-to-b border border-double outline-white/50 outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
                   Join the Waitlist
                 </Button>
               </Link>
