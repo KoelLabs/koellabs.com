@@ -338,6 +338,23 @@ html {
     radial-gradient(142% 91% at 111% 84%, rgba(52, 125, 193, 0.37) 0%, #ffffffff 99%);
 }
 
+.vds-video-layout .vds-time-slider .vds-slider-value {
+  background-color: var(--video-time-bg, unset);
+  text-shadow:
+    0px 0px 0px #333333,
+    0px 0px 0px #333333,
+    0px 0px 0px #333333,
+    0px 0px 0px #333333 !important;
+}
+
+:where(.vds-video-layout .vds-time-slider .vds-slider-chapter-title) {
+  text-shadow:
+    0px 0px 0px #333333,
+    0px 0px 0px #333333,
+    0px 0px 0px #333333,
+    0px 0px 0px #333333 !important;
+}
+
 .vds-audio-layout,
 .vds-video-layout {
   /* Shared. */
@@ -463,7 +480,7 @@ html {
   --media-slider-track-fill-live-bg: #dc2626;
   --media-slider-track-height: 5px;
   --media-slider-track-progress-bg: rgb(255 255 255 / 0.5);
-  --media-slider-focused-thumb-shadow: 0 0 0 4px hsla(0, 0%, 100%, 0.4);
+  --media-slider-focused-thumb-shadow: 0 0 0 0px hsla(0, 0%, 100%, 0);
   --media-slider-focused-thumb-size: calc(var(--thumb-size) * 1.1);
   --media-slider-focused-track-height: calc(var(--track-height) * 1.25);
   --media-slider-focused-track-height: var(--track-height);
