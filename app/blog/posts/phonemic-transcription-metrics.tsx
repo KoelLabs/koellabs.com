@@ -6,6 +6,16 @@ import type { Metadata } from '../posts';
 import { CodeBlock } from '@/components/ui/code-block';
 import Image from 'next/image';
 
+// Added formatDate function
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
 export const metadata: Metadata = {
   title: 'A Deep Dive into Phonemic Transcription Metrics',
   slug: 'phonemic-transcription-metrics',
@@ -32,13 +42,18 @@ export default function PostBody() {
         <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl text-center">
           {metadata.title}
         </h1>
+        <div className="flex justify-center mt-4">
+          <time dateTime={metadata.date} className="text-neutral-600">
+            {formatDate(metadata.date)}
+          </time>
+        </div>
 
         <div className="p-px mt-16 relative z-10 bg-linear-to-b from-transparent via-neutral-200 to-transparent rounded-lg">
-        <img
-          src={metadata.image}
-          alt="Phonemic Transcription Metrics"
-          className="w-full h-auto rounded-lg z-10 relative"
-        />
+          <img
+            src={metadata.image}
+            alt="Phonemic Transcription Metrics"
+            className="w-full h-auto rounded-lg z-10 relative"
+          />
         </div>
         <br></br>
         <div className="relative lg:col-span-3">

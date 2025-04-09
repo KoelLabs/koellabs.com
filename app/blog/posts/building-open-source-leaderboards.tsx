@@ -6,6 +6,16 @@ import type { Metadata } from '../posts';
 import Image from 'next/image';
 import Link from 'next/link';
 
+// Added formatDate function
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
 export const metadata: Metadata = {
   title: 'Building Open Source Hugging Face Leaderboards',
   slug: 'building-open-source-leaderboards',
@@ -32,6 +42,11 @@ export default function PostBody() {
         <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl text-center">
           {metadata.title}
         </h1>
+        <div className="flex justify-center mt-4">
+          <time dateTime={metadata.date} className="text-neutral-600">
+            {formatDate(metadata.date)}
+          </time>
+        </div>
         <div className="p-px mt-16 relative z-10 bg-linear-to-b from-transparent via-neutral-200 to-transparent rounded-lg">
           <img
             src="/images/blogLeaderboardsAlt.png"

@@ -4,6 +4,16 @@
 
 import type { Metadata } from '../posts';
 
+// Added formatDate function
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
 export const metadata: Metadata = {
   title: 'Hello World! — Our Open Source Project Launch',
   slug: 'open-source-project',
@@ -39,6 +49,11 @@ export default function PostBody() {
         <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl text-center">
           {metadata.title}
         </h1>
+        <div className="flex justify-center mt-4">
+          <time dateTime={metadata.date} className="text-neutral-600">
+            {formatDate(metadata.date)}
+          </time>
+        </div>
         <img
           src={metadata.image}
           alt={metadata.title}

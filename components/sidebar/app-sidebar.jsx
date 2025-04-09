@@ -84,7 +84,7 @@ const data = {
   ],
 };
 
-export function AppSidebar() {
+export function AppSidebar({ className }) {
   const shouldReduceMotion = useReducedMotion();
   const { open, onOpenChange } = useSidebar();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -113,7 +113,7 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar>
+    <Sidebar className={`${className} bg-white/80 backdrop-blur-md dark:bg-black/80`}>
       <MotionConfig reducedMotion="always">
         <SidebarHeader className="py-2.5 pr-3">
           <Link

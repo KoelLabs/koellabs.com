@@ -6,6 +6,16 @@ import type { Metadata } from '../posts';
 import { CodeBlock } from '@/components/ui/code-block';
 import Image from 'next/image';
 
+// Added formatDate function
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
 export const metadata: Metadata = {
   title: 'Dialect Sensitivity — Why it matters for the future of language acquisition',
   slug: 'dialect-sensitivity',
@@ -27,6 +37,11 @@ export default function PostBody() {
         <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl text-center">
           {metadata.title}
         </h1>
+        <div className="flex justify-center mt-4">
+          <time dateTime={metadata.date} className="text-neutral-600">
+            {formatDate(metadata.date)}
+          </time>
+        </div>
         <img
           src={metadata.image}
           alt="Phonemic Transcription Metrics"
