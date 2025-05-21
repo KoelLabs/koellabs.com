@@ -92,6 +92,7 @@ export default function Page() {
       name: 'Michael is a Terrible Secret Keeper - The Office US',
       thumbnail: '/images/thumbnails/the-office-michael-secret-keeper-full-res.jpg',
       vtt: '/videos/the-office-michael-secret-keeper.vtt',
+      captions: '/videos/the-office-michael-secret-keeper.captions.vtt',
       video: '/videos/the-office-michael-secret-keeper.mp4',
       link: 'E6LpBIwGyA4',
       id: 'eWOKwlFQJAjQ',
@@ -135,6 +136,7 @@ export default function Page() {
       name: "Michael's Pyramid Scheme - The Office US",
       thumbnail: '/images/thumbnails/the-office-michael-pyramid-scheme-full-res.jpg',
       vtt: '/videos/the-office-michael-pyramid-scheme.vtt',
+      captions: '/videos/the-office-michael-pyramid-scheme.captions.vtt',
       video: '/videos/the-office-michael-pyramid-scheme.mp4',
       link: 'QIoVaphXbz8',
       id: '0A4Dq41bPQZ1',
@@ -520,6 +522,7 @@ export default function Page() {
             title={currentVideo?.name}
             poster={currentVideo?.thumbnail}
             practicableSections={currentVideo?.vtt}
+            captions={currentVideo?.captions}
             onTimeUpdate={setCurrentTime}
             onSeek={setCurrentTime}
           />
@@ -572,7 +575,7 @@ export default function Page() {
             </div>
             <div className="border-t border-neutral-200 dark:border-neutral-800">
               <div className="w-full h-full flex items-center justify-center relative">
-                {isClient && score >= 0 ? (
+                {isClient && score > 0 ? (
                   <PieChart width={400} height={180}>
                     <Pie
                       data={data}

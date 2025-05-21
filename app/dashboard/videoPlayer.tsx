@@ -12,6 +12,7 @@ export default function VideoPlayer({
   title,
   poster,
   practicableSections,
+  captions,
   onTimeUpdate,
   onSeek,
 }) {
@@ -38,6 +39,7 @@ export default function VideoPlayer({
       <MediaProvider>
         <Poster className="vds-poster" />
         <Track src={practicableSections} kind="chapters" default />
+        <Track src={captions} kind="subtitles" label="English" lang="en-US" type="vtt" />
       </MediaProvider>
       <DefaultVideoLayout
         thumbnails={poster}
