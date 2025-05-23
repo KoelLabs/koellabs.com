@@ -180,6 +180,7 @@ export class FeedbackGiver {
         const target = this.words[i];
 
         if (
+          target &&
           word.toLowerCase().replace(/[^a-z]/g, '') === target.toLowerCase().replace(/[^a-z]/g, '')
         ) {
           this.are_words_correct[i] = true;

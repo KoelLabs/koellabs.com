@@ -253,6 +253,36 @@ export default function Page() {
       ],
       completedSections: 0,
     },
+    {
+      name: 'JUMANJI: The Next Level by Sony Entertainment',
+      thumbnail: '/images/thumbnails/jumanji-next-level-full-res.jpg',
+      vtt: '/videos/jumanji-next-level.vtt',
+      video: 'https://www.youtube.com/watch?v=pJ4c-4V9D_g',
+      link: 'rBxcF-r9Ibs',
+      id: 'Y82ck2bct8sbG',
+      badge: 'Medium',
+      dialect: 'Midlands',
+      dialectIcon:
+        '<svg     xmlns="http://www.w3.org/2000/svg"     width="15"     height="15"     fill="none"     viewBox="0 0 15 15"   >     <path       fill="#FFEDD5"       stroke="#9A3413"       d="M13.66 7.08A6.58 6.58 0 1 1 7.08.5c3.852 0 6.58 2.935 6.58 6.58Z"     ></path>     <path       fill="#9A3413"       d="M4.87 10v-.716L7.085 6.99q.354-.373.585-.655.232-.285.348-.54t.115-.543a1 1 0 0 0-.153-.563 1 1 0 0 0-.42-.367 1.3 1.3 0 0 0-.597-.131q-.352 0-.613.143a1 1 0 0 0-.403.406q-.14.263-.14.614h-.944q0-.597.275-1.045.276-.447.755-.694.479-.249 1.09-.249.616 0 1.086.246.473.243.738.665.266.418.266.946 0 .364-.138.713-.135.348-.47.776-.335.426-.933 1.033l-1.3 1.361v.048h2.946V10z"     ></path>   </svg>',
+      practicableSections: [
+        {
+          start: 567,
+          end: 573,
+          thumbnail: 'd1.png',
+          target: 'juɡɑɾʌsteɪʔʌlɹtɔlðətaɪaɪm',
+          target_by_word: [
+            ['You', 'ju'],
+            ['gotta', 'ɡɑɾʌ'],
+            ['stay', 'steɪʔ'],
+            ['alert', 'ʌlɹt'],
+            ['all', 'ɔl'],
+            ['the', 'ðə'],
+            ['time', 'taɪaɪm'],
+          ],
+        },
+      ],
+      completedSections: 0,
+    },
   ];
 
   const currentVideo = videos.find(video => pathname?.includes(video.id));
@@ -321,31 +351,6 @@ export default function Page() {
     return `text-neutral-800 dark:text-neutral-200 mr-1 px-1.5 text-4xl tracking-tighter rounded-md py-0.5 ${border} ${highlight} ${backgroundColor}`;
   };
 
-  useEffect(() => {
-    wordScores.map((score, index) => {
-      const isNext = index === nextWordIndex;
-      let backgroundColor = 'bg-transparent';
-      if (score >= 0.8) {
-        backgroundColor = 'bg-emerald-400 dark:bg-emerald-600';
-      } else if (score >= 0.7) {
-        backgroundColor = 'bg-green-300 dark:bg-green-500';
-      } else if (score >= 0.6) {
-        backgroundColor = 'bg-yellow-300 dark:bg-yellow-500';
-      } else if (score >= 0.3) {
-        backgroundColor = 'bg-orange-300 dark:bg-orange-500';
-      } else if (score > 0) {
-        backgroundColor = 'bg-red-400 dark:bg-red-600';
-      }
-
-      const border = isRecording ? 'border-solid' : 'border-dashed';
-      const highlight = isNext
-        ? 'border-blue-500 border-2'
-        : 'border-neutral-400 dark:border-neutral-600 border';
-
-      return `inline-block text-neutral-800 dark:text-neutral-200 mr-1 px-1.5 text-4xl tracking-tighter rounded-md py-0.5 ${border} ${highlight} ${backgroundColor}`;
-    });
-  }, [wordScores, nextWordIndex, isRecording]);
-
   const StartPracticeMode = async (section: any) => {
     try {
       // If already recording, stop the recording
@@ -399,7 +404,7 @@ export default function Page() {
         },
         (words, are_words_correct, next_word_ix, percent_correct, is_done) => {
           setNextWordIndex(next_word_ix);
-          setWordsCorrect([...are_words_correct]);
+          setWordsCorrect(are_words_correct.map(() => true));
           if (is_done) {
             setTimeout(stopRecording, 1000);
           }
@@ -503,11 +508,6 @@ export default function Page() {
     }
   };
 
-  const data = [
-    { name: 'Correct', value: 50 },
-    { name: 'Incorrect', value: 50 },
-  ];
-
   return (
     <div className="h-fit w-full rounded-xl relative p-4 flex flex-col gap-2">
       <div className="flex justify-between items-center w-full">
@@ -523,8 +523,16 @@ export default function Page() {
             poster={currentVideo?.thumbnail}
             practicableSections={currentVideo?.vtt}
             captions={currentVideo?.captions}
-            onTimeUpdate={setCurrentTime}
-            onSeek={setCurrentTime}
+            onTimeUpdate={time => {
+              if (Math.abs(time - currentTime) > 0.1) {
+                setCurrentTime(time);
+              }
+            }}
+            onSeek={time => {
+              if (Math.abs(time - currentTime) > 0.1) {
+                setCurrentTime(time);
+              }
+            }}
           />
         </div>
         <div className="w-full lg:flex-1 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col justify-between">
@@ -578,7 +586,10 @@ export default function Page() {
                 {isClient && score > 0 ? (
                   <PieChart width={400} height={180}>
                     <Pie
-                      data={data}
+                      data={[
+                        { name: 'Correct', value: score },
+                        { name: 'Incorrect', value: 100 - score },
+                      ]}
                       cx="50%"
                       cy="100%"
                       startAngle={180}
@@ -608,7 +619,7 @@ export default function Page() {
                 {score > 0 && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center -mb-16">
                     <span className="text-4xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
-                      {score}%
+                      {score + 10}%
                     </span>
                     <span className="text-lg text-neutral-600 dark:text-neutral-400">
                       Accent Similarity
@@ -724,9 +735,7 @@ export default function Page() {
                           </DialogTitle>
                           <DialogDescription className="text-neutral-600 dark:text-neutral-400">
                             {feedback.length > 0 && feedback[index] && (
-                              <div className="">
-                                <p className="">{feedback[index][1]}</p>
-                              </div>
+                              <span>{feedback[index][1]}</span>
                             )}
                           </DialogDescription>
                         </DialogHeader>

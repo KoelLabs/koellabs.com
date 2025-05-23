@@ -155,9 +155,10 @@ export class FeedbackGiver {
 
       const allWords = finalWords.concat(wordlist);
       if (
-        allWords[0].toLowerCase().replace(/[^a-z]/g, '') !=
-          this.words[0].toLowerCase().replace(/[^a-z]/g, '') &&
-        allWords.length > 0
+        allWords.length > 0 &&
+        this.words.length > 0 &&
+        allWords[0].toLowerCase().replace(/[^a-z]/g, '') !==
+          this.words[0].toLowerCase().replace(/[^a-z]/g, '')
       ) {
         allWords.shift();
       }
