@@ -4,7 +4,7 @@
 
 ### Run with Docker (Recommended)
 
-0. `git clone https://github.com/KoelLabs/webapp.git`
+0. `git clone --recurse-submodules https://github.com/KoelLabs/webapp.git`
 1. Install Docker and Docker Compose
    - [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/) or `brew install --cask docker` with [Homebrew](https://brew.sh/)
      - If it repeatedly complains about the daemon not running, make sure Docker Desktop is running and add `export DOCKER_HOST=unix:///Users/$USER/Library/Containers/com.docker.docker/Data/docker.raw.sock` to your shell profile (e.g. `~/.zshrc`)
@@ -12,7 +12,9 @@
    - [Docker Engine for Linux](https://docs.docker.com/engine/install/) or `sudo apt install docker.io` with APT on Ubuntu
 2. Duplicate the `.env.example` file and rename it to `.env.local` with `cp .env.example .env.local`.
    - Comment out `DEV_LOGIN` and add your `FIREBASE_SERVICE_ACCOUNT` to enable authentication checks (login with Google etc.). You can leave in the `DEV_LOGIN` for offline development and other cases where you can't connect to the Firebase Auth server.
-3. Run the application
+3. Duplicate the `server/.env.example` file and rename it to `server/.env` with `cp server/.env.example server/.env`.
+   - You can find your `HF_TOKEN` on your [Settings Page](https://huggingface.co/settings/tokens). It just needs read access to `gated repos`.
+4. Run the application
    - `. ./scripts/docker-run-dev.sh` to start the development server (or `npm run docker` if you have Node.js installed)
    - `ctrl+c` to stop the server or `. ./scripts/docker-stop-dev.sh` if you've closed the terminal
 
@@ -38,7 +40,8 @@ The docker container will also automatically `npm ci` from the package-lock.json
    - `npm install` or `npm ci` for a clean install from the package-lock.json
 6. Duplicate the `.env.example` file and rename it to `.env.local` with `cp .env.example .env.local`.
    - Comment out `DEV_LOGIN` and add your `FIREBASE_SERVICE_ACCOUNT` to enable authentication checks (login with Google etc.). You can leave in the `DEV_LOGIN` for offline development and other cases where you can't connect to the Firebase Auth server.
-7. Run the application
+7. [optional] Follow [the instructions](https://github.com/KoelLabs/server) to set up the inference server if you want to run the speech models.
+8. Run the application
    - `npm run dev` to start the development server
    - `ctrl+c` to stop it
 
