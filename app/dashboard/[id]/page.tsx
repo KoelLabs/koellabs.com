@@ -11,6 +11,7 @@ import {
   PauseIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
+  ArrowUpRightIcon,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { PieChart, Pie, Cell } from 'recharts';
@@ -254,7 +255,7 @@ export default function Page() {
       completedSections: 0,
     },
     {
-      name: 'JUMANJI: The Next Level by Sony Entertainment',
+      name: 'Jumanji: The Next Level from Sony Pictures Entertainment',
       thumbnail: '/images/thumbnails/jumanji-next-level-full-res.jpg',
       vtt: '/videos/jumanji-next-level.vtt',
       video: 'https://www.youtube.com/watch?v=pJ4c-4V9D_g',
@@ -683,6 +684,42 @@ export default function Page() {
           </div>
         </div>
       </div>
+
+      {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
+        <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 p-4 flex flex-row gap-2">
+          <div className="text-left">
+            <div className="mb-3">
+              <a
+                href="http://aan.sonypictures.com/JumanjiTheNextLevel"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-lg font-medium tracking-tighter transition-colors"
+              >
+                Watch Jumanji: The Next Level Now! -{' '}
+                <span className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors underline">
+                  http://aan.sonypictures.com/JumanjiTheNextLevel
+                </span>
+              </a>
+            </div>
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 mx-auto leading-relaxed text-balance">
+              In Jumanji: The Next Level, the gang is back (Dwayne Johnson, Jack Black, Kevin Hart,
+              and Karen Gillan) but the game has changed. Returning to Jumanji to rescue one of
+              their own, they discover that nothing is as they expect. With more action and
+              surprises, the players must brave parts unknown and unexplored, from the arid deserts
+              to the snowy mountains, to escape.
+            </p>
+          </div>
+          <a
+            href="http://aan.sonypictures.com/JumanjiTheNextLevel"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-left aspect-square border border-neutral-200 rounded-lg dark:border-neutral-800 h-22 w-22 flex items-center justify-center"
+          >
+            <ArrowUpRightIcon className="h-8 w-8 " />
+          </a>
+        </div>
+      )}
+
       <div className="flex flex-col lg:flex-row gap-2">
         <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 flex flex-col relative justify-between">
           <div>

@@ -82,7 +82,7 @@ const data = {
     //   icon: Clapperboard,
     // },
     {
-      name: 'JUMANJI: The Next Level by Sony Entertainment',
+      name: 'Jumanji: The Next Level from Sony Pictures Entertainment',
       id: 'Y82ck2bct8sbG',
       icon: Clapperboard,
     },
