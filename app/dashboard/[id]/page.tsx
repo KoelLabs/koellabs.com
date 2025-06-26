@@ -12,9 +12,15 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   ArrowUpRightIcon,
+  ChevronDown,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { PieChart, Pie, Cell } from 'recharts';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/base/collapsible';
 import { Button } from '@/components/ui/base/button';
 import Microphone from '../microphone';
 import VideoPlayer from '../videoPlayer';
@@ -685,7 +691,8 @@ export default function Page() {
         </div>
       </div>
 
-      {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
+      {/* version 1 */}
+      {/* {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
         <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 p-4 flex flex-row gap-2">
           <div className="text-left">
             <div className="mb-3">
@@ -718,7 +725,42 @@ export default function Page() {
             <ArrowUpRightIcon className="h-8 w-8 " />
           </a>
         </div>
-      )}
+      )} */}
+
+      {/* version 2 */}
+      {/* {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
+        <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 overflow-hidden">
+          <Collapsible defaultOpen={currentTime <= 5}>
+            <CollapsibleTrigger className="flex justify-between items-center w-full p-4 hover:bg-neutral-50 dark:hover:bg-neutral-900">
+              <div>
+                <a
+                  href="http://aan.sonypictures.com/JumanjiTheNextLevel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-sm underline tracking-tight"
+                >
+                  Watch Jumanji: The Next Level Now!
+                </a>
+                <ArrowUpRightIcon className="h-4 w-4 ml-1 -mt-px inline-block" />
+              </div>
+              <ChevronDown className="h-4 w-4" />
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <div className="p-4 flex flex-row gap-2 pt-0">
+                <div className="text-left">
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mx-auto leading-relaxed text-balance">
+                    In Jumanji: The Next Level, the gang is back (Dwayne Johnson, Jack Black, Kevin
+                    Hart, and Karen Gillan) but the game has changed. Returning to Jumanji to rescue
+                    one of their own, they discover that nothing is as they expect. With more action
+                    and surprises, the players must brave parts unknown and unexplored, from the
+                    arid deserts to the snowy mountains, to escape.
+                  </p>
+                </div>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </div>
+      )} */}
 
       <div className="flex flex-col lg:flex-row gap-2">
         <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 flex flex-col relative justify-between">
@@ -1007,6 +1049,39 @@ export default function Page() {
           <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-800 mb-5" />
         </div>
       </div>
+      {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
+        <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 overflow-hidden">
+          <Collapsible defaultOpen={currentTime <= 5}>
+            <CollapsibleTrigger className="flex justify-between items-center w-full p-4 hover:bg-neutral-50 dark:hover:bg-neutral-900">
+              <div>
+                <a
+                  href="http://aan.sonypictures.com/JumanjiTheNextLevel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-sm underline tracking-tight"
+                >
+                  Watch Jumanji: The Next Level Now!
+                </a>
+                <ArrowUpRightIcon className="h-4 w-4 ml-1 -mt-px inline-block" />
+              </div>
+              <ChevronDown className="h-4 w-4" />
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <div className="p-4 flex flex-row gap-2 pt-0">
+                <div className="text-left">
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mx-auto leading-relaxed text-balance">
+                    In Jumanji: The Next Level, the gang is back (Dwayne Johnson, Jack Black, Kevin
+                    Hart, and Karen Gillan) but the game has changed. Returning to Jumanji to rescue
+                    one of their own, they discover that nothing is as they expect. With more action
+                    and surprises, the players must brave parts unknown and unexplored, from the
+                    arid deserts to the snowy mountains, to escape.
+                  </p>
+                </div>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </div>
+      )}
     </div>
   );
 }
