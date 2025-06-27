@@ -544,42 +544,37 @@ export default function Page() {
         </div>
         <div className="w-full lg:flex-1 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col justify-between">
           <div>
-            <div className="flex justify-between items-center">
-              <h2 className="text-lg font-medium tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100">
-                Practicable Sections{' '}
+            <div className="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-800 w-full">
+              <h2 className="text-lg font-medium tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100 text-left w-full">
+                About the Movie{' '}
               </h2>
-              {/* <Badge
-                variant="outline"
-                className="text-xs rounded-full bg-white tracking-tight mr-3 mt-1"
-              >
-                Clickable
-              </Badge> */}
             </div>
-            <div className="flex flex-col gap-1.5 mt-0 m-3 max-h-[380px] overflow-y-auto">
-              {currentVideo?.practicableSections?.map((section, index) => (
-                <button
-                  key={index}
-                  // onClick={() => {
-                  //   if (player) {
-                  //     player.seek(section.start);
-                  //     setCurrentTime(section.start);
-                  //   }
-                  // }}
-                  className={`flex relative justify-between items-end p-2 h-20 bg-neutral-50 border-neutral-200 dark:border-neutral-800 rounded-lg w-full bg-cover bg-center dark:bg-neutral-900/50 border cursor-not-allowed 
-                    
-                    ${isInPracticeSection() && getCurrentSection() !== index ? 'opacity-50' : ''}`}
-                >
-                  {isSectionDone(index) && (
-                    <CheckCircle2 className="h-4 w-4 text-[#1B997B] dark:text-[#9DD8C5] absolute left-2 top-2" />
-                  )}
-                  <span className="text-neutral-700 dark:text-neutral-200 font-medium tracking-tighter z-1">
-                    Section #{index + 1}
-                  </span>
-                  <span className="text-neutral-500 dark:text-neutral-400 text-xs font-mono tracking-tight z-1">
-                    {formatTime(section.start)} - {formatTime(section.end)}
-                  </span>
-                </button>
-              ))}
+            <div className="m-3">
+              {currentVideo?.name ===
+                'Jumanji: The Next Level from Sony Pictures Entertainment' && (
+                <div className="mt-3">
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed ">
+                    In Jumanji: The Next Level, the gang is back (Dwayne Johnson, Jack Black, Kevin
+                    Hart, and Karen Gillan) but the game has changed. Returning to Jumanji to rescue
+                    one of their own, they discover that nothing is as they expect. With more action
+                    and surprises, the players must brave parts unknown and unexplored, from the
+                    arid deserts to the snowy mountains, to escape.
+                  </p>
+                  <a
+                    href="http://aan.sonypictures.com/JumanjiTheNextLevel"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 w-full inline-flex items-center justify-between px-2 py-2 text-sm font-medium rounded-md text-black bg-white hover:bg-neutral-100 border border-neutral-200 dark:border-neutral-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                  >
+                    Watch Full Movie <ArrowUpRightIcon className="ml-2 h-4 w-4 stroke-2" />
+                  </a>
+                </div>
+              )}
+              {!currentVideo?.name.includes('Jumanji') && (
+                <p className="text-neutral-600 dark:text-neutral-400 p-3">
+                  No additional information available for this video.
+                </p>
+              )}
             </div>
           </div>
           <div>
@@ -1049,7 +1044,7 @@ export default function Page() {
           <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-800 mb-5" />
         </div>
       </div>
-      {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
+      {/* {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
         <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 overflow-hidden">
           <Collapsible defaultOpen={currentTime <= 5}>
             <CollapsibleTrigger className="flex justify-between items-center w-full p-4 hover:bg-neutral-50 dark:hover:bg-neutral-900">
@@ -1081,7 +1076,7 @@ export default function Page() {
             </CollapsibleContent>
           </Collapsible>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
