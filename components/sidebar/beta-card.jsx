@@ -7,7 +7,7 @@ import * as SliderPrimitive from '@radix-ui/react-slider';
 
 export function BetaCard() {
   return (
-    <Card className="rounded-md text-xs shadow-xs min-w-[233px] relative">
+    <Card className="rounded-md text-xs shadow-xs min-w-[233px] relative -mb-1">
       <CardContent className="flex flex-col items-start gap-2 p-4 relative">
         <div className="flex items-center tracking-tight w-full relative">
           {/* <svg

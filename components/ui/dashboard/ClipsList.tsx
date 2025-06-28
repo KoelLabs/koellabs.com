@@ -205,8 +205,8 @@ export default function ClipsList({
   const renderEmptyState = () => {
     if (isRevisitList) {
       return (
-        <div className="flex flex-col items-center justify-center py-8 px-4 text-center">
-          <div className="rounded-full bg-neutral-100 dark:bg-neutral-800 p-3 mb-4">
+        <div className="flex flex-col items-center justify-center py-8 px-4 text-center border mx-4 border-neutral-200 dark:border-neutral-800 rounded-xl border-dashed">
+          <div className="rounded-full bg-neutral-100 dark:bg-neutral-800 p-3 mb-4 border border-neutral-200 dark:border-neutral-800">
             <svg
               width="24"
               height="24"
@@ -227,7 +227,7 @@ export default function ClipsList({
               />
             </svg>
           </div>
-          <h3 className="text-lg font-medium mb-2">No practice history yet</h3>
+          <h3 className="text-lg font-medium tracking-tight mb-2">No Practice History Yet</h3>
           <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4 max-w-xs">
             Start practicing with any clip from the recommendations below to build your history.
           </p>
@@ -242,6 +242,7 @@ export default function ClipsList({
               }
             }}
           >
+            Browse Recommendations
             <svg
               width="16"
               height="16"
@@ -257,7 +258,6 @@ export default function ClipsList({
                 strokeLinejoin="round"
               />
             </svg>
-            Browse recommendations
           </Button>
         </div>
       );

@@ -7,6 +7,8 @@ import {
   Moon,
   PanelsTopLeft,
   Sun,
+  Trash2,
+  RefreshCcw,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/base/avatar';
 import {
@@ -25,9 +27,69 @@ import {
 import { signOut } from '@/utils/authClient';
 import { useTheme } from 'next-themes';
 import { Skeleton } from '@/components/ui/base/skeleton';
+import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 export function NavUser({ user, isCollapsed, isLoading }) {
   const { setTheme } = useTheme();
+  const { toast } = useToast();
+  const [isResetting, setIsResetting] = useState(false);
+
+  const resetUserVideos = async () => {
+    if (
+      window.confirm(
+        'Are you sure you want to reset your video history? This action cannot be undone.',
+      )
+    ) {
+      try {
+        setIsResetting(true);
+
+        const response = await fetch('/api/resetUserVideos', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          toast({
+            title: 'Success',
+            description: 'Your video history has been reset.',
+            variant: 'default',
+          });
+
+          // Dispatch event to update UI components
+          window.dispatchEvent(
+            new CustomEvent('koellabs:userVideosUpdated', {
+              detail: { action: 'reset', timestamp: Date.now() },
+              bubbles: true,
+            }),
+          );
+
+          // Force page refresh to update UI
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        } else {
+          const error = await response.json();
+          toast({
+            title: 'Error',
+            description: error.message || 'Failed to reset video history.',
+            variant: 'destructive',
+          });
+        }
+      } catch (error) {
+        console.error('Error resetting video history:', error);
+        toast({
+          title: 'Error',
+          description: 'Something went wrong. Please try again.',
+          variant: 'destructive',
+        });
+      } finally {
+        setIsResetting(false);
+      }
+    }
+  };
 
   if (isLoading) {
     return (
@@ -119,6 +181,19 @@ export function NavUser({ user, isCollapsed, isLoading }) {
             Notifications
           </DropdownMenuItem>
         </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          className="gap-2 text-amber-600 hover:text-amber-700"
+          onClick={resetUserVideos}
+          disabled={isResetting}
+        >
+          {isResetting ? (
+            <RefreshCcw className="h-4 w-4 text-amber-600 animate-spin" />
+          ) : (
+            <Trash2 className="h-4 w-4 text-amber-600" />
+          )}
+          {isResetting ? 'Resetting...' : 'Reset Video History'}
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="gap-2 text-red-600 hover:text-red-600" onClick={signOut}>
           <LogOut className="h-4 w-4 text-muted-foreground text-red-600" />

@@ -116,6 +116,7 @@ export default function SearchCenter({}: SearchCenterProps) {
     let revisitResults = [...userClips];
     let recommendedResults = [...recommendedClips];
 
+    // Step 1: Apply show filter if active
     if (activeShow) {
       const showMatch = shows.find(show => show.id === activeShow);
       const showName = showMatch?.name.toLowerCase() || '';
@@ -126,6 +127,7 @@ export default function SearchCenter({}: SearchCenterProps) {
       );
     }
 
+    // Step 2: Apply search query if present
     if (searchQuery) {
       const filteredRevisitFuse = new Fuse(revisitResults, fuseOptions);
       const filteredRecommendedFuse = new Fuse(recommendedResults, fuseOptions);
@@ -133,6 +135,15 @@ export default function SearchCenter({}: SearchCenterProps) {
       revisitResults = filteredRevisitFuse.search(searchQuery).map(result => result.item);
       recommendedResults = filteredRecommendedFuse.search(searchQuery).map(result => result.item);
     }
+
+    // Step 3: Filter out videos from recommendations that already appear in user clips
+    // Get a list of all video IDs in the user's previously practiced clips
+    const userClipIds = revisitResults.map(clip => clip.id.toString());
+
+    // Remove any recommended clips that have matching IDs with user clips
+    recommendedResults = recommendedResults.filter(
+      clip => !userClipIds.includes(clip.id.toString()),
+    );
 
     setFilteredRevisitClips(revisitResults);
     setFilteredRecommendedClips(recommendedResults);
@@ -364,21 +375,36 @@ export default function SearchCenter({}: SearchCenterProps) {
           </>
         ) : (
           <>
-            <ClipsList
-              title="Previously Practiced"
-              clips={filteredRevisitClips}
-              isRevisitList={true}
-            />
-            <ClipsList
-              title="Recommended For You"
-              clips={filteredRecommendedClips}
-              onVideoAdded={handleVideoAdded}
-            />
+            {/* Only show sections if there are matching results or no search/filter is applied */}
+            {(filteredRevisitClips.length > 0 || (!searchQuery && !activeShow)) && (
+              <ClipsList
+                title="Previously Practiced"
+                clips={filteredRevisitClips}
+                isRevisitList={true}
+              />
+            )}
+
+            {/* Only show recommended section title if there are matching results */}
+            {filteredRecommendedClips.length > 0 ? (
+              <ClipsList
+                title="Recommended For You"
+                clips={filteredRecommendedClips}
+                onVideoAdded={handleVideoAdded}
+              />
+            ) : // If we have a search query but no results, don't show the section title
+            searchQuery || activeShow ? null : (
+              <ClipsList
+                title="Recommended For You"
+                clips={filteredRecommendedClips}
+                onVideoAdded={handleVideoAdded}
+              />
+            )}
           </>
         )}
       </div>
 
-      {filteredRevisitClips.length === 0 && filteredRecommendedClips.length === 0 && (
+      {/* Show "No clips found" only when there are no results for either section */}
+      {!isLoading && filteredRevisitClips.length === 0 && filteredRecommendedClips.length === 0 && (
         <div className="flex flex-col gap-1 px-4 w-full justify-center items-center relative">
           <div className="relative xl:mt-48 mt-24 mb-8">
             <svg
