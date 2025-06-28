@@ -10,64 +10,9 @@ import Fuse from 'fuse.js';
 
 const shows = [
   {
-    id: 'the-office',
-    name: 'The Office',
-    color: '#7A4926',
-  },
-  {
-    id: 'parks-and-rec',
-    name: 'Parks and Recreation',
-    color: '#3AC218',
-  },
-  {
-    id: 'good-place',
-    name: 'The Good Place',
-    color: '#17A763',
-  },
-  {
-    id: 'greys-anatomy',
-    name: "Grey's Anatomy",
-    color: '#626A8C',
-  },
-  {
-    id: 'friends',
-    name: 'Friends',
-    color: '#C01717',
-  },
-  {
-    id: 'seinfeld',
-    name: 'Seinfeld',
-    color: '#1C499E',
-  },
-  {
-    id: 'modern-family',
-    name: 'Modern Family',
-    color: '#FD7919',
-  },
-  {
-    id: 'the-big-bang-theory',
-    name: 'The Big Bang Theory',
-    color: '#FF3565',
-  },
-  {
-    id: 'breaking-bad',
-    name: 'Breaking Bad',
-    color: '#FFD600',
-  },
-  {
-    id: 'lost',
-    name: 'Lost',
-    color: '#47A4A6',
-  },
-  {
-    id: 'curious-george',
-    name: 'Curious George',
-    color: '#EB2C2E',
-  },
-  {
-    id: 'the-simpsons',
-    name: 'The Simpsons',
-    color: '#FFD600',
+    id: 'jumanji',
+    name: 'Jumanji',
+    color: '#228B22',
   },
 ];
 
@@ -80,7 +25,7 @@ const fuseOptions = {
 };
 
 interface RecommendedClip {
-  id: number;
+  id: string | number;
   title: string;
   duration: string;
   thumbnail: string;
@@ -92,63 +37,13 @@ interface RecommendedClip {
 
 const recommendedClips: RecommendedClip[] = [
   {
-    id: 4,
-    title: 'Where Is My Desk!? - The Office US',
-    duration: '1:55',
-    thumbnail: '/images/thumbnails/where-is-my-desk.jpg',
-    show: 'the-office',
-    difficulty: 'Hard',
+    id: 'Y82ck2bct8sbG',
+    title: 'Jumanji: The Next Level from Sony Pictures Entertainment',
+    duration: '9:35',
+    thumbnail: '/images/thumbnails/jumanji-next-level-full-res.jpg',
+    show: 'jumanji',
+    difficulty: 'Medium',
     dialect: 'US Midlands',
-    dialectFlag: '🇺🇸',
-  },
-  {
-    id: 5,
-    title: 'Janet Loves Jason - The Good Place',
-    duration: '1:37',
-    thumbnail: '/images/thumbnails/the-good-place-janet-loves-jason.jpg',
-    show: 'the-good-place',
-    difficulty: 'Easy',
-    dialect: 'US Midwest',
-    dialectFlag: '🇺🇸',
-  },
-  {
-    id: 6,
-    title: 'Say Hello to Real Eleanor - The Good Place',
-    duration: '2:37',
-    thumbnail: '/images/thumbnails/the-good-place-say-hello-to-real-eleanor.jpg',
-    show: 'the-good-place',
-    difficulty: 'Medium',
-    dialect: 'US Midwest',
-    dialectFlag: '🇺🇸',
-  },
-  {
-    id: 7,
-    title: "Meredith Wins Harper Avery - Grey's Anatomy 300th Episode",
-    duration: '1:26',
-    thumbnail: '/images/thumbnails/meredith-wins-harper-avery.jpg',
-    show: 'greys-anatomy',
-    difficulty: 'Medium',
-    dialect: 'US Midwest',
-    dialectFlag: '🇺🇸',
-  },
-  {
-    id: 2,
-    title: 'Ben finally shoots his shot - Parks and Recreation',
-    duration: '4:19',
-    thumbnail: '/images/thumbnails/parks-and-recreation-ben-shoots-his-shot.jpg',
-    show: 'parks-and-rec',
-    difficulty: 'Easy',
-    dialect: 'US Midwest',
-    dialectFlag: '🇺🇸',
-  },
-  {
-    id: 3,
-    title: 'The Cursed Harvest Festival Interview - Parks and Recreation',
-    duration: '2:14',
-    thumbnail: '/images/thumbnails/the-cursed-harvest-festival-interview.jpg',
-    show: 'parks-and-rec',
-    difficulty: 'Easy',
-    dialect: 'US Midwest',
     dialectFlag: '🇺🇸',
   },
 ];
@@ -168,22 +63,57 @@ interface RevisitClip {
   duration: string;
 }
 
-interface SearchCenterProps {
-  clips: RevisitClip[];
-}
+interface SearchCenterProps {}
 
-export default function SearchCenter({ clips }: SearchCenterProps) {
+export default function SearchCenter({}: SearchCenterProps) {
   const [activeShow, setActiveShow] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredRevisitClips, setFilteredRevisitClips] = useState(clips);
+  const [userClips, setUserClips] = useState<RevisitClip[]>([]);
+  const [filteredRevisitClips, setFilteredRevisitClips] = useState<RevisitClip[]>([]);
   const [filteredRecommendedClips, setFilteredRecommendedClips] = useState(recommendedClips);
+  const [isLoading, setIsLoading] = useState(true);
   const searchId = useId();
 
-  const revisitFuse = useMemo(() => new Fuse(clips, fuseOptions), [clips]);
+  const revisitFuse = useMemo(() => new Fuse(userClips, fuseOptions), [userClips]);
   const recommendedFuse = useMemo(() => new Fuse(recommendedClips, fuseOptions), []);
 
+  // Fetch user's videos on component mount
   useEffect(() => {
-    let revisitResults = [...clips];
+    const fetchUserVideos = async () => {
+      try {
+        // Set loading state
+        setIsLoading(true);
+
+        // Simulate minimum loading time for better UX (at least 500ms to show skeleton)
+        const startTime = Date.now();
+
+        const response = await fetch('/api/userVideos');
+        if (response.ok) {
+          const videos = await response.json();
+          setUserClips(videos);
+        } else {
+          console.warn('Failed to fetch user videos:', response.status);
+          setUserClips([]);
+        }
+
+        // Ensure loading state shows for at least 500ms for better UX
+        const elapsedTime = Date.now() - startTime;
+        if (elapsedTime < 500) {
+          await new Promise(resolve => setTimeout(resolve, 500 - elapsedTime));
+        }
+      } catch (error) {
+        console.error('Error fetching user videos:', error);
+        setUserClips([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUserVideos();
+  }, []);
+
+  useEffect(() => {
+    let revisitResults = [...userClips];
     let recommendedResults = [...recommendedClips];
 
     if (activeShow) {
@@ -206,10 +136,96 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
 
     setFilteredRevisitClips(revisitResults);
     setFilteredRecommendedClips(recommendedResults);
-  }, [searchQuery, activeShow, clips]);
+  }, [searchQuery, activeShow, userClips]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+  };
+
+  const handleVideoAdded = async (videoId: string) => {
+    // Refetch user videos to update the "Previously Practiced" section
+    try {
+      console.log('Refetching user videos after adding video:', videoId);
+      const response = await fetch('/api/userVideos');
+
+      if (response.ok) {
+        const videos = await response.json();
+        console.log('Updated user videos:', videos);
+
+        // Update local state with the new videos
+        setUserClips(videos);
+        setFilteredRevisitClips(videos);
+
+        // If we have videos, make sure they're displayed
+        if (videos.length > 0) {
+          console.log('Videos found, updating UI');
+        } else {
+          console.log('No videos returned from API');
+        }
+      } else {
+        console.warn('Failed to fetch updated videos:', response.status);
+      }
+
+      // Trigger a refresh of the sidebar using multiple approaches
+
+      // 1. Main event with video data
+      const mainEvent = new CustomEvent('koellabs:userVideosUpdated', {
+        detail: {
+          timestamp: Date.now(),
+          videoId: videoId,
+          action: 'add',
+          forceRefresh: true,
+        },
+        bubbles: true,
+      });
+      console.log('Dispatching main update event');
+      window.dispatchEvent(mainEvent);
+      document.dispatchEvent(mainEvent); // Try both window and document
+
+      // 2. Try a backup approach with a timeout
+      setTimeout(() => {
+        console.log('Dispatching backup events');
+
+        // Force sidebar refresh with another event type
+        const forceEvent = new CustomEvent('koellabs:forceRefresh', {
+          detail: { source: 'SearchCenter', timestamp: Date.now() },
+          bubbles: true,
+        });
+        window.dispatchEvent(forceEvent);
+        document.dispatchEvent(forceEvent);
+
+        // 3. Direct DOM manipulation as a last resort
+        try {
+          // Try multiple potential selectors
+          const selectors = [
+            '[data-sidebar-videos]',
+            '#sidebar-videos',
+            '.sidebar-videos',
+            '[data-component="sidebar-videos"]',
+          ];
+
+          for (const selector of selectors) {
+            const element = document.querySelector(selector);
+            if (element) {
+              console.log(`Found sidebar element with selector: ${selector}`);
+              element.setAttribute('data-force-update', Date.now().toString());
+              element.setAttribute('data-last-video', videoId);
+
+              // Try to trigger a custom event directly on the element
+              element.dispatchEvent(new CustomEvent('refresh', { bubbles: true }));
+              break;
+            }
+          }
+        } catch (domError) {
+          console.error('DOM manipulation error:', domError);
+        }
+      }, 100);
+
+      // Force a re-render by updating state
+      setSearchQuery(prev => prev);
+    } catch (error) {
+      console.error('Error refreshing user videos:', error);
+    }
   };
 
   return (
@@ -286,10 +302,80 @@ export default function SearchCenter({ clips }: SearchCenterProps) {
 
       <div className="h-px w-full border-t border-dashed"></div>
 
-      {/* Display filtered clips */}
+      {/* Display filtered clips with loading states */}
       <div>
-        <ClipsList title="Previously Practiced" clips={filteredRevisitClips} isRevisitList={true} />
-        <ClipsList title="Recommended For You" clips={filteredRecommendedClips} />
+        {isLoading ? (
+          <>
+            {/* Skeleton for Previously Practiced */}
+            <div className="w-full">
+              <div className="flex justify-between items-center p-4">
+                <div className="h-8 bg-neutral-200 dark:bg-neutral-800 rounded w-48 animate-pulse"></div>
+              </div>
+              <div className="relative">
+                <div className="overflow-x-scroll pb-4 scrollbar-hide">
+                  <div className="flex space-x-3 px-4">
+                    {Array(3)
+                      .fill(0)
+                      .map((_, index) => (
+                        <div
+                          key={`skeleton-revisit-${index}`}
+                          className="flex-none w-[200px] sm:w-[364px] animate-pulse"
+                        >
+                          <div className="rounded-lg bg-neutral-200 dark:bg-neutral-800 aspect-video mb-2"></div>
+                          <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-3/4 mb-2"></div>
+                          <div className="flex justify-between">
+                            <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/3"></div>
+                            <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/3"></div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Skeleton for Recommended */}
+            <div className="w-full mt-4">
+              <div className="flex justify-between items-center p-4">
+                <div className="h-8 bg-neutral-200 dark:bg-neutral-800 rounded w-48 animate-pulse"></div>
+              </div>
+              <div className="relative">
+                <div className="overflow-x-scroll pb-4 scrollbar-hide">
+                  <div className="flex space-x-3 px-4">
+                    {Array(4)
+                      .fill(0)
+                      .map((_, index) => (
+                        <div
+                          key={`skeleton-recommended-${index}`}
+                          className="flex-none w-[200px] sm:w-[364px] animate-pulse"
+                        >
+                          <div className="rounded-lg bg-neutral-200 dark:bg-neutral-800 aspect-video mb-2"></div>
+                          <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-3/4 mb-2"></div>
+                          <div className="flex justify-between">
+                            <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/3"></div>
+                            <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/3"></div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <ClipsList
+              title="Previously Practiced"
+              clips={filteredRevisitClips}
+              isRevisitList={true}
+            />
+            <ClipsList
+              title="Recommended For You"
+              clips={filteredRecommendedClips}
+              onVideoAdded={handleVideoAdded}
+            />
+          </>
+        )}
       </div>
 
       {filteredRevisitClips.length === 0 && filteredRecommendedClips.length === 0 && (

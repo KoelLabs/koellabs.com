@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/base/badge';
+import { useRouter } from 'next/navigation';
 
 interface BaseClip {
   id: string | number;
@@ -32,19 +33,64 @@ interface ClipsListProps {
   title: string;
   clips: (BaseClip | RevisitClip)[];
   isRevisitList?: boolean;
+  onVideoAdded?: (videoId: string) => Promise<void>;
 }
 
-export default function ClipsList({ title, clips, isRevisitList = false }: ClipsListProps) {
+export default function ClipsList({
+  title,
+  clips,
+  isRevisitList = false,
+  onVideoAdded,
+}: ClipsListProps) {
+  const router = useRouter();
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = React.useState(false);
   const [showRightArrow, setShowRightArrow] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
+  const handleRecommendedClipClick = async (clip: BaseClip | RevisitClip) => {
+    console.log('Video clicked:', clip.title, clip.id);
+
+    try {
+      console.log('Adding video to user collection...');
+      const response = await fetch('/api/userVideos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ videoId: clip.id }),
+      });
+
+      if (response.ok) {
+        console.log('Video added successfully');
+      } else {
+        console.warn('API response not ok:', response.status);
+      }
+
+      if (onVideoAdded) {
+        console.log('Updating parent state...');
+        await onVideoAdded(clip.id.toString());
+      }
+
+      console.log('Forcing global refresh...');
+
+      sessionStorage.setItem('lastClickedVideo', clip.id.toString());
+
+      console.log('Navigating to video page...');
+      setTimeout(() => {
+        router.push(`/dashboard/${clip.id}`);
+      }, 100);
+    } catch (error) {
+      console.error('Error adding video to user collection:', error);
+      console.log('Navigating anyway...');
+      router.push(`/dashboard/${clip.id}`);
+    }
+  };
+
   const handleScroll = () => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
       setShowLeftArrow(scrollLeft > 0);
-      // Only show right arrow if there's more content than viewport width
       setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10 && scrollWidth > clientWidth);
     }
   };
@@ -140,7 +186,12 @@ export default function ClipsList({ title, clips, isRevisitList = false }: Clips
             {clipContent}
           </Link>
         ) : (
-          clipContent
+          <button
+            onClick={() => handleRecommendedClipClick(clip)}
+            className="block w-full text-left cursor-pointer transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg"
+          >
+            {clipContent}
+          </button>
         )}
       </div>
     );
@@ -150,71 +201,152 @@ export default function ClipsList({ title, clips, isRevisitList = false }: Clips
 
   const showViewAllButton = clips.length >= 5;
 
+  // Render empty state with call to action for "Previously Practiced"
+  const renderEmptyState = () => {
+    if (isRevisitList) {
+      return (
+        <div className="flex flex-col items-center justify-center py-8 px-4 text-center">
+          <div className="rounded-full bg-neutral-100 dark:bg-neutral-800 p-3 mb-4">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+              <path
+                d="M12 8V12L15 15"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+          <h3 className="text-lg font-medium mb-2">No practice history yet</h3>
+          <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4 max-w-xs">
+            Start practicing with any clip from the recommendations below to build your history.
+          </p>
+          <Button
+            variant="outline"
+            className="flex items-center gap-2"
+            onClick={() => {
+              // Scroll to recommended section
+              const recommendedSection = document.querySelector('[data-section="recommended"]');
+              if (recommendedSection) {
+                recommendedSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 5V19M12 19L19 12M12 19L5 12"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Browse recommendations
+          </Button>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  // Render skeleton loading state
+  const renderSkeletonLoaders = () => {
+    return Array(4)
+      .fill(0)
+      .map((_, index) => (
+        <div key={`skeleton-${index}`} className="flex-none w-[200px] sm:w-[364px] animate-pulse">
+          <div className="rounded-lg bg-neutral-200 dark:bg-neutral-800 aspect-video mb-2"></div>
+          <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-3/4 mb-2"></div>
+          <div className="flex justify-between">
+            <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/3"></div>
+            <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/3"></div>
+          </div>
+        </div>
+      ));
+  };
+
   return (
-    <div className="w-full">
+    <div className="w-full" data-section={isRevisitList ? 'previously-practiced' : 'recommended'}>
+      <div className="flex justify-between items-center p-4">
+        <h1 className="text-xl sm:text-2xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100 pt-0.5 px-0.5">
+          {title}
+        </h1>
+        {clips.length > 0 && showViewAllButton && (
+          <Button
+            onClick={toggleExpand}
+            variant="outline"
+            size="sm"
+            className="tracking-tight dark:border-neutral-800 dark:text-neutral-300"
+          >
+            {isExpanded ? 'Collapse' : 'View All'}
+          </Button>
+        )}
+      </div>
+
+      {clips.length === 0 && renderEmptyState()}
+
       {clips.length > 0 && (
-        <>
-          <div className="flex justify-between items-center p-4">
-            <h1 className="text-xl sm:text-2xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100 pt-0.5 px-0.5">
-              {title}
-            </h1>
-            {showViewAllButton && (
-              <Button
-                onClick={toggleExpand}
-                variant="outline"
-                size="sm"
-                className="tracking-tight dark:border-neutral-800 dark:text-neutral-300"
-              >
-                {isExpanded ? 'Collapse' : 'View All'}
-              </Button>
-            )}
-          </div>
-          <div className={cn('relative', { 'px-5': isExpanded })}>
-            {isExpanded ? (
-              <div className="flex flex-wrap -mx-2">
-                {clips.map((clip, index) => renderClip(clip, index))}
+        <div className={cn('relative', { 'px-5': isExpanded })}>
+          {isExpanded ? (
+            <div className="flex flex-wrap -mx-2">
+              {clips.map((clip, index) => renderClip(clip, index))}
+            </div>
+          ) : (
+            <div
+              ref={scrollContainerRef}
+              className="overflow-x-scroll pb-4 scrollbar-hide snap-x snap-mandatory"
+            >
+              <div className="flex space-x-3 px-4">
+                {clips.map((clip, index) => (
+                  <div
+                    key={index}
+                    className={cn('snap-center', {
+                      'pr-4': index === clips.length - 1,
+                    })}
+                  >
+                    {renderClip(clip, index)}
+                  </div>
+                ))}
               </div>
-            ) : (
-              <div
-                ref={scrollContainerRef}
-                className="overflow-x-scroll pb-4 scrollbar-hide snap-x snap-mandatory"
-              >
-                <div className="flex space-x-3 px-4">
-                  {clips.map((clip, index) => (
-                    <div
-                      key={index}
-                      className={cn('snap-center', {
-                        'pr-4': index === clips.length - 1,
-                      })}
-                    >
-                      {renderClip(clip, index)}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-            {!isExpanded && showLeftArrow && (
-              <Button
-                variant="outline"
-                size="icon"
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white dark:bg-neutral-800 border border-accent dark:border-accent-dark rounded-full h-8 w-8"
-                onClick={() => scroll('left')}
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-            )}
-            {!isExpanded && showRightArrow && (
-              <Button
-                variant="outline"
-                size="icon"
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white dark:bg-neutral-800 border border-accent dark:border-accent-dark rounded-full h-8 w-8"
-                onClick={() => scroll('right')}
-              >
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            )}
-          </div>
-        </>
+            </div>
+          )}
+          {!isExpanded && showLeftArrow && (
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white dark:bg-neutral-800 border border-accent dark:border-accent-dark rounded-full h-8 w-8"
+              onClick={() => scroll('left')}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+          )}
+          {!isExpanded && showRightArrow && (
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white dark:bg-neutral-800 border border-accent dark:border-accent-dark rounded-full h-8 w-8"
+              onClick={() => scroll('right')}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          )}
+        </div>
       )}
     </div>
   );

@@ -15,6 +15,13 @@
       "when": 1728112130005,
       "tag": "0001_zippy_snowbird",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1751141780646,
+      "tag": "0002_orange_klaw",
+      "breakpoints": true
     }
   ]
 }

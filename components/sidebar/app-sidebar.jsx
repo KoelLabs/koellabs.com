@@ -65,28 +65,7 @@ const data = {
       icon: Send,
     },
   ],
-  videos: [
-    // {
-    //   name: 'Michael is a Terrible Secret Keeper - The Office US',
-    //   id: 'eWOKwlFQJAjQ',
-    //   icon: Clapperboard,
-    // },
-    // {
-    //   name: "Michael's Pyramid Scheme - The Office US",
-    //   id: '0A4Dq41bPQZ1',
-    //   icon: Clapperboard,
-    // },
-    // {
-    //   name: 'April joins the great resignat ion - Parks and Recreation',
-    //   id: 'JQMDL16t8isF',
-    //   icon: Clapperboard,
-    // },
-    {
-      name: 'Jumanji: The Next Level from Sony Pictures Entertainment',
-      id: 'Y82ck2bct8sbG',
-      icon: Clapperboard,
-    },
-  ],
+  videos: [],
 };
 
 export function AppSidebar({ className }) {
@@ -95,13 +74,122 @@ export function AppSidebar({ className }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFullyOpen, setIsFullyOpen] = useState(open);
 
-  useEffect(() => {
-    getUser().then(user => {
-      console.log(user);
+  const loadUserData = async (forceRefresh = false) => {
+    try {
+      console.log('Loading sidebar user data' + (forceRefresh ? ' (forced refresh)' : ''));
+
+      // Use separate fetch calls to isolate potential issues
+      const user = await getUser();
+      console.log('User data loaded:', user);
       data.user = user;
       data.user.isLoaded = true;
+
+      // Fetch videos with cache-busting query parameter when forced
+      const videosUrl = forceRefresh ? `/api/userVideos?_=${Date.now()}` : '/api/userVideos';
+
+      const videosResponse = await fetch(videosUrl);
+
+      if (!videosResponse.ok) {
+        console.warn('Failed to fetch user videos:', videosResponse.status);
+        // Continue with empty videos array
+        data.videos = [];
+      } else {
+        const userVideos = await videosResponse.json();
+        console.log('User videos loaded:', userVideos);
+
+        // Update videos array with the latest data
+        data.videos = userVideos.map(video => ({
+          name: video.title || 'Untitled Video',
+          id: video.id,
+          icon: Clapperboard,
+        }));
+      }
+
+      console.log('Sidebar videos updated:', data.videos);
+
+      // Force re-render by updating multiple states
       setIsLoaded(true);
-    });
+
+      // Force component refresh with multiple approaches
+      setIsFullyOpen(prev => !prev);
+      setTimeout(() => setIsFullyOpen(prev => !prev), 10);
+
+      // Return the loaded data for potential further processing
+      return { user: data.user, videos: data.videos };
+    } catch (error) {
+      console.error('Error loading sidebar data:', error);
+      // Still set user as loaded even if videos fail
+      try {
+        const user = await getUser();
+        data.user = user;
+        data.user.isLoaded = true;
+        setIsLoaded(true);
+      } catch (userError) {
+        console.error('Error loading user:', userError);
+      }
+      return { user: data.user, videos: [] };
+    }
+  };
+
+  useEffect(() => {
+    // Initial data load
+    loadUserData();
+
+    // Listen for custom event to refresh videos
+    const handleVideoUpdate = event => {
+      console.log('Sidebar received update event:', event.detail);
+
+      // Use the videoId from the event if available
+      const videoId = event.detail?.videoId;
+      const forceRefresh = event.detail?.forceRefresh === true;
+
+      // Force refresh with cache busting
+      loadUserData(true).then(result => {
+        console.log('Sidebar refreshed after video update. Videos count:', result.videos.length);
+
+        // If we have the specific video ID that was added, we could do something with it
+        if (videoId) {
+          console.log('Video update for specific ID:', videoId);
+
+          // Additional handling for specific video if needed
+          const videoElement = document.querySelector(`[data-video-id="${videoId}"]`);
+          if (videoElement) {
+            videoElement.classList.add('highlight-animation');
+            setTimeout(() => videoElement.classList.remove('highlight-animation'), 2000);
+          }
+        }
+      });
+    };
+
+    // Create a single handler for force refresh
+    const handleForceRefresh = event => {
+      console.log('Force refresh received in sidebar', event.detail || '');
+      loadUserData(true);
+    };
+
+    // Register all event listeners
+    window.addEventListener('koellabs:userVideosUpdated', handleVideoUpdate);
+    document.addEventListener('koellabs:userVideosUpdated', handleVideoUpdate);
+    window.addEventListener('koellabs:forceRefresh', handleForceRefresh);
+    document.addEventListener('koellabs:forceRefresh', handleForceRefresh);
+    window.addEventListener('userVideosUpdated', handleVideoUpdate); // Legacy support
+
+    // Set up a polling mechanism to ensure data is fresh
+    const pollingInterval = setInterval(() => {
+      loadUserData(false);
+    }, 10000); // Poll every 10 seconds
+
+    return () => {
+      // Clean up all event listeners
+      window.removeEventListener('koellabs:userVideosUpdated', handleVideoUpdate);
+      document.removeEventListener('koellabs:userVideosUpdated', handleVideoUpdate);
+      window.removeEventListener('koellabs:forceRefresh', handleForceRefresh);
+      document.removeEventListener('koellabs:forceRefresh', handleForceRefresh);
+      window.removeEventListener('userVideosUpdated', handleVideoUpdate);
+
+      // Clear the polling interval
+      clearInterval(pollingInterval);
+    };
   }, []);
 
   useEffect(() => {
@@ -406,7 +494,14 @@ export function AppSidebar({ className }) {
             <SidebarLabel className="flex justify-between items-center">
               {open && 'Your Clips'}{' '}
             </SidebarLabel>
-            <NavVideos videos={data.videos} isCollapsed={!open} className={open ? '' : '-mb-3'} />
+            <div data-sidebar-videos="true">
+              <NavVideos
+                videos={data.videos}
+                isCollapsed={!open}
+                className={open ? '' : '-mb-3'}
+                isLoading={!isLoaded}
+              />
+            </div>
           </SidebarItem>
           <SidebarItem className="mt-auto">
             <NavSecondary items={data.navSecondary} isCollapsed={!open} />

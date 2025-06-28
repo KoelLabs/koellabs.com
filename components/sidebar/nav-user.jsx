@@ -58,7 +58,9 @@ export function NavUser({ user, isCollapsed, isLoading }) {
           {!isCollapsed && (
             <>
               <div className="grid flex-1 leading-none">
-                <div className="font-medium">{user.name}</div>
+                <div className="font-medium line-clamp-1">
+                  {user.name.length > 15 ? `${user.name.substring(0, 18)}...` : user.name}
+                </div>
                 <div className="overflow-hidden text-xs text-muted-foreground">
                   <div className="line-clamp-1">{user.email}</div>
                 </div>
@@ -68,7 +70,7 @@ export function NavUser({ user, isCollapsed, isLoading }) {
           )}
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" side="right" sideOffset={4}>
+      <DropdownMenuContent className="min-w-56 w-full" align="end" side="right" sideOffset={4}>
         <DropdownMenuLabel className="p-0 font-normal">
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm transition-all">
             <Avatar className="h-7 w-7 rounded-md">
