@@ -1,6 +1,5 @@
 <img width="100%" alt="KoelLabsLogoLong" src="https://github.com/user-attachments/assets/fee3d829-6207-439b-bda0-1695562328fa">
 
-
 [![Mozilla Builders](https://img.shields.io/badge/Mozilla-000000.svg?style=for-the-badge&logo=Mozilla&logoColor=white)](https://future.mozilla.org/builders/)
 ![Patreon](https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white)
 ![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)

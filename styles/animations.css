@@ -51,3 +51,39 @@
   );
   animation: path-trace-footer 22s linear infinite;
 }
+
+/* Highlight animation for newly added videos */
+@keyframes highlight-pulse {
+  0% {
+    background-color: rgba(59, 130, 246, 0);
+  }
+  50% {
+    background-color: rgba(59, 130, 246, 0.2);
+  }
+  100% {
+    background-color: rgba(59, 130, 246, 0);
+  }
+}
+
+.highlight-animation {
+  animation: highlight-pulse 1s ease-in-out 3;
+}
+
+/* Dark mode version */
+@media (prefers-color-scheme: dark) {
+  @keyframes highlight-pulse-dark {
+    0% {
+      background-color: rgba(59, 130, 246, 0);
+    }
+    50% {
+      background-color: rgba(59, 130, 246, 0.3);
+    }
+    100% {
+      background-color: rgba(59, 130, 246, 0);
+    }
+  }
+
+  .highlight-animation {
+    animation: highlight-pulse-dark 1s ease-in-out 3;
+  }
+}

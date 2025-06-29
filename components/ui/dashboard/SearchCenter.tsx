@@ -384,15 +384,8 @@ export default function SearchCenter({}: SearchCenterProps) {
               />
             )}
 
-            {/* Only show recommended section title if there are matching results */}
-            {filteredRecommendedClips.length > 0 ? (
-              <ClipsList
-                title="Recommended For You"
-                clips={filteredRecommendedClips}
-                onVideoAdded={handleVideoAdded}
-              />
-            ) : // If we have a search query but no results, don't show the section title
-            searchQuery || activeShow ? null : (
+            {/* Only show recommended section if there are matching results */}
+            {filteredRecommendedClips.length > 0 && (
               <ClipsList
                 title="Recommended For You"
                 clips={filteredRecommendedClips}

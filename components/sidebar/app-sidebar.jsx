@@ -142,23 +142,53 @@ export function AppSidebar({ className }) {
       // Use the videoId from the event if available
       const videoId = event.detail?.videoId;
       const forceRefresh = event.detail?.forceRefresh === true;
+      const action = event.detail?.action;
 
-      // Force refresh with cache busting
-      loadUserData(true).then(result => {
-        console.log('Sidebar refreshed after video update. Videos count:', result.videos.length);
+      // Always force refresh with cache busting when a new video is added
+      if (action === 'add') {
+        console.log('New video added, forcing sidebar refresh');
+        loadUserData(true).then(result => {
+          console.log(
+            'Sidebar refreshed after new video added. Videos count:',
+            result.videos.length,
+          );
 
-        // If we have the specific video ID that was added, we could do something with it
-        if (videoId) {
-          console.log('Video update for specific ID:', videoId);
+          // If we have the specific video ID that was added, highlight it
+          if (videoId) {
+            console.log('Video update for specific ID:', videoId);
 
-          // Additional handling for specific video if needed
-          const videoElement = document.querySelector(`[data-video-id="${videoId}"]`);
-          if (videoElement) {
-            videoElement.classList.add('highlight-animation');
-            setTimeout(() => videoElement.classList.remove('highlight-animation'), 2000);
+            // Try to find and highlight the video element after a short delay to ensure DOM is updated
+            setTimeout(() => {
+              const videoElement = document.querySelector(`[data-video-id="${videoId}"]`);
+              if (videoElement) {
+                videoElement.classList.add('highlight-animation');
+                setTimeout(() => videoElement.classList.remove('highlight-animation'), 2000);
+              } else {
+                console.log('Video element not found in DOM, may need another refresh');
+                // Try one more refresh if element not found
+                loadUserData(true);
+              }
+            }, 300);
           }
-        }
-      });
+        });
+      } else {
+        // For other actions, use the forceRefresh flag
+        loadUserData(forceRefresh).then(result => {
+          console.log('Sidebar refreshed after video update. Videos count:', result.videos.length);
+
+          // If we have the specific video ID that was updated, we could do something with it
+          if (videoId) {
+            console.log('Video update for specific ID:', videoId);
+
+            // Additional handling for specific video if needed
+            const videoElement = document.querySelector(`[data-video-id="${videoId}"]`);
+            if (videoElement) {
+              videoElement.classList.add('highlight-animation');
+              setTimeout(() => videoElement.classList.remove('highlight-animation'), 2000);
+            }
+          }
+        });
+      }
     };
 
     // Create a single handler for force refresh
@@ -174,10 +204,14 @@ export function AppSidebar({ className }) {
     document.addEventListener('koellabs:forceRefresh', handleForceRefresh);
     window.addEventListener('userVideosUpdated', handleVideoUpdate); // Legacy support
 
-    // Set up a polling mechanism to ensure data is fresh
-    const pollingInterval = setInterval(() => {
-      loadUserData(false);
-    }, 10000); // Poll every 10 seconds
+    // Tab focus event listener to refresh data when user returns to the tab
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        console.log('Tab became visible, refreshing sidebar data');
+        loadUserData(true);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
       // Clean up all event listeners
@@ -186,9 +220,7 @@ export function AppSidebar({ className }) {
       window.removeEventListener('koellabs:forceRefresh', handleForceRefresh);
       document.removeEventListener('koellabs:forceRefresh', handleForceRefresh);
       window.removeEventListener('userVideosUpdated', handleVideoUpdate);
-
-      // Clear the polling interval
-      clearInterval(pollingInterval);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 

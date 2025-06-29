@@ -188,7 +188,7 @@ export default function ClipsList({
         ) : (
           <button
             onClick={() => handleRecommendedClipClick(clip)}
-            className="block w-full text-left cursor-pointer transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg"
+            className="block w-full text-left cursor-pointer transition-transform duration-200 rounded-lg"
           >
             {clipContent}
           </button>

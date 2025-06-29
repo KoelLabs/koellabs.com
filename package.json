@@ -46,10 +46,12 @@
     "react-dom": "^18",
     "react-google-recaptcha-v3": "^1.10.1",
     "recharts": "^2.15.3",
+    "swr": "^2.3.3",
     "tailwind-merge": "^2.5.2",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss": "^4.0.14",
     "tailwindcss-animate": "^1.0.7",
+    "uuid": "^11.1.0",
     "vaul": "^0.9.4",
     "zod": "^3.23.8"
   },
