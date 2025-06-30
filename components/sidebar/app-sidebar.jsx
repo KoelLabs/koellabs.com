@@ -31,7 +31,7 @@ import {
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { getUser } from '@/lib/auth-client';
-import { getUserVideos } from '@/lib/videos';
+import { useUserVideos } from '@/hooks/use-user-videos';
 import { Badge } from '../ui/base/badge';
 const data = {
   user: {
@@ -73,7 +73,7 @@ export function AppSidebar({ className }) {
   const { open, onOpenChange } = useSidebar();
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFullyOpen, setIsFullyOpen] = useState(true);
-
+  const { videos, mutate: refreshVideos } = useUserVideos();
   const loadUserData = async (forceRefresh = false) => {
     try {
       console.log('Loading sidebar user data' + (forceRefresh ? ' (forced refresh)' : ''));
@@ -86,8 +86,8 @@ export function AppSidebar({ className }) {
       data.user.isLoaded = true;
 
       try {
-        const videos = await getUserVideos();
-        data.videos = videos.map(video => ({
+        const refreshed = await refreshVideos();
+        data.videos = (refreshed || []).map(video => ({
           name: video.title || 'Untitled Video',
           id: video.id,
           icon: Clapperboard,

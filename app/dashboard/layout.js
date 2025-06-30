@@ -8,7 +8,7 @@ import { cookies } from 'next/headers';
 export default async function DashboardLayout({ children }) {
   const cook = await cookies();
   const sidebarCookie = cook.get('sidebar:state');
-  const defaultOpen = sidebarCookie?.value !== 'false'; // Default to open unless explicitly set to false
+  const defaultOpen = sidebarCookie?.value !== 'false';
 
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>

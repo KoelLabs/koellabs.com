@@ -543,7 +543,7 @@ export default function Page() {
         </div>
         <div className="w-full lg:flex-1 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col justify-between">
           {/* version 4 */}
-          {/* <div>
+          <div>
             <div className="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-800 w-full">
               <h2 className="text-lg font-medium tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100 text-left w-full">
                 About the Movie{' '}
@@ -576,7 +576,7 @@ export default function Page() {
                 </p>
               )}
             </div>
-          </div> */}
+          </div>
           <div>
             <div className="border-t border-neutral-200 dark:border-neutral-800">
               <h2 className="text-lg font-medium tracking-tighter m-2 text-center text-neutral-900 dark:text-neutral-100">
@@ -1045,7 +1045,7 @@ export default function Page() {
         </div>
       </div>
       {/* version 3 */}
-      {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
+      {/* {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
         <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 overflow-hidden">
           <Collapsible defaultOpen={currentTime <= 5}>
             <CollapsibleTrigger className="flex justify-between items-center w-full p-4 hover:bg-neutral-50 dark:hover:bg-neutral-900">
@@ -1077,7 +1077,7 @@ export default function Page() {
             </CollapsibleContent>
           </Collapsible>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

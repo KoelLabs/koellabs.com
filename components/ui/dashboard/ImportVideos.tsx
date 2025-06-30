@@ -96,9 +96,11 @@ function YouTubeUrlHelpModal() {
           </Tooltip>
         </TooltipProvider>
         <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>How to get a YouTube URL</DialogTitle>
-            <DialogDescription>Follow these steps to get a YouTube video URL:</DialogDescription>
+          <DialogHeader className="flex flex-col gap-2">
+            <DialogTitle className="text-left">How to get a YouTube URL</DialogTitle>
+            <DialogDescription className="text-left">
+              Follow these steps to get a YouTube video URL:
+            </DialogDescription>
           </DialogHeader>
           <YouTubeUrlHelpContent />
         </DialogContent>

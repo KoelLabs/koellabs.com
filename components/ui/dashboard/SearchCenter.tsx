@@ -7,7 +7,7 @@ import { Dot, Search } from 'lucide-react';
 import ClipsList from './ClipsList';
 import { useId } from 'react';
 import Fuse from 'fuse.js';
-import { getUserVideos } from '@/lib/videos';
+import { useUserVideos } from '@/hooks/use-user-videos';
 
 const shows = [
   {
@@ -72,34 +72,13 @@ interface SearchCenterProps {}
 export default function SearchCenter({}: SearchCenterProps) {
   const [activeShow, setActiveShow] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [userClips, setUserClips] = useState<RevisitClip[]>([]);
+  const { videos: userClips, isLoading, mutate: refreshUserVideos } = useUserVideos();
   const [filteredRevisitClips, setFilteredRevisitClips] = useState<RevisitClip[]>([]);
   const [filteredRecommendedClips, setFilteredRecommendedClips] = useState(recommendedClips);
-  const [isLoading, setIsLoading] = useState(true);
   const searchId = useId();
 
   const revisitFuse = useMemo(() => new Fuse(userClips, fuseOptions), [userClips]);
   const recommendedFuse = useMemo(() => new Fuse(recommendedClips, fuseOptions), []);
-
-  // Fetch user's videos on component mount
-  useEffect(() => {
-    const fetchUserVideos = async () => {
-      // Set loading state
-      setIsLoading(true);
-
-      try {
-        const videos = await getUserVideos();
-        setUserClips(videos);
-      } catch (error) {
-        console.error('Error fetching user videos:', error);
-        setUserClips([]);
-      }
-
-      setIsLoading(false);
-    };
-
-    fetchUserVideos();
-  }, []);
 
   useEffect(() => {
     let revisitResults = [...userClips];
@@ -147,12 +126,7 @@ export default function SearchCenter({}: SearchCenterProps) {
     try {
       console.log('Refetching user videos after adding video:', videoId);
       try {
-        const videos = await getUserVideos();
-        console.log('Updated user videos:', videos);
-
-        // Update local state with the new videos
-        setUserClips(videos);
-        setFilteredRevisitClips(videos);
+        await refreshUserVideos();
       } catch (error) {
         console.error('Error fetching updated user videos:', error);
       }
@@ -181,9 +155,6 @@ export default function SearchCenter({}: SearchCenterProps) {
         });
         window.dispatchEvent(forceEvent);
       }, 100); // TODO: timeouts will break with bad internet
-
-      // Force a re-render by updating state
-      setSearchQuery(prev => prev);
     } catch (error) {
       console.error('Error refreshing user videos:', error);
     }
