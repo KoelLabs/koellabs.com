@@ -10,3 +10,12 @@ export async function getUser() {
 
   return { user: data?.user, error };
 }
+
+// How to use as hook in client components:
+// import { authClient } from "@/lib/auth-client"
+// const {
+//     data: session,
+//     isPending, // loading state
+//     error, // error object
+//     refetch // refetch the session
+// } = authClient.useSession()

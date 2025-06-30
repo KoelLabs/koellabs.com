@@ -4,6 +4,18 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { db } from '@/db/schema';
 import * as schema from '@/db/schema';
 
+// How to use in server actions and server components:
+// import { auth } from "@/lib/auth"
+// import { headers } from "next/headers"
+
+// const session = await auth.api.getSession({
+//     headers: await headers()
+// })
+// if (!session) {
+//     // handle not being authenticated, e.g. by returning placholder jsx
+//     // or by redirecting to /sign-in
+// }
+
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: 'pg',
