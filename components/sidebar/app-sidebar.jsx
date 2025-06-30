@@ -74,13 +74,6 @@ export function AppSidebar({ className }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFullyOpen, setIsFullyOpen] = useState(true);
 
-  // Force sidebar to be open on first load
-  useEffect(() => {
-    if (!isLoaded) {
-      onOpenChange(true);
-    }
-  }, [isLoaded, onOpenChange]);
-
   const loadUserData = async (forceRefresh = false) => {
     try {
       console.log('Loading sidebar user data' + (forceRefresh ? ' (forced refresh)' : ''));

@@ -1,13 +1,14 @@
 'use server';
+
 import { AppSidebar } from '@/components/sidebar/app-sidebar';
-import { SidebarLayout, SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarLayout } from '@/components/ui/sidebar';
 import { ThemeProvider } from '@/components/ui/base/theme-provider';
+import { cookies } from 'next/headers';
 
 export default async function DashboardLayout({ children }) {
-  const { cookies } = await import('next/headers');
-  const sidebarCookie = cookies().get('sidebar:state');
-  // Default to open unless explicitly set to false
-  const defaultOpen = sidebarCookie?.value !== 'false';
+  const cook = await cookies();
+  const sidebarCookie = cook.get('sidebar:state');
+  const defaultOpen = sidebarCookie?.value !== 'false'; // Default to open unless explicitly set to false
 
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
