@@ -12,6 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          submodules: false
           persist-credentials: false
 
       - name: Install the latest version of uv
