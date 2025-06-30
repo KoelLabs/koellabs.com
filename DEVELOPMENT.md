@@ -11,7 +11,6 @@
    - [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/) or `choco install docker-desktop` with [Chocolatey](https://chocolatey.org/)
    - [Docker Engine for Linux](https://docs.docker.com/engine/install/) or `sudo apt install docker.io` with APT on Ubuntu
 2. Duplicate the `.env.example` file and rename it to `.env.local` with `cp .env.example .env.local`.
-   - Comment out `DEV_LOGIN` and add your `FIREBASE_SERVICE_ACCOUNT` to enable authentication checks (login with Google etc.). You can leave in the `DEV_LOGIN` for offline development and other cases where you can't connect to the Firebase Auth server.
 3. Duplicate the `server/.env.example` file and rename it to `server/.env` with `cp server/.env.example server/.env`.
    - You can find your `HF_TOKEN` on your [Settings Page](https://huggingface.co/settings/tokens). It just needs read access to `gated repos`.
 4. Run the application
@@ -39,7 +38,6 @@ The docker container will also automatically `npm ci` from the package-lock.json
 5. Install dependencies
    - `npm install` or `npm ci` for a clean install from the package-lock.json
 6. Duplicate the `.env.example` file and rename it to `.env.local` with `cp .env.example .env.local`.
-   - Comment out `DEV_LOGIN` and add your `FIREBASE_SERVICE_ACCOUNT` to enable authentication checks (login with Google etc.). You can leave in the `DEV_LOGIN` for offline development and other cases where you can't connect to the Firebase Auth server.
 7. [optional] Follow [the instructions](https://github.com/KoelLabs/server) to set up the inference server if you want to run the speech models.
 8. Run the application
    - `npm run dev` to start the development server
