@@ -72,7 +72,14 @@ export function AppSidebar({ className }) {
   const shouldReduceMotion = useReducedMotion();
   const { open, onOpenChange } = useSidebar();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isFullyOpen, setIsFullyOpen] = useState(open);
+  const [isFullyOpen, setIsFullyOpen] = useState(true);
+
+  // Force sidebar to be open on first load
+  useEffect(() => {
+    if (!isLoaded) {
+      onOpenChange(true);
+    }
+  }, [isLoaded, onOpenChange]);
 
   const loadUserData = async (forceRefresh = false) => {
     try {
@@ -199,9 +206,7 @@ export function AppSidebar({ className }) {
 
     // Register all event listeners
     window.addEventListener('koellabs:userVideosUpdated', handleVideoUpdate);
-    document.addEventListener('koellabs:userVideosUpdated', handleVideoUpdate);
     window.addEventListener('koellabs:forceRefresh', handleForceRefresh);
-    document.addEventListener('koellabs:forceRefresh', handleForceRefresh);
     window.addEventListener('userVideosUpdated', handleVideoUpdate); // Legacy support
 
     // Tab focus event listener to refresh data when user returns to the tab
@@ -216,9 +221,7 @@ export function AppSidebar({ className }) {
     return () => {
       // Clean up all event listeners
       window.removeEventListener('koellabs:userVideosUpdated', handleVideoUpdate);
-      document.removeEventListener('koellabs:userVideosUpdated', handleVideoUpdate);
       window.removeEventListener('koellabs:forceRefresh', handleForceRefresh);
-      document.removeEventListener('koellabs:forceRefresh', handleForceRefresh);
       window.removeEventListener('userVideosUpdated', handleVideoUpdate);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };

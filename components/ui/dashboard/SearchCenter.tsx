@@ -95,12 +95,6 @@ export default function SearchCenter({}: SearchCenterProps) {
           console.warn('Failed to fetch user videos:', response.status);
           setUserClips([]);
         }
-
-        // Ensure loading state shows for at least 500ms for better UX
-        const elapsedTime = Date.now() - startTime;
-        if (elapsedTime < 500) {
-          await new Promise(resolve => setTimeout(resolve, 500 - elapsedTime));
-        }
       } catch (error) {
         console.error('Error fetching user videos:', error);
         setUserClips([]);
@@ -177,8 +171,6 @@ export default function SearchCenter({}: SearchCenterProps) {
         console.warn('Failed to fetch updated videos:', response.status);
       }
 
-      // Trigger a refresh of the sidebar using multiple approaches
-
       // 1. Main event with video data
       const mainEvent = new CustomEvent('koellabs:userVideosUpdated', {
         detail: {
@@ -191,7 +183,6 @@ export default function SearchCenter({}: SearchCenterProps) {
       });
       console.log('Dispatching main update event');
       window.dispatchEvent(mainEvent);
-      document.dispatchEvent(mainEvent); // Try both window and document
 
       // 2. Try a backup approach with a timeout
       setTimeout(() => {
@@ -203,33 +194,6 @@ export default function SearchCenter({}: SearchCenterProps) {
           bubbles: true,
         });
         window.dispatchEvent(forceEvent);
-        document.dispatchEvent(forceEvent);
-
-        // 3. Direct DOM manipulation as a last resort
-        try {
-          // Try multiple potential selectors
-          const selectors = [
-            '[data-sidebar-videos]',
-            '#sidebar-videos',
-            '.sidebar-videos',
-            '[data-component="sidebar-videos"]',
-          ];
-
-          for (const selector of selectors) {
-            const element = document.querySelector(selector);
-            if (element) {
-              console.log(`Found sidebar element with selector: ${selector}`);
-              element.setAttribute('data-force-update', Date.now().toString());
-              element.setAttribute('data-last-video', videoId);
-
-              // Try to trigger a custom event directly on the element
-              element.dispatchEvent(new CustomEvent('refresh', { bubbles: true }));
-              break;
-            }
-          }
-        } catch (domError) {
-          console.error('DOM manipulation error:', domError);
-        }
       }, 100);
 
       // Force a re-render by updating state
@@ -243,17 +207,6 @@ export default function SearchCenter({}: SearchCenterProps) {
     <div className="w-full">
       <div className="flex flex-col gap-4 w-full h-fit">
         <div className="flex gap-2 w-full h-fit pt-4.5 px-4.5">
-          {/* <div
-            className="flex size-8 items-center justify-center rounded-lg bg-neutral-200"
-            aria-hidden="true"
-          >
-            <Search
-              size={16}
-              strokeWidth={2}
-              aria-hidden="true"
-              className="text-black/50 dark:text-white/50"
-            />
-          </div> */}
           <h1 className="text-2xl font-semibold text-black dark:text-white tracking-tighter">
             Search Clips
           </h1>

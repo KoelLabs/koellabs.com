@@ -48,54 +48,58 @@ export default function ClipsList({
   const [showRightArrow, setShowRightArrow] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
-  const handleRecommendedClipClick = async (clip: BaseClip | RevisitClip) => {
-    console.log('Video clicked:', clip.title, clip.id);
+  // Memoize clip rendering to prevent unnecessary re-renders
+  const handleRecommendedClipClick = React.useCallback(
+    async (clip: BaseClip | RevisitClip) => {
+      console.log('Video clicked:', clip.title, clip.id);
 
-    try {
-      console.log('Adding video to user collection...');
-      const response = await fetch('/api/userVideos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ videoId: clip.id }),
-      });
+      try {
+        console.log('Adding video to user collection...');
+        // Start navigation and API call in parallel
+        const navigationPromise = router.prefetch(`/dashboard/${clip.id}`);
 
-      if (response.ok) {
-        console.log('Video added successfully');
-      } else {
-        console.warn('API response not ok:', response.status);
-      }
+        const response = await fetch('/api/userVideos', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ videoId: clip.id }),
+        });
 
-      if (onVideoAdded) {
-        console.log('Updating parent state...');
-        await onVideoAdded(clip.id.toString());
-      }
+        if (response.ok) {
+          console.log('Video added successfully');
+        } else {
+          console.warn('API response not ok:', response.status);
+        }
 
-      console.log('Forcing global refresh...');
+        // Store in session storage early
+        sessionStorage.setItem('lastClickedVideo', clip.id.toString());
 
-      sessionStorage.setItem('lastClickedVideo', clip.id.toString());
+        if (onVideoAdded) {
+          console.log('Updating parent state...');
+          await onVideoAdded(clip.id.toString());
+        }
 
-      console.log('Navigating to video page...');
-      setTimeout(() => {
+        console.log('Navigating to video page...');
         router.push(`/dashboard/${clip.id}`);
-      }, 100);
-    } catch (error) {
-      console.error('Error adding video to user collection:', error);
-      console.log('Navigating anyway...');
-      router.push(`/dashboard/${clip.id}`);
-    }
-  };
+      } catch (error) {
+        console.error('Error adding video to user collection:', error);
+        console.log('Navigating anyway...');
+        router.push(`/dashboard/${clip.id}`);
+      }
+    },
+    [router, onVideoAdded],
+  );
 
-  const handleScroll = () => {
+  const handleScroll = React.useCallback(() => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
       setShowLeftArrow(scrollLeft > 0);
       setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10 && scrollWidth > clientWidth);
     }
-  };
+  }, []);
 
-  const scroll = (direction: 'left' | 'right') => {
+  const scroll = React.useCallback((direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
       const scrollAmount = scrollContainerRef.current.clientWidth / 2;
       scrollContainerRef.current.scrollBy({
@@ -103,106 +107,121 @@ export default function ClipsList({
         behavior: 'smooth',
       });
     }
-  };
+  }, []);
 
   React.useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
     if (scrollContainer) {
       scrollContainer.addEventListener('scroll', handleScroll);
+      // Use ResizeObserver to detect changes in container size
+      const resizeObserver = new ResizeObserver(() => {
+        handleScroll();
+      });
+      resizeObserver.observe(scrollContainer);
+
       // Initial check for overflow
       handleScroll();
-      return () => scrollContainer.removeEventListener('scroll', handleScroll);
+
+      return () => {
+        scrollContainer.removeEventListener('scroll', handleScroll);
+        resizeObserver.disconnect();
+      };
     }
+  }, [handleScroll]);
+
+  const toggleExpand = React.useCallback(() => {
+    setIsExpanded(prev => !prev);
   }, []);
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
+  const renderClip = React.useCallback(
+    (clip: BaseClip | RevisitClip, index: number) => {
+      const clipContent = (
+        <>
+          <Card className="border text-neutral-500 relative overflow-hidden dark:text-neutral-400 rounded-lg bg-neutral-200/50 dark:bg-neutral-800/50 border-neutral-300 dark:border-neutral-800">
+            <CardContent
+              className={cn(
+                'flex aspect-video items-center justify-center',
+                isRevisitList ? 'p-2' : 'p-0',
+              )}
+            >
+              <Image
+                src={clip.thumbnail}
+                alt={clip.title}
+                width={298}
+                height={167.33}
+                className={cn('w-full h-full object-cover', {
+                  'absolute inset-0': isRevisitList,
+                  'rounded-[7px]': !isRevisitList,
+                })}
+                loading="lazy"
+              />
+            </CardContent>
+          </Card>
+          <div className="flex justify-between mt-1.5">
+            <h2 className="text-sm font-medium tracking-tight ml-1 line-clamp-1 text-neutral-700 dark:text-neutral-300 h-full">
+              {clip.title}
+            </h2>
+            <p className="text-sm font-medium mr-1 text-neutral-500 dark:text-neutral-400">
+              {clip.duration}
+            </p>
+          </div>
+          <div className="flex justify-between mt-1.5">
+            <Badge
+              variant="outline"
+              className="inline-flex items-center justify-center rounded-full border px-2 py-0 text-xs font-normal leading-normal text-foreground gap-1.5"
+            >
+              <span
+                className={cn('size-1.5 rounded-full', {
+                  'bg-green-500': clip.difficulty === 'Easy',
+                  'bg-yellow-500': clip.difficulty === 'Medium',
+                  'bg-red-500': clip.difficulty === 'Hard',
+                })}
+                aria-hidden="true"
+              ></span>
+              {clip.difficulty}
+            </Badge>
+            <Badge
+              variant="outline"
+              className="inline-flex items-center justify-center rounded-full border px-2 py-0 text-xs font-normal leading-normal text-foreground gap-2"
+            >
+              {clip.dialectFlag} {clip.dialect}
+            </Badge>
+          </div>
+        </>
+      );
 
-  const renderClip = (clip: BaseClip | RevisitClip, index: number) => {
-    const clipContent = (
-      <>
-        <Card className="border text-neutral-500 relative overflow-hidden dark:text-neutral-400 rounded-lg bg-neutral-200/50 dark:bg-neutral-800/50 border-neutral-300 dark:border-neutral-800">
-          <CardContent
-            className={cn(
-              'flex aspect-video items-center justify-center',
-              isRevisitList ? 'p-2' : 'p-0',
-            )}
-          >
-            <Image
-              src={clip.thumbnail}
-              alt={clip.title}
-              width={298}
-              height={167.33}
-              className={cn('w-full h-full object-cover', {
-                'absolute inset-0': isRevisitList,
-                'rounded-[7px]': !isRevisitList,
-              })}
-            />
-          </CardContent>
-        </Card>
-        <div className="flex justify-between mt-1.5">
-          <h2 className="text-sm font-medium tracking-tight ml-1 line-clamp-1 text-neutral-700 dark:text-neutral-300 h-full">
-            {clip.title}
-          </h2>
-          <p className="text-sm font-medium mr-1 text-neutral-500 dark:text-neutral-400">
-            {clip.duration}
-          </p>
+      const clipWrapper = (
+        <div
+          key={index}
+          className={cn('flex-none w-[200px] sm:w-[364px]', {
+            'w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-1.5 pb-6': isExpanded,
+          })}
+        >
+          {isRevisitList ? (
+            <Link href={`dashboard/${clip.id}`} className="block">
+              {clipContent}
+            </Link>
+          ) : (
+            <button
+              onClick={() => handleRecommendedClipClick(clip)}
+              className="block w-full text-left cursor-pointer transition-transform duration-200 rounded-lg"
+            >
+              {clipContent}
+            </button>
+          )}
         </div>
-        <div className="flex justify-between mt-1.5">
-          <Badge
-            variant="outline"
-            className="inline-flex items-center justify-center rounded-full border px-2 py-0 text-xs font-normal leading-normal text-foreground gap-1.5"
-          >
-            <span
-              className={cn('size-1.5 rounded-full', {
-                'bg-green-500': clip.difficulty === 'Easy',
-                'bg-yellow-500': clip.difficulty === 'Medium',
-                'bg-red-500': clip.difficulty === 'Hard',
-              })}
-              aria-hidden="true"
-            ></span>
-            {clip.difficulty}
-          </Badge>
-          <Badge
-            variant="outline"
-            className="inline-flex items-center justify-center rounded-full border px-2 py-0 text-xs font-normal leading-normal text-foreground gap-2"
-          >
-            {clip.dialectFlag} {clip.dialect}
-          </Badge>
-        </div>
-      </>
-    );
+      );
 
-    const clipWrapper = (
-      <div
-        key={index}
-        className={cn('flex-none w-[200px] sm:w-[364px]', {
-          'w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-1.5 pb-6': isExpanded,
-        })}
-      >
-        {isRevisitList ? (
-          <Link href={`dashboard/${clip.id}`} className="block">
-            {clipContent}
-          </Link>
-        ) : (
-          <button
-            onClick={() => handleRecommendedClipClick(clip)}
-            className="block w-full text-left cursor-pointer transition-transform duration-200 rounded-lg"
-          >
-            {clipContent}
-          </button>
-        )}
-      </div>
-    );
+      return clipWrapper;
+    },
+    [isRevisitList, handleRecommendedClipClick],
+  );
 
-    return clipWrapper;
-  };
-
-  const showViewAllButton = clips.length >= 5;
+  // Memoize this calculation
+  const showViewAllButton = React.useMemo(() => clips.length >= 5, [clips.length]);
 
   // Render empty state with call to action for "Previously Practiced"
-  const renderEmptyState = () => {
+  const renderEmptyState = React.useCallback(() => {
     if (isRevisitList) {
       return (
         <div className="flex flex-col items-center justify-center py-8 px-4 text-center border mx-4 border-neutral-200 dark:border-neutral-800 rounded-xl border-dashed">
@@ -263,10 +282,10 @@ export default function ClipsList({
       );
     }
     return null;
-  };
+  }, [isRevisitList]);
 
-  // Render skeleton loading state
-  const renderSkeletonLoaders = () => {
+  // Memoize skeleton loaders
+  const skeletonLoaders = React.useMemo(() => {
     return Array(4)
       .fill(0)
       .map((_, index) => (
@@ -279,7 +298,21 @@ export default function ClipsList({
           </div>
         </div>
       ));
-  };
+  }, []);
+
+  // Memoize the clips rendering to prevent unnecessary re-renders
+  const renderedClips = React.useMemo(() => {
+    return clips.map((clip, index) => (
+      <div
+        key={`clip-${clip.id}`}
+        className={cn('snap-center', {
+          'pr-4': index === clips.length - 1,
+        })}
+      >
+        {renderClip(clip, index)}
+      </div>
+    ));
+  }, [clips, renderClip]);
 
   return (
     <div className="w-full" data-section={isRevisitList ? 'previously-practiced' : 'recommended'}>
@@ -312,18 +345,7 @@ export default function ClipsList({
               ref={scrollContainerRef}
               className="overflow-x-scroll pb-4 scrollbar-hide snap-x snap-mandatory"
             >
-              <div className="flex space-x-3 px-4">
-                {clips.map((clip, index) => (
-                  <div
-                    key={index}
-                    className={cn('snap-center', {
-                      'pr-4': index === clips.length - 1,
-                    })}
-                  >
-                    {renderClip(clip, index)}
-                  </div>
-                ))}
-              </div>
+              <div className="flex space-x-3 px-4">{renderedClips}</div>
             </div>
           )}
           {!isExpanded && showLeftArrow && (

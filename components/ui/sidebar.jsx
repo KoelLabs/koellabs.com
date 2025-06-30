@@ -21,7 +21,7 @@ function useSidebar() {
 }
 
 const SidebarLayout = React.forwardRef(({ defaultOpen, className, ...props }, ref) => {
-  const [open, setOpen] = React.useState(defaultOpen ?? true);
+  const [open, setOpen] = React.useState(defaultOpen !== false);
 
   const onOpenChange = React.useCallback(open => {
     setOpen(open);
