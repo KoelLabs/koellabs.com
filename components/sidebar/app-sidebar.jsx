@@ -30,8 +30,8 @@ import {
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { getUser } from '@/utils/authClient';
-import { StreakCard } from '@/components/sidebar/streak-card';
+import { getUser } from '@/lib/auth-client';
+import { getUserVideos } from '@/lib/videos';
 import { Badge } from '../ui/base/badge';
 const data = {
   user: {
@@ -86,30 +86,21 @@ export function AppSidebar({ className }) {
       console.log('Loading sidebar user data' + (forceRefresh ? ' (forced refresh)' : ''));
 
       // Use separate fetch calls to isolate potential issues
-      const user = await getUser();
+      const { user, error } = await getUser();
+      if (error) throw error;
       console.log('User data loaded:', user);
       data.user = user;
       data.user.isLoaded = true;
 
-      // Fetch videos with cache-busting query parameter when forced
-      const videosUrl = forceRefresh ? `/api/userVideos?_=${Date.now()}` : '/api/userVideos';
-
-      const videosResponse = await fetch(videosUrl);
-
-      if (!videosResponse.ok) {
-        console.warn('Failed to fetch user videos:', videosResponse.status);
-        // Continue with empty videos array
-        data.videos = [];
-      } else {
-        const userVideos = await videosResponse.json();
-        console.log('User videos loaded:', userVideos);
-
-        // Update videos array with the latest data
-        data.videos = userVideos.map(video => ({
+      try {
+        const videos = await getUserVideos();
+        data.videos = videos.map(video => ({
           name: video.title || 'Untitled Video',
           id: video.id,
           icon: Clapperboard,
         }));
+      } catch {
+        data.videos = [];
       }
 
       console.log('Sidebar videos updated:', data.videos);
@@ -127,7 +118,8 @@ export function AppSidebar({ className }) {
       console.error('Error loading sidebar data:', error);
       // Still set user as loaded even if videos fail
       try {
-        const user = await getUser();
+        const { user, error } = await getUser();
+        if (error) throw error;
         data.user = user;
         data.user.isLoaded = true;
         setIsLoaded(true);

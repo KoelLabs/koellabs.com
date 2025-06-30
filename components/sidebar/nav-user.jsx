@@ -24,65 +24,61 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/base/dropdown-menu';
-import { signOut } from '@/utils/authClient';
+import { authClient } from '@/lib/auth-client';
+import { resetUserVideos } from '@/lib/videos';
+import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { Skeleton } from '@/components/ui/base/skeleton';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 export function NavUser({ user, isCollapsed, isLoading }) {
+  const router = useRouter();
   const { setTheme } = useTheme();
   const { toast } = useToast();
   const [isResetting, setIsResetting] = useState(false);
 
-  const resetUserVideos = async () => {
+  const handleSignOut = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push('/sign-in'); // redirect to sign-in page
+        },
+      },
+    });
+  };
+
+  const resetVideos = async () => {
     if (
       window.confirm(
         'Are you sure you want to reset your video history? This action cannot be undone.',
       )
     ) {
+      setIsResetting(true);
       try {
-        setIsResetting(true);
-
-        const response = await fetch('/api/resetUserVideos', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+        await resetUserVideos();
+        toast({
+          title: 'Success',
+          description: 'Your video history has been reset.',
+          variant: 'default',
         });
 
-        if (response.ok) {
-          toast({
-            title: 'Success',
-            description: 'Your video history has been reset.',
-            variant: 'default',
-          });
+        // Dispatch event to update UI components
+        window.dispatchEvent(
+          new CustomEvent('koellabs:userVideosUpdated', {
+            detail: { action: 'reset', timestamp: Date.now() },
+            bubbles: true,
+          }),
+        );
 
-          // Dispatch event to update UI components
-          window.dispatchEvent(
-            new CustomEvent('koellabs:userVideosUpdated', {
-              detail: { action: 'reset', timestamp: Date.now() },
-              bubbles: true,
-            }),
-          );
-
-          // Force page refresh to update UI
-          setTimeout(() => {
-            window.location.reload();
-          }, 1500);
-        } else {
-          const error = await response.json();
-          toast({
-            title: 'Error',
-            description: error.message || 'Failed to reset video history.',
-            variant: 'destructive',
-          });
-        }
+        // Force page refresh to update UI
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500); // TODO: this is terrible and won't work
       } catch (error) {
-        console.error('Error resetting video history:', error);
         toast({
           title: 'Error',
-          description: 'Something went wrong. Please try again.',
+          description: error.message || 'Failed to reset video history.',
           variant: 'destructive',
         });
       } finally {
@@ -184,7 +180,7 @@ export function NavUser({ user, isCollapsed, isLoading }) {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="gap-2 text-amber-600 hover:text-amber-700"
-          onClick={resetUserVideos}
+          onClick={resetVideos}
           disabled={isResetting}
         >
           {isResetting ? (
@@ -195,7 +191,7 @@ export function NavUser({ user, isCollapsed, isLoading }) {
           {isResetting ? 'Resetting...' : 'Reset Video History'}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="gap-2 text-red-600 hover:text-red-600" onClick={signOut}>
+        <DropdownMenuItem className="gap-2 text-red-600 hover:text-red-600" onClick={handleSignOut}>
           <LogOut className="h-4 w-4 text-muted-foreground text-red-600" />
           Log out
         </DropdownMenuItem>

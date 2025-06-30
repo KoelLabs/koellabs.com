@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getSessionCookie, setSessionCookie } from 'better-auth/cookies';
 
 const PUBLIC_URLS = [
   new RegExp('^/$'),
@@ -15,21 +16,20 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next(); // trying to access public page -> continue
   }
 
-  const idToken = request.cookies.get('idtoken');
-  const isLoggedIn =
-    idToken &&
-    (await fetch(new URL('/api/isLoggedin', request.url), {
-      headers: {
-        Authorization: `Bearer ${idToken['value']}`,
-      },
-    }).then(res => res.json()));
+  const sessionCookie = getSessionCookie(request);
 
-  if (!isLoggedIn) {
+  // THIS IS NOT SECURE!
+  // This is the recommended approach to optimistically redirect users
+  // Auth checks should be handled in each page/route
+  if (!sessionCookie) {
     // Logged out
     if (request.nextUrl.pathname === '/sign-in') {
-      return NextResponse.next(); // trying to access sign-in -> continue
+      // trying to access sign-in -> continue
+      return NextResponse.next();
+    } else {
+      // trying to access private page -> redirect to sign-in
+      return NextResponse.redirect(new URL('/sign-in', request.url));
     }
-    return NextResponse.redirect(new URL('/sign-in', request.url)); // trying to access private page -> redirect to sign-in
   } else {
     // Logged in
     if (request.nextUrl.pathname === '/sign-in') {

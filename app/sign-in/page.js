@@ -1,23 +1,15 @@
 'use client';
-import Image from 'next/image';
-import Link from 'next/link';
 
 import { Button } from '@/components/ui/base/button';
 import { Input } from '@/components/ui/base/input';
 import { Label } from '@/components/ui/base/label';
 import { useState } from 'react';
-import { ArrowLeftCircle, MessageSquareText } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-
-import {
-  googleLogin,
-  emailPasswordLogin,
-  emailPasswordSignUp,
-  emailPasswordReset,
-} from '@/utils/authClient';
-
+import { authClient } from '@/lib/auth-client';
 import React from 'react';
-import NotFound from '../not-found';
+
+const ONBOARDING_URL = '/dashboard'; // TODO: make onboarding, for now just dashboard
+const RETURNING_USER_URL = '/dashboard';
 
 export default function AuthScreen() {
   const [email, setEmail] = useState('');
@@ -348,8 +340,11 @@ export default function AuthScreen() {
                 <Button
                   className="ml-auto inline-block text-sm hover:underline text-black dark:text-neutral-200 font-medium tracking-tight bg-transparent hover:bg-transparent p-0"
                   onClick={async () => {
+                    const { error } = await authClient.requestPasswordReset({
+                      email: email,
+                      redirectTo: '/reset-password', // the email link redirects here
+                    });
                     // TODO: use a dialog element or something similar that looks better than alert
-                    const error = await emailPasswordReset(email);
                     alert(error ? error.message : 'Password reset email sent');
                   }}
                 >
@@ -369,9 +364,18 @@ export default function AuthScreen() {
               className="w-full mt-2 dark:text-white bg-linear-to-br py-0 border border-double outline-white/50 outline-[0.1px] outline-offset-[-2px] border-black from-sky-800 to-blue-950 dark:outline-black/50 dark:from-sky-600 dark:to-blue-800 h-10 rounded-lg"
               type="submit"
               onClick={async () => {
-                const error = await emailPasswordLogin(email, password);
-                // TODO: display error message nicely
-                alert(error.message);
+                const { error } = await authClient.signIn.email({
+                  email,
+                  password,
+                  // callbackURL: '/dashboard', // Redirected to after the email is verified (optional)
+                  rememberMe: false, // remember user after browser is closed, TODO: add checkbox?
+                });
+                if (error) {
+                  // TODO: display error message nicely
+                  alert(error.message);
+                } else {
+                  router.push(location.state?.from || RETURNING_USER_URL);
+                }
               }}
             >
               Sign In
@@ -389,8 +393,14 @@ export default function AuthScreen() {
               <Button
                 className="w-full bg-white text-neutral-800 hover:bg-neutral-100 border border-neutral-200 dark:bg-neutral-900 dark:border-neutral-800 dark:text-white h-10 rounded-lg"
                 onClick={async () => {
-                  const error = await googleLogin();
-                  alert(error.message); // TODO: display nicely
+                  const { error } = await authClient.signIn.social({
+                    provider: 'google',
+                    callbackURL: RETURNING_USER_URL,
+                    newUserCallbackURL: ONBOARDING_URL,
+                  });
+                  if (error) {
+                    alert(error.message); // TODO: display nicely
+                  }
                 }}
               >
                 <svg
@@ -505,12 +515,24 @@ export default function AuthScreen() {
             <Button
               className="hover:underline text-black font-medium dark:text-neutral-200 bg-transparent hover:bg-transparent p-0"
               onClick={async () => {
-                const [user, error] = await emailPasswordSignUp(email, password);
+                const { error } = await authClient.signUp.email(
+                  {
+                    email, // user email address
+                    password, // user password -> min 8 characters by default
+                    name: email.split('@')[0], // user display name
+                    // image, // User image URL (optional)
+                    // callbackURL: '/dashboard', // A URL to redirect to after the user verifies their email (optional)
+                  },
+                  {
+                    onRequest: ctx => {
+                      // TODO: show loading
+                    },
+                  },
+                );
                 if (error) {
                   alert(error.message); // TODO: display nicely
                 } else {
-                  console.log(user);
-                  // TODO: router.push(location.state?.from || '/onboarding');
+                  router.push(location.state?.from || ONBOARDING_URL);
                 }
               }}
             >

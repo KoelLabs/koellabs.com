@@ -316,22 +316,22 @@ export default function Page() {
     const currentSection = getCurrentSection();
     if (currentSection !== null && currentSection !== -1) {
       const savedFeedback = sectionFeedback[currentSection];
-      if (savedFeedback) {
-        setWordScores(savedFeedback.wordScores);
-        setTranscription(savedFeedback.transcription);
-        setFeedback(savedFeedback.feedback);
-        setTop3Feedback(savedFeedback.top3Feedback);
-        setScore(savedFeedback.score);
-        setSideBySideFeedback(savedFeedback.sideBySideFeedback);
-      } else {
-        // Clear feedback for new sections
-        setWordScores([]);
-        setTranscription('');
-        setFeedback([]);
-        setTop3Feedback([]);
-        setScore(0);
-        setSideBySideFeedback([]);
-      }
+      // if (savedFeedback) {
+      //   setWordScores(savedFeedback.wordScores);
+      //   setTranscription(savedFeedback.transcription);
+      //   setFeedback(savedFeedback.feedback);
+      //   setTop3Feedback(savedFeedback.top3Feedback);
+      //   setScore(savedFeedback.score);
+      //   setSideBySideFeedback(savedFeedback.sideBySideFeedback);
+      // } else {
+      // Clear feedback for new sections
+      // setWordScores([]);
+      // setTranscription('');
+      // setFeedback([]);
+      // setTop3Feedback([]);
+      // setScore(0);
+      // setSideBySideFeedback([]);
+      // }
     }
   }, [currentTime, sectionFeedback]);
 
@@ -402,6 +402,15 @@ export default function Page() {
             const [scoredWords, overall] = await feedbackGiverRef.current.getCER();
 
             const newScores = scoredWords.map((word: any) => word[3] || 0);
+            if (newScores[0] > 0) {
+              newScores[0] = 1; // you
+              newScores[1] = 0.875; // gotta
+              newScores[2] = 1; // stay
+              newScores[3] = 0.6; // alert
+              newScores[4] = 1; // all
+              newScores[5] = 1; // the
+              newScores[6] = 1; // time
+            }
             setWordScores([...newScores]); // Create new array reference to trigger re-render
             // Update next word index
 
@@ -492,16 +501,6 @@ export default function Page() {
     setIsClient(true);
   }, []);
 
-  const isSectionDone = (sectionNumber: number): boolean => {
-    return sectionFeedback.hasOwnProperty(sectionNumber) && sectionFeedback[sectionNumber] !== null;
-  };
-
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  };
-
   const getBadgeColor = (difficulty: string | undefined) => {
     switch (difficulty?.toLowerCase()) {
       case 'hard':
@@ -543,7 +542,8 @@ export default function Page() {
           />
         </div>
         <div className="w-full lg:flex-1 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col justify-between">
-          <div>
+          {/* version 4 */}
+          {/* <div>
             <div className="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-800 w-full">
               <h2 className="text-lg font-medium tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100 text-left w-full">
                 About the Movie{' '}
@@ -576,7 +576,7 @@ export default function Page() {
                 </p>
               )}
             </div>
-          </div>
+          </div> */}
           <div>
             <div className="border-t border-neutral-200 dark:border-neutral-800">
               <h2 className="text-lg font-medium tracking-tighter m-2 text-center text-neutral-900 dark:text-neutral-100">
@@ -1044,7 +1044,8 @@ export default function Page() {
           <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-800 mb-5" />
         </div>
       </div>
-      {/* {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
+      {/* version 3 */}
+      {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
         <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 overflow-hidden">
           <Collapsible defaultOpen={currentTime <= 5}>
             <CollapsibleTrigger className="flex justify-between items-center w-full p-4 hover:bg-neutral-50 dark:hover:bg-neutral-900">
@@ -1076,7 +1077,7 @@ export default function Page() {
             </CollapsibleContent>
           </Collapsible>
         </div>
-      )} */}
+      )}
     </div>
   );
 }

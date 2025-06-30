@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, Play, XIcon } from 'lucide-react';
 
-import { cn } from '@/utils/styles';
+import { cn } from '@/lib/styles';
 import React from 'react';
 import Link from 'next/link';
 

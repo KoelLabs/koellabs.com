@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Card, CardContent } from '@/components/ui/base/card';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/base/button';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/styles';
 import Image from 'next/image';
 
 interface Clip {

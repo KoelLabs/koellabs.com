@@ -705,3 +705,7 @@ html {
   animation-delay: 0.16s;
   opacity: 0;
 }
+
+nextjs-portal {
+  display: none;
+}

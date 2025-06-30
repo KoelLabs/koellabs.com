@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { MoreHorizontal, PlusSquare, PencilLine, Trash2, RotateCcw, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/styles';
 import { Button } from '@/components/ui/base/button';
 import {
   DropdownMenu,

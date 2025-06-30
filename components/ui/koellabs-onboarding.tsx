@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from '@/components/ui/base/select';
 import { Checkbox } from '@/components/ui/base/checkbox';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/styles';
 import { ChevronLeft, ChevronRight, Verified } from 'lucide-react';
 import KoelBird from '@/components/ui/base/koel-labs-bird';
 

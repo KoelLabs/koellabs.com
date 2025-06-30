@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 
-import { cn } from '@/utils/styles';
+import { cn } from '@/lib/styles';
 
 import { Button } from '@/components/ui/base/button';
 import {

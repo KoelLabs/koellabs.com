@@ -7,6 +7,7 @@ import { Dot, Search } from 'lucide-react';
 import ClipsList from './ClipsList';
 import { useId } from 'react';
 import Fuse from 'fuse.js';
+import { getUserVideos } from '@/lib/videos';
 
 const shows = [
   {
@@ -49,18 +50,21 @@ const recommendedClips: RecommendedClip[] = [
 ];
 
 interface RevisitClip {
+  id: string;
   title: string;
   thumbnail: string;
-  vtt: string;
+  vtt: string | null;
   video: string;
-  link: string;
-  id: string;
-  badge: string;
-  dialect: string;
-  difficulty: string;
-  dialectFlag: string;
-  completedSections: number;
-  duration: string;
+  link: string | null;
+  badge: string | null;
+  difficulty: string | null;
+  dialect: string | null;
+  dialectFlag: string | null;
+  dialectIcon: string | null;
+  completedSections: number | null;
+  duration: string | null;
+  addedAt: Date | null;
+  lastWatched: Date | null;
 }
 
 interface SearchCenterProps {}
@@ -80,27 +84,18 @@ export default function SearchCenter({}: SearchCenterProps) {
   // Fetch user's videos on component mount
   useEffect(() => {
     const fetchUserVideos = async () => {
+      // Set loading state
+      setIsLoading(true);
+
       try {
-        // Set loading state
-        setIsLoading(true);
-
-        // Simulate minimum loading time for better UX (at least 500ms to show skeleton)
-        const startTime = Date.now();
-
-        const response = await fetch('/api/userVideos');
-        if (response.ok) {
-          const videos = await response.json();
-          setUserClips(videos);
-        } else {
-          console.warn('Failed to fetch user videos:', response.status);
-          setUserClips([]);
-        }
+        const videos = await getUserVideos();
+        setUserClips(videos);
       } catch (error) {
         console.error('Error fetching user videos:', error);
         setUserClips([]);
-      } finally {
-        setIsLoading(false);
       }
+
+      setIsLoading(false);
     };
 
     fetchUserVideos();
@@ -151,24 +146,15 @@ export default function SearchCenter({}: SearchCenterProps) {
     // Refetch user videos to update the "Previously Practiced" section
     try {
       console.log('Refetching user videos after adding video:', videoId);
-      const response = await fetch('/api/userVideos');
-
-      if (response.ok) {
-        const videos = await response.json();
+      try {
+        const videos = await getUserVideos();
         console.log('Updated user videos:', videos);
 
         // Update local state with the new videos
         setUserClips(videos);
         setFilteredRevisitClips(videos);
-
-        // If we have videos, make sure they're displayed
-        if (videos.length > 0) {
-          console.log('Videos found, updating UI');
-        } else {
-          console.log('No videos returned from API');
-        }
-      } else {
-        console.warn('Failed to fetch updated videos:', response.status);
+      } catch (error) {
+        console.error('Error fetching updated user videos:', error);
       }
 
       // 1. Main event with video data
@@ -194,7 +180,7 @@ export default function SearchCenter({}: SearchCenterProps) {
           bubbles: true,
         });
         window.dispatchEvent(forceEvent);
-      }, 100);
+      }, 100); // TODO: timeouts will break with bad internet
 
       // Force a re-render by updating state
       setSearchQuery(prev => prev);

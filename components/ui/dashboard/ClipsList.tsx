@@ -4,11 +4,12 @@ import * as React from 'react';
 import { Card, CardContent } from '@/components/ui/base/card';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/base/button';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/styles';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/base/badge';
 import { useRouter } from 'next/navigation';
+import { associateUserVideo } from '@/lib/videos';
 
 interface BaseClip {
   id: string | number;
@@ -20,13 +21,22 @@ interface BaseClip {
   dialectFlag: string;
 }
 
-interface RevisitClip extends BaseClip {
+interface RevisitClip {
   id: string;
-  vtt: string;
+  title: string;
+  thumbnail: string;
+  vtt: string | null;
   video: string;
-  link: string;
-  badge: string;
-  completedSections: number;
+  link: string | null;
+  badge: string | null;
+  difficulty: string | null;
+  dialect: string | null;
+  dialectFlag: string | null;
+  dialectIcon: string | null;
+  completedSections: number | null;
+  duration: string | null;
+  addedAt: Date | null;
+  lastWatched: Date | null;
 }
 
 interface ClipsListProps {
@@ -58,18 +68,11 @@ export default function ClipsList({
         // Start navigation and API call in parallel
         const navigationPromise = router.prefetch(`/dashboard/${clip.id}`);
 
-        const response = await fetch('/api/userVideos', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ videoId: clip.id }),
-        });
-
-        if (response.ok) {
+        try {
+          await associateUserVideo(clip.id.toString());
           console.log('Video added successfully');
-        } else {
-          console.warn('API response not ok:', response.status);
+        } catch (error) {
+          console.warn('Failed to add video:', error);
         }
 
         // Store in session storage early
@@ -84,7 +87,7 @@ export default function ClipsList({
         router.push(`/dashboard/${clip.id}`);
       } catch (error) {
         console.error('Error adding video to user collection:', error);
-        console.log('Navigating anyway...');
+        console.log('Navigating anyway...'); // TODO: what kind if error handling is this lol, should show something to the user
         router.push(`/dashboard/${clip.id}`);
       }
     },
