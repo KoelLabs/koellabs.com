@@ -13,7 +13,12 @@ async function fetchUserVideos() {
 }
 
 export function useUserVideos() {
-  const { data, error, isLoading, mutate } = useSWR('user-videos', fetchUserVideos);
+  const { data, error, isLoading, mutate } = useSWR('user-videos', fetchUserVideos, {
+    dedupingInterval: 5000,
+    revalidateOnFocus: false,
+    revalidateIfStale: true,
+    revalidateOnReconnect: true,
+  });
 
   return {
     videos: data || [],

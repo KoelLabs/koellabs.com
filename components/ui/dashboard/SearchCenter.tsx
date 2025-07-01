@@ -84,7 +84,6 @@ export default function SearchCenter({}: SearchCenterProps) {
     let revisitResults = [...userClips];
     let recommendedResults = [...recommendedClips];
 
-    // Step 1: Apply show filter if active
     if (activeShow) {
       const showMatch = shows.find(show => show.id === activeShow);
       const showName = showMatch?.name.toLowerCase() || '';
@@ -95,7 +94,6 @@ export default function SearchCenter({}: SearchCenterProps) {
       );
     }
 
-    // Step 2: Apply search query if present
     if (searchQuery) {
       const filteredRevisitFuse = new Fuse(revisitResults, fuseOptions);
       const filteredRecommendedFuse = new Fuse(recommendedResults, fuseOptions);
@@ -104,11 +102,8 @@ export default function SearchCenter({}: SearchCenterProps) {
       recommendedResults = filteredRecommendedFuse.search(searchQuery).map(result => result.item);
     }
 
-    // Step 3: Filter out videos from recommendations that already appear in user clips
-    // Get a list of all video IDs in the user's previously practiced clips
     const userClipIds = revisitResults.map(clip => clip.id.toString());
 
-    // Remove any recommended clips that have matching IDs with user clips
     recommendedResults = recommendedResults.filter(
       clip => !userClipIds.includes(clip.id.toString()),
     );
@@ -122,39 +117,21 @@ export default function SearchCenter({}: SearchCenterProps) {
   };
 
   const handleVideoAdded = async (videoId: string) => {
-    // Refetch user videos to update the "Previously Practiced" section
     try {
-      console.log('Refetching user videos after adding video:', videoId);
-      try {
-        await refreshUserVideos();
-      } catch (error) {
-        console.error('Error fetching updated user videos:', error);
-      }
+      console.log('Video added:', videoId);
 
-      // 1. Main event with video data
-      const mainEvent = new CustomEvent('koellabs:userVideosUpdated', {
+      await refreshUserVideos();
+
+      const updateEvent = new CustomEvent('koellabs:userVideosUpdated', {
         detail: {
           timestamp: Date.now(),
           videoId: videoId,
           action: 'add',
-          forceRefresh: true,
         },
         bubbles: true,
       });
-      console.log('Dispatching main update event');
-      window.dispatchEvent(mainEvent);
 
-      // 2. Try a backup approach with a timeout
-      setTimeout(() => {
-        console.log('Dispatching backup events');
-
-        // Force sidebar refresh with another event type
-        const forceEvent = new CustomEvent('koellabs:forceRefresh', {
-          detail: { source: 'SearchCenter', timestamp: Date.now() },
-          bubbles: true,
-        });
-        window.dispatchEvent(forceEvent);
-      }, 100); // TODO: timeouts will break with bad internet
+      window.dispatchEvent(updateEvent);
     } catch (error) {
       console.error('Error refreshing user videos:', error);
     }
