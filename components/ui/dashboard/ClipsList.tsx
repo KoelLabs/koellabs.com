@@ -287,23 +287,6 @@ export default function ClipsList({
     return null;
   }, [isRevisitList]);
 
-  // Memoize skeleton loaders
-  const skeletonLoaders = React.useMemo(() => {
-    return Array(4)
-      .fill(0)
-      .map((_, index) => (
-        <div key={`skeleton-${index}`} className="flex-none w-[200px] sm:w-[364px] animate-pulse">
-          <div className="rounded-lg bg-neutral-200 dark:bg-neutral-800 aspect-video mb-2"></div>
-          <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-3/4 mb-2"></div>
-          <div className="flex justify-between">
-            <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/3"></div>
-            <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/3"></div>
-          </div>
-        </div>
-      ));
-  }, []);
-
-  // Memoize the clips rendering to prevent unnecessary re-renders
   const renderedClips = React.useMemo(() => {
     return clips.map((clip, index) => (
       <div

@@ -2,6 +2,7 @@
 
 import useSWR from 'swr';
 import { getUserVideos } from '@/lib/videos';
+import { useMemo } from 'react';
 
 async function fetchUserVideos() {
   try {
@@ -20,8 +21,10 @@ export function useUserVideos() {
     revalidateOnReconnect: true,
   });
 
+  const videos = useMemo(() => data || [], [data]);
+
   return {
-    videos: data || [],
+    videos,
     error,
     isLoading,
     mutate,
