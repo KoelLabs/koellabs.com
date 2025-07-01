@@ -23,8 +23,8 @@ export async function middleware(request: NextRequest) {
   // Auth checks should be handled in each page/route
   if (!sessionCookie) {
     // Logged out
-    if (request.nextUrl.pathname === '/sign-in') {
-      // trying to access sign-in -> continue
+    if (request.nextUrl.pathname === '/sign-in' || request.nextUrl.pathname === '/sign-up') {
+      // trying to access sign-in or sign-up -> continue
       return NextResponse.next();
     } else {
       // trying to access private page -> redirect to sign-in
@@ -32,11 +32,11 @@ export async function middleware(request: NextRequest) {
     }
   } else {
     // Logged in
-    if (request.nextUrl.pathname === '/sign-in') {
-      // trying to access sign-in -> redirect to /dashboard
+    if (request.nextUrl.pathname === '/sign-in' || request.nextUrl.pathname === '/sign-up') {
+      // trying to access sign-in or sign-up -> redirect to /dashboard
       return NextResponse.redirect(new URL('/dashboard', request.url));
     } else {
-      // not trying to access sign-in -> continue
+      // not trying to access sign-in or sign-up -> continue
       return NextResponse.next();
     }
   }
