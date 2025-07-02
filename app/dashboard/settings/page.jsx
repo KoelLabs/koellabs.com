@@ -440,7 +440,7 @@ export default function SettingsPage() {
       <img
         alt="User avatar"
         src={previewAvatar || session?.user?.image || 'https://www.ruslan.in/grad.png'}
-        className="h-24 w-24 rounded-full border border-neutral-200 dark:border-neutral-800 object-cover"
+        className="h-24 w-24 rounded-full border outline-neutral-300 object-fill"
       />
     );
   }, [isPending, session?.user?.image, previewAvatar]);
@@ -460,7 +460,7 @@ export default function SettingsPage() {
           <TabsList className="grid w-fit grid-cols-2 border rounded-[15px] ">
             <TabsTrigger
               value="personal"
-              className="font-normal rounded-xl cursor-pointer outline-offset-[-0.5px] data-[state=active]:outline-[0.5px] outline-neutral-300"
+              className="font-normal rounded-xl cursor-pointer outline-offset-[-0.75px] data-[state=active]:outline-[0.75px] outline-neutral-300"
             >
               <span className="flex items-center gap-2 tracking-tight">
                 <User2 className="h-4 w-4" />
@@ -469,7 +469,7 @@ export default function SettingsPage() {
             </TabsTrigger>
             <TabsTrigger
               value="security"
-              className="font-normal rounded-xl cursor-pointer outline-offset-[-0.5px] data-[state=active]:outline-[0.5px] outline-neutral-300"
+              className="font-normal rounded-xl cursor-pointer outline-offset-[-0.75px] data-[state=active]:outline-[0.75px] outline-neutral-300"
             >
               <span className="flex items-center gap-2">
                 <Lock className="h-4 w-4" />

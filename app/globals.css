@@ -696,13 +696,13 @@ html {
 
 .empty-state-right {
   animation: popUpAndSettleRight 0.4s cubic-bezier(0.16, 1.5, 0.15, 1) forwards;
-  animation-delay: 0.08s;
+  animation-delay: 0.12s;
   opacity: 0;
 }
 
 .empty-state-left {
   animation: popUpAndSettleLeft 0.4s cubic-bezier(0.16, 1.5, 0.15, 1) forwards;
-  animation-delay: 0.16s;
+  animation-delay: 0.06s;
   opacity: 0;
 }
 

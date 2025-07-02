@@ -227,60 +227,64 @@ export default function ClipsList({
   const renderEmptyState = React.useCallback(() => {
     if (isRevisitList) {
       return (
-        <div className="flex flex-col items-center justify-center py-8 px-4 text-center border mx-4 border-neutral-200 dark:border-neutral-800 rounded-xl border-dashed">
-          <div className="rounded-full bg-neutral-100 dark:bg-neutral-800 p-3 mb-4 border border-neutral-200 dark:border-neutral-800">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+        <div className="flex relative flex-col items-center justify-center text-center border mx-4 border-neutral-200 dark:border-neutral-800 rounded-xl border-dashed bg-[url('/NoPractice.svg')] dark:bg-[url('/DarkNoPractice.svg')] bg-cover bg-center">
+          <div className="absolute inset-0 h-full w-full -z-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#0f0f0f_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+
+          <div className="relative flex-col items-center justify-center flex bg-white/50 dark:bg-transparent py-8 px-4">
+            <div className="rounded-full bg-white dark:bg-neutral-800 p-3 mb-4 border">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M12 8V12L15 15"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+            <h3 className="text-lg font-medium tracking-tight mb-2">No Practice History Yet</h3>
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4 max-w-xs">
+              Start practicing with any clip from the recommendations below to build your history.
+            </p>
+            <Button
+              variant="outline"
+              className="flex items-center gap-2"
+              onClick={() => {
+                // Scroll to recommended section
+                const recommendedSection = document.querySelector('[data-section="recommended"]');
+                if (recommendedSection) {
+                  recommendedSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
             >
-              <path
-                d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-                stroke="currentColor"
-                strokeWidth="2"
-              />
-              <path
-                d="M12 8V12L15 15"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
+              Browse Recommendations
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 5V19M12 19L19 12M12 19L5 12"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Button>
           </div>
-          <h3 className="text-lg font-medium tracking-tight mb-2">No Practice History Yet</h3>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4 max-w-xs">
-            Start practicing with any clip from the recommendations below to build your history.
-          </p>
-          <Button
-            variant="outline"
-            className="flex items-center gap-2"
-            onClick={() => {
-              // Scroll to recommended section
-              const recommendedSection = document.querySelector('[data-section="recommended"]');
-              if (recommendedSection) {
-                recommendedSection.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-          >
-            Browse Recommendations
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 5V19M12 19L19 12M12 19L5 12"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Button>
         </div>
       );
     }

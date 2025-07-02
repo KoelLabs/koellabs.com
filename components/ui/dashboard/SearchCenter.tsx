@@ -604,10 +604,10 @@ export default function SearchCenter({}: SearchCenterProps) {
             </svg>
           </div>
           <h2 className="text-lg font-medium text-black dark:text-white tracking-tighter">
-            No clips found
+            No Clips Found
           </h2>
-          <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-            Try searching for a different show or clip.
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground text-balance">
+            Try searching for something different.
           </p>
         </div>
       )}
