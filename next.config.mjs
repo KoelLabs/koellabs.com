@@ -6,6 +6,12 @@ const __dirname = new URL('.', import.meta.url).pathname;
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: false,
+  compiler: {
+    // Enable React compiler for better performance
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === 'production',
+    styledComponents: true,
+  },
   webpack: config => {
     config.resolve.alias = {
       ...config.resolve.alias,

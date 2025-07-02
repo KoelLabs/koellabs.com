@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     }
 
     // Parse the request body
-    const { targetLanguage, targetDialect, nativeLanguage, nativeDialect, hasConsented } =
+    const { targetLanguage, targetDialect, nativeLanguage, nativeDialect, hasConsented, avatar } =
       await request.json();
 
     // Update the user record with the new preferences
@@ -28,6 +28,8 @@ export async function POST(request: Request) {
           nativeDialect,
           hasConsented,
         }),
+        // Update the image field if avatar is provided
+        ...(avatar ? { image: avatar } : {}),
         // Mark onboarding as completed
         onboardingCompleted: true,
       })

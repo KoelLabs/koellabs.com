@@ -65,7 +65,7 @@ export function AppSidebar({ className }) {
   const [userData, setUserData] = useState({
     name: 'Loading...',
     email: 'Loading...',
-    picture: '',
+    image: '',
     isLoaded: false,
   });
   const [videosList, setVideosList] = useState([]);
@@ -93,10 +93,12 @@ export function AppSidebar({ className }) {
         if (error) throw error;
 
         setUserData(prevUserData => {
+          console.log('prevUserData', prevUserData);
+          console.log('user', user);
           if (
             !prevUserData.isLoaded ||
             prevUserData.email !== user.email ||
-            prevUserData.picture !== user.picture
+            prevUserData.image !== user.image
           ) {
             return {
               ...user,

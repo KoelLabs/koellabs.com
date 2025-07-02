@@ -32,11 +32,16 @@ import { Skeleton } from '@/components/ui/base/skeleton';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
-export function NavUser({ user, isCollapsed, isLoading }) {
+export function NavUser({ user = {}, isCollapsed, isLoading }) {
   const router = useRouter();
   const { setTheme } = useTheme();
   const { toast } = useToast();
   const [isResetting, setIsResetting] = useState(false);
+
+  // Extract user properties with default values for safety
+  const name = user?.name || 'User';
+  const email = user?.email || '';
+  const image = user?.image || '';
 
   const handleSignOut = async () => {
     await authClient.signOut({
@@ -104,21 +109,19 @@ export function NavUser({ user, isCollapsed, isLoading }) {
       <DropdownMenuTrigger className="w-full rounded-md outline-hidden ring-ring hover:bg-accent focus-visible:ring-2 data-[state=open]:bg-accent">
         <div className="flex items-center gap-2 px-2 py-1.5 text-left text-sm transition-all">
           <Avatar className="h-7 w-7 rounded-md border">
-            <AvatarImage
-              src={user.picture}
-              alt={user.name}
-              className="animate-in fade-in-50 zoom-in-90"
-            />
-            <AvatarFallback className="rounded-sm ">{user.name[0] + user.name[1]}</AvatarFallback>
+            <AvatarImage src={image} alt={name} className="animate-in fade-in-50 zoom-in-90" />
+            <AvatarFallback className="rounded-sm ">
+              {name.length > 1 ? name[0] + name[1] : 'U'}
+            </AvatarFallback>
           </Avatar>
           {!isCollapsed && (
             <>
               <div className="grid flex-1 leading-none">
                 <div className="font-medium line-clamp-1">
-                  {user.name.length > 15 ? `${user.name.substring(0, 18)}...` : user.name}
+                  {name.length > 15 ? `${name.substring(0, 18)}...` : name}
                 </div>
                 <div className="overflow-hidden text-xs text-muted-foreground">
-                  <div className="line-clamp-1">{user.email}</div>
+                  <div className="line-clamp-1">{email}</div>
                 </div>
               </div>
               <ChevronsUpDown className="ml-auto mr-0.5 h-4 w-4 text-muted-foreground/50" />
@@ -130,13 +133,15 @@ export function NavUser({ user, isCollapsed, isLoading }) {
         <DropdownMenuLabel className="p-0 font-normal">
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm transition-all">
             <Avatar className="h-7 w-7 rounded-md">
-              <AvatarImage src={user.picture} alt={user.name} />
-              <AvatarFallback className="border">{user.name[0] + user.name[1]}</AvatarFallback>
+              <AvatarImage src={image} alt={name} />
+              <AvatarFallback className="border">
+                {name.length > 1 ? name[0] + name[1] : 'U'}
+              </AvatarFallback>
             </Avatar>
             <div className="grid flex-1">
-              <div className="font-medium">{user.name}</div>
+              <div className="font-medium">{name}</div>
               <div className="overflow-hidden text-xs text-muted-foreground">
-                <div className="line-clamp-1">{user.email}</div>
+                <div className="line-clamp-1">{email}</div>
               </div>
             </div>
           </div>

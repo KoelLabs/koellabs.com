@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useId, useState, useEffect, useMemo, useCallback, memo } from 'react';
+import React, { useId, useState, useEffect, useMemo, useCallback, memo, useRef } from 'react';
 import { Button } from '@/components/ui/base/button';
 import { Input } from '@/components/ui/base/input';
 import { Label } from '@/components/ui/base/label';
@@ -55,7 +55,7 @@ const FormInput = memo(({ label, id, name, value, onChange, isPending }) => {
       <Input
         id={id}
         name={name}
-        className="text-sm rounded-lg"
+        className="text-sm rounded-lg mt-1"
         value={value}
         onChange={handleChange}
       />
@@ -90,7 +90,7 @@ const FormSelect = memo(({ label, id, value, options, onChange, isPending }) => 
         {label}
       </Label>
       <Select value={value} onValueChange={handleChange}>
-        <SelectTrigger id={id} className="text-sm rounded-lg">
+        <SelectTrigger id={id} className="text-sm rounded-lg mt-1">
           <SelectValue placeholder={`Select ${label.toLowerCase()}`} />
         </SelectTrigger>
         <SelectContent>
@@ -146,19 +146,12 @@ const AppearanceSection = memo(({ theme, setTheme }) => {
                     height={90}
                     className="relative object-cover cursor-pointer overflow-hidden rounded-lg border border-input shadow-xs shadow-black/5 outline-offset-2 transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-ring/70 peer-data-disabled:cursor-not-allowed peer-data-[state=checked]:border-ring peer-data-[state=checked]:bg-accent peer-data-disabled:opacity-50"
                   />
-                  <span className="group mt-2 flex items-center gap-1 peer-data-[state=unchecked]:text-muted-foreground/70">
-                    <Check
-                      size={16}
-                      strokeWidth={2}
-                      className="in-[.group]:peer-data-[state=unchecked]:hidden"
-                      aria-hidden="true"
-                    />
-                    <Minus
-                      size={16}
-                      strokeWidth={2}
-                      className="in-[.group]:peer-data-[state=checked]:hidden"
-                      aria-hidden="true"
-                    />
+                  <span className="mt-2 flex items-center gap-1 peer-data-[state=unchecked]:text-muted-foreground/70">
+                    {theme === item.value ? (
+                      <Check size={16} strokeWidth={2} aria-hidden="true" />
+                    ) : (
+                      <Minus size={16} strokeWidth={2} aria-hidden="true" />
+                    )}
                     <span className="text-xs font-medium">{item.label}</span>
                   </span>
                 </label>
@@ -195,7 +188,7 @@ const SecuritySection = memo(() => {
                 id="current-password"
                 name="current_password"
                 type="password"
-                className="text-sm rounded-lg"
+                className="text-sm rounded-lg mt-1"
               />
             </div>
 
@@ -207,7 +200,7 @@ const SecuritySection = memo(() => {
                 id="new-password"
                 name="new_password"
                 type="password"
-                className="text-sm rounded-lg"
+                className="text-sm rounded-lg mt-1"
               />
             </div>
 
@@ -219,7 +212,7 @@ const SecuritySection = memo(() => {
                 id="confirm-password"
                 name="confirm_password"
                 type="password"
-                className="text-sm rounded-lg"
+                className="text-sm rounded-lg mt-1"
               />
             </div>
           </div>
@@ -257,6 +250,7 @@ SecuritySection.displayName = 'SecuritySection';
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme();
   const { toast } = useToast();
+  const fileInputRef = useRef(null);
 
   const { data: session, isPending, refetch } = authClient.useSession();
 
@@ -270,6 +264,7 @@ export default function SettingsPage() {
   });
 
   const [isSaving, setIsSaving] = useState(false);
+  const [previewAvatar, setPreviewAvatar] = useState('');
 
   useEffect(() => {
     if (session?.user) {
@@ -299,6 +294,8 @@ export default function SettingsPage() {
         nativeLanguage: userPreferences.nativeLanguage || '',
         nativeDialect: userPreferences.nativeDialect || '',
       });
+
+      setPreviewAvatar(session.user.image || '');
     }
   }, [session]);
 
@@ -308,6 +305,35 @@ export default function SettingsPage() {
       [field]: value,
     }));
   }, []);
+
+  const handleAvatarClick = useCallback(() => {
+    fileInputRef.current?.click();
+  }, []);
+
+  const handleAvatarChange = useCallback(
+    e => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      // Check file size (1MB max)
+      if (file.size > 1024 * 1024) {
+        toast({
+          title: 'File too large',
+          description: 'Avatar image must be less than 1MB',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = event => {
+        const base64Image = event.target.result;
+        setPreviewAvatar(base64Image);
+      };
+      reader.readAsDataURL(file);
+    },
+    [toast],
+  );
 
   const saveInformation = useCallback(async () => {
     if (!session?.user) return;
@@ -344,6 +370,7 @@ export default function SettingsPage() {
           nativeLanguage: formData.nativeLanguage,
           nativeDialect: formData.nativeDialect,
           hasConsented: true, // Assuming they've already consented during onboarding
+          avatar: previewAvatar || session.user.image, // Send current avatar (either new or existing)
         }),
       });
 
@@ -368,7 +395,7 @@ export default function SettingsPage() {
     } finally {
       setIsSaving(false);
     }
-  }, [formData, session, toast, refetch]);
+  }, [formData, session, toast, refetch, previewAvatar]);
 
   // Memoize select options to prevent re-renders
   const languageOptions = useMemo(
@@ -411,12 +438,12 @@ export default function SettingsPage() {
     }
     return (
       <img
-        alt=""
-        src={session?.user?.image || 'https://www.ruslan.in/grad.png'}
+        alt="User avatar"
+        src={previewAvatar || session?.user?.image || 'https://www.ruslan.in/grad.png'}
         className="h-24 w-24 rounded-full border border-neutral-200 dark:border-neutral-800 object-cover"
       />
     );
-  }, [isPending, session?.user?.image]);
+  }, [isPending, session?.user?.image, previewAvatar]);
 
   return (
     <div className="w-full bg-white rounded-xl dark:bg-black">
@@ -430,14 +457,20 @@ export default function SettingsPage() {
 
       <div className="w-full p-4">
         <Tabs defaultValue="personal">
-          <TabsList className="grid w-fit grid-cols-2 border rounded-full bg-neutral-200/50 border-neutral-300 dark:bg-neutral-800/50 ">
-            <TabsTrigger value="personal" className="font-normal rounded-full cursor-pointer">
-              <span className="flex items-center gap-2">
+          <TabsList className="grid w-fit grid-cols-2 border rounded-[15px] ">
+            <TabsTrigger
+              value="personal"
+              className="font-normal rounded-xl cursor-pointer outline-offset-[-0.5px] data-[state=active]:outline-[0.5px] outline-neutral-300"
+            >
+              <span className="flex items-center gap-2 tracking-tight">
                 <User2 className="h-4 w-4" />
                 Personal
               </span>
             </TabsTrigger>
-            <TabsTrigger value="security" className="font-normal rounded-full cursor-pointer">
+            <TabsTrigger
+              value="security"
+              className="font-normal rounded-xl cursor-pointer outline-offset-[-0.5px] data-[state=active]:outline-[0.5px] outline-neutral-300"
+            >
               <span className="flex items-center gap-2">
                 <Lock className="h-4 w-4" />
                 Security
@@ -460,7 +493,14 @@ export default function SettingsPage() {
                   <div className="flex items-center gap-6">
                     {userAvatar}
                     <div>
-                      <Button variant="outline" className="text-sm">
+                      <input
+                        type="file"
+                        ref={fileInputRef}
+                        className="hidden"
+                        accept="image/jpeg,image/png,image/gif"
+                        onChange={handleAvatarChange}
+                      />
+                      <Button variant="outline" className="text-sm" onClick={handleAvatarClick}>
                         Change Avatar
                       </Button>
                       <p className="text-xs text-muted-foreground mt-2">

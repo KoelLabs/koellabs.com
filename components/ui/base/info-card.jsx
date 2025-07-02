@@ -169,167 +169,176 @@ const InfoCardAction = React.memo(({ children, className, ...props }) => {
 });
 InfoCardAction.displayName = 'InfoCardAction';
 
-const InfoCardMedia = ({
-  media = [],
-  className,
-  loading = undefined,
-  shrinkHeight = 75,
-  expandHeight = 150,
-}) => {
-  const { isHovered } = useContext(InfoCardContext);
-  const { setAllImagesLoaded } = useContext(InfoCardImageContext);
-  const [isOverflowVisible, setIsOverflowVisible] = useState(false);
-  const loadedMedia = useRef(new Set());
+// Memoized InfoCardMedia component to prevent unnecessary re-renders
+const InfoCardMedia = React.memo(
+  ({ media = [], className, loading = undefined, shrinkHeight = 75, expandHeight = 150 }) => {
+    const { isHovered } = useContext(InfoCardContext);
+    const { setAllImagesLoaded } = useContext(InfoCardImageContext);
+    const [isOverflowVisible, setIsOverflowVisible] = useState(false);
+    const loadedMedia = useRef(new Set());
 
-  const handleMediaLoad = mediaSrc => {
-    loadedMedia.current.add(mediaSrc);
-    if (loadedMedia.current.size === Math.min(3, media.slice(0, 3).length)) {
-      setAllImagesLoaded(true);
-    }
-  };
+    const handleMediaLoad = useCallback(
+      mediaSrc => {
+        loadedMedia.current.add(mediaSrc);
+        if (loadedMedia.current.size === Math.min(3, media.slice(0, 3).length)) {
+          setAllImagesLoaded(true);
+        }
+      },
+      [media, setAllImagesLoaded],
+    );
 
-  const processedMedia = useMemo(
-    () =>
-      media.map(item => ({
-        ...item,
-        type: item.type || 'image',
-      })),
-    [media],
-  );
+    const processedMedia = useMemo(
+      () =>
+        media.map(item => ({
+          ...item,
+          type: item.type || 'image',
+        })),
+      [media],
+    );
 
-  const displayMedia = useMemo(() => processedMedia.slice(0, 3), [processedMedia]);
+    const displayMedia = useMemo(() => processedMedia.slice(0, 3), [processedMedia]);
+    const mediaCount = useMemo(() => displayMedia.length, [displayMedia]);
 
-  useEffect(() => {
-    if (media.length > 0) {
-      setAllImagesLoaded(false);
-      loadedMedia.current.clear();
-    } else {
-      setAllImagesLoaded(true); // No media to load
-    }
-  }, [media.length]);
+    useEffect(() => {
+      if (media.length > 0) {
+        setAllImagesLoaded(false);
+        loadedMedia.current.clear();
+      } else {
+        setAllImagesLoaded(true); // No media to load
+      }
+    }, [media.length, setAllImagesLoaded]);
 
-  useEffect(() => {
-    let timeoutId;
-    if (isHovered) {
-      timeoutId = setTimeout(() => {
-        setIsOverflowVisible(true);
-      }, 100);
-    } else {
-      setIsOverflowVisible(false);
-    }
-    return () => clearTimeout(timeoutId);
-  }, [isHovered]);
+    useEffect(() => {
+      let timeoutId;
+      if (isHovered) {
+        timeoutId = setTimeout(() => {
+          setIsOverflowVisible(true);
+        }, 100);
+      } else {
+        setIsOverflowVisible(false);
+      }
+      return () => clearTimeout(timeoutId);
+    }, [isHovered]);
 
-  const mediaCount = displayMedia.length;
+    const getRotation = useCallback(
+      index => {
+        if (!isHovered || mediaCount === 1) return 0;
+        return (index - (mediaCount === 2 ? 0.5 : 1)) * 5;
+      },
+      [isHovered, mediaCount],
+    );
 
-  const getRotation = index => {
-    if (!isHovered || mediaCount === 1) return 0;
-    return (index - (mediaCount === 2 ? 0.5 : 1)) * 5;
-  };
+    const getTranslateX = useCallback(
+      index => {
+        if (!isHovered || mediaCount === 1) return 0;
+        return (index - (mediaCount === 2 ? 0.5 : 1)) * 20;
+      },
+      [isHovered, mediaCount],
+    );
 
-  const getTranslateX = index => {
-    if (!isHovered || mediaCount === 1) return 0;
-    return (index - (mediaCount === 2 ? 0.5 : 1)) * 20;
-  };
+    const getTranslateY = useCallback(
+      index => {
+        if (!isHovered) return 0;
+        if (mediaCount === 1) return -5;
+        return index === 0 ? -10 : index === 1 ? -5 : 0;
+      },
+      [isHovered, mediaCount],
+    );
 
-  const getTranslateY = index => {
-    if (!isHovered) return 0;
-    if (mediaCount === 1) return -5;
-    return index === 0 ? -10 : index === 1 ? -5 : 0;
-  };
+    const getScale = useCallback(
+      index => {
+        if (!isHovered) return 1;
+        return mediaCount === 1 ? 1 : 0.95 + index * 0.02;
+      },
+      [isHovered, mediaCount],
+    );
 
-  const getScale = index => {
-    if (!isHovered) return 1;
-    return mediaCount === 1 ? 1 : 0.95 + index * 0.02;
-  };
-
-  return (
-    <InfoCardImageContext.Provider
-      value={{
+    const contextValue = useMemo(
+      () => ({
         handleMediaLoad,
         setAllImagesLoaded,
-      }}
-    >
-      <motion.div
-        className={cn('relative mt-2 rounded-md', className)}
-        animate={{
-          height: media.length > 0 ? (isHovered ? expandHeight : shrinkHeight) : 'auto',
-        }}
-        style={{
-          overflow: isOverflowVisible ? 'visible' : 'hidden',
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 300,
-          damping: 30,
-          duration: 0.3,
-        }}
-      >
-        <div className={cn('relative', media.length > 0 ? { height: shrinkHeight } : 'h-auto')}>
-          {displayMedia.map((item, index) => {
-            const { type, src, alt, className: itemClassName, ...mediaProps } = item;
+      }),
+      [handleMediaLoad, setAllImagesLoaded],
+    );
 
-            return (
-              <motion.div
-                key={src}
-                className="absolute w-full"
-                animate={{
-                  rotateZ: getRotation(index),
-                  x: getTranslateX(index),
-                  y: getTranslateY(index),
-                  scale: getScale(index),
-                }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 300,
-                  damping: 30,
-                }}
-              >
-                {type === 'video' ? (
-                  <video
-                    src={src}
-                    className={cn(
-                      'w-full rounded-md border border-gray-200 dark:border-zinc-700/10 object-cover shadow-lg',
-                      itemClassName,
-                    )}
-                    onLoadedData={() => handleMediaLoad(src)}
-                    preload="metadata"
-                    muted
-                    playsInline
-                    {...mediaProps}
-                  />
-                ) : (
-                  <img
-                    src={src}
-                    alt={alt}
-                    className={cn(
-                      'w-full rounded-md border border-gray-200 dark:border-zinc-700/10 object-cover shadow-lg',
-                      itemClassName,
-                    )}
-                    onLoad={() => handleMediaLoad(src)}
-                    loading={loading}
-                    {...mediaProps}
-                  />
-                )}
-              </motion.div>
-            );
-          })}
-        </div>
+    // Don't render anything if no media
+    if (media.length === 0) {
+      return null;
+    }
 
+    return (
+      <InfoCardImageContext.Provider value={contextValue}>
         <motion.div
-          className="absolute right-0 bottom-0 left-0 h-10 bg-gradient-to-b from-transparent to-white dark:to-zinc-900"
-          animate={{ opacity: isHovered ? 0 : 1 }}
+          className={cn('relative mt-2 rounded-md', className)}
+          animate={{
+            height: isHovered ? expandHeight : shrinkHeight,
+          }}
+          style={{
+            overflow: isOverflowVisible ? 'visible' : 'hidden',
+          }}
           transition={{
             type: 'spring',
             stiffness: 300,
             damping: 30,
             duration: 0.3,
           }}
-        />
-      </motion.div>
-    </InfoCardImageContext.Provider>
-  );
-};
+        >
+          <div className={cn('relative', { height: shrinkHeight })}>
+            {displayMedia.map((item, index) => {
+              const { type, src, alt, className: itemClassName, ...mediaProps } = item;
+
+              return (
+                <motion.div
+                  key={src}
+                  className="absolute w-full"
+                  animate={{
+                    rotateZ: getRotation(index),
+                    x: getTranslateX(index),
+                    y: getTranslateY(index),
+                    scale: getScale(index),
+                  }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 30,
+                  }}
+                >
+                  {type === 'video' ? (
+                    <video
+                      src={src}
+                      className={cn(
+                        'w-full rounded-md border border-gray-200 dark:border-zinc-700/10 object-cover shadow-lg',
+                        itemClassName,
+                      )}
+                      onLoadedData={() => handleMediaLoad(src)}
+                      preload="metadata"
+                      muted
+                      playsInline
+                      {...mediaProps}
+                    />
+                  ) : (
+                    <img
+                      src={src}
+                      alt={alt}
+                      className={cn(
+                        'w-full rounded-md border border-gray-200 dark:border-zinc-700/10 object-cover shadow-lg',
+                        itemClassName,
+                      )}
+                      onLoad={() => handleMediaLoad(src)}
+                      loading={loading}
+                      {...mediaProps}
+                    />
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+      </InfoCardImageContext.Provider>
+    );
+  },
+);
+InfoCardMedia.displayName = 'InfoCardMedia';
 
 export {
   InfoCard,
