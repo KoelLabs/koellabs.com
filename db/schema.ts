@@ -1,4 +1,4 @@
-import { pgTable, varchar, integer, timestamp, text, boolean } from 'drizzle-orm/pg-core';
+import { pgTable, varchar, integer, timestamp, text, boolean, json } from 'drizzle-orm/pg-core';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 
@@ -24,6 +24,10 @@ export const users = pgTable('users', {
   // extra columns, also add as additional fields in utils/auth.ts
   streak: integer('streak').notNull().default(0),
   stripeId: varchar('stripe_id'),
+
+  // User preferences
+  metadata: json('metadata'),
+  onboardingCompleted: boolean('onboarding_completed').default(false),
 });
 
 export const sessions = pgTable('sessions', {

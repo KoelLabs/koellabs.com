@@ -67,6 +67,17 @@ export const auth = betterAuth({
         required: false,
         input: false, // don't allow user to set
       },
+      metadata: {
+        type: 'string',
+        required: false,
+        input: false, // don't allow user to set
+      },
+      onboardingCompleted: {
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        input: false, // don't allow user to set
+      },
     },
   },
 });

@@ -27,7 +27,25 @@ export function OnboardingProvider({ children }) {
 
   const completeOnboarding = async () => {
     try {
-      // [TODO] Send the data to backend
+      // Send the data to backend
+      const response = await fetch('/api/user/preferences', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          targetLanguage: onboardingData.targetLanguage,
+          targetDialect: onboardingData.targetDialect,
+          nativeLanguage: onboardingData.nativeLanguage,
+          nativeDialect: onboardingData.nativeDialect,
+          hasConsented: onboardingData.consent,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save preferences');
+      }
+
       console.log('Onboarding completed with data:', onboardingData);
 
       // Navigate to dashboard after successful completion
