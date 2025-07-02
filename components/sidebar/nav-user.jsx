@@ -106,11 +106,11 @@ export function NavUser({ user = {}, isCollapsed, isLoading }) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="w-full rounded-md outline-hidden ring-ring hover:bg-accent focus-visible:ring-2 data-[state=open]:bg-accent">
+      <DropdownMenuTrigger className="w-full rounded-md outline-hidden ring-ring hover:bg-accent data-[state=open]:bg-accent">
         <div className="flex items-center gap-2 px-2 py-1.5 text-left text-sm transition-all">
-          <Avatar className="h-7 w-7 rounded-md border">
+          <Avatar className="h-7 w-7 rounded-md">
             <AvatarImage src={image} alt={name} className="animate-in fade-in-50 zoom-in-90" />
-            <AvatarFallback className="rounded-sm ">
+            <AvatarFallback className="rounded-sm border">
               {name.length > 1 ? name[0] + name[1] : 'U'}
             </AvatarFallback>
           </Avatar>
@@ -134,7 +134,7 @@ export function NavUser({ user = {}, isCollapsed, isLoading }) {
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm transition-all">
             <Avatar className="h-7 w-7 rounded-md">
               <AvatarImage src={image} alt={name} />
-              <AvatarFallback className="border">
+              <AvatarFallback className="">
                 {name.length > 1 ? name[0] + name[1] : 'U'}
               </AvatarFallback>
             </Avatar>

@@ -225,7 +225,7 @@ const SecuritySection = memo(() => {
       <Card className="rounded-xl">
         <CardHeader className="p-5 border-b border-neutral-200 dark:border-neutral-800 rounded-t-xl bg-neutral-50 dark:bg-neutral-900">
           <div>
-            <h2 className="text-lg font-medium tracking-[-0.04em] text-destructive">
+            <h2 className="text-lg font-medium tracking-[-0.04em] text-destructive dark:text-red-500">
               Delete Account
             </h2>
             <p className="text-sm text-muted-foreground mt-1">
@@ -460,7 +460,7 @@ export default function SettingsPage() {
           <TabsList className="grid w-fit grid-cols-2 border rounded-[15px] ">
             <TabsTrigger
               value="personal"
-              className="font-normal rounded-xl cursor-pointer outline-offset-[-0.75px] data-[state=active]:outline-[0.75px] outline-neutral-300"
+              className="font-normal rounded-xl cursor-pointer outline-offset-[-0.75px] data-[state=active]:outline-[0.75px] outline-neutral-300 dark:outline-neutral-800"
             >
               <span className="flex items-center gap-2 tracking-tight">
                 <User2 className="h-4 w-4" />
@@ -469,7 +469,7 @@ export default function SettingsPage() {
             </TabsTrigger>
             <TabsTrigger
               value="security"
-              className="font-normal rounded-xl cursor-pointer outline-offset-[-0.75px] data-[state=active]:outline-[0.75px] outline-neutral-300"
+              className="font-normal rounded-xl cursor-pointer outline-offset-[-0.75px] data-[state=active]:outline-[0.75px] outline-neutral-300 dark:outline-neutral-800"
             >
               <span className="flex items-center gap-2">
                 <Lock className="h-4 w-4" />
