@@ -13,7 +13,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Search, Mail, Lock } from 'lucide-react';
 import KoelBirdRounded from '@/components/ui/base/koel-bird-rounded';
 
-const ONBOARDING_URL = '/dashboard'; // TODO: make onboarding, for now just dashboard
+const ONBOARDING_URL = '/onboarding/welcome'; // Changed from dashboard to onboarding
 const RETURNING_USER_URL = '/dashboard';
 
 export default function AuthScreen() {
@@ -127,14 +127,6 @@ export default function AuthScreen() {
 
   return (
     <div className="w-full min-h-screen bg-white dark:bg-neutral-950/[0.99] tracking-[-0.015em] relative overflow-hidden flex items-center justify-center">
-      <div className="absolute top-0 opacity-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[60%] -left-[10%] w-[40%] h-[40%] bg-sky-500/20 dark:bg-sky-600/20 rounded-full blur-[100px] animate-blob opacity-75"></div>
-        <div className="absolute top-[25%] -left-[15%] w-[40%] h-[30%] bg-sky-300/20 dark:bg-sky-400/20 rounded-full blur-[100px] animate-blob animation-delay-4000 opacity-75"></div>
-
-        <div className="absolute top-[60%] -right-[10%] w-[40%] h-[40%] bg-blue-500/20 dark:bg-blue-600/20 rounded-full blur-[100px] animate-blob animation-delay-2000 opacity-75"></div>
-        <div className="absolute top-[25%] -right-[15%] w-[40%] h-[30%] bg-sky-300/20 dark:bg-sky-400/20 rounded-full blur-[100px] animate-blob animation-delay-4000 opacity-75"></div>
-      </div>
-
       {/* Repeating line pattern - top */}
       <div className="absolute top-0 left-0 w-full h-[5vh] overflow-hidden flex items-end justify-center">
         <div className="flex h-full items-end gap-2">

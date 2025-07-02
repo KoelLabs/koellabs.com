@@ -10,21 +10,6 @@
   }
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(0.95);
-    opacity: 0.5;
-  }
-}
-
 .path-trace {
   stroke-dasharray: 4000;
   stroke-dashoffset: 4000;
@@ -86,4 +71,41 @@
   .highlight-animation {
     animation: highlight-pulse-dark 1s ease-in-out 3;
   }
+}
+
+/* Sequential fade-in and move-up animation */
+@keyframes fade-move-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  opacity: 0;
+  animation: fade-move-up 0.5s ease forwards;
+}
+
+.animate-in-1 {
+  animation-delay: 0.1s;
+}
+
+.animate-in-2 {
+  animation-delay: 0.3s;
+}
+
+.animate-in-3 {
+  animation-delay: 0.5s;
+}
+
+.animate-in-4 {
+  animation-delay: 0.7s;
+}
+
+.animate-in-5 {
+  animation-delay: 0.9s;
 }

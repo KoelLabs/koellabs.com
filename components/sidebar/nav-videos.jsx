@@ -72,7 +72,7 @@ export function NavVideos({ videos, className, isCollapsed, isLoading = false })
       <Card className="rounded-lg text-xs min-w-[233px] relative border-dashed border-neutral-200 dark:border-neutral-800 shadow-none">
         <CardContent className="flex flex-col items-start gap-2 p-4 relative">
           <div className="flex items-center tracking-tight w-full relative justify-between">
-            <h3 className="font-medium tracking-tight text-sm">No Practice History</h3>
+            <h3 className="font-medium tracking-tighter text-sm">No Practice History</h3>
             <Clock className="h-4 w-4" />
           </div>
           <p className="text-muted-foreground">

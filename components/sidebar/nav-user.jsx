@@ -48,6 +48,7 @@ export function NavUser({ user, isCollapsed, isLoading }) {
     });
   };
 
+  // Developer Only [TODO: remove this]
   const resetVideos = async () => {
     if (
       window.confirm(
@@ -71,10 +72,7 @@ export function NavUser({ user, isCollapsed, isLoading }) {
           }),
         );
 
-        // Force page refresh to update UI
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500); // TODO: this is terrible and won't work
+        router.refresh();
       } catch (error) {
         toast({
           title: 'Error',
@@ -133,7 +131,7 @@ export function NavUser({ user, isCollapsed, isLoading }) {
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm transition-all">
             <Avatar className="h-7 w-7 rounded-md">
               <AvatarImage src={user.picture} alt={user.name} />
-              <AvatarFallback className="bg-sky-400">{user.name[0] + user.name[1]}</AvatarFallback>
+              <AvatarFallback className="border">{user.name[0] + user.name[1]}</AvatarFallback>
             </Avatar>
             <div className="grid flex-1">
               <div className="font-medium">{user.name}</div>
@@ -179,7 +177,7 @@ export function NavUser({ user, isCollapsed, isLoading }) {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          className="gap-2 text-amber-600 hover:text-amber-700"
+          className="gap-2 text-amber-600 focus:text-amber-700"
           onClick={resetVideos}
           disabled={isResetting}
         >
@@ -191,8 +189,8 @@ export function NavUser({ user, isCollapsed, isLoading }) {
           {isResetting ? 'Resetting...' : 'Reset Video History'}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="gap-2 text-red-600 hover:text-red-600" onClick={handleSignOut}>
-          <LogOut className="h-4 w-4 text-muted-foreground text-red-600" />
+        <DropdownMenuItem className="gap-2 text-red-600 focus:text-red-700" onClick={handleSignOut}>
+          <LogOut className="h-4 w-4 text-red-600" />
           Log out
         </DropdownMenuItem>
       </DropdownMenuContent>

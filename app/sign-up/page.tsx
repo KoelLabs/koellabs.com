@@ -13,7 +13,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Mail, Lock, User } from 'lucide-react';
 import KoelBirdRounded from '@/components/ui/base/koel-bird-rounded';
 
-const ONBOARDING_URL = '/dashboard'; // TODO: make onboarding, for now just dashboard
+const ONBOARDING_URL = '/onboarding/welcome'; // Changed from dashboard to onboarding
 
 export default function SignUpScreen() {
   const [name, setName] = useState('');
