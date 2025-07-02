@@ -1030,25 +1030,8 @@ export default function Page() {
                       : 'text-neutral-400 dark:text-neutral-600 bg-neutral-100 dark:bg-neutral-900/50 border-neutral-200 dark:border-neutral-800 cursor-not-allowed disabled hover:bg-neutral-100 dark:hover:bg-neutral-900/50'
                   }`}
                   onClick={() => {
-                    // Is microphone fully initialized?
-                    if (isInPracticeSection()) {
-                      // Is microphone ready?
-                      if (
-                        feedbackGiverRef.current &&
-                        feedbackGiverRef.current.isMicrophoneReady()
-                      ) {
-                        StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()!]);
-                      } else {
-                        // Initialize microphone
-                        feedbackGiverRef.current?.initializeMicrophone().then(() => {
-                          StartPracticeMode(
-                            currentVideo?.practicableSections[getCurrentSection()!],
-                          );
-                        });
-                      }
-                    }
+                    StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()!]);
                   }}
-                  disabled={!isInPracticeSection()}
                 >
                   <PlayIcon className="mr-2 size-4 rounded-xl" fill="currentColor" />
                   Start Practice Mode
