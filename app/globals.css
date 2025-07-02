@@ -355,6 +355,10 @@ html {
     0px 0px 0px #333333 !important;
 }
 
+:where(.vds-poster) {
+  height: auto !important;
+}
+
 .vds-audio-layout,
 .vds-video-layout {
   /* Shared. */

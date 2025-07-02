@@ -16,13 +16,7 @@ import {
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { PieChart, Pie, Cell } from 'recharts';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/base/collapsible';
 import { Button } from '@/components/ui/base/button';
-import Microphone from '../microphone';
 import VideoPlayer from '../videoPlayer';
 import { FeedbackGiver } from '@/components/FeedbackGiver';
 import { useMediaRemote } from '@vidstack/react';
@@ -564,9 +558,13 @@ export default function Page() {
                     href="http://aan.sonypictures.com/JumanjiTheNextLevel"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 w-full inline-flex items-center justify-between px-2 py-2 text-sm font-medium rounded-md text-black bg-white hover:bg-neutral-100 border border-neutral-200 dark:border-neutral-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
                   >
-                    Watch Full Movie <ArrowUpRightIcon className="ml-2 h-4 w-4 stroke-2" />
+                    <Button
+                      variant="outline"
+                      className="mt-3 w-full inline-flex items-center justify-between tracking-tight px-2.5"
+                    >
+                      Watch Full Movie <ArrowUpRightIcon className="ml-2 h-4 w-4 stroke-2" />
+                    </Button>
                   </a>
                 </div>
               )}
@@ -765,9 +763,9 @@ export default function Page() {
             )}
 
             <div className="m-4">
-              <h2 className="font-semibold tracking-tighter text-xl text-neutral-900 dark:text-neutral-100">
+              <h1 className="text-xl font-semibold text-black dark:text-white tracking-[-0.04em]">
                 Practice Area
-              </h2>
+              </h1>
               {!isInPracticeSection() && (
                 <p className="text-neutral-600 dark:text-neutral-400">
                   You are not currently in a practice section. Please select a section to practice
@@ -986,7 +984,7 @@ export default function Page() {
           </div>
           {isInPracticeSection() && feedback.length > 0 && (
             <div className="m-4 space-y-2">
-              <h2 className="font-semibold tracking-tighter text-xl text-neutral-900 dark:text-neutral-100">
+              <h2 className="text-xl font-semibold text-black dark:text-white tracking-[-0.04em]">
                 Areas for Improvement
               </h2>
               <p className="text-neutral-600 dark:text-neutral-400">
@@ -1015,29 +1013,46 @@ export default function Page() {
           <div className="m-3">
             <div className="">
               {isRecording ? (
-                <div
-                  className="w-full border px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 border-[#FECACA] bg-[#FEE2E2] text-[#991B1B] dark:bg-[#451A1A] dark:text-[#FECACA] cursor-pointer"
+                <Button
+                  className="w-full border px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 border-[#FECACA] bg-[#FEE2E2] text-[#991B1B] dark:bg-[#451A1A] dark:text-[#FECACA] cursor-pointer hover:bg-[#FEE2E2]/80 dark:hover:bg-[#451A1A]/20"
                   onClick={() => {
                     StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()!]);
                   }}
                 >
                   <PauseIcon className="mr-2 size-4 rounded-xl" fill="currentColor" />
                   Stop Practice Mode
-                </div>
+                </Button>
               ) : (
-                <div
+                <Button
                   className={`w-full border px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 ${
                     isInPracticeSection()
-                      ? 'text-[#1B997B] dark:text-[#9DD8C5] bg-[#C7E9DE] dark:bg-[#1B997B]/20 border-[#9DD8C5] dark:border-[#1B997B] cursor-pointer'
-                      : 'text-neutral-400 dark:text-neutral-600 bg-neutral-100 dark:bg-neutral-900/50 border-neutral-200 dark:border-neutral-800 cursor-not-allowed'
+                      ? 'text-[#1B997B] dark:text-[#9DD8C5] bg-[#C7E9DE] dark:bg-[#1B997B]/20 border-[#9DD8C5] dark:border-[#1B997B] cursor-pointer hover:bg-[#C7E9DE]/80 dark:hover:bg-[#1B997B]/20'
+                      : 'text-neutral-400 dark:text-neutral-600 bg-neutral-100 dark:bg-neutral-900/50 border-neutral-200 dark:border-neutral-800 cursor-not-allowed disabled hover:bg-neutral-100 dark:hover:bg-neutral-900/50'
                   }`}
                   onClick={() => {
-                    StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()!]);
+                    // Is microphone fully initialized?
+                    if (isInPracticeSection()) {
+                      // Is microphone ready?
+                      if (
+                        feedbackGiverRef.current &&
+                        feedbackGiverRef.current.isMicrophoneReady()
+                      ) {
+                        StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()!]);
+                      } else {
+                        // Initialize microphone
+                        feedbackGiverRef.current?.initializeMicrophone().then(() => {
+                          StartPracticeMode(
+                            currentVideo?.practicableSections[getCurrentSection()!],
+                          );
+                        });
+                      }
+                    }
                   }}
+                  disabled={!isInPracticeSection()}
                 >
                   <PlayIcon className="mr-2 size-4 rounded-xl" fill="currentColor" />
                   Start Practice Mode
-                </div>
+                </Button>
               )}
             </div>
           </div>
