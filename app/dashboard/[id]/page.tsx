@@ -13,6 +13,7 @@ import {
   ArrowRightIcon,
   ArrowUpRightIcon,
   ChevronDown,
+  Loader2,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { PieChart, Pie, Cell } from 'recharts';
@@ -70,6 +71,8 @@ export default function Page() {
   const [currentTime, setCurrentTime] = useState(0);
   const [transcription, setTranscription] = useState('');
   const [isRecording, setIsRecording] = useState(false);
+  const [isMicInitializing, setIsMicInitializing] = useState(false);
+  const [isFirstInitialization, setIsFirstInitialization] = useState(true);
   const [feedback, setFeedback] = useState<Array<[string, string]>>([]);
   const [top3Feedback, setTop3Feedback] = useState<Array<[string, string]>>([]);
   const [score, setScore] = useState(0);
@@ -169,21 +172,21 @@ export default function Page() {
     const isCorrect = index >= (nextWordIndex ?? wordScores.length) || wordsCorrect[index];
 
     let backgroundColor = '';
-    if (score >= 0.8) backgroundColor = 'bg-emerald-400 dark:bg-emerald-600 border-emerald-500';
-    else if (score >= 0.7) backgroundColor = 'bg-green-300 dark:bg-green-500 border-green-500';
-    else if (score >= 0.6) backgroundColor = 'bg-yellow-300 dark:bg-yellow-500 border-yellow-500';
-    else if (score >= 0.3) backgroundColor = 'bg-orange-300 dark:bg-orange-500 border-orange-500';
-    else if (score > 0) backgroundColor = 'bg-red-400 dark:bg-red-600 border-red-500';
+    if (score >= 0.8) backgroundColor = 'bg-emerald-400 dark:bg-emerald-600 !border-emerald-600';
+    else if (score >= 0.7) backgroundColor = 'bg-green-300 dark:bg-green-500 !border-green-600';
+    else if (score >= 0.6) backgroundColor = 'bg-yellow-300 dark:bg-yellow-500 !border-yellow-600';
+    else if (score >= 0.3) backgroundColor = 'bg-orange-300 dark:bg-orange-500 !border-orange-600';
+    else if (score > 0) backgroundColor = 'bg-red-400 dark:bg-red-600 !border-red-600';
 
-    if (!isCorrect && score < 0.8) backgroundColor = 'bg-red-400 dark:bg-red-600 border-red-500';
+    if (!isCorrect && score < 0.8) backgroundColor = 'bg-red-400 dark:bg-red-600 border-red-600';
 
-    const border = isRecording ? 'border-solid' : 'border-dashed';
+    const border = isRecording ? 'border-dashed' : 'border-solid';
 
     const highlight = isNext
       ? 'border-blue-500 border-2'
       : 'border-neutral-400 dark:border-neutral-600 border';
 
-    return `text-neutral-800 dark:text-neutral-200 mr-1 px-1.5 text-4xl tracking-tighter rounded-md py-0.5 ${border} ${highlight} ${backgroundColor}`;
+    return `text-neutral-800 dark:text-neutral-200 mr-1 px-2 text-4xl tracking-tighter rounded-lg py-1.5 ${border} ${highlight} ${backgroundColor}`;
   };
 
   const StartPracticeMode = async (section: any) => {
@@ -212,7 +215,7 @@ export default function Page() {
         return;
       }
 
-      setIsRecording(true);
+      setIsMicInitializing(true);
       setTranscription(''); // Clear previous transcription
       setFeedback([]); // Clear previous feedback
       setTop3Feedback([]); // Clear previous top 3 feedback
@@ -257,9 +260,22 @@ export default function Page() {
 
       // Start recording
       await feedbackGiverRef.current.start();
+
+      // [ToDo]: Make this better. Right now it's 1500 for first initialization and 300 for subsequent initializations
+      const delayTime = isFirstInitialization ? 2500 : 300;
+      await new Promise(resolve => setTimeout(resolve, delayTime));
+
+      // After first initialization, set flag to false for future initializations
+      if (isFirstInitialization) {
+        setIsFirstInitialization(false);
+      }
+
+      setIsMicInitializing(false);
+      setIsRecording(true);
     } catch (error) {
       console.error('Error in StartPracticeMode:', error);
       setIsRecording(false);
+      setIsMicInitializing(false);
       setNextWordIndex(null);
       // Reset the feedback giver
       if (feedbackGiverRef.current) {
@@ -349,14 +365,14 @@ export default function Page() {
           {currentVideo ? currentVideo.name : 'No video selected'}
         </h1>
       </div>
-      <div className="flex flex-col lg:flex-row w-full h-full gap-2">
-        <div className="w-full lg:flex-4 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex">
+      <div className="flex flex-col 2xl:flex-row w-full h-full gap-2">
+        <div className="w-full 2xl:flex-4 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex">
           <VideoPlayer
             src={currentVideo?.video}
             title={currentVideo?.name}
             poster={currentVideo?.thumbnail}
             practicableSections={currentVideo?.vtt}
-            captions={currentVideo?.captions}
+            captions={currentVideo?.vtt}
             onTimeUpdate={time => {
               if (Math.abs(time - currentTime) > 0.1) {
                 setCurrentTime(time);
@@ -369,7 +385,7 @@ export default function Page() {
             }}
           />
         </div>
-        <div className="w-full lg:flex-1 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col justify-between">
+        <div className="w-full 2xl:flex-1 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col justify-between">
           {/* version 4 */}
           <div>
             <div className="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-800 w-full">
@@ -440,8 +456,8 @@ export default function Page() {
                 ) : (
                   <div className="h-[180px] flex items-center justify-center">
                     <div className="text-center text-neutral-500 dark:text-neutral-400">
-                      <Circle className="mx-auto mb-2 h-12 w-12 opacity-20 dark:opacity-50" />
-                      <p className="tracking-tight text-neutral-600 dark:text-neutral-300 mt-4">
+                      <div className="mx-auto mb-6 h-12 w-12 rounded-full border-[3px] border-neutral-300 " />
+                      <p className="tracking-[-0.04em] text-neutral-600 dark:text-neutral-300 mt-4 font-medium">
                         No accent similarity data yet.
                       </p>
                       <p className="text-sm tracking-tight text-neutral-500 dark:text-neutral-400">
@@ -518,79 +534,8 @@ export default function Page() {
         </div>
       </div>
 
-      {/* version 1 */}
-      {/* {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
-        <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 p-4 flex flex-row gap-2">
-          <div className="text-left">
-            <div className="mb-3">
-              <a
-                href="http://aan.sonypictures.com/JumanjiTheNextLevel"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lg font-medium tracking-tighter transition-colors"
-              >
-                Watch Jumanji: The Next Level Now! -{' '}
-                <span className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors underline">
-                  http://aan.sonypictures.com/JumanjiTheNextLevel
-                </span>
-              </a>
-            </div>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 mx-auto leading-relaxed text-balance">
-              In Jumanji: The Next Level, the gang is back (Dwayne Johnson, Jack Black, Kevin Hart,
-              and Karen Gillan) but the game has changed. Returning to Jumanji to rescue one of
-              their own, they discover that nothing is as they expect. With more action and
-              surprises, the players must brave parts unknown and unexplored, from the arid deserts
-              to the snowy mountains, to escape.
-            </p>
-          </div>
-          <a
-            href="http://aan.sonypictures.com/JumanjiTheNextLevel"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-left aspect-square border border-neutral-200 rounded-lg dark:border-neutral-800 h-22 w-22 flex items-center justify-center"
-          >
-            <ArrowUpRightIcon className="h-8 w-8 " />
-          </a>
-        </div>
-      )} */}
-
-      {/* version 2 */}
-      {/* {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
-        <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 overflow-hidden">
-          <Collapsible defaultOpen={currentTime <= 5}>
-            <CollapsibleTrigger className="flex justify-between items-center w-full p-4 hover:bg-neutral-50 dark:hover:bg-neutral-900">
-              <div>
-                <a
-                  href="http://aan.sonypictures.com/JumanjiTheNextLevel"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-sm underline tracking-tight"
-                >
-                  Watch Jumanji: The Next Level Now!
-                </a>
-                <ArrowUpRightIcon className="h-4 w-4 ml-1 -mt-px inline-block" />
-              </div>
-              <ChevronDown className="h-4 w-4" />
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <div className="p-4 flex flex-row gap-2 pt-0">
-                <div className="text-left">
-                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mx-auto leading-relaxed text-balance">
-                    In Jumanji: The Next Level, the gang is back (Dwayne Johnson, Jack Black, Kevin
-                    Hart, and Karen Gillan) but the game has changed. Returning to Jumanji to rescue
-                    one of their own, they discover that nothing is as they expect. With more action
-                    and surprises, the players must brave parts unknown and unexplored, from the
-                    arid deserts to the snowy mountains, to escape.
-                  </p>
-                </div>
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
-        </div>
-      )} */}
-
-      <div className="flex flex-col lg:flex-row gap-2">
-        <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 flex flex-col relative justify-between">
+      <div className="flex flex-col 2xl:flex-row gap-2">
+        <div className="w-full order-1 2xl:order-1 2xl:flex-[3] bg-white border border-neutral-200 rounded-lg dark:bg-neutral-950 dark:border-neutral-800 flex flex-col relative justify-between">
           <div>
             {isInPracticeSection() && (
               <div className="w-1 bg-blue-500 dark:bg-blue-400 rounded-l-3xl absolute left-0 top-0 h-full"></div>
@@ -613,14 +558,6 @@ export default function Page() {
                       ? 'Recording in progress. Click the button again to stop and get feedback.'
                       : 'You are currently in a practice section. Press the button to the right to start practicing.'}
                   </p>
-                  {/* {transcription && (
-                    <div className="mt-2">
-                      <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
-                        Transcription:
-                      </p>
-                      <p className="text-neutral-600 dark:text-neutral-400">{transcription}</p>
-                    </div>
-                  )} */}
                 </>
               )}
             </div>
@@ -677,7 +614,7 @@ export default function Page() {
                                     Click through the sounds you made side-by-side with the sounds
                                     the actor made to understand the differences!
                                   </p>
-                                  <div className="flex gap-4">
+                                  <div className="flex flex-col md:flex-row gap-4">
                                     <div className="flex flex-col gap-2 flex-1 grow">
                                       <h5 className="font-medium text-sm">
                                         The actor pronunciation (
@@ -733,7 +670,7 @@ export default function Page() {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="flex gap-2 border-t border-neutral-200 dark:border-neutral-700 pb-3 p-6">
+                                <div className="flex flex-wrap gap-2 border-t border-neutral-200 dark:border-neutral-700 pb-3 p-6">
                                   <button
                                     type="button"
                                     className="w-full px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 text-[#1B997B] dark:text-[#9DD8C5] bg-[#C7E9DE] dark:bg-[#1B997B]/20 border-[#9DD8C5] dark:border-[#1B997B] cursor-pointer border"
@@ -771,7 +708,7 @@ export default function Page() {
                                   </button>
                                   <button
                                     type="button"
-                                    className="w-full max-w-fit px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
+                                    className="w-full sm:max-w-fit px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
                                     onClick={() =>
                                       setPhonemeIX(prev => {
                                         const newArray = [...prev];
@@ -785,7 +722,7 @@ export default function Page() {
                                   </button>
                                   <button
                                     type="button"
-                                    className="w-full max-w-fit px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
+                                    className="w-full sm:max-w-fit px-4 py-2 rounded-md items-center tracking-tight flex justify-center transition-all duration-150 bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
                                     onClick={() =>
                                       setPhonemeIX(prev => {
                                         const newArray = [...prev];
@@ -804,11 +741,6 @@ export default function Page() {
                               </>
                             ) : null}
                           </div>
-                          {/* <div className="space-y-2">
-                          <h4 className="font-medium tracking-tight">
-                            Similar Words in Your Native Language
-                          </h4>
-                        </div> */}
                         </div>
                       </DialogContent>
                     </Dialog>
@@ -816,34 +748,35 @@ export default function Page() {
                 },
               )}
           </div>
-          {isInPracticeSection() && feedback.length > 0 && (
+          {isInPracticeSection() && feedback.length >= 0 && (
             <div className="m-4 space-y-2">
               <h2 className="text-xl font-semibold text-black dark:text-white tracking-[-0.04em]">
                 Areas for Improvement
               </h2>
               <p className="text-neutral-600 dark:text-neutral-400">
-                These are suggestions for words that you may want to practice some more. Let's take
-                a look at them, and press to enter deep practice mode when you're ready.
+                These are suggestions for words that you may want to practice some more. When you're
+                ready, press each word to enter deep practice mode.
               </p>
-              <ul className="list-inside">
+              <ul className="space-y-3 mt-4">
                 {top3Feedback.map((feedback, index) => (
                   <li
                     key={index}
-                    className="text-neutral-800 dark:text-neutral-200 my-2 border border-neutral-200 dark:border-neutral-700 rounded-lg p-2 bg-neutral-200/50 dark:bg-neutral-800 flex"
+                    className="flex items-center gap-3 p-2.5 rounded-[14px] bg-white dark:bg-neutral-900 border border-dashed transition-colors"
                   >
-                    <span className="font-semibold capitalize aspect-17/9 text-black border-dashed bg-neutral-200 border-neutral-300 dark:border-neutral-700 p-3 border rounded-md flex items-center justify-center h-12 mr-2">
+                    <span className="flex-shrink-0 font-medium capitalize min-w-18 text-center tracking-tight border-blue-500 border px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-md">
                       {feedback[0]}
                     </span>
-                    <div>{feedback[1]}</div>
+                    <div className="text-neutral-700 dark:text-neutral-300">{feedback[1]}</div>
                   </li>
                 ))}
               </ul>
             </div>
           )}
         </div>
-        <div className="max-w-[298px] relative h-fit w-full bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col">
-          <h2 className="text-lg font-semibold tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100"></h2>
-          <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-800" />
+
+        {/* Practice controls - visible on all screen sizes */}
+        <div className="w-full order-3 2xl:order-2 2xl:max-w-[298px] mt-2 2xl:mt-0 h-full bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col">
+          <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-800 mt-6" />
           <div className="m-3">
             <div className="">
               {isRecording ? (
@@ -866,50 +799,26 @@ export default function Page() {
                   onClick={() => {
                     StartPracticeMode(currentVideo?.practicableSections[getCurrentSection()!]);
                   }}
+                  disabled={isMicInitializing || !isInPracticeSection()}
                 >
-                  <PlayIcon className="mr-2 size-4 rounded-xl" fill="currentColor" />
-                  Start Practice Mode
+                  {isMicInitializing ? (
+                    <>
+                      <Loader2 className="mr-2 size-4 animate-spin" />
+                      Initializing Microphone...
+                    </>
+                  ) : (
+                    <>
+                      <PlayIcon className="mr-2 size-4 rounded-xl" fill="currentColor" />
+                      Start Practice Mode
+                    </>
+                  )}
                 </Button>
               )}
             </div>
           </div>
-          <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-800 mb-5" />
+          <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-800 mb-6" />
         </div>
       </div>
-      {/* version 3 */}
-      {/* {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
-        <div className="bg-white border border-neutral-200 rounded-lg w-full dark:bg-neutral-950 dark:border-neutral-800 overflow-hidden">
-          <Collapsible defaultOpen={currentTime <= 5}>
-            <CollapsibleTrigger className="flex justify-between items-center w-full p-4 hover:bg-neutral-50 dark:hover:bg-neutral-900">
-              <div>
-                <a
-                  href="http://aan.sonypictures.com/JumanjiTheNextLevel"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-sm underline tracking-tight"
-                >
-                  Watch Jumanji: The Next Level Now!
-                </a>
-                <ArrowUpRightIcon className="h-4 w-4 ml-1 -mt-px inline-block" />
-              </div>
-              <ChevronDown className="h-4 w-4" />
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <div className="p-4 flex flex-row gap-2 pt-0">
-                <div className="text-left">
-                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mx-auto leading-relaxed text-balance">
-                    In Jumanji: The Next Level, the gang is back (Dwayne Johnson, Jack Black, Kevin
-                    Hart, and Karen Gillan) but the game has changed. Returning to Jumanji to rescue
-                    one of their own, they discover that nothing is as they expect. With more action
-                    and surprises, the players must brave parts unknown and unexplored, from the
-                    arid deserts to the snowy mountains, to escape.
-                  </p>
-                </div>
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
-        </div>
-      )} */}
     </div>
   );
 }

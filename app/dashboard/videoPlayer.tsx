@@ -37,9 +37,8 @@ export default function VideoPlayer({
       className="aspect-video"
     >
       <MediaProvider>
-        <div className="bg-black absolute inset-0 h-full w-full">
-          <Poster className="vds-poster aspect-video h-auto" />
-        </div>
+        <Poster className="vds-poster aspect-video h-auto" />
+
         <Track src={practicableSections} kind="chapters" default />
         <Track src={captions} kind="subtitles" label="English" lang="en-US" type="vtt" />
       </MediaProvider>
