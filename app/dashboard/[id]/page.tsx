@@ -180,7 +180,7 @@ export default function Page() {
 
     if (!isCorrect && score < 0.8) backgroundColor = 'bg-red-400 dark:bg-red-600 border-red-600';
 
-    const border = isRecording ? 'border-dashed' : 'border-solid';
+    const border = isRecording ? 'border-solid' : 'border-dashed';
 
     const highlight = isNext
       ? 'border-blue-500 border-2'
@@ -556,7 +556,7 @@ export default function Page() {
                   <p className="text-neutral-600 dark:text-neutral-400 mb-4">
                     {isRecording
                       ? 'Recording in progress. Click the button again to stop and get feedback.'
-                      : 'You are currently in a practice section. Press the button to the right to start practicing.'}
+                      : 'You are currently in a practice section. Press the button to the right to start practicing the sentence below.'}
                   </p>
                 </>
               )}
@@ -748,7 +748,7 @@ export default function Page() {
                 },
               )}
           </div>
-          {isInPracticeSection() && feedback.length >= 0 && (
+          {isInPracticeSection() && feedback.length > 0 && (
             <div className="m-4 space-y-2">
               <h2 className="text-xl font-semibold text-black dark:text-white tracking-[-0.04em]">
                 Areas for Improvement
