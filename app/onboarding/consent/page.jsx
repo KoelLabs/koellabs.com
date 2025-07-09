@@ -22,7 +22,7 @@ export default function ConsentPage() {
   };
 
   const handleBack = () => {
-    router.push('/onboarding/language');
+    router.push('/onboarding/speech-assessment');
   };
 
   const isNextDisabled = !(
@@ -39,7 +39,7 @@ export default function ConsentPage() {
         <KoelBirdRounded className="w-[70px] mb-3 h-fit mx-auto" />
         <h3 className="text-2xl font-semibold tracking-tighter mb-2 z-10">Final Steps</h3>
         <p className="text-md text-neutral-500 dark:text-neutral-400 mb-6 max-w-md text-balance z-10">
-          Step 3 of 3
+          Please review and accept the following agreements to complete your setup
         </p>
 
         <div className="space-y-6 w-full">
@@ -162,6 +162,9 @@ export default function ConsentPage() {
             </svg>
             Back
           </Button>
+          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-2 text-center px-2">
+            Step 4 of 4
+          </p>
           <Button
             onClick={handleSubmit}
             disabled={isNextDisabled}

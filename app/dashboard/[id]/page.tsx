@@ -32,6 +32,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/base/dialog';
 import { set } from 'zod';
+import { cn } from '@/lib/styles';
 
 declare global {
   interface Window {
@@ -262,7 +263,7 @@ export default function Page() {
       await feedbackGiverRef.current.start();
 
       // [ToDo]: Make this better. Right now it's 1500 for first initialization and 300 for subsequent initializations
-      const delayTime = isFirstInitialization ? 2500 : 300;
+      const delayTime = isFirstInitialization ? 1000 : 50;
       await new Promise(resolve => setTimeout(resolve, delayTime));
 
       // After first initialization, set flag to false for future initializations
@@ -343,6 +344,12 @@ export default function Page() {
 
   useEffect(() => {
     setIsClient(true);
+    setFeedback([
+      ['you', 'hard'],
+      ['gotta', 'hard'],
+      ['stay', 'hard'],
+      ['alert', 'hard'],
+    ]);
   }, []);
 
   const getBadgeColor = (difficulty: string | undefined) => {
@@ -469,7 +476,7 @@ export default function Page() {
                 {score > 0 && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center -mb-16">
                     <span className="text-4xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
-                      {score + 10}%
+                      {score}%
                     </span>
                     <span className="text-lg text-neutral-600 dark:text-neutral-400">
                       Accent Similarity
@@ -761,9 +768,9 @@ export default function Page() {
                 {top3Feedback.map((feedback, index) => (
                   <li
                     key={index}
-                    className="flex items-center gap-3 p-2.5 rounded-[14px] bg-white dark:bg-neutral-900 border border-dashed transition-colors"
+                    className="flex items-center gap-3 p-2.5 rounded-[14px] bg-white dark:bg-neutral-900 border border-dashed transition-colors relative"
                   >
-                    <span className="flex-shrink-0 font-medium capitalize min-w-18 text-center tracking-tight border-blue-500 border px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-md">
+                    <span className="flex-shrink-0 font-medium capitalize min-w-18 h-full text-center tracking-tight border-blue-500 border px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-md">
                       {feedback[0]}
                     </span>
                     <div className="text-neutral-700 dark:text-neutral-300">{feedback[1]}</div>

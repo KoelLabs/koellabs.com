@@ -5,11 +5,33 @@ import KoelBirdRounded from '@/components/ui/base/koel-bird-rounded';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
+// Progress Indicator Component
+const ProgressBubbles = ({ currentStep, totalSteps }) => {
+  const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
+
+  return (
+    <div className="flex items-center justify-center gap-3 mb-8">
+      {steps.map(step => (
+        <div
+          key={step}
+          className={`w-2 h-2 rounded-full transition-all duration-300 ease-out ${
+            step < currentStep
+              ? 'bg-sky-600 scale-100'
+              : step === currentStep
+                ? 'bg-sky-600 scale-125 shadow-lg shadow-sky-600/30'
+                : 'bg-neutral-300 dark:bg-neutral-600 scale-100'
+          }`}
+        />
+      ))}
+    </div>
+  );
+};
+
 export default function WelcomePage() {
   const router = useRouter();
 
   const handleNext = () => {
-    router.push('/onboarding/language');
+    router.push('/onboarding/getting-to-know-you');
   };
 
   return (
@@ -20,6 +42,7 @@ export default function WelcomePage() {
         <div className="flex items-center tracking-tight w-full justify-between">
           <KoelBirdRounded className="w-[100px] h-fit mx-auto animate-in animate-in-1" />
         </div>
+
         <h3 className="text-2xl font-semibold tracking-[-0.04em] mb-2 z-10 animate-in animate-in-2">
           Welcome to Koel Labs
         </h3>

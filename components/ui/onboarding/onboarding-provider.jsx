@@ -7,10 +7,18 @@ const OnboardingContext = createContext(null);
 
 export function OnboardingProvider({ children }) {
   const [onboardingData, setOnboardingData] = useState({
-    targetLanguage: '',
-    targetDialect: '',
+    // Getting to Know You (Page 2)
     nativeLanguage: '',
     nativeDialect: '',
+    placeOfBirth: '',
+    birthday: '',
+
+    // Language Goals (Page 3)
+    targetLanguage: 'english', // Default to English as mentioned
+    experienceLevel: '',
+    challengingWords: '',
+
+    // Consent (Page 4)
     consent: false,
     privacyPolicy: false,
     termsOfService: false,
@@ -34,10 +42,13 @@ export function OnboardingProvider({ children }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          targetLanguage: onboardingData.targetLanguage,
-          targetDialect: onboardingData.targetDialect,
           nativeLanguage: onboardingData.nativeLanguage,
           nativeDialect: onboardingData.nativeDialect,
+          placeOfBirth: onboardingData.placeOfBirth,
+          birthday: onboardingData.birthday,
+          targetLanguage: onboardingData.targetLanguage,
+          experienceLevel: onboardingData.experienceLevel,
+          challengingWords: onboardingData.challengingWords,
           hasConsented: onboardingData.consent,
         }),
       });
