@@ -13,25 +13,46 @@ export async function POST(request: Request) {
     }
 
     // Parse the request body
-    const { targetLanguage, targetDialect, nativeLanguage, nativeDialect, hasConsented, avatar } =
-      await request.json();
+    const body = await request.json();
+    const {
+      // New onboarding fields
+      nativeLanguage,
+      placeOfBirth,
+      birthday,
+      targetLanguage,
+      experienceLevel,
+      challengingWords,
+      // Legacy fields for backward compatibility
+      hasConsented,
+      avatar,
+    } = body;
+
+    // Create metadata object with all user preferences
+    const metadata = {
+      nativeLanguage,
+      placeOfBirth,
+      birthday,
+      targetLanguage,
+      experienceLevel,
+      challengingWords,
+      // Include legacy fields for backward compatibility
+      hasConsented,
+      // Add timestamp for when preferences were last updated
+      lastUpdated: new Date().toISOString(),
+    };
 
     // Update the user record with the new preferences
     await db
       .update(users)
       .set({
-        // Add preferences as JSON string in the metadata field
-        metadata: JSON.stringify({
-          targetLanguage,
-          targetDialect,
-          nativeLanguage,
-          nativeDialect,
-          hasConsented,
-        }),
+        // Store all preferences as JSON in the metadata field
+        metadata: JSON.stringify(metadata),
         // Update the image field if avatar is provided
         ...(avatar ? { image: avatar } : {}),
         // Mark onboarding as completed
         onboardingCompleted: true,
+        // Update the updatedAt timestamp
+        updatedAt: new Date(),
       })
       .where(eq(users.id, session.user.id));
 

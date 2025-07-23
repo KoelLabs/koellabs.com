@@ -36,8 +36,6 @@ export default function WelcomePage() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center overflow-hidden ">
-      <div className="absolute h-full w-screen z-[-1] bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
-
       <div className="flex flex-col items-center justify-center py-8 px-4 text-center mx-4 border-neutral-200 dark:border-neutral-800 z-10  rounded-full">
         <div className="flex items-center tracking-tight w-full justify-between">
           <KoelBirdRounded className="w-[100px] h-fit mx-auto animate-in animate-in-1" />

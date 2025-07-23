@@ -48,7 +48,7 @@ function DateSegment({ className, ...props }: DateSegmentProps) {
 }
 
 const dateInputStyle =
-  'relative inline-flex h-9 w-full items-center overflow-hidden whitespace-nowrap rounded-md border border-input bg-background px-3 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none  ';
+  'relative inline-flex h-10 w-full items-center overflow-hidden whitespace-nowrap rounded-xl border border-input bg-background px-3 py-2 text-sm transition-[color,box-shadow] outline-none  ';
 
 interface DateInputProps extends DateInputPropsRac {
   className?: string;

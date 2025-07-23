@@ -4,6 +4,7 @@ import React, { useId, useState, useEffect, useMemo, useCallback, memo, useRef }
 import { Button } from '@/components/ui/base/button';
 import { Input } from '@/components/ui/base/input';
 import { Label } from '@/components/ui/base/label';
+import { Textarea } from '@/components/ui/base/textarea';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/base/card';
 import { ScrollArea, ScrollBar } from '@/components/ui/base/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/base/tabs';
@@ -110,6 +111,52 @@ const FormSelect = memo(({ label, id, value, options, onChange, isPending }) => 
   );
 });
 FormSelect.displayName = 'FormSelect';
+
+// Memoized textarea field component
+const FormTextarea = memo(
+  ({ label, id, name, value, onChange, isPending, placeholder, maxLength }) => {
+    const handleChange = useCallback(
+      e => {
+        onChange(name, e.target.value);
+      },
+      [name, onChange],
+    );
+
+    if (isPending) {
+      return (
+        <div className="space-y-2">
+          <Label htmlFor={id} className="text-sm font-normal ml-0.5">
+            {label}
+          </Label>
+          <Skeleton className="h-24 w-full" />
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-2">
+        <Label htmlFor={id} className="text-sm font-normal ml-0.5">
+          {label}
+        </Label>
+        <Textarea
+          id={id}
+          name={name}
+          className="min-h-[80px] rounded-lg resize-none"
+          placeholder={placeholder}
+          value={value}
+          onChange={handleChange}
+          maxLength={maxLength}
+        />
+        {maxLength && (
+          <p className="text-xs text-muted-foreground">
+            {value?.length || 0}/{maxLength} characters
+          </p>
+        )}
+      </div>
+    );
+  },
+);
+FormTextarea.displayName = 'FormTextarea';
 
 // Memoized appearance section
 const AppearanceSection = memo(({ theme, setTheme }) => {
@@ -258,9 +305,12 @@ export default function SettingsPage() {
     firstName: '',
     lastName: '',
     targetLanguage: '',
-    targetDialect: '',
     nativeLanguage: '',
-    nativeDialect: '',
+    // New onboarding fields
+    placeOfBirth: '',
+    birthday: '',
+    experienceLevel: '',
+    challengingWords: '',
   });
 
   const [isSaving, setIsSaving] = useState(false);
@@ -290,9 +340,12 @@ export default function SettingsPage() {
         firstName,
         lastName,
         targetLanguage: userPreferences.targetLanguage || '',
-        targetDialect: userPreferences.targetDialect || '',
         nativeLanguage: userPreferences.nativeLanguage || '',
-        nativeDialect: userPreferences.nativeDialect || '',
+        // New onboarding fields
+        placeOfBirth: userPreferences.placeOfBirth || '',
+        birthday: userPreferences.birthday || '',
+        experienceLevel: userPreferences.experienceLevel || '',
+        challengingWords: userPreferences.challengingWords || '',
       });
 
       setPreviewAvatar(session.user.image || '');
@@ -358,19 +411,24 @@ export default function SettingsPage() {
         }
       }
 
-      // Update user preferences
+      // Update user preferences with all fields
       const response = await fetch('/api/user/preferences', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          // Language preferences
           targetLanguage: formData.targetLanguage,
-          targetDialect: formData.targetDialect,
           nativeLanguage: formData.nativeLanguage,
-          nativeDialect: formData.nativeDialect,
-          hasConsented: true, // Assuming they've already consented during onboarding
-          avatar: previewAvatar || session.user.image, // Send current avatar (either new or existing)
+          // New onboarding fields
+          placeOfBirth: formData.placeOfBirth,
+          birthday: formData.birthday,
+          experienceLevel: formData.experienceLevel,
+          challengingWords: formData.challengingWords,
+          // Legacy fields
+          hasConsented: true,
+          avatar: previewAvatar || session.user.image,
         }),
       });
 
@@ -397,39 +455,136 @@ export default function SettingsPage() {
     }
   }, [formData, session, toast, refetch, previewAvatar]);
 
-  // Memoize select options to prevent re-renders
-  const languageOptions = useMemo(
+  // Target language options (limited set for beta)
+  const targetLanguageOptions = useMemo(
     () => [
-      { value: 'english', label: 'English' },
-      { value: 'spanish', label: 'Spanish (Coming Soon)', disabled: true },
-      { value: 'french', label: 'French (Coming Soon)', disabled: true },
-      { value: 'german', label: 'German (Coming Soon)', disabled: true },
+      { value: 'english', label: '🇺🇸 English' },
+      { value: 'spanish', label: '🇪🇸 Spanish (Coming Soon)', disabled: true },
+      { value: 'french', label: '🇫🇷 French (Coming Soon)', disabled: true },
+      { value: 'german', label: '🇩🇪 German (Coming Soon)', disabled: true },
     ],
     [],
   );
 
+  // Native language options (comprehensive set)
   const nativeLanguageOptions = useMemo(
     () => [
-      { value: 'english', label: 'English' },
-      { value: 'spanish', label: 'Spanish' },
-      { value: 'french', label: 'French' },
-      { value: 'german', label: 'German' },
+      { value: 'en', label: '🇺🇸 English' },
+      { value: 'es', label: '🇪🇸 Spanish' },
+      { value: 'fr', label: '🇫🇷 French' },
+      { value: 'de', label: '🇩🇪 German' },
+      { value: 'it', label: '🇮🇹 Italian' },
+      { value: 'pt', label: '🇵🇹 Portuguese' },
+      { value: 'ru', label: '🇷🇺 Russian' },
+      { value: 'ja', label: '🇯🇵 Japanese' },
+      { value: 'ko', label: '🇰🇷 Korean' },
+      { value: 'zh', label: '🇨🇳 Chinese' },
+      { value: 'ar', label: '🇸🇦 Arabic' },
+      { value: 'hi', label: '🇮🇳 Hindi' },
+      { value: 'bn', label: '🇧🇩 Bengali' },
+      { value: 'ur', label: '🇵🇰 Urdu' },
+      { value: 'nl', label: '🇳🇱 Dutch' },
+      { value: 'sv', label: '🇸🇪 Swedish' },
+      { value: 'no', label: '🇳🇴 Norwegian' },
+      { value: 'da', label: '🇩🇰 Danish' },
+      { value: 'fi', label: '🇫🇮 Finnish' },
+      { value: 'pl', label: '🇵🇱 Polish' },
+      { value: 'tr', label: '🇹🇷 Turkish' },
+      { value: 'th', label: '🇹🇭 Thai' },
+      { value: 'vi', label: '🇻🇳 Vietnamese' },
+      { value: 'id', label: '🇮🇩 Indonesian' },
+      { value: 'ms', label: '🇲🇾 Malay' },
     ],
     [],
   );
 
-  const dialectOptions = useMemo(
+  const experienceLevelOptions = useMemo(
     () => [
-      { value: 'american', label: 'American' },
-      { value: 'british', label: 'British' },
-      { value: 'australian', label: 'Australian' },
-      { value: 'canadian', label: 'Canadian' },
-      { value: 'irish', label: 'Irish' },
-      { value: 'scottish', label: 'Scottish' },
-      { value: 'other', label: 'Other' },
+      { value: '0', label: 'Complete Beginner (0 years)' },
+      { value: '0-1', label: 'Less than 1 year' },
+      { value: '1-2', label: '1-2 years' },
+      { value: '2-5', label: '2-5 years' },
+      { value: '5-10', label: '5-10 years' },
+      { value: '10+', label: 'More than 10 years' },
+      { value: 'native-level', label: 'Native/Near-native level' },
     ],
     [],
   );
+
+  // Helper function to format birthday for display
+  const formatBirthday = birthday => {
+    if (!birthday) return '';
+    try {
+      const date = new Date(birthday);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+    } catch (error) {
+      return birthday; // Return as is if parsing fails
+    }
+  };
+
+  // Comprehensive country mapping with flags
+  const getCountryDisplay = countryCode => {
+    if (!countryCode) return 'Not specified';
+    const countries = {
+      US: '🇺🇸 United States',
+      CA: '🇨🇦 Canada',
+      GB: '🇬🇧 United Kingdom',
+      AU: '🇦🇺 Australia',
+      DE: '🇩🇪 Germany',
+      FR: '🇫🇷 France',
+      IT: '🇮🇹 Italy',
+      ES: '🇪🇸 Spain',
+      IN: '🇮🇳 India',
+      CN: '🇨🇳 China',
+      JP: '🇯🇵 Japan',
+      KR: '🇰🇷 South Korea',
+      BR: '🇧🇷 Brazil',
+      MX: '🇲🇽 Mexico',
+      RU: '🇷🇺 Russia',
+      NL: '🇳🇱 Netherlands',
+      BE: '🇧🇪 Belgium',
+      CH: '🇨🇭 Switzerland',
+      AT: '🇦🇹 Austria',
+      PT: '🇵🇹 Portugal',
+      SE: '🇸🇪 Sweden',
+      NO: '🇳🇴 Norway',
+      DK: '🇩🇰 Denmark',
+      FI: '🇫🇮 Finland',
+      IE: '🇮🇪 Ireland',
+      PL: '🇵🇱 Poland',
+      CZ: '🇨🇿 Czech Republic',
+      HU: '🇭🇺 Hungary',
+      RO: '🇷🇴 Romania',
+      BG: '🇧🇬 Bulgaria',
+      HR: '🇭🇷 Croatia',
+      SI: '🇸🇮 Slovenia',
+      SK: '🇸🇰 Slovakia',
+      LT: '🇱🇹 Lithuania',
+      LV: '🇱🇻 Latvia',
+      EE: '🇪🇪 Estonia',
+      GR: '🇬🇷 Greece',
+      CY: '🇨🇾 Cyprus',
+      MT: '🇲🇹 Malta',
+      LU: '🇱🇺 Luxembourg',
+      IS: '🇮🇸 Iceland',
+      ENGLAND: '🏴󠁧󠁢󠁥󠁮󠁧󠁿 England',
+      SCOTLAND: '🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland',
+      WALES: '🏴󠁧󠁢󠁷󠁬󠁳󠁿 Wales',
+    };
+    return countries[countryCode] || `${countryCode}`;
+  };
+
+  // Helper function to get language display with flag
+  const getLanguageDisplay = (languageCode, isTarget = false) => {
+    if (!languageCode) return 'Not specified';
+    const options = isTarget ? targetLanguageOptions : nativeLanguageOptions;
+    const language = options.find(lang => lang.value === languageCode);
+    return language ? language.label : languageCode;
+  };
 
   // Memoize the user avatar to prevent re-renders
   const userAvatar = useMemo(() => {
@@ -532,16 +687,7 @@ export default function SettingsPage() {
                       label="Target Language"
                       id="targetLanguage"
                       value={formData.targetLanguage}
-                      options={languageOptions}
-                      onChange={handleInputChange}
-                      isPending={isPending}
-                    />
-
-                    <FormSelect
-                      label="Target Dialect"
-                      id="targetDialect"
-                      value={formData.targetDialect}
-                      options={dialectOptions}
+                      options={targetLanguageOptions}
                       onChange={handleInputChange}
                       isPending={isPending}
                     />
@@ -555,14 +701,51 @@ export default function SettingsPage() {
                       isPending={isPending}
                     />
 
-                    <FormSelect
-                      label="Native Dialect"
-                      id="nativeDialect"
-                      value={formData.nativeDialect}
-                      options={dialectOptions}
-                      onChange={handleInputChange}
-                      isPending={isPending}
-                    />
+                    <div className="space-y-2">
+                      <Label className="text-sm font-normal ml-0.5">Place of Birth</Label>
+                      {isPending ? (
+                        <Skeleton className="h-10 w-full" />
+                      ) : (
+                        <div className="flex h-10 w-full rounded-lg border border-input bg-muted px-3 py-2 text-sm text-muted-foreground">
+                          {getCountryDisplay(formData.placeOfBirth)}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label className="text-sm font-normal ml-0.5">Birthday</Label>
+                      {isPending ? (
+                        <Skeleton className="h-10 w-full" />
+                      ) : (
+                        <div className="flex h-10 w-full rounded-lg border border-input bg-muted px-3 py-2 text-sm text-muted-foreground">
+                          {formatBirthday(formData.birthday) || 'Not specified'}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <FormSelect
+                        label="Experience Level"
+                        id="experienceLevel"
+                        value={formData.experienceLevel}
+                        options={experienceLevelOptions}
+                        onChange={handleInputChange}
+                        isPending={isPending}
+                      />
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <FormTextarea
+                        label="Challenging Words"
+                        id="challenging-words"
+                        name="challengingWords"
+                        value={formData.challengingWords}
+                        onChange={handleInputChange}
+                        isPending={isPending}
+                        placeholder="Words you find difficult or confusing (e.g., 'thorough', 'entrepreneur', 'rural')"
+                        maxLength={500}
+                      />
+                    </div>
                   </div>
                 </div>
               </CardContent>

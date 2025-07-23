@@ -102,9 +102,9 @@ export default function SignUpScreen() {
       </div>
 
       {/* Repeating line pattern - top */}
-      <div className="absolute top-0 left-0 w-full h-[5vh] overflow-hidden flex items-end justify-center">
+      <div className="absolute top-0 left-0 w-full h-[6vh] overflow-hidden flex items-end justify-center bg-neutral-50">
         <div className="flex h-full items-end gap-2">
-          {Array(200)
+          {Array(500)
             .fill(0)
             .map((_, i) => (
               <div
@@ -115,14 +115,14 @@ export default function SignUpScreen() {
         </div>
       </div>
 
-      <div className="flex items-center justify-center my-12 relative w-full h-[90vh] bg-neutral-50/20 backdrop-blur-md border-y border-neutral-200 transform-gpu dark:border-neutral-800">
+      <div className="flex items-center justify-center my-12 relative w-full h-[90vh] bg-neutral-50/20 backdrop-blur-md border-y border-neutral-200 transform-gpu dark:border-neutral-800 z-10">
         <div className="mx-auto grid w-full px-6 sm:w-[420px] gap-8 relative z-10">
           <div className="grid gap-2 text-center">
-            <KoelBirdRounded className="w-12 h-12 mx-auto" />
+            <KoelBirdRounded className="w-16 h-16 mx-auto" />
             <h1 className="text-2xl font-semibold tracking-tighter text-black dark:text-white">
               <span className="relative">Get Started Today</span>
             </h1>
-            <p className="text-balance text-sm text-muted-foreground">
+            <p className="text-balance text-md text-muted-foreground">
               Sign up to get started with Koel Labs.
             </p>
           </div>
@@ -133,7 +133,7 @@ export default function SignUpScreen() {
                 <Label htmlFor="name" className="text-sm font-medium ml-1">
                   Name
                 </Label>
-                <div className="relative">
+                <div className="relative mt-1">
                   <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground z-20">
                     <User size={16} strokeWidth={2} aria-hidden="true" />
                   </div>
@@ -141,7 +141,7 @@ export default function SignUpScreen() {
                     id="name"
                     type="text"
                     value={name}
-                    className="pl-10 h-10 rounded-full focus-visible:ring-neutral-500 focus-visible:ring-1 border-neutral-200 bg-white/80 backdrop-blur-sm"
+                    className="pl-10 h-10 rounded-xl border-neutral-200 bg-white/80 backdrop-blur-sm"
                     placeholder="Your name"
                     required
                     onChange={e => setName(e.target.value)}
@@ -153,7 +153,7 @@ export default function SignUpScreen() {
                 <Label htmlFor="email" className="text-sm font-medium ml-1">
                   Email
                 </Label>
-                <div className="relative">
+                <div className="relative mt-1">
                   <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground z-20">
                     <Mail size={16} strokeWidth={2} aria-hidden="true" />
                   </div>
@@ -161,7 +161,7 @@ export default function SignUpScreen() {
                     id="email"
                     type="email"
                     value={email}
-                    className="pl-10 h-10 rounded-full focus-visible:ring-neutral-500 focus-visible:ring-1 border-neutral-200 bg-white/80 backdrop-blur-sm"
+                    className="pl-10 h-10 rounded-xl border-neutral-200 bg-white/80 backdrop-blur-sm"
                     placeholder="name@example.com"
                     required
                     onChange={e => setEmail(e.target.value)}
@@ -173,14 +173,14 @@ export default function SignUpScreen() {
                 <Label htmlFor="password" className="text-sm font-medium ml-1">
                   Password
                 </Label>
-                <div className="relative">
+                <div className="relative mt-1">
                   <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground z-20">
                     <Lock size={16} strokeWidth={2} aria-hidden="true" />
                   </div>
                   <Input
                     id="password"
                     type="password"
-                    className="pl-10 h-10 rounded-full focus-visible:ring-neutral-500 focus-visible:ring-1 border-neutral-200 bg-white/80 backdrop-blur-sm"
+                    className="pl-10 h-10 rounded-xl border-neutral-200 bg-white/80 backdrop-blur-sm"
                     required
                     placeholder="•••••••••••••"
                     onChange={e => setPassword(e.target.value)}
@@ -193,7 +193,7 @@ export default function SignUpScreen() {
             </div>
 
             <Button
-              className="w-full h-10 rounded-full font-medium bg-black hover:bg-neutral-800 text-white dark:bg-sky-600 dark:hover:bg-sky-700"
+              className="w-full h-10 rounded-xl font-medium bg-black hover:bg-neutral-800 text-white dark:bg-sky-600 dark:hover:bg-sky-700 mt-1"
               type="submit"
               disabled={isLoading}
             >
@@ -213,7 +213,7 @@ export default function SignUpScreen() {
                 type="button"
                 variant="outline"
                 size="sm"
-                className="h-9 rounded-full border-neutral-200 hover:bg-neutral-50 text-sm bg-white/80 backdrop-blur-sm"
+                className="h-9 rounded-xl border-neutral-200 hover:bg-neutral-50 text-sm bg-white/80 backdrop-blur-sm"
                 onClick={() => handleSocialSignUp('google')}
                 disabled={isLoading}
               >
@@ -248,7 +248,7 @@ export default function SignUpScreen() {
                 type="button"
                 variant="outline"
                 size="sm"
-                className="h-9 rounded-full border-neutral-200 hover:bg-neutral-50 text-sm bg-white/80 backdrop-blur-sm"
+                className="h-9 rounded-xl border-neutral-200 hover:bg-neutral-50 text-sm bg-white/80 backdrop-blur-sm"
                 onClick={() => handleSocialSignUp('wechat')}
                 disabled={isLoading}
               >
@@ -284,12 +284,12 @@ export default function SignUpScreen() {
                 type="button"
                 variant="outline"
                 size="sm"
-                className="h-9 rounded-full border-neutral-200 hover:bg-neutral-50 text-sm bg-white/80 backdrop-blur-sm"
+                className="h-9 rounded-xl border-neutral-200 hover:bg-neutral-50 text-sm bg-white/80 backdrop-blur-sm"
                 onClick={() => handleSocialSignUp('facebook')}
                 disabled={isLoading}
               >
                 <svg
-                  className="h-4 w-4 mr-2"
+                  className="h-6 w-6 mr-2"
                   width="934"
                   height="934"
                   viewBox="0 0 934 934"
@@ -323,7 +323,7 @@ export default function SignUpScreen() {
                 type="button"
                 variant="outline"
                 size="sm"
-                className="h-9 rounded-full border-neutral-200 hover:bg-neutral-50 text-sm bg-white/80 backdrop-blur-sm"
+                className="h-9 rounded-xl border-neutral-200 hover:bg-neutral-50 text-sm bg-white/80 backdrop-blur-sm"
                 onClick={() => handleSocialSignUp('microsoft')}
                 disabled={isLoading}
               >
@@ -360,9 +360,9 @@ export default function SignUpScreen() {
       </div>
 
       {/* Repeating line pattern - bottom */}
-      <div className="absolute bottom-0 left-0 w-full h-[5vh] overflow-hidden flex items-start justify-center">
+      <div className="absolute bottom-0 left-0 w-full h-[6vh] overflow-hidden flex items-start justify-center bg-neutral-50 z-[1]">
         <div className="flex h-full items-start gap-2">
-          {Array(200)
+          {Array(400)
             .fill(0)
             .map((_, i) => (
               <div

@@ -31,7 +31,6 @@ import { parseDate } from '@internationalized/date';
 export default function GettingToKnowYouPage() {
   const { onboardingData, updateOnboardingData } = useOnboarding();
   const router = useRouter();
-  const [selectedCountry, setSelectedCountry] = useState('');
   const [languageOpen, setLanguageOpen] = useState(false);
   const [placeOfBirthOpen, setPlaceOfBirthOpen] = useState(false);
   const languageSelectId = useId();
@@ -57,27 +56,6 @@ export default function GettingToKnowYouPage() {
 
   const handleBack = () => {
     router.push('/onboarding/welcome');
-  };
-
-  const getDialectsByCountry = countryCode => {
-    const dialectMap = {
-      US: ['General American', 'Southern American', 'New York', 'California', 'Texas', 'Boston'],
-      GB: ['Received Pronunciation', 'Cockney', 'Scottish', 'Welsh', 'Northern'],
-      ENGLAND: ['Received Pronunciation', 'Cockney', 'London', 'Yorkshire', 'Midlands'],
-      SCOTLAND: ['Scottish Standard English', 'Highland', 'Lowland', 'Glasgow', 'Edinburgh'],
-      WALES: ['Welsh English', 'North Welsh', 'South Welsh'],
-      CA: ['General Canadian', 'Quebec French influenced', 'Maritime'],
-      AU: ['General Australian', 'Broad Australian', 'Cultivated Australian'],
-      IE: ['Dublin', 'Cork', 'Ulster'],
-      ES: ['Castilian', 'Andalusian', 'Catalan influenced'],
-      MX: ['Central Mexican', 'Northern Mexican', 'Yucatecan'],
-      FR: ['Parisian', 'Southern French', 'Northern French'],
-      DE: ['High German', 'Low German', 'Bavarian', 'Saxon'],
-      IN: ['Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata'],
-      ZA: ['General South African', 'Cape Town', 'Johannesburg', 'Durban'],
-      NZ: ['General New Zealand', 'South Island', 'North Island'],
-    };
-    return dialectMap[countryCode] || ['Regional', 'Standard', 'Other'];
   };
 
   const languageGroups = [
@@ -1992,9 +1970,7 @@ export default function GettingToKnowYouPage() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center w-full">
-      <div className="absolute h-full w-screen z-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
-
-      <div className="flex flex-col items-center justify-center py-8 px-6 text-center mx-4 rounded-xl z-40 bg-white/40 border-neutral-200 dark:border-neutral-800 max-w-2xl w-full">
+      <div className="flex flex-col items-center justify-center p-8 text-center mx-4  z-40 max-w-2xl w-full ">
         <KoelBirdRounded className="w-[70px] mb-3 h-fit mx-auto" />
 
         <h3 className="text-2xl font-semibold tracking-tighter mb-2 z-10">Getting to Know You</h3>
@@ -2015,7 +1991,7 @@ export default function GettingToKnowYouPage() {
                     variant="outline"
                     role="combobox"
                     aria-expanded={languageOpen}
-                    className="bg-background hover:bg-background border-input w-full justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px] h-10 mt-1 rounded-lg"
+                    className="bg-background hover:bg-background border-input w-full justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px] h-10 mt-1 rounded-xl"
                   >
                     {onboardingData.nativeLanguage ? (
                       <span className="flex min-w-0 items-center gap-2">
@@ -2047,18 +2023,18 @@ export default function GettingToKnowYouPage() {
                     )}
                     <ChevronDownIcon
                       size={16}
-                      className="text-muted-foreground/80 shrink-0"
+                      className="text-muted-foreground/80 shrink-0 -mr-0.5"
                       aria-hidden="true"
                     />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent
-                  className="border-input w-full min-w-[var(--radix-popper-anchor-width)] p-0"
+                  className="border w-full min-w-[var(--radix-popper-anchor-width)] p-0 rounded-xl"
                   align="start"
                 >
-                  <Command>
+                  <Command className="rounded-xl">
                     <CommandInput placeholder="Search language..." />
-                    <CommandList>
+                    <CommandList className="rounded-xl">
                       <CommandEmpty>No language found.</CommandEmpty>
                       {languageGroups.map(group => (
                         <Fragment key={group.group}>
@@ -2069,8 +2045,6 @@ export default function GettingToKnowYouPage() {
                                 value={`${language.NativeName} ${language.EnglishName}`}
                                 onSelect={() => {
                                   updateOnboardingData('nativeLanguage', language.Code);
-                                  updateOnboardingData('nativeDialect', '');
-                                  setSelectedCountry('');
                                   setLanguageOpen(false);
                                 }}
                               >
@@ -2101,7 +2075,7 @@ export default function GettingToKnowYouPage() {
                     variant="outline"
                     role="combobox"
                     aria-expanded={placeOfBirthOpen}
-                    className="bg-background hover:bg-background border-input w-full justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px] h-10 mt-1 rounded-lg"
+                    className="bg-background hover:bg-background border-input w-full justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px] h-10 mt-1 rounded-xl"
                   >
                     {onboardingData.placeOfBirth ? (
                       <span className="flex min-w-0 items-center gap-2">
@@ -2123,18 +2097,18 @@ export default function GettingToKnowYouPage() {
                     )}
                     <ChevronDownIcon
                       size={16}
-                      className="text-muted-foreground/80 shrink-0"
+                      className="text-muted-foreground/80 shrink-0 -mr-0.5"
                       aria-hidden="true"
                     />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent
-                  className="border-input w-full min-w-[var(--radix-popper-anchor-width)] p-0 max-h-60"
+                  className="border-input w-full min-w-[var(--radix-popper-anchor-width)] p-0 rounded-xl"
                   align="start"
                 >
-                  <Command>
+                  <Command className="rounded-xl">
                     <CommandInput placeholder="Search country..." />
-                    <CommandList>
+                    <CommandList className="p-1">
                       <CommandEmpty>No country found.</CommandEmpty>
                       {countries.map(country => (
                         <CommandItem
@@ -2142,8 +2116,6 @@ export default function GettingToKnowYouPage() {
                           value={country.name}
                           onSelect={() => {
                             updateOnboardingData('placeOfBirth', country.code);
-                            setSelectedCountry(country.code);
-                            updateOnboardingData('nativeDialect', '');
                             setPlaceOfBirthOpen(false);
                           }}
                         >
@@ -2160,35 +2132,10 @@ export default function GettingToKnowYouPage() {
               </Popover>
             </div>
 
-            {selectedCountry && (
-              <div className="space-y-2 text-left">
-                <Label htmlFor="nativeDialect">
-                  Native Dialect
-                  <span className="text-xs text-neutral-500 ml-1">
-                    (Where you learned the language)
-                  </span>
-                </Label>
-                <Select
-                  onValueChange={value => updateOnboardingData('nativeDialect', value)}
-                  value={onboardingData.nativeDialect}
-                >
-                  <SelectTrigger id="nativeDialect" className="h-10 mt-1 rounded-lg">
-                    <SelectValue placeholder="Select your dialect/accent" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {getDialectsByCountry(selectedCountry).map(dialect => (
-                      <SelectItem key={dialect} value={dialect.toLowerCase()}>
-                        {dialect}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            )}
-
             <div className="space-y-2 text-left">
               <DatePickerComponent
-                label="What's your birthday? (Optional)"
+                label="What's your birthday?"
+                optional={true}
                 value={safeParseBirthday(onboardingData.birthday)}
                 onChange={value => updateOnboardingData('birthday', value ? value.toString() : '')}
               />
@@ -2196,7 +2143,7 @@ export default function GettingToKnowYouPage() {
           </div>
         </div>
 
-        <div className="flex gap-3 mt-8 w-full justify-between">
+        <div className="flex gap-3 mt-12 w-full justify-between">
           <Button variant="outline" onClick={handleBack} className="flex-1 gap-1">
             <svg
               width="16"
@@ -2217,7 +2164,7 @@ export default function GettingToKnowYouPage() {
             Back
           </Button>
           <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-2 text-center px-2">
-            Step 1 of 4
+            Step 1 of 3
           </p>
           <Button
             onClick={handleNext}

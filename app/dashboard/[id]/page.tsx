@@ -19,7 +19,7 @@ import { usePathname } from 'next/navigation';
 import { PieChart, Pie, Cell } from 'recharts';
 import { Button } from '@/components/ui/base/button';
 import VideoPlayer from '../videoPlayer';
-import { FeedbackGiver } from '@/components/FeedbackGiver';
+import { FeedbackGiver } from '@/server/src/static/FeedbackGiver.js';
 import { useMediaRemote } from '@vidstack/react';
 import { type MediaRemoteControl } from '@vidstack/react';
 
@@ -108,21 +108,83 @@ export default function Page() {
           start: 567,
           end: 573,
           thumbnail: 'd1.png',
-          target: 'juɡɑɾʌsteɪʔʌlɹtɔlðətaɪaɪm',
+          target: [
+            'j',
+            'u',
+            'ɡ',
+            'ɑ',
+            'ɾ',
+            'ʌ',
+            's',
+            't',
+            'eɪ',
+            'ʔ',
+            'ʌ',
+            'l',
+            'ɹ',
+            't',
+            'ɔ',
+            'l',
+            'ð',
+            'ə',
+            't',
+            'aɪ',
+            'aɪ',
+            'm',
+          ],
           target_by_word: [
-            ['You', 'ju'],
-            ['gotta', 'ɡɑɾʌ'],
-            ['stay', 'steɪʔ'],
-            ['alert', 'ʌlɹt'],
-            ['all', 'ɔl'],
-            ['the', 'ðə'],
-            ['time', 'taɪaɪm'],
+            ['You', ['j', 'u']],
+            ['gotta', ['ɡ', 'ɑ', 'ɾ', 'ʌ']],
+            ['stay', ['s', 't', 'eɪ', 'ʔ']],
+            ['alert', ['ʌ', 'l', 'ɹ', 't']],
+            ['all', ['ɔ', 'l']],
+            ['the', ['ð', 'ə']],
+            ['time', ['t', 'aɪ', 'aɪ', 'm']],
           ],
         },
       ],
       completedSections: 0,
     },
   ];
+
+  // const target = [
+  //   'kʰ',
+  //   'ɔ',
+  //   'l',
+  //   'ɪ',
+  //   'ŋ',
+  //   'kʰ',
+  //   'ɑ',
+  //   'ɹ',
+  //   'd',
+  //   'z',
+  //   'ɑ',
+  //   'ɹ',
+  //   'ð',
+  //   'ə',
+  //   'w',
+  //   'eɪ',
+  //   'v',
+  //   'ə',
+  //   'v',
+  //   'ð',
+  //   'ə',
+  //   'f',
+  //   'j',
+  //   'u',
+  //   'tʃ',
+  //   'ɜ˞',
+  // ];
+  // const target_by_words = [
+  //   ['calling', ['kʰ', 'ɔ', 'l', 'ɪ', 'ŋ']],
+  //   ['cards', ['kʰ', 'ɑ', 'ɹ', 'd', 'z']],
+  //   ['are', ['ɑ', 'ɹ']],
+  //   ['the', ['ð', 'ə']],
+  //   ['wave', ['w', 'eɪ', 'v']],
+  //   ['of', ['ə', 'v']],
+  //   ['the', ['ð', 'ə']],
+  //   ['future', ['f', 'j', 'u', 'tʃ', 'ɜ˞']],
+  // ];
 
   const currentVideo = videos.find(video => pathname?.includes(video.id));
 
@@ -228,21 +290,16 @@ export default function Page() {
       feedbackGiverRef.current = new FeedbackGiver(
         practiceSection.target,
         practiceSection.target_by_word,
-        async (newTranscription: string) => {
-          setTranscription(newTranscription);
+        async (newTranscription: any) => {
+          // Handle transcription as array (from server) or string (fallback)
+          const transcriptionText = Array.isArray(newTranscription)
+            ? newTranscription.join(' ')
+            : newTranscription;
+          setTranscription(transcriptionText);
           if (feedbackGiverRef.current) {
             const [scoredWords, overall] = await feedbackGiverRef.current.getCER();
 
             const newScores = scoredWords.map((word: any) => word[3] || 0);
-            if (newScores[0] > 0) {
-              newScores[0] = 1; // you
-              newScores[1] = 0.875; // gotta
-              newScores[2] = 1; // stay
-              newScores[3] = 0.6; // alert
-              newScores[4] = 1; // all
-              newScores[5] = 1; // the
-              newScores[6] = 1; // time
-            }
             setWordScores([...newScores]); // Create new array reference to trigger re-render
             // Update next word index
 
@@ -293,30 +350,54 @@ export default function Page() {
         await feedbackGiverRef.current.stop();
 
         // Get feedback after stopping
-        const [perWordFeedback, top3] = await feedbackGiverRef.current.getFeedback();
-        setFeedback(perWordFeedback);
-        setTop3Feedback(top3);
+        const userPhoneticErrors = await feedbackGiverRef.current.getUserPhoneticErrors();
+        const allPhonemeWrittenFeedback =
+          await feedbackGiverRef.current.getAllPhonemeWrittenFeedback();
+
+        // Convert userPhoneticErrors to top3Feedback format
+        const top3FeedbackArray = Object.entries(userPhoneticErrors).map(([phoneme, errorData]) => {
+          const [mistake_count, word_set, mistake_severities, phoneme_spoken_as, score] =
+            errorData as [number, string[], string[], string[], number];
+          const phonemeFeedback = allPhonemeWrittenFeedback[phoneme];
+          const targetPhonemeSpelling = phonemeFeedback?.['phonetic spelling'] || phoneme;
+          const targetPhonemeExplanation =
+            phonemeFeedback?.['explanation'] || 'No explanation available';
+          return [targetPhonemeSpelling, targetPhonemeExplanation];
+        });
+
+        // For per-word feedback, we'll use the phoneme feedback data
+        const perWordFeedback = Object.entries(allPhonemeWrittenFeedback).map(
+          ([phoneme, feedback]) => [
+            (feedback as { phonetic_spelling: string; explanation: string })['phonetic_spelling'] ||
+              phoneme,
+            (feedback as { phonetic_spelling: string; explanation: string })['explanation'] ||
+              'No explanation available',
+          ],
+        );
+
+        setFeedback(perWordFeedback as [string, string][]);
+        setTop3Feedback(top3FeedbackArray as [string, string][]);
 
         // Recalculate CER because it hasn't updated for some reason :/
         const [scoredWords, overall] = await feedbackGiverRef.current.getCER();
         const newScores = scoredWords.map((word: any) => word[3] || 0);
         const finalScore = Math.round(1000 * overall) / 10;
 
-        // Get side-by-side feedback
-        const sideBySideFeedback = await feedbackGiverRef.current.getSideBySideDescription();
+        // Set empty side-by-side feedback since getSideBySideDescription is no longer available
+        const sideBySideFeedback = [];
         setSideBySideFeedback(sideBySideFeedback);
         setPhonemeIX(sideBySideFeedback.map(word => 0));
 
         // Save feedback for current section
         const currentSection = getCurrentSection();
         if (currentSection !== null && currentSection !== -1) {
-          setSectionFeedback(prev => ({
+          setSectionFeedback((prev: any) => ({
             ...prev,
             [currentSection]: {
               wordScores: [...newScores], // Create a new array to ensure state updates
               transcription,
-              feedback: perWordFeedback,
-              top3Feedback: top3,
+              feedback: perWordFeedback as [string, string][],
+              top3Feedback: top3FeedbackArray,
               score: finalScore,
               sideBySideFeedback,
             },
@@ -344,12 +425,6 @@ export default function Page() {
 
   useEffect(() => {
     setIsClient(true);
-    setFeedback([
-      ['you', 'hard'],
-      ['gotta', 'hard'],
-      ['stay', 'hard'],
-      ['alert', 'hard'],
-    ]);
   }, []);
 
   const getBadgeColor = (difficulty: string | undefined) => {

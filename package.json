@@ -47,6 +47,7 @@
     "postcss": "^8",
     "react": "^18",
     "react-aria-components": "^1.10.1",
+    "react-canvas-confetti": "^2.0.7",
     "react-dom": "^18",
     "react-google-recaptcha-v3": "^1.10.1",
     "react-image-crop": "^11.0.10",
