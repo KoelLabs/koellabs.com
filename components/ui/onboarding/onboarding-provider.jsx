@@ -46,6 +46,7 @@ export function OnboardingProvider({ children }) {
     // Language Goals (Page 2)
     targetLanguage: 'english', // Default to English as mentioned
     experienceLevel: '',
+    learningCity: '',
     challengingWords: '',
   });
 
@@ -75,6 +76,7 @@ export function OnboardingProvider({ children }) {
           birthday: onboardingData.birthday,
           targetLanguage: onboardingData.targetLanguage,
           experienceLevel: onboardingData.experienceLevel,
+          learningCity: onboardingData.learningCity,
           challengingWords: onboardingData.challengingWords,
         }),
       });

@@ -14,6 +14,7 @@ import {
   ArrowUpRightIcon,
   ChevronDown,
   Loader2,
+  Users,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { PieChart, Pie, Cell } from 'recharts';
@@ -22,6 +23,7 @@ import VideoPlayer from '../videoPlayer';
 import { FeedbackGiver } from '@/server/src/static/FeedbackGiver.js';
 import { useMediaRemote } from '@vidstack/react';
 import { type MediaRemoteControl } from '@vidstack/react';
+import { authClient } from '@/lib/auth-client';
 
 import {
   Dialog,
@@ -33,6 +35,7 @@ import {
 } from '@/components/ui/base/dialog';
 import { set } from 'zod';
 import { cn } from '@/lib/styles';
+import { AudioPlayback } from '@/components/ui/audio-playback';
 
 declare global {
   interface Window {
@@ -41,11 +44,27 @@ declare global {
   }
 }
 
+interface EnhancedFeedback {
+  phoneme: string;
+  phoneticSpelling: string;
+  explanation: string;
+  mistakeCount: number;
+  wordsAffected: string[];
+  mistakeSeverities: string[];
+  userSaidInstead: string;
+  accuracyScore: number;
+  exampleWord: string;
+  displayName: string;
+  userSaidDisplayName: string;
+  nativeLanguagePattern: string;
+  boxDisplay: string;
+}
+
 interface SectionFeedback {
   wordScores: number[];
   transcription: string;
   feedback: Array<[string, string]>;
-  top3Feedback: Array<[string, string]>;
+  top3Feedback: EnhancedFeedback[];
   score: number;
   sideBySideFeedback: SideBySideFeedback;
 }
@@ -75,12 +94,15 @@ export default function Page() {
   const [isMicInitializing, setIsMicInitializing] = useState(false);
   const [isFirstInitialization, setIsFirstInitialization] = useState(true);
   const [feedback, setFeedback] = useState<Array<[string, string]>>([]);
-  const [top3Feedback, setTop3Feedback] = useState<Array<[string, string]>>([]);
+  const [top3Feedback, setTop3Feedback] = useState<EnhancedFeedback[]>([]);
   const [score, setScore] = useState(0);
   const feedbackGiverRef = useRef<any>(null);
   const videoPlayerRef = useRef(null);
   const remote = useMediaRemote();
   const ref = useRef<MediaRemoteControl>(remote);
+
+  // Get user session to access native language
+  const { data: session } = authClient.useSession();
 
   // diagrams
   const [sideBySideFeedback, setSideBySideFeedback] = useState<SideBySideFeedback>([]);
@@ -349,21 +371,360 @@ export default function Page() {
       if (feedbackGiverRef.current) {
         await feedbackGiverRef.current.stop();
 
-        // Get feedback after stopping
         const userPhoneticErrors = await feedbackGiverRef.current.getUserPhoneticErrors();
         const allPhonemeWrittenFeedback =
           await feedbackGiverRef.current.getAllPhonemeWrittenFeedback();
 
-        // Convert userPhoneticErrors to top3Feedback format
-        const top3FeedbackArray = Object.entries(userPhoneticErrors).map(([phoneme, errorData]) => {
-          const [mistake_count, word_set, mistake_severities, phoneme_spoken_as, score] =
-            errorData as [number, string[], string[], string[], number];
-          const phonemeFeedback = allPhonemeWrittenFeedback[phoneme];
-          const targetPhonemeSpelling = phonemeFeedback?.['phonetic spelling'] || phoneme;
-          const targetPhonemeExplanation =
-            phonemeFeedback?.['explanation'] || 'No explanation available';
-          return [targetPhonemeSpelling, targetPhonemeExplanation];
-        });
+        const getExampleWord = (phoneme: string) => {
+          const examples: { [key: string]: string } = {
+            θ: 'think',
+            ð: 'the',
+            r: 'red',
+            l: 'love',
+            w: 'water',
+            v: 'very',
+            b: 'big',
+            p: 'pen',
+            ʃ: 'ship',
+            tʃ: 'chair',
+            dʒ: 'judge',
+            ŋ: 'sing',
+            ʌ: 'cup',
+            ɑ: 'father',
+            ɔ: 'law',
+            ɪ: 'bit',
+            i: 'beat',
+            u: 'boot',
+            ʊ: 'book',
+            ə: 'about',
+            ɜ: 'bird',
+            æ: 'cat',
+            eɪ: 'day',
+            aɪ: 'buy',
+            oʊ: 'go',
+            aʊ: 'now',
+            ɔɪ: 'boy',
+            e: 'bed',
+            o: 'caught',
+            k: 'key',
+            g: 'go',
+            f: 'fish',
+            s: 'see',
+            z: 'zoo',
+            t: 'top',
+            d: 'dog',
+            n: 'no',
+            m: 'man',
+            h: 'hat',
+            j: 'yes',
+            ɹ: 'red',
+            ɾ: 'better',
+            ʔ: 'uh-oh',
+          };
+          return examples[phoneme] || 'no word found';
+        };
+
+        // Helper to get user's native language from session metadata
+        const getUserNativeLanguage = () => {
+          console.log('session', session);
+          if (!session?.user) return null;
+          try {
+            // Type assertion since we know the structure might have these properties
+            const userWithMetadata = session.user as any;
+            if (userWithMetadata.nativeLanguage) {
+              return userWithMetadata.nativeLanguage;
+            }
+            if (userWithMetadata.metadata) {
+              const metadata =
+                typeof userWithMetadata.metadata === 'string'
+                  ? JSON.parse(userWithMetadata.metadata)
+                  : userWithMetadata.metadata;
+              return metadata?.nativeLanguage;
+            }
+            return null;
+          } catch (error) {
+            console.error('Error parsing user metadata:', error);
+            return null;
+          }
+        };
+
+        const getNativeLanguagePattern = (phoneme: string) => {
+          const userNativeLanguage = getUserNativeLanguage();
+
+          const languagePatterns: { [key: string]: { [key: string]: string } } = {
+            es: {
+              // Spanish
+              θ: "Common challenge for Spanish speakers - this sound doesn't exist in Spanish",
+              ð: 'Common challenge for Spanish speakers - often replaced with "d" sound',
+              v: 'Spanish speakers often replace with "b" sound',
+              ʃ: 'Tends to be pronounced as "ch" sound by Spanish speakers',
+              z: 'Often pronounced as "s" by Spanish speakers',
+            },
+            fr: {
+              // French
+              θ: 'French speakers often replace with "s" or "z" sound',
+              ð: 'Challenging for French speakers - often becomes "d" sound',
+              h: 'Silent H in French makes this challenging',
+              ŋ: 'NG ending is difficult for French speakers',
+              w: 'Often pronounced as "v" by French speakers',
+            },
+            de: {
+              // German
+              θ: 'German speakers often replace with "s" sound',
+              ð: 'Challenging for German speakers - often becomes "d" sound',
+              w: 'German speakers may pronounce as "v" sound',
+              ʃ: 'Similar to German "sch" but positioning differs',
+            },
+            zh: {
+              // Chinese
+              r: 'Chinese speakers often struggle with English R sound',
+              l: 'L and R distinction is challenging for Chinese speakers',
+              θ: 'Often replaced with "s" sound',
+              ð: 'Typically becomes "d" or "z" sound',
+              v: 'May be pronounced as "w" sound',
+            },
+            ja: {
+              // Japanese
+              r: 'Japanese R is different from English R',
+              l: 'L sound is challenging for Japanese speakers',
+              θ: 'Often becomes "s" sound',
+              ð: 'Usually pronounced as "d" sound',
+              v: 'Often pronounced as "b" sound',
+            },
+            ko: {
+              // Korean
+              r: 'Korean speakers may struggle with English R',
+              l: 'R and L distinction can be challenging',
+              f: 'F sound is often replaced with "p" sound',
+              θ: 'Typically becomes "s" sound',
+              ð: 'Usually pronounced as "d" sound',
+            },
+            ar: {
+              // Arabic
+              p: 'Arabic speakers often replace P with B sound',
+              v: 'V sound may become F sound',
+              θ: 'This sound exists in Arabic but positioning differs',
+              ð: 'Exists in Arabic but English usage is different',
+            },
+            it: {
+              // Italian
+              θ: 'Italian speakers often use "t" sound',
+              ð: 'Typically becomes "d" sound',
+              h: 'H is often silent in Italian',
+              ŋ: 'NG sound is challenging for Italian speakers',
+            },
+            pt: {
+              // Portuguese
+              θ: 'Portuguese speakers often use "t" sound',
+              ð: 'Usually becomes "d" sound',
+              ʃ: 'Similar to Portuguese but context differs',
+              v: 'Sometimes confused with "b" sound',
+            },
+            ru: {
+              // Russian
+              θ: 'Russian speakers often use "s" sound',
+              ð: 'Typically becomes "d" sound',
+              w: 'Russian speakers may use "v" sound',
+              h: 'H pronunciation differs from Russian',
+            },
+          };
+
+          // Get user-specific pattern or fall back to generic
+          if (userNativeLanguage && languagePatterns[userNativeLanguage]?.[phoneme]) {
+            return languagePatterns[userNativeLanguage][phoneme];
+          }
+
+          // Generic fallback patterns
+          const genericPatterns: { [key: string]: string } = {
+            θ: "This sound doesn't exist in many languages",
+            ð: 'Voiced TH is challenging for most non-native speakers',
+            r: 'R sounds vary greatly between languages',
+            l: 'L sound positioning can be tricky',
+            w: 'W sound is often confused with V',
+            v: 'V sound distinctions vary by language',
+            ʃ: 'SH sound exists in many languages but differs slightly',
+            ŋ: 'NG sound at word endings is challenging',
+          };
+
+          return genericPatterns[phoneme] || '';
+        };
+
+        const getPhonemeDisplayName = (phoneme: string, exampleWord: string) => {
+          const names: { [key: string]: string } = {
+            θ: 'TH sound',
+            ð: 'TH sound',
+            r: 'R sound',
+            l: 'L sound',
+            w: 'W sound',
+            v: 'V sound',
+            b: 'B sound',
+            p: 'P sound',
+            ʃ: 'SH sound',
+            tʃ: 'CH sound',
+            dʒ: 'J sound',
+            ŋ: 'NG sound',
+            ɑ: 'AH sound',
+            ɔ: 'AW sound',
+            ɪ: 'IH sound',
+            i: 'EE sound',
+            u: 'OO sound',
+            ʊ: 'UH sound',
+            ə: 'UH sound',
+            ɜ: 'ER sound',
+            æ: 'A sound',
+            eɪ: 'AY sound',
+            aɪ: 'AI sound',
+            oʊ: 'OH sound',
+            aʊ: 'OW sound',
+            ɔɪ: 'OY sound',
+            ʌ: 'UH sound',
+            e: 'EH sound',
+            o: 'OH sound',
+            k: 'K sound',
+            g: 'G sound',
+            f: 'F sound',
+            s: 'S sound',
+            z: 'Z sound',
+            t: 'T sound',
+            d: 'D sound',
+            n: 'N sound',
+            m: 'M sound',
+            h: 'H sound',
+            j: 'Y sound',
+            ɹ: 'R sound',
+            ɾ: 'R sound',
+            ʔ: 'stop sound',
+          };
+          return `${names[phoneme] || phoneme.toUpperCase()} sound (as in "${exampleWord}")`;
+        };
+
+        const getPhonemeBoxDisplay = (phoneme: string) => {
+          const boxNames: { [key: string]: string } = {
+            θ: 'TH',
+            ð: 'TH',
+            r: 'R',
+            l: 'L',
+            w: 'W',
+            v: 'V',
+            b: 'B',
+            p: 'P',
+            ʃ: 'SH',
+            tʃ: 'CH',
+            dʒ: 'J',
+            ŋ: 'NG',
+            ɑ: 'AH',
+            ɔ: 'AW',
+            ɪ: 'IH',
+            i: 'EE',
+            u: 'OO',
+            ʊ: 'UH',
+            ə: 'UH',
+            ɜ: 'ER',
+            æ: 'A',
+            eɪ: 'AY',
+            aɪ: 'AI',
+            oʊ: 'OH',
+            aʊ: 'OW',
+            ɔɪ: 'OY',
+            ʌ: 'UH',
+            e: 'EH',
+            o: 'OH',
+            k: 'K',
+            g: 'G',
+            f: 'F',
+            s: 'S',
+            z: 'Z',
+            t: 'T',
+            d: 'D',
+            n: 'N',
+            m: 'M',
+            h: 'H',
+            j: 'Y',
+            ɹ: 'R',
+            ɾ: 'R',
+            ʔ: 'STOP',
+          };
+          return boxNames[phoneme] || phoneme.toUpperCase();
+        };
+
+        const getUserSaidDisplayName = (phonemeSpokenAs: string) => {
+          const names: { [key: string]: string } = {
+            s: 'S sound',
+            z: 'Z sound',
+            t: 'T sound',
+            d: 'D sound',
+            f: 'F sound',
+            w: 'W sound',
+            b: 'B sound',
+            p: 'P sound',
+            θ: 'TH sound',
+            ð: 'TH sound',
+            r: 'R sound',
+            l: 'L sound',
+            v: 'V sound',
+            ʃ: 'SH sound',
+            tʃ: 'CH sound',
+            dʒ: 'J sound',
+            ŋ: 'NG sound',
+            ɑ: 'AH sound',
+            ɔ: 'AW sound',
+            ɪ: 'IH sound',
+            i: 'EE sound',
+            u: 'OO sound',
+            ʊ: 'UH sound',
+            ə: 'UH sound',
+            ɜ: 'ER sound',
+            æ: 'A sound',
+            eɪ: 'AY sound',
+            aɪ: 'AI sound',
+            oʊ: 'OH sound',
+            aʊ: 'OW sound',
+            ɔɪ: 'OY sound',
+            ʌ: 'UH sound',
+            e: 'EH sound',
+            o: 'OH sound',
+            k: 'K sound',
+            g: 'G sound',
+            n: 'N sound',
+            m: 'M sound',
+            h: 'H sound',
+            j: 'Y sound',
+            ɹ: 'R sound',
+            ɾ: 'R sound',
+            ʔ: 'stop sound',
+          };
+          return names[phonemeSpokenAs] || `${phonemeSpokenAs.toUpperCase()} sound`;
+        };
+
+        // Convert userPhoneticErrors to enhanced top3Feedback format
+        const top3FeedbackArray = Object.entries(userPhoneticErrors)
+          .slice(0, 3)
+          .map(([phoneme, errorData]) => {
+            const [mistake_count, word_set, mistake_severities, phoneme_spoken_as, score] =
+              errorData as [number, string[], string[], string[], number];
+            const phonemeFeedback = allPhonemeWrittenFeedback[phoneme];
+            const targetPhonemeSpelling = phonemeFeedback?.['phonetic spelling'] || phoneme;
+            const targetPhonemeExplanation =
+              phonemeFeedback?.['explanation'] || 'No explanation available';
+            const exampleWord = getExampleWord(phoneme);
+
+            // Enhanced feedback object with all the rich data
+            return {
+              phoneme: phoneme,
+              phoneticSpelling: targetPhonemeSpelling,
+              explanation: targetPhonemeExplanation,
+              mistakeCount: mistake_count,
+              wordsAffected: word_set,
+              mistakeSeverities: mistake_severities,
+              userSaidInstead: phoneme_spoken_as[0] || 'unclear sound',
+              accuracyScore: Math.round((1 - score) * 100), // Convert to percentage
+              exampleWord: exampleWord,
+              displayName: getPhonemeDisplayName(phoneme, exampleWord),
+              userSaidDisplayName: getUserSaidDisplayName(phoneme_spoken_as[0] || ''),
+              nativeLanguagePattern: getNativeLanguagePattern(phoneme),
+              boxDisplay: getPhonemeBoxDisplay(phoneme),
+            };
+          });
 
         // For per-word feedback, we'll use the phoneme feedback data
         const perWordFeedback = Object.entries(allPhonemeWrittenFeedback).map(
@@ -376,7 +737,7 @@ export default function Page() {
         );
 
         setFeedback(perWordFeedback as [string, string][]);
-        setTop3Feedback(top3FeedbackArray as [string, string][]);
+        setTop3Feedback(top3FeedbackArray);
 
         // Recalculate CER because it hasn't updated for some reason :/
         const [scoredWords, overall] = await feedbackGiverRef.current.getCER();
@@ -832,6 +1193,15 @@ export default function Page() {
           </div>
           {isInPracticeSection() && feedback.length > 0 && (
             <div className="m-4 space-y-2">
+              {/* Audio playback component */}
+              <AudioPlayback
+                onPlay={async () => {
+                  if (feedbackGiverRef.current) {
+                    await feedbackGiverRef.current.playUserAudio();
+                  }
+                }}
+              />
+
               <h2 className="text-xl font-semibold text-black dark:text-white tracking-[-0.04em]">
                 Areas for Improvement
               </h2>
@@ -839,16 +1209,56 @@ export default function Page() {
                 These are suggestions for words that you may want to practice some more. When you're
                 ready, press each word to enter deep practice mode.
               </p>
-              <ul className="space-y-3 mt-4">
+              <ul className="space-y-4 mt-4">
                 {top3Feedback.map((feedback, index) => (
                   <li
                     key={index}
-                    className="flex items-center gap-3 p-2.5 rounded-[14px] bg-white dark:bg-neutral-900 border border-dashed transition-colors relative"
+                    className="bg-white dark:bg-neutral-900 border border-dashed rounded-2xl p-3 relative overflow-hidden"
                   >
-                    <span className="flex-shrink-0 font-medium capitalize min-w-18 h-full text-center tracking-tight border-blue-500 border px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-md">
-                      {feedback[0]}
-                    </span>
-                    <div className="text-neutral-700 dark:text-neutral-300">{feedback[1]}</div>
+                    {/* Header with boxed sound, description, and controls */}
+                    <div className="flex items-center gap-4 mb-3">
+                      {/* Boxed sound display */}
+                      <div className="flex-shrink-0 w-16 h-16 bg-violet-50 dark:bg-neutral-900 rounded-lg flex items-center justify-center border border-violet-100 dark:border-violet-800">
+                        <span className="text-lg font-bold text-violet-950 dark:text-violet-100">
+                          {feedback.boxDisplay}
+                        </span>
+                      </div>
+
+                      {/* Sound description and subtitle */}
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 tracking-tight">
+                          {feedback.displayName}
+                        </h3>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                          Found in {feedback.wordsAffected.length} word
+                          {feedback.wordsAffected.length !== 1 ? 's' : ''} • You said:{' '}
+                          {feedback.userSaidDisplayName}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="">
+                      <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300 ">
+                        Words affected:{' '}
+                        <span className="font-normal text-neutral-600 dark:text-neutral-400">
+                          {feedback.wordsAffected
+                            .map(
+                              wordIndex =>
+                                currentVideo?.practicableSections[getCurrentSection()!]
+                                  ?.target_by_word[wordIndex]?.[0] || `word ${wordIndex}`,
+                            )
+                            .slice(0, 5)
+                            .join(', ')}
+                          {feedback.wordsAffected.length > 5 &&
+                            `, +${feedback.wordsAffected.length - 5} more`}
+                        </span>
+                      </p>
+                    </div>
+                    {feedback.nativeLanguagePattern && (
+                      <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400 mt-3">
+                        <Users className="size-4 text-neutral-600 dark:text-neutral-400" />
+                        <span>{feedback.nativeLanguagePattern}</span>
+                      </div>
+                    )}
                   </li>
                 ))}
               </ul>

@@ -75,6 +75,50 @@
   }
 }
 
+@font-face {
+  font-family: 'OpenRundeRegular';
+  src: url('/fonts/OpenRunde-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenRundeMedium';
+  src: url('/fonts/OpenRunde-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenRundeSemibold';
+  src: url('/fonts/OpenRunde-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenRundeBold';
+  src: url('/fonts/OpenRunde-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+.open-runde-regular {
+  font-family: 'OpenRundeRegular', sans-serif;
+}
+
+.open-runde-medium {
+  font-family: 'OpenRundeMedium', sans-serif;
+}
+
+.open-runde-semibold {
+  font-family: 'OpenRundeSemibold', sans-serif;
+}
+
+.open-runde-bold {
+  font-family: 'OpenRundeBold', sans-serif;
+}
+
 @utility container {
   margin-inline: auto;
   padding-inline: 2rem;

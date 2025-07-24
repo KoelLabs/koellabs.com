@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/base/button';
 import KoelBirdRounded from '@/components/ui/base/koel-bird-rounded';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 // Progress Indicator Component
 const ProgressBubbles = ({ currentStep, totalSteps }) => {
@@ -29,8 +30,10 @@ const ProgressBubbles = ({ currentStep, totalSteps }) => {
 
 export default function WelcomePage() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleNext = () => {
+    setIsLoading(true);
     router.push('/onboarding/getting-to-know-you');
   };
 
@@ -51,24 +54,34 @@ export default function WelcomePage() {
           variant="outline"
           className="flex items-center gap-2 z-10 animate-in animate-in-4"
           onClick={handleNext}
+          disabled={isLoading}
         >
-          Start Learning
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="-rotate-90"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12 5V19M12 19L19 12M12 19L5 12"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          {isLoading ? (
+            <>
+              <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
+              Loading...
+            </>
+          ) : (
+            <>
+              Start Learning
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="-rotate-90"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 5V19M12 19L19 12M12 19L5 12"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </>
+          )}
         </Button>
       </div>
     </div>

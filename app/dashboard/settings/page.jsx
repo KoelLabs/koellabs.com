@@ -22,6 +22,15 @@ import { authClient } from '@/lib/auth-client';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/base/skeleton';
 
+// Import shared form components
+import LanguageSelector from '@/components/forms/language-selector';
+import CountrySelector from '@/components/forms/country-selector';
+import TargetLanguageSelector from '@/components/forms/target-language-selector';
+import BetaExperienceLevelSelector from '@/components/forms/beta-experience-level-selector';
+import CitySelector from '@/components/forms/city-selector';
+import DatePickerComponent from '@/components/ui/base/date';
+import { parseDate } from '@internationalized/date';
+
 const themeItems = [
   { value: 'light', label: 'Light', image: '/images/light.png' },
   { value: 'dark', label: 'Dark', image: '/images/dark.png' },
@@ -50,7 +59,7 @@ const FormInput = memo(({ label, id, name, value, onChange, isPending }) => {
 
   return (
     <div className="space-y-2">
-      <Label htmlFor={id} className="text-sm font-normal ml-0.5">
+      <Label htmlFor={id} className="text-sm font-medium ml-0.5">
         {label}
       </Label>
       <Input
@@ -64,53 +73,6 @@ const FormInput = memo(({ label, id, name, value, onChange, isPending }) => {
   );
 });
 FormInput.displayName = 'FormInput';
-
-// Memoized select field component
-const FormSelect = memo(({ label, id, value, options, onChange, isPending }) => {
-  const handleChange = useCallback(
-    value => {
-      onChange(id, value);
-    },
-    [id, onChange],
-  );
-
-  if (isPending) {
-    return (
-      <div className="space-y-2">
-        <Label htmlFor={id} className="text-sm font-normal ml-0.5">
-          {label}
-        </Label>
-        <Skeleton className="h-10 w-full" />
-      </div>
-    );
-  }
-
-  return (
-    <div className="space-y-2">
-      <Label htmlFor={id} className="text-sm font-normal ml-0.5">
-        {label}
-      </Label>
-      <Select value={value} onValueChange={handleChange}>
-        <SelectTrigger id={id} className="text-sm rounded-lg mt-1">
-          <SelectValue placeholder={`Select ${label.toLowerCase()}`} />
-        </SelectTrigger>
-        <SelectContent>
-          {options.map(option => (
-            <SelectItem
-              key={option.value}
-              value={option.value}
-              disabled={option.disabled}
-              className={option.disabled ? 'text-neutral-400' : ''}
-            >
-              {option.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </div>
-  );
-});
-FormSelect.displayName = 'FormSelect';
 
 // Memoized textarea field component
 const FormTextarea = memo(
@@ -135,13 +97,13 @@ const FormTextarea = memo(
 
     return (
       <div className="space-y-2">
-        <Label htmlFor={id} className="text-sm font-normal ml-0.5">
+        <Label htmlFor={id} className="text-sm font-medium ml-0.5">
           {label}
         </Label>
         <Textarea
           id={id}
           name={name}
-          className="min-h-[80px] rounded-lg resize-none"
+          className="min-h-[80px] rounded-xl resize-none mt-1"
           placeholder={placeholder}
           value={value}
           onChange={handleChange}
@@ -306,9 +268,9 @@ export default function SettingsPage() {
     lastName: '',
     targetLanguage: '',
     nativeLanguage: '',
-    // New onboarding fields
     placeOfBirth: '',
     birthday: '',
+    learningCity: '',
     experienceLevel: '',
     challengingWords: '',
   });
@@ -318,12 +280,10 @@ export default function SettingsPage() {
 
   useEffect(() => {
     if (session?.user) {
-      // Parse the user's name into first and last name
       const nameParts = session.user.name?.split(' ') || ['', ''];
       const firstName = nameParts[0] || '';
       const lastName = nameParts.slice(1).join(' ') || '';
 
-      // Parse metadata if it exists
       let userPreferences = {};
       if (session.user.metadata) {
         try {
@@ -341,9 +301,9 @@ export default function SettingsPage() {
         lastName,
         targetLanguage: userPreferences.targetLanguage || '',
         nativeLanguage: userPreferences.nativeLanguage || '',
-        // New onboarding fields
         placeOfBirth: userPreferences.placeOfBirth || '',
         birthday: userPreferences.birthday || '',
+        learningCity: userPreferences.learningCity || '',
         experienceLevel: userPreferences.experienceLevel || '',
         challengingWords: userPreferences.challengingWords || '',
       });
@@ -368,7 +328,6 @@ export default function SettingsPage() {
       const file = e.target.files[0];
       if (!file) return;
 
-      // Check file size (1MB max)
       if (file.size > 1024 * 1024) {
         toast({
           title: 'File too large',
@@ -411,42 +370,55 @@ export default function SettingsPage() {
         }
       }
 
-      // Update user preferences with all fields
-      const response = await fetch('/api/user/preferences', {
+      if (previewAvatar && previewAvatar !== session.user.image) {
+        const avatarUpdateResponse = await fetch('/api/auth/update-user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            image: previewAvatar,
+          }),
+        });
+
+        if (!avatarUpdateResponse.ok) {
+          throw new Error('Failed to update avatar');
+        }
+      }
+
+      const preferences = {
+        targetLanguage: formData.targetLanguage,
+        nativeLanguage: formData.nativeLanguage,
+        placeOfBirth: formData.placeOfBirth,
+        birthday: formData.birthday,
+        learningCity: formData.learningCity,
+        experienceLevel: formData.experienceLevel,
+        challengingWords: formData.challengingWords,
+      };
+
+      const preferencesResponse = await fetch('/api/user/preferences', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          // Language preferences
-          targetLanguage: formData.targetLanguage,
-          nativeLanguage: formData.nativeLanguage,
-          // New onboarding fields
-          placeOfBirth: formData.placeOfBirth,
-          birthday: formData.birthday,
-          experienceLevel: formData.experienceLevel,
-          challengingWords: formData.challengingWords,
-          // Legacy fields
-          hasConsented: true,
-          avatar: previewAvatar || session.user.image,
-        }),
+        body: JSON.stringify(preferences),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to save preferences');
+      if (!preferencesResponse.ok) {
+        throw new Error('Failed to update preferences');
       }
 
-      toast({
-        title: 'Settings saved',
-        description: 'Your preferences have been updated successfully.',
-      });
+      await refetch();
 
-      // Refresh the session to get updated user data
-      refetch();
-    } catch (error) {
-      console.error('Error saving settings:', error);
       toast({
-        title: 'Error saving settings',
+        title: 'Settings updated',
+        description: 'Your preferences have been saved successfully.',
+        variant: 'default',
+      });
+    } catch (error) {
+      console.error('Error saving information:', error);
+      toast({
+        title: 'Update failed',
         description: 'There was a problem saving your preferences.',
         variant: 'destructive',
       });
@@ -455,138 +427,19 @@ export default function SettingsPage() {
     }
   }, [formData, session, toast, refetch, previewAvatar]);
 
-  // Target language options (limited set for beta)
-  const targetLanguageOptions = useMemo(
-    () => [
-      { value: 'english', label: '🇺🇸 English' },
-      { value: 'spanish', label: '🇪🇸 Spanish (Coming Soon)', disabled: true },
-      { value: 'french', label: '🇫🇷 French (Coming Soon)', disabled: true },
-      { value: 'german', label: '🇩🇪 German (Coming Soon)', disabled: true },
-    ],
-    [],
-  );
-
-  // Native language options (comprehensive set)
-  const nativeLanguageOptions = useMemo(
-    () => [
-      { value: 'en', label: '🇺🇸 English' },
-      { value: 'es', label: '🇪🇸 Spanish' },
-      { value: 'fr', label: '🇫🇷 French' },
-      { value: 'de', label: '🇩🇪 German' },
-      { value: 'it', label: '🇮🇹 Italian' },
-      { value: 'pt', label: '🇵🇹 Portuguese' },
-      { value: 'ru', label: '🇷🇺 Russian' },
-      { value: 'ja', label: '🇯🇵 Japanese' },
-      { value: 'ko', label: '🇰🇷 Korean' },
-      { value: 'zh', label: '🇨🇳 Chinese' },
-      { value: 'ar', label: '🇸🇦 Arabic' },
-      { value: 'hi', label: '🇮🇳 Hindi' },
-      { value: 'bn', label: '🇧🇩 Bengali' },
-      { value: 'ur', label: '🇵🇰 Urdu' },
-      { value: 'nl', label: '🇳🇱 Dutch' },
-      { value: 'sv', label: '🇸🇪 Swedish' },
-      { value: 'no', label: '🇳🇴 Norwegian' },
-      { value: 'da', label: '🇩🇰 Danish' },
-      { value: 'fi', label: '🇫🇮 Finnish' },
-      { value: 'pl', label: '🇵🇱 Polish' },
-      { value: 'tr', label: '🇹🇷 Turkish' },
-      { value: 'th', label: '🇹🇭 Thai' },
-      { value: 'vi', label: '🇻🇳 Vietnamese' },
-      { value: 'id', label: '🇮🇩 Indonesian' },
-      { value: 'ms', label: '🇲🇾 Malay' },
-    ],
-    [],
-  );
-
-  const experienceLevelOptions = useMemo(
-    () => [
-      { value: '0', label: 'Complete Beginner (0 years)' },
-      { value: '0-1', label: 'Less than 1 year' },
-      { value: '1-2', label: '1-2 years' },
-      { value: '2-5', label: '2-5 years' },
-      { value: '5-10', label: '5-10 years' },
-      { value: '10+', label: 'More than 10 years' },
-      { value: 'native-level', label: 'Native/Near-native level' },
-    ],
-    [],
-  );
-
-  // Helper function to format birthday for display
-  const formatBirthday = birthday => {
-    if (!birthday) return '';
+  const safeParseBirthday = useCallback(dateString => {
+    if (!dateString || typeof dateString !== 'string') return null;
     try {
-      const date = new Date(birthday);
-      return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
+      if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+        return parseDate(dateString);
+      }
+      return null;
     } catch (error) {
-      return birthday; // Return as is if parsing fails
+      console.warn('Failed to parse birthday:', dateString, error);
+      return null;
     }
-  };
+  }, []);
 
-  // Comprehensive country mapping with flags
-  const getCountryDisplay = countryCode => {
-    if (!countryCode) return 'Not specified';
-    const countries = {
-      US: '🇺🇸 United States',
-      CA: '🇨🇦 Canada',
-      GB: '🇬🇧 United Kingdom',
-      AU: '🇦🇺 Australia',
-      DE: '🇩🇪 Germany',
-      FR: '🇫🇷 France',
-      IT: '🇮🇹 Italy',
-      ES: '🇪🇸 Spain',
-      IN: '🇮🇳 India',
-      CN: '🇨🇳 China',
-      JP: '🇯🇵 Japan',
-      KR: '🇰🇷 South Korea',
-      BR: '🇧🇷 Brazil',
-      MX: '🇲🇽 Mexico',
-      RU: '🇷🇺 Russia',
-      NL: '🇳🇱 Netherlands',
-      BE: '🇧🇪 Belgium',
-      CH: '🇨🇭 Switzerland',
-      AT: '🇦🇹 Austria',
-      PT: '🇵🇹 Portugal',
-      SE: '🇸🇪 Sweden',
-      NO: '🇳🇴 Norway',
-      DK: '🇩🇰 Denmark',
-      FI: '🇫🇮 Finland',
-      IE: '🇮🇪 Ireland',
-      PL: '🇵🇱 Poland',
-      CZ: '🇨🇿 Czech Republic',
-      HU: '🇭🇺 Hungary',
-      RO: '🇷🇴 Romania',
-      BG: '🇧🇬 Bulgaria',
-      HR: '🇭🇷 Croatia',
-      SI: '🇸🇮 Slovenia',
-      SK: '🇸🇰 Slovakia',
-      LT: '🇱🇹 Lithuania',
-      LV: '🇱🇻 Latvia',
-      EE: '🇪🇪 Estonia',
-      GR: '🇬🇷 Greece',
-      CY: '🇨🇾 Cyprus',
-      MT: '🇲🇹 Malta',
-      LU: '🇱🇺 Luxembourg',
-      IS: '🇮🇸 Iceland',
-      ENGLAND: '🏴󠁧󠁢󠁥󠁮󠁧󠁿 England',
-      SCOTLAND: '🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland',
-      WALES: '🏴󠁧󠁢󠁷󠁬󠁳󠁿 Wales',
-    };
-    return countries[countryCode] || `${countryCode}`;
-  };
-
-  // Helper function to get language display with flag
-  const getLanguageDisplay = (languageCode, isTarget = false) => {
-    if (!languageCode) return 'Not specified';
-    const options = isTarget ? targetLanguageOptions : nativeLanguageOptions;
-    const language = options.find(lang => lang.value === languageCode);
-    return language ? language.label : languageCode;
-  };
-
-  // Memoize the user avatar to prevent re-renders
   const userAvatar = useMemo(() => {
     if (isPending) {
       return <Skeleton className="h-24 w-24 rounded-full" />;
@@ -683,55 +536,93 @@ export default function SettingsPage() {
                       isPending={isPending}
                     />
 
-                    <FormSelect
-                      label="Target Language"
-                      id="targetLanguage"
-                      value={formData.targetLanguage}
-                      options={targetLanguageOptions}
-                      onChange={handleInputChange}
-                      isPending={isPending}
-                    />
-
-                    <FormSelect
-                      label="Native Language"
-                      id="nativeLanguage"
-                      value={formData.nativeLanguage}
-                      options={nativeLanguageOptions}
-                      onChange={handleInputChange}
-                      isPending={isPending}
-                    />
-
-                    <div className="space-y-2">
-                      <Label className="text-sm font-normal ml-0.5">Place of Birth</Label>
-                      {isPending ? (
+                    {isPending ? (
+                      <div className="space-y-2">
+                        <Label className="text-sm font-normal ml-0.5">Target Language</Label>
                         <Skeleton className="h-10 w-full" />
-                      ) : (
-                        <div className="flex h-10 w-full rounded-lg border border-input bg-muted px-3 py-2 text-sm text-muted-foreground">
-                          {getCountryDisplay(formData.placeOfBirth)}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label className="text-sm font-normal ml-0.5">Birthday</Label>
-                      {isPending ? (
-                        <Skeleton className="h-10 w-full" />
-                      ) : (
-                        <div className="flex h-10 w-full rounded-lg border border-input bg-muted px-3 py-2 text-sm text-muted-foreground">
-                          {formatBirthday(formData.birthday) || 'Not specified'}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="sm:col-span-2">
-                      <FormSelect
-                        label="Experience Level"
-                        id="experienceLevel"
-                        value={formData.experienceLevel}
-                        options={experienceLevelOptions}
-                        onChange={handleInputChange}
-                        isPending={isPending}
+                      </div>
+                    ) : (
+                      <TargetLanguageSelector
+                        label="Target Language"
+                        value={formData.targetLanguage}
+                        onChange={value => handleInputChange('targetLanguage', value)}
                       />
+                    )}
+
+                    {isPending ? (
+                      <div className="space-y-2">
+                        <Label className="text-sm font-normal ml-0.5">Native Language</Label>
+                        <Skeleton className="h-10 w-full" />
+                      </div>
+                    ) : (
+                      <LanguageSelector
+                        label="Native Language"
+                        value={formData.nativeLanguage}
+                        onChange={value => handleInputChange('nativeLanguage', value)}
+                        placeholder="Select your native language"
+                        showEnglishName={true}
+                      />
+                    )}
+
+                    {isPending ? (
+                      <div className="space-y-2">
+                        <Label className="text-sm font-normal ml-0.5">Place of Birth</Label>
+                        <Skeleton className="h-10 w-full" />
+                      </div>
+                    ) : (
+                      <CountrySelector
+                        label="Place of Birth"
+                        value={formData.placeOfBirth}
+                        onChange={value => handleInputChange('placeOfBirth', value)}
+                        placeholder="Select your place of birth"
+                      />
+                    )}
+
+                    {isPending ? (
+                      <div className="space-y-2">
+                        <Label className="text-sm font-normal ml-0.5">Learning City</Label>
+                        <Skeleton className="h-10 w-full" />
+                      </div>
+                    ) : (
+                      <CitySelector
+                        label="Learning City"
+                        value={formData.learningCity}
+                        onChange={value => handleInputChange('learningCity', value)}
+                        optional={true}
+                        placeholder="Select a city"
+                      />
+                    )}
+
+                    {isPending ? (
+                      <div className="space-y-2">
+                        <Label className="text-sm font-normal ml-0.5">Birthday</Label>
+                        <Skeleton className="h-10 w-full" />
+                      </div>
+                    ) : (
+                      <DatePickerComponent
+                        label="Birthday"
+                        optional={true}
+                        value={safeParseBirthday(formData.birthday)}
+                        onChange={value =>
+                          handleInputChange('birthday', value ? value.toString() : '')
+                        }
+                      />
+                    )}
+
+                    <div className="">
+                      {isPending ? (
+                        <div className="space-y-2">
+                          <Label className="text-sm font-normal ml-0.5">Experience Level</Label>
+                          <Skeleton className="h-10 w-full" />
+                        </div>
+                      ) : (
+                        <BetaExperienceLevelSelector
+                          label="Experience Level"
+                          value={formData.experienceLevel}
+                          onChange={value => handleInputChange('experienceLevel', value)}
+                          placeholder="Select your experience level"
+                        />
+                      )}
                     </div>
 
                     <div className="sm:col-span-2">
@@ -744,6 +635,7 @@ export default function SettingsPage() {
                         isPending={isPending}
                         placeholder="Words you find difficult or confusing (e.g., 'thorough', 'entrepreneur', 'rural')"
                         maxLength={500}
+                        className="rounded-2xl"
                       />
                     </div>
                   </div>

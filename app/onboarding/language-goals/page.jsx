@@ -41,6 +41,7 @@ export default function LanguageGoalsPage() {
   const [citiesError, setCitiesError] = useState(false);
   const [cityOpen, setCityOpen] = useState(false);
   const [citySearchTerm, setCitySearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const citySelectId = useId();
 
   useEffect(() => {
@@ -66,6 +67,7 @@ export default function LanguageGoalsPage() {
   }, []);
 
   const handleNext = () => {
+    setIsLoading(true);
     router.push('/onboarding/speech-assessment');
   };
 
@@ -419,26 +421,35 @@ export default function LanguageGoalsPage() {
           </p>
           <Button
             onClick={handleNext}
-            disabled={isNextDisabled}
+            disabled={isNextDisabled || isLoading}
             className="flex items-center flex-1 gap-1"
           >
-            Continue
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              className="-rotate-90"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 5V19M12 19L19 12M12 19L5 12"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            {isLoading ? (
+              <>
+                <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
+                Loading...
+              </>
+            ) : (
+              <>
+                Continue
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="-rotate-90"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 5V19M12 19L19 12M12 19L5 12"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </>
+            )}
           </Button>
         </div>
       </div>

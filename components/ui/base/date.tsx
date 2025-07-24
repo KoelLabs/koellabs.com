@@ -15,9 +15,9 @@ export default function DatePickerComponent({
   onChange: (value: DateValue | null) => void;
 }) {
   return (
-    <DatePicker className="*:not-first:mt-2" value={value} onChange={onChange}>
+    <DatePicker className="*:not-first:mt-2 text-left" value={value} onChange={onChange}>
       <Label className="text-foreground text-sm font-medium">{label}</Label>
-      <div className="flex">
+      <div className="flex mt-1!">
         <Group className="w-full">
           <DateInput className="pe-9" />
         </Group>

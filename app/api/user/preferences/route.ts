@@ -21,6 +21,7 @@ export async function POST(request: Request) {
       birthday,
       targetLanguage,
       experienceLevel,
+      learningCity,
       challengingWords,
       // Legacy fields for backward compatibility
       hasConsented,
@@ -34,6 +35,7 @@ export async function POST(request: Request) {
       birthday,
       targetLanguage,
       experienceLevel,
+      learningCity,
       challengingWords,
       // Include legacy fields for backward compatibility
       hasConsented,
