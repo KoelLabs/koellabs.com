@@ -806,7 +806,6 @@ export default function Page() {
       <div
         className={`w-full 2xl:flex-1 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col justify-between ${className}`}
       >
-        {/* version 4 */}
         <div>
           <div className="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-800 w-full">
             <h2 className="text-lg font-medium tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100 text-left w-full">
@@ -981,7 +980,7 @@ export default function Page() {
             }}
           />
         </div>
-        <VideoInformation className="hidden 2xl:block" />
+        <VideoInformation className="hidden 2xl:flex" />
       </div>
 
       <div className="flex flex-col 2xl:flex-row gap-2">
