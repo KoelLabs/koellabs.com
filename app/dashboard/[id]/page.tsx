@@ -801,6 +801,159 @@ export default function Page() {
     }
   };
 
+  const VideoInformation = ({ className }: { className: string }) => {
+    return (
+      <div
+        className={`w-full 2xl:flex-1 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col justify-between ${className}`}
+      >
+        {/* version 4 */}
+        <div>
+          <div className="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-800 w-full">
+            <h2 className="text-lg font-medium tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100 text-left w-full">
+              About the Movie{' '}
+            </h2>
+          </div>
+          <div className="m-3">
+            {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
+              <div className="mt-3">
+                <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed ">
+                  In Jumanji: The Next Level, the gang is back (Dwayne Johnson, Jack Black, Kevin
+                  Hart, and Karen Gillan) but the game has changed. Returning to Jumanji to rescue
+                  one of their own, they discover that nothing is as they expect. With more action
+                  and surprises, the players must brave parts unknown and unexplored, from the arid
+                  deserts to the snowy mountains, to escape.
+                </p>
+                <a
+                  href="http://aan.sonypictures.com/JumanjiTheNextLevel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    variant="outline"
+                    className="mt-3 w-full inline-flex items-center justify-between tracking-tight px-2.5"
+                  >
+                    Watch Full Movie <ArrowUpRightIcon className="ml-2 h-4 w-4 stroke-2" />
+                  </Button>
+                </a>
+              </div>
+            )}
+            {!currentVideo?.name.includes('Jumanji') && (
+              <p className="text-neutral-600 dark:text-neutral-400 p-3">
+                No additional information available for this video.
+              </p>
+            )}
+          </div>
+        </div>
+        <div>
+          <div className="border-t border-neutral-200 dark:border-neutral-800">
+            <h2 className="text-lg font-medium tracking-tighter m-2 text-center text-neutral-900 dark:text-neutral-100">
+              Overall Accent Similarity
+            </h2>
+          </div>
+          <div className="border-t border-neutral-200 dark:border-neutral-800">
+            <div className="w-full h-full flex items-center justify-center relative">
+              {isClient && score > 0 ? (
+                <PieChart width={400} height={180}>
+                  <Pie
+                    data={[
+                      { name: 'Correct', value: score },
+                      { name: 'Incorrect', value: 100 - score },
+                    ]}
+                    cx="50%"
+                    cy="100%"
+                    startAngle={180}
+                    endAngle={0}
+                    innerRadius={130}
+                    outerRadius={180}
+                    paddingAngle={0}
+                    dataKey="value"
+                  >
+                    <Cell fill="#3D8F78" />
+                    <Cell fill="#C8E6DE" />
+                  </Pie>
+                </PieChart>
+              ) : (
+                <div className="h-[180px] flex items-center justify-center">
+                  <div className="text-center text-neutral-500 dark:text-neutral-400">
+                    <div className="mx-auto mb-6 h-12 w-12 rounded-full border-[3px] border-neutral-300 " />
+                    <p className="tracking-[-0.04em] text-neutral-600 dark:text-neutral-300 mt-4 font-medium">
+                      No accent similarity data yet.
+                    </p>
+                    <p className="text-sm tracking-tight text-neutral-500 dark:text-neutral-400">
+                      Practice a section to see your score.
+                    </p>
+                  </div>
+                </div>
+              )}
+              {score > 0 && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center -mb-16">
+                  <span className="text-4xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
+                    {score}%
+                  </span>
+                  <span className="text-lg text-neutral-600 dark:text-neutral-400">
+                    Accent Similarity
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="border-t flex flex-wrap border-neutral-200 dark:border-neutral-800 p-2 gap-1 justify-center">
+            <Badge
+              variant="outline"
+              className="w-fit px-2.5 py-1 text-xs font-medium rounded-md bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border tracking-tight border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                fill="none"
+                viewBox="0 0 15 15"
+                className="mr-1"
+              >
+                {' '}
+                <path
+                  fill="#EEE"
+                  d="M13.92 8.927a7 7 0 0 0 .244-1.847l-.244-1.847a7 7 0 0 0-.795-1.847L11.49 1.54A7.05 7.05 0 0 0 7.085 0h-.006a7.05 7.05 0 0 0-4.406 1.54L1.039 3.385a7 7 0 0 0-.796 1.847L0 7.08v.003c0 .638.085 1.256.243 1.844l.796 1.847a7.1 7.1 0 0 0 1.634 1.847l4.409 1.539 4.409-1.54a7.1 7.1 0 0 0 1.634-1.846z"
+                ></path>{' '}
+                <path
+                  fill="#D80027"
+                  d="M13.92 5.233c.16.589.244 1.208.244 1.847H0c0-.639.085-1.258.243-1.847zM11.49 1.54c.647.514 1.201 1.139 1.635 1.846H1.039A7.1 7.1 0 0 1 2.673 1.54zM13.125 10.774a7 7 0 0 0 .795-1.847H.243a7 7 0 0 0 .796 1.847zM11.49 12.62H2.674a7.05 7.05 0 0 0 4.403 1.54h.012a7.05 7.05 0 0 0 4.403-1.54"
+                ></path>{' '}
+                <path fill="#0052B4" d="M0 6.792A7.08 7.08 0 0 1 7.082 0v7.08H0z"></path>{' '}
+                <path
+                  fill="#EEE"
+                  fillRule="evenodd"
+                  d="M3.03 1.273q.347-.243.723-.444l.027.082h.772l-.625.453.239.734-.625-.453-.624.453.239-.734zM.82 3.772q.245-.463.553-.883l.105.323h.772l-.624.453.238.734-.624-.453-.625.453zM5.842.177l.239.734h.771l-.624.453.238.734-.624-.453-.624.453.238-.734-.624-.453h.772zM3.541 2.478l.239.734h.772l-.625.453.239.734-.625-.453-.624.453.239-.734-.625-.453h.772zm2.54.734-.238-.734-.238.734h-.772l.624.453-.238.734.624-.453.624.453-.238-.734.624-.453zM1.24 4.779l.238.734h.772l-.624.453.238.734-.624-.453-.625.453.239-.734-.625-.453h.772zm2.54.734-.239-.734-.238.734H2.53l.624.453-.238.734.624-.453.625.453-.239-.734.625-.453zm2.063-.734.239.734h.771l-.624.453.238.734-.624-.453-.624.453.238-.734-.624-.453h.772z"
+                  clipRule="evenodd"
+                ></path>{' '}
+              </svg>
+              {currentVideo?.dialect}
+            </Badge>
+
+            <Badge
+              variant="outline"
+              className={`${getBadgeColor(currentVideo?.badge)} px-2.5 py-1 text-xs font-medium rounded-md`}
+            >
+              <div
+                dangerouslySetInnerHTML={{ __html: currentVideo?.dialectIcon ?? '' }}
+                className="mr-1"
+              />
+              {currentVideo?.badge}
+            </Badge>
+
+            <Badge
+              variant="outline"
+              className="w-fit px-2.5 py-1 text-xs font-medium rounded-md bg-[#C7E9DE] dark:bg-[#1B997B]/20 border tracking-tight border-[#9DD8C5] dark:border-[#1B997B] text-[#1B997B] dark:text-[#9DD8C5]"
+            >
+              <CheckCircle2 className="mr-1 h-[15px] w-[15px]" strokeWidth={2} />
+              {currentVideo?.completedSections}/{currentVideo?.practicableSections?.length} Done
+            </Badge>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="h-fit w-full rounded-xl relative p-4 flex flex-col gap-2">
       <div className="flex justify-between items-center w-full">
@@ -828,153 +981,7 @@ export default function Page() {
             }}
           />
         </div>
-        <div className="w-full 2xl:flex-1 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col justify-between">
-          {/* version 4 */}
-          <div>
-            <div className="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-800 w-full">
-              <h2 className="text-lg font-medium tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100 text-left w-full">
-                About the Movie{' '}
-              </h2>
-            </div>
-            <div className="m-3">
-              {currentVideo?.name ===
-                'Jumanji: The Next Level from Sony Pictures Entertainment' && (
-                <div className="mt-3">
-                  <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed ">
-                    In Jumanji: The Next Level, the gang is back (Dwayne Johnson, Jack Black, Kevin
-                    Hart, and Karen Gillan) but the game has changed. Returning to Jumanji to rescue
-                    one of their own, they discover that nothing is as they expect. With more action
-                    and surprises, the players must brave parts unknown and unexplored, from the
-                    arid deserts to the snowy mountains, to escape.
-                  </p>
-                  <a
-                    href="http://aan.sonypictures.com/JumanjiTheNextLevel"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button
-                      variant="outline"
-                      className="mt-3 w-full inline-flex items-center justify-between tracking-tight px-2.5"
-                    >
-                      Watch Full Movie <ArrowUpRightIcon className="ml-2 h-4 w-4 stroke-2" />
-                    </Button>
-                  </a>
-                </div>
-              )}
-              {!currentVideo?.name.includes('Jumanji') && (
-                <p className="text-neutral-600 dark:text-neutral-400 p-3">
-                  No additional information available for this video.
-                </p>
-              )}
-            </div>
-          </div>
-          <div>
-            <div className="border-t border-neutral-200 dark:border-neutral-800">
-              <h2 className="text-lg font-medium tracking-tighter m-2 text-center text-neutral-900 dark:text-neutral-100">
-                Overall Accent Similarity
-              </h2>
-            </div>
-            <div className="border-t border-neutral-200 dark:border-neutral-800">
-              <div className="w-full h-full flex items-center justify-center relative">
-                {isClient && score > 0 ? (
-                  <PieChart width={400} height={180}>
-                    <Pie
-                      data={[
-                        { name: 'Correct', value: score },
-                        { name: 'Incorrect', value: 100 - score },
-                      ]}
-                      cx="50%"
-                      cy="100%"
-                      startAngle={180}
-                      endAngle={0}
-                      innerRadius={130}
-                      outerRadius={180}
-                      paddingAngle={0}
-                      dataKey="value"
-                    >
-                      <Cell fill="#3D8F78" />
-                      <Cell fill="#C8E6DE" />
-                    </Pie>
-                  </PieChart>
-                ) : (
-                  <div className="h-[180px] flex items-center justify-center">
-                    <div className="text-center text-neutral-500 dark:text-neutral-400">
-                      <div className="mx-auto mb-6 h-12 w-12 rounded-full border-[3px] border-neutral-300 " />
-                      <p className="tracking-[-0.04em] text-neutral-600 dark:text-neutral-300 mt-4 font-medium">
-                        No accent similarity data yet.
-                      </p>
-                      <p className="text-sm tracking-tight text-neutral-500 dark:text-neutral-400">
-                        Practice a section to see your score.
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {score > 0 && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center -mb-16">
-                    <span className="text-4xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
-                      {score}%
-                    </span>
-                    <span className="text-lg text-neutral-600 dark:text-neutral-400">
-                      Accent Similarity
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className="border-t flex flex-wrap border-neutral-200 dark:border-neutral-800 p-2 gap-1 justify-center">
-              <Badge
-                variant="outline"
-                className="w-fit px-2.5 py-1 text-xs font-medium rounded-md bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border tracking-tight border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="15"
-                  height="15"
-                  fill="none"
-                  viewBox="0 0 15 15"
-                  className="mr-1"
-                >
-                  {' '}
-                  <path
-                    fill="#EEE"
-                    d="M13.92 8.927a7 7 0 0 0 .244-1.847l-.244-1.847a7 7 0 0 0-.795-1.847L11.49 1.54A7.05 7.05 0 0 0 7.085 0h-.006a7.05 7.05 0 0 0-4.406 1.54L1.039 3.385a7 7 0 0 0-.796 1.847L0 7.08v.003c0 .638.085 1.256.243 1.844l.796 1.847a7.1 7.1 0 0 0 1.634 1.847l4.409 1.539 4.409-1.54a7.1 7.1 0 0 0 1.634-1.846z"
-                  ></path>{' '}
-                  <path
-                    fill="#D80027"
-                    d="M13.92 5.233c.16.589.244 1.208.244 1.847H0c0-.639.085-1.258.243-1.847zM11.49 1.54c.647.514 1.201 1.139 1.635 1.846H1.039A7.1 7.1 0 0 1 2.673 1.54zM13.125 10.774a7 7 0 0 0 .795-1.847H.243a7 7 0 0 0 .796 1.847zM11.49 12.62H2.674a7.05 7.05 0 0 0 4.403 1.54h.012a7.05 7.05 0 0 0 4.403-1.54"
-                  ></path>{' '}
-                  <path fill="#0052B4" d="M0 6.792A7.08 7.08 0 0 1 7.082 0v7.08H0z"></path>{' '}
-                  <path
-                    fill="#EEE"
-                    fillRule="evenodd"
-                    d="M3.03 1.273q.347-.243.723-.444l.027.082h.772l-.625.453.239.734-.625-.453-.624.453.239-.734zM.82 3.772q.245-.463.553-.883l.105.323h.772l-.624.453.238.734-.624-.453-.625.453zM5.842.177l.239.734h.771l-.624.453.238.734-.624-.453-.624.453.238-.734-.624-.453h.772zM3.541 2.478l.239.734h.772l-.625.453.239.734-.625-.453-.624.453.239-.734-.625-.453h.772zm2.54.734-.238-.734-.238.734h-.772l.624.453-.238.734.624-.453.624.453-.238-.734.624-.453zM1.24 4.779l.238.734h.772l-.624.453.238.734-.624-.453-.625.453.239-.734-.625-.453h.772zm2.54.734-.239-.734-.238.734H2.53l.624.453-.238.734.624-.453.625.453-.239-.734.625-.453zm2.063-.734.239.734h.771l-.624.453.238.734-.624-.453-.624.453.238-.734-.624-.453h.772z"
-                    clipRule="evenodd"
-                  ></path>{' '}
-                </svg>
-                {currentVideo?.dialect}
-              </Badge>
-
-              <Badge
-                variant="outline"
-                className={`${getBadgeColor(currentVideo?.badge)} px-2.5 py-1 text-xs font-medium rounded-md`}
-              >
-                <div
-                  dangerouslySetInnerHTML={{ __html: currentVideo?.dialectIcon ?? '' }}
-                  className="mr-1"
-                />
-                {currentVideo?.badge}
-              </Badge>
-
-              <Badge
-                variant="outline"
-                className="w-fit px-2.5 py-1 text-xs font-medium rounded-md bg-[#C7E9DE] dark:bg-[#1B997B]/20 border tracking-tight border-[#9DD8C5] dark:border-[#1B997B] text-[#1B997B] dark:text-[#9DD8C5]"
-              >
-                <CheckCircle2 className="mr-1 h-[15px] w-[15px]" strokeWidth={2} />
-                {currentVideo?.completedSections}/{currentVideo?.practicableSections?.length} Done
-              </Badge>
-            </div>
-          </div>
-        </div>
+        <VideoInformation className="hidden 2xl:block" />
       </div>
 
       <div className="flex flex-col 2xl:flex-row gap-2">
@@ -1311,6 +1318,7 @@ export default function Page() {
           <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-800 mb-6" />
         </div>
       </div>
+      <VideoInformation className="2xl:hidden" />
     </div>
   );
 }

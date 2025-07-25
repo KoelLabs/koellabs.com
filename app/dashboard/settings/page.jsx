@@ -65,7 +65,7 @@ const FormInput = memo(({ label, id, name, value, onChange, isPending }) => {
       <Input
         id={id}
         name={name}
-        className="text-sm rounded-lg mt-1"
+        className="text-sm rounded-xl mt-1"
         value={value}
         onChange={handleChange}
       />
@@ -588,7 +588,7 @@ export default function SettingsPage() {
                         label="Learning City"
                         value={formData.learningCity}
                         onChange={value => handleInputChange('learningCity', value)}
-                        optional={true}
+                        optional={false}
                         placeholder="Select a city"
                       />
                     )}

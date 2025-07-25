@@ -164,7 +164,7 @@ export default function CitySelector({
         >
           <Command className="rounded-xl" shouldFilter={false}>
             <CommandInput
-              placeholder="Search for a city..."
+              placeholder="Search city..."
               value={citySearchTerm}
               onValueChange={setCitySearchTerm}
             />

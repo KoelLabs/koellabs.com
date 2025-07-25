@@ -12,9 +12,9 @@ import { ArrowUpRight } from 'lucide-react';
 
 const languages = [
   { value: 'english', flag: '🇺🇸', name: 'English' },
-  { value: 'spanish', flag: '🇪🇸', name: 'Spanish (Coming soon)', disabled: true },
-  { value: 'german', flag: '🇩🇪', name: 'German (Coming soon)', disabled: true },
-  { value: 'russian', flag: '🇷🇺', name: 'Russian (Coming soon)', disabled: true },
+  { value: 'spanish', flag: '🇪🇸', name: 'Spanish (Coming Soon)', disabled: true },
+  { value: 'german', flag: '🇩🇪', name: 'German (Coming Soon)', disabled: true },
+  { value: 'russian', flag: '🇷🇺', name: 'Russian (Coming Soon)', disabled: true },
 ];
 
 export default function TargetLanguageSelector({
