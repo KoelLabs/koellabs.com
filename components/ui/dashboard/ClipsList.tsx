@@ -229,16 +229,14 @@ export default function ClipsList({
       return (
         <div className="flex relative flex-col items-center justify-center text-center border mx-4 border-neutral-200 dark:border-neutral-800 rounded-xl border-dashed bg-[url('/NoPractice.svg')] dark:bg-[url('/DarkNoPractice.svg')] bg-cover bg-center">
           <div className="relative flex-col items-center justify-center flex bg-white/50 dark:bg-transparent py-10 px-4">
-            <div className="mb-3">
-              <Clock className="h-7 w-7 stroke-[1.9px]" />
-            </div>
-            <h3 className="text-lg font-medium tracking-tight mb-2">No Practice History Yet</h3>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4 max-w-xs">
-              Start practicing with any clip from the recommendations below to build your history.
+            <p className="mb-3 text-3xl">🎬</p>
+            <h3 className="text-lg font-medium tracking-tight mb-2">No Practice History</h3>
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4 max-w-xs text-balance">
+              Start practicing with any clip from the home page to build history.
             </p>
             <Button
               variant="outline"
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 tracking-tight"
               onClick={() => {
                 // Scroll to recommended section
                 const recommendedSection = document.querySelector('[data-section="recommended"]');
