@@ -14,14 +14,16 @@ import {
   ArrowUpRightIcon,
   ChevronDown,
   Loader2,
+  Users,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { PieChart, Pie, Cell } from 'recharts';
 import { Button } from '@/components/ui/base/button';
 import VideoPlayer from '../videoPlayer';
-import { FeedbackGiver } from '@/components/FeedbackGiver';
+import { FeedbackGiver } from '@/server/src/static/FeedbackGiver.js';
 import { useMediaRemote } from '@vidstack/react';
 import { type MediaRemoteControl } from '@vidstack/react';
+import { authClient } from '@/lib/auth-client';
 
 import {
   Dialog,
@@ -32,6 +34,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/base/dialog';
 import { set } from 'zod';
+import { cn } from '@/lib/styles';
+import { AudioPlayback } from '@/components/ui/audio-playback';
 
 declare global {
   interface Window {
@@ -40,11 +44,27 @@ declare global {
   }
 }
 
+interface EnhancedFeedback {
+  phoneme: string;
+  phoneticSpelling: string;
+  explanation: string;
+  mistakeCount: number;
+  wordsAffected: string[];
+  mistakeSeverities: string[];
+  userSaidInstead: string;
+  accuracyScore: number;
+  exampleWord: string;
+  displayName: string;
+  userSaidDisplayName: string;
+  nativeLanguagePattern: string;
+  boxDisplay: string;
+}
+
 interface SectionFeedback {
   wordScores: number[];
   transcription: string;
   feedback: Array<[string, string]>;
-  top3Feedback: Array<[string, string]>;
+  top3Feedback: EnhancedFeedback[];
   score: number;
   sideBySideFeedback: SideBySideFeedback;
 }
@@ -74,12 +94,15 @@ export default function Page() {
   const [isMicInitializing, setIsMicInitializing] = useState(false);
   const [isFirstInitialization, setIsFirstInitialization] = useState(true);
   const [feedback, setFeedback] = useState<Array<[string, string]>>([]);
-  const [top3Feedback, setTop3Feedback] = useState<Array<[string, string]>>([]);
+  const [top3Feedback, setTop3Feedback] = useState<EnhancedFeedback[]>([]);
   const [score, setScore] = useState(0);
   const feedbackGiverRef = useRef<any>(null);
   const videoPlayerRef = useRef(null);
   const remote = useMediaRemote();
   const ref = useRef<MediaRemoteControl>(remote);
+
+  // Get user session to access native language
+  const { data: session } = authClient.useSession();
 
   // diagrams
   const [sideBySideFeedback, setSideBySideFeedback] = useState<SideBySideFeedback>([]);
@@ -107,21 +130,83 @@ export default function Page() {
           start: 567,
           end: 573,
           thumbnail: 'd1.png',
-          target: 'juɡɑɾʌsteɪʔʌlɹtɔlðətaɪaɪm',
+          target: [
+            'j',
+            'u',
+            'ɡ',
+            'ɑ',
+            'ɾ',
+            'ʌ',
+            's',
+            't',
+            'eɪ',
+            'ʔ',
+            'ʌ',
+            'l',
+            'ɹ',
+            't',
+            'ɔ',
+            'l',
+            'ð',
+            'ə',
+            't',
+            'aɪ',
+            'aɪ',
+            'm',
+          ],
           target_by_word: [
-            ['You', 'ju'],
-            ['gotta', 'ɡɑɾʌ'],
-            ['stay', 'steɪʔ'],
-            ['alert', 'ʌlɹt'],
-            ['all', 'ɔl'],
-            ['the', 'ðə'],
-            ['time', 'taɪaɪm'],
+            ['You', ['j', 'u']],
+            ['gotta', ['ɡ', 'ɑ', 'ɾ', 'ʌ']],
+            ['stay', ['s', 't', 'eɪ', 'ʔ']],
+            ['alert', ['ʌ', 'l', 'ɹ', 't']],
+            ['all', ['ɔ', 'l']],
+            ['the', ['ð', 'ə']],
+            ['time', ['t', 'aɪ', 'aɪ', 'm']],
           ],
         },
       ],
       completedSections: 0,
     },
   ];
+
+  // const target = [
+  //   'kʰ',
+  //   'ɔ',
+  //   'l',
+  //   'ɪ',
+  //   'ŋ',
+  //   'kʰ',
+  //   'ɑ',
+  //   'ɹ',
+  //   'd',
+  //   'z',
+  //   'ɑ',
+  //   'ɹ',
+  //   'ð',
+  //   'ə',
+  //   'w',
+  //   'eɪ',
+  //   'v',
+  //   'ə',
+  //   'v',
+  //   'ð',
+  //   'ə',
+  //   'f',
+  //   'j',
+  //   'u',
+  //   'tʃ',
+  //   'ɜ˞',
+  // ];
+  // const target_by_words = [
+  //   ['calling', ['kʰ', 'ɔ', 'l', 'ɪ', 'ŋ']],
+  //   ['cards', ['kʰ', 'ɑ', 'ɹ', 'd', 'z']],
+  //   ['are', ['ɑ', 'ɹ']],
+  //   ['the', ['ð', 'ə']],
+  //   ['wave', ['w', 'eɪ', 'v']],
+  //   ['of', ['ə', 'v']],
+  //   ['the', ['ð', 'ə']],
+  //   ['future', ['f', 'j', 'u', 'tʃ', 'ɜ˞']],
+  // ];
 
   const currentVideo = videos.find(video => pathname?.includes(video.id));
 
@@ -180,7 +265,7 @@ export default function Page() {
 
     if (!isCorrect && score < 0.8) backgroundColor = 'bg-red-400 dark:bg-red-600 border-red-600';
 
-    const border = isRecording ? 'border-dashed' : 'border-solid';
+    const border = isRecording ? 'border-solid' : 'border-dashed';
 
     const highlight = isNext
       ? 'border-blue-500 border-2'
@@ -227,21 +312,16 @@ export default function Page() {
       feedbackGiverRef.current = new FeedbackGiver(
         practiceSection.target,
         practiceSection.target_by_word,
-        async (newTranscription: string) => {
-          setTranscription(newTranscription);
+        async (newTranscription: any) => {
+          // Handle transcription as array (from server) or string (fallback)
+          const transcriptionText = Array.isArray(newTranscription)
+            ? newTranscription.join(' ')
+            : newTranscription;
+          setTranscription(transcriptionText);
           if (feedbackGiverRef.current) {
             const [scoredWords, overall] = await feedbackGiverRef.current.getCER();
 
             const newScores = scoredWords.map((word: any) => word[3] || 0);
-            if (newScores[0] > 0) {
-              newScores[0] = 1; // you
-              newScores[1] = 0.875; // gotta
-              newScores[2] = 1; // stay
-              newScores[3] = 0.6; // alert
-              newScores[4] = 1; // all
-              newScores[5] = 1; // the
-              newScores[6] = 1; // time
-            }
             setWordScores([...newScores]); // Create new array reference to trigger re-render
             // Update next word index
 
@@ -262,7 +342,7 @@ export default function Page() {
       await feedbackGiverRef.current.start();
 
       // [ToDo]: Make this better. Right now it's 1500 for first initialization and 300 for subsequent initializations
-      const delayTime = isFirstInitialization ? 2500 : 300;
+      const delayTime = isFirstInitialization ? 1000 : 50;
       await new Promise(resolve => setTimeout(resolve, delayTime));
 
       // After first initialization, set flag to false for future initializations
@@ -291,31 +371,394 @@ export default function Page() {
       if (feedbackGiverRef.current) {
         await feedbackGiverRef.current.stop();
 
-        // Get feedback after stopping
-        const [perWordFeedback, top3] = await feedbackGiverRef.current.getFeedback();
-        setFeedback(perWordFeedback);
-        setTop3Feedback(top3);
+        const userPhoneticErrors = await feedbackGiverRef.current.getUserPhoneticErrors();
+        const allPhonemeWrittenFeedback =
+          await feedbackGiverRef.current.getAllPhonemeWrittenFeedback();
+
+        const getExampleWord = (phoneme: string) => {
+          const examples: { [key: string]: string } = {
+            θ: 'think',
+            ð: 'the',
+            r: 'red',
+            l: 'love',
+            w: 'water',
+            v: 'very',
+            b: 'big',
+            p: 'pen',
+            ʃ: 'ship',
+            tʃ: 'chair',
+            dʒ: 'judge',
+            ŋ: 'sing',
+            ʌ: 'cup',
+            ɑ: 'father',
+            ɔ: 'law',
+            ɪ: 'bit',
+            i: 'beat',
+            u: 'boot',
+            ʊ: 'book',
+            ə: 'about',
+            ɜ: 'bird',
+            æ: 'cat',
+            eɪ: 'day',
+            aɪ: 'buy',
+            oʊ: 'go',
+            aʊ: 'now',
+            ɔɪ: 'boy',
+            e: 'bed',
+            o: 'caught',
+            k: 'key',
+            g: 'go',
+            f: 'fish',
+            s: 'see',
+            z: 'zoo',
+            t: 'top',
+            d: 'dog',
+            n: 'no',
+            m: 'man',
+            h: 'hat',
+            j: 'yes',
+            ɹ: 'red',
+            ɾ: 'better',
+            ʔ: 'uh-oh',
+          };
+          return examples[phoneme] || 'no word found';
+        };
+
+        // Helper to get user's native language from session metadata
+        const getUserNativeLanguage = () => {
+          console.log('session', session);
+          if (!session?.user) return null;
+          try {
+            // Type assertion since we know the structure might have these properties
+            const userWithMetadata = session.user as any;
+            if (userWithMetadata.nativeLanguage) {
+              return userWithMetadata.nativeLanguage;
+            }
+            if (userWithMetadata.metadata) {
+              const metadata =
+                typeof userWithMetadata.metadata === 'string'
+                  ? JSON.parse(userWithMetadata.metadata)
+                  : userWithMetadata.metadata;
+              return metadata?.nativeLanguage;
+            }
+            return null;
+          } catch (error) {
+            console.error('Error parsing user metadata:', error);
+            return null;
+          }
+        };
+
+        const getNativeLanguagePattern = (phoneme: string) => {
+          const userNativeLanguage = getUserNativeLanguage();
+
+          const languagePatterns: { [key: string]: { [key: string]: string } } = {
+            es: {
+              // Spanish
+              θ: "Common challenge for Spanish speakers - this sound doesn't exist in Spanish",
+              ð: 'Common challenge for Spanish speakers - often replaced with "d" sound',
+              v: 'Spanish speakers often replace with "b" sound',
+              ʃ: 'Tends to be pronounced as "ch" sound by Spanish speakers',
+              z: 'Often pronounced as "s" by Spanish speakers',
+            },
+            fr: {
+              // French
+              θ: 'French speakers often replace with "s" or "z" sound',
+              ð: 'Challenging for French speakers - often becomes "d" sound',
+              h: 'Silent H in French makes this challenging',
+              ŋ: 'NG ending is difficult for French speakers',
+              w: 'Often pronounced as "v" by French speakers',
+            },
+            de: {
+              // German
+              θ: 'German speakers often replace with "s" sound',
+              ð: 'Challenging for German speakers - often becomes "d" sound',
+              w: 'German speakers may pronounce as "v" sound',
+              ʃ: 'Similar to German "sch" but positioning differs',
+            },
+            zh: {
+              // Chinese
+              r: 'Chinese speakers often struggle with English R sound',
+              l: 'L and R distinction is challenging for Chinese speakers',
+              θ: 'Often replaced with "s" sound',
+              ð: 'Typically becomes "d" or "z" sound',
+              v: 'May be pronounced as "w" sound',
+            },
+            ja: {
+              // Japanese
+              r: 'Japanese R is different from English R',
+              l: 'L sound is challenging for Japanese speakers',
+              θ: 'Often becomes "s" sound',
+              ð: 'Usually pronounced as "d" sound',
+              v: 'Often pronounced as "b" sound',
+            },
+            ko: {
+              // Korean
+              r: 'Korean speakers may struggle with English R',
+              l: 'R and L distinction can be challenging',
+              f: 'F sound is often replaced with "p" sound',
+              θ: 'Typically becomes "s" sound',
+              ð: 'Usually pronounced as "d" sound',
+            },
+            ar: {
+              // Arabic
+              p: 'Arabic speakers often replace P with B sound',
+              v: 'V sound may become F sound',
+              θ: 'This sound exists in Arabic but positioning differs',
+              ð: 'Exists in Arabic but English usage is different',
+            },
+            it: {
+              // Italian
+              θ: 'Italian speakers often use "t" sound',
+              ð: 'Typically becomes "d" sound',
+              h: 'H is often silent in Italian',
+              ŋ: 'NG sound is challenging for Italian speakers',
+            },
+            pt: {
+              // Portuguese
+              θ: 'Portuguese speakers often use "t" sound',
+              ð: 'Usually becomes "d" sound',
+              ʃ: 'Similar to Portuguese but context differs',
+              v: 'Sometimes confused with "b" sound',
+            },
+            ru: {
+              // Russian
+              θ: 'Russian speakers often use "s" sound',
+              ð: 'Typically becomes "d" sound',
+              w: 'Russian speakers may use "v" sound',
+              h: 'H pronunciation differs from Russian',
+            },
+          };
+
+          // Get user-specific pattern or fall back to generic
+          if (userNativeLanguage && languagePatterns[userNativeLanguage]?.[phoneme]) {
+            return languagePatterns[userNativeLanguage][phoneme];
+          }
+
+          // Generic fallback patterns
+          const genericPatterns: { [key: string]: string } = {
+            θ: "This sound doesn't exist in many languages",
+            ð: 'Voiced TH is challenging for most non-native speakers',
+            r: 'R sounds vary greatly between languages',
+            l: 'L sound positioning can be tricky',
+            w: 'W sound is often confused with V',
+            v: 'V sound distinctions vary by language',
+            ʃ: 'SH sound exists in many languages but differs slightly',
+            ŋ: 'NG sound at word endings is challenging',
+          };
+
+          return genericPatterns[phoneme] || '';
+        };
+
+        const getPhonemeDisplayName = (phoneme: string, exampleWord: string) => {
+          const names: { [key: string]: string } = {
+            θ: 'TH sound',
+            ð: 'TH sound',
+            r: 'R sound',
+            l: 'L sound',
+            w: 'W sound',
+            v: 'V sound',
+            b: 'B sound',
+            p: 'P sound',
+            ʃ: 'SH sound',
+            tʃ: 'CH sound',
+            dʒ: 'J sound',
+            ŋ: 'NG sound',
+            ɑ: 'AH sound',
+            ɔ: 'AW sound',
+            ɪ: 'IH sound',
+            i: 'EE sound',
+            u: 'OO sound',
+            ʊ: 'UH sound',
+            ə: 'UH sound',
+            ɜ: 'ER sound',
+            æ: 'A sound',
+            eɪ: 'AY sound',
+            aɪ: 'AI sound',
+            oʊ: 'OH sound',
+            aʊ: 'OW sound',
+            ɔɪ: 'OY sound',
+            ʌ: 'UH sound',
+            e: 'EH sound',
+            o: 'OH sound',
+            k: 'K sound',
+            g: 'G sound',
+            f: 'F sound',
+            s: 'S sound',
+            z: 'Z sound',
+            t: 'T sound',
+            d: 'D sound',
+            n: 'N sound',
+            m: 'M sound',
+            h: 'H sound',
+            j: 'Y sound',
+            ɹ: 'R sound',
+            ɾ: 'R sound',
+            ʔ: 'stop sound',
+          };
+          return `${names[phoneme] || phoneme.toUpperCase()} sound (as in "${exampleWord}")`;
+        };
+
+        const getPhonemeBoxDisplay = (phoneme: string) => {
+          const boxNames: { [key: string]: string } = {
+            θ: 'TH',
+            ð: 'TH',
+            r: 'R',
+            l: 'L',
+            w: 'W',
+            v: 'V',
+            b: 'B',
+            p: 'P',
+            ʃ: 'SH',
+            tʃ: 'CH',
+            dʒ: 'J',
+            ŋ: 'NG',
+            ɑ: 'AH',
+            ɔ: 'AW',
+            ɪ: 'IH',
+            i: 'EE',
+            u: 'OO',
+            ʊ: 'UH',
+            ə: 'UH',
+            ɜ: 'ER',
+            æ: 'A',
+            eɪ: 'AY',
+            aɪ: 'AI',
+            oʊ: 'OH',
+            aʊ: 'OW',
+            ɔɪ: 'OY',
+            ʌ: 'UH',
+            e: 'EH',
+            o: 'OH',
+            k: 'K',
+            g: 'G',
+            f: 'F',
+            s: 'S',
+            z: 'Z',
+            t: 'T',
+            d: 'D',
+            n: 'N',
+            m: 'M',
+            h: 'H',
+            j: 'Y',
+            ɹ: 'R',
+            ɾ: 'R',
+            ʔ: 'STOP',
+          };
+          return boxNames[phoneme] || phoneme.toUpperCase();
+        };
+
+        const getUserSaidDisplayName = (phonemeSpokenAs: string) => {
+          const names: { [key: string]: string } = {
+            s: 'S sound',
+            z: 'Z sound',
+            t: 'T sound',
+            d: 'D sound',
+            f: 'F sound',
+            w: 'W sound',
+            b: 'B sound',
+            p: 'P sound',
+            θ: 'TH sound',
+            ð: 'TH sound',
+            r: 'R sound',
+            l: 'L sound',
+            v: 'V sound',
+            ʃ: 'SH sound',
+            tʃ: 'CH sound',
+            dʒ: 'J sound',
+            ŋ: 'NG sound',
+            ɑ: 'AH sound',
+            ɔ: 'AW sound',
+            ɪ: 'IH sound',
+            i: 'EE sound',
+            u: 'OO sound',
+            ʊ: 'UH sound',
+            ə: 'UH sound',
+            ɜ: 'ER sound',
+            æ: 'A sound',
+            eɪ: 'AY sound',
+            aɪ: 'AI sound',
+            oʊ: 'OH sound',
+            aʊ: 'OW sound',
+            ɔɪ: 'OY sound',
+            ʌ: 'UH sound',
+            e: 'EH sound',
+            o: 'OH sound',
+            k: 'K sound',
+            g: 'G sound',
+            n: 'N sound',
+            m: 'M sound',
+            h: 'H sound',
+            j: 'Y sound',
+            ɹ: 'R sound',
+            ɾ: 'R sound',
+            ʔ: 'stop sound',
+          };
+          return names[phonemeSpokenAs] || `${phonemeSpokenAs.toUpperCase()} sound`;
+        };
+
+        // Convert userPhoneticErrors to enhanced top3Feedback format
+        const top3FeedbackArray = Object.entries(userPhoneticErrors)
+          .slice(0, 3)
+          .map(([phoneme, errorData]) => {
+            const [mistake_count, word_set, mistake_severities, phoneme_spoken_as, score] =
+              errorData as [number, string[], string[], string[], number];
+            const phonemeFeedback = allPhonemeWrittenFeedback[phoneme];
+            const targetPhonemeSpelling = phonemeFeedback?.['phonetic spelling'] || phoneme;
+            const targetPhonemeExplanation =
+              phonemeFeedback?.['explanation'] || 'No explanation available';
+            const exampleWord = getExampleWord(phoneme);
+
+            // Enhanced feedback object with all the rich data
+            return {
+              phoneme: phoneme,
+              phoneticSpelling: targetPhonemeSpelling,
+              explanation: targetPhonemeExplanation,
+              mistakeCount: mistake_count,
+              wordsAffected: word_set,
+              mistakeSeverities: mistake_severities,
+              userSaidInstead: phoneme_spoken_as[0] || 'unclear sound',
+              accuracyScore: Math.round((1 - score) * 100), // Convert to percentage
+              exampleWord: exampleWord,
+              displayName: getPhonemeDisplayName(phoneme, exampleWord),
+              userSaidDisplayName: getUserSaidDisplayName(phoneme_spoken_as[0] || ''),
+              nativeLanguagePattern: getNativeLanguagePattern(phoneme),
+              boxDisplay: getPhonemeBoxDisplay(phoneme),
+            };
+          });
+
+        // For per-word feedback, we'll use the phoneme feedback data
+        const perWordFeedback = Object.entries(allPhonemeWrittenFeedback).map(
+          ([phoneme, feedback]) => [
+            (feedback as { phonetic_spelling: string; explanation: string })['phonetic_spelling'] ||
+              phoneme,
+            (feedback as { phonetic_spelling: string; explanation: string })['explanation'] ||
+              'No explanation available',
+          ],
+        );
+
+        setFeedback(perWordFeedback as [string, string][]);
+        setTop3Feedback(top3FeedbackArray);
 
         // Recalculate CER because it hasn't updated for some reason :/
         const [scoredWords, overall] = await feedbackGiverRef.current.getCER();
         const newScores = scoredWords.map((word: any) => word[3] || 0);
         const finalScore = Math.round(1000 * overall) / 10;
 
-        // Get side-by-side feedback
-        const sideBySideFeedback = await feedbackGiverRef.current.getSideBySideDescription();
+        // Set empty side-by-side feedback since getSideBySideDescription is no longer available
+        const sideBySideFeedback = [];
         setSideBySideFeedback(sideBySideFeedback);
         setPhonemeIX(sideBySideFeedback.map(word => 0));
 
         // Save feedback for current section
         const currentSection = getCurrentSection();
         if (currentSection !== null && currentSection !== -1) {
-          setSectionFeedback(prev => ({
+          setSectionFeedback((prev: any) => ({
             ...prev,
             [currentSection]: {
               wordScores: [...newScores], // Create a new array to ensure state updates
               transcription,
-              feedback: perWordFeedback,
-              top3Feedback: top3,
+              feedback: perWordFeedback as [string, string][],
+              top3Feedback: top3FeedbackArray,
               score: finalScore,
               sideBySideFeedback,
             },
@@ -358,6 +801,158 @@ export default function Page() {
     }
   };
 
+  const VideoInformation = ({ className }: { className: string }) => {
+    return (
+      <div
+        className={`w-full 2xl:flex-1 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col justify-between ${className}`}
+      >
+        <div>
+          <div className="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-800 w-full">
+            <h2 className="text-lg font-medium tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100 text-left w-full">
+              About the Movie{' '}
+            </h2>
+          </div>
+          <div className="m-3">
+            {currentVideo?.name === 'Jumanji: The Next Level from Sony Pictures Entertainment' && (
+              <div className="mt-3">
+                <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed ">
+                  In Jumanji: The Next Level, the gang is back (Dwayne Johnson, Jack Black, Kevin
+                  Hart, and Karen Gillan) but the game has changed. Returning to Jumanji to rescue
+                  one of their own, they discover that nothing is as they expect. With more action
+                  and surprises, the players must brave parts unknown and unexplored, from the arid
+                  deserts to the snowy mountains, to escape.
+                </p>
+                <a
+                  href="http://aan.sonypictures.com/JumanjiTheNextLevel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    variant="outline"
+                    className="mt-3 w-full inline-flex items-center justify-between tracking-tight px-2.5"
+                  >
+                    Watch Full Movie <ArrowUpRightIcon className="ml-2 h-4 w-4 stroke-2" />
+                  </Button>
+                </a>
+              </div>
+            )}
+            {!currentVideo?.name.includes('Jumanji') && (
+              <p className="text-neutral-600 dark:text-neutral-400 p-3">
+                No additional information available for this video.
+              </p>
+            )}
+          </div>
+        </div>
+        <div>
+          <div className="border-t border-neutral-200 dark:border-neutral-800">
+            <h2 className="text-lg font-medium tracking-tighter m-2 text-center text-neutral-900 dark:text-neutral-100">
+              Overall Accent Similarity
+            </h2>
+          </div>
+          <div className="border-t border-neutral-200 dark:border-neutral-800">
+            <div className="w-full h-full flex items-center justify-center relative">
+              {isClient && score > 0 ? (
+                <PieChart width={400} height={180}>
+                  <Pie
+                    data={[
+                      { name: 'Correct', value: score },
+                      { name: 'Incorrect', value: 100 - score },
+                    ]}
+                    cx="50%"
+                    cy="100%"
+                    startAngle={180}
+                    endAngle={0}
+                    innerRadius={130}
+                    outerRadius={180}
+                    paddingAngle={0}
+                    dataKey="value"
+                  >
+                    <Cell fill="#3D8F78" />
+                    <Cell fill="#C8E6DE" />
+                  </Pie>
+                </PieChart>
+              ) : (
+                <div className="h-[180px] flex items-center justify-center">
+                  <div className="text-center text-neutral-500 dark:text-neutral-400">
+                    <div className="mx-auto mb-6 h-12 w-12 rounded-full border-[3px] border-neutral-300 " />
+                    <p className="tracking-[-0.04em] text-neutral-600 dark:text-neutral-300 mt-4 font-medium">
+                      No accent similarity data yet.
+                    </p>
+                    <p className="text-sm tracking-tight text-neutral-500 dark:text-neutral-400">
+                      Practice a section to see your score.
+                    </p>
+                  </div>
+                </div>
+              )}
+              {score > 0 && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center -mb-16">
+                  <span className="text-4xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
+                    {score}%
+                  </span>
+                  <span className="text-lg text-neutral-600 dark:text-neutral-400">
+                    Accent Similarity
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="border-t flex flex-wrap border-neutral-200 dark:border-neutral-800 p-2 gap-1 justify-center">
+            <Badge
+              variant="outline"
+              className="w-fit px-2.5 py-1 text-xs font-medium rounded-md bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border tracking-tight border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                fill="none"
+                viewBox="0 0 15 15"
+                className="mr-1"
+              >
+                {' '}
+                <path
+                  fill="#EEE"
+                  d="M13.92 8.927a7 7 0 0 0 .244-1.847l-.244-1.847a7 7 0 0 0-.795-1.847L11.49 1.54A7.05 7.05 0 0 0 7.085 0h-.006a7.05 7.05 0 0 0-4.406 1.54L1.039 3.385a7 7 0 0 0-.796 1.847L0 7.08v.003c0 .638.085 1.256.243 1.844l.796 1.847a7.1 7.1 0 0 0 1.634 1.847l4.409 1.539 4.409-1.54a7.1 7.1 0 0 0 1.634-1.846z"
+                ></path>{' '}
+                <path
+                  fill="#D80027"
+                  d="M13.92 5.233c.16.589.244 1.208.244 1.847H0c0-.639.085-1.258.243-1.847zM11.49 1.54c.647.514 1.201 1.139 1.635 1.846H1.039A7.1 7.1 0 0 1 2.673 1.54zM13.125 10.774a7 7 0 0 0 .795-1.847H.243a7 7 0 0 0 .796 1.847zM11.49 12.62H2.674a7.05 7.05 0 0 0 4.403 1.54h.012a7.05 7.05 0 0 0 4.403-1.54"
+                ></path>{' '}
+                <path fill="#0052B4" d="M0 6.792A7.08 7.08 0 0 1 7.082 0v7.08H0z"></path>{' '}
+                <path
+                  fill="#EEE"
+                  fillRule="evenodd"
+                  d="M3.03 1.273q.347-.243.723-.444l.027.082h.772l-.625.453.239.734-.625-.453-.624.453.239-.734zM.82 3.772q.245-.463.553-.883l.105.323h.772l-.624.453.238.734-.624-.453-.625.453zM5.842.177l.239.734h.771l-.624.453.238.734-.624-.453-.624.453.238-.734-.624-.453h.772zM3.541 2.478l.239.734h.772l-.625.453.239.734-.625-.453-.624.453.239-.734-.625-.453h.772zm2.54.734-.238-.734-.238.734h-.772l.624.453-.238.734.624-.453.624.453-.238-.734.624-.453zM1.24 4.779l.238.734h.772l-.624.453.238.734-.624-.453-.625.453.239-.734-.625-.453h.772zm2.54.734-.239-.734-.238.734H2.53l.624.453-.238.734.624-.453.625.453-.239-.734.625-.453zm2.063-.734.239.734h.771l-.624.453.238.734-.624-.453-.624.453.238-.734-.624-.453h.772z"
+                  clipRule="evenodd"
+                ></path>{' '}
+              </svg>
+              {currentVideo?.dialect}
+            </Badge>
+
+            <Badge
+              variant="outline"
+              className={`${getBadgeColor(currentVideo?.badge)} px-2.5 py-1 text-xs font-medium rounded-md`}
+            >
+              <div
+                dangerouslySetInnerHTML={{ __html: currentVideo?.dialectIcon ?? '' }}
+                className="mr-1"
+              />
+              {currentVideo?.badge}
+            </Badge>
+
+            <Badge
+              variant="outline"
+              className="w-fit px-2.5 py-1 text-xs font-medium rounded-md bg-[#C7E9DE] dark:bg-[#1B997B]/20 border tracking-tight border-[#9DD8C5] dark:border-[#1B997B] text-[#1B997B] dark:text-[#9DD8C5]"
+            >
+              <CheckCircle2 className="mr-1 h-[15px] w-[15px]" strokeWidth={2} />
+              {currentVideo?.completedSections}/{currentVideo?.practicableSections?.length} Done
+            </Badge>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="h-fit w-full rounded-xl relative p-4 flex flex-col gap-2">
       <div className="flex justify-between items-center w-full">
@@ -385,153 +980,7 @@ export default function Page() {
             }}
           />
         </div>
-        <div className="w-full 2xl:flex-1 bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col justify-between">
-          {/* version 4 */}
-          <div>
-            <div className="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-800 w-full">
-              <h2 className="text-lg font-medium tracking-tighter m-3 mb-2 text-neutral-900 dark:text-neutral-100 text-left w-full">
-                About the Movie{' '}
-              </h2>
-            </div>
-            <div className="m-3">
-              {currentVideo?.name ===
-                'Jumanji: The Next Level from Sony Pictures Entertainment' && (
-                <div className="mt-3">
-                  <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed ">
-                    In Jumanji: The Next Level, the gang is back (Dwayne Johnson, Jack Black, Kevin
-                    Hart, and Karen Gillan) but the game has changed. Returning to Jumanji to rescue
-                    one of their own, they discover that nothing is as they expect. With more action
-                    and surprises, the players must brave parts unknown and unexplored, from the
-                    arid deserts to the snowy mountains, to escape.
-                  </p>
-                  <a
-                    href="http://aan.sonypictures.com/JumanjiTheNextLevel"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button
-                      variant="outline"
-                      className="mt-3 w-full inline-flex items-center justify-between tracking-tight px-2.5"
-                    >
-                      Watch Full Movie <ArrowUpRightIcon className="ml-2 h-4 w-4 stroke-2" />
-                    </Button>
-                  </a>
-                </div>
-              )}
-              {!currentVideo?.name.includes('Jumanji') && (
-                <p className="text-neutral-600 dark:text-neutral-400 p-3">
-                  No additional information available for this video.
-                </p>
-              )}
-            </div>
-          </div>
-          <div>
-            <div className="border-t border-neutral-200 dark:border-neutral-800">
-              <h2 className="text-lg font-medium tracking-tighter m-2 text-center text-neutral-900 dark:text-neutral-100">
-                Overall Accent Similarity
-              </h2>
-            </div>
-            <div className="border-t border-neutral-200 dark:border-neutral-800">
-              <div className="w-full h-full flex items-center justify-center relative">
-                {isClient && score > 0 ? (
-                  <PieChart width={400} height={180}>
-                    <Pie
-                      data={[
-                        { name: 'Correct', value: score },
-                        { name: 'Incorrect', value: 100 - score },
-                      ]}
-                      cx="50%"
-                      cy="100%"
-                      startAngle={180}
-                      endAngle={0}
-                      innerRadius={130}
-                      outerRadius={180}
-                      paddingAngle={0}
-                      dataKey="value"
-                    >
-                      <Cell fill="#3D8F78" />
-                      <Cell fill="#C8E6DE" />
-                    </Pie>
-                  </PieChart>
-                ) : (
-                  <div className="h-[180px] flex items-center justify-center">
-                    <div className="text-center text-neutral-500 dark:text-neutral-400">
-                      <div className="mx-auto mb-6 h-12 w-12 rounded-full border-[3px] border-neutral-300 " />
-                      <p className="tracking-[-0.04em] text-neutral-600 dark:text-neutral-300 mt-4 font-medium">
-                        No accent similarity data yet.
-                      </p>
-                      <p className="text-sm tracking-tight text-neutral-500 dark:text-neutral-400">
-                        Practice a section to see your score.
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {score > 0 && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center -mb-16">
-                    <span className="text-4xl font-semibold tracking-tighter text-neutral-900 dark:text-neutral-100">
-                      {score + 10}%
-                    </span>
-                    <span className="text-lg text-neutral-600 dark:text-neutral-400">
-                      Accent Similarity
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className="border-t flex flex-wrap border-neutral-200 dark:border-neutral-800 p-2 gap-1 justify-center">
-              <Badge
-                variant="outline"
-                className="w-fit px-2.5 py-1 text-xs font-medium rounded-md bg-[#E2EAFE] dark:bg-[#1B3E99]/20 border tracking-tight border-[#CAD9FE] dark:border-[#1B3E99] text-[#1B3E99] dark:text-[#CAD9FE]"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="15"
-                  height="15"
-                  fill="none"
-                  viewBox="0 0 15 15"
-                  className="mr-1"
-                >
-                  {' '}
-                  <path
-                    fill="#EEE"
-                    d="M13.92 8.927a7 7 0 0 0 .244-1.847l-.244-1.847a7 7 0 0 0-.795-1.847L11.49 1.54A7.05 7.05 0 0 0 7.085 0h-.006a7.05 7.05 0 0 0-4.406 1.54L1.039 3.385a7 7 0 0 0-.796 1.847L0 7.08v.003c0 .638.085 1.256.243 1.844l.796 1.847a7.1 7.1 0 0 0 1.634 1.847l4.409 1.539 4.409-1.54a7.1 7.1 0 0 0 1.634-1.846z"
-                  ></path>{' '}
-                  <path
-                    fill="#D80027"
-                    d="M13.92 5.233c.16.589.244 1.208.244 1.847H0c0-.639.085-1.258.243-1.847zM11.49 1.54c.647.514 1.201 1.139 1.635 1.846H1.039A7.1 7.1 0 0 1 2.673 1.54zM13.125 10.774a7 7 0 0 0 .795-1.847H.243a7 7 0 0 0 .796 1.847zM11.49 12.62H2.674a7.05 7.05 0 0 0 4.403 1.54h.012a7.05 7.05 0 0 0 4.403-1.54"
-                  ></path>{' '}
-                  <path fill="#0052B4" d="M0 6.792A7.08 7.08 0 0 1 7.082 0v7.08H0z"></path>{' '}
-                  <path
-                    fill="#EEE"
-                    fillRule="evenodd"
-                    d="M3.03 1.273q.347-.243.723-.444l.027.082h.772l-.625.453.239.734-.625-.453-.624.453.239-.734zM.82 3.772q.245-.463.553-.883l.105.323h.772l-.624.453.238.734-.624-.453-.625.453zM5.842.177l.239.734h.771l-.624.453.238.734-.624-.453-.624.453.238-.734-.624-.453h.772zM3.541 2.478l.239.734h.772l-.625.453.239.734-.625-.453-.624.453.239-.734-.625-.453h.772zm2.54.734-.238-.734-.238.734h-.772l.624.453-.238.734.624-.453.624.453-.238-.734.624-.453zM1.24 4.779l.238.734h.772l-.624.453.238.734-.624-.453-.625.453.239-.734-.625-.453h.772zm2.54.734-.239-.734-.238.734H2.53l.624.453-.238.734.624-.453.625.453-.239-.734.625-.453zm2.063-.734.239.734h.771l-.624.453.238.734-.624-.453-.624.453.238-.734-.624-.453h.772z"
-                    clipRule="evenodd"
-                  ></path>{' '}
-                </svg>
-                {currentVideo?.dialect}
-              </Badge>
-
-              <Badge
-                variant="outline"
-                className={`${getBadgeColor(currentVideo?.badge)} px-2.5 py-1 text-xs font-medium rounded-md`}
-              >
-                <div
-                  dangerouslySetInnerHTML={{ __html: currentVideo?.dialectIcon ?? '' }}
-                  className="mr-1"
-                />
-                {currentVideo?.badge}
-              </Badge>
-
-              <Badge
-                variant="outline"
-                className="w-fit px-2.5 py-1 text-xs font-medium rounded-md bg-[#C7E9DE] dark:bg-[#1B997B]/20 border tracking-tight border-[#9DD8C5] dark:border-[#1B997B] text-[#1B997B] dark:text-[#9DD8C5]"
-              >
-                <CheckCircle2 className="mr-1 h-[15px] w-[15px]" strokeWidth={2} />
-                {currentVideo?.completedSections}/{currentVideo?.practicableSections?.length} Done
-              </Badge>
-            </div>
-          </div>
-        </div>
+        <VideoInformation className="hidden 2xl:flex" />
       </div>
 
       <div className="flex flex-col 2xl:flex-row gap-2">
@@ -556,7 +1005,7 @@ export default function Page() {
                   <p className="text-neutral-600 dark:text-neutral-400 mb-4">
                     {isRecording
                       ? 'Recording in progress. Click the button again to stop and get feedback.'
-                      : 'You are currently in a practice section. Press the button to the right to start practicing.'}
+                      : 'You are currently in a practice section. Press the button to the right to start practicing the sentence below.'}
                   </p>
                 </>
               )}
@@ -748,8 +1197,17 @@ export default function Page() {
                 },
               )}
           </div>
-          {isInPracticeSection() && feedback.length >= 0 && (
+          {isInPracticeSection() && feedback.length > 0 && (
             <div className="m-4 space-y-2">
+              {/* Audio playback component */}
+              <AudioPlayback
+                onPlay={async () => {
+                  if (feedbackGiverRef.current) {
+                    await feedbackGiverRef.current.playUserAudio();
+                  }
+                }}
+              />
+
               <h2 className="text-xl font-semibold text-black dark:text-white tracking-[-0.04em]">
                 Areas for Improvement
               </h2>
@@ -757,16 +1215,56 @@ export default function Page() {
                 These are suggestions for words that you may want to practice some more. When you're
                 ready, press each word to enter deep practice mode.
               </p>
-              <ul className="space-y-3 mt-4">
+              <ul className="space-y-4 mt-4">
                 {top3Feedback.map((feedback, index) => (
                   <li
                     key={index}
-                    className="flex items-center gap-3 p-2.5 rounded-[14px] bg-white dark:bg-neutral-900 border border-dashed transition-colors"
+                    className="bg-white dark:bg-neutral-900 border border-dashed rounded-2xl p-3 relative overflow-hidden"
                   >
-                    <span className="flex-shrink-0 font-medium capitalize min-w-18 text-center tracking-tight border-blue-500 border px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-md">
-                      {feedback[0]}
-                    </span>
-                    <div className="text-neutral-700 dark:text-neutral-300">{feedback[1]}</div>
+                    {/* Header with boxed sound, description, and controls */}
+                    <div className="flex items-center gap-4 mb-3">
+                      {/* Boxed sound display */}
+                      <div className="flex-shrink-0 w-16 h-16 bg-violet-50 dark:bg-neutral-900 rounded-lg flex items-center justify-center border border-violet-100 dark:border-violet-800">
+                        <span className="text-lg font-bold text-violet-950 dark:text-violet-100">
+                          {feedback.boxDisplay}
+                        </span>
+                      </div>
+
+                      {/* Sound description and subtitle */}
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 tracking-tight">
+                          {feedback.displayName}
+                        </h3>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                          Found in {feedback.wordsAffected.length} word
+                          {feedback.wordsAffected.length !== 1 ? 's' : ''} • You said:{' '}
+                          {feedback.userSaidDisplayName}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="">
+                      <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300 ">
+                        Words affected:{' '}
+                        <span className="font-normal text-neutral-600 dark:text-neutral-400">
+                          {feedback.wordsAffected
+                            .map(
+                              wordIndex =>
+                                currentVideo?.practicableSections[getCurrentSection()!]
+                                  ?.target_by_word[wordIndex]?.[0] || `word ${wordIndex}`,
+                            )
+                            .slice(0, 5)
+                            .join(', ')}
+                          {feedback.wordsAffected.length > 5 &&
+                            `, +${feedback.wordsAffected.length - 5} more`}
+                        </span>
+                      </p>
+                    </div>
+                    {feedback.nativeLanguagePattern && (
+                      <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400 mt-3">
+                        <Users className="size-4 text-neutral-600 dark:text-neutral-400" />
+                        <span>{feedback.nativeLanguagePattern}</span>
+                      </div>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -819,6 +1317,7 @@ export default function Page() {
           <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-800 mb-6" />
         </div>
       </div>
+      <VideoInformation className="2xl:hidden" />
     </div>
   );
 }

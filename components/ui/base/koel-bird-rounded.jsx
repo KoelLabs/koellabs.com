@@ -10,7 +10,6 @@ const KoelBirdRounded = ({ className, ...props }) => (
     className={className}
     {...props}
   >
-    <rect width="1437" height="1437" fill="#fff" rx="718.5"></rect>
     <rect
       width="344.708"
       height="691.027"
