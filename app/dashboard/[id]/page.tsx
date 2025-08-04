@@ -1201,15 +1201,6 @@ export default function Page() {
           </div>
           {isInPracticeSection() && feedback.length > 0 && (
             <div className="m-4 space-y-2">
-              {/* Audio playback component */}
-              <AudioPlayback
-                onPlay={async () => {
-                  if (feedbackGiverRef.current) {
-                    await feedbackGiverRef.current.playUserAudio();
-                  }
-                }}
-              />
-
               <h2 className="text-xl font-semibold text-black dark:text-white tracking-[-0.04em]">
                 Areas for Improvement
               </h2>
@@ -1272,9 +1263,22 @@ export default function Page() {
               </ul>
             </div>
           )}
+          {isInPracticeSection() && top3Feedback.length === 0 && (
+            <div className="m-4 space-y-2">
+              <h2 className="text-xl font-semibold text-black dark:text-white tracking-[-0.04em]">
+                Listen back
+              </h2>
+              <AudioPlayback
+                onPlay={async () => {
+                  if (feedbackGiverRef.current) {
+                    await feedbackGiverRef.current.playUserAudio();
+                  }
+                }}
+              />
+            </div>
+          )}
         </div>
 
-        {/* Practice controls - visible on all screen sizes */}
         <div className="w-full order-3 2xl:order-2 2xl:max-w-[298px] mt-2 2xl:mt-0 h-full bg-white border border-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 flex flex-col">
           <div className="h-[1px] w-full bg-neutral-200 dark:bg-neutral-800 mt-6" />
           <div className="m-3">

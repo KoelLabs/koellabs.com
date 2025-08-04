@@ -40,7 +40,7 @@ export default function GettingToKnowYouPage() {
     router.push('/onboarding/welcome');
   };
 
-  const isNextDisabled = !onboardingData.nativeLanguage || !onboardingData.placeOfBirth;
+  const isNextDisabled = !onboardingData.nativeLanguage || !onboardingData.nativeLanguageCountry;
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center w-full">
@@ -64,11 +64,11 @@ export default function GettingToKnowYouPage() {
             />
 
             <CountrySelector
-              label="What's your place of birth?"
-              value={onboardingData.placeOfBirth}
-              onChange={value => updateOnboardingData('placeOfBirth', value)}
+              label="Where did you grow up learning your native language?"
+              value={onboardingData.nativeLanguageCountry}
+              onChange={value => updateOnboardingData('nativeLanguageCountry', value)}
               required={true}
-              placeholder="Select your place of birth"
+              placeholder="Select country"
             />
 
             <DatePickerComponent

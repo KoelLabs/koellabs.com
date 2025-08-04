@@ -177,8 +177,8 @@ export default function CitySelector({
                 <CommandGroup className="p-0">
                   {filteredCities.map((city, index) => (
                     <CommandItem
-                      key={`${city.country}-${city.state}-${city.name}-${index}`}
-                      value={city.name}
+                      key={`${city.country}-${city.state}-${index}`}
+                      value={city.country + ' ' + city.state + ' ' + city.name + ' ' + index}
                       className="rounded-lg"
                       onSelect={() => {
                         onChange({

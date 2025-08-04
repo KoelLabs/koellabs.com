@@ -26,7 +26,8 @@ import { Skeleton } from '@/components/ui/base/skeleton';
 import LanguageSelector from '@/components/forms/language-selector';
 import CountrySelector from '@/components/forms/country-selector';
 import TargetLanguageSelector from '@/components/forms/target-language-selector';
-import BetaExperienceLevelSelector from '@/components/forms/beta-experience-level-selector';
+import ExperienceLevelSelector from '@/components/forms/experience-level-selector';
+import ChallengingWordsSelector from '@/components/forms/challenging-words-selector';
 import CitySelector from '@/components/forms/city-selector';
 import DatePickerComponent from '@/components/ui/base/date';
 import { parseDate } from '@internationalized/date';
@@ -49,17 +50,17 @@ const FormInput = memo(({ label, id, name, value, onChange, isPending }) => {
   if (isPending) {
     return (
       <div className="space-y-2">
-        <Label htmlFor={id} className="text-sm font-normal ml-0.5">
+        <Label htmlFor={id} className="text-sm font-medium">
           {label}
         </Label>
-        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full rounded-xl mt-1" />
       </div>
     );
   }
 
   return (
     <div className="space-y-2">
-      <Label htmlFor={id} className="text-sm font-medium ml-0.5">
+      <Label htmlFor={id} className="text-sm font-medium">
         {label}
       </Label>
       <Input
@@ -87,10 +88,11 @@ const FormTextarea = memo(
     if (isPending) {
       return (
         <div className="space-y-2">
-          <Label htmlFor={id} className="text-sm font-normal ml-0.5">
+          <Label htmlFor={id} className="text-sm font-medium ml-0.5">
             {label}
           </Label>
-          <Skeleton className="h-24 w-full" />
+          <Skeleton className="h-20 w-full rounded-xl mt-1" />
+          <Skeleton className="h-4 w-26 rounded-lg mt-1" />
         </div>
       );
     }
@@ -268,7 +270,7 @@ export default function SettingsPage() {
     lastName: '',
     targetLanguage: '',
     nativeLanguage: '',
-    placeOfBirth: '',
+    nativeLanguageCountry: '',
     birthday: '',
     learningCity: '',
     experienceLevel: '',
@@ -301,7 +303,7 @@ export default function SettingsPage() {
         lastName,
         targetLanguage: userPreferences.targetLanguage || '',
         nativeLanguage: userPreferences.nativeLanguage || '',
-        placeOfBirth: userPreferences.placeOfBirth || '',
+        nativeLanguageCountry: userPreferences.nativeLanguageCountry || '',
         birthday: userPreferences.birthday || '',
         learningCity: userPreferences.learningCity || '',
         experienceLevel: userPreferences.experienceLevel || '',
@@ -370,30 +372,15 @@ export default function SettingsPage() {
         }
       }
 
-      if (previewAvatar && previewAvatar !== session.user.image) {
-        const avatarUpdateResponse = await fetch('/api/auth/update-user', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            image: previewAvatar,
-          }),
-        });
-
-        if (!avatarUpdateResponse.ok) {
-          throw new Error('Failed to update avatar');
-        }
-      }
-
       const preferences = {
         targetLanguage: formData.targetLanguage,
         nativeLanguage: formData.nativeLanguage,
-        placeOfBirth: formData.placeOfBirth,
+        nativeLanguageCountry: formData.nativeLanguageCountry,
         birthday: formData.birthday,
         learningCity: formData.learningCity,
         experienceLevel: formData.experienceLevel,
         challengingWords: formData.challengingWords,
+        ...(previewAvatar && previewAvatar !== session.user.image && { avatar: previewAvatar }),
       };
 
       const preferencesResponse = await fetch('/api/user/preferences', {
@@ -538,8 +525,8 @@ export default function SettingsPage() {
 
                     {isPending ? (
                       <div className="space-y-2">
-                        <Label className="text-sm font-normal ml-0.5">Target Language</Label>
-                        <Skeleton className="h-10 w-full" />
+                        <Label className="text-sm font-medium">Target Language</Label>
+                        <Skeleton className="h-10 w-full rounded-xl mt-1" />
                       </div>
                     ) : (
                       <TargetLanguageSelector
@@ -551,37 +538,8 @@ export default function SettingsPage() {
 
                     {isPending ? (
                       <div className="space-y-2">
-                        <Label className="text-sm font-normal ml-0.5">Native Language</Label>
-                        <Skeleton className="h-10 w-full" />
-                      </div>
-                    ) : (
-                      <LanguageSelector
-                        label="Native Language"
-                        value={formData.nativeLanguage}
-                        onChange={value => handleInputChange('nativeLanguage', value)}
-                        placeholder="Select your native language"
-                        showEnglishName={true}
-                      />
-                    )}
-
-                    {isPending ? (
-                      <div className="space-y-2">
-                        <Label className="text-sm font-normal ml-0.5">Place of Birth</Label>
-                        <Skeleton className="h-10 w-full" />
-                      </div>
-                    ) : (
-                      <CountrySelector
-                        label="Place of Birth"
-                        value={formData.placeOfBirth}
-                        onChange={value => handleInputChange('placeOfBirth', value)}
-                        placeholder="Select your place of birth"
-                      />
-                    )}
-
-                    {isPending ? (
-                      <div className="space-y-2">
-                        <Label className="text-sm font-normal ml-0.5">Learning City</Label>
-                        <Skeleton className="h-10 w-full" />
+                        <Label className="text-sm font-medium">Learning City</Label>
+                        <Skeleton className="h-10 w-full rounded-xl mt-1" />
                       </div>
                     ) : (
                       <CitySelector
@@ -595,8 +553,37 @@ export default function SettingsPage() {
 
                     {isPending ? (
                       <div className="space-y-2">
-                        <Label className="text-sm font-normal ml-0.5">Birthday</Label>
-                        <Skeleton className="h-10 w-full" />
+                        <Label className="text-sm font-medium">Native Language</Label>
+                        <Skeleton className="h-10 w-full rounded-xl mt-1" />
+                      </div>
+                    ) : (
+                      <LanguageSelector
+                        label="Native Language"
+                        value={formData.nativeLanguage}
+                        onChange={value => handleInputChange('nativeLanguage', value)}
+                        placeholder="Select your native language"
+                        showEnglishName={true}
+                      />
+                    )}
+
+                    {isPending ? (
+                      <div className="space-y-2">
+                        <Label className="text-sm font-medium">Native Language Country</Label>
+                        <Skeleton className="h-10 w-full rounded-xl mt-1" />
+                      </div>
+                    ) : (
+                      <CountrySelector
+                        label="Native Language Country"
+                        value={formData.nativeLanguageCountry}
+                        onChange={value => handleInputChange('nativeLanguageCountry', value)}
+                        placeholder="Where you grew up learning your native language"
+                      />
+                    )}
+
+                    {isPending ? (
+                      <div className="space-y-2">
+                        <Label className="text-sm font-medium">Birthday</Label>
+                        <Skeleton className="h-10 w-full rounded-xl mt-1" />
                       </div>
                     ) : (
                       <DatePickerComponent
@@ -612,11 +599,11 @@ export default function SettingsPage() {
                     <div className="">
                       {isPending ? (
                         <div className="space-y-2">
-                          <Label className="text-sm font-normal ml-0.5">Experience Level</Label>
-                          <Skeleton className="h-10 w-full" />
+                          <Label className="text-sm font-medium">Experience Level</Label>
+                          <Skeleton className="h-10 w-full rounded-xl mt-1" />
                         </div>
                       ) : (
-                        <BetaExperienceLevelSelector
+                        <ExperienceLevelSelector
                           label="Experience Level"
                           value={formData.experienceLevel}
                           onChange={value => handleInputChange('experienceLevel', value)}
@@ -626,16 +613,14 @@ export default function SettingsPage() {
                     </div>
 
                     <div className="sm:col-span-2">
-                      <FormTextarea
+                      <ChallengingWordsSelector
                         label="Challenging Words"
-                        id="challenging-words"
-                        name="challengingWords"
                         value={formData.challengingWords}
-                        onChange={handleInputChange}
+                        onChange={value => handleInputChange('challengingWords', value)}
                         isPending={isPending}
                         placeholder="Words you find difficult or confusing (e.g., 'thorough', 'entrepreneur', 'rural')"
                         maxLength={500}
-                        className="rounded-2xl"
+                        className=""
                       />
                     </div>
                   </div>

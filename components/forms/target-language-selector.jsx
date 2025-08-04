@@ -11,10 +11,10 @@ import {
 import { ArrowUpRight } from 'lucide-react';
 
 const languages = [
-  { value: 'english', flag: '🇺🇸', name: 'English' },
-  { value: 'spanish', flag: '🇪🇸', name: 'Spanish (Coming Soon)', disabled: true },
-  { value: 'german', flag: '🇩🇪', name: 'German (Coming Soon)', disabled: true },
-  { value: 'russian', flag: '🇷🇺', name: 'Russian (Coming Soon)', disabled: true },
+  { value: 'english', name: 'English' },
+  { value: 'spanish', name: 'Spanish (Coming Soon)', disabled: true },
+  { value: 'german', name: 'German (Coming Soon)', disabled: true },
+  { value: 'russian', name: 'Russian (Coming Soon)', disabled: true },
 ];
 
 export default function TargetLanguageSelector({
@@ -45,12 +45,10 @@ export default function TargetLanguageSelector({
             <SelectValue>
               {selectedLanguage ? (
                 <span className="flex items-center">
-                  <span className="mr-2">{selectedLanguage.flag}</span>
                   <span>{selectedLanguage.name}</span>
                 </span>
               ) : (
                 <span className="text-muted-foreground flex items-center">
-                  <span className="mr-2">🇺🇸</span>
                   <span>English</span>
                 </span>
               )}
@@ -67,7 +65,6 @@ export default function TargetLanguageSelector({
                   noCheck={true}
                 >
                   <span className="flex items-center">
-                    <span className="mr-2">{language.flag}</span>
                     <span>{language.name}</span>
                   </span>
                 </SelectItem>

@@ -3,7 +3,7 @@
 // Checkout [slug]/page.tsx for the individual blog post page (this is the general layout for all blog posts).
 // Checkout posts/*.tsx for individual blog post content.
 
-import Header from '@/components/ui/1 - header';
+import Header from '@/components/ui/header';
 import BlogList from './bloglist';
 
 export default function BlogPage() {

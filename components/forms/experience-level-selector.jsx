@@ -20,33 +20,51 @@ const experienceLevels = [
 ];
 
 export default function ExperienceLevelSelector({
-  label,
+  label = 'How many years have you studied this language?',
   value,
   onChange,
   required = false,
   className = '',
-  placeholder = 'Select experience level',
+  placeholder = 'Select your experience level',
 }) {
-  const MandatoryStar = () => (
-    <span className="text-sky-600" aria-hidden="true">
-      *
-    </span>
-  );
+  const selectedExperience = experienceLevels.find(level => level.value === value);
 
   return (
     <div className={`space-y-2 text-left ${className}`}>
-      <Label className="mb-2">
-        {label} {required && <MandatoryStar />}
+      <Label htmlFor="experienceLevel" className="mb-2">
+        {label}
+        {required && (
+          <span className="text-sky-600 ml-1" aria-hidden="true">
+            *
+          </span>
+        )}
       </Label>
-      <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="rounded-xl mt-1">
-          <SelectValue placeholder={placeholder} />
+      <Select onValueChange={onChange} value={value}>
+        <SelectTrigger
+          id="experienceLevel"
+          className="h-10 mt-1 rounded-xl focus:ring-0 focus:ring-offset-0"
+        >
+          {selectedExperience ? (
+            <SelectValue className="pl-2">
+              <span className="flex items-center">
+                <span className="mr-2">{selectedExperience.emoji}</span>
+                <span>{selectedExperience.name}</span>
+              </span>
+            </SelectValue>
+          ) : (
+            <p className="text-muted-foreground">{placeholder}</p>
+          )}
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="rounded-xl">
           {experienceLevels.map(level => (
-            <SelectItem key={level.value} value={level.value}>
-              <span className="flex items-center gap-2">
-                <span>{level.emoji}</span>
+            <SelectItem
+              className="pl-2 rounded-lg"
+              key={level.value}
+              value={level.value}
+              rightCheck={true}
+            >
+              <span className="flex items-center">
+                <span className="mr-2">{level.emoji}</span>
                 <span>{level.name}</span>
               </span>
             </SelectItem>
@@ -57,5 +75,4 @@ export default function ExperienceLevelSelector({
   );
 }
 
-// Export experience levels for other components that might need the data
 export { experienceLevels };

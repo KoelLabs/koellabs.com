@@ -3,7 +3,7 @@
 
 import { getPost } from '../posts';
 import { notFound } from 'next/navigation';
-import Header from '@/components/ui/1 - header';
+import Header from '@/components/ui/header';
 import CTA from '@/components/sections/3 - CTA';
 import Footer from '@/components/sections/4 - Footer';
 

@@ -22,7 +22,6 @@ export default function OnboardingLayout({ children }) {
           style={{ backgroundImage: "url('/grain.png')" }}
         ></div> */}
 
-        {/* Repeating line pattern - top */}
         <div className="absolute top-0 left-0 w-full h-[5vh] overflow-hidden flex items-end justify-center bg-neutral-50">
           <div className="flex h-full items-end gap-2">
             {Array(500)
@@ -40,7 +39,6 @@ export default function OnboardingLayout({ children }) {
           {children}
         </div>
 
-        {/* Repeating line pattern - bottom */}
         <div className="absolute bottom-0 left-0 w-full h-[5vh] overflow-hidden flex items-start justify-center bg-neutral-50">
           <div className="flex h-full items-start gap-2">
             {Array(500)

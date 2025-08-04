@@ -1,8 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import MobileDrawer from './1 - mobile-drawer.jsx';
 import { Button } from '@/components/ui/base/button';
-import { ContextMenu, ContextMenuTrigger } from '@/components/ui/base/context-menu';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';

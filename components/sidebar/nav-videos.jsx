@@ -35,12 +35,11 @@ export function NavVideos({ videos, className, isCollapsed, isLoading = false })
         >
           {isCollapsed ? (
             <div className="flex items-center justify-center h-10">
-              <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-700 animate-pulse"></div>
+              <div className="h-4 w-4 rounded-full bg-neutral-100 dark:bg-neutral-800 animate-pulse"></div>
             </div>
           ) : (
-            <div className="flex h-7 items-center gap-2.5 px-1.5">
-              <div className="shrink-0 h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-700 animate-pulse"></div>
-              <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-full animate-pulse"></div>
+            <div className="flex h-6 items-center gap-2.5">
+              <div className="h-5 bg-neutral-100 dark:bg-neutral-800 rounded w-full animate-pulse"></div>
             </div>
           )}
         </li>

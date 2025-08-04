@@ -2,7 +2,7 @@
 
 import CTA from '@/components/sections/3 - CTA';
 import Footer from '@/components/sections/4 - Footer';
-import Header from '@/components/ui/1 - header';
+import Header from '@/components/ui/header';
 import { Button } from '@/components/ui/base/button';
 import { Input } from '@/components/ui/base/input';
 import { Label } from '@/components/ui/base/label';

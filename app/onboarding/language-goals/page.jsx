@@ -32,6 +32,10 @@ import {
 } from '@/components/ui/datefield-rac';
 import { ArrowUpRight } from 'lucide-react';
 import { useState, useEffect, useId, useMemo } from 'react';
+import TargetLanguageSelector from '@/components/forms/target-language-selector';
+import ExperienceLevelSelector from '@/components/forms/experience-level-selector';
+import ChallengingWordsSelector from '@/components/forms/challenging-words-selector';
+import CitySelector from '@/components/forms/city-selector';
 
 export default function LanguageGoalsPage() {
   const { onboardingData, updateOnboardingData } = useOnboarding();
@@ -84,20 +88,7 @@ export default function LanguageGoalsPage() {
     { value: 'russian', flag: '🇷🇺', name: 'Russian (Coming Soon)', disabled: true },
   ];
 
-  const experienceLevels = [
-    { value: '0', emoji: '🌱', name: 'Complete Beginner (0 years)' },
-    { value: '0-1', emoji: '🌿', name: 'Less than 1 year' },
-    { value: '1-2', emoji: '🌳', name: '1-2 years' },
-    { value: '2-5', emoji: '🎯', name: '2-5 years' },
-    { value: '5-10', emoji: '🚀', name: '5-10 years' },
-    { value: '10+', emoji: '⭐', name: 'More than 10 years' },
-    { value: 'native-level', emoji: '👑', name: 'Native/Near-native level' },
-  ];
-
   const selectedLanguage = languages.find(lang => lang.value === onboardingData.targetLanguage);
-  const selectedExperience = experienceLevels.find(
-    level => level.value === onboardingData.experienceLevel,
-  );
 
   const selectedCity = cities.find(city => {
     if (typeof onboardingData.learningCity === 'string') {
@@ -176,223 +167,38 @@ export default function LanguageGoalsPage() {
 
         <div className="space-y-6 w-full">
           <div className="space-y-4">
-            <div className="space-y-2 text-left">
-              <Label htmlFor="targetLanguage" className="mb-2">
-                What language do you want to learn?
-                <span className="text-sky-600 ml-1" aria-hidden="true">
-                  *
-                </span>
-              </Label>
-              <div className="relative">
-                <Select
-                  onValueChange={value => updateOnboardingData('targetLanguage', value)}
-                  value={onboardingData.targetLanguage}
-                >
-                  <SelectTrigger
-                    id="targetLanguage"
-                    className="h-10 mt-1 rounded-xl focus:ring-0 focus:ring-offset-0"
-                  >
-                    <SelectValue>
-                      {selectedLanguage ? (
-                        <span className="flex items-center">
-                          <span className="mr-2">{selectedLanguage.flag}</span>
-                          <span>{selectedLanguage.name}</span>
-                        </span>
-                      ) : (
-                        <span className="text-muted-foreground flex items-center">
-                          <span className="mr-2">🇺🇸</span>
-                          <span>English</span>
-                        </span>
-                      )}
-                    </SelectValue>
-                  </SelectTrigger>
-                  <SelectContent
-                    className="rounded-xl bg-neutral-100 dark:bg-neutral-900"
-                    noPadding={true}
-                  >
-                    <div className="p-1 rounded-xl border-b bg-white">
-                      {languages.map(language => (
-                        <SelectItem
-                          className="pl-2 rounded-lg"
-                          key={language.value}
-                          value={language.value}
-                          disabled={language.disabled}
-                          noCheck={true}
-                        >
-                          <span className="flex items-center">
-                            <span className="mr-2">{language.flag}</span>
-                            <span>{language.name}</span>
-                          </span>
-                        </SelectItem>
-                      ))}
-                    </div>
-                    <div className="p-3 max-w-[608px] bg-neutral-100 dark:bg-neutral-900 text-balance">
-                      <p className="text-sm text-neutral-500 tracking-tight">
-                        During the beta phase, we're focusing on English. In the future, we plan to
-                        expand to other languages. Want to suggest what comes next?{' '}
-                        <a
-                          href="https://docs.google.com/forms/d/e/1FAIpQLSeKziYp-3pTI1Ptnk70RSZ1ryQSDJfUrZagrAuIsDSKr3YvWw/viewform"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sky-600 hover:underline inline-block"
-                        >
-                          Submit a request here
-                          <ArrowUpRight
-                            aria-hidden="true"
-                            className="w-4 h-4 inline-block -mt-0.5 ml-0.5"
-                          />
-                        </a>
-                      </p>
-                    </div>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
+            <TargetLanguageSelector
+              label="What language do you want to learn?"
+              value={onboardingData.targetLanguage}
+              onChange={value => updateOnboardingData('targetLanguage', value)}
+              required={true}
+              placeholder="Select your target language"
+            />
 
-            <div className="space-y-2 text-left">
-              <Label htmlFor="experienceLevel" className="mb-2">
-                How many years have you studied this language?
-                <span className="text-sky-600 ml-1" aria-hidden="true">
-                  *
-                </span>
-              </Label>
-              <Select
-                onValueChange={value => updateOnboardingData('experienceLevel', value)}
-                value={onboardingData.experienceLevel}
-              >
-                <SelectTrigger
-                  id="experienceLevel"
-                  className="h-10 mt-1 rounded-xl focus:ring-0 focus:ring-offset-0"
-                >
-                  {selectedExperience ? (
-                    <SelectValue className="pl-2">
-                      <span className="flex items-center">
-                        <span className="mr-2">{selectedExperience.emoji}</span>
-                        <span>{selectedExperience.name}</span>
-                      </span>
-                    </SelectValue>
-                  ) : (
-                    <p className="text-muted-foreground">Select your experience level</p>
-                  )}
-                </SelectTrigger>
-                <SelectContent className="rounded-xl">
-                  {experienceLevels.map(level => (
-                    <SelectItem
-                      className="pl-2 rounded-lg"
-                      key={level.value}
-                      value={level.value}
-                      rightCheck={true}
-                    >
-                      <span className="flex items-center">
-                        <span className="mr-2">{level.emoji}</span>
-                        <span>{level.name}</span>
-                      </span>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+            <ExperienceLevelSelector
+              label="How many years have you studied this language?"
+              value={onboardingData.experienceLevel}
+              onChange={value => updateOnboardingData('experienceLevel', value)}
+              required={true}
+              placeholder="Select your experience level"
+            />
 
-            <div className="space-y-2 text-left">
-              <Label htmlFor={citySelectId} className="mb-2">
-                Where did you spend the longest time learning this language?
-                <span className="text-xs text-neutral-500 ml-1">(Optional)</span>
-              </Label>
-              <Popover open={cityOpen} onOpenChange={setCityOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                    id={citySelectId}
-                    variant="outline"
-                    role="combobox"
-                    aria-expanded={cityOpen}
-                    disabled={citiesError}
-                    className="bg-background hover:bg-background border-input w-full justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px] h-10 mt-1 rounded-xl disabled:opacity-50"
-                  >
-                    {citiesLoading ? (
-                      <span className="text-muted-foreground">Loading cities...</span>
-                    ) : citiesError ? (
-                      <span className="text-muted-foreground">
-                        Information not needed at this time
-                      </span>
-                    ) : selectedCity ? (
-                      <span className="flex min-w-0 items-center">
-                        <span className="truncate">{formatCityDisplay(selectedCity)}</span>
-                      </span>
-                    ) : onboardingData.learningCity &&
-                      typeof onboardingData.learningCity === 'string' ? (
-                      <span className="flex min-w-0 items-center">
-                        <span className="truncate">{onboardingData.learningCity}</span>
-                      </span>
-                    ) : (
-                      <span className="text-muted-foreground">Select a city</span>
-                    )}
-                    <ChevronDownIcon
-                      size={16}
-                      className="text-muted-foreground/80 shrink-0 -mr-0.5"
-                      aria-hidden="true"
-                    />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent
-                  className="border-input w-full min-w-[var(--radix-popper-anchor-width)] p-0 rounded-xl"
-                  align="start"
-                >
-                  <Command className="rounded-xl" shouldFilter={false}>
-                    <CommandInput
-                      placeholder="Search city..."
-                      value={citySearchTerm}
-                      onValueChange={setCitySearchTerm}
-                    />
-                    <CommandList className="p-1 max-h-[200px]">
-                      {!citySearchTerm || citySearchTerm.length < 2 ? (
-                        <CommandEmpty>Type at least 2 characters to search...</CommandEmpty>
-                      ) : filteredCities.length === 0 ? (
-                        <CommandEmpty>No cities found.</CommandEmpty>
-                      ) : (
-                        <CommandGroup className="p-0">
-                          {filteredCities.map((city, index) => (
-                            <CommandItem
-                              key={`${city.country}-${city.state}-${city.name}-${index}`}
-                              value={city.name}
-                              className="rounded-lg"
-                              onSelect={() => {
-                                updateOnboardingData('learningCity', {
-                                  name: city.name,
-                                  state: city.state,
-                                  country: city.country,
-                                });
-                                setCityOpen(false);
-                                setCitySearchTerm('');
-                              }}
-                            >
-                              {formatCityDisplay(city)}
-                            </CommandItem>
-                          ))}
-                        </CommandGroup>
-                      )}
-                    </CommandList>
-                  </Command>
-                </PopoverContent>
-              </Popover>
-            </div>
+            <CitySelector
+              label="Where did you spend the longest time learning this language?"
+              value={onboardingData.learningCity}
+              onChange={value => updateOnboardingData('learningCity', value)}
+              required={false}
+              placeholder="Select a city"
+            />
 
-            <div className="space-y-2 text-left">
-              <Label htmlFor="challengingWords" className="mb-2">
-                Challenging Words
-                <span className="text-xs text-neutral-500 ml-1">(Optional)</span>
-              </Label>
-              <Textarea
-                id="challengingWords"
-                placeholder="Are there any specific words you find difficult or confusing? (for example, 'thorough', 'entrepreneur', 'rural')"
-                value={onboardingData.challengingWords}
-                onChange={e => updateOnboardingData('challengingWords', e.target.value)}
-                className="min-h-[100px] mt-1 rounded-xl resize-none p-3"
-                maxLength={500}
-              />
-              <p className="text-xs text-neutral-400 mt-1">
-                {onboardingData.challengingWords?.length || 0}/500 characters
-              </p>
-            </div>
+            <ChallengingWordsSelector
+              label="Challenging Words"
+              value={onboardingData.challengingWords}
+              onChange={value => updateOnboardingData('challengingWords', value)}
+              optional={true}
+              placeholder="Are there any specific words you find difficult or confusing? (for example, 'thorough', 'entrepreneur', 'rural')"
+              maxLength={500}
+            />
           </div>
         </div>
 

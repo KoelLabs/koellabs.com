@@ -2,7 +2,7 @@
 
 import { useState, Fragment } from 'react';
 import { Radio, RadioGroup } from '@headlessui/react';
-import Header from '@/components/ui/1 - header';
+import Header from '@/components/ui/header';
 import { Button } from '@/components/ui/base/button';
 import React from 'react';
 import { Check, Minus, X } from 'lucide-react';

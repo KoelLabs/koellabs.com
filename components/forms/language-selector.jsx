@@ -12,13 +12,18 @@ import {
   CommandList,
 } from '@/components/ui/base/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/base/popover';
-import { CheckIcon, ChevronDownIcon } from 'lucide-react';
+import { ArrowUpRight, CheckIcon, ChevronDownIcon } from 'lucide-react';
 
 const languageGroups = [
   {
     group: 'Most Common',
     languages: [
-      { Code: 'en', NativeName: 'English', Flag: '🇺🇸', EnglishName: 'English' },
+      {
+        Code: 'en',
+        NativeName: 'English (American)',
+        Flag: '🇺🇸',
+        EnglishName: 'English (American)',
+      },
       { Code: 'es', NativeName: 'Español (España)', EnglishName: 'Spanish (Spain)', Flag: '🇪🇸' },
       { Code: 'zh', NativeName: '中文（简体）', EnglishName: 'Chinese (Simplified)', Flag: '🇨🇳' },
       { Code: 'hi', NativeName: 'हिन्दी', Flag: '🇮🇳', EnglishName: 'Hindi' },
@@ -245,10 +250,26 @@ export default function LanguageSelector({
           className="border w-full min-w-[var(--radix-popper-anchor-width)] p-0 rounded-xl"
           align="start"
         >
-          <Command className="rounded-xl">
+          <Command className="rounded-xl relative">
             <CommandInput placeholder="Search language..." />
-            <CommandList className="rounded-xl">
+            <CommandList className="rounded-xl overflow-y-auto">
               <CommandEmpty>No language found.</CommandEmpty>
+              <div className="p-3 w-full max-w-[608px] text-balance">
+                <div className="border border-dashed rounded-xl p-3 ">
+                  <span className="text-sm text-neutral-500 tracking-tight leading-[0.2]">
+                    We are currently using the ISO 639-1 language code, with flag emojis from a
+                    dataset. What are your thoughts about flags associated with languages?
+                  </span>{' '}
+                  <a
+                    href="hhttps://docs.google.com/forms/d/e/1FAIpQLScGr_SkBidld82ghxYKvZeLnsbQI2j75-1wmLpDCwd32BAn2g/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sky-600 hover:underline inline-block text-sm items-center gap-1"
+                  >
+                    Submit feedback here!
+                  </a>
+                </div>
+              </div>
               {languageGroups.map(group => (
                 <Fragment key={group.group}>
                   <CommandGroup heading={group.group}>
