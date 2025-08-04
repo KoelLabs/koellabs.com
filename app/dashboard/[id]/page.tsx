@@ -336,6 +336,8 @@ export default function Page() {
             setTimeout(stopRecording, 1000);
           }
         },
+        process.env.NEXT_PUBLIC_SERVER_ORIGIN,
+        process.env.NEXT_PUBLIC_SERVER_HOST,
       );
 
       // Start recording
