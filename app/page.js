@@ -3,13 +3,14 @@ import Bento from '@/components/sections/2 - Bento';
 import Header from '@/components/ui/header';
 import CTA from '@/components/sections/3 - CTA';
 import Footer from '@/components/sections/4 - Footer';
+import HeroNew from '@/components/sections/hero';
 export default function Home() {
   return (
     <div className="flex-col flex w-screen relative scroll-smooth">
       <div className="z-1 sticky top-0 mx-auto w-full">
         <Header />
       </div>
-      <Hero />
+      <HeroNew />
       <Bento />
       <CTA />
       <Footer />

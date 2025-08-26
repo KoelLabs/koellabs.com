@@ -87,150 +87,68 @@ export default function Footer() {
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <a href="/" className="text-2xl font-semibold  tracking-[-0.04em] h-fit w-fit">
             <svg
-              className="h-10 w-10 -mt-1.5 inline-block"
-              xmlns="http://www.w3.org/2000/svg"
-              width="870"
-              height="870"
+              width="770"
+              height="859"
+              viewBox="0 0 770 859"
               fill="none"
-              viewBox="0 0 870 870"
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 mr-1 -mt-1.5 inline-block"
             >
+              <rect width="769.162" height="859" fill="white" />
               <rect
-                width="214"
-                height="429"
-                x="671.179"
-                y="403"
-                fill="url(#paint0_linear_1691_806)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(90 671.179 403)"
-              ></rect>
+                x="686.844"
+                y="353.266"
+                width="263.361"
+                height="527.953"
+                rx="131.681"
+                transform="rotate(90 686.844 353.266)"
+                fill="#154063"
+              />
               <rect
-                width="214"
-                height="429"
-                x="652.67"
-                y="662.406"
-                fill="url(#paint1_linear_1691_806)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(135 652.67 662.406)"
-              ></rect>
-              <rect
-                width="214"
-                height="429"
-                x="671.179"
-                y="403"
-                fill="url(#paint2_linear_1691_806)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(90 671.179 403)"
-              ></rect>
-              <rect
-                width="214"
-                height="429"
-                x="652.67"
-                y="662.406"
-                fill="url(#paint3_linear_1691_806)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(135 652.67 662.406)"
-              ></rect>
-              <rect
-                width="214"
-                height="429"
-                x="671.179"
-                y="403"
-                fill="url(#paint4_linear_1691_806)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(90 671.179 403)"
-              ></rect>
-              <rect
-                width="214"
-                height="429"
-                x="652.67"
-                y="662.406"
-                fill="url(#paint5_linear_1691_806)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(135 652.67 662.406)"
-              ></rect>
+                x="664.07"
+                y="672.516"
+                width="263.361"
+                height="527.953"
+                rx="131.681"
+                transform="rotate(135 664.07 672.516)"
+                fill="#3779B5"
+              />
+              <mask
+                id="mask0_3106_273"
+                style={{ maskType: 'alpha' }}
+                maskUnits="userSpaceOnUse"
+                x="158"
+                y="353"
+                width="529"
+                height="264"
+              >
+                <rect
+                  x="686.844"
+                  y="353.266"
+                  width="263.361"
+                  height="527.953"
+                  rx="131.681"
+                  transform="rotate(90 686.844 353.266)"
+                  fill="white"
+                />
+              </mask>
+              <g mask="url(#mask0_3106_273)">
+                <rect
+                  x="664.07"
+                  y="672.516"
+                  width="263.361"
+                  height="527.953"
+                  rx="131.681"
+                  transform="rotate(135 664.07 672.516)"
+                  fill="#122438"
+                />
+              </g>
               <path
-                fill="#000"
-                d="M283.332 374.002c-55.404-20.556-106.308-146.637-104.047-152.731 2.261-6.094 123.083-68.461 178.487-47.905 55.404 20.556 83.654 82.134 63.098 137.538-20.556 55.404-82.134 83.654-137.538 63.098z"
-              ></path>
-              <defs>
-                <linearGradient
-                  id="paint0_linear_1691_806"
-                  x1="778.179"
-                  x2="778.179"
-                  y1="403"
-                  y2="832"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#317EC5"></stop>
-                  <stop offset="1"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint1_linear_1691_806"
-                  x1="759.67"
-                  x2="759.67"
-                  y1="662.406"
-                  y2="1091.41"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#317EC5"></stop>
-                  <stop offset="1"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint2_linear_1691_806"
-                  x1="778.179"
-                  x2="778.179"
-                  y1="403"
-                  y2="832"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#317EC5"></stop>
-                  <stop offset="1"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint3_linear_1691_806"
-                  x1="759.67"
-                  x2="759.67"
-                  y1="662.406"
-                  y2="1091.41"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#317EC5"></stop>
-                  <stop offset="1"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint4_linear_1691_806"
-                  x1="778.179"
-                  x2="778.179"
-                  y1="403"
-                  y2="832"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#317EC5"></stop>
-                  <stop offset="1"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint5_linear_1691_806"
-                  x1="759.67"
-                  x2="759.67"
-                  y1="662.406"
-                  y2="1091.41"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#317EC5"></stop>
-                  <stop offset="1"></stop>
-                </linearGradient>
-              </defs>
+                d="M209.534 317.593C141.351 292.296 78.7053 137.133 81.4879 129.634C84.2704 122.134 232.961 45.3817 301.145 70.6792C369.328 95.9767 404.094 171.758 378.796 239.941C353.499 308.125 277.718 342.891 209.534 317.593Z"
+                fill="black"
+              />
             </svg>
-            Koel{' '}
-            <span className=" -ml-px text-transparent bg-clip-text bg-linear-to-br from-black via-sky-950 to-sky-500">
-              Labs
-            </span>
+            Koel Labs
           </a>
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0 grid-flow-col">
             <div className="md:grid md:grid-cols-2 md:gap-8 ">

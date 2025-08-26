@@ -663,6 +663,14 @@ html {
   --media-chapters-with-thumbnails-min-width: 300px;
 }
 
+body {
+  background-color: #ffffff;
+}
+
+main {
+  background-color: #ffffff;
+}
+
 .path {
   animation: pathAnimation 24s ease-in-out infinite;
   stroke-dasharray: 612.5;
@@ -705,55 +713,93 @@ html {
   }
 }
 
-@keyframes popUpAndSettle {
-  0% {
+/* Navigation Menu Animations */
+@keyframes enterFromLeft {
+  from {
     opacity: 0;
-    transform: scale(0.3) translateY(100px);
+    transform: translateX(-100px) translateY(-8px);
   }
-  100% {
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes enterFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes exitToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100px) translateY(-8px);
+  }
+}
+
+@keyframes exitToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100px) translateY(-8px);
+  }
+}
+
+@keyframes scaleInContent {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(-4px);
+  }
+  to {
     opacity: 1;
     transform: scale(1) translateY(0);
   }
 }
 
-@keyframes popUpAndSettleLeft {
-  0% {
-    opacity: 0;
-    transform: scale(0.3) translateY(100px);
-  }
-  100% {
+@keyframes scaleOutContent {
+  from {
     opacity: 1;
-    transform: scale(1) translate(-30px, -30px) rotate(-3deg);
+    transform: scale(1) translateY(0);
   }
-}
-
-@keyframes popUpAndSettleRight {
-  0% {
+  to {
     opacity: 0;
-    transform: scale(0.3) translateY(100px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translate(30px, 30px) rotate(3deg);
+    transform: scale(0.98) translateY(-4px);
   }
 }
 
-.empty-state-center {
-  animation: popUpAndSettle 0.4s cubic-bezier(0.16, 1.5, 0.15, 1) forwards;
+.animate-enter-from-left {
+  animation: enterFromLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.empty-state-right {
-  animation: popUpAndSettleRight 0.4s cubic-bezier(0.16, 1.5, 0.15, 1) forwards;
-  animation-delay: 0.12s;
-  opacity: 0;
+.animate-enter-from-right {
+  animation: enterFromRight 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.empty-state-left {
-  animation: popUpAndSettleLeft 0.4s cubic-bezier(0.16, 1.5, 0.15, 1) forwards;
-  animation-delay: 0.06s;
-  opacity: 0;
+.animate-exit-to-left {
+  animation: exitToLeft 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-nextjs-portal {
-  display: none;
+.animate-exit-to-right {
+  animation: exitToRight 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-scale-in-content {
+  animation: scaleInContent 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-scale-out-content {
+  animation: scaleOutContent 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
