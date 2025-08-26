@@ -67,7 +67,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth ">
+    <html lang="en" className="scroll-smooth overflow-x-hidden">
       <ReactScan />
       <head>
         <Script id="org-schema" type="application/ld+json">

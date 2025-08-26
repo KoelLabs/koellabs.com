@@ -2,17 +2,104 @@
 
 import React, { createContext, useId, useState } from 'react';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
-import { LayoutGroup } from 'framer-motion';
+import { LayoutGroup, motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, SquareChevronRight, SquareLibrary, SquareUserRound, X } from 'lucide-react';
 import { Dialog, DialogPanel } from '@headlessui/react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/styles';
 import { useScroll } from '@/lib/hooks/use-scroll';
-import { MaxWidthWrapper } from '@/components/ui/max-width-wrapper';
 import { Button } from '@/components/ui/base/button';
 
 export const NavContext = createContext({ theme: 'light' });
+
+function AboutContent() {
+  return (
+    <div className="w-[400px] transform-gpu bg-neutral-100 ring-1">
+      <div className="-space-y-0.5 p-2 bg-white rounded-xl border-b">
+        <Link
+          href="/about"
+          prefetch={true}
+          className="group rounded-xl transition-colors p-2 hover:bg-neutral-50 flex items-center gap-2"
+        >
+          <div className="flex items-center gap-2 border p-3 rounded-lg text-neutral-600 justify-center size-12 bg-white">
+            <SquareUserRound className="size-8" />
+          </div>
+          <div className="flex flex-col ml-1.5">
+            <div className="font-medium text-sm text-neutral-900">Team</div>
+            <div className="text-sm text-neutral-500 mt-0.5">Our mission, team, and values</div>
+          </div>
+        </Link>
+        <Link
+          href="/blog"
+          prefetch={true}
+          className="group rounded-xl transition-colors p-2 hover:bg-neutral-50 flex items-center gap-2"
+        >
+          <div className="flex items-center gap-2 border p-3 rounded-lg text-neutral-600 size-12 bg-white">
+            <SquareLibrary className="size-8" />
+          </div>
+          <div className="flex flex-col ml-1.5">
+            <div className="font-medium text-sm text-neutral-900">Blog</div>
+            <div className="text-sm text-neutral-500 mt-0.5">Latest insights and updates</div>
+          </div>
+        </Link>
+        <Link
+          href="/contact"
+          prefetch={true}
+          className="group rounded-xl transition-colors p-2 hover:bg-neutral-50 flex items-center gap-2"
+        >
+          <div className="flex items-center gap-2 border p-3 rounded-lg text-neutral-600 size-12 bg-white">
+            <SquareChevronRight className="size-8" />
+          </div>
+          <div className="flex flex-col ml-1.5">
+            <div className="font-medium text-sm text-neutral-900">Contact</div>
+            <div className="text-sm text-neutral-500 mt-0.5">Get in touch with our team</div>
+          </div>
+        </Link>
+      </div>
+      {/* <div className="h-fit w-full bg-neutral-100">
+        <Link
+          href="/blog"
+          className="group rounded-xl transition-colors p-2 hover:bg-neutral-50 flex items-center gap-2"
+        >
+          <div className="flex items-center gap-2 border p-3 rounded-2xl text-neutral-600 w-full h-12 mb-0.5 bg-white">
+            <p className="text-xs font-medium">We are building a pronunciation platform</p>
+          </div>
+        </Link>
+      </div> */}
+    </div>
+  );
+}
+
+function AnimatedChevron(props) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="9"
+      height="9"
+      fill="none"
+      viewBox="0 0 9 9"
+      {...props}
+    >
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+        d="M7.278 3.389 4.5 6.167 1.722 3.389"
+        className="transition-transform duration-150 [transform-box:view-box] [transform-origin:center] [vector-effect:non-scaling-stroke] group-data-[state=open]/item:-scale-y-100"
+      />
+    </svg>
+  );
+}
+
+function WithTrigger({ trigger, children }) {
+  return trigger ? (
+    <NavigationMenuPrimitive.Trigger asChild>{children}</NavigationMenuPrimitive.Trigger>
+  ) : (
+    children
+  );
+}
 
 const navItems = [
   {
@@ -21,28 +108,21 @@ const navItems = [
     segments: ['/'],
   },
   {
+    name: 'Previews',
+    href: '/previews',
+    segments: ['/previews'],
+  },
+  {
+    name: 'Research',
+    href: '/research',
+    segments: ['/research'],
+  },
+  {
     name: 'About',
-    href: '/about',
-    segments: ['/about'],
-  },
-  {
-    name: 'Blog',
-    href: '/blog',
-    segments: ['/blog'],
-  },
-  {
-    name: 'Contact',
-    href: '/contact',
-    segments: ['/contact'],
+    content: AboutContent,
+    segments: ['/about', '/blog', '/contact'],
   },
 ];
-
-const navItemClassName = cn(
-  'relative group/item flex items-center rounded-md px-4 py-2 text-sm rounded-lg font-medium text-neutral-700 hover:text-neutral-900 transition-colors',
-  'hover:bg-neutral-900/5 dark:hover:bg-white/10',
-  'data-[active=true]:bg-neutral-900/5 dark:data-[active=true]:bg-white/10',
-  'group-has-[:hover]:data-[active=true]:[&:not(:hover)]:bg-transparent',
-);
 
 function LogoComponent() {
   return (
@@ -115,29 +195,47 @@ function LogoComponent() {
 
 export default function Header({ theme = 'light' }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState(null);
+  const [previousHoveredItem, setPreviousHoveredItem] = useState(null);
   const layoutGroupId = useId();
-  const scrolled = useScroll(40);
+  const scrolled = useScroll(20);
   const pathname = usePathname();
   const currentPath = pathname === '/' ? '/' : `/${pathname?.split('/')?.[1] || ''}`;
+
+  const activeItem = navItems.find(({ segments }) =>
+    segments.some(segment => currentPath === segment),
+  );
+
+  const handleItemHover = itemName => {
+    setPreviousHoveredItem(hoveredItem || activeItem?.name);
+    setHoveredItem(itemName);
+  };
+
+  const handleItemLeave = () => {
+    setPreviousHoveredItem(hoveredItem);
+    setHoveredItem(null);
+  };
+
+  const backgroundItem = hoveredItem || activeItem?.name;
 
   return (
     <NavContext.Provider value={{ theme }}>
       <LayoutGroup id={layoutGroupId}>
         <div
           className={cn(
-            'sticky inset-x-0 top-0 z-30 w-full transition-all',
+            'sticky inset-x-0 top-0 z-[60] w-full transition-all',
             theme === 'dark' && 'dark',
           )}
         >
           <div
             className={cn(
-              'absolute inset-0 block border-b border-transparent transition-all duration-300',
+              'absolute inset-0 block border-b border-transparent transition-all duration-300 z-[50]',
               scrolled &&
                 'border-neutral-200 bg-white/80 backdrop-blur-xl dark:border-white/10 dark:bg-black/80',
             )}
           />
-          <MaxWidthWrapper className="relative">
-            <div className="flex h-20 items-center justify-between">
+          <div className="mx-auto w-full max-w-6xl px-6 lg:px-8 relative z-[50]">
+            <div className="flex h-20 items-center justify-between z-[50] relative">
               <div className="grow basis-0">
                 <div className="block w-fit py-2 pr-2">
                   <LogoComponent />
@@ -149,27 +247,104 @@ export default function Header({ theme = 'light' }) {
                 className="relative hidden lg:block"
               >
                 <NavigationMenuPrimitive.List className="group relative z-0 flex">
-                  {navItems.map(({ name, href, segments }) => {
+                  {navItems.map(({ name, href, segments, content: Content }, index) => {
                     const isActive = segments.some(segment => currentPath === segment);
+                    const isHovered = hoveredItem === name;
+                    const hasBackground = backgroundItem === name;
+                    const currentIndex = index;
+                    const previousIndex = previousHoveredItem
+                      ? navItems.findIndex(item => item.name === previousHoveredItem)
+                      : activeItem
+                        ? navItems.findIndex(item => item.name === activeItem.name)
+                        : currentIndex;
 
                     return (
-                      <NavigationMenuPrimitive.Item key={name}>
-                        <Link href={href} className={navItemClassName} data-active={isActive}>
-                          {name}
-                        </Link>
+                      <NavigationMenuPrimitive.Item
+                        key={name}
+                        className="relative active:scale-[97%]"
+                      >
+                        {hasBackground && (
+                          <motion.div
+                            layoutId="nav-bg"
+                            className={cn('absolute inset-0 rounded-xl bg-neutral-100 ')}
+                            initial={{
+                              opacity: 1,
+                              scale: 1,
+                              x:
+                                previousIndex !== currentIndex
+                                  ? previousIndex > currentIndex
+                                    ? 16
+                                    : -16
+                                  : 0,
+                              y: isHovered ? -2 : 0,
+                            }}
+                            animate={{
+                              opacity: 1,
+                              scale: 1,
+                              x: 0,
+                              y: 0,
+                            }}
+                            exit={{
+                              x:
+                                previousIndex !== currentIndex
+                                  ? previousIndex < currentIndex
+                                    ? 16
+                                    : -16
+                                  : 0,
+                              y: 2,
+                            }}
+                            transition={{
+                              type: 'spring',
+                              bounce: 0.15,
+                              duration: 0.5,
+                            }}
+                          />
+                        )}
+
+                        <WithTrigger trigger={!!Content}>
+                          {href !== undefined ? (
+                            <Link
+                              href={href}
+                              className="relative z-10 group/item flex items-center px-4 py-2 text-sm rounded-xl font-base"
+                              onMouseEnter={() => handleItemHover(name)}
+                              onMouseLeave={handleItemLeave}
+                            >
+                              {name}
+                            </Link>
+                          ) : (
+                            <button
+                              className="relative z-10 group/item flex items-center px-4 py-2 text-sm rounded-xl font-base"
+                              onMouseEnter={() => handleItemHover(name)}
+                              onMouseLeave={handleItemLeave}
+                            >
+                              {name}
+                              <AnimatedChevron className="ml-1.5 size-2.5 text-neutral-700" />
+                            </button>
+                          )}
+                        </WithTrigger>
+
+                        {Content && (
+                          <NavigationMenuPrimitive.Content className="data-[motion=from-start]:animate-enter-from-left data-[motion=from-end]:animate-enter-from-right data-[motion=to-start]:animate-exit-to-left data-[motion=to-end]:animate-exit-to-right absolute left-0 top-0">
+                            <Content />
+                          </NavigationMenuPrimitive.Content>
+                        )}
                       </NavigationMenuPrimitive.Item>
                     );
                   })}
                 </NavigationMenuPrimitive.List>
-              </NavigationMenuPrimitive.Root>
 
-              <div className="hidden grow basis-0 justify-end gap-2 lg:flex">
-                <Link href="#join-the-waitlist">
-                  <Button className="bg-gradient-to-b py-0 px-6 rounded-lg border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
-                    Join the Waitlist
-                  </Button>
-                </Link>
-              </div>
+                <div className="absolute left-1/2 top-full mt-3 -translate-x-1/2">
+                  <NavigationMenuPrimitive.Viewport
+                    className={cn(
+                      'nav-viewport relative flex justify-start overflow-hidden rounded-[20px] border border-neutral-200 bg-white shadow-lg dark:border-white/[0.15] dark:bg-black',
+                      'transform-gpu will-change-[transform,width,height]',
+                      'data-[state=closed]:animate-scale-out-content data-[state=open]:animate-scale-in-content',
+                      'transition-[width,height] duration-300',
+                      'h-[var(--radix-navigation-menu-viewport-height)] w-[var(--radix-navigation-menu-viewport-width)]',
+                    )}
+                  />
+                </div>
+              </NavigationMenuPrimitive.Root>
 
               <div className="flex lg:hidden">
                 <button
@@ -182,7 +357,7 @@ export default function Header({ theme = 'light' }) {
                 </button>
               </div>
             </div>
-          </MaxWidthWrapper>
+          </div>
         </div>
       </LayoutGroup>
 
@@ -353,27 +528,75 @@ export default function Header({ theme = 'light' }) {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <ul className="flex flex-col gap-y-2">
-                  {navItems.map(({ href, name }) => (
-                    <Link
-                      className={
-                        currentPath === href
-                          ? 'text-black'
-                          : 'text-neutral-500 hover:text-neutral-700'
-                      }
-                      href={href}
-                      key={`${href}${name}`}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <li className="w-full p-2 rounded-2xl tracking-tight hover:bg-neutral-100">
-                        {name}
-                      </li>
-                    </Link>
-                  ))}
+                  {navItems.map(({ href, name, content, segments }) => {
+                    if (content) {
+                      return (
+                        <div key={name}>
+                          <Link
+                            className={
+                              segments.some(segment => currentPath === segment)
+                                ? 'text-black'
+                                : 'text-neutral-500 hover:text-neutral-700'
+                            }
+                            href="/about"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            <li className="w-full p-2 rounded-2xl tracking-tight hover:bg-neutral-100">
+                              About Us
+                            </li>
+                          </Link>
+                          <Link
+                            className={
+                              currentPath === '/blog'
+                                ? 'text-black'
+                                : 'text-neutral-500 hover:text-neutral-700'
+                            }
+                            href="/blog"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            <li className="w-full p-2 pl-6 rounded-2xl tracking-tight hover:bg-neutral-100">
+                              Blog
+                            </li>
+                          </Link>
+                          <Link
+                            className={
+                              currentPath === '/contact'
+                                ? 'text-black'
+                                : 'text-neutral-500 hover:text-neutral-700'
+                            }
+                            href="/contact"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            <li className="w-full p-2 pl-6 rounded-2xl tracking-tight hover:bg-neutral-100">
+                              Contact
+                            </li>
+                          </Link>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <Link
+                        className={
+                          currentPath === href
+                            ? 'text-black'
+                            : 'text-neutral-500 hover:text-neutral-700'
+                        }
+                        href={href}
+                        key={`${href}${name}`}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <li className="w-full p-2 rounded-2xl tracking-tight hover:bg-neutral-100">
+                          {name}
+                        </li>
+                      </Link>
+                    );
+                  })}
                 </ul>
               </div>
               <div className="py-6">
                 <Link href="#join-the-waitlist" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="w-full bg-gradient-to-b py-0 px-6 rounded-lg border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
+                  <Button className="w-full bg-gradient-to-b py-0 px-6 rounded-lg border border-double outline-white/50 outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
                     Join the Waitlist
                   </Button>
                 </Link>

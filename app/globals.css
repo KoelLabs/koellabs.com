@@ -663,6 +663,31 @@ html {
   --media-chapters-with-thumbnails-min-width: 300px;
 }
 
+.NavigationMenuIndicator[data-state='visible'] {
+  animation: fadeIn 200ms ease;
+}
+.NavigationMenuIndicator[data-state='hidden'] {
+  animation: fadeOut 200ms ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 body {
   background-color: #ffffff;
 }
@@ -761,7 +786,7 @@ main {
 @keyframes scaleInContent {
   from {
     opacity: 0;
-    transform: scale(0.98) translateY(-4px);
+    transform: scale(0.95) translateY(-8px);
   }
   to {
     opacity: 1;
@@ -776,7 +801,7 @@ main {
   }
   to {
     opacity: 0;
-    transform: scale(0.98) translateY(-4px);
+    transform: scale(0.9) translateY(-8px);
   }
 }
 
@@ -797,9 +822,27 @@ main {
 }
 
 .animate-scale-in-content {
-  animation: scaleInContent 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: scaleInContent 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top right !important;
 }
 
 .animate-scale-out-content {
-  animation: scaleOutContent 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: scaleOutContent 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top center !important;
+}
+
+/* Ensure Radix NavigationMenu viewport animates in/out based on data-state */
+.nav-viewport {
+  transition:
+    width 300ms,
+    height 300ms,
+    transform 300ms;
+}
+.nav-viewport[data-state='open'] {
+  animation: scaleInContent 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top right !important;
+}
+.nav-viewport[data-state='closed'] {
+  animation: scaleOutContent 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top center !important;
 }

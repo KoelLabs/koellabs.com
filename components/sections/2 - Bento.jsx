@@ -15,7 +15,7 @@ export default function Bento() {
           aria-labelledby="features-heading"
           className="mx-auto w-full h-fit bg-neutral-50/20 backdrop-blur-md border-y border-neutral-200 relative overflow-hidden"
         >
-          <div className="bg-white/50 py-24 sm:py-32">
+          <div className="bg-white py-24 sm:py-32">
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
               <p className="text-base/7 font-semibold text-sky-600 relative z-10">What is this?</p>
               <h2
