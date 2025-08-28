@@ -1,20 +1,20 @@
 import React from 'react';
 import { Button } from '@/components/ui/base/button';
 import Header from '@/components/ui/header';
-import { ChevronRight, UserRoundPlus } from 'lucide-react';
+import { ArrowBigDown, Lock, ServerIcon } from 'lucide-react';
 import Link from 'next/link';
 import { Card } from '@/components/ui/base/card';
 
 export default function Models() {
   return (
-    <div id="models" className="">
+    <div id="models" className="relative">
       <svg
         width="75"
         height="905"
         viewBox="0 0 75 905"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute top-4 left-0 z-[1]"
+        className="absolute top-4 left-0 z-[1] hidden lg:block"
       >
         <g clipPath="url(#clip0_3877_301)">
           <path
@@ -44,7 +44,7 @@ export default function Models() {
         viewBox="0 0 75 905"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute top-4 right-0 z-[1] rotate-180"
+        className="absolute top-4 right-0 z-[1] rotate-180 hidden lg:block"
       >
         <g clipPath="url(#clip0_3877_301)">
           <path
@@ -78,144 +78,78 @@ export default function Models() {
             className="bg-white py-24 sm:py-32"
           >
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[1000] relative">
-              <p className="text-base/7 font-semibold text-sky-600 relative z-10">Research</p>
+              <p className="text-base/7 font-semibold text-sky-600 relative z-10">Models</p>
               <h2
                 id="features-heading"
                 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
               >
-                Our latest talks and presentations
+                The latest and greatest in phonetic models
               </h2>
               <ul
                 role="list"
-                className="mt-12 grid grid-cols-1 gap-20 lg:grid-cols-6 lg:grid-rows-1 p-2 z-10 relative`"
+                data-cursor-opacity="1"
+                data-cursor-size="340"
+                className="mt-12 grid lg:p-2 z-10 grid-cols-1 lg:grid-cols-2 relative gap-10 `"
               >
-                <li className="relative lg:col-span-3 group">
+                <li className="relative group">
                   <Link href="/research">
-                    <article className="relative flex h-fit flex-col inset-px ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
-                      <div className="relative p-2 rounded-[32px] bg-white border scale-110 shadow-xs">
-                        <img
-                          alt="Screenshot showing the massive library of content available to practice with"
-                          src="/images/interspeech.png"
-                          className="h-full aspect-video object-cover object-top rounded-3xl border bg-white border-black/10"
-                        />
-                      </div>
-                      <div className="p-5 pt-9">
-                        <div className="flex items-center gap-2">
-                          <div className="flex items-center gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-fit">
-                            <svg
-                              width="86"
-                              height="86"
-                              viewBox="0 0 86 86"
-                              fill="none"
-                              className="size-3 text-sky-600 mx-0.5 mr-1 group-hover:rotate-180 transition-transform ease-in-out duration-450"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M41.4672 1.19822C41.7127 0.0255133 44.2873 0.0255196 44.5328 1.19822C46.3436 9.84995 50.0055 22.4562 56.7746 29.2254C63.5438 35.9945 76.1501 39.6564 84.8018 41.4672C85.9745 41.7127 85.9745 44.2873 84.8018 44.5328C76.1501 46.3436 63.5438 50.0055 56.7746 56.7746C50.0055 63.5438 46.3436 76.1501 44.5328 84.8018C44.2873 85.9745 41.7127 85.9745 41.4672 84.8018C39.6564 76.1501 35.9945 63.5438 29.2254 56.7746C22.4562 50.0055 9.84994 46.3436 1.19822 44.5328C0.0255133 44.2873 0.0255196 41.7127 1.19822 41.4672C9.84995 39.6564 22.4562 35.9945 29.2254 29.2254C35.9945 22.4562 39.6564 9.84994 41.4672 1.19822Z"
-                                fill="oklch(0.588 0.158 241.966)"
-                              />
-                            </svg>
-
-                            <h3 className="text-sm/4 font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-[#536AD4]">
-                              Research Conference
-                            </h3>
-                          </div>
-                          <div className="flex items-center gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-fit group">
-                            <svg
-                              width="86"
-                              height="86"
-                              viewBox="0 0 86 86"
-                              fill="none"
-                              className="size-3 text-emerald-600 mx-0.5 mr-1 rotate-45 group-hover:rotate-270 transition-transform ease-in-out duration-450"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M41.4672 1.19822C41.7127 0.0255133 44.2873 0.0255196 44.5328 1.19822C46.3436 9.84995 50.0055 22.4562 56.7746 29.2254C63.5438 35.9945 76.1501 39.6564 84.8018 41.4672C85.9745 41.7127 85.9745 44.2873 84.8018 44.5328C76.1501 46.3436 63.5438 50.0055 56.7746 56.7746C50.0055 63.5438 46.3436 76.1501 44.5328 84.8018C44.2873 85.9745 41.7127 85.9745 41.4672 84.8018C39.6564 76.1501 35.9945 63.5438 29.2254 56.7746C22.4562 50.0055 9.84994 46.3436 1.19822 44.5328C0.0255133 44.2873 0.0255196 41.7127 1.19822 41.4672C9.84995 39.6564 22.4562 35.9945 29.2254 29.2254C35.9945 22.4562 39.6564 9.84994 41.4672 1.19822Z"
-                                fill="oklch(0.609 0.126 221.723)"
-                              />
-                            </svg>
-
-                            <h3 className="text-sm/4 font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-sky-800">
-                              August 2025
-                            </h3>
-                          </div>
-                        </div>
-                        <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
-                          Interspeech Conference Science Slam '25
-                        </p>
-                        <p className="mt-2 max-w-lg text-sm/6 text-gray-600 text-pretty">
-                          We presented our work on making speech pathology more accessible, insights
-                          and statistics into our latest phonetic model, and a demo of our
-                          work-in-progress pronunciation platform.
-                        </p>
-                      </div>
-                    </article>
+                    <div className="relative p-2 aspect-square rounded-[32px] bg-white border overflow-hidden">
+                      <img
+                        alt="Screenshot showing the massive library of content available to practice with"
+                        src="/models.svg"
+                        className="h-full aspect-video object-cover object-top rounded-3xl border bg-white border-black/10 saturate-200"
+                      />
+                    </div>
                   </Link>
                 </li>
-                <li className="relative lg:col-span-3 group">
-                  <Link href="/research">
-                    <article className="relative flex h-fit flex-col inset-px ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
-                      <div className="relative p-2 rounded-[32px] bg-white border scale-110 shadow-xs">
-                        <img
-                          alt="Screenshot showing the massive library of content available to practice with"
-                          src="/images/UofW.png"
-                          className="h-full aspect-video top-0 object-cover object-top rounded-3xl bg-white border border-black/10"
-                        />
-                      </div>
-                      <div className="p-5 pt-9">
-                        <div className="flex items-center gap-2">
-                          <div className="flex items-center gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-fit">
-                            <div className="flex items-center gap-2">
-                              <svg
-                                width="86"
-                                height="86"
-                                viewBox="0 0 86 86"
-                                fill="none"
-                                className="size-3 text-sky-600 mx-0.5 mr-1 group-hover:rotate-180 transition-transform ease-in-out duration-450"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M41.4672 1.19822C41.7127 0.0255133 44.2873 0.0255196 44.5328 1.19822C46.3436 9.84995 50.0055 22.4562 56.7746 29.2254C63.5438 35.9945 76.1501 39.6564 84.8018 41.4672C85.9745 41.7127 85.9745 44.2873 84.8018 44.5328C76.1501 46.3436 63.5438 50.0055 56.7746 56.7746C50.0055 63.5438 46.3436 76.1501 44.5328 84.8018C44.2873 85.9745 41.7127 85.9745 41.4672 84.8018C39.6564 76.1501 35.9945 63.5438 29.2254 56.7746C22.4562 50.0055 9.84994 46.3436 1.19822 44.5328C0.0255133 44.2873 0.0255196 41.7127 1.19822 41.4672C9.84995 39.6564 22.4562 35.9945 29.2254 29.2254C35.9945 22.4562 39.6564 9.84994 41.4672 1.19822Z"
-                                  fill="oklch(0.588 0.158 241.966)"
-                                />
-                              </svg>
-
-                              <h3 className="text-sm/4 font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-[#536AD4]">
-                                Research Symposium
-                              </h3>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-fit group">
-                            <svg
-                              width="86"
-                              height="86"
-                              viewBox="0 0 86 86"
-                              fill="none"
-                              className="size-3 text-emerald-600 mx-0.5 mr-1 rotate-45 group-hover:rotate-270 transition-transform ease-in-out duration-450"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M41.4672 1.19822C41.7127 0.0255133 44.2873 0.0255196 44.5328 1.19822C46.3436 9.84995 50.0055 22.4562 56.7746 29.2254C63.5438 35.9945 76.1501 39.6564 84.8018 41.4672C85.9745 41.7127 85.9745 44.2873 84.8018 44.5328C76.1501 46.3436 63.5438 50.0055 56.7746 56.7746C50.0055 63.5438 46.3436 76.1501 44.5328 84.8018C44.2873 85.9745 41.7127 85.9745 41.4672 84.8018C39.6564 76.1501 35.9945 63.5438 29.2254 56.7746C22.4562 50.0055 9.84994 46.3436 1.19822 44.5328C0.0255133 44.2873 0.0255196 41.7127 1.19822 41.4672C9.84995 39.6564 22.4562 35.9945 29.2254 29.2254C35.9945 22.4562 39.6564 9.84994 41.4672 1.19822Z"
-                                fill="oklch(0.609 0.126 221.723)"
-                              />
-                            </svg>
-
-                            <h3 className="text-sm/4 font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-sky-800">
-                              May 2025
-                            </h3>
-                          </div>
-                        </div>
-                        <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
-                          University of Washington Research Symposium '25
-                        </p>
-                        <p className="mt-2 max-w-lg text-sm/6 text-gray-600 text-pretty">
-                          We presented architectural challenges in building speech tools and models,
-                          working with non-lab settings and real-time data, and our mission as a
-                          research lab.
-                        </p>
-                      </div>
-                    </article>
-                  </Link>
+                <li
+                  data-cursor-opacity="0.5"
+                  data-cursor-size="100"
+                  className="px-2 md:px-6 lg:px-0 lg:pr-4 lg:pt-4"
+                >
+                  <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-lg">
+                    <p className="lg:-mt-4 xl:mt-4 text-md/8 text-neutral-600 text-pretty">
+                      We introduce a state-of-the-art phonetic transcription model, XLSR-English-01,
+                      which transcribes both standard and non-standard English speech, achieving a
+                      60% improvement in feature error rate over other phonetic models, including
+                      Facebook's model, Facebook 60.
+                    </p>
+                    <p className="mt-6 text-md/8 text-neutral-600 text-pretty">
+                      To develop truly inclusive speech technology, models should be able to
+                      accurately transcribe diverse speaker profiles, from speech impediments to
+                      non-native speech.
+                    </p>
+                    <p className="mt-6 text-md/8 text-neutral-600 text-pretty">
+                      In light of this, we test our model on speech aphasia data (PSST) and
+                      non-native speech spanning from Italian and German (ISLE) to Mandarin
+                      (SpeechOcean) accented speech.
+                    </p>
+                    <p className="mt-6 text-md/8 text-neutral-600 text-pretty">
+                      This model marks our second major update from our previous SoTA model
+                      (Koel-Labs-B0), and we aim to continuously improve upon phonetic transcription
+                      models in both their transcription quality and inference time.
+                    </p>
+                    <div className="mt-6 border rounded-[20px] p-2 w-full flex flex-row gap-2">
+                      <Button
+                        variant="outline"
+                        className="w-full active:scale-[97%] transition-all duration-50 "
+                      >
+                        <p>View GitHub</p>
+                      </Button>
+                      <Button className="w-full active:scale-[97%] transition-all duration-50 ">
+                        <p>View on Huggingface</p>
+                      </Button>
+                    </div>
+                    {/* <div className="mt-6 border rounded-3xl p-2 w-full flex flex-row gap-2">
+                      <div className="size-24 rounded-2xl border"></div>
+                    </div>
+                    <div className="mt-6 border rounded-3xl p-2 w-full flex flex-row gap-2">
+                      <div className="size-24 rounded-2xl border"></div>
+                    </div>
+                    <div className="mt-6 border rounded-3xl p-2 w-full flex flex-row gap-2">
+                      <div className="size-24 rounded-2xl border"></div>
+                    </div> */}
+                  </div>
                 </li>
               </ul>
             </div>

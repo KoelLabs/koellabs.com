@@ -266,7 +266,7 @@ export default function Header({ theme = 'light' }) {
                         {hasBackground && (
                           <motion.div
                             layoutId="nav-bg"
-                            className={cn('absolute inset-0 rounded-xl bg-neutral-100 ')}
+                            className={cn('absolute inset-0 rounded-xl bg-neutral-100 opacity-50 ')}
                             initial={{
                               opacity: 1,
                               scale: 1,

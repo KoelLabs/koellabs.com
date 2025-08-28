@@ -85,10 +85,13 @@ export default function HeroNew() {
               technologies more inclusive for all dialects.
             </p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4 w-full">
-              <Button variant="outline" className="active:scale-[97%] transition-all duration-50">
+              <Button
+                variant="outline"
+                className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto"
+              >
                 Read our research
               </Button>
-              <Button className="active:scale-[97%] transition-all duration-50">
+              <Button className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto">
                 View our demos
               </Button>
             </div>

@@ -36,6 +36,7 @@
     "cmdk": "^1.1.1",
     "drizzle-kit": "^0.31.4",
     "drizzle-orm": "^0.44.2",
+    "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.3.0",
     "formidable": "^3.5.2",
     "framer-motion": "^11.3.30",
