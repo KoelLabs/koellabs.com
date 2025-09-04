@@ -26,65 +26,10 @@ export default function Hero() {
                 Anyone Built by <span className="pr-0.5">Everyone</span>{' '}
               </span>
             </h1>
-            <svg
-              aria-hidden="true"
-              className="absolute right-4 bottom-[126px] rotate-12 shimmer hidden lg:block"
-              xmlns="http://www.w3.org/2000/svg"
-              width="44"
-              height="47"
-              fill="none"
-              viewBox="0 0 44 47"
-            >
-              <path
-                fill="url(#paint0_linear_1610_229)"
-                d="M18.32 19.146c.042-.112.257-.068.251.052-.09 1.955-.097 6.527 1.578 9.074 1.675 2.548 5.874 4.355 7.705 5.048.112.042.067.257-.052.251-1.956-.09-6.527-.096-9.075 1.578-2.547 1.675-4.355 5.874-5.047 7.705-.043.112-.258.068-.252-.052.09-1.956.097-6.527-1.578-9.075-1.674-2.547-5.873-4.354-7.704-5.047-.113-.043-.068-.257.052-.252 1.955.09 6.527.097 9.074-1.578 2.548-1.674 4.355-5.873 5.048-7.704z"
-              ></path>
-              <path
-                fill="url(#paint1_linear_1610_229)"
-                d="M33.683 9.777c.044-.111.269-.065.265.055-.052 1.525.01 4.562 1.15 6.298 1.141 1.736 3.905 2.996 5.325 3.553.112.044.065.27-.055.265-1.525-.051-4.561.01-6.297 1.15-1.736 1.142-2.996 3.905-3.554 5.326-.044.111-.269.065-.265-.055.052-1.525-.009-4.562-1.15-6.298-1.141-1.736-3.904-2.996-5.325-3.554-.112-.043-.065-.268.055-.264 1.525.051 4.561-.01 6.297-1.15 1.736-1.142 2.997-3.905 3.554-5.326z"
-              ></path>
-              <path
-                fill="url(#paint2_linear_1610_229)"
-                d="M14.68 2.19c.047-.11.286-.06.285.059-.017 1.116.08 2.975.804 4.077.724 1.102 2.392 1.927 3.423 2.355.111.046.061.285-.058.284-1.117-.017-2.975.08-4.077.804-1.102.724-1.928 2.392-2.355 3.423-.046.11-.286.061-.284-.058.016-1.117-.08-2.975-.804-4.077-.724-1.102-2.392-1.928-3.424-2.355-.11-.046-.06-.286.059-.284 1.116.016 2.975-.08 4.077-.804 1.102-.724 1.927-2.392 2.355-3.424z"
-              ></path>
-              <defs>
-                <linearGradient
-                  id="paint0_linear_1610_229"
-                  x1="18.632"
-                  x2="13.367"
-                  y1="18.269"
-                  y2="43.73"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#0284C7"></stop>
-                  <stop offset="1" stopColor="#172554"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint1_linear_1610_229"
-                  x1="34.002"
-                  x2="30.198"
-                  y1="8.902"
-                  y2="27.299"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#0284C7"></stop>
-                  <stop offset="1" stopColor="#172554"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint2_linear_1610_229"
-                  x1="15.009"
-                  x2="12.373"
-                  y1="1.318"
-                  y2="14.065"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#0284C7"></stop>
-                  <stop offset="1" stopColor="#172554"></stop>
-                </linearGradient>
-              </defs>
-            </svg>
+
             <p className="mt-6 sm:text-lg leading-8 text-gray-600 max-w-xl mx-auto text-pretty">
-              An Open Source Approach to Inclusive Innovation
+              We are building out state-of-the-art models, tools, and datasets to make speech
+              technologies more inclusive for all dialects.
             </p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4 w-full">
               <Link
@@ -93,7 +38,7 @@ export default function Hero() {
                 aria-label="Join the waitlist"
               >
                 <Button className="w-full rounded-lg sm:w-40 bg-gradient-to-b border border-double outline-white/50 outline outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
-                  Preview Waitlist
+                  Join Waitlist
                 </Button>
               </Link>
               <Link
