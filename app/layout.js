@@ -81,7 +81,7 @@ export default function RootLayout({ children }) {
                 "https://github.com/koellabs",
                 "https://www.linkedin.com/company/koellabs"
               ],
-              "description": "Koel Labs is your new favorite tool for pronunciation learning. Other methods for pronunciation learning are often outdated, lack accessibility, and are ultimately boring. Language learners, like us and our families, desperately need a change—and we aim to be just that.",
+              "description": "Koel Labs is a speech research lab reimagining how technology can listen and respond to anyone, regardless of an accent, speech impediment, or speaking style. We aim to advance the frontier of phonetic research and real-time speech feedback while creating fun and engaging platforms to speak with!",
               "foundingDate": "2024",
               "knowsAbout": [
                 "Pronunciation Learning",

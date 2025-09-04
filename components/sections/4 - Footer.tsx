@@ -236,7 +236,7 @@ export default function Footer() {
             <div className="md:grid md:grid-cols-2 md:gap-8 ">
               <div></div>
               <div className="">
-                <h3 className="text-sm/6 font-semibold text-neutral-900">Product</h3>
+                <h3 className="text-sm/6 font-semibold text-neutral-900">Research Previews</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.product.map(item => (
                     <li key={item.name}>
@@ -254,7 +254,7 @@ export default function Footer() {
 
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm/6 font-semibold text-neutral-900">Company</h3>
+                <h3 className="text-sm/6 font-semibold text-neutral-900">Research Lab</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.company.map(item => (
                     <li key={item.name}>

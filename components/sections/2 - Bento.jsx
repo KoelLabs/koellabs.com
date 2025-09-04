@@ -18,7 +18,7 @@ export default function Bento() {
         >
           <div className="bg-white/50 py-24 sm:py-32">
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-10">
-              <p className="text-base/7 font-semibold text-sky-600 relative z-10">What is this?</p>
+              <p className="text-base/7 font-semibold text-sky-600 relative z-10">Upcoming Research Previews</p>
               <h2
                 id="features-heading"
                 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
@@ -59,7 +59,7 @@ export default function Bento() {
                       className="h-80 object-cover object-left lg:object-top"
                     />
                     <div className="p-10 pt-4">
-                      <h3 className="text-sm/4 font-semibold text-sky-600">Extensive Feedback</h3>
+                      <h3 className="text-sm/4 font-semibold text-sky-600">Translations and Definitions at your Fingertips</h3>
                       <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
                         Actionable, tailored insights
                       </p>
@@ -80,7 +80,7 @@ export default function Bento() {
                       className="h-80 object-cover object-center"
                     />
                     <div className="p-10 pt-4">
-                      <h3 className="text-sm/4 font-semibold text-sky-600">Speed</h3>
+                      <h3 className="text-sm/4 font-semibold text-sky-600">Intuitive Phrase by Phrase Navigation</h3>
                       <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
                         Real-time analysis
                       </p>
