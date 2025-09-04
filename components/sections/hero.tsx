@@ -48,36 +48,13 @@ export default function HeroNew() {
       <div className="mx-auto md:px-6 pt-0 lg:px-8 py-32 pb-0">
         <div className="mx-auto p-4 max-w-4xl py-32 z-[90] relative">
           <section aria-labelledby="hero-heading" className="text-center relative">
-            <div className="flex flex-row justify-center items-center my-6">
-              <p className="font-[400] text-md text-neutral-700">Backed by</p>
-              <div className="h-6 bg-black w-6 rounded-md overflow-hidden ml-2 mr-1.5 p-0.5">
-                <svg
-                  aria-label="Mozilla Logo"
-                  role="img"
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0"
-                  y="0"
-                  enableBackground="new 0 0 68 68"
-                  version="1.1"
-                  viewBox="0 0 68 68"
-                  xmlSpace="preserve"
-                >
-                  {' '}
-                  <path d="M0 0H68V68H0z"></path>{' '}
-                  <path
-                    d="M57.9 42.6h3.9V49H49.5V32.4c0-5.1-1.7-7-5-7-4 0-5.6 2.9-5.6 6.9v10.2h3.9v6.4H30.5V32.4c0-5.1-1.7-7-5-7-4 0-5.6 2.9-5.6 6.9v10.2h5.6v6.4h-18v-6.4h3.9V26H7.5v-6.4h12.3V24c1.8-3.1 4.8-5 8.9-5 4.2 0 8.1 2 9.5 6.3 1.6-3.9 4.9-6.3 9.5-6.3 5.3 0 10.1 3.2 10.1 10.1v13.5z"
-                    className="st0 text-white fill-white bg-white"
-                  ></path>{' '}
-                </svg>{' '}
-              </div>
-              <p className="font-[400] text-md text-neutral-700">Mozilla</p>
-            </div>
+            <div className="flex flex-row justify-center items-center my-8"></div>
 
             <h1
               id="hero-heading"
               className="text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-6xl relative"
             >
-              Pioneering Inclusive Speech Technology for Everyone
+              Making Speech Technology Understand You Better
             </h1>
 
             <p className="mt-6 sm:text-lg leading-8 text-neutral-600 max-w-xl mx-auto text-pretty">

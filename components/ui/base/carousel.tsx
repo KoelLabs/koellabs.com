@@ -127,14 +127,19 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
 );
 Carousel.displayName = 'Carousel';
 
-type CarouselContentProps = React.HTMLAttributes<HTMLDivElement>;
+type CarouselContentProps = React.HTMLAttributes<HTMLDivElement> & {
+  overflowVisible?: boolean;
+};
 
 const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, overflowVisible, ...props }, ref) => {
     const { carouselRef, orientation } = useCarousel();
 
     return (
-      <div ref={carouselRef} className="overflow-hidden">
+      <div
+        ref={carouselRef}
+        className={cn('overflow-hidden', overflowVisible && 'overflow-visible')}
+      >
         <div
           ref={ref}
           className={cn(
