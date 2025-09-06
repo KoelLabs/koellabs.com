@@ -28,8 +28,7 @@ export default function Hero() {
             </h1>
 
             <p className="mt-6 sm:text-lg leading-8 text-gray-600 max-w-xl mx-auto text-pretty">
-              We are building out state-of-the-art models, tools, and datasets to make speech
-              technologies more inclusive for all dialects.
+              A collaborative research movement towards inclusive innovation embracing every speech pattern, accent, and dialect.
             </p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4 w-full">
               <Link

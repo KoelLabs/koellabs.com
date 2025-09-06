@@ -79,7 +79,7 @@ export default function About() {
                   unheard.{' '}
                 </p>
                 <p className="text-pretty text-lg font-medium text-neutral-600 mt-4">
-                  At Koel Labs, we're working to fix this. As a research lab, we collaborate with
+                  As a research lab, we collaborate with
                   top universities to build fun and engaging products that actually understand your
                   voice.{' '}
                 </p>
