@@ -63,7 +63,7 @@ export default function About() {
           <div className="mx-auto max-w-7xl px-6 py-16 pt-0 sm:py-40 lg:px-8">
             <div className="mx-auto max-w-2xl lg:mx-0 mt-0 sm:mt-24 lg:my-12 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
               {/* <h1 class="max-w-2xl text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl lg:col-span-2 xl:col-auto">We’re changing the way people connect</h1> */}
-              <h1 className="max-w-2xl xss:text-3xl pt-12 text-balance text-2xl font-semibold tracking-tighter text-black sm:text-6xl lg:col-span-2 xl:col-auto">
+              <h1 className="max-w-2xl xss:text-3xl pt-12 text-balance text-2xl font-semibold tracking-tighter text-black sm:text-6xl  lg:col-span-2 xl:col-auto">
                 Speech Technology{' '}
                 <span className="bg-clip-text text-transparent bg-gradient-to-br from-sky-600 to-blue-950">
                   That Truly Listens
@@ -71,12 +71,18 @@ export default function About() {
               </h1>
               <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
                 <p className="text-pretty text-lg font-medium text-neutral-600">
-                  Your voice is unique and should be understood not just by those around you but the technology you interact with every day.
-                  <br className="block sm:hidden" />{' '}
-                  <br className="block sm:hidden" />
-                  Too often, voice assistants and smart speakers struggle with accents, speech differences, or non standard dialects, leaving millions of people frustrated and unheard.                </p>
+                  Your voice is unique and should be understood not just by those around you but the
+                  technology you interact with every day.
+                  <br className="block sm:hidden" /> <br className="block sm:hidden" />
+                  Too often, voice assistants and smart speakers struggle with accents, speech
+                  differences, or non standard dialects, leaving millions of people frustrated and
+                  unheard.{' '}
+                </p>
                 <p className="text-pretty text-lg font-medium text-neutral-600 mt-4">
-                At Koel Labs, we're working to fix this. As a research lab, we collaborate with top universities to build fun and engaging products that actually understand your voice.          </p>
+                  At Koel Labs, we're working to fix this. As a research lab, we collaborate with
+                  top universities to build fun and engaging products that actually understand your
+                  voice.{' '}
+                </p>
                 <div className="flex gap-x-2">
                   <p className="text-pretty text-md font-medium text-black mt-8">—</p>
                   <img
@@ -86,7 +92,7 @@ export default function About() {
                   />
                 </div>
               </div>
-              <div className="mt-10 aspect-[6/5] w-full md:max-w-lg rounded-[32px] object-cover sm:mt-16 lg:mt-8 xl:-mt-8 lg:max-w-none xl:row-span-2 xl:row-end-2 p-4 bg-white/75 backdrop-blur-md border border-neutral-300/50">
+              <div className="mt-10 aspect-[6/5] w-full md:max-w-lg rounded-[32px] object-cover sm:mt-16 lg:mt-8 xl:mt-12 lg:max-w-none xl:row-span-2 xl:row-end-2 p-4 bg-white/75 backdrop-blur-md border border-neutral-300/50">
                 <img
                   alt="A photo of the Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the bay bridge in San Francisco."
                   src="/images/aboutShot.jpeg"
