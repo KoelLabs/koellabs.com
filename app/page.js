@@ -35,6 +35,7 @@ export default function Home() {
   const cursorRef = useRef(null);
   const lastXRef = useRef(null);
   const lastYRef = useRef(null);
+  const collisionElementsRef = useRef(null);
   const [emblaApi, setEmblaApi] = useState(null);
   const [selectedSnap, setSelectedSnap] = useState(0);
 
@@ -88,8 +89,58 @@ export default function Home() {
     const height = cursor.offsetHeight || attrs.size;
     const halfW = width / 2;
     const halfH = height / 2;
-    const cx = Math.min(Math.max(clientX, halfW), vw - halfW);
-    const cy = Math.min(Math.max(clientY, halfH), vh - halfH);
+    // clamp to viewport first (same behavior as edges)
+    let cx = Math.min(Math.max(clientX, halfW), vw - halfW);
+    let cy = Math.min(Math.max(clientY, halfH), vh - halfH);
+
+    // lazily cache elements that request collision
+    if (collisionElementsRef.current == null) {
+      collisionElementsRef.current = Array.from(
+        document.querySelectorAll('[data-cursor-collision="true"]'),
+      );
+    }
+
+    const elements = collisionElementsRef.current || [];
+    if (elements.length) {
+      let adjusted = true;
+      let safety = 0;
+      while (adjusted && safety < 4) {
+        adjusted = false;
+        safety += 1;
+        for (let i = 0; i < elements.length; i += 1) {
+          const el = elements[i];
+          if (!el || !el.getBoundingClientRect) continue;
+          const rect = el.getBoundingClientRect();
+          if (rect.width === 0 || rect.height === 0) continue;
+          const overlapsX = cx + halfW > rect.left && cx - halfW < rect.right;
+          const overlapsY = cy + halfH > rect.top && cy - halfH < rect.bottom;
+          if (overlapsX && overlapsY) {
+            const pushLeft = cx + halfW - rect.left; // move left by this
+            const pushRight = rect.right - (cx - halfW); // move right by this
+            const pushUp = cy + halfH - rect.top; // move up by this
+            const pushDown = rect.bottom - (cy - halfH); // move down by this
+
+            // choose the smallest push to exit rect
+            const minPush = Math.min(pushLeft, pushRight, pushUp, pushDown);
+            if (minPush === pushLeft) {
+              cx = rect.left - halfW - 0.5;
+            } else if (minPush === pushRight) {
+              cx = rect.right + halfW + 0.5;
+            } else if (minPush === pushUp) {
+              cy = rect.top - halfH - 0.5;
+            } else {
+              cy = rect.bottom + halfH + 0.5;
+            }
+
+            // keep within viewport after adjustment
+            cx = Math.min(Math.max(cx, halfW), vw - halfW);
+            cy = Math.min(Math.max(cy, halfH), vh - halfH);
+            adjusted = true;
+          }
+        }
+      }
+    }
+
     cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%)`;
     cursor.style.opacity = `${attrs.opacity}`;
   };
@@ -115,6 +166,7 @@ export default function Home() {
       if (cursor) cursor.style.display = 'none';
       return;
     }
+    // reset cached collision elements on DOM changes that commonly affect layout
     const handleScrollOrResize = () => {
       const x = lastXRef.current;
       const y = lastYRef.current;
@@ -122,6 +174,8 @@ export default function Home() {
       const el = document.elementFromPoint(x, y);
       const attrs = findAttrsForTarget(el);
       updateCursorFromPoint(x, y, attrs);
+      // viewport/layout changes may add/remove collision nodes
+      collisionElementsRef.current = null;
     };
     window.addEventListener('scroll', handleScrollOrResize, { passive: true });
     window.addEventListener('resize', handleScrollOrResize, { passive: true });
@@ -212,8 +266,7 @@ export default function Home() {
                       width={700}
                       height={600}
                       quality={25}
-                      className="object-cover rounded-lg object-right-bottom grayscale hover:grayscale-0 transition-all duration-150"
-                      data-cursor-size="1"
+                      className="object-cover rounded-lg object-right-bottom grayscale transition-all duration-150"
                       priority={i === 0}
                     />
                   </div>
@@ -250,7 +303,7 @@ export default function Home() {
         className="z-0 relative"
       >
         <Previews />
-        <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50">
+        <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-b">
           <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
             {Array(500)
               .fill(0)
@@ -263,7 +316,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <CTA />
+      <div className="w-full relative">
+        <CTA />
+      </div>
       <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
         <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
           {Array(500)

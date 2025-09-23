@@ -5,170 +5,201 @@ import { ChevronRight, UserRoundPlus } from 'lucide-react';
 import Link from 'next/link';
 import { Card } from '@/components/ui/base/card';
 
+const previews = [
+  {
+    title: 'Phonetic Models',
+    status: 'Available',
+    description:
+      'XLSR-English-01, the state-of-the-art model for phonetic transcription, is available on Huggingface, alongside our other models, various datasets, and our IPA transcription leaderboard.',
+    image: '/images/card-one.svg',
+  },
+  {
+    title: 'Phrase Segmentation',
+    status: 'In Beta',
+    description:
+      'Phrase Segmentation, our demonstration tool for how phonetic transcription models will eventually interact with users in conjunction with language learning materials, is now available in closed beta.  ',
+    image: '/images/card-two.svg',
+  },
+  {
+    title: 'Speech Analysis',
+    status: 'Upcoming',
+    description:
+      'A robust and open speech analysis tool, powered by our own models, to allow for real-time feedback to users about speech, based on an actor reference, not a restricted, arbitrary standard.',
+    image: '/images/card-three.svg',
+  },
+];
+
 export default function Previews() {
   return (
-    <div id="models" className=" relative">
-      <div className="absolute left-0 top-0 w-[49.3px] h-[49px] bg-neutral-50 p-1 z-[2] hidden 2xl:block">
-        <div className="rounded-full w-full h-full border bg-white"></div>
-      </div>
+    <div id="previews" className=" relative">
+      <svg
+        width="75"
+        height="905"
+        viewBox="0 0 75 905"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute top-24 left-0 z-[1] hidden lg:block"
+      >
+        <g clipPath="url(#clip0_3877_301)">
+          <path
+            d="M69.9964 807.941C69.9826 905.441 -69.8021 807.5 -69.8022 905L-69.8022 0.0643433C-69.6808 97.3525 69.9825 -0.460876 69.9963 96.9968C70.0013 132.346 70.0002 294.846 69.9986 452.469C70.0002 610.092 70.0014 772.592 69.9964 807.941Z"
+            fill="#ffffff"
+          />
+          <path
+            d="M69.9963 196.941C69.9963 360.607 70.0045 750.741 69.9964 807.941C69.9826 905.441 -69.8021 807.5 -69.8022 905L-69.8022 0.0643433M-69.8022 -0.0624878C-69.8022 -0.0201653 -69.8022 0.0220944 -69.8022 0.0643433M69.9964 707.997C69.9964 544.33 70.0044 154.197 69.9963 96.9968C69.9825 -0.460854 -69.6808 97.3525 -69.8022 0.0643433"
+            stroke="#E5E5E5"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_3877_301">
+            <rect
+              width="75.0001"
+              height="905"
+              fill="white"
+              transform="translate(75 905) rotate(180)"
+            />
+          </clipPath>
+        </defs>
+      </svg>
 
-      <div className="absolute right-0 top-0 w-[49.3px] h-[49px] bg-neutral-50 p-1 z-[2] hidden 2xl:block">
-        <div className="rounded-full w-full h-full border bg-white"></div>
+      <svg
+        width="75"
+        height="905"
+        viewBox="0 0 75 905"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute top-24 right-0 z-[1] rotate-180 hidden lg:block"
+      >
+        <g clipPath="url(#clip0_3877_301)">
+          <path
+            d="M69.9963 196.941C69.9963 360.607 70.0045 750.741 69.9964 807.941C69.9826 905.441 -69.8021 807.5 -69.8022 905L-69.8022 0.0643433M-69.8022 -0.0624878C-69.8022 -0.0201653 -69.8022 0.0220944 -69.8022 0.0643433M69.9964 707.997C69.9964 544.33 70.0044 154.197 69.9963 96.9968C69.9825 -0.460854 -69.6808 97.3525 -69.8022 0.0643433"
+            stroke="#E5E5E5"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_3877_301">
+            <rect
+              width="75.0001"
+              height="905"
+              fill="white"
+              transform="translate(75 905) rotate(180)"
+            />
+          </clipPath>
+        </defs>
+      </svg>
+      <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-b">
+        <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
+          {Array(500)
+            .fill(0)
+            .map((_, i) => (
+              <div
+                key={`bottom-${i}`}
+                className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
+              ></div>
+            ))}
+        </div>
       </div>
       <div className="mx-auto">
-        <div className="absolute right-0 top-0 w-[50.5px] h-[105.5%] overflow-hidden items-start justify-center bg-neutral-50 border-x z-[1] hidden 2xl:flex shadow-xl">
-          <div className="flex-col h-full items-start gap-[8px] -mt-px flex">
-            {Array(109)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`right-${i}`}
-                  className="h-px w-[50.5px] bg-neutral-200 dark:bg-neutral-800"
-                ></div>
-              ))}
-          </div>
-        </div>
-        <div className="absolute left-0 top-0 w-[50.5px] h-[105.5%] overflow-hidden items-start justify-center bg-neutral-50 border-x z-[1] hidden 2xl:flex shadow-xl">
-          <div className="flex-col h-full items-start gap-[8px] -mt-px flex z-20">
-            {Array(109)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`right-${i}`}
-                  className="h-px w-[50.5px] bg-neutral-200 dark:bg-neutral-800"
-                ></div>
-              ))}
-          </div>
-        </div>
-        <div className="mx-auto absolute h-full flex justify-between z-[-1]"></div>
-
         <section
           aria-labelledby="features-heading"
           className="mx-auto w-full h-fit bg-neutral-50/20 backdrop-blur-md border-b border-neutral-200 overflow-hidden"
         >
           <div
-            data-cursor-opacity="0.8"
-            data-cursor-size="240"
+            data-cursor-opacity="0.3"
+            data-cursor-size="24"
             data-cursor-color="#2A4BCC"
             className="bg-white py-24 sm:py-32"
           >
-            <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[1000] relative">
-              <p className="text-base/7 font-semibold text-blue-800 relative z-10">
-                Research Previews
-              </p>
+            <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[1000] relative bg-white">
+              <p className="text-base/7 font-semibold text-blue-800 relative z-10">Previews</p>
               <h2
                 id="features-heading"
                 className="mt-2 text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
               >
-                We are building your favorite tool for pronunciation
+                Building your favorite language tools
               </h2>
               <ul
                 role="list"
-                className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2"
+                data-cursor-opacity="1"
+                data-cursor-size="340"
+                className="mt-12 grid lg:p-2 z-10 grid-cols-1 lg:grid-cols-3 relative gap-4 bg-white overflow-hidden group"
               >
-                <li className="relative lg:col-span-3">
-                  <div className="absolute inset-px rounded-lg bg-white" />
-                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]">
-                    <img
-                      alt="Screenshot showing the massive library of content available to practice with"
-                      src="/images/bentoClips.png"
-                      className="h-80 top-0 object-cover object-top"
-                    />
-                    <div className="p-10 pt-4">
-                      <h3 className="text-sm/4 font-semibold text-sky-600">Engaging Content</h3>
-                      <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
-                        Your favorite movies and shows
-                      </p>
-                      <p className="mt-2 max-w-lg text-sm/6 text-gray-600">
-                        Practicing pronunciation has never been easier or more fun. Start learning
-                        today with engaging scenes from iconic movies and shows.
-                      </p>
-                    </div>
-                  </article>
-                  <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5" />
-                </li>
-                <li className="relative lg:col-span-3">
-                  <div className="absolute inset-px rounded-lg bg-white lg:rounded-tr-[2rem]" />
-                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
-                    <img
-                      alt="Screenshot showing detailed pronunciation feedback interface"
-                      src="/images/bentoActionable.png"
-                      className="h-80 object-cover object-left lg:object-top"
-                    />
-                    <div className="p-10 pt-4">
-                      <h3 className="text-sm/4 font-semibold text-sky-600">Extensive Feedback</h3>
-                      <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
-                        Actionable, tailored insights
-                      </p>
-                      <p className="mt-2 max-w-lg text-sm/6 text-gray-600">
-                        Learn faster with our curated, actionable feedback, designed for maximum
-                        impact, that gives you everything you need to start improving immediately.
-                      </p>
-                    </div>
-                  </article>
-                  <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5" />
-                </li>
-                <li className="relative lg:col-span-2">
-                  <div className="absolute inset-px rounded-lg bg-white lg:rounded-bl-[2rem]" />
-                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
-                    <img
-                      alt="Screenshot showing analysis interface"
-                      src="/images/bentoFeedback.png"
-                      className="h-80 object-cover object-center"
-                    />
-                    <div className="p-10 pt-4">
-                      <h3 className="text-sm/4 font-semibold text-sky-600">Speed</h3>
-                      <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
-                        Real-time analysis
-                      </p>
-                      <p className="mt-2 max-w-lg text-sm/6 text-gray-600">
-                        Get the first layer of feedback almost immediately after speaking.
-                      </p>
-                    </div>
-                  </article>
-                  <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5" />
-                </li>
-                <li className="relative lg:col-span-2">
-                  <div className="absolute inset-px rounded-lg bg-white" />
-                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
-                    <img
-                      alt="Screenshot showing deep practice mode"
-                      src="/images/bentoComplex.png"
-                      className="h-80 object-cover"
-                    />
-                    <div className="p-10 pt-4">
-                      <h3 className="text-sm/4 font-semibold text-sky-600">Dive in Deep</h3>
-                      <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
-                        Master even the hardest words
-                      </p>
-                      <p className="mt-2 max-w-lg text-sm/6 text-gray-600">
-                        Practice hard-to-pronounce words by breaking them down into multiple
-                        practical chunks.
-                      </p>
-                    </div>
-                  </article>
-                  <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5" />
-                </li>
-                <li className="relative lg:col-span-2">
-                  <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]" />
-                  <article className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]">
-                    <img
-                      alt="An image of the worlds map to highlight the diversity of dialects"
-                      src="/images/bentoDialect.png"
-                      className="h-80 object-cover"
-                    />
-                    <div className="p-10 pt-4">
-                      <h3 className="text-sm/4 font-semibold text-sky-600">Dialect</h3>
-                      <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
-                        Dialect-sensitive learning
-                      </p>
-                      <p className="mt-2 max-w-lg text-sm/6 text-gray-600">
-                        Take control of your learning by choosing the dialect you want to practice.
-                      </p>
-                    </div>
-                  </article>
-                  <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]" />
-                </li>
+                <div className="h-1/2 w-1/4 bg-blue-700 rounded-full absolute top-1/5 left-1/4 mix-blend-color blur-2xl animate-[float-left-right_8s_ease-in-out_infinite] group-hover:-translate-y-full transition-transform z-100 pointer-events-none scale-200"></div>
+                <div className="h-1/2 w-1/4 bg-sky-700 rounded-full absolute top-1/5 left-4/7 mix-blend-color blur-2xl animate-[float-right-left_8s_ease-in-out_infinite_2s] group-hover:-translate-y-full transition-transform z-100 pointer-events-none scale-200"></div>
+                <style jsx>{`
+                  @keyframes float-left-right {
+                    0%,
+                    100% {
+                      transform: translateX(-200px);
+                    }
+                    50% {
+                      transform: translateX(700px);
+                    }
+                  }
+                  @keyframes float-right-left {
+                    0%,
+                    100% {
+                      transform: translateX(200px);
+                    }
+                    50% {
+                      transform: translateX(-700px);
+                    }
+                  }
+                `}</style>
+
+                {previews.map(preview => (
+                  <a href={preview.title} key={preview.title} target="_blank">
+                    <li
+                      key={preview.title}
+                      className="flex flex-col gap-2 border border-neutral-200 rounded-3xl p-2 relative group/item"
+                      data-cursor-size="2"
+                    >
+                      <div className="p-4 pb-2 rounded-2xl bg-white border border-neutral-200">
+                        <div className="flex flex-row gap-2 items-center justify-between pb-2">
+                          <h3 className="text-lg font-medium tracking-[-0.03em] text-black">
+                            {preview.title}
+                          </h3>
+
+                          <span className="transition-all inline-flex items-center px-2 w-full py-1.5 border text-sm leading-4 font-medium tracking-tight rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 sm:w-fit flex-row justify-between hover:shadow-sm group">
+                            <div
+                              className={`h-2 w-2 rounded-full relative transition-all mr-1`}
+                              style={{
+                                backgroundColor:
+                                  preview.status === 'Available'
+                                    ? '#3779B5'
+                                    : preview.status === 'In Beta'
+                                      ? '#154063'
+                                      : 'black',
+                              }}
+                            ></div>
+                            {preview.status}
+                          </span>
+                        </div>
+                      </div>
+                      <div
+                        className=" rounded-2xl bg-white border border-neutral-200 aspect-square relative overflow-hidden"
+                        data-cursor-size="320"
+                      >
+                        <div className="h-5/6 w-5/6 bg-sky-700 rounded-full absolute top-1/2 left-1/2 transition-transform blur-xl mix-blend-color scale-200 hidden group-hover/item:block"></div>
+                        <div className="h-5/6 w-5/6 bg-[#2A4BCC] rounded-full absolute -top-1/4 -left-1/4 transition-transform blur-xl  mix-blend-color scale-200 hidden group-hover/item:block"></div>
+
+                        <img
+                          src={preview.image}
+                          alt={preview.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div
+                        className="p-4 rounded-2xl bg-white border border-neutral-200"
+                        data-cursor-collision="true"
+                      >
+                        <p className="text-[0.87rem] text-neutral-600 text-">
+                          {preview.description}
+                        </p>
+                      </div>
+                    </li>
+                  </a>
+                ))}
               </ul>
             </div>
           </div>

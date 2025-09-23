@@ -105,6 +105,7 @@ export default function Models() {
                 <li
                   data-cursor-opacity="0.5"
                   data-cursor-size="100"
+                  data-cursor-collision="true"
                   className="px-2 md:px-6 lg:px-0 lg:pr-4 lg:pt-4"
                 >
                   <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-lg">

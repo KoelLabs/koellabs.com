@@ -3,7 +3,7 @@ import { ArrowUpRightIcon } from 'lucide-react';
 const navigation = {
   research: [
     { name: 'Previews', href: '/previews' },
-    { name: 'Read Latest', href: '/research' },
+    { name: 'Publications', href: '/research' },
   ],
   lab: [
     { name: 'About', href: '/about' },

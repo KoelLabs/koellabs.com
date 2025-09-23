@@ -1,14 +1,46 @@
 'use client';
 import React from 'react';
 import { ArrowUpRight, ChevronRightIcon } from 'lucide-react';
-import { Card } from '../ui/base/card';
-import HeroVideoDialog from '../ui/magicui/hero-video-dialog';
-import { Button } from '../ui/base/button';
+import { Card } from '@/components/ui/base/card';
+import HeroVideoDialog from '@/components/ui/magicui/hero-video-dialog';
+import { Button } from '@/components/ui/base/button';
 import Link from 'next/link';
+import Header from '@/components/ui/header';
 
-export default function HeroNew() {
+const previews = [
+  {
+    title: 'Phrase Segmentation',
+    status: 'In Beta',
+    description:
+      'Phrase Segmentation, our demonstration tool for how phonetic transcription models will eventually interact with users in conjunction with language learning materials, is now available in closed beta.  ',
+    image: '/images/card-two.svg',
+  },
+  {
+    title: 'Phonetic Models',
+    status: 'Available',
+    description:
+      'XLSR-English-01, the state-of-the-art model for phonetic transcription, is available on Huggingface, alongside our other models, various datasets, and our IPA transcription leaderboard.',
+    image: '/images/card-one-center.svg',
+  },
+  {
+    title: 'Speech Analysis',
+    status: 'Upcoming',
+    description:
+      'A robust and open speech analysis tool, powered by our own models, to allow for real-time feedback to users about speech, based on an actor reference, not a restricted, arbitrary standard.',
+    image: '/images/card-three.svg',
+  },
+];
+
+export default function Previews() {
   return (
     <div className="relative min-h-[900px] h-full">
+      <div
+        data-cursor-opacity="0.3"
+        data-cursor-size="240"
+        className="z-100 sticky top-0 mx-auto w-full"
+      >
+        <Header />
+      </div>
       <div className="absolute right-0 -top-20 w-full h-[500px] bg-gradient-to-b from-white via-10% via-white to-transparent z-[0]"></div>
 
       <div className="absolute left-0 bottom-0 w-[49.3px] h-[49px] bg-neutral-50 p-1 z-[2] hidden 2xl:block">
@@ -100,7 +132,7 @@ export default function HeroNew() {
               ))}
           </div>
         </div> */}
-        <div className="mx-auto absolute opacity-25 sm:opacity-100 top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] flex justify-between z-[-1] h-[1600px]">
+        <div className="mx-auto absolute opacity-25 sm:opacity-100 top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] flex justify-between z-[-1] h-[1200px]">
           <div className="h-full"></div>
           <div className="w-[1px] h-full bg-gradient-to-b from-white via-30% via-neutral-200 to-neutral-200"></div>
           <div className="h-full"></div>
@@ -146,20 +178,59 @@ export default function HeroNew() {
           ></path>
         </svg>
 
-        <div className="flex justify-center sm:overflow-visible overflow-hidden mb-[127px]">
-          <Card
-            data-cursor-size="200"
-            className=" max-w-[1200px] min-w-[500px] p-6 bg-white rounded-[32px] shadow-xl w-full h-fit mx-auto  z-[30] "
-          >
-            {/* <div className="flex flex-col items-center justify-center aspect-video w-full h-full border rounded-[12px] shadow-lg"></div> */}
-            <HeroVideoDialog
-              className="rounded-[500px] z-[30] relative"
-              animationStyle="top-in-bottom-out"
-              videoSrc="https://www.youtube.com/watch?v=s7yPjSUjU9s"
-              thumbnailSrc="/images/demoPitchUpdated.png"
-              thumbnailAlt="Hero Video"
-            />
-          </Card>
+        <div className="bg-gradient-to-b from-transparent to-white via-white via-50% h-1/3 w-full absolute -bottom-36 left-0 z-[5] pointer-events-none"></div>
+
+        <div className="flex justify-center sm:overflow-visible overflow-hidden mb-[127px] mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[4] relative gap-4">
+          {previews.map(preview => (
+            <a
+              href={preview.title}
+              key={preview.title}
+              target="_blank"
+              className="shadow-xl rounded-3xl first:-rotate-12 last:rotate-12 scale-110 first:translate-y-12 last:translate-y-12 first:translate-x-24 last:-translate-x-24"
+            >
+              <li
+                key={preview.title}
+                className="flex flex-col gap-2 border border-neutral-200 rounded-3xl p-2 relative group/item bg-white"
+                data-cursor-size="2"
+              >
+                <div className="p-4 pb-2 rounded-2xl bg-white border border-neutral-200">
+                  <div className="flex flex-row gap-2 items-center justify-between pb-2">
+                    <h3 className="text-lg font-medium tracking-[-0.03em] text-black">
+                      {preview.title}
+                    </h3>
+
+                    <span className="transition-all inline-flex items-center px-2 w-full py-1.5 border text-sm leading-4 font-medium tracking-tight rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 sm:w-fit flex-row justify-between hover:shadow-sm group">
+                      <div
+                        className={`h-2 w-2 rounded-full relative transition-all mr-1`}
+                        style={{
+                          backgroundColor:
+                            preview.status === 'Available'
+                              ? '#3779B5'
+                              : preview.status === 'In Beta'
+                                ? '#154063'
+                                : 'black',
+                        }}
+                      ></div>
+                      {preview.status}
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className=" rounded-2xl bg-white border border-neutral-200 aspect-square relative overflow-hidden"
+                  data-cursor-size="320"
+                >
+                  <div className="h-5/6 w-5/6 bg-sky-700 rounded-full absolute top-1/2 left-1/2 transition-transform duration-500 blur-xl mix-blend-color scale-0 group-hover/item:scale-200"></div>
+                  <div className="h-5/6 w-5/6 bg-[#2A4BCC] rounded-full absolute -bottom-1/4 -left-1/2 transition-transform duration-500 blur-xl  mix-blend-color scale-0 group-hover/item:scale-200"></div>
+
+                  <img
+                    src={preview.image}
+                    alt={preview.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </li>
+            </a>
+          ))}
         </div>
       </div>
     </div>
