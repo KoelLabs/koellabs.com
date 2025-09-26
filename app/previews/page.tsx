@@ -1,39 +1,219 @@
 'use client';
-import React from 'react';
-import { ArrowUpRight, ChevronRightIcon } from 'lucide-react';
-import { Card } from '@/components/ui/base/card';
-import HeroVideoDialog from '@/components/ui/magicui/hero-video-dialog';
-import { Button } from '@/components/ui/base/button';
-import Link from 'next/link';
-import Header from '@/components/ui/header';
 
-const previews = [
-  {
-    title: 'Phrase Segmentation',
-    status: 'In Beta',
-    description:
-      'Phrase Segmentation, our demonstration tool for how phonetic transcription models will eventually interact with users in conjunction with language learning materials, is now available in closed beta.  ',
-    image: '/images/card-two.svg',
-  },
-  {
-    title: 'Phonetic Models',
-    status: 'Available',
-    description:
-      'XLSR-English-01, the state-of-the-art model for phonetic transcription, is available on Huggingface, alongside our other models, various datasets, and our IPA transcription leaderboard.',
-    image: '/images/card-one-center.svg',
-  },
-  {
-    title: 'Speech Analysis',
-    status: 'Upcoming',
-    description:
-      'A robust and open speech analysis tool, powered by our own models, to allow for real-time feedback to users about speech, based on an actor reference, not a restricted, arbitrary standard.',
-    image: '/images/card-three.svg',
-  },
+import Header from '@/components/ui/header';
+import CTA from '@/components/sections/cta';
+import Footer from '@/components/sections/footer';
+import HeroNew from '@/components/sections/hero';
+import Research from '@/components/sections/research';
+import { useEffect, useRef, useState } from 'react';
+import Models from '@/components/sections/models';
+import Image from 'next/image';
+import Autoplay from 'embla-carousel-autoplay';
+
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/base/carousel';
+import Previews from '@/components/sections/previews';
+import PreviewsHero from '@/app/previews/sections-previews/previews-hero';
+import PreviewsModels from './sections-previews/previews-models';
+
+const sliderImages = [
+  '/images/frontpage/9.jpg',
+  '/images/one.jpg',
+  '/images/frontpage/10.jpg',
+  '/images/frontpage/2.jpg',
+  '/images/three.jpg',
+  '/images/frontpage/3.jpg',
 ];
 
-export default function Previews() {
+export default function Home() {
+  const containerRef = useRef(null);
+  const cursorRef = useRef(null);
+  const lastXRef = useRef(null);
+  const lastYRef = useRef(null);
+  const collisionElementsRef = useRef(null);
+  const [emblaApi, setEmblaApi] = useState(null);
+  const [selectedSnap, setSelectedSnap] = useState(0);
+
+  // this is the moving around magic highlighter that follows the cursor around the page
+
+  const isMobilePointer = () =>
+    (typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0) ||
+    (typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(pointer: coarse)').matches);
+
+  const DEFAULTS = {
+    size: 400,
+    color: '#0086FF',
+    opacity: 1,
+  };
+
+  const readAttrsFromElement = el => {
+    if (!el || !el.getAttribute) return DEFAULTS;
+    const sizeAttr = el.getAttribute('data-cursor-size');
+    const opacityAttr = el.getAttribute('data-cursor-opacity');
+    const colorAttr = el.getAttribute('data-cursor-color');
+    return {
+      size: Number.parseInt(sizeAttr || `${DEFAULTS.size}`, 10) || DEFAULTS.size,
+      opacity: Number.isNaN(Number.parseFloat(opacityAttr))
+        ? DEFAULTS.opacity
+        : Math.max(0, Math.min(1, Number.parseFloat(opacityAttr))),
+      color: colorAttr || DEFAULTS.color,
+    };
+  };
+
+  const findAttrsForTarget = target => {
+    if (target && target.closest) {
+      const el = target.closest('[data-cursor-size],[data-cursor-opacity],[data-cursor-color]');
+      if (el) return readAttrsFromElement(el);
+    }
+    return DEFAULTS;
+  };
+
+  const updateCursorFromPoint = (clientX, clientY, attrs) => {
+    const cursor = cursorRef.current;
+    if (!cursor) return;
+
+    // @ts-ignore
+    cursor.style.backgroundColor = attrs.color;
+    // @ts-ignore
+    cursor.style.width = `${attrs.size}px`;
+    // @ts-ignore
+    cursor.style.height = `${attrs.size}px`;
+
+    const vw = window.innerWidth; // @ts-ignore
+    const vh = window.innerHeight; // @ts-ignore
+    const width = cursor.offsetWidth || attrs.size; // @ts-ignore
+    const height = cursor.offsetHeight || attrs.size; // @ts-ignore
+    const halfW = width / 2;
+    const halfH = height / 2;
+    // clamp to viewport first (same behavior as edges)
+    let cx = Math.min(Math.max(clientX, halfW), vw - halfW);
+    let cy = Math.min(Math.max(clientY, halfH), vh - halfH);
+
+    // lazily cache elements that request collision
+    if (collisionElementsRef.current == null) {
+      // @ts-ignore
+      collisionElementsRef.current = Array.from(
+        document.querySelectorAll('[data-cursor-collision="true"]'),
+      );
+    }
+
+    const elements = collisionElementsRef.current || [];
+    if (elements.length) {
+      let adjusted = true;
+      let safety = 0;
+      while (adjusted && safety < 4) {
+        adjusted = false;
+        safety += 1;
+        for (let i = 0; i < elements.length; i += 1) {
+          const el = elements[i];
+          // @ts-ignore
+          if (!el || !el.getBoundingClientRect) continue;
+          // @ts-ignore
+          const rect = el.getBoundingClientRect();
+          if (rect.width === 0 || rect.height === 0) continue;
+          const overlapsX = cx + halfW > rect.left && cx - halfW < rect.right;
+          const overlapsY = cy + halfH > rect.top && cy - halfH < rect.bottom;
+          if (overlapsX && overlapsY) {
+            const pushLeft = cx + halfW - rect.left; // move left by this
+            const pushRight = rect.right - (cx - halfW); // move right by this
+            const pushUp = cy + halfH - rect.top; // move up by this
+            const pushDown = rect.bottom - (cy - halfH); // move down by this
+
+            // choose the smallest push to exit rect
+            const minPush = Math.min(pushLeft, pushRight, pushUp, pushDown);
+            if (minPush === pushLeft) {
+              cx = rect.left - halfW - 0.5;
+            } else if (minPush === pushRight) {
+              cx = rect.right + halfW + 0.5;
+            } else if (minPush === pushUp) {
+              cy = rect.top - halfH - 0.5;
+            } else {
+              cy = rect.bottom + halfH + 0.5;
+            }
+
+            // keep within viewport after adjustment
+            cx = Math.min(Math.max(cx, halfW), vw - halfW);
+            cy = Math.min(Math.max(cy, halfH), vh - halfH);
+            adjusted = true;
+          }
+        }
+      }
+    }
+
+    // @ts-ignore
+    cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%)`;
+    // @ts-ignore
+    cursor.style.opacity = `${attrs.opacity}`;
+  };
+
+  const handleMouseMove = e => {
+    if (isMobilePointer()) return;
+    lastXRef.current = e.clientX;
+    lastYRef.current = e.clientY;
+    const attrs = findAttrsForTarget(e.target);
+    updateCursorFromPoint(e.clientX, e.clientY, attrs);
+  };
+
+  const handleMouseLeave = () => {
+    if (isMobilePointer()) return;
+    const cursor = cursorRef.current;
+    if (!cursor) return;
+    // @ts-ignore
+    cursor.style.opacity = '0';
+  };
+
+  useEffect(() => {
+    if (isMobilePointer()) {
+      const cursor = cursorRef.current;
+      // @ts-ignore
+      if (cursor) cursor.style.display = 'none';
+      return;
+    }
+    // reset cached collision elements on DOM changes that commonly affect layout
+    const handleScrollOrResize = () => {
+      const x = lastXRef.current;
+      const y = lastYRef.current;
+      if (x == null || y == null) return;
+      const el = document.elementFromPoint(x, y);
+      const attrs = findAttrsForTarget(el);
+      updateCursorFromPoint(x, y, attrs);
+      // viewport/layout changes may add/remove collision nodes
+      collisionElementsRef.current = null;
+    };
+    window.addEventListener('scroll', handleScrollOrResize, { passive: true });
+    window.addEventListener('resize', handleScrollOrResize, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScrollOrResize);
+      window.removeEventListener('resize', handleScrollOrResize);
+    };
+  }, []);
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => {
+      // @ts-ignore
+      setSelectedSnap(emblaApi.selectedScrollSnap());
+    };
+    onSelect();
+    // @ts-ignore
+    emblaApi.on('select', onSelect);
+    // @ts-ignore
+    emblaApi.on('reInit', onSelect);
+    return () => {
+      // @ts-ignore
+      emblaApi.off('select', onSelect);
+      // @ts-ignore
+      emblaApi.off('reInit', onSelect);
+    };
+  }, [emblaApi]);
+  const centerIndex = (selectedSnap + 1) % sliderImages.length;
   return (
-    <div className="relative min-h-[900px] h-full">
+    <div
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="flex-col flex w-screen relative scroll-smooth"
+    >
       <div
         data-cursor-opacity="0.3"
         data-cursor-size="240"
@@ -41,86 +221,27 @@ export default function Previews() {
       >
         <Header />
       </div>
-      <div className="absolute right-0 -top-20 w-full h-[500px] bg-gradient-to-b from-white via-10% via-white to-transparent z-[0]"></div>
-
-      <div className="absolute left-0 bottom-0 w-[49.3px] h-[49px] bg-neutral-50 p-1 z-[2] hidden 2xl:block">
-        <div className="rounded-full w-full h-full border bg-white"></div>
-      </div>
-
-      <div className="absolute right-0 bottom-0 w-[49.3px] h-[49px] bg-neutral-50 p-1 z-[2] hidden 2xl:block">
-        <div className="rounded-full w-full h-full border bg-white"></div>
-      </div>
-      {/* <div className="absolute right-0 -top-20 w-full h-[110%] bg-gradient-to-b from-[#0086FF] to-[#2A4BCC] z-[2] mix-blend-color pointer-events-none"></div> */}
-      {/* <div className="absolute left-0 -top-20 w-[60px] h-[110%] bg-gradient-to-b from-[#0086FF] to-[#2A4BCC] z-[2] mix-blend-color"></div> */}
-
-      <div className="absolute right-0 -top-20 w-[50.5px] h-[110%] overflow-hidden items-start justify-center bg-neutral-50 border-x z-[-1] hidden 2xl:flex shadow-xl">
-        <div className="flex-col h-full items-start gap-[8px] mt-[2px] flex">
-          {Array(165)
+      <PreviewsHero />
+      <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-t">
+        <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
+          {Array(500)
             .fill(0)
             .map((_, i) => (
               <div
-                key={`right-${i}`}
-                className="h-px w-[50.5px] bg-neutral-200 dark:bg-neutral-800"
+                key={`bottom-${i}`}
+                className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
               ></div>
             ))}
         </div>
       </div>
-      <div className="absolute left-0 -top-20 w-[50.5px] h-[110%] overflow-hidden items-start justify-center bg-neutral-50 border-x z-[-1] hidden 2xl:flex shadow-xl">
-        <div className="flex-col h-full items-start gap-[8px] mt-[2px] flex">
-          {Array(165)
-            .fill(0)
-            .map((_, i) => (
-              <div
-                key={`right-${i}`}
-                className="h-px w-[50.5px] bg-neutral-200 dark:bg-neutral-800"
-              ></div>
-            ))}
-        </div>
-      </div>
-      <div className="mx-auto md:px-6 pt-0 lg:px-8 py-32 pb-0">
-        <div className="mx-auto p-4 max-w-4xl py-32 z-[90] relative">
-          <section aria-labelledby="hero-heading" className="text-center relative">
-            {/* <div className="flex flex-row justify-center items-center my-8"></div> */}
-            <div className="hidden sm:mb-8 sm:flex sm:justify-center relative z-10">
-              <div className="relative rounded-full px-2 py-0.5 pr-4.5 text-sm/6 text-gray-600 border-y border-l rounded-r-none">
-                A new look for Koel Labs{' '}
-              </div>
-              <a
-                href="#"
-                className="font-semibold text-sky-600 rounded-full shadow-xs bg-white -ml-3 pl-2.5 border-l-none border text-sm/6 px-2 py-0.5 relative"
-              >
-                <span aria-hidden="true" className="absolute inset-0 tracking-tight" />
-                Read more <ArrowUpRight className="w-4 h-4 inline-block -ml-0.5" strokeWidth={3} />
-              </a>
-            </div>
-            <h1
-              id="hero-heading"
-              className="text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-6xl relative"
-            >
-              Making Speech Technology Understand You Better
-            </h1>
-
-            <p className="mt-6 sm:text-lg leading-8 text-neutral-600 max-w-xl mx-auto text-pretty">
-              We are building out state-of-the-art models, tools, and datasets to make speech
-              technologies more inclusive for all dialects.
-            </p>
-            <div className="mt-4 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4 w-full">
-              <Button
-                variant="outline"
-                className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto"
-              >
-                Read our research
-              </Button>
-              <Button className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto">
-                View our demos
-              </Button>
-            </div>
-          </section>
-        </div>
-
-        {/* <div className="absolute -bottom-2  h-[65px] w-[90%] bg-gradient-to-b from-[#0086FF] to-[#2A4BCC] z-[3] mix-blend-color"></div> */}
-
-        {/* <div className="absolute bottom-0 left-0 w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-t">
+      <div
+        data-cursor-opacity="0.8"
+        data-cursor-size="240"
+        data-cursor-color="#2A4BCC"
+        className="z-0 relative"
+      >
+        <PreviewsModels />
+        <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-b">
           <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
             {Array(500)
               .fill(0)
@@ -131,108 +252,26 @@ export default function Previews() {
                 ></div>
               ))}
           </div>
-        </div> */}
-        <div className="mx-auto absolute opacity-25 sm:opacity-100 top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] flex justify-between z-[-1] h-[1200px]">
-          <div className="h-full"></div>
-          <div className="w-[1px] h-full bg-gradient-to-b from-white via-30% via-neutral-200 to-neutral-200"></div>
-          <div className="h-full"></div>
-          <div className="h-full"></div>
-          <div className="h-full"></div>
-          <div className="h-full"></div>
-          <div className="h-full"></div>
-          <div className="h-full"></div>
-          <div className="h-full"></div>
-          <div className="h-full"></div>
-          <div className="h-full"></div>
-          <div className="h-full"></div>
-          <div className="h-full"></div>
-          <div className="h-full"></div>
-          <div className="h-full"></div>
-          <div className="w-[1px] h-full bg-gradient-to-b from-white via-30% via-neutral-200 to-neutral-200"></div>
-          <div className="h-full"></div>
-        </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="141"
-          height="906"
-          fill="none"
-          className="absolute -bottom-28 xl:right-0 hidden 2xl:block z-[-3]"
-          viewBox="0 0 141 906"
-        >
-          <path
-            stroke="#E5E5E5"
-            d="M140.505 0C140.505 97.5.721-.44.707 97.06c-.008 57.199 0 447.333 0 610.999m139.798 197.003c0-97.5-139.784.441-139.798-97.059-.008-57.2 0-447.333 0-611"
-          ></path>
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="141"
-          height="906"
-          fill="none"
-          className="absolute rotate-180 -bottom-28 xl:left-0 hidden 2xl:block z-[-3]"
-          viewBox="0 0 141 906"
-        >
-          <path
-            stroke="#E5E5E5"
-            d="M140.505 0C140.505 97.5.721-.44.707 97.06c-.008 57.199 0 447.333 0 610.999m139.798 197.003c0-97.5-139.784.441-139.798-97.059-.008-57.2 0-447.333 0-611"
-          ></path>
-        </svg>
-
-        <div className="bg-gradient-to-b from-transparent to-white via-white via-50% h-1/3 w-full absolute -bottom-36 left-0 z-[5] pointer-events-none"></div>
-
-        <div className="flex justify-center sm:overflow-visible overflow-hidden mb-[127px] mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[4] relative gap-4">
-          {previews.map(preview => (
-            <a
-              href={preview.title}
-              key={preview.title}
-              target="_blank"
-              className="shadow-xl rounded-3xl first:-rotate-12 last:rotate-12 scale-110 first:translate-y-12 last:translate-y-12 first:translate-x-24 last:-translate-x-24"
-            >
-              <li
-                key={preview.title}
-                className="flex flex-col gap-2 border border-neutral-200 rounded-3xl p-2 relative group/item bg-white"
-                data-cursor-size="2"
-              >
-                <div className="p-4 pb-2 rounded-2xl bg-white border border-neutral-200">
-                  <div className="flex flex-row gap-2 items-center justify-between pb-2">
-                    <h3 className="text-lg font-medium tracking-[-0.03em] text-black">
-                      {preview.title}
-                    </h3>
-
-                    <span className="transition-all inline-flex items-center px-2 w-full py-1.5 border text-sm leading-4 font-medium tracking-tight rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 sm:w-fit flex-row justify-between hover:shadow-sm group">
-                      <div
-                        className={`h-2 w-2 rounded-full relative transition-all mr-1`}
-                        style={{
-                          backgroundColor:
-                            preview.status === 'Available'
-                              ? '#3779B5'
-                              : preview.status === 'In Beta'
-                                ? '#154063'
-                                : 'black',
-                        }}
-                      ></div>
-                      {preview.status}
-                    </span>
-                  </div>
-                </div>
-                <div
-                  className=" rounded-2xl bg-white border border-neutral-200 aspect-square relative overflow-hidden"
-                  data-cursor-size="320"
-                >
-                  <div className="h-5/6 w-5/6 bg-sky-700 rounded-full absolute top-1/2 left-1/2 transition-transform duration-500 blur-xl mix-blend-color scale-0 group-hover/item:scale-200"></div>
-                  <div className="h-5/6 w-5/6 bg-[#2A4BCC] rounded-full absolute -bottom-1/4 -left-1/2 transition-transform duration-500 blur-xl  mix-blend-color scale-0 group-hover/item:scale-200"></div>
-
-                  <img
-                    src={preview.image}
-                    alt={preview.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </li>
-            </a>
-          ))}
         </div>
       </div>
+
+      <div className="w-full relative">
+        <CTA />
+      </div>
+      <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
+        <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
+          {Array(500)
+            .fill(0)
+            .map((_, i) => (
+              <div
+                key={`bottom-${i}`}
+                className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
+              ></div>
+            ))}
+        </div>
+      </div>
+
+      <Footer />
     </div>
   );
 }

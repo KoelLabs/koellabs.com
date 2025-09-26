@@ -6,7 +6,7 @@ import { useToast } from '@/hooks/use-toast';
 export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
   const { toast } = useToast();
   return (
-    <div id="join-the-waitlist" className={`relative`}>
+    <div id="join-the-waitlist" className={`relative overflow-hidden`}>
       <div className="mx-auto max-w-[1321px] sm:px-6 lg:px-[47.5px] relative">
         <svg
           width="1529"

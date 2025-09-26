@@ -49,13 +49,13 @@ export default function HeroNew() {
         <div className="mx-auto p-4 max-w-4xl py-32 z-[90] relative">
           <section aria-labelledby="hero-heading" className="text-center relative">
             {/* <div className="flex flex-row justify-center items-center my-8"></div> */}
-            <div className="hidden sm:mb-8 sm:flex sm:justify-center relative z-10">
+            <div className="hidden sm:mb-8 sm:flex sm:justify-center relative z-10 max-w-sm mx-auto">
               <div className="relative rounded-full px-2 py-0.5 pr-4.5 text-sm/6 text-gray-600 border-y border-l rounded-r-none">
                 A new look for Koel Labs{' '}
               </div>
               <a
                 href="#"
-                className="font-semibold text-sky-600 rounded-full shadow-xs bg-white -ml-3 pl-2.5 border-l-none border text-sm/6 px-2 py-0.5 relative"
+                className="font-semibold text-sky-600 rounded-full shadow-xs bg-white -ml-3 pl-2.5 border-l-none border text-sm/6 px-2 py-0.5 inset-0"
               >
                 <span aria-hidden="true" className="absolute inset-0 tracking-tight" />
                 Read more <ArrowUpRight className="w-4 h-4 inline-block -ml-0.5" strokeWidth={3} />

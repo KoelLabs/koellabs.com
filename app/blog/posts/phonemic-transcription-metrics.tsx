@@ -5,6 +5,12 @@
 import type { Metadata } from '../posts';
 import { CodeBlock } from '@/components/ui/code-block';
 import Image from 'next/image';
+import { Source_Serif_4 } from 'next/font/google';
+
+const sourceSerif = Source_Serif_4({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
 
 // Added formatDate function
 function formatDate(dateString: string): string {
@@ -37,27 +43,34 @@ export default function PostBody() {
   return (
     <div className="bg-white/50 py-24 sm:py-32 relative">
       <div className="bg-white absolute h-full w-full mt-96 border-y border-neutral-200"></div>
-      <div className="mx-auto max-w-2xl px-6 lg:max-w-5xl lg:px-8 z-10">
-        <h2 className="text-base/7 font-semibold text-sky-600 text-center">{metadata.category}</h2>
-        <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl text-center">
-          {metadata.title}
-        </h1>
-        <div className="flex justify-center mt-4">
-          <time dateTime={metadata.date} className="text-neutral-600">
-            {formatDate(metadata.date)}
-          </time>
+      <div className="mx-auto max-w-2xl px-6 lg:max-w-6xl lg:px-8 z-10">
+        <div className="relative lg:max-w-3xl mx-auto">
+          <h2 className="text-sm tracking-tight font-semibold text-purple-600 text-center border border-neutral-200 rounded-full w-fit mx-auto px-3 mb-4 py-1">
+            {metadata.category}
+          </h2>
+          <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl text-center">
+            {metadata.title}
+          </h1>
+          <div className="flex justify-center mt-4">
+            <time dateTime={metadata.date} className="text-neutral-600">
+              {formatDate(metadata.date)} • By Koel Labs
+            </time>
+          </div>
         </div>
 
-        <div className="p-px mt-16 relative z-10 bg-linear-to-b from-transparent via-neutral-200 to-transparent rounded-lg">
+        <div className="p-2 mt-16 relative z-10 rounded-3xl border overflow-hidden bg-neutral-50">
           <img
             src={metadata.image}
             alt="Phonemic Transcription Metrics"
-            className="w-full h-auto rounded-lg z-10 relative"
+            className="w-full h-auto rounded-2xl z-10 relative border"
           />
         </div>
         <br></br>
-        <div className="relative lg:col-span-3">
-          <div className="relative flex h-full flex-col overflow-hidden tracking-[-0.010em] text-lg">
+        <div className="relative lg:col-span-3 max-w-3xl mx-auto mt-12">
+          <div
+            className={`relative flex h-full flex-col overflow-hidden tracking-[-0.010em] text-lg ${sourceSerif.className}`}
+          >
+            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">An Introduction</h2>
             <p className="mb-4">{metadata.summary}</p>
             <p className="mb-4">
               At Koel Labs, we use two key metrics to evaluate phonemic transcription models:
@@ -73,7 +86,7 @@ export default function PostBody() {
               </li>
             </ol>
 
-            <h2 className="text-2xl font-semibold tracking-tight mt-4 mb-4">
+            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">
               Why Traditional Metrics Fall Short: A Tale of Three Words
             </h2>
 
@@ -111,7 +124,7 @@ export default function PostBody() {
               substitutions, deletions, and insertions. In our example:
             </p>
 
-            <div className="p-4 mb-4 bg-white/50 border border-neutral-200 rounded-xl">
+            <div className="p-2 mb-4 bg-white border rounded-2xl">
               <CodeBlock
                 code={`"Bop" → "Pop": 1 substitution = 33.33% error rate
 "Bop" → "Sop": 1 substitution = 33.33% error rate`}
@@ -124,7 +137,7 @@ export default function PostBody() {
               misleading evaluations.
             </p>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4 tracking-tight">
+            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">
               Weighted Phonemic Edit Distance
             </h2>
 
@@ -145,7 +158,7 @@ export default function PostBody() {
 
             <p className="mb-4">Each phoneme becomes a feature vector, something like:</p>
 
-            <div className="p-4 mb-4 bg-white/50 border border-neutral-200 rounded-xl">
+            <div className="p-2 mb-4 bg-white border rounded-2xl">
               <CodeBlock
                 code={`B: [+voiced, +bilabial, +plosive, -fricative, ...]
 P: [-voiced, +bilabial, +plosive, -fricative, ...]
@@ -157,7 +170,7 @@ S: [-voiced, +alveolar, -plosive, +fricative, ...]`}
               When we calculate the distance between these vectors, we get a much more nuanced view:
             </p>
 
-            <div className="p-4 mb-4 bg-white/50 border border-neutral-200 rounded-xl">
+            <div className="p-2 mb-4 bg-white border rounded-2xl">
               <CodeBlock
                 code={`Distance("Bop" → "Pop") = 0.2  // Small difference
 Distance("Bop" → "Sop") = 0.8  // Large difference`}
@@ -170,11 +183,11 @@ Distance("Bop" → "Sop") = 0.8  // Large difference`}
                 alt="Diagram illustrating phonemic distances"
                 width={600}
                 height={400}
-                className="mx-auto rounded-lg"
+                className="mx-auto rounded-2xl"
               />
             </div>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4 tracking-tight">Why This Matters</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">Why This Matters</h2>
 
             <p className="mb-4">
               When you're teaching a model to transcribe speech, you want it to understand that
@@ -190,7 +203,7 @@ Distance("Bop" → "Sop") = 0.8  // Large difference`}
               similarity.
             </p>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4 tracking-tight">The Takeaway</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">The Takeaway</h2>
 
             <p className="mb-4">
               By using WPED alongside traditional metrics like PER, we can better understand how
