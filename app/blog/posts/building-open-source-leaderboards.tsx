@@ -3,24 +3,19 @@
 // It will also be used to set meta tags for SEO once I get around to adding that.
 
 import type { Metadata } from '../posts';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Source_Serif_4 } from 'next/font/google';
+import BlogBody from '../blog-components/body';
+import BlogHeading from '../blog-components/heading';
+import BlogHeroImage from '../blog-components/hero-image';
+import BlogSubheading from '../blog-components/subheading';
+import BlogImage from '../blog-components/image';
+import BlogDecorations from '../blog-components/decorations';
 
 const sourceSerif = Source_Serif_4({
   subsets: ['latin'],
   weight: ['400', '700'],
 });
-
-// Added formatDate function
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
 
 export const metadata: Metadata = {
   title: 'Building Open Source Hugging Face Leaderboards',
@@ -41,185 +36,26 @@ export const metadata: Metadata = {
 
 export default function PostBody() {
   return (
-    <div className="bg-white/50 py-24 sm:py-32 relative">
-      <div className="mx-auto absolute opacity-25 sm:opacity-100 top-0 left-0 right-0 bottom-0 lg:max-w-[1346px] flex justify-between z-[-1] h-[1300px]">
-        <div className="h-full"></div>
-        <div className="w-[1px] h-full bg-gradient-to-b from-white via-30% via-neutral-200 to-neutral-400"></div>
-        <div className="h-full"></div>
-        <div className="h-full"></div>
-        <div className="h-full"></div>
-        <div className="h-full"></div>
-        <div className="h-full"></div>
-        <div className="h-full"></div>
-        <div className="h-full"></div>
-        <div className="h-full"></div>
-        <div className="h-full"></div>
-        <div className="h-full"></div>
-        <div className="h-full"></div>
-        <div className="h-full"></div>
-        <div className="h-full"></div>
-        <div className="w-[1px] h-full bg-gradient-to-b from-white via-30% via-neutral-200 to-neutral-400"></div>
-        <div className="h-full"></div>
-      </div>
-
-      <div className="bg-white absolute h-full w-full mt-96 border-y border-neutral-200">
-        <div className="absolute left-0 top-0 w-[49.3px] h-[49px] bg-neutral-50 p-1 z-[5] hidden 2xl:block">
-          <div className="rounded-full w-full h-full border bg-white"></div>
-        </div>
-
-        <div className="absolute right-0 top-0 w-[49.3px] h-[49px] bg-neutral-50 p-1 z-[5] hidden 2xl:block">
-          <div className="rounded-full w-full h-full border bg-white"></div>
-        </div>
-
-        <div className="absolute left-0 top-[225px] w-[49.3px] h-[48px] bg-neutral-50 p-1 z-[5] hidden 2xl:block">
-          <div className="rounded-full w-full h-full border bg-white"></div>
-        </div>
-
-        <div className="absolute right-0 top-[225px] w-[49.3px] h-[48px] bg-neutral-50 p-1 z-[5] hidden 2xl:block">
-          <div className="rounded-full w-full h-full border bg-white"></div>
-        </div>
-        <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-b absolute top-0 left-0 z-[1]">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
-        </div>
-        <div className=" w-full h-[250px] overflow-hidden bg-neutral-50 absolute top-0 left-0"></div>
-        <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y absolute top-56 left-0">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
-        </div>
-      </div>
-      <div className="mx-auto max-w-2xl px-6 lg:max-w-6xl lg:px-8 z-10">
-        <div className="relative lg:max-w-5xl">
-          <h2 className="text-sm tracking-tight font-semibold text-sky-600 text-center border border-neutral-200 rounded-full w-fit mx-auto px-3 mb-4 py-1">
-            {metadata.category}
-          </h2>
-          <h1 className="mt-2 text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl text-center">
-            {metadata.title}
-          </h1>
-          <div className="flex justify-center mt-4">
-            <time dateTime={metadata.date} className="text-neutral-600">
-              {formatDate(metadata.date)} • By Koel Labs
-            </time>
-          </div>
-        </div>
-        <div className="border rounded-2xl overflow-hidden mt-16 relative z-10 p-2 bg-neutral-50">
-          <img
-            src="/images/blogLeaderboardsAlt.png"
-            alt="Building Open Source Leaderboards"
-            className="w-full h-auto rounded-lg z-10 relative border"
-          />
-        </div>
-
+    <BlogBody>
+      <div className="">
+        <BlogHeading
+          category={metadata.category}
+          categoryColorClass="text-sky-600"
+          title={metadata.title}
+          dateISO={metadata.date}
+          maxWidth={600}
+        />
+        <BlogHeroImage
+          src="/images/blogLeaderboardsAlt.png"
+          alt="Building Open Source Leaderboards"
+        />
         <br></br>
         <div className="relative lg:col-span-3 max-w-3xl mx-auto mt-12">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1121"
-            height="1308"
-            fill="none"
-            viewBox="0 0 1121 1308"
-            className="absolute -top-128 -left-[890px] scale-50"
-          >
-            <path
-              stroke="#E5E5E5"
-              d="M53 .5h710c28.443 0 51.5 23.057 51.5 51.5v217.25c0 28.995 23.505 52.5 52.5 52.5h201.5c28.44 0 51.5 23.057 51.5 51.5v882.72c0 28.44-23.06 51.5-51.5 51.5H53c-28.443 0-51.5-23.06-51.5-51.5V52C1.5 23.557 24.557.5 53 .5Z"
-            ></path>
-            <path fill="url(#paint0_linear_4063_253)" d="M1 599h1120v709H1z"></path>
-            <path
-              fill="url(#paint1_linear_4063_253)"
-              d="M554.5 0h1308v554h-1308z"
-              transform="rotate(90 554.5 0)"
-            ></path>
-            <defs>
-              <linearGradient
-                id="paint0_linear_4063_253"
-                x1="561"
-                x2="561"
-                y1="599"
-                y2="1308"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#fff" stopOpacity="0"></stop>
-                <stop offset="1" stopColor="#fff"></stop>
-              </linearGradient>
-              <linearGradient
-                id="paint1_linear_4063_253"
-                x1="1208.5"
-                x2="1208.5"
-                y1="0"
-                y2="554"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#fff" stopOpacity="0"></stop>
-                <stop offset="0.87" stopColor="#fff"></stop>
-              </linearGradient>
-            </defs>
-          </svg>
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1121"
-            height="1308"
-            fill="none"
-            viewBox="0 0 1121 1308"
-            className="absolute -top-128 -right-[890px] scale-50 rotate-y-180"
-          >
-            <path
-              stroke="#E5E5E5"
-              d="M53 .5h710c28.443 0 51.5 23.057 51.5 51.5v217.25c0 28.995 23.505 52.5 52.5 52.5h201.5c28.44 0 51.5 23.057 51.5 51.5v882.72c0 28.44-23.06 51.5-51.5 51.5H53c-28.443 0-51.5-23.06-51.5-51.5V52C1.5 23.557 24.557.5 53 .5Z"
-            ></path>
-            <path fill="url(#paint0_linear_4063_253)" d="M1 599h1120v709H1z"></path>
-            <path
-              fill="url(#paint1_linear_4063_253)"
-              d="M554.5 0h1308v554h-1308z"
-              transform="rotate(90 554.5 0)"
-            ></path>
-            <defs>
-              <linearGradient
-                id="paint0_linear_4063_253"
-                x1="561"
-                x2="561"
-                y1="599"
-                y2="1308"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#fff" stopOpacity="0"></stop>
-                <stop offset="1" stopColor="#fff"></stop>
-              </linearGradient>
-              <linearGradient
-                id="paint1_linear_4063_253"
-                x1="1208.5"
-                x2="1208.5"
-                y1="0"
-                y2="554"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#fff" stopOpacity="0"></stop>
-                <stop offset="0.87" stopColor="#fff"></stop>
-              </linearGradient>
-            </defs>
-          </svg>
-
+          <BlogDecorations />
           <div
             className={`relative flex h-full flex-col tracking-[-0.010em] text-lg ${sourceSerif.className}`}
           >
-            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">An Introduction</h2>
+            <BlogSubheading>An Introduction</BlogSubheading>
             <p className="mb-4">
               Sometimes, the best machine learning models are hidden in plain sight. During our work
               on phonemic transcription, we stumbled upon a specialized{' '}
@@ -255,9 +91,9 @@ export default function PostBody() {
               </Link>
               .
             </p>
-            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">
+            <BlogSubheading>
               The Need for Better Model Discovery and Standardized Evaluation
-            </h2>
+            </BlogSubheading>
 
             <p className="mb-4">
               While leaderboards have become fundamental infrastructure in many areas of machine
@@ -286,9 +122,7 @@ export default function PostBody() {
               effectively.
             </p>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">
-              A Streamlined Architecture for Open Evaluation
-            </h2>
+            <BlogSubheading>A Streamlined Architecture for Open Evaluation</BlogSubheading>
 
             <p className="mb-4">
               To address this gap, we implemented a system that handles both the queue backend and
@@ -347,12 +181,13 @@ export default function PostBody() {
               request model evaluation and wait, our system automates the process.
             </p>
 
-            <Image
+            <BlogImage
               src="/images/blogLeaderboard1.png"
               alt="Check status of your model"
               width={1200}
               height={600}
-              className="rounded-2xl p-1.5 bg-neutral-50 border-[0.75px] scale-150 my-32 mb-36"
+              expanded={true}
+              className="my-32 mb-36"
             />
 
             <p className="mb-4">
@@ -361,9 +196,7 @@ export default function PostBody() {
               machine learning but has been notably absent in phonemic transcription.
             </p>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">
-              Technical Implementation Details
-            </h2>
+            <BlogSubheading>Technical Implementation Details</BlogSubheading>
 
             <p className="mb-4">
               Our evaluation system measures model performance using two key metrics:
@@ -397,9 +230,7 @@ export default function PostBody() {
               on a consistent compute environment (16GB RAM, 2vCPUs) to ensure reproducibility.
             </p>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">
-              We Need More of These Projects
-            </h2>
+            <BlogSubheading>We Need More of These Projects</BlogSubheading>
 
             <p className="mb-4">
               The success of platforms like the Open LLM Leaderboard, with nearly 3,000 submissions,
@@ -411,7 +242,7 @@ export default function PostBody() {
               lesser-known models that might otherwise remain undiscovered.
             </p>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">Looking Forward</h2>
+            <BlogSubheading>Looking Forward</BlogSubheading>
 
             <p className="mb-4">
               Creating leaderboards has historically been challenging, with many templates becoming
@@ -420,12 +251,13 @@ export default function PostBody() {
               requirements. To create a leaderboard using their template:
             </p>
 
-            <Image
+            <BlogImage
               src="/images/blogLeaderboard2.png"
               alt="Hosting your leaderboard"
               width={1200}
               height={600}
-              className="rounded-2xl p-1.5 bg-white border-[0.75px] scale-150 my-36"
+              expanded={true}
+              className="my-36"
             />
 
             <ol className="list-decimal list-inside mb-4 pl-4 italic">
@@ -485,6 +317,6 @@ export default function PostBody() {
           </div>
         </div>
       </div>
-    </div>
+    </BlogBody>
   );
 }

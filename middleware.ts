@@ -10,6 +10,8 @@ const PUBLIC_URLS = [
   new RegExp('^/about$'),
   new RegExp('^/contact$'),
   new RegExp('^/previews$'),
+  new RegExp('^/research$'),
+  new RegExp('^/research/.*$'),
 ];
 
 export async function middleware(request: NextRequest) {

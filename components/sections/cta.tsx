@@ -94,7 +94,7 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
         <div className="sm:px-6 bg-white">
           <section
             aria-labelledby="cta-heading"
-            className="relative isolate overflow-hidden bg-white bg-[url('/cta-bg.svg')] [background-size:148%] bg-[50%_52.5%] px-6 py-16 sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:py-12 border-x"
+            className="relative isolate overflow-hidden bg-white bg-[url('/cta-bg.svg')] [background-size:300%] sm:[background-size:148%] bg-[50%_52.5%] px-6 py-16 sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:py-12 border-x"
           >
             <div className="absolute left-0 top-0 w-full h-full bg-radial from-transparent via-white/10 to-white"></div>
             <div
@@ -102,7 +102,7 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
               data-cursor-size="2"
               data-cursor-collision="true"
             >
-              <p className="text-sm/4 font-semibold text-sky-600 mb-2">Early Access</p>
+              <p className="text-sm/4 font-semibold text-sky-800 mb-2">Early Access</p>
               <h2
                 id="cta-heading"
                 className="text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl"
@@ -149,7 +149,7 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
                       <button
                         type="submit"
                         aria-label="Submit email to join waitlist"
-                        className="flex aspect-square h-full items-center justify-center rounded-xl bg-sky-700 text-white transition hover:bg-sky-800 bg-linear-to-b border border-double outline-white/50 outline-offset-[-2px] border-black from-sky-900 to-blue-950 cursor-pointer"
+                        className="flex aspect-square h-full items-center justify-center rounded-xl text-white transition hover:bg-sky-800 bg-sky-950 cursor-pointer"
                       >
                         <ArrowRightIcon className="w-4" aria-hidden="true" />
                       </button>

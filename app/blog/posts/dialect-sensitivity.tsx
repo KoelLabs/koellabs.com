@@ -3,24 +3,18 @@
 // It will also be used to set meta tags for SEO once I get around to adding that.
 
 import type { Metadata } from '../posts';
-import { CodeBlock } from '@/components/ui/code-block';
 import Image from 'next/image';
 import { Source_Serif_4 } from 'next/font/google';
+import BlogBody from '../blog-components/body';
+import BlogHeading from '../blog-components/heading';
+import BlogHeroImage from '../blog-components/hero-image';
+import BlogSubheading from '../blog-components/subheading';
+import BlogCode from '../blog-components/code';
 
 const sourceSerif = Source_Serif_4({
   subsets: ['latin'],
   weight: ['400', '700'],
 });
-
-// Added formatDate function
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
 
 export const metadata: Metadata = {
   title: 'Dialect Sensitivity — Why it matters for the future of language acquisition',
@@ -36,27 +30,16 @@ export const metadata: Metadata = {
 
 export default function PostBody() {
   return (
-    <div className="bg-white/50 py-24 sm:py-32 relative">
-      <div className="bg-white absolute h-full w-full mt-96 border-y border-neutral-200"></div>
-      <div className="mx-auto max-w-2xl px-6 lg:max-w-6xl lg:px-8 z-10">
-        <div className="relative lg:max-w-5xl">
-          <h2 className="text-sm tracking-tight font-semibold text-sky-600 text-center border border-neutral-200 rounded-full w-fit mx-auto px-3 mb-4 py-1">
-            {metadata.category}
-          </h2>
-          <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl text-center">
-            {metadata.title}
-          </h1>
-          <div className="flex justify-center mt-4">
-            <time dateTime={metadata.date} className="text-neutral-600">
-              {formatDate(metadata.date)} • By Koel Labs
-            </time>
-          </div>
-        </div>
-        <img
-          src={metadata.image}
-          alt="Phonemic Transcription Metrics"
-          className="w-full h-auto mt-16 rounded-lg z-10 relative border"
+    <BlogBody>
+      <div className="">
+        <BlogHeading
+          category={metadata.category}
+          categoryColorClass="text-sky-600"
+          title={metadata.title}
+          dateISO={metadata.date}
+          maxWidth="5xl"
         />
+        <BlogHeroImage src={metadata.image} alt={metadata.title} />
         <br></br>
         <div className="relative lg:col-span-3 max-w-3xl mx-auto mt-12">
           <div
@@ -77,9 +60,9 @@ export default function PostBody() {
               </li>
             </ol>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">
+            <BlogSubheading>
               Why Traditional Metrics Fall Short: A Tale of Three Words
-            </h2>
+            </BlogSubheading>
 
             <p className="mb-4">
               Let's say we're trying to transcribe the word "Bop". Our model could make different
@@ -115,8 +98,8 @@ export default function PostBody() {
               substitutions, deletions, and insertions. In our example:
             </p>
 
-            <div className="p-4 mb-4 bg-white/50 border border-neutral-200 rounded-xl">
-              <CodeBlock
+            <div className="p-2 mb-4 bg-white border rounded-2xl">
+              <BlogCode
                 code={`"Bop" → "Pop": 1 substitution = 33.33% error rate
 "Bop" → "Sop": 1 substitution = 33.33% error rate`}
               />
@@ -128,9 +111,7 @@ export default function PostBody() {
               misleading evaluations.
             </p>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">
-              Weighted Phonemic Edit Distance
-            </h2>
+            <BlogSubheading>Weighted Phonemic Edit Distance</BlogSubheading>
 
             <p className="mb-4">
               This is where WPED comes to the rescue, powered by the{' '}
@@ -149,24 +130,20 @@ export default function PostBody() {
 
             <p className="mb-4">Each phoneme becomes a feature vector, something like:</p>
 
-            <div className="p-4 mb-4 bg-white/50 border border-neutral-200 rounded-xl">
-              <CodeBlock
-                code={`B: [+voiced, +bilabial, +plosive, -fricative, ...]
+            <BlogCode
+              code={`B: [+voiced, +bilabial, +plosive, -fricative, ...]
 P: [-voiced, +bilabial, +plosive, -fricative, ...]
 S: [-voiced, +alveolar, -plosive, +fricative, ...]`}
-              />
-            </div>
+            />
 
             <p className="mb-4">
               When we calculate the distance between these vectors, we get a much more nuanced view:
             </p>
 
-            <div className="p-4 mb-4 bg-white/50 border border-neutral-200 rounded-xl">
-              <CodeBlock
-                code={`Distance("Bop" → "Pop") = 0.2  // Small difference
+            <BlogCode
+              code={`Distance("Bop" → "Pop") = 0.2  // Small difference
 Distance("Bop" → "Sop") = 0.8  // Large difference`}
-              />
-            </div>
+            />
 
             <div className="my-8">
               <Image
@@ -178,7 +155,7 @@ Distance("Bop" → "Sop") = 0.8  // Large difference`}
               />
             </div>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">Why This Matters</h2>
+            <BlogSubheading>Why This Matters</BlogSubheading>
 
             <p className="mb-4">
               When you're teaching a model to transcribe speech, you want it to understand that
@@ -194,7 +171,7 @@ Distance("Bop" → "Sop") = 0.8  // Large difference`}
               similarity.
             </p>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4 font-sans">The Takeaway</h2>
+            <BlogSubheading>The Takeaway</BlogSubheading>
 
             <p className="mb-4">
               By using WPED alongside traditional metrics like PER, we can better understand how
@@ -212,6 +189,6 @@ Distance("Bop" → "Sop") = 0.8  // Large difference`}
           </div>
         </div>
       </div>
-    </div>
+    </BlogBody>
   );
 }

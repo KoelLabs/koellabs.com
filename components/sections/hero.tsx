@@ -63,16 +63,22 @@ export default function HeroNew() {
             </div>
             <h1
               id="hero-heading"
-              className="text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-6xl relative"
+              className="text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-6xl relative sm:block hidden"
             >
               Making Speech Technology Understand You Better
             </h1>
+            <h1
+              id="hero-heading"
+              className="text-balance text-[2.2rem] leading-[1.15] text-4xl font-semibold tracking-tighter text-gray-950 relative sm:hidden block"
+            >
+              Making Speech Tech Understand You Better
+            </h1>
 
-            <p className="mt-6 sm:text-lg leading-8 text-neutral-600 max-w-xl mx-auto text-pretty">
+            <p className="mt-6 sm:text-lg leading-7 sm:leading-8 text-neutral-600 max-w-xl mx-auto text-pretty">
               We are building out state-of-the-art models, tools, and datasets to make speech
               technologies more inclusive for all dialects.
             </p>
-            <div className="mt-4 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4 w-full">
+            <div className="mt-6 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4 w-full">
               <Button
                 variant="outline"
                 className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto"

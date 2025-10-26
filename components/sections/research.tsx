@@ -81,7 +81,7 @@ export default function Research() {
               <p className="text-base/7 font-semibold text-blue-600 relative z-10">Research</p>
               <h2
                 id="features-heading"
-                className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
+                className="mt-2 text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
               >
                 Our newest talks and presentations
               </h2>

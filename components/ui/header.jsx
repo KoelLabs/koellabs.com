@@ -230,7 +230,7 @@ export default function Header({ theme = 'light' }) {
           <div
             className={cn(
               'absolute inset-0 block border-b border-transparent transition-all duration-300 z-[50]',
-              scrolled &&
+              (scrolled || pathname === '/contact') &&
                 'border-neutral-200 bg-white/80 backdrop-blur-xl dark:border-white/10 dark:bg-black/80',
             )}
           />

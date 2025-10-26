@@ -688,6 +688,10 @@ html {
   }
 }
 
+strong {
+  font-weight: semibold;
+}
+
 body {
   background-color: #ffffff;
 }

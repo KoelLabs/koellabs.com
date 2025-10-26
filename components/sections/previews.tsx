@@ -114,7 +114,7 @@ export default function Previews() {
               <p className="text-base/7 font-semibold text-blue-800 relative z-10">Previews</p>
               <h2
                 id="features-heading"
-                className="mt-2 text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
+                className="mt-2 text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10 text-balance"
               >
                 Building your favorite language tools
               </h2>
@@ -156,11 +156,11 @@ export default function Previews() {
                     >
                       <div className="p-4 pb-2 rounded-2xl bg-white border border-neutral-200">
                         <div className="flex flex-row gap-2 items-center justify-between pb-2">
-                          <h3 className="text-lg font-medium tracking-[-0.03em] text-black">
+                          <h3 className="text-lg font-medium tracking-[-0.03em] text-black w-full">
                             {preview.title}
                           </h3>
 
-                          <span className="transition-all inline-flex items-center px-2 w-full py-1.5 border text-sm leading-4 font-medium tracking-tight rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 sm:w-fit flex-row justify-between hover:shadow-sm group">
+                          <span className="transition-all inline-flex items-center px-2 py-1.5 border text-sm leading-4 font-medium tracking-tight rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500  sm:w-fit flex-row justify-between hover:shadow-sm group">
                             <div
                               className={`h-2 w-2 rounded-full relative transition-all mr-1`}
                               style={{
@@ -172,7 +172,7 @@ export default function Previews() {
                                       : 'black',
                               }}
                             ></div>
-                            {preview.status}
+                            <span className="w-full sm:w-fit text-nowrap">{preview.status}</span>
                           </span>
                         </div>
                       </div>
@@ -180,8 +180,8 @@ export default function Previews() {
                         className=" rounded-2xl bg-white border border-neutral-200 aspect-square relative overflow-hidden"
                         data-cursor-size="320"
                       >
-                        <div className="h-5/6 w-5/6 bg-sky-700 rounded-full absolute top-1/2 left-1/2 transition-transform blur-xl mix-blend-color scale-200 hidden group-hover/item:block"></div>
-                        <div className="h-5/6 w-5/6 bg-[#2A4BCC] rounded-full absolute -top-1/4 -left-1/4 transition-transform blur-xl  mix-blend-color scale-200 hidden group-hover/item:block"></div>
+                        <div className="h-5/6 w-5/6 bg-sky-700 rounded-full absolute top-1/2 left-1/2 transition-transform blur-xl mix-blend-color scale-200 hidden group-hover/item:block z-10"></div>
+                        <div className="h-5/6 w-5/6 bg-[#2A4BCC] rounded-full absolute -top-1/4 -left-1/4 transition-transform blur-xl  mix-blend-color scale-200 hidden group-hover/item:block z-10"></div>
 
                         <img
                           src={preview.image}
@@ -190,7 +190,7 @@ export default function Previews() {
                         />
                       </div>
                       <div
-                        className="p-4 rounded-2xl bg-white border border-neutral-200"
+                        className="p-4 rounded-2xl bg-white border border-neutral-200 z-100 relative"
                         data-cursor-collision="true"
                       >
                         <p className="text-[0.87rem] text-neutral-600 text-">

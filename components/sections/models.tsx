@@ -81,9 +81,15 @@ export default function Models() {
               <p className="text-base/7 font-semibold text-sky-600 relative z-10">Models</p>
               <h2
                 id="features-heading"
-                className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
+                className="mt-2 text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10 sm:block hidden"
               >
                 The latest and greatest in phonetic models
+              </h2>
+              <h2
+                id="features-heading"
+                className="mt-2 text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10 sm:hidden block"
+              >
+                The greatest in phonetic models
               </h2>
               <ul
                 role="list"
