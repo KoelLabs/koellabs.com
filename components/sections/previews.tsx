@@ -121,7 +121,7 @@ export default function Previews() {
                 <div className="h-1/2 w-1/4 bg-sky-700 rounded-full absolute top-1/5 left-4/7 mix-blend-color blur-2xl animate-[float-right-left_8s_ease-in-out_infinite_2s] group-hover:-translate-y-full transition-transform z-100 pointer-events-none scale-200"></div>
 
                 {previews.map(preview => (
-                  <a href={preview.title} key={preview.title} target="_blank">
+                  <a href="/previews" key={preview.title} target="_blank">
                     <li
                       key={preview.title}
                       className="flex flex-col gap-2 border border-neutral-200 rounded-3xl p-2 relative group/item"

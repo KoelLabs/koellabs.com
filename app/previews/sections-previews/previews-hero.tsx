@@ -18,6 +18,7 @@ const previews = [
     description:
       'XLSR-English-01, the state-of-the-art model for phonetic transcription, is available on Huggingface, alongside our other models, various datasets, and our IPA transcription leaderboard.',
     image: '/images/card-one-center.svg',
+    link: 'https://huggingface.co/KoelLabs/xlsr-english-01',
   },
   {
     title: 'Speech Analysis',

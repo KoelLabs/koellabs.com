@@ -4,6 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { Card } from '@/components/ui/base/card';
 import HeroVideoDialog from '@/components/ui/magicui/hero-video-dialog';
 import { Button } from '@/components/ui/base/button';
+import Link from 'next/link';
 
 export default function HeroNew() {
   return (
@@ -72,15 +73,19 @@ export default function HeroNew() {
               technologies more inclusive for all dialects.
             </p>
             <div className="mt-6 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4 w-full">
-              <Button
-                variant="outline"
-                className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto"
-              >
-                Read our research
-              </Button>
-              <Button className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto">
-                View our demos
-              </Button>
+              <Link href="/research">
+                <Button
+                  variant="outline"
+                  className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto"
+                >
+                  Read our research
+                </Button>
+              </Link>
+              <Link href="/previews">
+                <Button className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto">
+                  View our demos
+                </Button>
+              </Link>
             </div>
           </section>
         </div>

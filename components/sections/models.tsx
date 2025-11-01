@@ -134,15 +134,19 @@ export default function Models() {
                       models in both their transcription quality and inference time.
                     </p>
                     <div className="mt-6 border rounded-[20px] p-2 w-full flex flex-row gap-2">
-                      <Button
-                        variant="outline"
-                        className="w-full active:scale-[97%] transition-all duration-50 "
-                      >
-                        <p>View GitHub</p>
-                      </Button>
-                      <Button className="w-full active:scale-[97%] transition-all duration-50 ">
-                        <p>View on Huggingface</p>
-                      </Button>
+                      <Link href="https://github.com/KoelLabs/ML">
+                        <Button
+                          variant="outline"
+                          className="w-full active:scale-[97%] transition-all duration-50 "
+                        >
+                          <p>View GitHub</p>
+                        </Button>
+                      </Link>
+                      <Link href="https://huggingface.co/KoelLabs/xlsr-english-01">
+                        <Button className="w-full active:scale-[97%] transition-all duration-50 ">
+                          <p>View on Huggingface</p>
+                        </Button>
+                      </Link>
                     </div>
                     {/* <div className="mt-6 border rounded-3xl p-2 w-full flex flex-row gap-2">
                       <div className="size-24 rounded-2xl border"></div>
