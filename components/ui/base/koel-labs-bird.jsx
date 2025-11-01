@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/utils/styles';
+import { cn } from '@/lib/styles';
 
 export default function KoelBird({ className }) {
   return (

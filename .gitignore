@@ -20,4 +20,7 @@ data
 
 # local env files
 .env*.local
-venv/
+.env
+
+# prevent certain individuals from committing python stuff
+venv

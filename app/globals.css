@@ -1,8 +1,166 @@
-@import '../styles/animations.css';
+@import '../styles/animations.css' layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+@plugin 'tailwind-scrollbar-hide';
+@plugin '@vidstack/react/tailwind.cjs' {
+  selector: '.media-player';
+  prefix: 'media';
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-inter: 'Inter', sans-serif;
+
+  --breakpoint-xss: 390px;
+  --breakpoint-special: 768px;
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+@font-face {
+  font-family: 'OpenRundeRegular';
+  src: url('/fonts/OpenRunde-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenRundeMedium';
+  src: url('/fonts/OpenRunde-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenRundeSemibold';
+  src: url('/fonts/OpenRunde-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenRundeBold';
+  src: url('/fonts/OpenRunde-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+.open-runde-regular {
+  font-family: 'OpenRundeRegular', sans-serif;
+}
+
+.open-runde-medium {
+  font-family: 'OpenRundeMedium', sans-serif;
+}
+
+.open-runde-semibold {
+  font-family: 'OpenRundeSemibold', sans-serif;
+}
+
+.open-runde-bold {
+  font-family: 'OpenRundeBold', sans-serif;
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-xss)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+/* .screen-minus-sidebar-max-width {
+  max-width: calc(100vw - 256px);
+}
+
+@media (max-width: 768px) {
+  .screen-minus-sidebar-max-width {
+    max-width: 100vw;
+  }
+} */
+
+@utility main-transition {
+  transition: max-width 150ms ease-in-out;
+}
 
 @layer base {
   :root {
@@ -70,22 +228,6 @@
   }
 }
 
-/* .screen-minus-sidebar-max-width {
-  max-width: calc(100vw - 256px);
-}
-
-@media (max-width: 768px) {
-  .screen-minus-sidebar-max-width {
-    max-width: 100vw;
-  }
-} */
-
-@layer utilities {
-  .main-transition {
-    transition: max-width 150ms ease-in-out;
-  }
-}
-
 .color-bg {
   background-image: radial-gradient(at 27% 37%, #0284c7 0, transparent 0),
     radial-gradient(at 97% 21%, #0284c7b0 0, transparent 50%),
@@ -94,6 +236,15 @@
     radial-gradient(at 97% 96%, #95c6e4 0, transparent 50%),
     radial-gradient(at 33% 50%, #ffffff 0, transparent 50%),
     radial-gradient(at 79% 53%, #ffffff00 0, transparent 50%);
+}
+
+.color-bg-ui {
+  background-image: radial-gradient(at 27% 37%, #0284c7 0, transparent 0),
+    radial-gradient(at 100% 0%, #0285c7 0, transparent 40%),
+    radial-gradient(at 0% 100%, #0285c7 0, transparent 40%),
+    radial-gradient(at 100% 96%, #95c6e4 0, transparent 20%),
+    radial-gradient(at 13% 60%, #ffffff 0, transparent 50%),
+    radial-gradient(at 79% 53%, #ffffff 0, transparent 50%);
 }
 
 .drops {
@@ -212,13 +363,13 @@ html {
   content: '';
   position: absolute;
   inset: 0px;
-  background: radial-gradient(49% 81% at 45% 47%, rgba(52, 125, 193, 0.515) 0%, #073aff00 100%),
-    radial-gradient(113% 91% at 17% -2%, rgba(131, 170, 207, 0.548) 0%, #ff000000 99%),
-    radial-gradient(142% 91% at 83% 7%, rgba(164, 138, 249, 0.526) 1%, #ff000000 99%),
-    radial-gradient(142% 91% at -6% 74%, rgba(174, 196, 255, 0.935) 1%, #ff000000 99%),
-    radial-gradient(142% 91% at 111% 84%, rgba(52, 125, 193, 0.57) 0%, #ffffffff 99%);
+  background: radial-gradient(49% 81% at 45% 47%, rgb(5, 62, 115) 0%, #073aff00 100%),
+    radial-gradient(113% 91% at 17% -2%, rgba(1, 40, 75, 0.548) 0%, #ff000000 99%),
+    radial-gradient(142% 91% at 83% 7%, rgba(6, 30, 75, 0) 1%, #ff000000 99%),
+    radial-gradient(142% 91% at -6% 74%, rgba(174, 196, 255, 0) 1%, #ff000000 99%),
+    radial-gradient(142% 91% at 111% 84%, rgb(52, 125, 193) 0%, #ffffffff 99%);
   filter: blur(15px);
-  opacity: 0.7;
+  opacity: 0.3;
   transform: translate3d(0px, 0px, -1px);
   pointer-events: none;
 }
@@ -229,6 +380,27 @@ html {
     radial-gradient(142% 91% at 83% 7%, rgba(164, 138, 249, 0.326) 1%, #ff000000 99%),
     radial-gradient(142% 91% at -6% 74%, rgba(174, 196, 255, 0.735) 1%, #ff000000 99%),
     radial-gradient(142% 91% at 111% 84%, rgba(52, 125, 193, 0.37) 0%, #ffffffff 99%);
+}
+
+.vds-video-layout .vds-time-slider .vds-slider-value {
+  background-color: var(--video-time-bg, unset);
+  text-shadow:
+    0px 0px 0px #333333,
+    0px 0px 0px #333333,
+    0px 0px 0px #333333,
+    0px 0px 0px #333333 !important;
+}
+
+:where(.vds-video-layout .vds-time-slider .vds-slider-chapter-title) {
+  text-shadow:
+    0px 0px 0px #333333,
+    0px 0px 0px #333333,
+    0px 0px 0px #333333,
+    0px 0px 0px #333333 !important;
+}
+
+:where(.vds-poster) {
+  height: auto !important;
 }
 
 .vds-audio-layout,
@@ -356,7 +528,7 @@ html {
   --media-slider-track-fill-live-bg: #dc2626;
   --media-slider-track-height: 5px;
   --media-slider-track-progress-bg: rgb(255 255 255 / 0.5);
-  --media-slider-focused-thumb-shadow: 0 0 0 4px hsla(0, 0%, 100%, 0.4);
+  --media-slider-focused-thumb-shadow: 0 0 0 0px hsla(0, 0%, 100%, 0);
   --media-slider-focused-thumb-size: calc(var(--thumb-size) * 1.1);
   --media-slider-focused-track-height: calc(var(--track-height) * 1.25);
   --media-slider-focused-track-height: var(--track-height);
@@ -491,12 +663,60 @@ html {
   --media-chapters-with-thumbnails-min-width: 300px;
 }
 
+.NavigationMenuIndicator[data-state='visible'] {
+  animation: fadeIn 200ms ease;
+}
+.NavigationMenuIndicator[data-state='hidden'] {
+  animation: fadeOut 200ms ease;
+}
+
+@keyframes float-left-right {
+  0%,
+  100% {
+    transform: translateX(-200px);
+  }
+  50% {
+    transform: translateX(700px);
+  }
+}
+@keyframes float-right-left {
+  0%,
+  100% {
+    transform: translateX(200px);
+  }
+  50% {
+    transform: translateX(-700px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+strong {
+  font-weight: semibold;
+}
+
 body {
-  background-color: #fafafa;
+  background-color: #ffffff;
 }
 
 main {
-  background-color: #fafafa;
+  background-color: #ffffff;
 }
 
 .path {
@@ -539,4 +759,113 @@ main {
   100% {
     stroke-dashoffset: var(--stroke-dashoffset);
   }
+}
+
+/* Navigation Menu Animations */
+@keyframes enterFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes enterFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes exitToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100px) translateY(-8px);
+  }
+}
+
+@keyframes exitToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100px) translateY(-8px);
+  }
+}
+
+@keyframes scaleInContent {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes scaleOutContent {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9) translateY(-8px);
+  }
+}
+
+.animate-enter-from-left {
+  animation: enterFromLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-enter-from-right {
+  animation: enterFromRight 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-exit-to-left {
+  animation: exitToLeft 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-exit-to-right {
+  animation: exitToRight 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-scale-in-content {
+  animation: scaleInContent 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top right !important;
+}
+
+.animate-scale-out-content {
+  animation: scaleOutContent 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top center !important;
+}
+
+/* Ensure Radix NavigationMenu viewport animates in/out based on data-state */
+.nav-viewport {
+  transition:
+    width 300ms,
+    height 300ms,
+    transform 300ms;
+}
+.nav-viewport[data-state='open'] {
+  animation: scaleInContent 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top right !important;
+}
+.nav-viewport[data-state='closed'] {
+  animation: scaleOutContent 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top center !important;
 }

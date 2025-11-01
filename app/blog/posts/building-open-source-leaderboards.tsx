@@ -3,8 +3,19 @@
 // It will also be used to set meta tags for SEO once I get around to adding that.
 
 import type { Metadata } from '../posts';
-import Image from 'next/image';
 import Link from 'next/link';
+import { Source_Serif_4 } from 'next/font/google';
+import BlogBody from '../blog-components/body';
+import BlogHeading from '../blog-components/heading';
+import BlogHeroImage from '../blog-components/hero-image';
+import BlogSubheading from '../blog-components/subheading';
+import BlogImage from '../blog-components/image';
+import BlogDecorations from '../blog-components/decorations';
+
+const sourceSerif = Source_Serif_4({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
 
 export const metadata: Metadata = {
   title: 'Building Open Source Hugging Face Leaderboards',
@@ -25,24 +36,26 @@ export const metadata: Metadata = {
 
 export default function PostBody() {
   return (
-    <div className="bg-white/50 py-24 sm:py-32 relative">
-      <div className="bg-white absolute h-full w-full mt-96 border-y border-neutral-200"></div>
-      <div className="mx-auto max-w-2xl px-6 lg:max-w-5xl lg:px-8 z-10">
-        <h2 className="text-base/7 font-semibold text-sky-600 text-center">{metadata.category}</h2>
-        <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl text-center">
-          {metadata.title}
-        </h1>
-        <div className="p-px mt-16 relative z-10 bg-gradient-to-b from-transparent via-neutral-200 to-transparent rounded-lg">
-          <img
-            src="/images/blogLeaderboardsAlt.png"
-            alt="Building Open Source Leaderboards"
-            className="w-full h-auto rounded-lg z-10 relative"
-          />
-        </div>
-
+    <BlogBody>
+      <div className="">
+        <BlogHeading
+          category={metadata.category}
+          categoryColorClass="text-sky-600"
+          title={metadata.title}
+          dateISO={metadata.date}
+          maxWidth={600}
+        />
+        <BlogHeroImage
+          src="/images/blogLeaderboardsAlt.png"
+          alt="Building Open Source Leaderboards"
+        />
         <br></br>
-        <div className="relative lg:col-span-3">
-          <div className="relative flex h-full flex-col overflow-hidden tracking-[-0.010em] text-lg">
+        <div className="relative lg:col-span-3 max-w-3xl mx-auto mt-12">
+          <BlogDecorations />
+          <div
+            className={`relative flex h-full flex-col tracking-[-0.010em] text-lg ${sourceSerif.className}`}
+          >
+            <BlogSubheading>An Introduction</BlogSubheading>
             <p className="mb-4">
               Sometimes, the best machine learning models are hidden in plain sight. During our work
               on phonemic transcription, we stumbled upon a specialized{' '}
@@ -78,9 +91,9 @@ export default function PostBody() {
               </Link>
               .
             </p>
-            <h2 className="text-2xl font-semibold mt-8 mb-4">
+            <BlogSubheading>
               The Need for Better Model Discovery and Standardized Evaluation
-            </h2>
+            </BlogSubheading>
 
             <p className="mb-4">
               While leaderboards have become fundamental infrastructure in many areas of machine
@@ -109,9 +122,7 @@ export default function PostBody() {
               effectively.
             </p>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4">
-              A Streamlined Architecture for Open Evaluation
-            </h2>
+            <BlogSubheading>A Streamlined Architecture for Open Evaluation</BlogSubheading>
 
             <p className="mb-4">
               To address this gap, we implemented a system that handles both the queue backend and
@@ -122,25 +133,25 @@ export default function PostBody() {
 
             <ul className="list-disc list-inside mb-4 pl-4">
               <li className="mb-2">
-                <span className="font-semibold text-sky-700">app.py:</span> Handles the front-end
-                logic using Gradio, providing a clean interface for viewing the leaderboard,
-                checking model status, and submitting new models
+                <span className="font-semibold text-sky-600 font-sans">app.py:</span> Handles the
+                front-end logic using Gradio, providing a clean interface for viewing the
+                leaderboard, checking model status, and submitting new models
               </li>
               <li className="mb-2">
-                <span className="font-semibold text-sky-700">tasks.py:</span> Manages the back-end
-                operations, interfacing with three JSON files in the queue directory:
+                <span className="font-semibold text-sky-600 font-sans">tasks.py:</span> Manages the
+                back-end operations, interfacing with three JSON files in the queue directory:
                 <ul className="list-disc list-inside ml-4 mt-2">
                   <li>
-                    <span className="font-semibold text-sky-700">leaderboard.json:</span> Stores the
-                    final, processed rankings
+                    <span className="font-semibold text-sky-600 font-sans">leaderboard.json:</span>{' '}
+                    Stores the final, processed rankings
                   </li>
                   <li>
-                    <span className="font-semibold text-sky-700">tasks.json:</span> Tracks newly
-                    submitted models
+                    <span className="font-semibold text-sky-600 font-sans">tasks.json:</span> Tracks
+                    newly submitted models
                   </li>
                   <li>
-                    <span className="font-semibold text-sky-700">results.json:</span> Contains
-                    detailed metadata for completed evaluations
+                    <span className="font-semibold text-sky-600 font-sans">results.json:</span>{' '}
+                    Contains detailed metadata for completed evaluations
                   </li>
                 </ul>
               </li>
@@ -170,12 +181,13 @@ export default function PostBody() {
               request model evaluation and wait, our system automates the process.
             </p>
 
-            <Image
+            <BlogImage
               src="/images/blogLeaderboard1.png"
               alt="Check status of your model"
               width={1200}
               height={600}
-              className="my-6 rounded-md p-2 bg-white/50 border border-neutral-200"
+              expanded={true}
+              className="my-32 mb-36"
             />
 
             <p className="mb-4">
@@ -184,7 +196,7 @@ export default function PostBody() {
               machine learning but has been notably absent in phonemic transcription.
             </p>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4">Technical Implementation Details</h2>
+            <BlogSubheading>Technical Implementation Details</BlogSubheading>
 
             <p className="mb-4">
               Our evaluation system measures model performance using two key metrics:
@@ -218,7 +230,7 @@ export default function PostBody() {
               on a consistent compute environment (16GB RAM, 2vCPUs) to ensure reproducibility.
             </p>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4">We Need More of These Projects</h2>
+            <BlogSubheading>We Need More of These Projects</BlogSubheading>
 
             <p className="mb-4">
               The success of platforms like the Open LLM Leaderboard, with nearly 3,000 submissions,
@@ -230,15 +242,7 @@ export default function PostBody() {
               lesser-known models that might otherwise remain undiscovered.
             </p>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4">Looking Forward</h2>
-
-            <Image
-              src="/images/blogLeaderboard2.png"
-              alt="Hosting your leaderboard"
-              width={1200}
-              height={600}
-              className="mb-6 rounded-md p-2 bg-white/50 border border-neutral-200"
-            />
+            <BlogSubheading>Looking Forward</BlogSubheading>
 
             <p className="mb-4">
               Creating leaderboards has historically been challenging, with many templates becoming
@@ -246,6 +250,15 @@ export default function PostBody() {
               Space SDK, which is ideal for evaluating models of varying sizes and computational
               requirements. To create a leaderboard using their template:
             </p>
+
+            <BlogImage
+              src="/images/blogLeaderboard2.png"
+              alt="Hosting your leaderboard"
+              width={1200}
+              height={600}
+              expanded={true}
+              className="my-36"
+            />
 
             <ol className="list-decimal list-inside mb-4 pl-4 italic">
               <li className="mb-2">
@@ -304,6 +317,6 @@ export default function PostBody() {
           </div>
         </div>
       </div>
-    </div>
+    </BlogBody>
   );
 }

@@ -12,7 +12,7 @@ const user = {
 
 export function StreakCard() {
   return (
-    <Card className="rounded-md text-xs shadow-sm">
+    <Card className="rounded-md text-xs shadow-xs">
       <CardContent className="flex items-start gap-2.5 p-2.5">
         <div className="grid flex-1 gap-1">
           <p className="font-medium">Streak</p>

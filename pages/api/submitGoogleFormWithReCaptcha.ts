@@ -63,10 +63,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     const formData = new FormData();
     Object.keys(fields).forEach(key => {
-      formData.append(key, fields[key]);
+      formData.append(key, fields[key] as unknown as string);
     });
     Object.keys(files).forEach(key => {
-      formData.append(key, files[key]);
+      formData.append(key, files[key] as unknown as File);
     });
 
     // submit the form

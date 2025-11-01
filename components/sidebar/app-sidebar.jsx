@@ -6,9 +6,8 @@ import {
   Clapperboard,
   Home,
   LifeBuoy,
-  Plus,
   Send,
-  Settings2,
+  Settings,
 } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { NavMain } from '@/components/sidebar/nav-main';
@@ -28,337 +27,230 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { getUser } from '@/utils/authClient';
-import { StreakCard } from '@/components/sidebar/streak-card';
+import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
+import { getUser } from '@/lib/auth-client';
+import { useUserVideos } from '@/hooks/use-user-videos';
+import { Badge } from '../ui/base/badge';
 
-const data = {
-  user: {
-    name: 'Loading...',
-    email: 'Loading...',
-    picture: '',
-    isLoaded: false,
+const NAV_MAIN = [
+  {
+    title: 'Home',
+    url: '/dashboard',
+    icon: Home,
   },
-  navMain: [
-    {
-      title: 'Home',
-      url: '/dashboard',
-      icon: Home,
-    },
-    {
-      title: 'Settings',
-      url: '#',
-      icon: Settings2,
-    },
-  ],
+  {
+    title: 'Settings',
+    url: '/dashboard/settings',
+    icon: Settings,
+  },
+];
 
-  navSecondary: [
-    {
-      title: 'Support',
-      url: '#',
-      icon: LifeBuoy,
-    },
-    {
-      title: 'Feedback',
-      url: '#',
-      icon: Send,
-    },
-  ],
-  videos: [
-    {
-      name: 'Michael is a Terrible Secret Keeper - The Office US',
-      id: 'eWOKwlFQJAjQ',
-      icon: Clapperboard,
-    },
-    {
-      name: "Michael's Pyramid Scheme - The Office US",
-      id: '0A4Dq41bPQZ1',
-      icon: Clapperboard,
-    },
-    {
-      name: 'April joins the great resignat ion - Parks and Recreation',
-      id: 'JQMDL16t8isF',
-      icon: Clapperboard,
-    },
-  ],
-};
+const NAV_SECONDARY = [
+  {
+    title: 'Support',
+    url: '#',
+    icon: LifeBuoy,
+  },
+  {
+    title: 'Feedback',
+    url: '#',
+    icon: Send,
+  },
+];
 
-export function AppSidebar() {
+export function AppSidebar({ className }) {
   const shouldReduceMotion = useReducedMotion();
   const { open, onOpenChange } = useSidebar();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isFullyOpen, setIsFullyOpen] = useState(open);
+  const [userData, setUserData] = useState({
+    name: 'Loading...',
+    email: 'Loading...',
+    image: '',
+    isLoaded: false,
+  });
+  const [videosList, setVideosList] = useState([]);
+  const { videos, mutate: refreshVideos } = useUserVideos();
+  const isInitialLoad = useRef(true);
+
+  const formattedVideos = useMemo(() => {
+    return (videos || []).map(video => ({
+      name: video.title || 'Untitled Video',
+      id: video.id,
+      icon: Clapperboard,
+    }));
+  }, [videos]);
 
   useEffect(() => {
-    getUser().then(user => {
-      console.log(user);
-      data.user = user;
-      data.user.isLoaded = true;
-      setIsLoaded(true);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (open) {
-      const timer = setTimeout(() => setIsFullyOpen(true), 150); // 150ms is the duration of the sidebar animation
-      return () => clearTimeout(timer);
-    } else {
-      setIsFullyOpen(false);
+    if (videos && videos.length > 0) {
+      setVideosList(formattedVideos);
     }
-  }, [open]);
+  }, [formattedVideos, videos]);
 
-  const toggleSidebar = () => {
+  const loadUserData = useCallback(
+    async (forceRefresh = false) => {
+      try {
+        const { user, error } = await getUser();
+        if (error) throw error;
+
+        setUserData(prevUserData => {
+          console.log('prevUserData', prevUserData);
+          console.log('user', user);
+          if (
+            !prevUserData.isLoaded ||
+            prevUserData.email !== user.email ||
+            prevUserData.image !== user.image
+          ) {
+            return {
+              ...user,
+              isLoaded: true,
+            };
+          }
+          return prevUserData;
+        });
+
+        if (forceRefresh) {
+          await refreshVideos();
+        }
+
+        setIsLoaded(true);
+        return { user, videos: formattedVideos };
+      } catch (error) {
+        console.error('Error loading sidebar data:', error);
+        return { user: userData, videos: [] };
+      } finally {
+        setIsLoaded(true);
+      }
+    },
+    [refreshVideos],
+  );
+
+  useEffect(() => {
+    const handleVideoUpdate = event => {
+      if (window.sidebarUpdateTimeout) {
+        clearTimeout(window.sidebarUpdateTimeout);
+      }
+
+      window.sidebarUpdateTimeout = setTimeout(() => {
+        const videoId = event.detail?.videoId;
+        const action = event.detail?.action;
+        const forceRefresh = action === 'add';
+
+        loadUserData(forceRefresh).then(result => {
+          if (videoId) {
+            setTimeout(() => {
+              const videoElement = document.querySelector(`[data-video-id="${videoId}"]`);
+              if (videoElement) {
+                videoElement.classList.add('highlight-animation');
+                setTimeout(() => videoElement.classList.remove('highlight-animation'), 2000);
+              }
+            }, 300);
+          }
+        });
+      }, 300);
+    };
+
+    if (isInitialLoad.current) {
+      loadUserData();
+      isInitialLoad.current = false;
+    }
+
+    const events = ['koellabs:userUpdated'];
+
+    events.forEach(event => {
+      window.addEventListener(event, handleVideoUpdate);
+    });
+
+    return () => {
+      events.forEach(event => {
+        window.removeEventListener(event, handleVideoUpdate);
+      });
+
+      if (window.sidebarUpdateTimeout) {
+        clearTimeout(window.sidebarUpdateTimeout);
+      }
+    };
+  }, [loadUserData]);
+
+  const toggleSidebar = useCallback(() => {
     onOpenChange(!open);
-  };
+  }, [open, onOpenChange]);
+
+  const LogoSVG = useMemo(
+    () => (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1451"
+        height="1437"
+        fill="none"
+        viewBox="0 0 1451 1437"
+        className="inline-block h-7 w-7 -mt-0.5"
+      >
+        <rect
+          width="344.708"
+          height="691.027"
+          x="1126.33"
+          y="622.281"
+          fill="#154063"
+          rx="172.354"
+          transform="rotate(90 1126.33 622.281)"
+        ></rect>
+        <rect
+          width="344.708"
+          height="691.027"
+          x="1096.52"
+          y="1040.13"
+          fill="#3779B5"
+          rx="172.354"
+          transform="rotate(135 1096.52 1040.13)"
+        ></rect>
+        <mask
+          id="mask0_3672_386"
+          width="692"
+          height="345"
+          x="435"
+          y="622"
+          maskUnits="userSpaceOnUse"
+          style={{ maskType: 'alpha' }}
+        >
+          <rect
+            width="344.708"
+            height="691.027"
+            x="1126.33"
+            y="622.281"
+            fill="#fff"
+            rx="172.354"
+            transform="rotate(90 1126.33 622.281)"
+          ></rect>
+        </mask>
+        <g mask="url(#mask0_3672_386)">
+          <rect
+            width="344.708"
+            height="691.027"
+            x="1096.52"
+            y="1040.13"
+            fill="#122438"
+            rx="172.354"
+            transform="rotate(135 1096.52 1040.13)"
+          ></rect>
+        </g>
+        <path
+          fill="#000"
+          d="M501.589 575.587c-89.244-33.112-171.24-236.2-167.598-246.017 3.642-9.816 198.261-110.275 287.504-77.164s134.749 132.3 101.637 221.544-132.3 134.748-221.543 101.637"
+        ></path>
+      </svg>
+    ),
+    [],
+  );
 
   return (
-    <Sidebar>
+    <Sidebar className={`${className} bg-white/80 backdrop-blur-md dark:bg-black/80`}>
       <MotionConfig reducedMotion="always">
-        <SidebarHeader>
+        <SidebarHeader className="py-2.5 pr-3">
           <Link
             href="/"
-            className={`flex items-center gap-2 font-semibold py-1 h-[36px] ${open ? '' : ''}`}
+            className="flex items-center gap-2 -mb-px mt-px font-semibold py-1 h-[38px]"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="870"
-              height="870"
-              fill="none"
-              viewBox="0 0 870 870"
-              className=" h-7 w-7 -mt-0.5 hidden dark:inline-block"
-            >
-              <rect
-                width="214"
-                height="429"
-                x="671.178"
-                y="403"
-                fill="url(#paint0_linear_1675_354)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(90 671.178 403)"
-              ></rect>
-              <rect
-                width="214"
-                height="429"
-                x="671.18"
-                y="403"
-                fill="url(#paint1_linear_1675_354)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(90 671.18 403)"
-              ></rect>
-              <rect
-                width="214"
-                height="429"
-                x="652.67"
-                y="662.406"
-                fill="url(#paint2_linear_1675_354)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(135 652.67 662.406)"
-              ></rect>
-              <rect
-                width="214"
-                height="429"
-                x="652.67"
-                y="662.406"
-                fill="url(#paint3_linear_1675_354)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(135 652.67 662.406)"
-              ></rect>
-              <path
-                fill="#fff"
-                d="M349.176 383c-59.095 0-150.677-100.5-150.677-107s91.582-107 150.677-107c59.094 0 107 47.906 107 107s-47.906 107-107 107z"
-              ></path>
-              <defs>
-                <linearGradient
-                  id="paint0_linear_1675_354"
-                  x1="778.178"
-                  x2="778.178"
-                  y1="403"
-                  y2="832"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop></stop>
-                  <stop offset="1" stopColor="#fff"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint1_linear_1675_354"
-                  x1="778.18"
-                  x2="778.18"
-                  y1="403"
-                  y2="832"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop></stop>
-                  <stop offset="1" stopColor="#fff"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint2_linear_1675_354"
-                  x1="759.67"
-                  x2="759.67"
-                  y1="662.406"
-                  y2="1091.41"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop></stop>
-                  <stop offset="1" stopColor="#fff"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint3_linear_1675_354"
-                  x1="759.67"
-                  x2="759.67"
-                  y1="662.406"
-                  y2="1091.41"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop></stop>
-                  <stop offset="1" stopColor="#fff"></stop>
-                </linearGradient>
-              </defs>
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="870"
-              height="870"
-              fill="none"
-              viewBox="0 0 870 870"
-              className="inline-block h-7 w-7 -mt-0.5 dark:hidden"
-            >
-              <rect
-                width="214"
-                height="429"
-                x="671.179"
-                y="403"
-                fill="url(#paint0_linear_1691_806)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(90 671.179 403)"
-              ></rect>
-              <rect
-                width="214"
-                height="429"
-                x="652.67"
-                y="662.406"
-                fill="url(#paint1_linear_1691_806)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(135 652.67 662.406)"
-              ></rect>
-              <rect
-                width="214"
-                height="429"
-                x="671.179"
-                y="403"
-                fill="url(#paint2_linear_1691_806)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(90 671.179 403)"
-              ></rect>
-              <rect
-                width="214"
-                height="429"
-                x="652.67"
-                y="662.406"
-                fill="url(#paint3_linear_1691_806)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(135 652.67 662.406)"
-              ></rect>
-              <rect
-                width="214"
-                height="429"
-                x="671.179"
-                y="403"
-                fill="url(#paint4_linear_1691_806)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(90 671.179 403)"
-              ></rect>
-              <rect
-                width="214"
-                height="429"
-                x="652.67"
-                y="662.406"
-                fill="url(#paint5_linear_1691_806)"
-                fillOpacity="0.6"
-                rx="107"
-                transform="rotate(135 652.67 662.406)"
-              ></rect>
-              <path
-                fill="#000"
-                d="M283.332 374.002c-55.404-20.556-106.308-146.637-104.047-152.731 2.261-6.094 123.083-68.461 178.487-47.905 55.404 20.556 83.654 82.134 63.098 137.538-20.556 55.404-82.134 83.654-137.538 63.098z"
-              ></path>
-              <defs>
-                <linearGradient
-                  id="paint0_linear_1691_806"
-                  x1="778.179"
-                  x2="778.179"
-                  y1="403"
-                  y2="832"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#317EC5"></stop>
-                  <stop offset="1"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint1_linear_1691_806"
-                  x1="759.67"
-                  x2="759.67"
-                  y1="662.406"
-                  y2="1091.41"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#317EC5"></stop>
-                  <stop offset="1"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint2_linear_1691_806"
-                  x1="778.179"
-                  x2="778.179"
-                  y1="403"
-                  y2="832"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#317EC5"></stop>
-                  <stop offset="1"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint3_linear_1691_806"
-                  x1="759.67"
-                  x2="759.67"
-                  y1="662.406"
-                  y2="1091.41"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#317EC5"></stop>
-                  <stop offset="1"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint4_linear_1691_806"
-                  x1="778.179"
-                  x2="778.179"
-                  y1="403"
-                  y2="832"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#317EC5"></stop>
-                  <stop offset="1"></stop>
-                </linearGradient>
-                <linearGradient
-                  id="paint5_linear_1691_806"
-                  x1="759.67"
-                  x2="759.67"
-                  y1="662.406"
-                  y2="1091.41"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#317EC5"></stop>
-                  <stop offset="1"></stop>
-                </linearGradient>
-              </defs>
-            </svg>
+            {LogoSVG}
             <AnimatePresence>
               {open && (
                 <motion.span
@@ -370,10 +262,10 @@ export function AppSidebar() {
                   }
                   className="tracking-tighter -ml-1.5 text-xl overflow-hidden whitespace-nowrap"
                 >
-                  Koel{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-black via-sky-950 to-sky-600 dark:from-white dark:via-white dark:to-black">
-                    Labs
-                  </span>
+                  Koel Labs
+                  <Badge variant="outline" className="ml-1.5 tracking-tight -translate-y-[3px]">
+                    Beta
+                  </Badge>
                 </motion.span>
               )}
             </AnimatePresence>
@@ -390,22 +282,24 @@ export function AppSidebar() {
         <SidebarContent>
           <SidebarItem>
             <SidebarLabel>{open && 'Platform'}</SidebarLabel>
-            <NavMain items={data.navMain} isCollapsed={!open} className={open ? '' : '-mb-3'} />
+            <NavMain items={NAV_MAIN} isCollapsed={!open} className={open ? '' : '-mb-3'} />
           </SidebarItem>
           {!open && <div className="h-[1px] bg-black/10 w-full"></div>}
           <SidebarItem>
             <SidebarLabel className="flex justify-between items-center">
-              {open && 'Your Videos'}{' '}
-              {open && (
-                <Button variant="ghost" size="icon" className="h-6 w-6 -mr-0.5">
-                  <Plus className="h-4 w-4" />
-                </Button>
-              )}
+              {open && 'Your Clips'}
             </SidebarLabel>
-            <NavVideos videos={data.videos} isCollapsed={!open} className={open ? '' : '-mb-3'} />
+            <div data-sidebar-videos="true">
+              <NavVideos
+                videos={videosList}
+                isCollapsed={!open}
+                className={open ? '' : '-mb-3'}
+                isLoading={!isLoaded}
+              />
+            </div>
           </SidebarItem>
           <SidebarItem className="mt-auto">
-            <NavSecondary items={data.navSecondary} isCollapsed={!open} />
+            <NavSecondary items={NAV_SECONDARY} isCollapsed={!open} />
           </SidebarItem>
           <AnimatePresence>
             {open && (
@@ -416,9 +310,6 @@ export function AppSidebar() {
                 transition={{ duration: 0.0, ease: 'easeInOut' }}
                 className="flex flex-col gap-3"
               >
-                {/* <SidebarItem>
-                  <StreakCard />
-                </SidebarItem> */}
                 <SidebarItem>
                   <BetaCard />
                 </SidebarItem>
@@ -427,7 +318,7 @@ export function AppSidebar() {
           </AnimatePresence>
         </SidebarContent>
         <SidebarFooter>
-          <NavUser user={data.user} isCollapsed={!open} isLoading={!isLoaded} />
+          <NavUser user={userData} isCollapsed={!open} isLoading={!isLoaded} />
         </SidebarFooter>
       </MotionConfig>
     </Sidebar>

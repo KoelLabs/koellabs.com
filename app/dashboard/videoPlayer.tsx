@@ -12,6 +12,7 @@ export default function VideoPlayer({
   title,
   poster,
   practicableSections,
+  captions,
   onTimeUpdate,
   onSeek,
 }) {
@@ -33,11 +34,13 @@ export default function VideoPlayer({
       onTimeUpdate={e => {
         onTimeUpdate(e.currentTime);
       }}
-      className=""
+      className="aspect-video"
     >
       <MediaProvider>
-        <Poster className="vds-poster" />
+        <Poster className="vds-poster aspect-video h-auto" />
+
         <Track src={practicableSections} kind="chapters" default />
+        <Track src={captions} kind="subtitles" label="English" lang="en-US" type="vtt" />
       </MediaProvider>
       <DefaultVideoLayout
         thumbnails={poster}

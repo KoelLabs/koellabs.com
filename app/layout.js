@@ -1,7 +1,9 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
+import '../styles/animations.css';
 import { Toaster } from '@/components/ui/toaster';
 import Script from 'next/script';
+import { ReactScan } from '@/components/react-scan';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -13,10 +15,11 @@ export const metadata = {
   metadataBase: new URL('https://koellabs.com'),
   title: {
     template: '%s | Koel Labs',
-    default: 'Koel Labs - Your new favorite tool for pronunciation learning',
+    default:
+      'Koel Labs - Building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects.',
   },
   description:
-    'Your new favorite tool for pronunciation learning. Other methods for pronunciation learning are often outdated, lack accessibility, and are ultimately boring. Language learners, like us and our families, desperately need a change—and we aim to be just that.',
+    'A research lab building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects. We are a team of researchers and engineers inspired by our own experiences with language.',
   keywords: [
     'pronunciation learning',
     'AI language learning',
@@ -27,7 +30,7 @@ export const metadata = {
   openGraph: {
     title: 'Koel Labs',
     description:
-      'Your new favorite tool for pronunciation learning. Other methods for pronunciation learning are often outdated, lack accessibility, and are ultimately boring. Language learners, like us and our families, desperately need a change—and we aim to be just that.',
+      'A research lab building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects. We are a team of researchers and engineers inspired by our own experiences with language.',
     url: 'https://koellabs.com',
     siteName: 'Koel Labs',
     images: [
@@ -55,7 +58,8 @@ export const metadata = {
   twitter: {
     title: 'Koel Labs',
     card: 'summary_large_image',
-    description: 'Pioneering AI-powered pronunciation learning platform',
+    description:
+      'A research lab building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects. We are a team of researchers and engineers inspired by our own experiences with language.',
     images: ['/openGraph.png'],
   },
   alternates: {
@@ -65,7 +69,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth overflow-x-hidden">
+      <ReactScan />
       <head>
         <Script id="org-schema" type="application/ld+json">
           {`
@@ -81,7 +86,7 @@ export default function RootLayout({ children }) {
                 "https://github.com/koellabs",
                 "https://www.linkedin.com/company/koellabs"
               ],
-              "description": "Koel Labs is a speech research lab reimagining how technology can listen and respond to anyone, regardless of an accent, speech impediment, or speaking style. We aim to advance the frontier of phonetic research and real-time speech feedback while creating fun and engaging platforms to speak with!",
+              "description": "Koel Labs is your new favorite tool for pronunciation learning. Other methods for pronunciation learning are often outdated, lack accessibility, and are ultimately boring. Language learners, like us and our families, desperately need a change—and we aim to be just that.",
               "foundingDate": "2024",
               "knowsAbout": [
                 "Pronunciation Learning",
@@ -125,7 +130,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} dark:bg-black`}>
         {children}
         <Toaster />
       </body>

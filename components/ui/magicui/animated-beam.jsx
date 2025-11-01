@@ -2,7 +2,7 @@
 import { useEffect, useId, useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { cn } from '@/utils/styles';
+import { cn } from '@/lib/styles';
 
 export const AnimatedBeam = ({
   className,

@@ -3,7 +3,7 @@ import * as React from 'react';
 import useEmblaCarousel, { EmblaViewportRefType } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/styles';
 import { Button } from '@/components/ui/base/button';
 
 const CarouselContext = React.createContext<{
@@ -127,14 +127,19 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
 );
 Carousel.displayName = 'Carousel';
 
-type CarouselContentProps = React.HTMLAttributes<HTMLDivElement>;
+type CarouselContentProps = React.HTMLAttributes<HTMLDivElement> & {
+  overflowVisible?: boolean;
+};
 
 const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, overflowVisible, ...props }, ref) => {
     const { carouselRef, orientation } = useCarousel();
 
     return (
-      <div ref={carouselRef} className="overflow-hidden">
+      <div
+        ref={carouselRef}
+        className={cn('overflow-hidden', overflowVisible && 'overflow-visible')}
+      >
         <div
           ref={ref}
           className={cn(

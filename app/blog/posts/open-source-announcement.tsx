@@ -3,6 +3,17 @@
 // It will also be used to set meta tags for SEO once I get around to adding that.
 
 import type { Metadata } from '../posts';
+import BlogBody from '../blog-components/body';
+import BlogHeading from '../blog-components/heading';
+import BlogHeroImage from '../blog-components/hero-image';
+import BlogSubheading from '../blog-components/subheading';
+import BlogDecorations from '../blog-components/decorations';
+import { Source_Serif_4 } from 'next/font/google';
+
+const sourceSerif = Source_Serif_4({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
 
 export const metadata: Metadata = {
   title: 'Hello World! — Our Open Source Project Launch',
@@ -14,8 +25,7 @@ export const metadata: Metadata = {
     At Koel Labs, our goal is to make pronunciation learning more accessible and inclusive.
     To represent the diversity of language and dialects, we're excited to announce that everything 
     from model weights and training code to datasets, research papers, and the frontend UI is 
-    officially open source! We believe that together, we can build a better future for language 
-    learning.
+    officially open source!
   `,
   category: 'Announcement',
   tags: [
@@ -32,25 +42,25 @@ export const metadata: Metadata = {
 
 export default function PostBody() {
   return (
-    <div className="bg-white/50 py-24 sm:py-32 relative">
-      <div className="bg-white absolute h-full w-full mt-96 border-y border-neutral-200"></div>
-      <div className="mx-auto max-w-2xl px-6 pt-16 sm:pt-8 md:pt-0 lg:max-w-5xl lg:px-8 z-10">
-        <h2 className="text-base/7 font-semibold text-sky-600 text-center">{metadata.category}</h2>
-        <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl text-center">
-          {metadata.title}
-        </h1>
-        <img
-          src={metadata.image}
-          alt={metadata.title}
-          className="w-full h-auto mt-16 rounded-lg z-10 relative"
+    <BlogBody>
+      <div className="">
+        <BlogHeading
+          category={metadata.category}
+          categoryColorClass="text-sky-600"
+          title={metadata.title}
+          dateISO={metadata.date}
+          maxWidth="2xl"
         />
+        <BlogHeroImage src={metadata.image} alt={metadata.title} />
         <br></br>
-        <div className="relative lg:col-span-3">
-          <div className="relative flex h-full flex-col overflow-hidden tracking-[-0.010em] text-lg">
+        <div className="relative lg:col-span-3 max-w-3xl mx-auto mt-12">
+          <BlogDecorations />
+          <div
+            className={`relative flex h-full flex-col overflow-hidden tracking-[-0.010em] text-lg ${sourceSerif.className}`}
+          >
+            <BlogSubheading>An Introduction</BlogSubheading>
             <p>{metadata.summary}</p>
-            <h2 className="text-2xl font-semibold tracking-tight mt-8 mb-4">
-              The problem of pronunciation learning
-            </h2>
+            <BlogSubheading>The problem of pronunciation learning</BlogSubheading>
 
             <p className="mb-4">
               Currently, 48% of foreign speakers are anxious about their accents [1]. Pronunciation
@@ -88,9 +98,7 @@ export default function PostBody() {
               allows for discussion and ideas from a worldwide audience.
             </p>
 
-            <h2 className="text-2xl font-semibold tracking-tight mt-8 mb-4">
-              Current progress and plans
-            </h2>
+            <BlogSubheading>Current progress and plans</BlogSubheading>
 
             <p className="mb-4">
               We were fortunate to join the{' '}
@@ -123,9 +131,7 @@ export default function PostBody() {
               .
             </p>
 
-            <h2 className="text-2xl font-semibold tracking-tight mt-8 mb-4">
-              How do I get involved?
-            </h2>
+            <BlogSubheading>How do I get involved?</BlogSubheading>
 
             <p className="mb-4">
               If your institution is interested in collaborating, please reach out to us at{' '}
@@ -170,6 +176,6 @@ export default function PostBody() {
           </div>
         </div>
       </div>
-    </div>
+    </BlogBody>
   );
 }

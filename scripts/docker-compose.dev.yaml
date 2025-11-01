@@ -5,7 +5,17 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ../data:/var/lib/postgresql/data
+      - ../data:/var/lib/postgresql
+  server:
+    build:
+      context: '../server'
+      dockerfile: './scripts/Dockerfile.dev'
+    env_file: '../server/.env'
+    ports:
+      - '8080:8080'
+    volumes:
+      - ../server/src:/app/src
+      - ../server/.cache/huggingface/hub:/app/.cache/huggingface/hub
   webapp:
     entrypoint: bash -c "npm install && npm run migrate && npm run dev"
     build:
@@ -14,6 +24,7 @@ services:
     env_file: '../.env.local'
     depends_on:
       - postgres
+      - server
     ports:
       - '3000:3000'
     volumes:

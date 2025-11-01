@@ -3,7 +3,7 @@ import * as React from 'react';
 import { PanelLeft } from 'lucide-react';
 
 import { useIsMobile } from '@/hooks/use-mobile';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/styles';
 import { Button } from '@/components/ui/base/button';
 import { Sheet, SheetContent } from '@/components/ui/base/sheet';
 import { useReducedMotion } from 'framer-motion';
@@ -21,7 +21,7 @@ function useSidebar() {
 }
 
 const SidebarLayout = React.forwardRef(({ defaultOpen, className, ...props }, ref) => {
-  const [open, setOpen] = React.useState(defaultOpen ?? true);
+  const [open, setOpen] = React.useState(defaultOpen !== false);
 
   const onOpenChange = React.useCallback(open => {
     setOpen(open);
@@ -39,7 +39,7 @@ const SidebarLayout = React.forwardRef(({ defaultOpen, className, ...props }, re
           '--sidebar-width': open ? '16rem' : '4rem',
         }}
         className={cn(
-          'flex min-h-screen bg-accent/50 pl-0 transition-all duration-150 ease-in-out  special:pl-[--sidebar-width]',
+          'flex min-h-screen bg-accent/50 pl-0 transition-all duration-150 ease-in-out  special:pl-(--sidebar-width)',
           className,
         )}
         {...props}
@@ -92,7 +92,7 @@ const Sidebar = React.forwardRef(({ className, children }, ref) => {
     return (
       <Sheet open={open} onOpenChange={onOpenChange}>
         <SheetContent
-          className="w-[260px] p-0 md:w-[--sidebar-width] [&>button]:hidden"
+          className="w-[260px] p-0 md:w-(--sidebar-width) [&>button]:hidden"
           side="left"
         >
           {sidebar}

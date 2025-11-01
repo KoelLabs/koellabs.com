@@ -7,7 +7,6 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
   const { toast } = useToast();
   return (
     <div id="join-the-waitlist" className={`relative`}>
-      <div className="color-bg h-full w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
       <div
         className={`mx-auto absolute top-0 left-0 right-0 bottom-0 lg:max-w-[1264px] h-full flex justify-between z-[-1] ${hideBg ? 'hidden' : ''}`}
       >
@@ -26,10 +25,10 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
       </div>
 
       <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
-        <div className="sm:p-4 sm:border sm:border-neutral-200 bg-white/50 backdrop-blur-sm sm:rounded-[36px]">
+        <div className="sm:p-4 sm:border sm:border-neutral-200 bg-white/50 backdrop-blur-xs sm:rounded-[36px]">
           <section
             aria-labelledby="cta-heading"
-            className="relative isolate overflow-hidden bg-white/50 border border-neutral-200 backdrop-blur-md px-6 py-16 shadow-sm sm:rounded-3xl sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0"
+            className="relative isolate overflow-hidden bg-white/50 border border-neutral-200 backdrop-blur-md px-6 py-16 shadow-xs sm:rounded-3xl sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0"
           >
             <svg
               aria-hidden="true"
@@ -415,14 +414,14 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
                       name="entry.358867278"
                       placeholder="Email address"
                       aria-label="Email address"
-                      className="block w-full rounded-2xl border border-neutral-200 bg-white/75 py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-sky-950 focus:outline-none focus:ring-sky-950/5"
+                      className="block w-full rounded-2xl border border-neutral-200 bg-white/75 py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-sky-950 focus:outline-hidden focus:ring-sky-950/5"
                       required
                     />
                     <div className="absolute inset-y-1 right-1 flex justify-end">
                       <button
                         type="submit"
                         aria-label="Submit email to join waitlist"
-                        className="flex aspect-square h-full items-center justify-center rounded-xl bg-sky-700 text-white transition hover:bg-sky-800 bg-gradient-to-b border border-double outline-white/50 outline-offset-[-2px] border-black from-sky-900 to-blue-950"
+                        className="flex aspect-square h-full items-center justify-center rounded-xl bg-sky-700 text-white transition hover:bg-sky-800 bg-linear-to-b border border-double outline-white/50 outline-offset-[-2px] border-black from-sky-900 to-blue-950"
                       >
                         <ArrowRightIcon className="w-4" aria-hidden="true" />
                       </button>

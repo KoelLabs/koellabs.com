@@ -3,12 +3,13 @@
 
 import { getPost } from '../posts';
 import { notFound } from 'next/navigation';
-import Header from '@/components/ui/1 - header';
-import CTA from '@/components/sections/3 - CTA';
-import Footer from '@/components/sections/4 - Footer';
+import Header from '@/components/ui/header';
+import CTA from '@/components/sections/cta';
+import Footer from '@/components/sections/footer';
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPost(slug);
   if (!post) return {};
 
   return {
@@ -41,27 +42,52 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function PostPage({
   params,
 }: {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }) {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
   if (!post) return notFound();
 
   return (
     <div className="flex-col flex w-screen relative scroll-smooth">
-      <div className="z-[2] sticky top-0 mx-auto w-full">
+      <div className="z-2 sticky top-0 mx-auto w-full">
         <Header />
       </div>
       <div className="relative">
-        <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-[0] blur-[64px] transform-gpu opacity-10 top-48"></div>
+        <div className="color-bg h-[80%] w-11/12 left-0 right-0 mx-auto absolute z-0 blur-[64px] transform-gpu opacity-10 top-48"></div>
         <main className="mx-auto relative">
           <div className="mx-auto absolute h-full flex justify-between z-[-1]"></div>
 
           <article className="mx-auto w-full h-fit bg-neutral-50/20 border-b border-neutral-200 backdrop-blur-md relative overflow-hidden">
             <post.content />
+            <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-t absolute bottom-0 left-0 mt-12">
+              <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
+                {Array(500)
+                  .fill(0)
+                  .map((_, i) => (
+                    <div
+                      key={`bottom-${i}`}
+                      className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
+                    ></div>
+                  ))}
+              </div>
+            </div>
           </article>
           <CTA />
+          <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
+            <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
+              {Array(500)
+                .fill(0)
+                .map((_, i) => (
+                  <div
+                    key={`bottom-${i}`}
+                    className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
+                  ></div>
+                ))}
+            </div>
+          </div>
           <Footer />
         </main>
       </div>
