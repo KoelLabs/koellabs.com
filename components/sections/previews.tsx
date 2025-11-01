@@ -31,7 +31,7 @@ export default function Previews() {
         viewBox="0 0 75 905"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute top-24 left-0 z-[1] hidden lg:block"
+        className="absolute top-24 left-0 z-[1] hidden 2xl:block"
       >
         <g clipPath="url(#clip0_3877_301)">
           <path
@@ -61,7 +61,7 @@ export default function Previews() {
         viewBox="0 0 75 905"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute top-24 right-0 z-[1] rotate-180 hidden lg:block"
+        className="absolute top-24 right-0 z-[1] rotate-180 hidden 2xl:block"
       >
         <g clipPath="url(#clip0_3877_301)">
           <path

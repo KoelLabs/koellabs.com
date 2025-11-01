@@ -11,7 +11,7 @@ export default function Models() {
         viewBox="0 0 75 905"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute top-4 left-0 z-[1] hidden lg:block"
+        className="absolute top-4 left-0 z-[1] hidden 2xl:block"
       >
         <g clipPath="url(#clip0_3877_301)">
           <path
@@ -41,7 +41,7 @@ export default function Models() {
         viewBox="0 0 75 905"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute top-4 right-0 z-[1] rotate-180 hidden lg:block"
+        className="absolute top-4 right-0 z-[1] rotate-180 hidden 2xl:block"
       >
         <g clipPath="url(#clip0_3877_301)">
           <path
@@ -134,7 +134,7 @@ export default function Models() {
                       models in both their transcription quality and inference time.
                     </p>
                     <div className="mt-6 border rounded-[20px] p-2 w-full flex flex-row gap-2">
-                      <Link href="https://github.com/KoelLabs/ML">
+                      <Link href="https://github.com/KoelLabs/ML" className="w-full">
                         <Button
                           variant="outline"
                           className="w-full active:scale-[97%] transition-all duration-50 "
@@ -142,7 +142,10 @@ export default function Models() {
                           <p>View GitHub</p>
                         </Button>
                       </Link>
-                      <Link href="https://huggingface.co/KoelLabs/xlsr-english-01">
+                      <Link
+                        href="https://huggingface.co/KoelLabs/xlsr-english-01"
+                        className="w-full"
+                      >
                         <Button className="w-full active:scale-[97%] transition-all duration-50 ">
                           <p>View on Huggingface</p>
                         </Button>

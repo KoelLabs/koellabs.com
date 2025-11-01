@@ -73,7 +73,7 @@ export default function HeroNew() {
               technologies more inclusive for all dialects.
             </p>
             <div className="mt-6 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4 w-full">
-              <Link href="/research">
+              <Link href="/research" className="w-full sm:w-auto">
                 <Button
                   variant="outline"
                   className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto"
@@ -81,7 +81,7 @@ export default function HeroNew() {
                   Read our research
                 </Button>
               </Link>
-              <Link href="/previews">
+              <Link href="/previews" className="w-full sm:w-auto">
                 <Button className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto">
                   View our demos
                 </Button>
