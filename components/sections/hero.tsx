@@ -54,7 +54,7 @@ export default function HeroNew() {
                 A new look for Koel Labs{' '}
               </div>
               <a
-                href="#"
+                href="/blog/new-look-for-koel-labs"
                 className="font-semibold text-sky-600 rounded-full shadow-xs bg-white -ml-3 pl-2.5 border-l-none border text-sm/6 px-2 py-0.5 inset-0"
               >
                 <span aria-hidden="true" className="absolute inset-0 tracking-tight" />

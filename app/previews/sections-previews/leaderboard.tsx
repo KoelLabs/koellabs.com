@@ -339,9 +339,9 @@ export default function Leaderboard() {
                 id="features-heading"
                 className="mt-2 text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
               >
-                Our newest talks and presentations
+                Setting a new standard in phonetic transcription
               </h2>
-              <ul
+              {/* <ul
                 role="list"
                 data-cursor-opacity="1"
                 data-cursor-size="340"
@@ -358,7 +358,7 @@ export default function Leaderboard() {
                   quos. Quasi voluptatibus atque eum quam velit? Sequi, autem cumque consequatur
                   laborum.
                 </p>
-              </ul>
+              </ul> */}
 
               <div className="p-2 mt-12 border rounded-[24px] bg-white">
                 <ul
@@ -484,6 +484,17 @@ export default function Leaderboard() {
                   </table>
                 </ul>
               </div>
+              <p className="text-center text-sm text-neutral-500 mt-8">
+                Last updated: November 1, 2025 from{' '}
+                <a
+                  href="https://huggingface.co/spaces/KoelLabs/IPA-Transcription-EN"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sky-600 underline"
+                >
+                  https://huggingface.co/spaces/KoelLabs/IPA-Transcription-EN
+                </a>
+              </p>
             </div>
           </div>
         </section>
