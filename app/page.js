@@ -15,12 +15,12 @@ import Previews from '@/components/sections/previews';
 import MagicHighlighter from '@/components/magic-highlighter';
 
 const sliderImages = [
-  '/images/frontpage/9.jpg',
-  '/images/one.jpg',
-  '/images/frontpage/10.jpg',
-  '/images/frontpage/2.jpg',
-  '/images/three.jpg',
-  '/images/frontpage/3.jpg',
+  '/images/frontpage/1-group.jpg',
+  '/images/frontpage/2-aruna.jpg',
+  '/images/frontpage/3-group.jpg',
+  '/images/frontpage/4-alex.jpg',
+  '/images/frontpage/5-group.jpg',
+  '/images/frontpage/6-ruslan.jpg',
 ];
 
 export default function Home() {
