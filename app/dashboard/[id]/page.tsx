@@ -21,6 +21,7 @@ import { PieChart, Pie, Cell } from 'recharts';
 import { Button } from '@/components/ui/base/button';
 import VideoPlayer from '../videoPlayer';
 import { FeedbackGiver } from '@/server/src/static/FeedbackGiver.js';
+import type { TimestampedPhonesByWord } from '@/server/src/static/FeedbackGiver.js';
 import { useMediaRemote } from '@vidstack/react';
 import { type MediaRemoteControl } from '@vidstack/react';
 import { authClient } from '@/lib/auth-client';
@@ -130,83 +131,20 @@ export default function Page() {
           start: 567,
           end: 573,
           thumbnail: 'd1.png',
-          target: [
-            'j',
-            'u',
-            'ɡ',
-            'ɑ',
-            'ɾ',
-            'ʌ',
-            's',
-            't',
-            'eɪ',
-            'ʔ',
-            'ʌ',
-            'l',
-            'ɹ',
-            't',
-            'ɔ',
-            'l',
-            'ð',
-            'ə',
-            't',
-            'aɪ',
-            'aɪ',
-            'm',
-          ],
           target_by_word: [
-            ['You', ['j', 'u']],
-            ['gotta', ['ɡ', 'ɑ', 'ɾ', 'ʌ']],
-            ['stay', ['s', 't', 'eɪ', 'ʔ']],
-            ['alert', ['ʌ', 'l', 'ɹ', 't']],
-            ['all', ['ɔ', 'l']],
-            ['the', ['ð', 'ə']],
-            ['time', ['t', 'aɪ', 'aɪ', 'm']],
+            ['You', [['j', 0.24160443037974685, 0.2617381329113924], ['u', 0.2617381329113924, 0.281871835443038]]], // prettier-ignore
+            ['gotta', [['ɡ', 0.34227294303797473, 0.36240664556962027], ['ɑ', 0.38254034810126586, 0.40267405063291145], ['t', 0.4429414556962025, 0.4630751582278481], ['ʌ', 0.4832088607594937, 0.5033425632911394]]], // prettier-ignore
+            ['stay', [['s', 0.6845458860759495, 0.7046795886075949], ['t', 0.7650806962025317, 0.7852143987341773], ['eɪ', 0.8053481012658229, 0.8254818037974684]]], // prettier-ignore
+            ['alert', [['æ', 1.0872199367088609, 1.1073536392405066], ['l', 1.369091772151899, 1.3892254746835444], ['ɜ˞', 1.4093591772151899, 1.4294928797468356], ['t', 1.6106962025316458, 1.630829905063291]]], // prettier-ignore
+            ['all', [['ɔ', 2.0536376582278484, 2.073771360759494], ['l', 2.1945735759493674, 2.214707278481013]]], // prettier-ignore
+            ['the', [['ð', 2.27510838607595, 2.295242088607595], ['ʌ', 2.295242088607595, 2.3153757911392407]]], // prettier-ignore
+            ['time', [['t', 2.416044303797469, 2.436178006329114], ['aɪ', 2.4764454113924055, 2.4965791139240507], ['m', 2.7985846518987345, 2.8187183544303798]]], // prettier-ignore
           ],
         },
       ],
       completedSections: 0,
     },
   ];
-
-  // const target = [
-  //   'kʰ',
-  //   'ɔ',
-  //   'l',
-  //   'ɪ',
-  //   'ŋ',
-  //   'kʰ',
-  //   'ɑ',
-  //   'ɹ',
-  //   'd',
-  //   'z',
-  //   'ɑ',
-  //   'ɹ',
-  //   'ð',
-  //   'ə',
-  //   'w',
-  //   'eɪ',
-  //   'v',
-  //   'ə',
-  //   'v',
-  //   'ð',
-  //   'ə',
-  //   'f',
-  //   'j',
-  //   'u',
-  //   'tʃ',
-  //   'ɜ˞',
-  // ];
-  // const target_by_words = [
-  //   ['calling', ['kʰ', 'ɔ', 'l', 'ɪ', 'ŋ']],
-  //   ['cards', ['kʰ', 'ɑ', 'ɹ', 'd', 'z']],
-  //   ['are', ['ɑ', 'ɹ']],
-  //   ['the', ['ð', 'ə']],
-  //   ['wave', ['w', 'eɪ', 'v']],
-  //   ['of', ['ə', 'v']],
-  //   ['the', ['ð', 'ə']],
-  //   ['future', ['f', 'j', 'u', 'tʃ', 'ɜ˞']],
-  // ];
 
   const currentVideo = videos.find(video => pathname?.includes(video.id));
 
@@ -310,8 +248,7 @@ export default function Page() {
 
       // Initialize FeedbackGiver with the current section's target and target_by_word
       feedbackGiverRef.current = new FeedbackGiver(
-        practiceSection.target,
-        practiceSection.target_by_word,
+        practiceSection.target_by_word as TimestampedPhonesByWord,
         async (newTranscription: any) => {
           // Handle transcription as array (from server) or string (fallback)
           const transcriptionText = Array.isArray(newTranscription)
