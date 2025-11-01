@@ -18,7 +18,7 @@ const navigation = {
   social: [
     {
       name: 'LinkedIn',
-      href: 'https://www.linkedin.com/lab/koel-labs/',
+      href: 'https://www.linkedin.com/company/koel-labs/',
       icon: props => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <g clipPath="url(#clip0_2232_245)">

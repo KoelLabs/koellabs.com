@@ -3,6 +3,7 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 
 import { Button } from '@/components/ui/base/button';
+import Link from 'next/link';
 
 const previews = [
   {
@@ -102,15 +103,19 @@ export default function PreviewsHero() {
               technology and language learning.
             </p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4 w-full">
-              <Button
-                variant="outline"
-                className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto"
-              >
-                Join the waitlist
-              </Button>
-              <Button className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto">
-                View our demos
-              </Button>
+              <Link href="/research" className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto"
+                >
+                  Join the waitlist
+                </Button>
+              </Link>
+              <Link href="/research" className="w-full sm:w-auto">
+                <Button className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto">
+                  Read our research
+                </Button>
+              </Link>
             </div>
           </section>
         </div>
@@ -181,13 +186,22 @@ export default function PreviewsHero() {
           {previews.map(preview => (
             <div
               key={preview.title}
-              className="shadow-xl min-w-[330px] mt-8 sm:mt-0 rounded-3xl first:-rotate-12 last:rotate-12 scale-110 first:translate-y-12 last:translate-y-12 first:translate-x-24 last:-translate-x-24 last:hover:translate-y-6 last:hover:-translate-x-12 even:hover:-translate-y-12 first:hover:translate-y-6 first:hover:translate-x-12 transition-all duration-350"
+              className="relative shadow-xl min-w-[330px] mt-8 sm:mt-0 rounded-3xl first:-rotate-12 last:rotate-12 scale-110 first:translate-y-12 last:translate-y-12 first:translate-x-24 last:-translate-x-24 last:hover:translate-y-6 last:hover:-translate-x-12 even:hover:-translate-y-12 first:hover:translate-y-6 first:hover:translate-x-12 transition-all duration-350"
             >
               <li
                 key={preview.title}
                 className="flex flex-col gap-2 border border-neutral-200 rounded-3xl p-2 relative group/item bg-white"
                 data-cursor-size="2"
               >
+                {preview.link ? (
+                  <a
+                    href={preview.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full h-full absolute top-0 left-0 z-[999]"
+                  />
+                ) : null}
+
                 <div className="p-4 pb-2 rounded-2xl bg-white border border-neutral-200">
                   <div className="flex flex-row gap-2 items-center justify-between pb-2">
                     <h3 className="text-lg font-medium tracking-[-0.03em] text-black">
