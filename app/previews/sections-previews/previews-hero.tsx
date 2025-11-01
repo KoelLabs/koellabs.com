@@ -1,10 +1,8 @@
 'use client';
 import React from 'react';
-import { ArrowUpRight, ChevronRightIcon } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 import { Button } from '@/components/ui/base/button';
-
-import Header from '@/components/ui/header';
 
 const previews = [
   {
@@ -73,12 +71,12 @@ export default function PreviewsHero() {
         <div className="mx-auto p-4 max-w-4xl py-32 z-[90] relative">
           <section aria-labelledby="hero-heading" className="text-center relative">
             {/* <div className="flex flex-row justify-center items-center my-8"></div> */}
-            <div className="hidden sm:mb-8 sm:flex sm:justify-center relative z-10 max-w-md mx-auto">
-              <div className="relative rounded-full px-2 py-0.5 pr-4.5 text-sm/6 text-gray-600 border-y border-l rounded-r-none">
-                Phrase Segmentation is now in closed beta{' '}
+            <div className="hidden sm:mb-8 sm:flex sm:justify-center relative z-10 max-w-lg mx-auto">
+              <div className="relative rounded-full px-2 py-0.5 pr-4.5 text-sm/6 text-gray-600 border-y border-l rounded-r-none w-fit">
+                We've released a series of blogs about Wav2Vec2{' '}
               </div>
               <a
-                href="#"
+                href="/blog"
                 className="font-semibold text-[#154063] rounded-full shadow-xs bg-white -ml-3 pl-2.5 border-l-none border text-sm/6 px-2 py-0.5 inset-0"
               >
                 <span aria-hidden="true" className="absolute inset-0 tracking-tight" />
@@ -87,9 +85,15 @@ export default function PreviewsHero() {
             </div>
             <h1
               id="hero-heading"
-              className=" text-4xl font-semibold tracking-tighter text-gray-950 sm:text-6xl relative text-balance ligat"
+              className="text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-6xl relative sm:block hidden"
             >
-              Pioneering Inclusive Speech Technology for Everyone
+              Making Speech Technology Understand You Better
+            </h1>
+            <h1
+              id="hero-heading"
+              className="text-balance text-[2.2rem] leading-[1.15] text-4xl font-semibold tracking-tighter text-gray-950 relative sm:hidden block"
+            >
+              Making Speech Tech Understand You Better
             </h1>
 
             <p className="mt-6 sm:text-lg leading-8 text-neutral-600 max-w-xl mx-auto text-pretty">
@@ -174,11 +178,9 @@ export default function PreviewsHero() {
 
         <div className="flex justify-center sm:overflow-visible overflow-hidden mb-[127px] mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[4] relative gap-4">
           {previews.map(preview => (
-            <a
-              href={preview.title}
+            <div
               key={preview.title}
-              target="_blank"
-              className="shadow-xl rounded-3xl first:-rotate-12 last:rotate-12 scale-110 first:translate-y-12 last:translate-y-12 first:translate-x-24 last:-translate-x-24 last:hover:translate-y-6 last:hover:-translate-x-12 even:hover:-translate-y-12 first:hover:translate-y-6 first:hover:translate-x-12 transition-all duration-350"
+              className="shadow-xl min-w-[330px] mt-8 sm:mt-0 rounded-3xl first:-rotate-12 last:rotate-12 scale-110 first:translate-y-12 last:translate-y-12 first:translate-x-24 last:-translate-x-24 last:hover:translate-y-6 last:hover:-translate-x-12 even:hover:-translate-y-12 first:hover:translate-y-6 first:hover:translate-x-12 transition-all duration-350"
             >
               <li
                 key={preview.title}
@@ -191,7 +193,7 @@ export default function PreviewsHero() {
                       {preview.title}
                     </h3>
 
-                    <span className="transition-all inline-flex items-center px-2 w-full py-1.5 border text-sm leading-4 font-medium tracking-tight rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 sm:w-fit flex-row justify-between hover:shadow-sm group">
+                    <span className="transition-all inline-flex items-center px-2 py-1.5 border text-sm leading-4 font-medium tracking-tight rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 w-fit flex-row justify-between hover:shadow-sm group">
                       <div
                         className={`h-2 w-2 rounded-full relative transition-all mr-1`}
                         style={{
@@ -221,7 +223,7 @@ export default function PreviewsHero() {
                   />
                 </div>
               </li>
-            </a>
+            </div>
           ))}
         </div>
       </div>

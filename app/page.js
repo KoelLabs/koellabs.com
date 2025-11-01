@@ -5,18 +5,12 @@ import CTA from '@/components/sections/cta';
 import Footer from '@/components/sections/footer';
 import HeroNew from '@/components/sections/hero';
 import Research from '@/components/sections/research';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import Models from '@/components/sections/models';
 import Image from 'next/image';
 import Autoplay from 'embla-carousel-autoplay';
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/base/carousel';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/base/carousel';
 import Previews from '@/components/sections/previews';
 import MagicHighlighter from '@/components/magic-highlighter';
 
@@ -31,38 +25,25 @@ const sliderImages = [
 
 export default function Home() {
   const containerRef = useRef(null);
-  const [emblaApi, setEmblaApi] = useState(null);
-  const [selectedSnap, setSelectedSnap] = useState(0);
-  useEffect(() => {
-    if (!emblaApi) return;
-    const onSelect = () => {
-      setSelectedSnap(emblaApi.selectedScrollSnap());
-    };
-    onSelect();
-    emblaApi.on('select', onSelect);
-    emblaApi.on('reInit', onSelect);
-    return () => {
-      emblaApi.off('select', onSelect);
-      emblaApi.off('reInit', onSelect);
-    };
-  }, [emblaApi]);
-  const centerIndex = (selectedSnap + 1) % sliderImages.length;
+
   return (
     <div ref={containerRef} className="flex-col flex w-screen relative scroll-smooth">
       <MagicHighlighter containerRef={containerRef} />
       <div
         data-cursor-opacity="0.3"
         data-cursor-size="240"
-        className="z-100 sticky top-0 mx-auto w-full"
+        className="z-9999 sticky top-0 mx-auto w-full"
       >
         <Header />
       </div>
+
       <HeroNew />
+
       <div
         data-cursor-opacity="0.8"
         data-cursor-size="240"
         data-cursor-color="#2A4BCC"
-        className="z-0 relative"
+        className="z-10 relative"
       >
         <Research />
         <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-b">
@@ -95,7 +76,6 @@ export default function Home() {
             opts={{ loop: true, align: 'start' }}
             className="overflow-visible rounded-2xl w-full"
             plugins={[Autoplay({ delay: 5000 })]}
-            setApi={setEmblaApi}
           >
             <CarouselContent className="overflow-visible" overflowVisible>
               {sliderImages.map((src, i) => (

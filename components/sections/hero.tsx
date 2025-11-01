@@ -1,10 +1,9 @@
 'use client';
 import React from 'react';
-import { ArrowUpRight, ChevronRightIcon } from 'lucide-react';
-import { Card } from '../ui/base/card';
-import HeroVideoDialog from '../ui/magicui/hero-video-dialog';
-import { Button } from '../ui/base/button';
-import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+import { Card } from '@/components/ui/base/card';
+import HeroVideoDialog from '@/components/ui/magicui/hero-video-dialog';
+import { Button } from '@/components/ui/base/button';
 
 export default function HeroNew() {
   return (
@@ -46,7 +45,7 @@ export default function HeroNew() {
         </div>
       </div>
       <div className="mx-auto md:px-6 pt-0 lg:px-8 py-32 pb-0">
-        <div className="mx-auto p-4 max-w-4xl py-32 z-[90] relative">
+        <div className="mx-auto p-4 max-w-4xl py-32 z-[999] relative">
           <section aria-labelledby="hero-heading" className="text-center relative">
             {/* <div className="flex flex-row justify-center items-center my-8"></div> */}
             <div className="hidden sm:mb-8 sm:flex sm:justify-center relative z-10 max-w-sm mx-auto">
@@ -63,15 +62,9 @@ export default function HeroNew() {
             </div>
             <h1
               id="hero-heading"
-              className="text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-6xl relative sm:block hidden"
+              className=" text-4xl font-semibold tracking-tighter text-gray-950 sm:text-6xl relative text-balance ligat"
             >
-              Making Speech Technology Understand You Better
-            </h1>
-            <h1
-              id="hero-heading"
-              className="text-balance text-[2.2rem] leading-[1.15] text-4xl font-semibold tracking-tighter text-gray-950 relative sm:hidden block"
-            >
-              Making Speech Tech Understand You Better
+              Pioneering Inclusive Speech Technology for Everyone
             </h1>
 
             <p className="mt-6 sm:text-lg leading-7 sm:leading-8 text-neutral-600 max-w-xl mx-auto text-pretty">

@@ -1,6 +1,5 @@
 'use client';
 import { ArrowRightIcon } from 'lucide-react';
-import { Button } from '../ui/base/button';
 import { useToast } from '@/hooks/use-toast';
 
 export default function CTA({ hideBg = false }: { hideBg?: boolean }) {

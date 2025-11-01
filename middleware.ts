@@ -30,7 +30,8 @@ export async function middleware(request: NextRequest) {
       // trying to access sign-in or sign-up -> continue
       return NextResponse.next();
     } else {
-      // trying to access private page -> redirect to sign-in
+      // trying to access private page -> redirect to sign-in (disabled for now)
+
       return NextResponse.redirect(new URL('/sign-in', request.url));
     }
   } else {

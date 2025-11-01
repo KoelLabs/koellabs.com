@@ -1,9 +1,5 @@
 import React from 'react';
-import { Button } from '@/components/ui/base/button';
-import Header from '@/components/ui/header';
-import { ChevronRight, UserRoundPlus } from 'lucide-react';
 import Link from 'next/link';
-import { Card } from '@/components/ui/base/card';
 
 export default function Research() {
   return (

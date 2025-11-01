@@ -32,7 +32,7 @@ const people = [
 export default function About() {
   return (
     <div className="relative">
-      <div className="z-2 sticky top-0 mx-auto w-full">
+      <div className="z-[9999] sticky top-0 mx-auto w-full">
         <Header />
       </div>
       <div className="absolute right-0 -top-20 w-full h-[500px] bg-gradient-to-b from-white via-10% via-white to-transparent z-[0]"></div>
@@ -61,7 +61,7 @@ export default function About() {
             ))}
         </div>
       </div>
-      <div className="mx-auto pt-0  py-32 relative">
+      <div className="mx-auto pt-0 py-32 pb-0 relative">
         <div className="relative">
           <div className="relative">
             <div className="absolute left-0 bottom-0 w-[49.3px] h-[49px] bg-neutral-50 p-1 z-[20] hidden 2xl:block">

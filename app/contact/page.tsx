@@ -205,14 +205,14 @@ export default function Contact() {
               ))}
           </div>
         </div>
-        <div className="max-w-[908px] mx-auto relative">
+        <div className="max-w-[908px] mx-auto relative overflow-x-hidden lg:overflow-x-visible">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="1234"
             height="1815"
             fill="none"
             viewBox="0 0 1234 1815"
-            className="absolute -top-104 -left-[960px] scale-50 "
+            className="absolute -top-104 -left-[960px] scale-50 md:block hidden"
           >
             <g stroke="#E5E5E5" strokeWidth="2" clipPath="url(#clip0_4363_485)">
               <path d="M505.393 957.159c-21.522-31.138-21.522-72.348 0-103.486L1088.81 9.566c50.75-73.424 165.87-37.511 165.87 51.743V1749.52c0 89.26-115.12 125.17-165.87 51.75z"></path>
@@ -244,7 +244,7 @@ export default function Contact() {
             height="1815"
             fill="none"
             viewBox="0 0 1234 1815"
-            className="absolute -top-104 -right-[960px] scale-50 rotate-y-180"
+            className="absolute -top-104 -right-[960px] scale-50 rotate-y-180 md:block hidden"
           >
             <g stroke="#E5E5E5" strokeWidth="2" clipPath="url(#clip0_4363_485)">
               <path d="M505.393 957.159c-21.522-31.138-21.522-72.348 0-103.486L1088.81 9.566c50.75-73.424 165.87-37.511 165.87 51.743V1749.52c0 89.26-115.12 125.17-165.87 51.75z"></path>

@@ -364,159 +364,13 @@ export default function Header({ theme = 'light' }) {
       </LayoutGroup>
 
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
-        <div className="fixed inset-0 z-10" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div className="fixed inset-0" />
+        <DialogPanel className="fixed inset-y-0 right-0 z-150 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <Link
-              href="/"
-              className="text-2xl font-semibold tracking-[-0.04em] flex justify-center"
-            >
-              <svg
-                className="h-10 w-10 -mt-1.5"
-                xmlns="http://www.w3.org/2000/svg"
-                width="870"
-                height="870"
-                fill="none"
-                viewBox="0 0 870 870"
-              >
-                <rect
-                  width="214"
-                  height="429"
-                  x="671.179"
-                  y="403"
-                  fill="url(#paint0_linear_1691_806)"
-                  fillOpacity="0.6"
-                  rx="107"
-                  transform="rotate(90 671.179 403)"
-                />
-                <rect
-                  width="214"
-                  height="429"
-                  x="652.67"
-                  y="662.406"
-                  fill="url(#paint1_linear_1691_806)"
-                  fillOpacity="0.6"
-                  rx="107"
-                  transform="rotate(135 652.67 662.406)"
-                />
-                <rect
-                  width="214"
-                  height="429"
-                  x="671.179"
-                  y="403"
-                  fill="url(#paint2_linear_1691_806)"
-                  fillOpacity="0.6"
-                  rx="107"
-                  transform="rotate(90 671.179 403)"
-                />
-                <rect
-                  width="214"
-                  height="429"
-                  x="652.67"
-                  y="662.406"
-                  fill="url(#paint3_linear_1691_806)"
-                  fillOpacity="0.6"
-                  rx="107"
-                  transform="rotate(135 652.67 662.406)"
-                />
-                <rect
-                  width="214"
-                  height="429"
-                  x="671.179"
-                  y="403"
-                  fill="url(#paint4_linear_1691_806)"
-                  fillOpacity="0.6"
-                  rx="107"
-                  transform="rotate(90 671.179 403)"
-                />
-                <rect
-                  width="214"
-                  height="429"
-                  x="652.67"
-                  y="662.406"
-                  fill="url(#paint5_linear_1691_806)"
-                  fillOpacity="0.6"
-                  rx="107"
-                  transform="rotate(135 652.67 662.406)"
-                />
-                <path
-                  fill="#000"
-                  d="M283.332 374.002c-55.404-20.556-106.308-146.637-104.047-152.731 2.261-6.094 123.083-68.461 178.487-47.905 55.404 20.556 83.654 82.134 63.098 137.538-20.556 55.404-82.134 83.654-137.538 63.098z"
-                />
-                <defs>
-                  <linearGradient
-                    id="paint0_linear_1691_806"
-                    x1="778.179"
-                    x2="778.179"
-                    y1="403"
-                    y2="832"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#317EC5" />
-                    <stop offset="1" />
-                  </linearGradient>
-                  <linearGradient
-                    id="paint1_linear_1691_806"
-                    x1="759.67"
-                    x2="759.67"
-                    y1="662.406"
-                    y2="1091.41"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#317EC5" />
-                    <stop offset="1" />
-                  </linearGradient>
-                  <linearGradient
-                    id="paint2_linear_1691_806"
-                    x1="778.179"
-                    x2="778.179"
-                    y1="403"
-                    y2="832"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#317EC5" />
-                    <stop offset="1" />
-                  </linearGradient>
-                  <linearGradient
-                    id="paint3_linear_1691_806"
-                    x1="759.67"
-                    x2="759.67"
-                    y1="662.406"
-                    y2="1091.41"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#317EC5" />
-                    <stop offset="1" />
-                  </linearGradient>
-                  <linearGradient
-                    id="paint4_linear_1691_806"
-                    x1="778.179"
-                    x2="778.179"
-                    y1="403"
-                    y2="832"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#317EC5" />
-                    <stop offset="1" />
-                  </linearGradient>
-                  <linearGradient
-                    id="paint5_linear_1691_806"
-                    x1="759.67"
-                    x2="759.67"
-                    y1="662.406"
-                    y2="1091.41"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#317EC5" />
-                    <stop offset="1" />
-                  </linearGradient>
-                </defs>
-              </svg>
-              Koel{' '}
-              <span className="ml-1 text-transparent bg-clip-text bg-linear-to-br from-black via-sky-950 to-sky-500">
-                Labs
-              </span>
-            </Link>
+            <span className="text-2xl font-semibold tracking-[-0.04em] flex justify-center items-center gap-2">
+              <LogoComponent />
+              <span className="md:block hidden">Koel Labs</span>
+            </span>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -536,15 +390,24 @@ export default function Header({ theme = 'light' }) {
                         <div key={name}>
                           <Link
                             className={
-                              segments.some(segment => currentPath === segment)
+                              currentPath === '/about'
                                 ? 'text-black'
                                 : 'text-neutral-500 hover:text-neutral-700'
                             }
                             href="/about"
                             onClick={() => setMobileMenuOpen(false)}
                           >
-                            <li className="w-full p-2 rounded-2xl tracking-tight hover:bg-neutral-100">
+                            <li className="w-full p-2 px-3 text-sm rounded-2xl tracking-tight hover:bg-neutral-100 border flex items-center justify-between">
                               About Us
+                              {currentPath === '/about' ? (
+                                <div
+                                  className={`h-2 w-2 bg-[#154063] rounded-full relative transition-all mr-1`}
+                                ></div>
+                              ) : (
+                                <div
+                                  className={`h-2 w-2 bg-[#3779B5] rounded-full relative transition-all mr-1 opacity-50`}
+                                ></div>
+                              )}
                             </li>
                           </Link>
                           <Link
@@ -556,8 +419,17 @@ export default function Header({ theme = 'light' }) {
                             href="/blog"
                             onClick={() => setMobileMenuOpen(false)}
                           >
-                            <li className="w-full p-2 pl-6 rounded-2xl tracking-tight hover:bg-neutral-100">
+                            <li className="w-full p-2 px-3 text-sm rounded-2xl tracking-tight hover:bg-neutral-100 border flex items-center justify-between mt-2">
                               Blog
+                              {currentPath === '/blog' ? (
+                                <div
+                                  className={`h-2 w-2 bg-[#154063] rounded-full relative transition-all mr-1`}
+                                ></div>
+                              ) : (
+                                <div
+                                  className={`h-2 w-2 bg-[#3779B5] rounded-full relative transition-all mr-1 opacity-50`}
+                                ></div>
+                              )}
                             </li>
                           </Link>
                           <Link
@@ -569,8 +441,17 @@ export default function Header({ theme = 'light' }) {
                             href="/contact"
                             onClick={() => setMobileMenuOpen(false)}
                           >
-                            <li className="w-full p-2 pl-6 rounded-2xl tracking-tight hover:bg-neutral-100">
+                            <li className="w-full p-2 px-3 text-sm rounded-2xl tracking-tight hover:bg-neutral-100 border flex items-center justify-between mt-2">
                               Contact
+                              {currentPath === '/contact' ? (
+                                <div
+                                  className={`h-2 w-2 bg-[#154063] rounded-full relative transition-all mr-1`}
+                                ></div>
+                              ) : (
+                                <div
+                                  className={`h-2 w-2 bg-[#3779B5] rounded-full relative transition-all mr-1 opacity-50`}
+                                ></div>
+                              )}
                             </li>
                           </Link>
                         </div>
@@ -588,8 +469,18 @@ export default function Header({ theme = 'light' }) {
                         key={`${href}${name}`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        <li className="w-full p-2 rounded-2xl tracking-tight hover:bg-neutral-100">
+                        <li className="w-full p-2 px-3 text-sm rounded-2xl tracking-tight hover:bg-neutral-100 border flex items-center justify-between">
                           {name}
+
+                          {currentPath === href ? (
+                            <div
+                              className={`h-2 w-2 bg-[#154063] rounded-full relative transition-all mr-1`}
+                            ></div>
+                          ) : (
+                            <div
+                              className={`h-2 w-2 bg-[#3779B5] rounded-full relative transition-all mr-1 opacity-50`}
+                            ></div>
+                          )}
                         </li>
                       </Link>
                     );
@@ -598,9 +489,7 @@ export default function Header({ theme = 'light' }) {
               </div>
               <div className="py-6">
                 <Link href="#join-the-waitlist" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="w-full bg-gradient-to-b py-0 px-6 rounded-lg border border-double outline-white/50 outline-[0.1px] outline-offset-[-2px] border-black from-sky-900 to-blue-950">
-                    Join the Waitlist
-                  </Button>
+                  <Button className="w-full">Join the Waitlist</Button>
                 </Link>
               </div>
             </div>

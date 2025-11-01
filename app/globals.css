@@ -670,6 +670,25 @@ html {
   animation: fadeOut 200ms ease;
 }
 
+@keyframes float-left-right {
+  0%,
+  100% {
+    transform: translateX(-200px);
+  }
+  50% {
+    transform: translateX(700px);
+  }
+}
+@keyframes float-right-left {
+  0%,
+  100% {
+    transform: translateX(200px);
+  }
+  50% {
+    transform: translateX(-700px);
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

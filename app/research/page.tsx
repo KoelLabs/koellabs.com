@@ -19,7 +19,7 @@ export default async function ResearchPage() {
             height="257"
             fill="none"
             viewBox="0 0 2037 257"
-            className="h-24 w-[1024px] -ml-27 mb-3"
+            className="h-24 w-[300px] ml-5 sm:w-[400px] sm:ml-8 md:w-[600px] md:ml-6 lg:w-[800px] lg:ml-0 xl:w-[1024px] xl:-ml-27 sm:mb-3"
           >
             <path
               fill="#000"
@@ -57,8 +57,8 @@ export default async function ResearchPage() {
               aria-labelledby="hero-heading"
               className="text-center relative grid grid-cols-1 md:grid-cols-2 border-x"
             >
-              <div className="md:border-r aspect-[16/12] overflow-hidden relative p-8 flex items-center justify-between">
-                <span className="transition-all inline-flex items-center w-full h-full absolute top-24 left-[850px] text-black">
+              <div className="md:border-r aspect-[16/12] overflow-hidden relative p-8 flex items-center justify-between border-b sm:border-b-0">
+                <span className="transition-all inline-flex items-center w-full h-full absolute top-12 left-[850px] text-black">
                   {Array(180)
                     .fill(0)
                     .map((_, i) => (
@@ -143,8 +143,8 @@ export default async function ResearchPage() {
                   </div>
                 </div>
               </div>
-              <div className="aspect-[16/12] overflow-hidden relative p-8 flex items-center justify-between">
-                <span className="transition-all inline-flex items-center w-full h-full absolute top-24 left-[850px] text-black">
+              <div className="aspect-[16/12] overflow-hidden relative p-8 flex items-center justify-between border-t sm:border-t-0">
+                <span className="transition-all inline-flex items-center w-full h-full absolute top-12 left-[850px] text-black">
                   {Array(180)
                     .fill(0)
                     .map((_, i) => (
@@ -172,7 +172,7 @@ export default async function ResearchPage() {
         </div>
 
         <div className="overflow-hidden border mt-12 mb-24 py-24 sm:py-32">
-          <div className="mx-auto max-w-7xl">
+          <div className="mx-auto max-w-7xl p-6 md:p-0">
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
               <div className="lg:ml-auto lg:pl-4 lg:pt-4">
                 <div className="lg:max-w-2xl lg:mt-12">

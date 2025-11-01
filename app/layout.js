@@ -15,7 +15,8 @@ export const metadata = {
   metadataBase: new URL('https://koellabs.com'),
   title: {
     template: '%s | Koel Labs',
-    default: 'Koel Labs - Your new favorite tool for pronunciation learning',
+    default:
+      'Koel Labs - Building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects.',
   },
   description:
     'Your new favorite tool for pronunciation learning. Other methods for pronunciation learning are often outdated, lack accessibility, and are ultimately boring. Language learners, like us and our families, desperately need a change—and we aim to be just that.',

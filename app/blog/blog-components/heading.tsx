@@ -63,12 +63,12 @@ export default function BlogHeading({
           {category}
         </h2>
       </Link>
-      <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl text-center">
+      <h1 className="mt-2 text-pretty text-3xl sm:text-4xl font-semibold tracking-tighter text-neutral-950 md:text-5xl text-center">
         {title}
       </h1>
       <div className="flex justify-center mt-7 items-center gap-1">
         <div className="text-neutral-600 flex items-center gap-1.5">
-          {/* {formatDate(dateISO)}
+          {/* {formatDate(dateISO)} 
           {byline ? ` • ${byline}` : ''} */}
           <div className=" -space-x-1 overflow-hidden inline-block">
             <img
