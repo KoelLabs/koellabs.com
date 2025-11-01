@@ -19,7 +19,7 @@ export const metadata = {
       'Koel Labs - Building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects.',
   },
   description:
-    'Your new favorite tool for pronunciation learning. Other methods for pronunciation learning are often outdated, lack accessibility, and are ultimately boring. Language learners, like us and our families, desperately need a change—and we aim to be just that.',
+    'A research lab building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects. We are a team of researchers and engineers inspired by our own experiences with language.',
   keywords: [
     'pronunciation learning',
     'AI language learning',
@@ -30,7 +30,7 @@ export const metadata = {
   openGraph: {
     title: 'Koel Labs',
     description:
-      'Your new favorite tool for pronunciation learning. Other methods for pronunciation learning are often outdated, lack accessibility, and are ultimately boring. Language learners, like us and our families, desperately need a change—and we aim to be just that.',
+      'A research lab building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects. We are a team of researchers and engineers inspired by our own experiences with language.',
     url: 'https://koellabs.com',
     siteName: 'Koel Labs',
     images: [
@@ -58,7 +58,8 @@ export const metadata = {
   twitter: {
     title: 'Koel Labs',
     card: 'summary_large_image',
-    description: 'Pioneering AI-powered pronunciation learning platform',
+    description:
+      'A research lab building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects. We are a team of researchers and engineers inspired by our own experiences with language.',
     images: ['/openGraph.png'],
   },
   alternates: {
