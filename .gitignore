@@ -21,3 +21,6 @@ data
 # local env files
 .env*.local
 .env
+
+# prevent certain individuals from committing python stuff
+venv
