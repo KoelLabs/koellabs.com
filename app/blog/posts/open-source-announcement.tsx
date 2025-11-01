@@ -25,8 +25,7 @@ export const metadata: Metadata = {
     At Koel Labs, our goal is to make pronunciation learning more accessible and inclusive.
     To represent the diversity of language and dialects, we're excited to announce that everything 
     from model weights and training code to datasets, research papers, and the frontend UI is 
-    officially open source! We believe that together, we can build a better future for language 
-    learning.
+    officially open source!
   `,
   category: 'Announcement',
   tags: [
