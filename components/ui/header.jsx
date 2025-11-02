@@ -231,7 +231,7 @@ export default function Header({ theme = 'light' }) {
             className={cn(
               'absolute inset-0 block border-b border-transparent transition-all duration-300 z-[50]',
               (scrolled || pathname === '/contact') &&
-                'border-neutral-200 bg-white/80 backdrop-blur-xl dark:border-white/10 dark:bg-black/80',
+                'border-neutral-200 bg-white/80 backdrop-blur-xl transform-gpu translate-y-0 dark:border-white/10 dark:bg-black/80',
             )}
           />
           <div className="mx-auto w-full max-w-6xl px-6 lg:px-8 relative z-[50]">

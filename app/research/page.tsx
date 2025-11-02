@@ -3,6 +3,7 @@ import React from 'react';
 import CTA from '@/components/sections/cta';
 import Footer from '@/components/sections/footer';
 import Header from '@/components/ui/header';
+import Image from 'next/image';
 
 export default async function ResearchPage() {
   return (
@@ -74,10 +75,12 @@ export default async function ResearchPage() {
                   href="https://docs.google.com/presentation/d/1vC-smwntEnyBO1tNOdMEPg4y0lKs61Wp2Vyhswu2kwU/edit?usp=sharing"
                 >
                   <div className="relative p-2 rounded-[32px] bg-white border  shadow-sm">
-                    <img
+                    <Image
                       alt="Screenshot showing the massive library of content available to practice with"
                       src="/images/interspeech.png"
                       className="h-full aspect-video object-cover object-top rounded-3xl border bg-white border-black/10"
+                      width={556}
+                      height={313}
                     />
                   </div>
                 </a>
@@ -159,10 +162,12 @@ export default async function ResearchPage() {
                   href="https://docs.google.com/presentation/d/19v1o8X_8QxV-W1kG4dt7m1ltAXbYasK_f4srhnypF8E/edit?usp=sharing"
                 >
                   <div className="relative p-2 rounded-[32px] bg-white border  shadow-sm">
-                    <img
+                    <Image
                       alt="Screenshot showing the massive library of content available to practice with"
                       src="/images/UofW.png"
                       className="h-full aspect-video object-cover object-top rounded-3xl border bg-white border-black/10"
+                      width={556}
+                      height={313}
                     />
                   </div>
                 </a>
@@ -203,9 +208,11 @@ export default async function ResearchPage() {
               </div>
               <div className="flex items-start justify-end lg:order-first sm:mr-8 mr-0">
                 <div className="w-full relative h-full bg-white/50 border border-neutral-200/50 rounded-[32px] p-2">
-                  <img
+                  <Image
                     alt="A photo of the Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the bay bridge in San Francisco."
                     src="/images/research.png"
+                    width={590}
+                    height={590}
                     className="w-full h-full rounded-[26px] object-cover object-right lg:max-w-none xl:row-span-2 opacity-100 bg-white xl:row-end-2 aspect-square border"
                   />
                 </div>
