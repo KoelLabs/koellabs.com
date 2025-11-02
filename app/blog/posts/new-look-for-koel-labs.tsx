@@ -44,7 +44,7 @@ export default function PostBody() {
           dateISO={metadata.date}
           maxWidth={600}
         />
-        <BlogHeroImage src="/images/blog/new-look/5.jpeg" alt="A New Look for Koel Labs" />
+        <BlogHeroImage src="/images/blog/new-look/5-opt.png" alt="A New Look for Koel Labs" />
         <br></br>
         <div className="relative lg:col-span-3 max-w-3xl mx-auto mt-12">
           <BlogDecorations />
