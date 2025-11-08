@@ -3,7 +3,6 @@
 // It will also be used to set meta tags for SEO once I get around to adding that.
 
 import type { Metadata } from '../posts';
-import Image from 'next/image';
 import { Source_Serif_4 } from 'next/font/google';
 import BlogBody from '../blog-components/body';
 import BlogHeading from '../blog-components/heading';

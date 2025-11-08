@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Research() {
   return (
-    <div id="models" className="">
+    <div id="research" className="">
       <svg
         width="75"
         height="905"
@@ -92,7 +92,7 @@ export default function Research() {
                         <img
                           alt="Screenshot showing the massive library of content available to practice with"
                           src="/images/interspeech.png"
-                          className="h-full aspect-video object-cover object-top rounded-3xl border bg-white border-black/10"
+                          className="w-full aspect-video max-h-[318px] sm:max-h-[650px] object-top rounded-3xl border bg-white border-black/10"
                         />
                       </div>
                       <div className="p-5 pt-9">
@@ -155,7 +155,7 @@ export default function Research() {
                         <img
                           alt="Screenshot showing the massive library of content available to practice with"
                           src="/images/UofW.png"
-                          className="h-full aspect-video top-0 object-cover object-top rounded-3xl bg-white border border-black/10"
+                          className="w-full aspect-video max-h-[318px] sm:max-h-[650px] object-top rounded-3xl border bg-white border-black/10"
                         />
                       </div>
                       <div className="p-5 pt-9">
