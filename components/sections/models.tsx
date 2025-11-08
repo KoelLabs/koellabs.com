@@ -99,7 +99,7 @@ export default function Models() {
                     <div className="relative p-2 aspect-square rounded-[32px] bg-white border overflow-hidden">
                       <img
                         alt="Screenshot showing the massive library of content available to practice with"
-                        src="/models.svg"
+                        src="/images/models.webp"
                         className="h-full aspect-video object-cover object-top rounded-3xl border bg-white border-black/10 saturate-200"
                       />
                     </div>
