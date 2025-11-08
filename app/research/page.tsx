@@ -13,7 +13,7 @@ export default async function ResearchPage() {
       </div>
       <div className="flex-col flex w-screen relative scroll-smooth z-0">
         <div className="absolute top-0 left-0 w-full h-36 bg-gradient-to-b from-white via-10% via-white to-transparent z-[0]"></div>
-        <div className="mx-auto max-w-7xl border-x w-full h-64 flex flex-col justify-end items-start">
+        <div className="mx-auto max-w-7xl border-x w-full h-36 sm:h-64 flex flex-col justify-end items-start z-10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="2037"
