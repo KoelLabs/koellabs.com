@@ -178,7 +178,13 @@ function tag(status: string) {
   );
 }
 
-type SortKey = 'model' | 'average_per' | 'average_fer' | 'link' | 'submission_date';
+type SortKey =
+  | 'model'
+  | 'average_per'
+  | 'average_per_fer'
+  | 'average_fer'
+  | 'link'
+  | 'submission_date';
 type SortDirection = 'asc' | 'desc';
 
 function SortIndicator({ direction }: { direction: SortDirection | null }) {
@@ -247,6 +253,11 @@ export default function Leaderboard() {
           cmp = String(a[sortConfig.key]).localeCompare(String(b[sortConfig.key]));
           break;
         case 'average_per':
+        case 'average_per_fer':
+          const aNum = parseFloat(String(a[sortConfig.key].average_per).replace('%', ''));
+          const bNum = parseFloat(String(b[sortConfig.key]).replace('%', ''));
+          cmp = aNum - bNum;
+          break;
         case 'average_fer': {
           const aNum = parseFloat(String(a[sortConfig.key]).replace('%', ''));
           const bNum = parseFloat(String(b[sortConfig.key]).replace('%', ''));
@@ -334,7 +345,7 @@ export default function Leaderboard() {
             className="bg-white py-24 sm:py-32"
           >
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[1000] relative">
-              <p className="text-base/7 font-semibold text-blue-600 relative z-10">Leaderboard</p>
+              <p className="text-base/7 font-semibold text-sky-600 relative z-10">Leaderboard</p>
               <h2
                 id="features-heading"
                 className="mt-2 text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
@@ -369,7 +380,7 @@ export default function Leaderboard() {
                     <thead className="bg-neutral-100 border-b">
                       <tr className="*:font-semibold *:tracking-tight *:py-3 *:px-4 *:border-r last:border-r-0! *:min-w-[150px] sm:*:min-w-[100px]">
                         <th
-                          className="text-left"
+                          className="text-center sm:text-left"
                           aria-sort={
                             getDirectionFor('model')
                               ? getDirectionFor('model') === 'asc'
@@ -388,7 +399,7 @@ export default function Leaderboard() {
                           </button>
                         </th>
                         <th
-                          className="text-center"
+                          className="text-center hidden sm:table-cell"
                           aria-sort={
                             getDirectionFor('average_per')
                               ? getDirectionFor('average_per') === 'asc'
@@ -407,7 +418,7 @@ export default function Leaderboard() {
                           </button>
                         </th>
                         <th
-                          className="text-center"
+                          className="text-center hidden sm:table-cell"
                           aria-sort={
                             getDirectionFor('average_fer')
                               ? getDirectionFor('average_fer') === 'asc'
@@ -426,7 +437,7 @@ export default function Leaderboard() {
                           </button>
                         </th>
                         <th
-                          className="text-center w-[110px]"
+                          className="text-center w-[110px] hidden sm:table-cell"
                           aria-sort={
                             getDirectionFor('link')
                               ? getDirectionFor('link') === 'asc'
@@ -445,7 +456,7 @@ export default function Leaderboard() {
                           </button>
                         </th>
                         <th
-                          className="text-center w-[160px] border-0!"
+                          className="text-center w-[160px] hidden sm:table-cell border-0!"
                           aria-sort={
                             getDirectionFor('submission_date')
                               ? getDirectionFor('submission_date') === 'asc'
@@ -463,20 +474,64 @@ export default function Leaderboard() {
                             <SortIndicator direction={getDirectionFor('submission_date')} />
                           </button>
                         </th>
+                        <th
+                          className="text-center sm:hidden table-cell min-w-[165px]!"
+                          aria-sort={
+                            getDirectionFor('average_per_fer')
+                              ? getDirectionFor('average_per_fer') === 'asc'
+                                ? 'ascending'
+                                : 'descending'
+                              : 'none'
+                          }
+                        >
+                          <button
+                            type="button"
+                            onClick={() => requestSort('average_per_fer')}
+                            className="inline-flex items-center gap-1 cursor-pointer select-none justify-center w-full"
+                          >
+                            <span>PER / FER</span>
+                            <SortIndicator direction={getDirectionFor('average_per_fer')} />
+                          </button>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
                       {sortedLeaderboard.map((item, index) => (
                         <tr
                           key={item.model}
-                          className={`border-b border-neutral-200 last:border-b-0 ${index % 2 === 0 ? 'bg-white' : 'bg-neutral-50'}`}
+                          className={`border-y h-[100px] sm:h-auto last:border-b-0 ${
+                            item.koel_labs
+                              ? 'bg-sky-100 outline outline-sky-200 z-10'
+                              : index % 2 === 0
+                                ? 'bg-white'
+                                : 'bg-neutral-50'
+                          }`}
                         >
-                          <td className="text-left py-3 px-4 border-r">{item.model}</td>
-                          <td className="text-center py-3 px-4 border-r">{item.average_per}</td>
-                          <td className="text-center py-3 px-4 border-r">{item.average_fer}</td>
-                          <td className="text-center py-3 px-4 border-r">{tagLink(item.link)}</td>
-                          <td className="text-center py-3 px-4">
+                          <td
+                            className={`text-left py-3 px-4 border-r ${item.koel_labs ? 'border-sky-200' : 'border-neutral-200'}`}
+                          >
+                            {item.model}
+                          </td>
+                          <td
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-sky-200' : 'border-neutral-200'}`}
+                          >
+                            {item.average_per}
+                          </td>
+                          <td
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-sky-200' : 'border-neutral-200'}`}
+                          >
+                            {item.average_fer}
+                          </td>
+                          <td
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-sky-200' : 'border-neutral-200'}`}
+                          >
+                            {tagLink(item.link)}
+                          </td>
+                          <td className="text-center py-3 px-4 hidden sm:table-cell">
                             {tag(formatDate(item.submission_date))}
+                          </td>
+                          <td className="text-center sm:hidden table-cell">
+                            {item.average_per} / {item.average_fer}
                           </td>
                         </tr>
                       ))}
