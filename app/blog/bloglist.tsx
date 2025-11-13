@@ -283,7 +283,7 @@ export default async function BlogListWrapper() {
     <div className="flex-col flex w-screen relative scroll-smooth z-0">
       <BlogList posts={posts} />
       <div className="relative">
-        <div className="mx-auto p-4 max-w-7xl py-32 z-[0]">
+        <div id="announcements" className="mx-auto p-4 max-w-7xl py-32 z-[0]">
           <div className="mx-auto max-w-2xl px-6 lg:max-w-6xl lg:px-8 z-10 mb-20 -mt-12">
             <h1
               id="recent-posts-heading"
@@ -319,7 +319,7 @@ export default async function BlogListWrapper() {
         </div>
       </div>
 
-      <div className="relative">
+      <div id="technical-reports" className="relative">
         <div className="mx-auto p-4 max-w-7xl py-32 z-[0]">
           <div className="absolute left-0 -bottom-12.5 w-[49.3px] h-[49px] bg-neutral-50 p-1 z-[200] hidden 2xl:block border-b">
             <div className="rounded-full w-full h-full border bg-white"></div>

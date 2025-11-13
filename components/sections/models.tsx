@@ -133,13 +133,13 @@ export default function Models() {
                       (Koel-Labs-B0), and we aim to continuously improve upon phonetic transcription
                       models in both their transcription quality and inference time.
                     </p>
-                    <div className="mt-6 border rounded-[20px] p-2 w-full flex flex-row gap-2">
-                      <Link href="https://github.com/KoelLabs/ML" className="w-full">
+                    <div className="mt-6 border rounded-[20px] p-2 w-full flex flex-col sm:flex-row gap-2">
+                      <Link href="https://koellabs.com/blog/technical-reports" className="w-full">
                         <Button
                           variant="outline"
                           className="w-full active:scale-[97%] transition-all duration-50 "
                         >
-                          <p>View GitHub</p>
+                          <p>View Technical Reports</p>
                         </Button>
                       </Link>
                       <Link
