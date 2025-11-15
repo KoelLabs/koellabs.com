@@ -134,7 +134,7 @@ export default function Models() {
                       models in both their transcription quality and inference time.
                     </p>
                     <div className="mt-6 border rounded-[20px] p-2 w-full flex flex-col sm:flex-row gap-2">
-                      <Link href="https://koellabs.com/blog/technical-reports" className="w-full">
+                      <Link href="https://koellabs.com/blog#technical-reports" className="w-full">
                         <Button
                           variant="outline"
                           className="w-full active:scale-[97%] transition-all duration-50 "
