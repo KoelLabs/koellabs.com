@@ -34,7 +34,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
-    "drizzle-kit": "^0.18.1",
+    "drizzle-kit": "^0.31.4",
     "drizzle-orm": "^0.44.2",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.3.0",
@@ -55,7 +55,6 @@
     "react-google-recaptcha-v3": "^1.10.1",
     "react-image-crop": "^11.0.10",
     "react-scan": "^0.4.3",
-    "react-syntax-highlighter": "^16.1.0",
     "recharts": "^2.15.3",
     "swr": "^2.3.3",
     "tailwind-merge": "^2.5.2",
@@ -73,11 +72,10 @@
     "@types/node": "22.5.2",
     "@types/pg": "^8.15.4",
     "@types/react": "18.3.5",
-    "@types/react-syntax-highlighter": "^15.5.13",
     "css-minimizer-webpack-plugin": "^7.0.0",
     "dotenv": "^16.4.5",
-    "eslint": "^9.0.0",
-    "eslint-config-next": "^16.0.3",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
     "eslint-config-prettier": "^9.1.0",
     "fixpack": "^4.0.0",
     "prettier": "^3.3.3"
@@ -87,7 +85,7 @@
     "lightningcss-linux-x64-gnu": "^1.29.1"
   },
   "engines": {
-    "node": ">=18.18"
+    "node": "^18.18"
   },
   "overrides": {
     "react-is": "^19.0.0-rc-69d4b800-20241021"
