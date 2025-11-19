@@ -76,7 +76,7 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "css-minimizer-webpack-plugin": "^7.0.0",
     "dotenv": "^16.4.5",
-    "eslint": "^8",
+    "eslint": "^9.0.0",
     "eslint-config-next": "^16.0.3",
     "eslint-config-prettier": "^9.1.0",
     "fixpack": "^4.0.0",
@@ -87,7 +87,7 @@
     "lightningcss-linux-x64-gnu": "^1.29.1"
   },
   "engines": {
-    "node": "^18.18"
+    "node": ">=18.18"
   },
   "overrides": {
     "react-is": "^19.0.0-rc-69d4b800-20241021"
