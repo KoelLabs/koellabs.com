@@ -282,42 +282,6 @@ export default async function BlogListWrapper() {
   return (
     <div className="flex-col flex w-screen relative scroll-smooth z-0">
       <BlogList posts={posts} />
-      <div className="relative">
-        <div id="announcements" className="mx-auto p-4 max-w-7xl py-32 z-[0]">
-          <div className="mx-auto max-w-2xl px-6 lg:max-w-6xl lg:px-8 z-10 mb-20 -mt-12">
-            <h1
-              id="recent-posts-heading"
-              className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl"
-            >
-              Announcements
-            </h1>
-          </div>
-          <section
-            aria-labelledby="hero-heading"
-            className="text-center relative grid grid-cols-1 md:grid-cols-2 gap-4"
-          >
-            {/* <div className="flex flex-row justify-center items-center my-8"></div> */}
-            {posts
-              .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-              .filter(post => post.category === 'Announcement')
-              .map(post => (
-                <PostCard key={post.slug} post={post} />
-              ))}
-          </section>
-        </div>
-      </div>
-      <div className="w-full h-[46px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y mt-[4.5px]">
-        <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-          {Array(500)
-            .fill(0)
-            .map((_, i) => (
-              <div
-                key={`bottom-${i}`}
-                className="h-full w-px bg-neutral-200 dark:bg-neutral-800"
-              ></div>
-            ))}
-        </div>
-      </div>
 
       <div id="technical-reports" className="relative">
         <div className="mx-auto p-4 max-w-7xl py-32 z-[0]">
@@ -360,6 +324,42 @@ export default async function BlogListWrapper() {
                 <div
                   key={`bottom-${i}`}
                   className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
+                ></div>
+              ))}
+          </div>
+        </div>
+        <div className="relative">
+          <div id="announcements" className="mx-auto p-4 max-w-7xl py-32 z-[0]">
+            <div className="mx-auto max-w-2xl px-6 lg:max-w-6xl lg:px-8 z-10 mb-20 -mt-12">
+              <h1
+                id="recent-posts-heading"
+                className="mt-2 text-pretty text-4xl font-semibold tracking-tighter text-neutral-950 sm:text-5xl"
+              >
+                Announcements
+              </h1>
+            </div>
+            <section
+              aria-labelledby="hero-heading"
+              className="text-center relative grid grid-cols-1 md:grid-cols-2 gap-4"
+            >
+              {/* <div className="flex flex-row justify-center items-center my-8"></div> */}
+              {posts
+                .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                .filter(post => post.category === 'Announcement')
+                .map(post => (
+                  <PostCard key={post.slug} post={post} />
+                ))}
+            </section>
+          </div>
+        </div>
+        <div className="w-full h-[46px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y mt-[4.5px]">
+          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
+            {Array(500)
+              .fill(0)
+              .map((_, i) => (
+                <div
+                  key={`bottom-${i}`}
+                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800"
                 ></div>
               ))}
           </div>

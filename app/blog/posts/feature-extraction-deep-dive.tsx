@@ -44,7 +44,7 @@ export default function PostBody() {
           dateISO={metadata.date}
           maxWidth={700}
         />
-        <BlogHeroImage src="/blog/cnn/blogCNN.png" alt="Wav2Vec2 Architecture Diagram" />
+        <BlogHeroImage src="/blog/cnn/wav2vec2-border.png" alt="Wav2Vec2 Architecture Diagram" />
         <br></br>
         <div className="relative lg:col-span-3 max-w-3xl mx-auto mt-12">
           <BlogDecorations />

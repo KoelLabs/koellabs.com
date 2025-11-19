@@ -8,7 +8,7 @@ const leaderboard = [
     model: 'Koel Labs XLSR English 01',
     average_per: '20.59%',
     average_fer: '3.31%',
-    link: 'https://github.com/KoelLabs/ML',
+    link: 'https://huggingface.co/KoelLabs/xlsr-english-01',
     submission_date: '2025-09-03',
     koel_labs: true,
   },
@@ -65,7 +65,7 @@ const leaderboard = [
     model: 'Koel Labs B0',
     average_per: '44.36%',
     average_fer: '10.30%',
-    link: 'https://github.com/KoelLabs/ML',
+    link: 'https://huggingface.co/KoelLabs/xlsr-timit-b0',
     submission_date: '2025-09-03',
     koel_labs: true,
   },
@@ -217,7 +217,7 @@ function tagLink(link: string) {
   return (
     <a href={link} target="_blank">
       <span className="bg-white transition-all inline-flex items-center px-2 w-full py-1.5 border text-sm leading-4 font-medium tracking-tight rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 sm:w-fit flex-row justify-between hover:shadow-sm group">
-        {link == 'N/A' ? 'N/A' : 'Repository'}
+        {link == 'N/A' ? 'N/A' : 'Link'}
         <ArrowUpRight className="size-4 -mb-px ml-0.5" />
       </span>
     </a>
