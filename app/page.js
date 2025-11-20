@@ -88,7 +88,8 @@ export default function Home() {
                       height={600}
                       quality={50}
                       className="object-cover rounded-lg object-right-bottom grays cale transition-all duration-150"
-                      priority={i === 0}
+                      priority={i < 4}
+                      loading={i < 4 ? undefined : 'lazy'}
                     />
                   </div>
                 </CarouselItem>

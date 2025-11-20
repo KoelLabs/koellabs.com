@@ -563,7 +563,6 @@ export default function PostBody() {
               By focusing on relationships rather than absolute positions, and probabilities rather
               than hard alignments, Wav2Vec2 can learn from audio at scale.
             </p>
-            <p className="mb-4">Ready for more? Our next article explores [next topic]!</p>
           </div>
         </div>
       </div>
