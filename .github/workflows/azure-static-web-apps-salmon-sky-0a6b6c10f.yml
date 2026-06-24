@@ -10,7 +10,7 @@ on:
       - main
 
 permissions:
-  contents: read           # Access to repository content for build and deploy
+  contents: read # Access to repository content for build and deploy
 
 jobs:
   build_and_deploy_job:
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744
         with:
           submodules: true
           lfs: false
