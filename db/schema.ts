@@ -1,4 +1,4 @@
-import { pgTable, varchar, integer, timestamp } from 'drizzle-orm/pg-core';
+import { pgTable, varchar, integer, timestamp, serial, text } from 'drizzle-orm/pg-core';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 
@@ -19,4 +19,18 @@ export const users = pgTable('users', {
     .notNull()
     .defaultNow()
     .$onUpdate(() => new Date()),
+});
+
+export const betaRedirectClicks = pgTable('beta_redirect_clicks', {
+  id: serial('id').primaryKey(),
+  platform: varchar('platform', { length: 32 }).notNull(),
+  destination: varchar('destination', { length: 64 }).notNull(),
+  campaign: varchar('campaign', { length: 128 }),
+  variant: varchar('variant', { length: 128 }),
+  source: varchar('source', { length: 128 }),
+  medium: varchar('medium', { length: 128 }),
+  recipientId: varchar('recipient_id', { length: 128 }),
+  referrer: text('referrer'),
+  userAgent: text('user_agent'),
+  createdAt: timestamp('created_at', { mode: 'date', precision: 3 }).notNull().defaultNow(),
 });
