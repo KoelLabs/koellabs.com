@@ -194,7 +194,7 @@ PER("Bop" → "Sop") = 0.33     WPFER("Bop" → "Sop") = 0.060  // b→s: place 
 
           <div className="my-8">
             <BlogImage
-              src="/images/blog1_visual.png"
+              src="/images/blogPERversus.svg"
               alt="Regular PER versus weighted PER: substituting B or I for the P in 'Pop' both score the same under PER, but very differently under WPFER, which reflects how acoustically close the sounds are"
               width={600}
               height={400}
