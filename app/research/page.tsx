@@ -58,6 +58,71 @@ export default async function ResearchPage() {
               aria-labelledby="hero-heading"
               className="text-center relative grid grid-cols-1 md:grid-cols-2 border-x"
             >
+              <div className="md:border-r">
+                <div className="relative flex flex-col justify-between h-full overflow-hidden">
+                  <div className="p-6 text-left">
+                    <h2 className="text-xl sm:text-xl lg:text-2xl max-w-[400px] mr-auto font-medium tracking-tight text-neutral-950">
+                      Scaling Human and G2P Supervision for Robust Phonetic Transcription
+                    </h2>
+
+                    <div className="flex flex-col gap-1 justify-start mt-4 items-start text-left">
+                      <div className="flex flex-col justify-center align-baseline sm:items-center gap-1 grayscale text-left">
+                        <p className="text-neutral-600">Accepted Paper to Interspeech 2026</p>
+
+                        <time dateTime="2026-06-14" className="text-neutral-600 mr-auto">
+                          June 14, 2026
+                        </time>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-6 w-full text-left flex justify-start">
+                    <p className="mt-2 max-w-lg text-sm/6 text-neutral-600 text-balance">
+                      We are presenting at Interspeech 2026 about how phonetic transcription systems
+                      scale with expert human labels versus G2P-generated supervision. Across
+                      native, non-native, and post-stroke speech, we find that G2P helps only when
+                      expert annotation is scarce, while diverse human labels and ASR pretraining
+                      drive stronger robustness and reduce weighted phone feature error by 2.3x.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="aspect-[16/12] overflow-hidden relative p-6 sm:p-8 flex items-center justify-center border-t sm:border-t-0">
+                <span className="transition-all inline-flex items-center w-full h-full absolute top-12 left-[850px] text-black">
+                  {Array(180)
+                    .fill(0)
+                    .map((_, i) => (
+                      <div
+                        key={`bottom-${i}`}
+                        className="h-[200%] w-px bg-neutral-200 dark:bg-neutral-800 -ml-1 -mr-1 rotate-45"
+                      ></div>
+                    ))}
+                </span>
+                <a
+                  target="_blank"
+                  href="https://arxiv.org/pdf/2606.16019"
+                  className="relative z-10 flex h-[400px] md:h-[500px] xl:h-[600px] mt-60 w-full items-center justify-center"
+                >
+                  <div className="relative aspect-[14/19] h-full max-h-[2080px] p-2 rounded-[32px] bg-white border shadow-sm">
+                    <Image
+                      alt="First page of the Interspeech 2026 paper Scaling Human and G2P Supervision for Robust Phonetic Transcription"
+                      src="/images/paper.png"
+                      className="h-full w-full object-contain rounded-3xl border bg-white border-black/10"
+                      width={1420}
+                      height={1928}
+                    />
+                  </div>
+                </a>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div className="max-w-7xl border-x h-12 w-full mx-auto"></div>
+        <div className="relative border-y">
+          <div className="mx-auto max-w-7xl z-[0]">
+            <section
+              aria-labelledby="hero-heading"
+              className="text-center relative grid grid-cols-1 md:grid-cols-2 border-x"
+            >
               <div className="md:border-r aspect-[16/12] overflow-hidden relative p-8 flex items-center justify-between border-b sm:border-b-0">
                 <span className="transition-all inline-flex items-center w-full h-full absolute top-12 left-[850px] text-black">
                   {Array(180)
