@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   published: true,
   image: '/images/blogPhonetic.png',
   summary:
-    'The International Phonetic Alphabet (IPA) is like the Swiss Army knife of pronunciation—it gives us precise symbols to represent every sound humans make in language. In recent years, predicting these phonemic transcriptions from audio has become a popular machine learning task. But how do we calculate the accuracy of these models?',
+    "The International Phonetic Alphabet (IPA) provides a useful phonetic alphabet that can detail a speaker's pronunciation. It is also the vocabulary of the Koel Labs phonetic transcription models, enabling us to model accent variation and develop amazing applications for language learning! In recent years, predicting these phonemic transcriptions from audio has become a popular machine learning task. But how do we calculate the accuracy of these models?",
   category: 'Technical Report',
   tags: [
     {
@@ -55,7 +55,20 @@ export default function PostBody() {
           className={`relative flex h-full flex-col tracking-[-0.010em] text-lg ${sourceSerif.className}`}
         >
           <BlogSubheading>An Introduction</BlogSubheading>
-          <p className="mb-4">{metadata.summary}</p>
+          <p className="mb-4">
+            The{' '}
+            <a
+              href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet"
+              className="text-sky-600 hover:underline"
+            >
+              International Phonetic Alphabet (IPA)
+            </a>{' '}
+            provides a useful phonetic alphabet that can detail a speaker's pronunciation. It is
+            also the vocabulary of the Koel Labs phonetic transcription models, enabling us to model
+            accent variation and develop amazing applications for language learning! In recent
+            years, predicting these phonemic transcriptions from audio has become a popular machine
+            learning task. But how do we calculate the accuracy of these models?
+          </p>
           <p className="mb-4">
             At Koel Labs, we use two key metrics to evaluate phonemic transcription models:
           </p>
@@ -65,8 +78,8 @@ export default function PostBody() {
               Phonemic Error Rate (PER): The classic "how many mistakes did you make?" metric
             </li>
             <li className="mb-2">
-              Weighted Phonemic Edit Distance (WPED): A smarter approach that considers how similar
-              sounds are to each other
+              Weighted Phone Feature Error Rate (WPFER): A smarter approach that weights each
+              mistake by how acoustically similar the sounds are
             </li>
           </ol>
 
@@ -74,7 +87,7 @@ export default function PostBody() {
 
           <p className="mb-4">
             Let's say we're trying to transcribe the word "Bop". Our model could make different
-            types of mistakes, and this is where things get interesting.
+            types of mistakes.
           </p>
 
           <p className="mb-4">Consider two models making different predictions:</p>
@@ -90,14 +103,26 @@ export default function PostBody() {
 
           <ul className="list-disc list-inside mb-4 pl-4">
             <li className="mb-2">
-              'B' and 'P' are like cousins—they're both plosive bilabial consonants, made by
-              stopping airflow with your lips. The only difference is that 'B' is voiced (your vocal
-              cords vibrate) and 'P' isn't.
+              'B' and 'P' are like cousins. They're both{' '}
+              <a
+                href="https://en.wikipedia.org/wiki/Bilabial_consonant"
+                className="text-sky-600 hover:underline"
+              >
+                plosive bilabial consonants
+              </a>
+              , made by stopping airflow with your lips. The only difference is that 'B' is voiced
+              (your vocal cords vibrate) and 'P' isn't.
             </li>
             <li className="mb-2">
-              'B' and 'S', on the other hand, are more like distant relatives. 'S' is a fricative
-              alveolar consonant, made by forcing air between your tongue and the ridge behind your
-              upper teeth—a completely different sound!
+              'B' and 'S', on the other hand, are more like distant relatives. 'S' is a{' '}
+              <a
+                href="https://en.wikipedia.org/wiki/Voiceless_alveolar_fricative"
+                className="text-sky-600 hover:underline"
+              >
+                fricative alveolar consonant
+              </a>
+              , made by forcing air between your tongue and the ridge behind your upper teeth: a
+              completely different sound.
             </li>
           </ul>
 
@@ -112,20 +137,19 @@ export default function PostBody() {
           />
 
           <p className="mb-4">
-            This is like saying someone who almost hit the bullseye did just as poorly as someone
-            who hit the wall next to the dartboard. You can imagine that this would create very
-            misleading evaluations.
+            That's like saying someone who just missed the bullseye did as poorly as someone who hit
+            the wall next to the dartboard, which makes for misleading evaluations.
           </p>
 
-          <BlogSubheading>Weighted Phonemic Edit Distance</BlogSubheading>
+          <BlogSubheading>Weighted Phone Feature Error Rate</BlogSubheading>
 
           <p className="mb-4">
-            This is where WPED comes to the rescue, powered by the{' '}
+            WPFER addresses this, powered by the{' '}
             <a href="https://github.com/dmort27/panphon" className="text-sky-600 hover:underline">
               Panphon library
             </a>
             . Instead of treating each phoneme as completely different or identical, it represents
-            them as a sequence of features—things like:
+            them as a sequence of features, things like:
           </p>
 
           <ul className="list-disc list-inside mb-4 pl-4">
@@ -143,18 +167,35 @@ S: [-voiced, +alveolar, -plosive, +fricative, ...]`}
           />
 
           <p className="mb-4">
-            When we calculate the distance between these vectors, we get a much more nuanced view:
+            When we measure the distance between these vectors, we get a much more nuanced view. PER
+            scores both errors identically, but WPFER pulls them apart:
           </p>
 
           <BlogCode
-            code={`Distance("Bop" → "Pop") = 0.2  // Small difference
-Distance("Bop" → "Sop") = 0.8  // Large difference`}
+            code={`PER("Bop" → "Pop") = 0.33     WPFER("Bop" → "Pop") = 0.006  // b→p: just voicing
+PER("Bop" → "Sop") = 0.33     WPFER("Bop" → "Sop") = 0.060  // b→s: place AND manner`}
           />
+
+          <p className="mb-4">
+            WPFER sums the feature-weighted cost of every edit and divides by the length of the
+            ground truth, with a normalization factor (one over twice the total feature weight) that
+            keeps it on a small, PER-comparable scale. Identical transcriptions score 0, and the
+            further apart the sounds, the higher the number. That's why the "Sop" error lands about
+            ten times higher than the near-miss "Pop", even though PER can't tell them apart. You
+            can find the exact implementation in our{' '}
+            <a
+              href="https://github.com/KoelLabs/ML/blob/main/scripts/eval/metrics.py"
+              className="text-sky-600 hover:underline"
+            >
+              ML repo
+            </a>
+            .
+          </p>
 
           <div className="my-8">
             <BlogImage
-              src="/images/PERversus.svg"
-              alt="Diagram illustrating phonemic distances"
+              src="/images/blogPERversus.svg"
+              alt="Regular PER versus weighted PER: substituting B or I for the P in 'Pop' both score the same under PER, but very differently under WPFER, which reflects how acoustically close the sounds are"
               width={600}
               height={400}
               className="mx-auto"
@@ -167,30 +208,54 @@ Distance("Bop" → "Sop") = 0.8  // Large difference`}
           <p className="mb-4">
             When you're teaching a model to transcribe speech, you want it to understand that
             predicting a similar sound is better than predicting a completely different one. This is
-            especially important because different models might use different phoneme
-            vocabularies—some might have 40 symbols, others up to 400.
+            especially important because different models might use different phoneme vocabularies,
+            with some using 40 symbols and others up to 400.
           </p>
 
           <p className="mb-4">
             Traditional PER might unfairly favor models that happen to use the exact same phoneme
             set as your ground truth data, even if other models are making more linguistically
-            sensible predictions. WPED helps level the playing field by considering phonetic
+            sensible predictions. WPFER helps level the playing field by considering phonetic
             similarity.
           </p>
 
           <BlogSubheading>The Takeaway</BlogSubheading>
 
           <p className="mb-4">
-            By using WPED alongside traditional metrics like PER, we can better understand how well
-            our models are really performing at phonemic transcription. It's not just about getting
-            the exact right symbol—it's about understanding the underlying sounds of language.
+            Reporting WPFER alongside PER gives a fuller picture of how a model is really doing. It
+            measures not just whether you picked the exact right symbol, but how close you came to
+            the right sound, which is what matters for pronunciation feedback.
           </p>
 
           <p className="mb-4">
-            As we continue to develop better speech recognition models, metrics like WPED will be
-            crucial in helping us measure progress in a way that actually reflects linguistic
-            reality. After all, in the world of pronunciation, being close sometimes counts for a
-            lot more than traditional metrics might suggest!
+            You can compare both metrics across open models on our{' '}
+            <a
+              href="https://huggingface.co/spaces/KoelLabs/IPA-Transcription-EN"
+              className="text-sky-600 hover:underline"
+            >
+              IPA transcription leaderboard
+            </a>
+            :
+          </p>
+
+          <div className="my-8">
+            <BlogImage
+              src="/images/huggingfaceLeaderboard.png"
+              alt="Koel Labs IPA transcription leaderboard ranking models by average PER and WPFER"
+              width={1000}
+              height={300}
+              className="mx-auto"
+              expanded={false}
+            />
+          </div>
+
+          <p className="mb-4">
+            For the full details, including how we use WPFER to train and evaluate our models, see
+            our paper,{' '}
+            <a href="https://arxiv.org/abs/2606.16019" className="text-sky-600 hover:underline">
+              Scaling Human and G2P Supervision for Robust Phonetic Transcription
+            </a>
+            .
           </p>
         </div>
       </div>
