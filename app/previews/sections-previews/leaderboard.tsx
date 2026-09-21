@@ -13,53 +13,118 @@ const leaderboard = [
     koel_labs: true,
   },
   {
+    model: 'Koel Labs XLSR English 01 Mini',
+    average_per: '20.80%',
+    average_fer: '3.40%',
+    link: 'https://github.com/KoelLabs/ML',
+    submission_date: '2026-05-04',
+    koel_labs: true,
+  },
+  {
+    model: 'Qwen3.8-Omni-Flash',
+    average_per: '38.79%',
+    average_fer: '5.97%',
+    link: 'https://www.qwencloud.com/models/qwen3.8-omni-flash',
+    submission_date: '2026-09-20',
+  },
+  {
     model: 'Facebook Wav2Vec2 53 Espeak',
     average_per: '114.40%',
     average_fer: '7.68%',
-    link: 'https://github.com/facebookresearch/fairseq/tree/main/examples/wav2vec#wav2vec-20',
+    link: 'https://huggingface.co/facebook/wav2vec2-xlsr-53-espeak-cv-ft',
     submission_date: '2025-09-03',
   },
   {
     model: 'Facebook Wav2Vec2 60 Espeak',
     average_per: '116.98%',
     average_fer: '7.96%',
-    link: 'https://github.com/facebookresearch/fairseq/tree/main/examples/wav2vec#wav2vec-20',
+    link: 'https://huggingface.co/facebook/wav2vec2-lv-60-espeak-cv-ft',
     submission_date: '2025-09-03',
   },
   {
     model: 'MrRubino XLSR 53 L2-Arctic',
     average_per: '58.83%',
     average_fer: '8.12%',
-    link: 'https://doi.org/10.1109/ichi61247.2024.00045',
+    link: 'https://huggingface.co/mrrubino/wav2vec2-large-xlsr-53-l2-arctic-phoneme',
     submission_date: '2025-09-07',
+  },
+  {
+    model: 'Koel Labs XLSR English 01 Nano',
+    average_per: '37.63%',
+    average_fer: '8.44%',
+    link: 'https://github.com/KoelLabs/ML',
+    submission_date: '2026-09-17',
+    koel_labs: true,
+  },
+  {
+    model: 'PhoneticXeus',
+    average_per: '49.98%',
+    average_fer: '8.46%',
+    link: 'https://huggingface.co/changelinglab/PhoneticXeus',
+    submission_date: '2026-05-02',
   },
   {
     model: 'Vitouphy XLSR TIMIT',
     average_per: '59.91%',
     average_fer: '8.55%',
-    link: 'https://www.kaggle.com/code/vitouphy/phoneme-recognition-with-wav2vec2',
+    link: 'https://huggingface.co/vitouphy/wav2vec2-xls-r-300m-timit-phoneme',
     submission_date: '2025-09-03',
+  },
+  {
+    model: 'WavLM HuPER CTC',
+    average_per: '39.12%',
+    average_fer: '8.55%',
+    link: 'https://huggingface.co/huper29/huper_recognizer',
+    submission_date: '2026-02-16',
+  },
+  {
+    model: 'ZIPA Large',
+    average_per: '45.82%',
+    average_fer: '8.80%',
+    link: 'https://huggingface.co/anyspeech/zipa-large-crctc-500k',
+    submission_date: '2026-05-02',
+  },
+  {
+    model: 'ESPnet POWSM',
+    average_per: '50.41%',
+    average_fer: '8.88%',
+    link: 'https://huggingface.co/espnet/powsm',
+    submission_date: '2025-11-03',
   },
   {
     model: 'Ginic XLSR 53 Buckeye',
     average_per: '42.12%',
     average_fer: '8.89%',
-    link: 'https://github.com/ginic/multipa',
+    link: 'https://huggingface.co/ginic/vary_individuals_old_only_3_wav2vec2-large-xlsr-53-buckeye-ipa',
     submission_date: '2025-09-03',
   },
   {
     model: 'Facebook XLSR 53 Phon',
     average_per: '50.01%',
     average_fer: '9.35%',
-    link: 'N/A',
+    link: 'https://huggingface.co/facebook/wav2vec2-xlsr-53-phon-cv-ft',
     submission_date: '2025-09-07',
   },
   {
     model: 'DahmL XLSR MFA',
     average_per: '122.82%',
     average_fer: '10.05%',
-    link: 'N/A',
+    link: 'https://huggingface.co/DahmL/wav2vec2-xls-r-300m_phone-mfa_english',
     submission_date: '2025-09-08',
+  },
+  {
+    model: 'Wav2Vec2-base TIMIT arpabet',
+    average_per: '45.14%',
+    average_fer: '10.09%',
+    link: 'https://huggingface.co/mostafaashahin/wav2vec2-base-timit-phoneme-arpa-39-v2',
+    submission_date: '2025-11-12',
+  },
+  {
+    model: 'HuBERT Phoneme',
+    average_per: '42.14%',
+    average_fer: '10.20%',
+    link: 'https://huggingface.co/coml/hubert-phoneme-classification',
+    submission_date: '2025-11-12',
   },
   {
     model: 'Koel Labs B0',
@@ -73,91 +138,133 @@ const leaderboard = [
     model: 'Facebook XLSR 53 BABEL',
     average_per: '54.83%',
     average_fer: '10.89%',
-    link: 'http://www.lrec-conf.org/lrec1998/midwich.reading.ac.uk/research/speechlab/babel/index.html',
+    link: 'https://huggingface.co/facebook/wav2vec2-xlsr-53-phon-cv-babel-ft',
     submission_date: '2025-09-07',
+  },
+  {
+    model: 'MultiBridge EEA Wav2Vec2-base',
+    average_per: '44.72%',
+    average_fer: '11.70%',
+    link: 'https://huggingface.co/MultiBridge/wav2vec-LnNor-IPA-ft',
+    submission_date: '2025-11-23',
   },
   {
     model: 'Speech31 XLSR English IPA',
     average_per: '117.12%',
     average_fer: '12.37%',
-    link: 'N/A',
+    link: 'https://huggingface.co/speech31/XLS-R-300m-english-ipa',
     submission_date: '2025-09-03',
   },
   {
     model: 'Speech31 Wav2Vec2 TIMIT-IPA3',
     average_per: '68.59%',
     average_fer: '12.64%',
-    link: 'N/A',
+    link: 'https://huggingface.co/speech31/wav2vec2-large-english-TIMIT-phoneme_v3',
     submission_date: '2025-09-03',
   },
   {
     model: 'Chihiro Taguchi XLSR japlmthufielta',
     average_per: '73.07%',
     average_fer: '12.89%',
-    link: 'N/A',
+    link: 'https://huggingface.co/ctaguchi/wav2vec2-large-xlsr-japlmthufielta-ipa1000-ns',
     submission_date: '2025-09-03',
   },
   {
     model: 'Speech31 WavLM English IPA',
     average_per: '118.56%',
     average_fer: '13.29%',
-    link: 'N/A',
+    link: 'https://huggingface.co/speech31/wavlm-large-english-ipa',
     submission_date: '2025-09-03',
   },
   {
     model: 'Snu Nia Wav2Vec2 TIMIT',
     average_per: '141.47%',
     average_fer: '13.46%',
-    link: 'N/A',
+    link: 'https://huggingface.co/snu-nia-12/wav2vec2-large_nia12_phone-ipa_english',
     submission_date: '2025-09-03',
   },
   {
     model: 'Speech31 TIMIT-IPA2',
     average_per: '141.47%',
     average_fer: '13.46%',
-    link: 'N/A',
+    link: 'https://huggingface.co/speech31/wav2vec2-large-TIMIT-IPA2',
     submission_date: '2025-09-03',
   },
   {
     model: 'Speech31 Hubert English IPA',
     average_per: '109.03%',
     average_fer: '14.16%',
-    link: 'N/A',
+    link: 'https://huggingface.co/speech31/hubert-base-english-ipa',
     submission_date: '2025-09-04',
+  },
+  {
+    model: 'Allosaurus',
+    average_per: '70.21%',
+    average_fer: '14.21%',
+    link: 'https://github.com/xinjli/allosaurus',
+    submission_date: '2026-05-02',
   },
   {
     model: 'SNU-SLP Lab XLSR 53 TIMIT',
     average_per: '71.75%',
     average_fer: '14.71%',
-    link: 'N/A',
+    link: 'https://huggingface.co/slplab/wav2vec2_xlsr50k_english_phoneme',
     submission_date: '2025-09-08',
   },
   {
     model: 'Jubliano XLSR International 1.5',
     average_per: '83.61%',
     average_fer: '16.46%',
-    link: 'N/A',
+    link: 'https://huggingface.co/Jubliano/wav2vec2-large-xls-r-300m-ipa-INTERNATIONAL1.5',
     submission_date: '2025-09-03',
+  },
+  {
+    model: 'WhisperPPT',
+    average_per: '68.12%',
+    average_fer: '17.01%',
+    link: 'https://github.com/smfsamir/audit-ipa',
+    submission_date: '2026-05-02',
   },
   {
     model: 'Vikramanantha Wav2Vec2-base LJSpeech Gruut',
     average_per: '141.09%',
     average_fer: '22.98%',
-    link: 'https://huggingface.co/bookbot/wav2vec2-ljspeech-gruut/tree/main',
+    link: 'https://huggingface.co/ct-vikramanantha/phoneme-scorer-v2-wav2vec2',
     submission_date: '2025-09-07',
+  },
+  {
+    model: 'Seanghay Wav2Vec2-base Khmer',
+    average_per: '115.72%',
+    average_fer: '25.15%',
+    link: 'https://huggingface.co/seanghay/wav2vec2-base-khmer-phonetisaurus',
+    submission_date: '2025-11-03',
+  },
+  {
+    model: 'Cole Robertson Wav2Vec2 Ogma',
+    average_per: '116.51%',
+    average_fer: '28.03%',
+    link: 'https://huggingface.co/colerobertson/wav2vec2-xls-r-phoneme-300m-tr-ogma-phoneme',
+    submission_date: '2025-11-06',
+  },
+  {
+    model: 'Aditya Wav2Vec2 Librispeech',
+    average_per: '164.09%',
+    average_fer: '55.05%',
+    link: 'https://huggingface.co/Aditya3107/libri-wav2vec2-xlsr-300m-phoneme-demo',
+    submission_date: '2025-11-03',
   },
   {
     model: 'Excalibur12 Wav2Vec2 TIMIT Simplified',
     average_per: '283.05%',
     average_fer: '57.73%',
-    link: 'N/A',
+    link: 'https://huggingface.co/excalibur12/wav2vec2-large-lv60_phoneme-timit_english_timit-4k_simplified',
     submission_date: '2025-09-07',
   },
   {
     model: 'Excalibur12 Wav2Vec2 lv60 TIMIT',
     average_per: '289.38%',
     average_fer: '59.85%',
-    link: 'N/A',
+    link: 'https://huggingface.co/excalibur12/wav2vec2-large-lv60_phoneme-timit_english_timit-4k',
     submission_date: '2025-09-07',
   },
 ];
@@ -254,8 +361,8 @@ export default function Leaderboard() {
           break;
         case 'average_per':
         case 'average_per_fer':
-          const aNum = parseFloat(String(a[sortConfig.key].average_per).replace('%', ''));
-          const bNum = parseFloat(String(b[sortConfig.key]).replace('%', ''));
+          const aNum = parseFloat(String(a.average_per).replace('%', ''));
+          const bNum = parseFloat(String(b.average_per).replace('%', ''));
           cmp = aNum - bNum;
           break;
         case 'average_fer': {
@@ -540,7 +647,7 @@ export default function Leaderboard() {
                 </ul>
               </div>
               <p className="text-center text-sm text-neutral-500 mt-8">
-                Last updated: November 1, 2025 from{' '}
+                Last updated: September 20, 2026 from{' '}
                 <a
                   href="https://huggingface.co/spaces/KoelLabs/IPA-Transcription-EN"
                   target="_blank"
