@@ -119,6 +119,7 @@ function SideCurve({ side }: { side: 'left' | 'right' }) {
       {cap(0)}
       <div className="flex-1 w-[70.5px] bg-white border-r border-[#E5E5E5]" />
       {cap(805)}
+      <div className="absolute inset-y-0 left-[90%] w-48 bg-gradient-to-r from-white to-transparent pointer-events-none z-[-1] " />
     </div>
   );
 }
