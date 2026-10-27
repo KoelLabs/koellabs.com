@@ -181,47 +181,49 @@ export default function Research() {
                     </h2>
                   </div>
                   <div className="hidden sm:flex gap-2 shrink-0">
-                    <CarouselPrevious className="static translate-y-0 size-10" />
-                    <CarouselNext className="static translate-y-0 size-10" />
+                    <CarouselPrevious className="static translate-y-0 size-10 rounded-xl" />
+                    <CarouselNext className="static translate-y-0 size-10 rounded-xl" />
                   </div>
                 </div>
-                <CarouselContent overflowVisible className="mt-12 -ml-6 sm:-ml-10">
+                <CarouselContent overflowVisible className="mt-16 -ml-8 sm:-ml-16">
                   {items.map(item => (
                     <CarouselItem
                       key={item.title}
-                      className="pl-6 sm:pl-10 basis-[88%] sm:basis-[62%] lg:basis-[44%] group"
+                      className="pl-8 sm:pl-16 basis-[88%] sm:basis-[62%] lg:basis-[46%] group"
                     >
                       <Link href={item.href} target="_blank" className="block h-full">
-                        <article className="relative flex h-full flex-col ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
-                          <div
-                            className="relative rounded-[32px] bg-white border shadow-xs overflow-hidden aspect-[4/3] flex justify-center"
-                            style={{
-                              backgroundImage:
-                                'repeating-linear-gradient(135deg, #e5e5e5 0 1px, transparent 1px 9px)',
-                            }}
-                          >
-                            <div
-                              className={`absolute p-2 bg-white border shadow-sm transition-transform duration-300 ease-out group-hover:-translate-y-2 ${
-                                item.kind === 'paper'
-                                  ? 'top-[14%] w-[78%] aspect-[14/19] rounded-[28px]'
-                                  : 'top-[22%] w-[86%] aspect-video rounded-[24px]'
-                              }`}
-                            >
+                        <article className="relative flex h-full flex-col inset-px ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
+                          <div className="relative p-2 rounded-[32px] bg-white border scale-110 shadow-xs">
+                            {item.kind === 'paper' ? (
+                              <div
+                                className="relative w-full aspect-video max-h-[318px] sm:max-h-[650px] rounded-3xl border border-black/10 bg-white overflow-hidden flex justify-center"
+                                style={{
+                                  backgroundImage:
+                                    'repeating-linear-gradient(135deg, #e5e5e5 0 1px, transparent 1px 9px)',
+                                }}
+                              >
+                                <div className="absolute top-[12%] w-[72%] aspect-[14/19] p-2 rounded-[28px] bg-white border shadow-sm">
+                                  <img
+                                    alt={item.alt}
+                                    src={item.image}
+                                    className="h-full w-full object-cover object-top rounded-[20px] border bg-white border-black/10"
+                                  />
+                                </div>
+                              </div>
+                            ) : (
                               <img
                                 alt={item.alt}
                                 src={item.image}
-                                className={`h-full w-full object-cover object-top border bg-white border-black/10 ${
-                                  item.kind === 'paper' ? 'rounded-[20px]' : 'rounded-[16px]'
-                                }`}
+                                className="w-full aspect-video max-h-[318px] sm:max-h-[650px] object-top rounded-3xl border bg-white border-black/10"
                               />
-                            </div>
+                            )}
                           </div>
-                          <div className="p-5 pt-6">
+                          <div className="p-5 pt-9">
                             <div className="flex items-center gap-2">
                               <Badge>{item.venue}</Badge>
                               <Badge secondary>{item.date}</Badge>
                             </div>
-                            <p className="mt-3 text-lg font-medium tracking-tight text-gray-950 text-balance">
+                            <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 text-balance">
                               {item.title}
                             </p>
                             <p className="mt-2 max-w-lg text-sm/6 text-gray-600 text-pretty">
