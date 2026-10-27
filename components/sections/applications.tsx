@@ -1,31 +1,27 @@
 const applications = [
   {
-    title: 'XLSR-English-01',
-    status: 'Open Source',
-    statusColor: '#3779B5',
+    title: 'Phonetic Models',
+    status: 'Available',
     description:
-      'Our state-of-the-art phonetic transcription model for standard and non-standard English speech, available on Hugging Face alongside our earlier checkpoints.',
+      'XLSR-English-01, the state-of-the-art model for phonetic transcription of standard and non-standard English speech, is available on Hugging Face alongside our other models.',
     image: '/images/card-one.svg',
     href: 'https://huggingface.co/KoelLabs/xlsr-english-01',
   },
   {
     title: 'Slay Speech',
-    status: 'Available',
-    statusColor: '#154063',
+    status: 'In Beta',
     description:
-      'An app for practicing spoken English through short story-based lessons, with word-by-word pronunciation feedback and daily speaking practice.',
-    image: '/images/slaySpeechPhone.webp',
-    imageFit: 'object-contain scale-[1.4] translate-y-[8%]',
+      'Slay Speech brings phonetic transcription together with language learning materials, giving learners word-by-word pronunciation feedback through short story-based lessons.',
+    image: '/images/card-two.svg',
     href: 'https://slayspeech.com',
   },
   {
-    title: 'Open Benchmarks & Data',
-    status: 'Open Data',
-    statusColor: 'black',
+    title: 'Benchmarks and Data',
+    status: 'Upcoming',
     description:
-      'Our IPA transcription leaderboard and standardized datasets spanning native, non-native, and atypical speech, so others can measure progress on the speakers who matter most.',
+      'Our IPA transcription leaderboard and curated datasets of native, non-native, and atypical speech. Get in touch about research access to our benchmarks and data.',
     image: '/images/card-three.svg',
-    href: 'https://huggingface.co/spaces/KoelLabs/IPA-Transcription-EN',
+    href: '/contact#contact-form',
   },
 ];
 
@@ -130,7 +126,11 @@ export default function Applications() {
                 <div className="h-1/2 w-1/4 bg-sky-700 rounded-full absolute top-1/5 left-4/7 mix-blend-color blur-2xl animate-[float-right-left_8s_ease-in-out_infinite_2s] group-hover:-translate-y-full transition-transform z-100 pointer-events-none scale-200"></div>
 
                 {applications.map(preview => (
-                  <a href={preview.href} key={preview.title} target="_blank">
+                  <a
+                    href={preview.href}
+                    key={preview.title}
+                    target={preview.href.startsWith('http') ? '_blank' : undefined}
+                  >
                     <li
                       key={preview.title}
                       className="flex flex-col gap-2 border border-neutral-200 rounded-3xl p-2 relative group/item"
@@ -145,7 +145,14 @@ export default function Applications() {
                           <span className="transition-all inline-flex items-center px-2 py-1.5 border text-sm leading-4 font-medium tracking-tight rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500  sm:w-fit flex-row justify-between hover:shadow-sm group">
                             <div
                               className={`h-2 w-2 rounded-full relative transition-all mr-1`}
-                              style={{ backgroundColor: preview.statusColor }}
+                              style={{
+                                backgroundColor:
+                                  preview.status === 'Available'
+                                    ? '#3779B5'
+                                    : preview.status === 'In Beta'
+                                      ? '#154063'
+                                      : 'black',
+                              }}
                             ></div>
                             <span className="w-full sm:w-fit text-nowrap">{preview.status}</span>
                           </span>
@@ -161,7 +168,7 @@ export default function Applications() {
                         <img
                           src={preview.image}
                           alt={preview.title}
-                          className={`w-full h-full ${preview.imageFit ?? 'object-cover'}`}
+                          className="w-full h-full object-cover"
                         />
                       </div>
                       <div
