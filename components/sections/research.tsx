@@ -11,28 +11,27 @@ import {
 const items = [
   {
     kind: 'paper',
-    title:
-      'Connecting the Dots: Enduring Performance Gaps in ASR Systems Between Standard and Minority English Varieties',
-    venue: 'IEEE SLT 2026',
+    title: "IEEE Spoken Language Technology Workshop '26",
+    venue: 'Accepted Paper',
     date: 'October 2026',
     href: 'https://arxiv.org/abs/2610.17761',
     image: '/images/paperSLT.png',
     pages: ['/images/paperSLT-p2.jpg', '/images/paperSLT-p3.jpg'],
     alt: 'First page of the IEEE SLT 2026 paper Connecting the Dots',
     description:
-      'We evaluate 16 speech recognition systems released between 2021 and 2025 across 8 English accent datasets, and find that the gap between Mainstream US English and minority accents is not reliably closing as models scale.',
+      'We show the speech recognition gap between Mainstream US English and minority accents is not closing as models scale.',
   },
   {
     kind: 'paper',
-    title: 'Scaling Human and G2P Supervision for Robust Phonetic Transcription',
-    venue: 'Interspeech 2026',
+    title: "Interspeech Conference '26",
+    venue: 'Accepted Paper',
     date: 'June 2026',
     href: 'https://arxiv.org/abs/2606.16019',
     image: '/images/paper.png',
     pages: ['/images/paper-p2.jpg', '/images/paper-p3.jpg'],
     alt: 'First page of the Interspeech 2026 paper Scaling Human and G2P Supervision for Robust Phonetic Transcription',
     description:
-      'Using an 80-hour benchmark of native, non-native, and post-stroke speech, we show where G2P labels stop helping and achieve a 2.3× reduction in weighted phone feature error rate over prior systems.',
+      'We show where G2P labels stop helping phonetic transcription, and cut weighted phone feature error rate by 2.3×.',
   },
   {
     kind: 'talk',
@@ -54,7 +53,7 @@ const items = [
     image: '/images/UofW.png',
     alt: 'Title slide from our University of Washington Research Symposium 2025 presentation',
     description:
-      'We presented architectural challenges in building speech tools and models, and working with non-lab settings and real-time data.',
+      'We presented the challenges of building speech tools and models with real-time data outside of lab settings.',
   },
 ];
 
