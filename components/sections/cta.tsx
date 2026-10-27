@@ -96,7 +96,6 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
             <div className="absolute left-0 top-0 w-full h-full bg-radial from-transparent via-white/10 to-white"></div>
             {/* Hover glow: fade each layer on its own so the color blend always sees the backdrop */}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#2A4BCC] to-sky-700 mix-blend-color opacity-0 transition-opacity duration-500 group-has-[a:hover]/cta:opacity-100"></div>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#2A4BCC]/10 via-sky-500/5 to-sky-700/10 opacity-0 transition-opacity duration-500 group-has-[a:hover]/cta:opacity-100"></div>
             <div
               className="mx-auto max-w-md text-center lg:flex-auto lg:my-16 lg:mt-16 lg:pb-18 lg:pt-14 z-10 relative"
               data-cursor-size="2"
