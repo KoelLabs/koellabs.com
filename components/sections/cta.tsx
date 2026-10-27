@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/base/button';
 
 export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
   return (
-    <div id="work-with-us" className={`relative overflow-hidden`}>
+    <div id="work-with-us" className="group/cta relative isolate overflow-hidden">
       <div className="mx-auto max-w-[1321px] sm:px-6 lg:px-[47.5px] relative">
         <svg
           width="1529"
@@ -91,11 +91,9 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
         <div className="sm:px-6 bg-white">
           <section
             aria-labelledby="cta-heading"
-            className="group/cta relative isolate overflow-hidden bg-white bg-[url('/cta-bg.svg')] [background-size:300%] sm:[background-size:148%] bg-[50%_52.5%] px-6 py-16 sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:py-12 border-x"
+            className="relative overflow-hidden bg-white bg-[url('/cta-bg.svg')] [background-size:300%] sm:[background-size:148%] bg-[50%_52.5%] px-6 py-16 sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:py-12 border-x"
           >
             <div className="absolute left-0 top-0 w-full h-full bg-radial from-transparent via-white/10 to-white"></div>
-            {/* Hover glow: fade each layer on its own so the color blend always sees the backdrop */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#2A4BCC] to-sky-700 mix-blend-color opacity-0 transition-opacity duration-500 group-has-[a:hover]/cta:opacity-100"></div>
             <div
               className="mx-auto max-w-md text-center lg:flex-auto lg:my-16 lg:mt-16 lg:pb-18 lg:pt-14 z-10 relative"
               data-cursor-size="2"
@@ -127,6 +125,8 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
           </section>
         </div>
       </div>
+      {/* Hover glow: recolors only the gray linework across the whole block; white stays white */}
+      <div className="pointer-events-none absolute inset-0 z-[3] bg-gradient-to-r from-[#2A4BCC] to-sky-700 mix-blend-color opacity-0 transition-opacity duration-500 group-has-[a:hover]/cta:opacity-100"></div>
     </div>
   );
 }
