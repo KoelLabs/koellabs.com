@@ -108,11 +108,6 @@ const navItems = [
     segments: ['/'],
   },
   {
-    name: 'Previews',
-    href: '/previews',
-    segments: ['/previews'],
-  },
-  {
     name: 'Research',
     href: '/research',
     segments: ['/research'],
@@ -488,8 +483,8 @@ export default function Header({ theme = 'light' }) {
                 </ul>
               </div>
               <div className="py-6">
-                <Link href="#join-the-waitlist" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="w-full">Join the Waitlist</Button>
+                <Link href="/contact#contact-form" onClick={() => setMobileMenuOpen(false)}>
+                  <Button className="w-full">Work With Us</Button>
                 </Link>
               </div>
             </div>

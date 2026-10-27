@@ -66,7 +66,10 @@ function ContactForm() {
   );
 
   return (
-    <div className="mx-auto max-w-md text-center lg:flex-auto lg:py-32">
+    <div
+      id="contact-form"
+      className="mx-auto max-w-md text-center lg:flex-auto lg:py-32 scroll-mt-24"
+    >
       <p className="text-sm/4 font-semibold text-sky-800 mb-2">Contact Form</p>
       <h2 className="text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl">
         {/* Ready to start learning? */}

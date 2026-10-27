@@ -1,30 +1,37 @@
-const previews = [
+const applications = [
   {
-    title: 'Phonetic Models',
-    status: 'Available',
+    title: 'XLSR-English-01',
+    status: 'Open Source',
+    statusColor: '#3779B5',
     description:
-      'XLSR-English-01, the state-of-the-art model for phonetic transcription, is available on Huggingface, alongside our other models, various datasets, and our IPA transcription leaderboard.',
+      'Our state-of-the-art phonetic transcription model for standard and non-standard English speech, available on Hugging Face alongside our earlier checkpoints.',
     image: '/images/card-one.svg',
+    href: 'https://huggingface.co/KoelLabs/xlsr-english-01',
   },
   {
-    title: 'Phrase Segmentation',
-    status: 'In Beta',
+    title: 'Slay Speech',
+    status: 'Available',
+    statusColor: '#154063',
     description:
-      'Phrase Segmentation, our demonstration tool for how phonetic transcription models will eventually interact with users in conjunction with language learning materials, is now available in closed beta.  ',
-    image: '/images/card-two.svg',
+      'An app for practicing spoken English through short story-based lessons, with word-by-word pronunciation feedback and daily speaking practice.',
+    image: '/images/slaySpeechPhone.webp',
+    imageFit: 'object-contain scale-[1.4] translate-y-[8%]',
+    href: 'https://slayspeech.com',
   },
   {
-    title: 'Speech Analysis',
-    status: 'Upcoming',
+    title: 'Open Benchmarks & Data',
+    status: 'Open Data',
+    statusColor: 'black',
     description:
-      'A robust and open speech analysis tool, powered by our own models, to allow for real-time feedback to users about speech, based on an actor reference, not a restricted, arbitrary standard.',
+      'Our IPA transcription leaderboard and standardized datasets spanning native, non-native, and atypical speech, so others can measure progress on the speakers who matter most.',
     image: '/images/card-three.svg',
+    href: 'https://huggingface.co/spaces/KoelLabs/IPA-Transcription-EN',
   },
 ];
 
-export default function Previews() {
+export default function Applications() {
   return (
-    <div id="previews" className=" relative">
+    <div id="applications" className=" relative">
       <svg
         width="75"
         height="905"
@@ -104,12 +111,14 @@ export default function Previews() {
             className="bg-white py-24 sm:py-32"
           >
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[1000] relative bg-white">
-              <p className="text-base/7 font-semibold text-blue-800 relative z-10">Previews</p>
+              <p className="text-base/7 font-semibold text-blue-800 relative z-10">
+                Models &amp; Applications
+              </p>
               <h2
                 id="features-heading"
                 className="mt-2 text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10 text-balance"
               >
-                Building your favorite language tools
+                From research to real speakers
               </h2>
               <ul
                 role="list"
@@ -120,8 +129,8 @@ export default function Previews() {
                 <div className="h-1/2 w-1/4 bg-blue-700 rounded-full absolute top-1/5 left-1/4 mix-blend-color blur-2xl animate-[float-left-right_8s_ease-in-out_infinite] group-hover:-translate-y-full transition-transform z-100 pointer-events-none scale-200"></div>
                 <div className="h-1/2 w-1/4 bg-sky-700 rounded-full absolute top-1/5 left-4/7 mix-blend-color blur-2xl animate-[float-right-left_8s_ease-in-out_infinite_2s] group-hover:-translate-y-full transition-transform z-100 pointer-events-none scale-200"></div>
 
-                {previews.map(preview => (
-                  <a href="/previews" key={preview.title} target="_blank">
+                {applications.map(preview => (
+                  <a href={preview.href} key={preview.title} target="_blank">
                     <li
                       key={preview.title}
                       className="flex flex-col gap-2 border border-neutral-200 rounded-3xl p-2 relative group/item"
@@ -136,14 +145,7 @@ export default function Previews() {
                           <span className="transition-all inline-flex items-center px-2 py-1.5 border text-sm leading-4 font-medium tracking-tight rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500  sm:w-fit flex-row justify-between hover:shadow-sm group">
                             <div
                               className={`h-2 w-2 rounded-full relative transition-all mr-1`}
-                              style={{
-                                backgroundColor:
-                                  preview.status === 'Available'
-                                    ? '#3779B5'
-                                    : preview.status === 'In Beta'
-                                      ? '#154063'
-                                      : 'black',
-                              }}
+                              style={{ backgroundColor: preview.statusColor }}
                             ></div>
                             <span className="w-full sm:w-fit text-nowrap">{preview.status}</span>
                           </span>
@@ -159,7 +161,7 @@ export default function Previews() {
                         <img
                           src={preview.image}
                           alt={preview.title}
-                          className="w-full h-full object-cover"
+                          className={`w-full h-full ${preview.imageFit ?? 'object-cover'}`}
                         />
                       </div>
                       <div

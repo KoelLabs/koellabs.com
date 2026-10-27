@@ -1,11 +1,17 @@
-'use client';
+import Link from 'next/link';
 import { ArrowRightIcon } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { Button } from '@/components/ui/base/button';
+
+const collaborationAreas = [
+  'Clinical & atypical speech',
+  "Children's speech & early literacy",
+  'Accent & dialect fairness',
+  'Speech data & annotation',
+];
 
 export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
-  const { toast } = useToast();
   return (
-    <div id="join-the-waitlist" className={`relative overflow-hidden`}>
+    <div id="work-with-us" className={`relative overflow-hidden`}>
       <div className="mx-auto max-w-[1321px] sm:px-6 lg:px-[47.5px] relative">
         <svg
           width="1529"
@@ -101,60 +107,33 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
               data-cursor-size="2"
               data-cursor-collision="true"
             >
-              <p className="text-sm/4 font-semibold text-sky-800 mb-2">Early Access</p>
+              <p className="text-sm/4 font-semibold text-sky-800 mb-2">Work With Us</p>
               <h2
                 id="cta-heading"
                 className="text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl"
               >
-                Be First in Line
+                Let's Build It Together
               </h2>
               <p className="mt-6 text-pretty text-lg/8 text-neutral-700">
-                We’re inviting a small group for early access to our research previews. Reserve your
-                spot today.
+                We partner with researchers, clinicians, and educators on applied speech research,
+                from new datasets to models built for the speakers technology leaves behind.
               </p>
-              <div className="mt-8 flex items-center justify-center gap-x-6">
-                <div className="relative w-full lg:mx-4">
-                  <form
-                    action="https://docs.google.com/forms/d/e/1FAIpQLScYXfLnmvyRogKKffPJ1R0c_sYWpAsAk_8lYWqEGWWSZGHX3Q/formResponse"
-                    method="POST"
-                    onSubmit={e => {
-                      e.preventDefault();
-                      const formData = new FormData(e.currentTarget);
-                      fetch(e.currentTarget.action, {
-                        method: 'POST',
-                        body: formData,
-                        mode: 'no-cors',
-                      });
-                      toast({
-                        title: 'Submitted',
-                        description: 'Thank you for joining the waitlist!',
-                      });
-                      e.currentTarget.reset();
-                    }}
+              <ul role="list" className="mt-8 flex flex-wrap items-center justify-center gap-2">
+                {collaborationAreas.map(area => (
+                  <li
+                    key={area}
+                    className="px-3 py-1.5 border border-neutral-200 bg-white/75 rounded-xl text-sm leading-4 font-medium tracking-tight text-neutral-800"
                   >
-                    <label htmlFor="email-input" className="sr-only">
-                      Email address
-                    </label>
-                    <input
-                      id="email-input"
-                      type="email"
-                      name="entry.358867278"
-                      placeholder="Email address"
-                      aria-label="Email address"
-                      className="block w-full rounded-2xl border border-neutral-200 bg-white/75 py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-sky-950 focus:outline-hidden focus:ring-sky-950/5"
-                      required
-                    />
-                    <div className="absolute inset-y-1 right-1 flex justify-end">
-                      <button
-                        type="submit"
-                        aria-label="Submit email to join waitlist"
-                        className="flex aspect-square h-full items-center justify-center rounded-xl text-white transition hover:bg-sky-800 bg-sky-950 cursor-pointer"
-                      >
-                        <ArrowRightIcon className="w-4" aria-hidden="true" />
-                      </button>
-                    </div>
-                  </form>
-                </div>
+                    {area}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 flex items-center justify-center">
+                <Link href="/contact#contact-form" className="w-full sm:w-auto">
+                  <Button className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto">
+                    Get in touch <ArrowRightIcon className="w-4" aria-hidden="true" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </section>

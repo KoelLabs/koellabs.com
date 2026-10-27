@@ -2,8 +2,8 @@ import { ArrowUpRightIcon } from 'lucide-react';
 
 const navigation = {
   research: [
-    { name: 'Previews', href: '/previews' },
     { name: 'Publications', href: '/research' },
+    { name: 'Models', href: 'https://huggingface.co/KoelLabs' },
   ],
   lab: [
     { name: 'About', href: '/about' },

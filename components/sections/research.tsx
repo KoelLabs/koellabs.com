@@ -1,6 +1,83 @@
 import React from 'react';
 import Link from 'next/link';
 
+const papers = [
+  {
+    title:
+      'Connecting the Dots: Enduring Performance Gaps in ASR Systems Between Standard and Minority English Varieties',
+    venue: 'IEEE SLT 2026',
+    date: 'October 2026',
+    href: 'https://arxiv.org/abs/2610.17761',
+    image: '/images/paperSLT.png',
+    description:
+      'We evaluate 16 speech recognition systems released between 2021 and 2025 across 8 English accent datasets, and find that the gap between Mainstream US English and minority accents is not reliably closing as models scale.',
+  },
+  {
+    title: 'Scaling Human and G2P Supervision for Robust Phonetic Transcription',
+    venue: 'Interspeech 2026',
+    date: 'June 2026',
+    href: 'https://arxiv.org/abs/2606.16019',
+    image: '/images/paper.png',
+    description:
+      'Using an 80-hour benchmark of native, non-native, and post-stroke speech, we show where G2P labels stop helping and achieve a 2.3× reduction in weighted phone feature error rate over prior systems.',
+  },
+];
+
+const talks = [
+  {
+    title: "Interspeech Conference Science Slam '25",
+    type: 'Research Conference',
+    date: 'August 2025',
+    description:
+      'We presented our work on making speech pathology more accessible and insights into our latest phonetic model.',
+  },
+  {
+    title: "University of Washington Research Symposium '25",
+    type: 'Research Symposium',
+    date: 'May 2025',
+    description:
+      'We presented architectural challenges in building speech tools and models, and working with non-lab settings and real-time data.',
+  },
+];
+
+const sparkle =
+  'M41.4672 1.19822C41.7127 0.0255133 44.2873 0.0255196 44.5328 1.19822C46.3436 9.84995 50.0055 22.4562 56.7746 29.2254C63.5438 35.9945 76.1501 39.6564 84.8018 41.4672C85.9745 41.7127 85.9745 44.2873 84.8018 44.5328C76.1501 46.3436 63.5438 50.0055 56.7746 56.7746C50.0055 63.5438 46.3436 76.1501 44.5328 84.8018C44.2873 85.9745 41.7127 85.9745 41.4672 84.8018C39.6564 76.1501 35.9945 63.5438 29.2254 56.7746C22.4562 50.0055 9.84994 46.3436 1.19822 44.5328C0.0255133 44.2873 0.0255196 41.7127 1.19822 41.4672C9.84995 39.6564 22.4562 35.9945 29.2254 29.2254C35.9945 22.4562 39.6564 9.84994 41.4672 1.19822Z';
+
+function Badge({
+  children,
+  secondary = false,
+}: {
+  children: React.ReactNode;
+  secondary?: boolean;
+}) {
+  return (
+    <div className="flex items-center gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-fit pl-3 sm:pl-2">
+      <svg
+        width="86"
+        height="86"
+        viewBox="0 0 86 86"
+        fill="none"
+        className={`size-3 mx-0.5 mr-1 transition-transform ease-in-out duration-450 hidden sm:block ${
+          secondary ? 'rotate-45 group-hover:rotate-270' : 'group-hover:rotate-180'
+        }`}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d={sparkle}
+          fill={secondary ? 'oklch(0.609 0.126 221.723)' : 'oklch(0.588 0.158 241.966)'}
+        />
+      </svg>
+      <h3
+        className={`text-sm/4 font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r ${
+          secondary ? 'from-cyan-600 to-sky-800' : 'from-sky-600 to-[#536AD4]'
+        }`}
+      >
+        {children}
+      </h3>
+    </div>
+  );
+}
+
 export default function Research() {
   return (
     <div id="research" className="">
@@ -79,140 +156,62 @@ export default function Research() {
                 id="features-heading"
                 className="mt-2 text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
               >
-                Our newest talks and presentations
+                Our latest publications
               </h2>
               <ul
                 role="list"
-                className="mt-12 grid grid-cols-1 gap-10 sm:gap-20 lg:grid-cols-6 lg:grid-rows-1 sm:p-2 z-10 relative`"
+                className="mt-12 grid grid-cols-1 gap-10 sm:gap-20 lg:grid-cols-6 lg:grid-rows-1 sm:p-2 z-10 relative"
               >
-                <li className="relative lg:col-span-3 group">
-                  <Link href="/research">
-                    <article className="relative flex h-fit flex-col inset-px ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
-                      <div className="relative p-2 rounded-[32px] bg-white border scale-110 shadow-xs">
-                        <img
-                          alt="Screenshot showing the massive library of content available to practice with"
-                          src="/images/interspeech.png"
-                          className="w-full aspect-video max-h-[318px] sm:max-h-[650px] object-top rounded-3xl border bg-white border-black/10"
-                        />
-                      </div>
-                      <div className="p-5 pt-9">
+                {papers.map(paper => (
+                  <li key={paper.title} className="relative lg:col-span-3 group">
+                    <Link href={paper.href} target="_blank">
+                      <article className="relative flex h-fit flex-col inset-px ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
+                        <div className="relative p-2 rounded-[32px] bg-white border scale-110 shadow-xs">
+                          <img
+                            alt={`First page of the paper ${paper.title}`}
+                            src={paper.image}
+                            className="w-full aspect-video max-h-[318px] sm:max-h-[650px] object-cover object-top rounded-3xl border bg-white border-black/10"
+                          />
+                        </div>
+                        <div className="p-5 pt-9">
+                          <div className="flex items-center gap-2">
+                            <Badge>{paper.venue}</Badge>
+                            <Badge secondary>{paper.date}</Badge>
+                          </div>
+                          <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 text-balance">
+                            {paper.title}
+                          </p>
+                          <p className="mt-2 max-w-lg text-sm/6 text-gray-600 text-pretty">
+                            {paper.description}
+                          </p>
+                        </div>
+                      </article>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-20 text-base/7 font-semibold text-gray-950 relative z-10">
+                Talks and presentations
+              </p>
+              <ul role="list" className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2 z-10 relative">
+                {talks.map(talk => (
+                  <li key={talk.title} className="group">
+                    <Link href="/research">
+                      <article className="h-full p-5 ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
                         <div className="flex items-center gap-2">
-                          <div className="flex items-center gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-fit pl-3 sm:pl-2">
-                            <svg
-                              width="86"
-                              height="86"
-                              viewBox="0 0 86 86"
-                              fill="none"
-                              className="size-3 text-sky-600 mx-0.5 mr-1 group-hover:rotate-180 transition-transform ease-in-out duration-450 hidden sm:block"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M41.4672 1.19822C41.7127 0.0255133 44.2873 0.0255196 44.5328 1.19822C46.3436 9.84995 50.0055 22.4562 56.7746 29.2254C63.5438 35.9945 76.1501 39.6564 84.8018 41.4672C85.9745 41.7127 85.9745 44.2873 84.8018 44.5328C76.1501 46.3436 63.5438 50.0055 56.7746 56.7746C50.0055 63.5438 46.3436 76.1501 44.5328 84.8018C44.2873 85.9745 41.7127 85.9745 41.4672 84.8018C39.6564 76.1501 35.9945 63.5438 29.2254 56.7746C22.4562 50.0055 9.84994 46.3436 1.19822 44.5328C0.0255133 44.2873 0.0255196 41.7127 1.19822 41.4672C9.84995 39.6564 22.4562 35.9945 29.2254 29.2254C35.9945 22.4562 39.6564 9.84994 41.4672 1.19822Z"
-                                fill="oklch(0.588 0.158 241.966)"
-                              />
-                            </svg>
-
-                            <h3 className="text-sm/4 font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-[#536AD4]">
-                              Research Conference
-                            </h3>
-                          </div>
-                          <div className="flex items-center gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-fit group pl-3 sm:pl-2">
-                            <svg
-                              width="86"
-                              height="86"
-                              viewBox="0 0 86 86"
-                              fill="none"
-                              className="size-3 text-emerald-600 mx-0.5 mr-1 rotate-45 group-hover:rotate-270 transition-transform ease-in-out duration-450 hidden sm:block"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M41.4672 1.19822C41.7127 0.0255133 44.2873 0.0255196 44.5328 1.19822C46.3436 9.84995 50.0055 22.4562 56.7746 29.2254C63.5438 35.9945 76.1501 39.6564 84.8018 41.4672C85.9745 41.7127 85.9745 44.2873 84.8018 44.5328C76.1501 46.3436 63.5438 50.0055 56.7746 56.7746C50.0055 63.5438 46.3436 76.1501 44.5328 84.8018C44.2873 85.9745 41.7127 85.9745 41.4672 84.8018C39.6564 76.1501 35.9945 63.5438 29.2254 56.7746C22.4562 50.0055 9.84994 46.3436 1.19822 44.5328C0.0255133 44.2873 0.0255196 41.7127 1.19822 41.4672C9.84995 39.6564 22.4562 35.9945 29.2254 29.2254C35.9945 22.4562 39.6564 9.84994 41.4672 1.19822Z"
-                                fill="oklch(0.609 0.126 221.723)"
-                              />
-                            </svg>
-
-                            <h3 className="text-sm/4 font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-sky-800">
-                              August 2025
-                            </h3>
-                          </div>
+                          <Badge>{talk.type}</Badge>
+                          <Badge secondary>{talk.date}</Badge>
                         </div>
                         <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
-                          Interspeech Conference Science Slam '25
+                          {talk.title}
                         </p>
                         <p className="mt-2 max-w-lg text-sm/6 text-gray-600 text-pretty">
-                          We presented our work on making speech pathology more accessible, insights
-                          and statistics into our latest phonetic model, and a demo of our
-                          work-in-progress pronunciation platform.
+                          {talk.description}
                         </p>
-                      </div>
-                    </article>
-                  </Link>
-                </li>
-                <li className="relative lg:col-span-3 group">
-                  <Link href="/research">
-                    <article className="relative flex h-fit flex-col inset-px ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
-                      <div className="relative p-2 rounded-[32px] bg-white border scale-110 shadow-xs">
-                        <img
-                          alt="Screenshot showing the massive library of content available to practice with"
-                          src="/images/UofW.png"
-                          className="w-full aspect-video max-h-[318px] sm:max-h-[650px] object-top rounded-3xl border bg-white border-black/10"
-                        />
-                      </div>
-                      <div className="p-5 pt-9">
-                        <div className="flex items-center gap-2">
-                          <div className="flex items-center gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-fit pl-3 sm:pl-2">
-                            <div className="flex items-center gap-2">
-                              <svg
-                                width="86"
-                                height="86"
-                                viewBox="0 0 86 86"
-                                fill="none"
-                                className="size-3 text-sky-600 mx-0.5 mr-1 group-hover:rotate-180 transition-transform ease-in-out duration-450 hidden sm:block"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M41.4672 1.19822C41.7127 0.0255133 44.2873 0.0255196 44.5328 1.19822C46.3436 9.84995 50.0055 22.4562 56.7746 29.2254C63.5438 35.9945 76.1501 39.6564 84.8018 41.4672C85.9745 41.7127 85.9745 44.2873 84.8018 44.5328C76.1501 46.3436 63.5438 50.0055 56.7746 56.7746C50.0055 63.5438 46.3436 76.1501 44.5328 84.8018C44.2873 85.9745 41.7127 85.9745 41.4672 84.8018C39.6564 76.1501 35.9945 63.5438 29.2254 56.7746C22.4562 50.0055 9.84994 46.3436 1.19822 44.5328C0.0255133 44.2873 0.0255196 41.7127 1.19822 41.4672C9.84995 39.6564 22.4562 35.9945 29.2254 29.2254C35.9945 22.4562 39.6564 9.84994 41.4672 1.19822Z"
-                                  fill="oklch(0.588 0.158 241.966)"
-                                />
-                              </svg>
-
-                              <h3 className="text-sm/4 font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-[#536AD4]">
-                                Research Symposium
-                              </h3>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-fit group pl-3 sm:pl-2">
-                            <svg
-                              width="86"
-                              height="86"
-                              viewBox="0 0 86 86"
-                              fill="none"
-                              className="size-3 text-emerald-600 mx-0.5 mr-1 rotate-45 group-hover:rotate-270 transition-transform ease-in-out duration-450 hidden sm:block"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M41.4672 1.19822C41.7127 0.0255133 44.2873 0.0255196 44.5328 1.19822C46.3436 9.84995 50.0055 22.4562 56.7746 29.2254C63.5438 35.9945 76.1501 39.6564 84.8018 41.4672C85.9745 41.7127 85.9745 44.2873 84.8018 44.5328C76.1501 46.3436 63.5438 50.0055 56.7746 56.7746C50.0055 63.5438 46.3436 76.1501 44.5328 84.8018C44.2873 85.9745 41.7127 85.9745 41.4672 84.8018C39.6564 76.1501 35.9945 63.5438 29.2254 56.7746C22.4562 50.0055 9.84994 46.3436 1.19822 44.5328C0.0255133 44.2873 0.0255196 41.7127 1.19822 41.4672C9.84995 39.6564 22.4562 35.9945 29.2254 29.2254C35.9945 22.4562 39.6564 9.84994 41.4672 1.19822Z"
-                                fill="oklch(0.609 0.126 221.723)"
-                              />
-                            </svg>
-
-                            <h3 className="text-sm/4 font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-sky-800">
-                              May 2025
-                            </h3>
-                          </div>
-                        </div>
-                        <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
-                          University of Washington Research Symposium '25
-                        </p>
-                        <p className="mt-2 max-w-lg text-sm/6 text-gray-600 text-pretty">
-                          We presented architectural challenges in building speech tools and models,
-                          working with non-lab settings and real-time data, and our mission as a
-                          research lab.
-                        </p>
-                      </div>
-                    </article>
-                  </Link>
-                </li>
+                      </article>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

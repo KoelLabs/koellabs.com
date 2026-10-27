@@ -15,22 +15,22 @@ export const metadata = {
   metadataBase: new URL('https://koellabs.com'),
   title: {
     template: '%s | Koel Labs',
-    default:
-      'Koel Labs - Building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects.',
+    default: 'Koel Labs - Speech research for every accent, dialect, and speaker',
   },
   description:
-    'A research lab building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects. We are a team of researchers and engineers inspired by our own experiences with language.',
+    'Koel Labs is a speech research lab building open models, benchmarks, and datasets so that speech technology works for every accent, dialect, and speaker.',
   keywords: [
-    'pronunciation learning',
-    'AI language learning',
-    'speech technology',
-    'language education',
-    'pronunciation assessment',
+    'speech research',
+    'phonetic transcription',
+    'speech recognition',
+    'accent and dialect fairness',
+    'atypical speech',
+    'speech datasets',
   ],
   openGraph: {
     title: 'Koel Labs',
     description:
-      'A research lab building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects. We are a team of researchers and engineers inspired by our own experiences with language.',
+      'Koel Labs is a speech research lab building open models, benchmarks, and datasets so that speech technology works for every accent, dialect, and speaker.',
     url: 'https://koellabs.com',
     siteName: 'Koel Labs',
     images: [
@@ -59,7 +59,7 @@ export const metadata = {
     title: 'Koel Labs',
     card: 'summary_large_image',
     description:
-      'A research lab building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects. We are a team of researchers and engineers inspired by our own experiences with language.',
+      'Koel Labs is a speech research lab building open models, benchmarks, and datasets so that speech technology works for every accent, dialect, and speaker.',
     images: ['/openGraph.png'],
   },
   alternates: {
@@ -84,16 +84,17 @@ export default function RootLayout({ children }) {
               "sameAs": [
                 "https://twitter.com/koellabs",
                 "https://github.com/koellabs",
-                "https://www.linkedin.com/company/koellabs"
+                "https://huggingface.co/KoelLabs",
+                "https://www.linkedin.com/company/koel-labs/"
               ],
-              "description": "Koel Labs is your new favorite tool for pronunciation learning. Other methods for pronunciation learning are often outdated, lack accessibility, and are ultimately boring. Language learners, like us and our families, desperately need a change—and we aim to be just that.",
+              "description": "Koel Labs is a speech research lab building open models, benchmarks, and datasets so that speech technology works for every accent, dialect, and speaker.",
               "foundingDate": "2024",
               "knowsAbout": [
-                "Pronunciation Learning",
                 "Speech Technology",
-                "Artificial Intelligence",
-                "Language Education",
-                "Educational Technology"
+                "Phonetic Transcription",
+                "Automatic Speech Recognition",
+                "Natural Language Processing",
+                "Artificial Intelligence"
               ],
               "areaServed": "Worldwide",
               "email": "info@koellabs.com",
