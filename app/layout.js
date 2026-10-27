@@ -103,21 +103,21 @@ export default function RootLayout({ children }) {
                   "@type": "Person",
                   "name": "Alexander Metzger",
                   "jobTitle": "Chief Executive Officer",
-                  "image": "https://koellabs.com/images/alexShot.png",
+                  "image": "https://koellabs.com/images/alexShot.jpg",
                   "sameAs": "https://www.linkedin.com/in/alexander-le-metzger/"
                 },
                 {
                   "@type": "Person",
                   "name": "Aruna Srivastava",
                   "jobTitle": "Chief Technology Officer",
-                  "image": "https://koellabs.com/images/arunaShot.png",
+                  "image": "https://koellabs.com/images/arunaShot.jpg",
                   "sameAs": "https://www.linkedin.com/in/arunasr/"
                 },
                 {
                   "@type": "Person",
                   "name": "Ruslan Mukhamedvaleev",
                   "jobTitle": "Chief Product Officer",
-                  "image": "https://koellabs.com/images/ruslanShot.png",
+                  "image": "https://koellabs.com/images/ruslanShot.jpg",
                   "sameAs": [
                     "https://github.com/digitalRM",
                     "https://www.linkedin.com/in/ruslan-muk/", 
