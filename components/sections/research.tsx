@@ -213,10 +213,10 @@ export default function Research() {
                                   <div
                                     key={page}
                                     aria-hidden="true"
-                                    className={`absolute left-1/2 top-[15%] w-[62%] aspect-[14/19] p-2 rounded-[28px] bg-white border shadow-sm origin-bottom transition-transform duration-300 ease-out ${
+                                    className={`absolute left-1/2 top-[15%] w-[62%] aspect-[14/19] p-2 rounded-[28px] bg-white border shadow-sm origin-bottom ${
                                       i === 0
-                                        ? '-translate-x-[60%] -rotate-[6deg] group-hover:-translate-x-[64%] group-hover:-rotate-[8deg]'
-                                        : '-translate-x-[40%] rotate-[6deg] group-hover:-translate-x-[36%] group-hover:rotate-[8deg]'
+                                        ? '-translate-x-[60%] -rotate-[6deg]'
+                                        : '-translate-x-[40%] rotate-[6deg]'
                                     }`}
                                   >
                                     <img
