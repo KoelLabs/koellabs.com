@@ -15,6 +15,8 @@ import Applications from '@/components/sections/applications';
 import MagicHighlighter from '@/components/magic-highlighter';
 
 const sliderImages = [
+  '/images/frontpage/interspeech-poster.jpg',
+  '/images/frontpage/interspeech-backdrop.jpg',
   '/images/frontpage/1-group.jpg',
   '/images/frontpage/2-aruna.jpg',
   '/images/frontpage/3-group.jpg',
