@@ -128,7 +128,7 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
         </div>
       </div>
       {/* Hover glow: recolors only the gray linework, including the ruled strips above and below */}
-      <div className="pointer-events-none absolute inset-x-0 -inset-y-[52px] z-[3] bg-gradient-to-r from-[#2A4BCC] to-sky-700 mix-blend-color opacity-0 transition-opacity duration-500 group-has-[a:hover]/cta:opacity-100"></div>
+      <div className="pointer-events-none absolute inset-x-0 -inset-y-[50px] z-[3] bg-gradient-to-r from-[#2A4BCC] to-sky-700 mix-blend-color opacity-0 transition-opacity duration-500 group-has-[a:hover]/cta:opacity-100"></div>
     </div>
   );
 }
