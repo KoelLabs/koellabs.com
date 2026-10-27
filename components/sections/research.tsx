@@ -17,6 +17,7 @@ const items = [
     date: 'October 2026',
     href: 'https://arxiv.org/abs/2610.17761',
     image: '/images/paperSLT.png',
+    pages: ['/images/paperSLT-p2.jpg', '/images/paperSLT-p3.jpg'],
     alt: 'First page of the IEEE SLT 2026 paper Connecting the Dots',
     description:
       'We evaluate 16 speech recognition systems released between 2021 and 2025 across 8 English accent datasets, and find that the gap between Mainstream US English and minority accents is not reliably closing as models scale.',
@@ -28,6 +29,7 @@ const items = [
     date: 'June 2026',
     href: 'https://arxiv.org/abs/2606.16019',
     image: '/images/paper.png',
+    pages: ['/images/paper-p2.jpg', '/images/paper-p3.jpg'],
     alt: 'First page of the Interspeech 2026 paper Scaling Human and G2P Supervision for Robust Phonetic Transcription',
     description:
       'Using an 80-hour benchmark of native, non-native, and post-stroke speech, we show where G2P labels stop helping and achieve a 2.3× reduction in weighted phone feature error rate over prior systems.',
@@ -195,14 +197,33 @@ export default function Research() {
                         <article className="relative flex h-full flex-col inset-px ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
                           <div className="relative p-2 rounded-[32px] bg-white border scale-110 shadow-xs">
                             {item.kind === 'paper' ? (
-                              <div
-                                className="relative w-full aspect-video max-h-[318px] sm:max-h-[650px] rounded-3xl border border-black/10 bg-white overflow-hidden flex justify-center"
-                                style={{
-                                  backgroundImage:
-                                    'repeating-linear-gradient(135deg, #e5e5e5 0 1px, transparent 1px 9px)',
-                                }}
-                              >
-                                <div className="absolute top-[12%] w-[72%] aspect-[14/19] p-2 rounded-[28px] bg-white border shadow-sm">
+                              <div className="relative w-full aspect-video max-h-[318px] sm:max-h-[650px] rounded-3xl border border-black/10 bg-white overflow-hidden">
+                                <div
+                                  aria-hidden="true"
+                                  className="absolute inset-0 -mt-0.5"
+                                  style={{
+                                    backgroundImage:
+                                      'repeating-linear-gradient(135deg, #e5e5e5 0 1px, transparent 1px 4.7px)',
+                                  }}
+                                />
+                                {item.pages?.map((page, i) => (
+                                  <div
+                                    key={page}
+                                    aria-hidden="true"
+                                    className={`absolute left-1/2 top-[15%] w-[62%] aspect-[14/19] p-2 rounded-[28px] bg-white border shadow-sm origin-bottom transition-transform duration-300 ease-out ${
+                                      i === 0
+                                        ? '-translate-x-[60%] -rotate-[6deg] group-hover:-translate-x-[64%] group-hover:-rotate-[8deg]'
+                                        : '-translate-x-[40%] rotate-[6deg] group-hover:-translate-x-[36%] group-hover:rotate-[8deg]'
+                                    }`}
+                                  >
+                                    <img
+                                      alt=""
+                                      src={page}
+                                      className="h-full w-full object-cover object-top rounded-[20px] border bg-white border-black/10 opacity-60"
+                                    />
+                                  </div>
+                                ))}
+                                <div className="absolute left-1/2 -translate-x-1/2 top-[12%] w-[66%] aspect-[14/19] p-2 rounded-[28px] bg-white border shadow-md">
                                   <img
                                     alt={item.alt}
                                     src={item.image}
