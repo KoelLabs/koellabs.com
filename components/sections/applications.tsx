@@ -9,7 +9,7 @@ const applications = [
   },
   {
     title: 'Slay Speech',
-    status: 'In Beta',
+    status: 'Available',
     description:
       'Slay Speech brings phonetic transcription together with language learning materials, giving learners word-by-word pronunciation feedback through short story-based lessons.',
     image: '/images/card-two.svg',
@@ -17,7 +17,7 @@ const applications = [
   },
   {
     title: 'Benchmarks and Data',
-    status: 'Upcoming',
+    status: 'Contact',
     description:
       'Our IPA transcription leaderboard and curated datasets of native, non-native, and atypical speech. Get in touch about research access to our benchmarks and data.',
     image: '/images/card-three.svg',
