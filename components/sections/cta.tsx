@@ -94,10 +94,9 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
             className="group/cta relative isolate overflow-hidden bg-white bg-[url('/cta-bg.svg')] [background-size:300%] sm:[background-size:148%] bg-[50%_52.5%] px-6 py-16 sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:py-12 border-x"
           >
             <div className="absolute left-0 top-0 w-full h-full bg-radial from-transparent via-white/10 to-white"></div>
-            <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-has-[a:hover]/cta:opacity-100">
-              <div className="absolute -left-1/4 top-0 h-full w-3/4 rounded-full bg-[#2A4BCC] blur-3xl mix-blend-color"></div>
-              <div className="absolute -right-1/4 top-0 h-full w-3/4 rounded-full bg-sky-700 blur-3xl mix-blend-color"></div>
-            </div>
+            {/* Hover glow: fade each layer on its own so the color blend always sees the backdrop */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#2A4BCC] to-sky-700 mix-blend-color opacity-0 transition-opacity duration-500 group-has-[a:hover]/cta:opacity-100"></div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#2A4BCC]/10 via-sky-500/5 to-sky-700/10 opacity-0 transition-opacity duration-500 group-has-[a:hover]/cta:opacity-100"></div>
             <div
               className="mx-auto max-w-md text-center lg:flex-auto lg:my-16 lg:mt-16 lg:pb-18 lg:pt-14 z-10 relative"
               data-cursor-size="2"
