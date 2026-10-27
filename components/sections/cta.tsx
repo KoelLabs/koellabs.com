@@ -1,13 +1,5 @@
 import Link from 'next/link';
-import { ArrowRightIcon } from 'lucide-react';
 import { Button } from '@/components/ui/base/button';
-
-const collaborationAreas = [
-  'Clinical & atypical speech',
-  "Children's speech & early literacy",
-  'Accent & dialect fairness',
-  'Speech data & annotation',
-];
 
 export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
   return (
@@ -99,9 +91,13 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
         <div className="sm:px-6 bg-white">
           <section
             aria-labelledby="cta-heading"
-            className="relative isolate overflow-hidden bg-white bg-[url('/cta-bg.svg')] [background-size:300%] sm:[background-size:148%] bg-[50%_52.5%] px-6 py-16 sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:py-12 border-x"
+            className="group/cta relative isolate overflow-hidden bg-white bg-[url('/cta-bg.svg')] [background-size:300%] sm:[background-size:148%] bg-[50%_52.5%] px-6 py-16 sm:px-16 md:py-24 lg:flex lg:gap-x-20 lg:px-24 lg:py-12 border-x"
           >
             <div className="absolute left-0 top-0 w-full h-full bg-radial from-transparent via-white/10 to-white"></div>
+            <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-has-[a:hover]/cta:opacity-100">
+              <div className="absolute -left-1/4 top-0 h-full w-3/4 rounded-full bg-[#2A4BCC] blur-3xl mix-blend-color"></div>
+              <div className="absolute -right-1/4 top-0 h-full w-3/4 rounded-full bg-sky-700 blur-3xl mix-blend-color"></div>
+            </div>
             <div
               className="mx-auto max-w-md text-center lg:flex-auto lg:my-16 lg:mt-16 lg:pb-18 lg:pt-14 z-10 relative"
               data-cursor-size="2"
@@ -115,23 +111,17 @@ export default function CTA({ hideBg = false }: { hideBg?: boolean }) {
                 Let's Build It Together
               </h2>
               <p className="mt-6 text-pretty text-lg/8 text-neutral-700">
-                We partner with researchers, clinicians, and educators on applied speech research,
-                from new datasets to models built for the speakers technology leaves behind.
+                We partner with researchers, clinicians, developers, and others on applied speech
+                research.
               </p>
-              <ul role="list" className="mt-8 flex flex-wrap items-center justify-center gap-2">
-                {collaborationAreas.map(area => (
-                  <li
-                    key={area}
-                    className="px-3 py-1.5 border border-neutral-200 bg-white/75 rounded-xl text-sm leading-4 font-medium tracking-tight text-neutral-800"
-                  >
-                    {area}
-                  </li>
-                ))}
-              </ul>
+
               <div className="mt-8 flex items-center justify-center">
-                <Link href="/contact#contact-form" className="w-full sm:w-auto">
+                <Link
+                  href="/contact#contact-form"
+                  className="w-full sm:w-auto border border-neutral-200 p-2 rounded-[20px]"
+                >
                   <Button className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto">
-                    Get in touch <ArrowRightIcon className="w-4" aria-hidden="true" />
+                    Get in touch
                   </Button>
                 </Link>
               </div>
