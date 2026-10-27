@@ -1,40 +1,56 @@
 import React from 'react';
 import Link from 'next/link';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from '@/components/ui/base/carousel';
 
-const papers = [
+const items = [
   {
+    kind: 'paper',
     title:
       'Connecting the Dots: Enduring Performance Gaps in ASR Systems Between Standard and Minority English Varieties',
     venue: 'IEEE SLT 2026',
     date: 'October 2026',
     href: 'https://arxiv.org/abs/2610.17761',
     image: '/images/paperSLT.png',
+    alt: 'First page of the IEEE SLT 2026 paper Connecting the Dots',
     description:
       'We evaluate 16 speech recognition systems released between 2021 and 2025 across 8 English accent datasets, and find that the gap between Mainstream US English and minority accents is not reliably closing as models scale.',
   },
   {
+    kind: 'paper',
     title: 'Scaling Human and G2P Supervision for Robust Phonetic Transcription',
     venue: 'Interspeech 2026',
     date: 'June 2026',
     href: 'https://arxiv.org/abs/2606.16019',
     image: '/images/paper.png',
+    alt: 'First page of the Interspeech 2026 paper Scaling Human and G2P Supervision for Robust Phonetic Transcription',
     description:
       'Using an 80-hour benchmark of native, non-native, and post-stroke speech, we show where G2P labels stop helping and achieve a 2.3× reduction in weighted phone feature error rate over prior systems.',
   },
-];
-
-const talks = [
   {
+    kind: 'talk',
     title: "Interspeech Conference Science Slam '25",
-    type: 'Research Conference',
+    venue: 'Research Conference',
     date: 'August 2025',
+    href: 'https://docs.google.com/presentation/d/1vC-smwntEnyBO1tNOdMEPg4y0lKs61Wp2Vyhswu2kwU/edit?usp=sharing',
+    image: '/images/interspeech.png',
+    alt: 'Title slide from our Interspeech 2025 Science Slam presentation',
     description:
       'We presented our work on making speech pathology more accessible and insights into our latest phonetic model.',
   },
   {
+    kind: 'talk',
     title: "University of Washington Research Symposium '25",
-    type: 'Research Symposium',
+    venue: 'Research Symposium',
     date: 'May 2025',
+    href: 'https://docs.google.com/presentation/d/19v1o8X_8QxV-W1kG4dt7m1ltAXbYasK_f4srhnypF8E/edit?usp=sharing',
+    image: '/images/UofW.png',
+    alt: 'Title slide from our University of Washington Research Symposium 2025 presentation',
     description:
       'We presented architectural challenges in building speech tools and models, and working with non-lab settings and real-time data.',
   },
@@ -151,68 +167,73 @@ export default function Research() {
             className="bg-white py-24 sm:py-32"
           >
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[1000] relative">
-              <p className="text-base/7 font-semibold text-blue-600 relative z-10">Research</p>
-              <h2
-                id="features-heading"
-                className="mt-2 text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
-              >
-                Our latest publications
-              </h2>
-              <ul
-                role="list"
-                className="mt-12 grid grid-cols-1 gap-10 sm:gap-20 lg:grid-cols-6 lg:grid-rows-1 sm:p-2 z-10 relative"
-              >
-                {papers.map(paper => (
-                  <li key={paper.title} className="relative lg:col-span-3 group">
-                    <Link href={paper.href} target="_blank">
-                      <article className="relative flex h-fit flex-col inset-px ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
-                        <div className="relative p-2 rounded-[32px] bg-white border scale-110 shadow-xs">
-                          <img
-                            alt={`First page of the paper ${paper.title}`}
-                            src={paper.image}
-                            className="w-full aspect-video max-h-[318px] sm:max-h-[650px] object-cover object-top rounded-3xl border bg-white border-black/10"
-                          />
-                        </div>
-                        <div className="p-5 pt-9">
-                          <div className="flex items-center gap-2">
-                            <Badge>{paper.venue}</Badge>
-                            <Badge secondary>{paper.date}</Badge>
+              <Carousel opts={{ align: 'start' }} className="relative z-10">
+                <div className="flex items-end justify-between gap-6">
+                  <div>
+                    <p className="text-base/7 font-semibold text-blue-600 relative z-10">
+                      Research
+                    </p>
+                    <h2
+                      id="features-heading"
+                      className="mt-2 text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
+                    >
+                      Our latest publications and talks
+                    </h2>
+                  </div>
+                  <div className="hidden sm:flex gap-2 shrink-0">
+                    <CarouselPrevious className="static translate-y-0 size-10" />
+                    <CarouselNext className="static translate-y-0 size-10" />
+                  </div>
+                </div>
+                <CarouselContent overflowVisible className="mt-12 -ml-6 sm:-ml-10">
+                  {items.map(item => (
+                    <CarouselItem
+                      key={item.title}
+                      className="pl-6 sm:pl-10 basis-[88%] sm:basis-[62%] lg:basis-[44%] group"
+                    >
+                      <Link href={item.href} target="_blank" className="block h-full">
+                        <article className="relative flex h-full flex-col ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
+                          <div
+                            className="relative rounded-[32px] bg-white border shadow-xs overflow-hidden aspect-[4/3] flex justify-center"
+                            style={{
+                              backgroundImage:
+                                'repeating-linear-gradient(135deg, #e5e5e5 0 1px, transparent 1px 9px)',
+                            }}
+                          >
+                            <div
+                              className={`absolute p-2 bg-white border shadow-sm transition-transform duration-300 ease-out group-hover:-translate-y-2 ${
+                                item.kind === 'paper'
+                                  ? 'top-[14%] w-[78%] aspect-[14/19] rounded-[28px]'
+                                  : 'top-[22%] w-[86%] aspect-video rounded-[24px]'
+                              }`}
+                            >
+                              <img
+                                alt={item.alt}
+                                src={item.image}
+                                className={`h-full w-full object-cover object-top border bg-white border-black/10 ${
+                                  item.kind === 'paper' ? 'rounded-[20px]' : 'rounded-[16px]'
+                                }`}
+                              />
+                            </div>
                           </div>
-                          <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 text-balance">
-                            {paper.title}
-                          </p>
-                          <p className="mt-2 max-w-lg text-sm/6 text-gray-600 text-pretty">
-                            {paper.description}
-                          </p>
-                        </div>
-                      </article>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-20 text-base/7 font-semibold text-gray-950 relative z-10">
-                Talks and presentations
-              </p>
-              <ul role="list" className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2 z-10 relative">
-                {talks.map(talk => (
-                  <li key={talk.title} className="group">
-                    <Link href="/research">
-                      <article className="h-full p-5 ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
-                        <div className="flex items-center gap-2">
-                          <Badge>{talk.type}</Badge>
-                          <Badge secondary>{talk.date}</Badge>
-                        </div>
-                        <p className="mt-2 text-lg font-medium tracking-tight text-gray-950">
-                          {talk.title}
-                        </p>
-                        <p className="mt-2 max-w-lg text-sm/6 text-gray-600 text-pretty">
-                          {talk.description}
-                        </p>
-                      </article>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+                          <div className="p-5 pt-6">
+                            <div className="flex items-center gap-2">
+                              <Badge>{item.venue}</Badge>
+                              <Badge secondary>{item.date}</Badge>
+                            </div>
+                            <p className="mt-3 text-lg font-medium tracking-tight text-gray-950 text-balance">
+                              {item.title}
+                            </p>
+                            <p className="mt-2 max-w-lg text-sm/6 text-gray-600 text-pretty">
+                              {item.description}
+                            </p>
+                          </div>
+                        </article>
+                      </Link>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
             </div>
           </div>
         </section>
