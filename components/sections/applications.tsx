@@ -19,7 +19,7 @@ const applications = [
     title: 'Benchmarks and Data',
     status: 'Contact',
     description:
-      'Our IPA transcription leaderboard and curated datasets of native, non-native, and atypical speech. Get in touch about research access to our benchmarks and data.',
+      'Our IPA transcription benchmark and leaderboard for native, non-native, and atypical speech are freely available. Get in touch to learn more about our datasets.',
     image: '/images/card-three.svg',
     href: '/contact#contact-form',
   },
