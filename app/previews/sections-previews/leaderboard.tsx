@@ -669,19 +669,19 @@ export default function Leaderboard() {
                           key={item.model}
                           className={`border-y h-[100px] sm:h-auto last:border-b-0 ${
                             item.koel_labs
-                              ? 'bg-blue-50 border-blue-100'
+                              ? 'bg-blue-50 border-blue-200/70'
                               : index % 2 === 0
                                 ? 'bg-white'
                                 : 'bg-neutral-50'
                           } ${
                             // Collapsed borders: the row above owns a shared edge, so it carries the blue top line
                             !item.koel_labs && sortedLeaderboard[index + 1]?.koel_labs
-                              ? 'border-b-blue-100'
+                              ? 'border-b-blue-200/70'
                               : ''
                           }`}
                         >
                           <td
-                            className={`text-left py-3 px-4 border-r ${item.koel_labs ? 'border-blue-100' : 'border-neutral-200'}`}
+                            className={`text-left py-3 px-4 border-r ${item.koel_labs ? 'border-blue-200/70' : 'border-neutral-200'}`}
                           >
                             {item.koel_labs ? (
                               <span className="inline-flex items-center gap-2 font-medium text-neutral-950">
@@ -693,17 +693,17 @@ export default function Leaderboard() {
                             )}
                           </td>
                           <td
-                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-100' : 'border-neutral-200'}`}
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-200/70' : 'border-neutral-200'}`}
                           >
                             {item.average_per}
                           </td>
                           <td
-                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-100' : 'border-neutral-200'}`}
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-200/70' : 'border-neutral-200'}`}
                           >
                             {item.average_fer}
                           </td>
                           <td
-                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-100' : 'border-neutral-200'}`}
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-200/70' : 'border-neutral-200'}`}
                           >
                             {tagLink(item.link)}
                           </td>
