@@ -2,6 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, ChevronDown, ChevronsUpDown, ChevronUp } from 'lucide-react';
+import { SideCurve } from '@/components/ui/side-curve';
 
 const leaderboard = [
   {
@@ -442,62 +443,9 @@ export default function Leaderboard() {
     return items;
   }, [sortConfig]);
   return (
-    <div id="models" className="">
-      <svg
-        width="75"
-        height="905"
-        viewBox="0 0 75 905"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="absolute top-4 left-0 z-[1] hidden 2xl:block"
-      >
-        <g clipPath="url(#clip0_3877_301)">
-          <path
-            d="M69.9964 807.941C69.9826 905.441 -69.8021 807.5 -69.8022 905L-69.8022 0.0643433C-69.6808 97.3525 69.9825 -0.460876 69.9963 96.9968C70.0013 132.346 70.0002 294.846 69.9986 452.469C70.0002 610.092 70.0014 772.592 69.9964 807.941Z"
-            fill="#ffffff"
-          />
-          <path
-            d="M69.9963 196.941C69.9963 360.607 70.0045 750.741 69.9964 807.941C69.9826 905.441 -69.8021 807.5 -69.8022 905L-69.8022 0.0643433M-69.8022 -0.0624878C-69.8022 -0.0201653 -69.8022 0.0220944 -69.8022 0.0643433M69.9964 707.997C69.9964 544.33 70.0044 154.197 69.9963 96.9968C69.9825 -0.460854 -69.6808 97.3525 -69.8022 0.0643433"
-            stroke="#E5E5E5"
-          />
-        </g>
-        <defs>
-          <clipPath id="clip0_3877_301">
-            <rect
-              width="75.0001"
-              height="905"
-              fill="white"
-              transform="translate(75 905) rotate(180)"
-            />
-          </clipPath>
-        </defs>
-      </svg>
-
-      <svg
-        width="75"
-        height="905"
-        viewBox="0 0 75 905"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="absolute top-4 right-0 z-[1] rotate-180 hidden 2xl:block"
-      >
-        <g clipPath="url(#clip0_3877_301)">
-          <path
-            d="M69.9963 196.941C69.9963 360.607 70.0045 750.741 69.9964 807.941C69.9826 905.441 -69.8021 807.5 -69.8022 905L-69.8022 0.0643433M-69.8022 -0.0624878C-69.8022 -0.0201653 -69.8022 0.0220944 -69.8022 0.0643433M69.9964 707.997C69.9964 544.33 70.0044 154.197 69.9963 96.9968C69.9825 -0.460854 -69.6808 97.3525 -69.8022 0.0643433"
-            stroke="#E5E5E5"
-          />
-        </g>
-        <defs>
-          <clipPath id="clip0_3877_301">
-            <rect
-              width="75.0001"
-              height="905"
-              fill="white"
-              transform="translate(75 905) rotate(180)"
-            />
-          </clipPath>
-        </defs>
-      </svg>
+    <div id="models" className="relative">
+      <SideCurve side="left" inset="top-4 bottom-4" />
+      <SideCurve side="right" inset="top-4 bottom-4" />
 
       <div className="mx-auto">
         <div className="mx-auto absolute h-full flex justify-between z-[-1]"></div>
@@ -669,31 +617,24 @@ export default function Leaderboard() {
                           key={item.model}
                           className={`border-y h-[100px] sm:h-auto last:border-b-0 ${
                             item.koel_labs
-                              ? 'bg-blue-50 border-blue-200/70'
+                              ? 'bg-blue-50 border-blue-300/70'
                               : index % 2 === 0
                                 ? 'bg-white'
                                 : 'bg-neutral-50'
                           } ${
                             // Collapsed borders: the row above owns a shared edge, so it carries the blue top line
                             !item.koel_labs && sortedLeaderboard[index + 1]?.koel_labs
-                              ? 'border-b-blue-200/70'
+                              ? 'border-b-blue-300/70'
                               : ''
                           }`}
                         >
                           <td
-                            className={`text-left py-3 px-4 border-r ${item.koel_labs ? 'border-blue-200/70' : 'border-neutral-200'}`}
+                            className={`text-left py-3 px-4 border-r ${item.koel_labs ? 'border-blue-300/70' : 'border-neutral-200'}`}
                           >
-                            {item.koel_labs ? (
-                              <span className="inline-flex items-center gap-2 font-medium text-neutral-950">
-                                <KoelMark />
-                                {item.model}
-                              </span>
-                            ) : (
-                              item.model
-                            )}
+                            {item.model}
                           </td>
                           <td
-                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-200/70' : 'border-neutral-200'}`}
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-300/70' : 'border-neutral-200'}`}
                           >
                             <span
                               className={item.koel_labs ? 'font-semibold text-neutral-950' : ''}
@@ -702,7 +643,7 @@ export default function Leaderboard() {
                             </span>
                           </td>
                           <td
-                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-200/70' : 'border-neutral-200'}`}
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-300/70' : 'border-neutral-200'}`}
                           >
                             <span
                               className={item.koel_labs ? 'font-semibold text-neutral-950' : ''}
@@ -711,7 +652,7 @@ export default function Leaderboard() {
                             </span>
                           </td>
                           <td
-                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-200/70' : 'border-neutral-200'}`}
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-300/70' : 'border-neutral-200'}`}
                           >
                             {tagLink(item.link)}
                           </td>
