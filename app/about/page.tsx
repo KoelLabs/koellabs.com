@@ -14,18 +14,21 @@ const people = [
     role: 'Chief Executive Officer',
     imageUrl: '/images/alexShot.jpg',
     linkedinUrl: 'https://www.linkedin.com/in/alexander-le-metzger/',
+    email: 'alex@koellabs.com',
   },
   {
     name: 'Aruna Srivastava',
     role: 'Chief Technology Officer',
     imageUrl: '/images/arunaShot.jpg',
     linkedinUrl: 'https://www.linkedin.com/in/arunasr/',
+    email: 'aruna@koellabs.com',
   },
   {
     name: 'Ruslan Mukhamedvaleev',
     role: 'Chief Product Officer',
     imageUrl: '/images/ruslanShot.jpg',
     linkedinUrl: 'https://www.linkedin.com/in/ruslan-muk/',
+    email: 'ruslan@koellabs.com',
   },
 ];
 
@@ -163,6 +166,23 @@ export default function About() {
                               clipRule="evenodd"
                               fillRule="evenodd"
                             />
+                          </svg>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href={`mailto:${person.email}`}
+                          className="text-gray-400 hover:text-gray-500"
+                        >
+                          <span className="sr-only">Email {person.email}</span>
+                          <svg
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            aria-hidden="true"
+                            className="size-5"
+                          >
+                            <path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z" />
+                            <path d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z" />
                           </svg>
                         </a>
                       </li>
