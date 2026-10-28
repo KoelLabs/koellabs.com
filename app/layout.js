@@ -15,10 +15,11 @@ export const metadata = {
   metadataBase: new URL('https://koellabs.com'),
   title: {
     template: '%s | Koel Labs',
-    default: 'Koel Labs - Speech research for every accent, dialect, and speaker',
+    default:
+      'Koel Labs - Speech research lab building state-of-the-art models, tools, and datasets to make speech technology better',
   },
   description:
-    'Koel Labs is a speech research lab building open models, benchmarks, and datasets so that speech technology works for every accent, dialect, and speaker.',
+    'Koel Labs is a speech research lab building state-of-the-art models, tools, and datasets to make speech technology better',
   keywords: [
     'speech research',
     'phonetic transcription',
@@ -30,7 +31,7 @@ export const metadata = {
   openGraph: {
     title: 'Koel Labs',
     description:
-      'Koel Labs is a speech research lab building open models, benchmarks, and datasets so that speech technology works for every accent, dialect, and speaker.',
+      'Koel Labs is a speech research lab building state-of-the-art models, tools, and datasets to make speech technology better',
     url: 'https://koellabs.com',
     siteName: 'Koel Labs',
     images: [
@@ -59,7 +60,7 @@ export const metadata = {
     title: 'Koel Labs',
     card: 'summary_large_image',
     description:
-      'Koel Labs is a speech research lab building open models, benchmarks, and datasets so that speech technology works for every accent, dialect, and speaker.',
+      'Koel Labs is a speech research lab building state-of-the-art models, tools, and datasets to make speech technology better',
     images: ['/openGraph.png'],
   },
   alternates: {
@@ -87,7 +88,7 @@ export default function RootLayout({ children }) {
                 "https://huggingface.co/KoelLabs",
                 "https://www.linkedin.com/company/koel-labs/"
               ],
-              "description": "Koel Labs is a speech research lab building open models, benchmarks, and datasets so that speech technology works for every accent, dialect, and speaker.",
+              "description": "Koel Labs is a speech research lab building state-of-the-art models, tools, and datasets to make speech technology better",
               "foundingDate": "2024",
               "knowsAbout": [
                 "Speech Technology",
