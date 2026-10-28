@@ -673,9 +673,16 @@ export default function Leaderboard() {
                               : index % 2 === 0
                                 ? 'bg-white'
                                 : 'bg-neutral-50'
+                          } ${
+                            // Collapsed borders: the row above owns a shared edge, so it carries the blue top line
+                            !item.koel_labs && sortedLeaderboard[index + 1]?.koel_labs
+                              ? 'border-b-blue-100'
+                              : ''
                           }`}
                         >
-                          <td className="text-left py-3 px-4 border-r border-neutral-200">
+                          <td
+                            className={`text-left py-3 px-4 border-r ${item.koel_labs ? 'border-blue-100' : 'border-neutral-200'}`}
+                          >
                             {item.koel_labs ? (
                               <span className="inline-flex items-center gap-2 font-medium text-neutral-950">
                                 <KoelMark />
@@ -685,13 +692,19 @@ export default function Leaderboard() {
                               item.model
                             )}
                           </td>
-                          <td className="text-center py-3 px-4 border-r hidden sm:table-cell border-neutral-200">
+                          <td
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-100' : 'border-neutral-200'}`}
+                          >
                             {item.average_per}
                           </td>
-                          <td className="text-center py-3 px-4 border-r hidden sm:table-cell border-neutral-200">
+                          <td
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-100' : 'border-neutral-200'}`}
+                          >
                             {item.average_fer}
                           </td>
-                          <td className="text-center py-3 px-4 border-r hidden sm:table-cell border-neutral-200">
+                          <td
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-100' : 'border-neutral-200'}`}
+                          >
                             {tagLink(item.link)}
                           </td>
                           <td className="text-center py-3 px-4 hidden sm:table-cell">
