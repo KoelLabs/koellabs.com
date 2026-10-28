@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   published: true,
   image: '/images/blogOpenSource.png',
   summary: `
-    At Koel Labs, our goal is to make pronunciation learning more accessible and inclusive.
+    At Koel Labs, our goal is to make pronunciation learning more accessible and equitable.
     To represent the diversity of language and dialects, we're excited to announce that everything 
     from model weights and training code to datasets, research papers, and the frontend UI is 
     officially open source!

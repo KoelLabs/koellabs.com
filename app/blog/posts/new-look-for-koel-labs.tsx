@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   published: true,
   image: '/images/blog/new-look/blogNewLook.png',
   summary:
-    'You might have noticed that we’ve given Koel Labs a fresh new look. This change is intended to better align us with our mission of pioneering inclusive speech technology, with our goals as a research-focused startup, and with our belief in openly sharing our work.',
+    'You might have noticed that we’ve given Koel Labs a fresh new look. This change is intended to better align us with our mission of pioneering equitable speech technology, with our goals as a research-focused startup, and with our belief in openly sharing our work.',
   category: 'Announcement',
   tags: [
     {
@@ -54,7 +54,7 @@ export default function PostBody() {
             <BlogSubheading>A Fresh New Look</BlogSubheading>
             <p className="mb-4">
               You might have noticed that we’ve given Koel Labs a fresh new look. This change is
-              intended to better align us with our mission of pioneering inclusive speech
+              intended to better align us with our mission of pioneering equitable speech
               technology, with our goals as a research-focused startup, and with our belief in
               openly sharing our work.
             </p>

@@ -119,7 +119,7 @@ export default function Models() {
                       non-standard English.
                     </p>
                     <p className="mt-6 text-md/8 text-neutral-600 text-pretty">
-                      To develop truly inclusive speech technology, models should be able to
+                      To develop truly equitable speech technology, models should be able to
                       accurately transcribe diverse speaker profiles, from aphasia to non-native
                       speech.
                     </p>
