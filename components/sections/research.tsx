@@ -68,13 +68,13 @@ function Badge({
   secondary?: boolean;
 }) {
   return (
-    <div className="flex items-center gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-fit pl-3 sm:pl-2">
+    <div className="flex items-center gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-fit">
       <svg
         width="86"
         height="86"
         viewBox="0 0 86 86"
         fill="none"
-        className={`size-3 mx-0.5 mr-1 transition-transform ease-in-out duration-450 hidden sm:block ${
+        className={`size-3 shrink-0 mx-0.5 mr-1 transition-transform ease-in-out duration-450 ${
           secondary ? 'rotate-45 group-hover:rotate-270' : 'group-hover:rotate-180'
         }`}
         xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ function Badge({
         />
       </svg>
       <h3
-        className={`text-sm/4 font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r ${
+        className={`whitespace-nowrap text-sm/4 font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r ${
           secondary ? 'from-cyan-600 to-sky-800' : 'from-sky-600 to-[#536AD4]'
         }`}
       >
@@ -162,14 +162,14 @@ export default function Research() {
                     <CarouselNext className="static translate-y-0 size-10 rounded-xl" />
                   </div>
                 </div>
-                <CarouselContent overflowVisible className="mt-16 -ml-8 sm:-ml-16">
+                <CarouselContent overflowVisible className="mt-16 -ml-6 sm:-ml-16">
                   {items.map(item => (
                     <CarouselItem
                       key={item.title}
-                      className="pl-8 sm:pl-16 basis-[88%] sm:basis-[62%] lg:basis-[46%] group"
+                      className="pl-6 sm:pl-16 basis-[88%] sm:basis-[62%] lg:basis-[46%] group"
                     >
                       <Link href={item.href} target="_blank" className="block h-full">
-                        <article className="relative flex h-full flex-col inset-px ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm">
+                        <article className="relative flex h-full flex-col inset-px ring-1 ring-black/10 rounded-3xl bg-neutral-50 shadow-sm mx-[5%] sm:mx-0">
                           <div className="relative p-2 rounded-[32px] bg-white border scale-110 shadow-xs">
                             {item.kind === 'paper' ? (
                               <div className="relative w-full aspect-video max-h-[318px] sm:max-h-[650px] rounded-3xl border border-black/10 bg-white overflow-hidden">
@@ -215,7 +215,7 @@ export default function Research() {
                             )}
                           </div>
                           <div className="p-5 pt-9">
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
                               <Badge>{item.venue}</Badge>
                               <Badge secondary>{item.date}</Badge>
                             </div>
