@@ -325,7 +325,7 @@ export default function Header({ theme = 'light' }) {
                               {external && (
                                 <ArrowUpRight
                                   className="size-3.5 ml-1"
-                                  strokeOpacity={0.9}
+                                  strokeOpacity={0.6}
                                   strokeWidth={2.5}
                                 />
                               )}
