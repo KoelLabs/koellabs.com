@@ -50,13 +50,13 @@ export default function HeroNew() {
           <section aria-labelledby="hero-heading" className="text-center relative">
             {/* <div className="flex flex-row justify-center items-center my-8"></div> */}
             <div className="hidden sm:mb-8 sm:flex sm:justify-center relative z-10 max-w-md mx-auto">
-              <div className="relative rounded-full px-2 py-0.5 pr-4.5 text-sm/6 text-gray-600 border-y border-l rounded-r-none">
+              <div className="relative rounded-full px-2 py-0.5 pr-5 text-sm/6 text-gray-600 border-y border-l rounded-r-none">
                 Our paper was accepted to IEEE SLT 2026!{' '}
               </div>
               <a
                 href="https://arxiv.org/abs/2610.17761"
                 target="_blank"
-                className="font-semibold text-sky-600 rounded-full shadow-xs bg-white -ml-3 pl-2.5 border-l-none border text-sm/6 px-2 py-0.5 inset-0"
+                className="font-semibold text-sky-600 rounded-full shadow-xs bg-white -ml-[13px] pl-2.5 border-l-none border text-sm/6 px-2 py-0.5 inset-0"
               >
                 <span aria-hidden="true" className="absolute inset-0 tracking-tight" />
                 Read paper <ArrowUpRight className="w-4 h-4 inline-block -ml-0.5" strokeWidth={3} />
@@ -160,9 +160,9 @@ export default function HeroNew() {
             <HeroVideoDialog
               className="rounded-[500px] z-[30] relative"
               animationStyle="top-in-bottom-out"
-              videoSrc="https://www.youtube.com/watch?v=s7yPjSUjU9s"
-              thumbnailSrc="/images/demoPitchUpdated.png"
-              thumbnailAlt="Hero Video"
+              videoSrc="https://slayspeech.com"
+              thumbnailSrc="/images/heroSlaySpeech.png"
+              thumbnailAlt="Slay Speech by Koel Labs"
             />
           </Card>
         </div>
