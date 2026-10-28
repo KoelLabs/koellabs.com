@@ -66,7 +66,7 @@ export default function HeroNew() {
               id="hero-heading"
               className=" text-4xl font-semibold tracking-tighter text-gray-950 sm:text-6xl relative text-balance ligat"
             >
-              Pioneering Inclusive Speech Technology for Everyone
+              Pioneering Equitable Speech Technology for Everyone
             </h1>
 
             <p className="mt-6 sm:text-lg leading-7 sm:leading-8 text-neutral-600 max-w-xl mx-auto text-pretty">
