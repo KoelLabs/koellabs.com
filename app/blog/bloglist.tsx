@@ -51,17 +51,17 @@ function PostCard({ post }: { post: Post }) {
                   <div className=" -space-x-1 overflow-hidden inline-block">
                     <img
                       alt="A photo of Alexander Metzger"
-                      src="/images/mini-alex.png"
+                      src="/images/avatar-alex.png"
                       className="inline-block size-6 rounded-full outline outline-1 -outline-offset-1 outline-black/5 ring-2 ring-white"
                     />
                     <img
                       alt="A photo of Aruna Srivastava"
-                      src="/images/mini-aruna.png"
+                      src="/images/avatar-aruna.png"
                       className="inline-block size-6 rounded-full outline outline-1 -outline-offset-1 outline-black/5 ring-2 ring-white"
                     />
                     <img
                       alt="A photo of Ruslan Mukhamedvaleev"
-                      src="/images/mini-ruslan.png"
+                      src="/images/avatar-ruslan.png"
                       className="inline-block size-6 rounded-full outline outline-1 -outline-offset-1 outline-black/5 ring-2 ring-white"
                     />
                   </div>
