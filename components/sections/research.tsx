@@ -222,7 +222,7 @@ export default function Research() {
                             )}
                           </div>
                           <div className="p-5 pt-9">
-                            <div className="flex flex-col items-stretch gap-2 pb-2 sm:flex-row sm:items-center sm:pb-0">
+                            <div className="flex flex-col items-stretch gap-2 pb-4 sm:flex-row sm:items-center sm:pb-0">
                               <Badge>{item.venue}</Badge>
                               <Badge secondary>{item.date}</Badge>
                             </div>
