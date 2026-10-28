@@ -1,30 +1,33 @@
-const previews = [
+const applications = [
   {
     title: 'Phonetic Models',
     status: 'Available',
     description:
-      'XLSR-English-01, the state-of-the-art model for phonetic transcription, is available on Huggingface, alongside our other models, various datasets, and our IPA transcription leaderboard.',
+      'XLSR-English-01, the state-of-the-art model for phonetic transcription of standard and non-standard English speech, is available on Hugging Face alongside our other models.',
     image: '/images/card-one.svg',
+    href: 'https://huggingface.co/KoelLabs/xlsr-english-01',
   },
   {
-    title: 'Phrase Segmentation',
-    status: 'In Beta',
+    title: 'Slay Speech',
+    status: 'Available',
     description:
-      'Phrase Segmentation, our demonstration tool for how phonetic transcription models will eventually interact with users in conjunction with language learning materials, is now available in closed beta.  ',
+      'Slay Speech brings phonetic transcription together with language learning materials, giving learners word-by-word pronunciation feedback through short story-based lessons.',
     image: '/images/card-two.svg',
+    href: 'https://slayspeech.com',
   },
   {
-    title: 'Speech Analysis',
-    status: 'Upcoming',
+    title: 'Benchmarks and Data',
+    status: 'Contact',
     description:
-      'A robust and open speech analysis tool, powered by our own models, to allow for real-time feedback to users about speech, based on an actor reference, not a restricted, arbitrary standard.',
+      'Our IPA transcription benchmark and leaderboard for native, non-native, and atypical speech are freely available. Get in touch to learn more about our datasets.',
     image: '/images/card-three.svg',
+    href: '/contact#contact-form',
   },
 ];
 
-export default function Previews() {
+export default function Applications() {
   return (
-    <div id="previews" className=" relative">
+    <div id="applications" className=" relative">
       <svg
         width="75"
         height="905"
@@ -95,7 +98,7 @@ export default function Previews() {
       <div className="mx-auto">
         <section
           aria-labelledby="features-heading"
-          className="mx-auto w-full h-fit bg-neutral-50/20 backdrop-blur-md border-b border-neutral-200 overflow-hidden"
+          className="mx-auto w-full h-fit bg-neutral-50/20 backdrop-blur-md overflow-hidden"
         >
           <div
             data-cursor-opacity="0.3"
@@ -104,12 +107,12 @@ export default function Previews() {
             className="bg-white py-24 sm:py-32"
           >
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[1000] relative bg-white">
-              <p className="text-base/7 font-semibold text-blue-800 relative z-10">Previews</p>
+              <p className="text-base/7 font-semibold text-blue-800 relative z-10">Real-world</p>
               <h2
                 id="features-heading"
                 className="mt-2 text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10 text-balance"
               >
-                Building your favorite language tools
+                From research to end users
               </h2>
               <ul
                 role="list"
@@ -120,8 +123,12 @@ export default function Previews() {
                 <div className="h-1/2 w-1/4 bg-blue-700 rounded-full absolute top-1/5 left-1/4 mix-blend-color blur-2xl animate-[float-left-right_8s_ease-in-out_infinite] group-hover:-translate-y-full transition-transform z-100 pointer-events-none scale-200"></div>
                 <div className="h-1/2 w-1/4 bg-sky-700 rounded-full absolute top-1/5 left-4/7 mix-blend-color blur-2xl animate-[float-right-left_8s_ease-in-out_infinite_2s] group-hover:-translate-y-full transition-transform z-100 pointer-events-none scale-200"></div>
 
-                {previews.map(preview => (
-                  <a href="/previews" key={preview.title} target="_blank">
+                {applications.map(preview => (
+                  <a
+                    href={preview.href}
+                    key={preview.title}
+                    target={preview.href.startsWith('http') ? '_blank' : undefined}
+                  >
                     <li
                       key={preview.title}
                       className="flex flex-col gap-2 border border-neutral-200 rounded-3xl p-2 relative group/item"

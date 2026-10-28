@@ -5,7 +5,14 @@ import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { LayoutGroup, motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, SquareChevronRight, SquareLibrary, SquareUserRound, X } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Menu,
+  SquareChevronRight,
+  SquareLibrary,
+  SquareUserRound,
+  X,
+} from 'lucide-react';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { cn } from '@/lib/styles';
 import { useScroll } from '@/lib/hooks/use-scroll';
@@ -108,14 +115,15 @@ const navItems = [
     segments: ['/'],
   },
   {
-    name: 'Previews',
-    href: '/previews',
-    segments: ['/previews'],
-  },
-  {
     name: 'Research',
     href: '/research',
     segments: ['/research'],
+  },
+  {
+    name: 'Slay Speech',
+    href: 'https://slayspeech.com',
+    segments: [],
+    external: true,
   },
   {
     name: 'About',
@@ -247,7 +255,7 @@ export default function Header({ theme = 'light' }) {
                 className="relative hidden lg:block"
               >
                 <NavigationMenuPrimitive.List className="group relative z-0 flex">
-                  {navItems.map(({ name, href, segments, content: Content }, index) => {
+                  {navItems.map(({ name, href, segments, content: Content, external }, index) => {
                     const isActive = segments.some(segment => currentPath === segment);
                     const isHovered = hoveredItem === name;
                     const hasBackground = backgroundItem === name;
@@ -307,11 +315,20 @@ export default function Header({ theme = 'light' }) {
                           {href !== undefined ? (
                             <Link
                               href={href}
+                              target={external ? '_blank' : undefined}
+                              rel={external ? 'noopener noreferrer' : undefined}
                               className="relative z-10 group/item flex items-center px-4 py-2 text-sm rounded-xl font-base"
                               onMouseEnter={() => handleItemHover(name)}
                               onMouseLeave={handleItemLeave}
                             >
                               {name}
+                              {external && (
+                                <ArrowUpRight
+                                  className="size-3.5 ml-1"
+                                  strokeOpacity={0.6}
+                                  strokeWidth={2.5}
+                                />
+                              )}
                             </Link>
                           ) : (
                             <button
@@ -384,7 +401,7 @@ export default function Header({ theme = 'light' }) {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <ul className="flex flex-col gap-y-2">
-                  {navItems.map(({ href, name, content, segments }) => {
+                  {navItems.map(({ href, name, content, segments, external }) => {
                     if (content) {
                       return (
                         <div key={name}>
@@ -466,13 +483,17 @@ export default function Header({ theme = 'light' }) {
                             : 'text-neutral-500 hover:text-neutral-700'
                         }
                         href={href}
+                        target={external ? '_blank' : undefined}
+                        rel={external ? 'noopener noreferrer' : undefined}
                         key={`${href}${name}`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <li className="w-full p-2 px-3 text-sm rounded-2xl tracking-tight hover:bg-neutral-100 border flex items-center justify-between">
                           {name}
 
-                          {currentPath === href ? (
+                          {external ? (
+                            <ArrowUpRight className="size-4 mr-0.5" strokeWidth={2.5} />
+                          ) : currentPath === href ? (
                             <div
                               className={`h-2 w-2 bg-[#154063] rounded-full relative transition-all mr-1`}
                             ></div>
@@ -488,8 +509,8 @@ export default function Header({ theme = 'light' }) {
                 </ul>
               </div>
               <div className="py-6">
-                <Link href="#join-the-waitlist" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="w-full">Join the Waitlist</Button>
+                <Link href="/contact#contact-form" onClick={() => setMobileMenuOpen(false)}>
+                  <Button className="w-full">Work With Us</Button>
                 </Link>
               </div>
             </div>

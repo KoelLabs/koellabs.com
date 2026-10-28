@@ -11,12 +11,14 @@ import Image from 'next/image';
 import Autoplay from 'embla-carousel-autoplay';
 
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/base/carousel';
-import Previews from '@/components/sections/previews';
+import Applications from '@/components/sections/applications';
 import MagicHighlighter from '@/components/magic-highlighter';
 
 const sliderImages = [
+  '/images/frontpage/interspeech-poster.jpg',
   '/images/frontpage/1-group.jpg',
   '/images/frontpage/2-aruna.jpg',
+  '/images/frontpage/interspeech-backdrop.jpg',
   '/images/frontpage/3-group.jpg',
   '/images/frontpage/4-alex.jpg',
   '/images/frontpage/5-group.jpg',
@@ -124,8 +126,8 @@ export default function Home() {
         data-cursor-color="#2A4BCC"
         className="z-0 relative"
       >
-        <Previews />
-        <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-b">
+        <Applications />
+        <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
           <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
             {Array(500)
               .fill(0)

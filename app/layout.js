@@ -16,21 +16,22 @@ export const metadata = {
   title: {
     template: '%s | Koel Labs',
     default:
-      'Koel Labs - Building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects.',
+      'Koel Labs - Speech research lab building state-of-the-art models, tools, and datasets to make speech technology better',
   },
   description:
-    'A research lab building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects. We are a team of researchers and engineers inspired by our own experiences with language.',
+    'Koel Labs is a speech research lab building state-of-the-art models, tools, and datasets to make speech technology better',
   keywords: [
-    'pronunciation learning',
-    'AI language learning',
-    'speech technology',
-    'language education',
-    'pronunciation assessment',
+    'speech research',
+    'phonetic transcription',
+    'speech recognition',
+    'accent and dialect fairness',
+    'atypical speech',
+    'speech datasets',
   ],
   openGraph: {
     title: 'Koel Labs',
     description:
-      'A research lab building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects. We are a team of researchers and engineers inspired by our own experiences with language.',
+      'Koel Labs is a speech research lab building state-of-the-art models, tools, and datasets to make speech technology better',
     url: 'https://koellabs.com',
     siteName: 'Koel Labs',
     images: [
@@ -59,7 +60,7 @@ export const metadata = {
     title: 'Koel Labs',
     card: 'summary_large_image',
     description:
-      'A research lab building out state-of-the-art models, tools, and datasets to make speech technologies more inclusive for all dialects. We are a team of researchers and engineers inspired by our own experiences with language.',
+      'Koel Labs is a speech research lab building state-of-the-art models, tools, and datasets to make speech technology better',
     images: ['/openGraph.png'],
   },
   alternates: {
@@ -84,16 +85,17 @@ export default function RootLayout({ children }) {
               "sameAs": [
                 "https://twitter.com/koellabs",
                 "https://github.com/koellabs",
-                "https://www.linkedin.com/company/koellabs"
+                "https://huggingface.co/KoelLabs",
+                "https://www.linkedin.com/company/koel-labs/"
               ],
-              "description": "Koel Labs is your new favorite tool for pronunciation learning. Other methods for pronunciation learning are often outdated, lack accessibility, and are ultimately boring. Language learners, like us and our families, desperately need a change—and we aim to be just that.",
+              "description": "Koel Labs is a speech research lab building state-of-the-art models, tools, and datasets to make speech technology better",
               "foundingDate": "2024",
               "knowsAbout": [
-                "Pronunciation Learning",
                 "Speech Technology",
-                "Artificial Intelligence",
-                "Language Education",
-                "Educational Technology"
+                "Phonetic Transcription",
+                "Automatic Speech Recognition",
+                "Natural Language Processing",
+                "Artificial Intelligence"
               ],
               "areaServed": "Worldwide",
               "email": "info@koellabs.com",
@@ -102,21 +104,21 @@ export default function RootLayout({ children }) {
                   "@type": "Person",
                   "name": "Alexander Metzger",
                   "jobTitle": "Chief Executive Officer",
-                  "image": "https://koellabs.com/images/alexShot.png",
+                  "image": "https://koellabs.com/images/alexShot.jpg",
                   "sameAs": "https://www.linkedin.com/in/alexander-le-metzger/"
                 },
                 {
                   "@type": "Person",
                   "name": "Aruna Srivastava",
                   "jobTitle": "Chief Technology Officer",
-                  "image": "https://koellabs.com/images/arunaShot.png",
+                  "image": "https://koellabs.com/images/arunaShot.jpg",
                   "sameAs": "https://www.linkedin.com/in/arunasr/"
                 },
                 {
                   "@type": "Person",
                   "name": "Ruslan Mukhamedvaleev",
                   "jobTitle": "Chief Product Officer",
-                  "image": "https://koellabs.com/images/ruslanShot.png",
+                  "image": "https://koellabs.com/images/ruslanShot.jpg",
                   "sameAs": [
                     "https://github.com/digitalRM",
                     "https://www.linkedin.com/in/ruslan-muk/", 

@@ -12,20 +12,23 @@ const people = [
   {
     name: 'Alexander Metzger',
     role: 'Chief Executive Officer',
-    imageUrl: '/images/alexShot.png',
+    imageUrl: '/images/alexShot.jpg',
     linkedinUrl: 'https://www.linkedin.com/in/alexander-le-metzger/',
+    email: 'alex@koellabs.com',
   },
   {
     name: 'Aruna Srivastava',
     role: 'Chief Technology Officer',
-    imageUrl: '/images/arunaShot.png',
+    imageUrl: '/images/arunaShot.jpg',
     linkedinUrl: 'https://www.linkedin.com/in/arunasr/',
+    email: 'aruna@koellabs.com',
   },
   {
     name: 'Ruslan Mukhamedvaleev',
     role: 'Chief Product Officer',
-    imageUrl: '/images/ruslanShot.png',
+    imageUrl: '/images/ruslanShot.jpg',
     linkedinUrl: 'https://www.linkedin.com/in/ruslan-muk/',
+    email: 'ruslan@koellabs.com',
   },
 ];
 
@@ -75,7 +78,7 @@ export default function About() {
               <div className="mx-auto max-w-2xl lg:mx-0 mt-0 sm:mt-24 lg:mt-0 lg:my-12 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
                 {/* <h1 class="max-w-2xl text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl lg:col-span-2 xl:col-auto">We’re changing the way people connect</h1> */}
                 <h1 className="max-w-2xl xss:text-3xl pt-12 text-balance text-3xl font-semibold tracking-tighter text-gray-950 sm:text-6xl lg:col-span-2 xl:col-auto">
-                  Building Inclusive <span className="text-[#003a59]">Speech Technology</span>
+                  Building Better <span className="text-[#003a59]">Speech Technology</span>
                 </h1>
                 <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
                   <p className="sm:text-lg/8 text-neutral-600">
@@ -102,9 +105,9 @@ export default function About() {
                 </div>
                 <div className="mt-10 w-full md:max-w-lg rounded-[24px] object-cover sm:mt-16 lg:mt-0 xl:mt-8 lg:max-w-none xl:row-span-2 xl:row-end-2 p-2 bg-white/75 backdrop-blur-md border">
                   <img
-                    alt="A photo of the Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the bay bridge in San Francisco."
-                    src="/images/aboutShot.jpeg"
-                    className=" aspect-5/5 scale w-full md:max-w-lg rounded-2xl object-cover object-[23%] lg:max-w-none xl:row-span-2 xl:row-end-2 border"
+                    alt="A selfie of the Koel Labs founders, Aruna Srivastava, Ruslan Mukhamedvaleev, and Alexander Metzger, holding their badges at Interspeech 2026."
+                    src="/images/aboutTeam.jpg"
+                    className=" aspect-5/5 scale w-full md:max-w-lg rounded-2xl object-cover object-left lg:max-w-none xl:row-span-2 xl:row-end-2 border"
                   />
                   <div className="w-full h-12 rounded-2xl mt-2 border relative gap-y-2 flex items-center overflow-hidden justify-center">
                     {Array(120)
@@ -163,6 +166,23 @@ export default function About() {
                               clipRule="evenodd"
                               fillRule="evenodd"
                             />
+                          </svg>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href={`mailto:${person.email}`}
+                          className="text-gray-400 hover:text-gray-500"
+                        >
+                          <span className="sr-only">Email {person.email}</span>
+                          <svg
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            aria-hidden="true"
+                            className="size-6 -my-0.5"
+                          >
+                            <path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z" />
+                            <path d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z" />
                           </svg>
                         </a>
                       </li>

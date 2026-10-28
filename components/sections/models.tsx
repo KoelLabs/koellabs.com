@@ -98,7 +98,7 @@ export default function Models() {
                   <Link href="/research">
                     <div className="relative p-2 aspect-square rounded-[32px] bg-white border overflow-hidden">
                       <img
-                        alt="Screenshot showing the massive library of content available to practice with"
+                        alt="Phonetic transcription model results"
                         src="/images/models.webp"
                         className="h-full aspect-video object-cover object-top rounded-3xl border bg-white border-black/10 saturate-200"
                       />
@@ -113,33 +113,38 @@ export default function Models() {
                 >
                   <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-lg">
                     <p className="lg:-mt-4 xl:mt-4 text-md/8 text-neutral-600 text-pretty">
-                      We introduce a state-of-the-art phonetic transcription model, XLSR-English-01,
-                      which transcribes both standard and non-standard English speech, achieving a
-                      60% improvement in feature error rate over other phonetic models, including
-                      Facebook's model, Facebook 60.
+                      XLSR-English-01 is our open phonetic transcription model. It transcribes
+                      speech into the International Phonetic Alphabet, capturing how words are
+                      actually pronounced rather than only what was said, for both standard and
+                      non-standard English.
                     </p>
                     <p className="mt-6 text-md/8 text-neutral-600 text-pretty">
                       To develop truly inclusive speech technology, models should be able to
-                      accurately transcribe diverse speaker profiles, from speech impediments to
-                      non-native speech.
+                      accurately transcribe diverse speaker profiles, from aphasia to non-native
+                      speech.
                     </p>
                     <p className="mt-6 text-md/8 text-neutral-600 text-pretty">
-                      In light of this, we test our model on speech aphasia data (PSST) and
-                      non-native speech spanning from Italian and German (ISLE) to Mandarin
-                      (SpeechOcean) accented speech.
+                      In our Interspeech 2026 paper, we curate an 80-hour benchmark spanning native,
+                      non-native, and post-stroke speech, and study how human and G2P supervision
+                      scale. With ASR pretraining, we achieve a 2.3× reduction in weighted phone
+                      feature error rate over prior systems, with the strongest gains on non-native
+                      and aphasic speech.
                     </p>
                     <p className="mt-6 text-md/8 text-neutral-600 text-pretty">
-                      This model marks our second major update from our previous SoTA model
-                      (Koel-Labs-B0), and we aim to continuously improve upon phonetic transcription
-                      models in both their transcription quality and inference time.
+                      All training code, processing scripts, models, and standardized datasets are
+                      open source.
                     </p>
                     <div className="mt-6 border rounded-[20px] p-2 w-full flex flex-col sm:flex-row gap-2">
-                      <Link href="https://koellabs.com/blog#technical-reports" className="w-full">
+                      <Link
+                        href="https://arxiv.org/abs/2606.16019"
+                        target="_blank"
+                        className="w-full"
+                      >
                         <Button
                           variant="outline"
                           className="w-full active:scale-[97%] transition-all duration-50 "
                         >
-                          <p>View Technical Reports</p>
+                          <p>Read the Paper</p>
                         </Button>
                       </Link>
                       <Link
@@ -147,7 +152,7 @@ export default function Models() {
                         className="w-full"
                       >
                         <Button className="w-full active:scale-[97%] transition-all duration-50 ">
-                          <p>View on Huggingface</p>
+                          <p>View on Hugging Face</p>
                         </Button>
                       </Link>
                     </div>

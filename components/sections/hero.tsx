@@ -49,16 +49,17 @@ export default function HeroNew() {
         <div className="mx-auto p-4 max-w-4xl py-32 z-[999] relative">
           <section aria-labelledby="hero-heading" className="text-center relative">
             {/* <div className="flex flex-row justify-center items-center my-8"></div> */}
-            <div className="hidden sm:mb-8 sm:flex sm:justify-center relative z-10 max-w-sm mx-auto">
-              <div className="relative rounded-full px-2 py-0.5 pr-4.5 text-sm/6 text-gray-600 border-y border-l rounded-r-none">
-                A new look for Koel Labs{' '}
+            <div className="hidden sm:mb-8 sm:flex sm:justify-center relative z-10 max-w-md mx-auto">
+              <div className="relative rounded-full px-2 py-0.5 pr-5 text-sm/6 text-gray-600 border-y border-l rounded-r-none">
+                Our paper was accepted to IEEE SLT 2026!{' '}
               </div>
               <a
-                href="/blog/new-look-for-koel-labs"
-                className="font-semibold text-sky-600 rounded-full shadow-xs bg-white -ml-3 pl-2.5 border-l-none border text-sm/6 px-2 py-0.5 inset-0"
+                href="https://arxiv.org/abs/2610.17761"
+                target="_blank"
+                className="font-semibold text-sky-600 rounded-full shadow-xs bg-white -ml-[13px] pl-2.5 border-l-none border text-sm/6 px-2 py-0.5 inset-0"
               >
                 <span aria-hidden="true" className="absolute inset-0 tracking-tight" />
-                Read more <ArrowUpRight className="w-4 h-4 inline-block -ml-0.5" strokeWidth={3} />
+                Read paper <ArrowUpRight className="w-4 h-4 inline-block -ml-0.5" strokeWidth={3} />
               </a>
             </div>
             <h1
@@ -69,8 +70,8 @@ export default function HeroNew() {
             </h1>
 
             <p className="mt-6 sm:text-lg leading-7 sm:leading-8 text-neutral-600 max-w-xl mx-auto text-pretty">
-              We are building out state-of-the-art models, tools, and datasets to make speech
-              technologies more inclusive for all dialects.
+              We are a speech research lab building state-of-the-art models, tools, and datasets to
+              make speech technology better.
             </p>
             <div className="mt-6 flex flex-col gap-2 sm:flex-row items-center justify-center gap-x-4 w-full">
               <Link href="/research" className="w-full sm:w-auto">
@@ -81,9 +82,9 @@ export default function HeroNew() {
                   Read our research
                 </Button>
               </Link>
-              <Link href="/previews" className="w-full sm:w-auto">
+              <Link href="#models" className="w-full sm:w-auto">
                 <Button className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto">
-                  View our demos
+                  Explore our models
                 </Button>
               </Link>
             </div>
@@ -159,9 +160,9 @@ export default function HeroNew() {
             <HeroVideoDialog
               className="rounded-[500px] z-[30] relative"
               animationStyle="top-in-bottom-out"
-              videoSrc="https://www.youtube.com/watch?v=s7yPjSUjU9s"
-              thumbnailSrc="/images/demoPitchUpdated.png"
-              thumbnailAlt="Hero Video"
+              videoSrc="https://slayspeech.com"
+              thumbnailSrc="/images/heroSlaySpeech.png"
+              thumbnailAlt="Slay Speech by Koel Labs"
             />
           </Card>
         </div>
