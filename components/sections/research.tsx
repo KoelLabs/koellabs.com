@@ -68,7 +68,7 @@ function Badge({
   secondary?: boolean;
 }) {
   return (
-    <div className="flex items-center gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-fit">
+    <div className="flex items-center justify-between sm:justify-start gap-1 bg-white border border-black/10 rounded-xl p-2 pr-3 w-full sm:w-fit">
       <svg
         width="86"
         height="86"
@@ -144,7 +144,14 @@ export default function Research() {
             className="bg-white py-24 sm:py-32"
           >
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[1000] relative">
-              <Carousel opts={{ align: 'start' }} className="relative z-10">
+              <Carousel
+                // Below lg, center each card as you swipe (including the first) instead of left-aligning
+                opts={{
+                  align: 'start',
+                  breakpoints: { '(max-width: 1023px)': { align: 'center', containScroll: false } },
+                }}
+                className="relative z-10"
+              >
                 <div className="flex items-end justify-between gap-6">
                   <div>
                     <p className="text-base/7 font-semibold text-blue-600 relative z-10">
@@ -215,7 +222,7 @@ export default function Research() {
                             )}
                           </div>
                           <div className="p-5 pt-9">
-                            <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
+                            <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
                               <Badge>{item.venue}</Badge>
                               <Badge secondary>{item.date}</Badge>
                             </div>
