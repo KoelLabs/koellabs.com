@@ -631,7 +631,11 @@ export default function Leaderboard() {
                           <td
                             className={`text-left py-3 px-4 border-r ${item.koel_labs ? 'border-blue-300/70' : 'border-neutral-200'}`}
                           >
-                            {item.model}
+                            <span
+                              className={item.koel_labs ? 'font-semibold text-neutral-950' : ''}
+                            >
+                              {item.model}
+                            </span>
                           </td>
                           <td
                             className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-300/70' : 'border-neutral-200'}`}
