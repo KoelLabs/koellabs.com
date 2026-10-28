@@ -667,13 +667,15 @@ export default function Leaderboard() {
                       {sortedLeaderboard.map((item, index) => (
                         <tr
                           key={item.model}
-                          className={`border-y h-[100px] sm:h-auto last:border-b-0 ${index % 2 === 0 ? 'bg-white' : 'bg-neutral-50'}`}
+                          className={`border-y h-[100px] sm:h-auto last:border-b-0 ${
+                            item.koel_labs
+                              ? 'bg-[#154063]/[0.07] outline outline-[#154063]/25 z-10'
+                              : index % 2 === 0
+                                ? 'bg-white'
+                                : 'bg-neutral-50'
+                          }`}
                         >
-                          <td
-                            className={`text-left py-3 px-4 border-r border-neutral-200 ${
-                              item.koel_labs ? 'shadow-[inset_2px_0_0_#154063]' : ''
-                            }`}
-                          >
+                          <td className="text-left py-3 px-4 border-r border-neutral-200">
                             {item.koel_labs ? (
                               <span className="inline-flex items-center gap-2 font-medium text-neutral-950">
                                 <KoelMark />
