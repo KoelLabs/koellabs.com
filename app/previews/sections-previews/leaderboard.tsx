@@ -269,8 +269,9 @@ const leaderboard = [
   },
 ];
 
-// Small Koel Labs logomark used to mark our own models in the table
+// Small Koel Labs logomark used to mark our own models in the table (same art as the header logo)
 function KoelMark() {
+  const maskId = React.useId();
   return (
     <svg viewBox="0 0 770 859" fill="none" aria-hidden="true" className="size-4 shrink-0">
       <rect
@@ -291,6 +292,36 @@ function KoelMark() {
         transform="rotate(135 664.07 672.516)"
         fill="#3779B5"
       />
+      <mask
+        id={maskId}
+        style={{ maskType: 'alpha' }}
+        maskUnits="userSpaceOnUse"
+        x="158"
+        y="353"
+        width="529"
+        height="264"
+      >
+        <rect
+          x="686.844"
+          y="353.266"
+          width="263.361"
+          height="527.953"
+          rx="131.681"
+          transform="rotate(90 686.844 353.266)"
+          fill="white"
+        />
+      </mask>
+      <g mask={`url(#${maskId})`}>
+        <rect
+          x="664.07"
+          y="672.516"
+          width="263.361"
+          height="527.953"
+          rx="131.681"
+          transform="rotate(135 664.07 672.516)"
+          fill="#122438"
+        />
+      </g>
       <path
         d="M209.534 317.593C141.351 292.296 78.7053 137.133 81.4879 129.634C84.2704 122.134 232.961 45.3817 301.145 70.6792C369.328 95.9767 404.094 171.758 378.796 239.941C353.499 308.125 277.718 342.891 209.534 317.593Z"
         fill="black"
