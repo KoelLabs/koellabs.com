@@ -10,12 +10,7 @@ import BlogSubheading from '../blog-components/subheading';
 import BlogImage from '../blog-components/image';
 import BlogDecorations from '../blog-components/decorations';
 import BlogCode from '../blog-components/code';
-import { Source_Serif_4 } from 'next/font/google';
-
-const sourceSerif = Source_Serif_4({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-});
+import { sourceSerif } from '@/app/fonts';
 
 export const metadata: Metadata = {
   title: "The Underlying Intuition of Wav2Vec2's CNN",

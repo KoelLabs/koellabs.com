@@ -8,12 +8,7 @@ import BlogHeading from '../blog-components/heading';
 import BlogHeroImage from '../blog-components/hero-image';
 import BlogSubheading from '../blog-components/subheading';
 import BlogDecorations from '../blog-components/decorations';
-import { Source_Serif_4 } from 'next/font/google';
-
-const sourceSerif = Source_Serif_4({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-});
+import { sourceSerif } from '@/app/fonts';
 
 export const metadata: Metadata = {
   title: 'Hello World! — Our Open Source Project Launch',

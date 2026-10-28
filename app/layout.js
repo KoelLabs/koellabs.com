@@ -1,11 +1,9 @@
-import { Inter } from 'next/font/google';
+import { inter } from './fonts';
 import './globals.css';
 import '../styles/animations.css';
 import { Toaster } from '@/components/ui/toaster';
 import Script from 'next/script';
 import { ReactScan } from '@/components/react-scan';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const viewport = {
   themeColor: 'white',

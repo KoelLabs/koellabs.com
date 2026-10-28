@@ -5,13 +5,8 @@ import BlogHeroImage from '../blog-components/hero-image';
 import BlogSubheading from '../blog-components/subheading';
 import BlogDecorations from '../blog-components/decorations';
 import BlogCode from '../blog-components/code';
-import { Source_Serif_4 } from 'next/font/google';
+import { sourceSerif } from '@/app/fonts';
 import BlogImage from '../blog-components/image';
-
-const sourceSerif = Source_Serif_4({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-});
 
 export const metadata: Metadata = {
   title: 'The Underlying Intuition of Wav2Vec2’s Transformer',

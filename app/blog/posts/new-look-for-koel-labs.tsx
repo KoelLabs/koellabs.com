@@ -3,18 +3,13 @@
 // It will also be used to set meta tags for SEO once I get around to adding that.
 
 import type { Metadata } from '../posts';
-import { Source_Serif_4 } from 'next/font/google';
+import { sourceSerif } from '@/app/fonts';
 import BlogBody from '../blog-components/body';
 import BlogHeading from '../blog-components/heading';
 import BlogHeroImage from '../blog-components/hero-image';
 import BlogSubheading from '../blog-components/subheading';
 import BlogImage from '../blog-components/image';
 import BlogDecorations from '../blog-components/decorations';
-
-const sourceSerif = Source_Serif_4({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-});
 
 export const metadata: Metadata = {
   title: 'A New Look for Koel Labs',
