@@ -695,12 +695,20 @@ export default function Leaderboard() {
                           <td
                             className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-200/70' : 'border-neutral-200'}`}
                           >
-                            {item.average_per}
+                            <span
+                              className={item.koel_labs ? 'font-semibold text-neutral-950' : ''}
+                            >
+                              {item.average_per}
+                            </span>
                           </td>
                           <td
                             className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-200/70' : 'border-neutral-200'}`}
                           >
-                            {item.average_fer}
+                            <span
+                              className={item.koel_labs ? 'font-semibold text-neutral-950' : ''}
+                            >
+                              {item.average_fer}
+                            </span>
                           </td>
                           <td
                             className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-200/70' : 'border-neutral-200'}`}
@@ -711,7 +719,11 @@ export default function Leaderboard() {
                             {tag(formatDate(item.submission_date))}
                           </td>
                           <td className="text-center sm:hidden table-cell">
-                            {item.average_per} / {item.average_fer}
+                            <span
+                              className={item.koel_labs ? 'font-semibold text-neutral-950' : ''}
+                            >
+                              {item.average_per} / {item.average_fer}
+                            </span>
                           </td>
                         </tr>
                       ))}
