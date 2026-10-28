@@ -98,7 +98,7 @@ export default function Applications() {
       <div className="mx-auto">
         <section
           aria-labelledby="features-heading"
-          className="mx-auto w-full h-fit bg-neutral-50/20 backdrop-blur-md border-b border-neutral-200 overflow-hidden"
+          className="mx-auto w-full h-fit bg-neutral-50/20 backdrop-blur-md overflow-hidden"
         >
           <div
             data-cursor-opacity="0.3"

@@ -127,7 +127,7 @@ export default function Home() {
         className="z-0 relative"
       >
         <Applications />
-        <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-b">
+        <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
           <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
             {Array(500)
               .fill(0)
