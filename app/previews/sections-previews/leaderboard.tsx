@@ -269,6 +269,36 @@ const leaderboard = [
   },
 ];
 
+// Small Koel Labs logomark used to mark our own models in the table
+function KoelMark() {
+  return (
+    <svg viewBox="0 0 770 859" fill="none" aria-hidden="true" className="size-4 shrink-0">
+      <rect
+        x="686.844"
+        y="353.266"
+        width="263.361"
+        height="527.953"
+        rx="131.681"
+        transform="rotate(90 686.844 353.266)"
+        fill="#154063"
+      />
+      <rect
+        x="664.07"
+        y="672.516"
+        width="263.361"
+        height="527.953"
+        rx="131.681"
+        transform="rotate(135 664.07 672.516)"
+        fill="#3779B5"
+      />
+      <path
+        d="M209.534 317.593C141.351 292.296 78.7053 137.133 81.4879 129.634C84.2704 122.134 232.961 45.3817 301.145 70.6792C369.328 95.9767 404.094 171.758 378.796 239.941C353.499 308.125 277.718 342.891 209.534 317.593Z"
+        fill="black"
+      />
+    </svg>
+  );
+}
+
 function formatDate(date: string) {
   return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -606,32 +636,29 @@ export default function Leaderboard() {
                       {sortedLeaderboard.map((item, index) => (
                         <tr
                           key={item.model}
-                          className={`border-y h-[100px] sm:h-auto last:border-b-0 ${
-                            item.koel_labs
-                              ? 'bg-sky-100 outline outline-sky-200 z-10'
-                              : index % 2 === 0
-                                ? 'bg-white'
-                                : 'bg-neutral-50'
-                          }`}
+                          className={`border-y h-[100px] sm:h-auto last:border-b-0 ${index % 2 === 0 ? 'bg-white' : 'bg-neutral-50'}`}
                         >
                           <td
-                            className={`text-left py-3 px-4 border-r ${item.koel_labs ? 'border-sky-200' : 'border-neutral-200'}`}
+                            className={`text-left py-3 px-4 border-r border-neutral-200 ${
+                              item.koel_labs ? 'shadow-[inset_2px_0_0_#154063]' : ''
+                            }`}
                           >
-                            {item.model}
+                            {item.koel_labs ? (
+                              <span className="inline-flex items-center gap-2 font-medium text-neutral-950">
+                                <KoelMark />
+                                {item.model}
+                              </span>
+                            ) : (
+                              item.model
+                            )}
                           </td>
-                          <td
-                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-sky-200' : 'border-neutral-200'}`}
-                          >
+                          <td className="text-center py-3 px-4 border-r hidden sm:table-cell border-neutral-200">
                             {item.average_per}
                           </td>
-                          <td
-                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-sky-200' : 'border-neutral-200'}`}
-                          >
+                          <td className="text-center py-3 px-4 border-r hidden sm:table-cell border-neutral-200">
                             {item.average_fer}
                           </td>
-                          <td
-                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-sky-200' : 'border-neutral-200'}`}
-                          >
+                          <td className="text-center py-3 px-4 border-r hidden sm:table-cell border-neutral-200">
                             {tagLink(item.link)}
                           </td>
                           <td className="text-center py-3 px-4 hidden sm:table-cell">

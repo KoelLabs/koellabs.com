@@ -4,6 +4,7 @@ import CTA from '@/components/sections/cta';
 import Footer from '@/components/sections/footer';
 import Header from '@/components/ui/header';
 import Image from 'next/image';
+import Leaderboard from '@/app/previews/sections-previews/leaderboard';
 
 export default async function ResearchPage() {
   return (
@@ -302,6 +303,10 @@ export default async function ResearchPage() {
               </div>
             </section>
           </div>
+        </div>
+
+        <div className="relative mt-12">
+          <Leaderboard />
         </div>
 
         <div className="overflow-hidden border mt-12 mb-24 py-24 sm:py-32">
