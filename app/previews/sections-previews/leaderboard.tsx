@@ -669,7 +669,7 @@ export default function Leaderboard() {
                           key={item.model}
                           className={`border-y h-[100px] sm:h-auto last:border-b-0 ${
                             item.koel_labs
-                              ? 'bg-[#154063]/[0.07] outline outline-[#154063]/25 z-10'
+                              ? 'bg-blue-50 border-blue-100'
                               : index % 2 === 0
                                 ? 'bg-white'
                                 : 'bg-neutral-50'
