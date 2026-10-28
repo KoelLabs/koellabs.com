@@ -119,7 +119,7 @@ function SideCurve({ side }: { side: 'left' | 'right' }) {
       {cap(0)}
       <div className="flex-1 w-[70.5px] bg-white border-r border-[#E5E5E5]" />
       {cap(805)}
-      <div className="absolute inset-y-0 left-[90%] w-48 bg-gradient-to-r from-white to-transparent pointer-events-none z-[-1] " />
+      <div className="absolute inset-y-0 left-[92%] w-64 bg-gradient-to-r from-white to-transparent pointer-events-none z-[-1] " />
     </div>
   );
 }
@@ -145,10 +145,12 @@ export default function Research() {
           >
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[1000] relative">
               <Carousel
-                // Below lg, center each card as you swipe (including the first) instead of left-aligning
+                // Loops forever. On lg+ each snap centers a pair of cards, so the two papers start in the
+                // middle. Below lg, one card is centered at a time.
                 opts={{
-                  align: 'start',
-                  breakpoints: { '(max-width: 1023px)': { align: 'center', containScroll: false } },
+                  loop: true,
+                  align: (viewSize: number, snapSize: number) => viewSize / 2 - snapSize,
+                  breakpoints: { '(max-width: 1023px)': { align: 'center' } },
                 }}
                 className="relative z-10"
               >
@@ -170,9 +172,9 @@ export default function Research() {
                   </div>
                 </div>
                 <CarouselContent overflowVisible className="mt-16 -ml-6 sm:-ml-16">
-                  {items.map(item => (
+                  {[...items, ...items].map((item, i) => (
                     <CarouselItem
-                      key={item.title}
+                      key={`${i}-${item.title}`}
                       className="pl-6 sm:pl-16 basis-[88%] sm:basis-[62%] lg:basis-[46%] group"
                     >
                       <Link href={item.href} target="_blank" className="block h-full">

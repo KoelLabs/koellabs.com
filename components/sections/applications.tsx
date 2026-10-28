@@ -107,14 +107,12 @@ export default function Applications() {
             className="bg-white py-24 sm:py-32"
           >
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[1000] relative bg-white">
-              <p className="text-base/7 font-semibold text-blue-800 relative z-10">
-                Models &amp; Applications
-              </p>
+              <p className="text-base/7 font-semibold text-blue-800 relative z-10">Real-world</p>
               <h2
                 id="features-heading"
                 className="mt-2 text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10 text-balance"
               >
-                From research to real speakers
+                From research to end users
               </h2>
               <ul
                 role="list"
