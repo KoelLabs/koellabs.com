@@ -1,8 +1,8 @@
-# Contributing to Koel Labs - Web Application
+# Contributing to Koel Labs - Website
 
 👍🎉 First off, thanks for taking the time to contribute! 🎉👍
 
-If you have great ideas for improving UI/UX, conveying pronunciation feedback more clearly, or making the application more accessible (including translations), this is the repo for you.
+Use this repository to improve the public Koel Labs website, including its content, design, and accessibility.
 
 Checkout our [general contributing guidelines here](https://github.com/KoelLabs/.github/blob/main/CONTRIBUTING.md).
 

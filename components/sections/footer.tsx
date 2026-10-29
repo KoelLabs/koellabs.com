@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { ArrowUpRightIcon } from 'lucide-react';
 
 const navigation = {
@@ -92,7 +93,7 @@ export default function Footer() {
     >
       <div className="mx-auto max-w-7xl px-6 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <a href="/" className="text-2xl font-semibold  tracking-[-0.04em] h-fit w-fit">
+          <Link href="/" className="text-2xl font-semibold  tracking-[-0.04em] h-fit w-fit">
             <svg
               width="770"
               height="859"
@@ -156,7 +157,7 @@ export default function Footer() {
               />
             </svg>
             Koel Labs
-          </a>
+          </Link>
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0 grid-flow-col">
             <div className="md:grid md:grid-cols-2 md:gap-8 ">
               <div></div>

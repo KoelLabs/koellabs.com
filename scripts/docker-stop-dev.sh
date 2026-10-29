@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f ./scripts/docker-compose.dev.yaml down
+docker compose -f ./scripts/docker-compose.dev.yaml down

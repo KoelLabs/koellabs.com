@@ -24,3 +24,6 @@ data
 
 # prevent certain individuals from committing python stuff
 venv
+
+# Retired inference-server checkout (kept locally, not part of the website)
+/server/

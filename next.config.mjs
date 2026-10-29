@@ -6,6 +6,15 @@ const __dirname = new URL('.', import.meta.url).pathname;
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: false,
+  async redirects() {
+    return [
+      {
+        source: '/dashboard/:path*',
+        destination: 'https://slayspeech.com',
+        permanent: false,
+      },
+    ];
+  },
   compiler: {
     // Enable React compiler for better performance
     reactRemoveProperties: process.env.NODE_ENV === 'production',

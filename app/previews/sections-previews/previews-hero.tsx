@@ -77,13 +77,13 @@ export default function PreviewsHero() {
               <div className="relative rounded-full px-2 py-0.5 pr-4.5 text-sm/6 text-gray-600 border-y border-l rounded-r-none w-fit">
                 We've released a series of blogs about Wav2Vec2{' '}
               </div>
-              <a
+              <Link
                 href="/blog"
                 className="font-semibold text-[#154063] rounded-full shadow-xs bg-white -ml-3 pl-2.5 border-l-none border text-sm/6 px-2 py-0.5 inset-0"
               >
                 <span aria-hidden="true" className="absolute inset-0 tracking-tight" />
                 Read more <ArrowUpRight className="w-4 h-4 inline-block -ml-0.5" strokeWidth={3} />
-              </a>
+              </Link>
             </div>
             <h1
               id="hero-heading"

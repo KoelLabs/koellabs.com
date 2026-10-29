@@ -17,10 +17,12 @@ node_modules
 # misc
 .DS_Store
 *.pem
-migrations
 
 # postgres
 data
 
 # local env files
 .env*.local
+
+# Legacy inference server checkout (not used by the website)
+/server/
