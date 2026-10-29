@@ -1,0 +1,128 @@
+.document {
+  color: #404040;
+  font-size: 1rem;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.document h1,
+.document h2,
+.document h3,
+.document h4,
+.document h5,
+.document h6 {
+  color: #171717;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.document h1 {
+  margin-bottom: 2rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.document h2 {
+  margin: 2.5rem 0 1rem;
+  font-size: 1.5rem;
+}
+
+.document h3,
+.document h4,
+.document h5,
+.document h6 {
+  margin: 2rem 0 1rem;
+  font-size: 1.125rem;
+}
+
+.document p,
+.document ul,
+.document ol,
+.document blockquote,
+.document pre,
+.document table {
+  margin: 1.25rem 0;
+}
+
+.document a {
+  color: #0369a1;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.document a:hover {
+  color: #075985;
+}
+
+.document strong {
+  color: #262626;
+  font-weight: 600;
+}
+
+.document ul,
+.document ol {
+  padding-left: 1.5rem;
+}
+
+.document ul {
+  list-style: disc;
+}
+
+.document ol {
+  list-style: decimal;
+}
+
+.document li {
+  margin: 0.5rem 0;
+}
+
+.document blockquote {
+  border-left: 3px solid #d4d4d4;
+  padding-left: 1.25rem;
+}
+
+.document code {
+  border-radius: 0.25rem;
+  background: #f5f5f5;
+  padding: 0.15em 0.3em;
+  font-size: 0.875em;
+}
+
+.document pre {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  background: #f5f5f5;
+  padding: 1rem;
+}
+
+.document pre code {
+  padding: 0;
+}
+
+.document table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.document th,
+.document td {
+  border: 1px solid #d4d4d4;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.document th {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.document hr {
+  margin: 2rem 0;
+  border-color: #e5e5e5;
+}
+
+.document img {
+  max-width: 100%;
+  height: auto;
+}

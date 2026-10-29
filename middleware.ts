@@ -9,6 +9,8 @@ const PUBLIC_URLS = [
   new RegExp('^/pricing$'),
   new RegExp('^/about$'),
   new RegExp('^/contact$'),
+  new RegExp('^/privacy$'),
+  new RegExp('^/terms$'),
   new RegExp('^/previews$'),
   new RegExp('^/research$'),
   new RegExp('^/research/.*$'),

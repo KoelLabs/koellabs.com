@@ -11,8 +11,8 @@ const navigation = {
     { name: 'Contact', href: '/contact' },
   ],
   legal: [
-    { name: 'Terms of service', href: 'https://github.com/KoelLabs/.github/blob/main/TERMS.md' },
-    { name: 'Privacy policy', href: 'https://github.com/KoelLabs/.github/blob/main/PRIVACY.md' },
+    { name: 'Terms of service', href: '/terms' },
+    { name: 'Privacy policy', href: '/privacy' },
     { name: 'License', href: 'https://github.com/KoelLabs#open-source-licensing' },
   ],
   social: [

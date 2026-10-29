@@ -14,6 +14,10 @@ Contains the website for Koel Labs and the web interface for the pronunciation l
 
 Read about all our repositories [here](https://github.com/KoelLabs).
 
+The public `/privacy` and `/terms` pages fetch and render `PRIVACY.md` and `TERMS.md` from the
+[`KoelLabs/.github` repository](https://github.com/KoelLabs/.github) on each request. GitHub remains
+the source of truth for these documents; updates there are served without a website rebuild.
+
 ## Setup
 
 See [DEVELOPMENT.md](DEVELOPMENT.md) for how to setup your local development environment. If you just want to run the application locally not for development purposes, follow the instructions below.
