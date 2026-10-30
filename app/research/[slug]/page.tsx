@@ -10,7 +10,7 @@ export default async function ResearchPage() {
 
   const page = (
     <div className="flex-col flex w-screen relative scroll-smooth">
-      <div className="z-2 sticky top-0 mx-auto w-full">
+      <div className="z-[9999] sticky top-0 mx-auto w-full">
         <Header />
       </div>
       <div className="flex-col flex w-screen relative scroll-smooth z-0">

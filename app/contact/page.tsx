@@ -190,7 +190,7 @@ function ContactForm() {
 export default function Contact() {
   return (
     <div className={`min-h-screen`}>
-      <div className="z-10 sticky top-0 mx-auto w-full">
+      <div className="z-[9999] sticky top-0 mx-auto w-full">
         <Header />
       </div>
 
