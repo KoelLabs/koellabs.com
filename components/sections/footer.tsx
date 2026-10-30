@@ -201,11 +201,14 @@ export default function Footer() {
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        target="_blank"
+                        target={item.href.startsWith('http') ? '_blank' : undefined}
                         className="text-sm/6 text-neutral-600 hover:text-neutral-900"
                       >
                         {item.name}
-                        <ArrowUpRightIcon className="size-4 inline-block ml-1 mb-0.5 text-neutral-600" />
+                        {/* Only links that leave the site get the arrow */}
+                        {item.href.startsWith('http') && (
+                          <ArrowUpRightIcon className="size-4 inline-block ml-1 mb-0.5 text-neutral-600" />
+                        )}
                       </a>
                     </li>
                   ))}
