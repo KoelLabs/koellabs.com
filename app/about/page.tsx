@@ -96,10 +96,7 @@ export default function About() {
                     help close the gap. We love collaborating with researchers who align with our
                     goal of better, equitable speech technology.
                   </p>
-                  <div className="flex gap-x-2">
-                    <p className="text-pretty text-md font-medium text-neutral-600 mt-8">—</p>
-                    <Signature className="mt-6 w-1/2 sm:w-1/5 opacity-75 text-black" />
-                  </div>
+                  <Signature className="mt-6 w-[57.5%] sm:w-[23%] opacity-75 text-black" />
                 </div>
                 <div className="mt-10 w-full md:max-w-lg rounded-[24px] object-cover sm:mt-16 lg:mt-0 xl:mt-8 lg:max-w-none xl:row-span-2 xl:row-end-2 p-2 bg-white/75 backdrop-blur-md border">
                   <img
