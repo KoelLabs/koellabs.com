@@ -84,7 +84,7 @@ export default async function LegalDocument({
             </a>
           </p>
         </div>
-        <div className="mx-auto h-20 w-full max-w-4xl border-x sm:h-32"></div>
+        <div className="h-20 sm:h-32"></div>
       </div>
       <Footer />
     </div>
