@@ -55,7 +55,7 @@ export default async function LegalDocument({
 
         <div className="mx-auto h-20 w-full max-w-4xl border-x sm:h-32"></div>
         <div className="relative border-y">
-          <main className="mx-auto max-w-4xl border-x px-[var(--doc-pad)] py-12 [--doc-pad:1.5rem] sm:py-16 sm:[--doc-pad:3rem]">
+          <main className="mx-auto max-w-4xl border-x px-[var(--doc-pad)] py-[var(--doc-pad-y)] [--doc-pad:1.5rem] [--doc-pad-y:3rem] sm:[--doc-pad:3rem] sm:[--doc-pad-y:4rem]">
             <article className={styles.document}>
               {markdown ? (
                 <Markdown remarkPlugins={[remarkGfm]} urlTransform={resolveUrl}>

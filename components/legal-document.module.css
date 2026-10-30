@@ -23,7 +23,8 @@
   /* Rule under the title that runs edge to edge inside the bordered container */
   margin-inline: calc(var(--doc-pad, 0px) * -1);
   padding-inline: var(--doc-pad, 0px);
-  padding-bottom: 2rem;
+  /* Same space below the title as the container has above it */
+  padding-bottom: var(--doc-pad-y, 2rem);
   border-bottom: 1px solid #e5e5e5;
 }
 
