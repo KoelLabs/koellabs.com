@@ -7,6 +7,7 @@ import { Card } from '@/components/ui/base/card';
 import HeroVideoDialog from '@/components/ui/magicui/hero-video-dialog';
 import CTA from '@/components/sections/cta';
 import Footer from '@/components/sections/footer';
+import Signature from '@/components/ui/signature';
 
 const people = [
   {
@@ -97,11 +98,7 @@ export default function About() {
                   </p>
                   <div className="flex gap-x-2">
                     <p className="text-pretty text-md font-medium text-neutral-600 mt-8">—</p>
-                    <img
-                      alt="Koel Labs Signature"
-                      src="/images/koelLabsSig.png"
-                      className="mt-6 w-1/2 sm:w-1/5 opacity-75"
-                    />
+                    <Signature className="mt-6 w-1/2 sm:w-1/5 opacity-75 text-black" />
                   </div>
                 </div>
                 <div className="mt-10 w-full md:max-w-lg rounded-[24px] object-cover sm:mt-16 lg:mt-0 xl:mt-8 lg:max-w-none xl:row-span-2 xl:row-end-2 p-2 bg-white/75 backdrop-blur-md border">
