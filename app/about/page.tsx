@@ -7,6 +7,7 @@ import { Card } from '@/components/ui/base/card';
 import HeroVideoDialog from '@/components/ui/magicui/hero-video-dialog';
 import CTA from '@/components/sections/cta';
 import Footer from '@/components/sections/footer';
+import Signature from '@/components/ui/signature';
 
 const people = [
   {
@@ -82,26 +83,20 @@ export default function About() {
                 </h1>
                 <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
                   <p className="sm:text-lg/8 text-neutral-600">
-                    Your voice is unique and should be understood not just by those around you, but
-                    also by the technology you interact with every day.
+                    Our goal is to build speech technology that’s more inclusive and fair, for
+                    everyone.
                   </p>
                   <p className="sm:text-lg/8 text-neutral-600 mt-4">
-                    Too often, voice assistants and smart speakers struggle with accents, speech
-                    differences, or non-standard dialects, leaving millions of people frustrated and
-                    unheard.
+                    Today, most systems and models are trained and measured with a narrow slice of
+                    voices, that doesn’t capture a representative snapshot of everyone’s unique
+                    voices.
                   </p>
                   <p className="sm:text-lg/8 text-neutral-600 mt-4">
-                    As a research lab, we collaborate with top universities, other researchers, and
-                    domain experts to create technologies that actually understand your voice.
+                    So we build models, tools, benchmarks, apps, datasets, and other things that
+                    help close the gap. We love collaborating with researchers who align with our
+                    goal of better, equitable speech technology.
                   </p>
-                  <div className="flex gap-x-2">
-                    <p className="text-pretty text-md font-medium text-neutral-600 mt-8">—</p>
-                    <img
-                      alt="Koel Labs Signature"
-                      src="/images/koelLabsSig.png"
-                      className="mt-6 w-1/2 sm:w-1/5 opacity-75"
-                    />
-                  </div>
+                  <Signature className="mt-6 w-[57.5%] sm:w-[23%] opacity-75 text-black" />
                 </div>
                 <div className="mt-10 w-full md:max-w-lg rounded-[24px] object-cover sm:mt-16 lg:mt-0 xl:mt-8 lg:max-w-none xl:row-span-2 xl:row-end-2 p-2 bg-white/75 backdrop-blur-md border">
                   <img

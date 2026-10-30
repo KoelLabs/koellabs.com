@@ -166,7 +166,7 @@ export default function Research() {
                                   <div
                                     key={page}
                                     aria-hidden="true"
-                                    className={`absolute left-1/2 top-[15%] w-[62%] aspect-[14/19] p-2 rounded-[28px] bg-white border shadow-sm origin-bottom ${
+                                    className={`absolute left-1/2 top-[15%] w-[62%] aspect-[14/19] p-1.5 rounded-[16px] sm:p-2 sm:rounded-[28px] bg-white border shadow-sm origin-bottom ${
                                       i === 0
                                         ? '-translate-x-[60%] -rotate-[6deg]'
                                         : '-translate-x-[40%] rotate-[6deg]'
@@ -175,15 +175,15 @@ export default function Research() {
                                     <img
                                       alt=""
                                       src={page}
-                                      className="h-full w-full object-cover object-top rounded-[20px] border bg-white border-black/10 opacity-60"
+                                      className="h-full w-full object-cover object-top rounded-[10px] sm:rounded-[20px] border bg-white border-black/10 opacity-60"
                                     />
                                   </div>
                                 ))}
-                                <div className="absolute left-1/2 -translate-x-1/2 top-[12%] w-[66%] aspect-[14/19] p-2 rounded-[28px] bg-white border shadow-md">
+                                <div className="absolute left-1/2 -translate-x-1/2 top-[12%] w-[66%] aspect-[14/19] p-1.5 rounded-[16px] sm:p-2 sm:rounded-[28px] bg-white border shadow-md">
                                   <img
                                     alt={item.alt}
                                     src={item.image}
-                                    className="h-full w-full object-cover object-top rounded-[20px] border bg-white border-black/10"
+                                    className="h-full w-full object-cover object-top rounded-[10px] sm:rounded-[20px] border bg-white border-black/10"
                                   />
                                 </div>
                               </div>
