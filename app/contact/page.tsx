@@ -56,7 +56,9 @@ function ContactForm() {
         toast({
           title: 'Error',
           description:
-            'Failed to verify your humanity. Make sure to disable VPNs and adblockers, double check you are not a robot, and email us if the issue persists.',
+            res.status === 403
+              ? 'Failed to verify your humanity. Make sure to disable VPNs and adblockers, double check you are not a robot, and email us if the issue persists.'
+              : 'We could not send your message right now. Please email us at info@koellabs.com instead.',
           status: 'error',
         });
         return false;
