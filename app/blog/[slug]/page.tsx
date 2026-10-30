@@ -1,11 +1,19 @@
 // General layout that is shared between all blog posts goes here (e.g. footer, header, display author, etc).
 // The posts are defined in app/blog/posts/*.tsx.
 
-import { getPost } from '../posts';
+import { getPost, getPosts } from '../posts';
 import { notFound } from 'next/navigation';
 import Header from '@/components/ui/header';
 import CTA from '@/components/sections/cta';
 import Footer from '@/components/sections/footer';
+
+// Build every published post as a static page so opening one is instant instead of rendering on request
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  return posts.map(post => ({ slug: post.slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
