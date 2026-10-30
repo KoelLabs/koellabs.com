@@ -46,30 +46,46 @@ export default async function LegalDocument({
       <div className="sticky top-0 z-50 w-full">
         <Header />
       </div>
-      <main className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
-        <article className={styles.document}>
-          {markdown ? (
-            <Markdown remarkPlugins={[remarkGfm]} urlTransform={resolveUrl}>
-              {markdown}
-            </Markdown>
-          ) : (
-            <>
-              <h1>{title}</h1>
-              <p role="alert">
-                This document could not be loaded. Please read it on GitHub using the link below.
-              </p>
-            </>
-          )}
-        </article>
-        <p className="mt-12 border-t border-neutral-200 pt-6 text-sm text-neutral-500">
-          <a
-            href={`${sourceBase}${document}.md`}
-            className="underline underline-offset-4 hover:text-sky-700"
-          >
-            View on GitHub
-          </a>
-        </p>
-      </main>
+      {/* Same line framing as the research page: vertical guides on the container edges, full-width
+          rules around the document, and white fades so the lines trail off at the top and sides */}
+      <div className="relative overflow-hidden">
+        <div className="pointer-events-none absolute top-0 left-0 z-[2] h-36 w-full bg-gradient-to-b from-white via-white via-10% to-transparent"></div>
+        <div className="pointer-events-none absolute top-0 left-0 z-[2] hidden h-full w-36 bg-gradient-to-r from-white via-white via-10% to-transparent 2xl:block"></div>
+        <div className="pointer-events-none absolute top-0 right-0 z-[2] hidden h-full w-36 bg-gradient-to-l from-white via-white via-10% to-transparent 2xl:block"></div>
+
+        <div className="mx-auto h-20 w-full max-w-4xl border-x sm:h-32"></div>
+        <div className="relative border-y">
+          <main className="mx-auto max-w-4xl border-x px-6 py-12 sm:px-12 sm:py-16">
+            <article className={styles.document}>
+              {markdown ? (
+                <Markdown remarkPlugins={[remarkGfm]} urlTransform={resolveUrl}>
+                  {markdown}
+                </Markdown>
+              ) : (
+                <>
+                  <h1>{title}</h1>
+                  <p role="alert">
+                    This document could not be loaded. Please read it on GitHub using the link
+                    below.
+                  </p>
+                </>
+              )}
+            </article>
+          </main>
+        </div>
+        <div className="mx-auto h-12 w-full max-w-4xl border-x"></div>
+        <div className="relative border-y">
+          <p className="mx-auto max-w-4xl border-x px-6 py-5 text-sm text-neutral-500 sm:px-12">
+            <a
+              href={`${sourceBase}${document}.md`}
+              className="underline underline-offset-4 hover:text-sky-700"
+            >
+              View on GitHub
+            </a>
+          </p>
+        </div>
+        <div className="mx-auto h-20 w-full max-w-4xl border-x sm:h-32"></div>
+      </div>
       <Footer />
     </div>
   );
