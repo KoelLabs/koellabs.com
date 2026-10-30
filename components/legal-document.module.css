@@ -20,6 +20,7 @@
 .document h1 {
   margin-bottom: 2rem;
   font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.045em;
   /* Rule under the title that runs edge to edge inside the bordered container */
   margin-inline: calc(var(--doc-pad, 0px) * -1);
   padding-inline: var(--doc-pad, 0px);
