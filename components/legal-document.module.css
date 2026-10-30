@@ -20,6 +20,11 @@
 .document h1 {
   margin-bottom: 2rem;
   font-size: clamp(2rem, 5vw, 3rem);
+  /* Rule under the title that runs edge to edge inside the bordered container */
+  margin-inline: calc(var(--doc-pad, 0px) * -1);
+  padding-inline: var(--doc-pad, 0px);
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .document h2 {
