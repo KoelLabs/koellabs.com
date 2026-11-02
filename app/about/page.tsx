@@ -87,14 +87,13 @@ export default function About() {
                     everyone.
                   </p>
                   <p className="sm:text-lg/8 text-neutral-600 mt-4">
-                    Today, most systems and models are trained and measured with a narrow slice of
-                    voices, that doesn’t capture a representative snapshot of everyone’s unique
-                    voices.
+                    Today, most systems and models are trained and measured with a tiny selection of
+                    available voices that doesn’t represent the world.
                   </p>
                   <p className="sm:text-lg/8 text-neutral-600 mt-4">
-                    So we build models, tools, benchmarks, apps, datasets, and other things that
-                    help close the gap. We love collaborating with researchers who align with our
-                    goal of better, equitable speech technology.
+                    We build models, benchmarks, apps, datasets, and other tools that help close the
+                    gap. We love collaborating with researchers who align with our goal of better,
+                    equitable speech technology.
                   </p>
                   <Signature className="mt-6 w-[57.5%] sm:w-[23%] opacity-75 text-black" />
                 </div>
