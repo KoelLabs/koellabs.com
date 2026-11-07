@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from '../posts';
 import { sourceSerif } from '@/app/fonts';
@@ -218,20 +219,46 @@ export default function PostBody() {
             and whiskers in the figures show how precise each estimate is. Lower error rates
             indicate better performance.
           </p>
-          <BlogFigure
-            src="/blog/interspeech-2026/metrics.webp"
-            alt="Regular PER assigns equal penalties to substitutions in Pop, Bop, and Iop, while weighted feature error distinguishes how similar the substituted sounds are"
-            width={1082}
-            height={1007}
-            narrow
-          >
-            Feature-weighted scoring distinguishes near misses from less similar sounds. Read more
-            in our{' '}
-            <Link className={linkClass} href="/blog/phonemic-transcription-metrics">
-              phonetic transcription metrics guide
-            </Link>
-            .
-          </BlogFigure>
+          <figure className="my-8">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {[
+                {
+                  src: '/blog/interspeech-2026/metrics-regular.webp',
+                  alt: 'Regular PER assigns the same -0.33 penalty to Bop and Iop as substitutions for Pop',
+                },
+                {
+                  src: '/blog/interspeech-2026/metrics-weighted.webp',
+                  alt: 'Weighted PER gives Bop a small -0.006 penalty and Iop a larger -0.060 penalty, reflecting how similar each sound is to Pop',
+                },
+              ].map(({ src, alt }) => (
+                <a
+                  key={src}
+                  href={src}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open figure: ${alt}`}
+                >
+                  <Image
+                    src={src}
+                    alt={alt}
+                    width={1082}
+                    height={502}
+                    unoptimized
+                    sizes="(max-width: 640px) 100vw, 384px"
+                    className="h-auto w-full rounded-2xl border border-neutral-200"
+                  />
+                </a>
+              ))}
+            </div>
+            <figcaption className="mt-3 text-sm/6 text-neutral-500 font-sans">
+              Feature-weighted scoring distinguishes near misses from less similar sounds. Read more
+              in our{' '}
+              <Link className={linkClass} href="/blog/phonemic-transcription-metrics">
+                phonetic transcription metrics guide
+              </Link>
+              .
+            </figcaption>
+          </figure>
 
           <BlogSubheading>ASR Helps on Unseen Accents</BlogSubheading>
           <p className="mb-4">
