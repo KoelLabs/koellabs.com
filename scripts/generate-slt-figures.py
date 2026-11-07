@@ -15,6 +15,10 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
+from matplotlib.patches import PathPatch
+from matplotlib.path import Path as GlyphPath
+from matplotlib.textpath import text_to_path
+from matplotlib.transforms import Affine2D, Bbox
 from matplotlib.ticker import MultipleLocator
 from fontTools.ttLib import TTFont
 import numpy as np
@@ -42,6 +46,12 @@ for weight in ['Regular', 'Semibold']:
     target = Path(TMP.name) / f'{weight}.ttf'
     face.save(target)
     FONTS[weight] = target
+CAP_HEIGHT = face['OS/2'].sCapHeight / face['head'].unitsPerEm  # Same in both weights.
+TITLE_X, TITLE_SIZE = .055, 23
+TITLE_TRACKING, SUBTITLE_TRACKING = -.025, -.01  # em; display-heading tracking.
+# Top inset to the title's cap height equals its left inset (both inches, 10 in wide).
+TITLE_INSET = TITLE_X*10
+TOP_PAD = TITLE_INSET - (.44 - CAP_HEIGHT*TITLE_SIZE/72)
 
 
 def font(size=14, bold=False):
@@ -52,10 +62,29 @@ def write(fig, x, y, text, size=14, color=INK, bold=False, **kwargs):
     return fig.text(x, y, text, fontproperties=font(size, bold), color=color, **kwargs)
 
 
+def tracked(fig, x, y, text, size, tracking, color=INK, bold=False):
+    """Left/baseline text outlined with letter-spacing (em), keeping the font's kerning.
+
+    Text is exported as paths, so SVG letter-spacing would have no effect; the
+    tracking is applied to the glyph positions before outlining instead."""
+    glyphs, glyph_map, _ = text_to_path.get_glyphs_with_font(
+        text_to_path._get_font(font(size, bold)), text)
+    verts, codes = [], []
+    for i, (glyph, gx, gy, scale) in enumerate(glyphs):
+        v, c = glyph_map[glyph]
+        if len(v):
+            verts.extend(np.asarray(v)*scale + [gx + i*tracking*text_to_path.FONT_SCALE, gy])
+            codes.extend(c)
+    width, height = fig.get_size_inches()
+    to_inches = Affine2D().scale(size/text_to_path.FONT_SCALE/72).translate(x*width, y*height)
+    fig.patches.append(PathPatch(GlyphPath(verts, codes), facecolor=color, edgecolor='none',
+                                 lw=0, transform=to_inches + fig.dpi_scale_trans, figure=fig))
+
+
 def base(title, subtitle, height=6.5):
     fig = plt.figure(figsize=(10, height))
-    write(fig, .055, 1-.44/height, title, 23, bold=True)
-    write(fig, .055, 1-.79/height, subtitle, 13, color=MUTED)
+    tracked(fig, TITLE_X, 1-.44/height, title, TITLE_SIZE, TITLE_TRACKING, bold=True)
+    tracked(fig, TITLE_X, 1-.79/height, subtitle, 13, SUBTITLE_TRACKING, color=MUTED)
     return fig
 
 
@@ -73,11 +102,13 @@ def style(ax, xstep=None, ystep=None):
 
 def save(fig, name, title, description):
     target = OUT / f'{name}.svg'
-    fig.savefig(target, format='svg', metadata={
+    width, height = fig.get_size_inches()
+    height += TOP_PAD  # Grow the canvas upward only; chart content keeps its layout.
+    fig.savefig(target, format='svg', bbox_inches=Bbox([[0, 0], [width, height]]), metadata={
         'Title': title, 'Description': description, 'Creator': 'Koel Labs', 'Date': None})
     # Explicit intrinsic pixel size makes the image's dimensions unambiguous in browsers.
     text = target.read_text()
-    width, height = fig.get_size_inches()*96
+    width, height = width*96, height*96
     text = re.sub(r'(<svg[^>]*?)width="[^"]+" height="[^"]+"',
                   lambda m: f'{m[1]}width="{round(width)}" height="{round(height)}"', text, count=1)
     target.write_text(text)
