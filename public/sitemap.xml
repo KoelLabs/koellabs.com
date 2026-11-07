@@ -28,6 +28,12 @@
 
   <!-- Blog posts -->
   <url>
+    <loc>https://koellabs.com/blog/scaling-human-g2p-supervision</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://koellabs.com/blog/building-open-source-leaderboards</loc>
     <lastmod>2025-01-11</lastmod>
     <changefreq>monthly</changefreq>

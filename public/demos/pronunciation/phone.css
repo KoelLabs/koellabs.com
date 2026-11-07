@@ -1,0 +1,561 @@
+/* Phone UI reused from sandergi.com / assets/css/refresh.css. */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+body {
+  color: #111827;
+  font:
+    400 13pt/1.85 Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+body {
+  padding: 0 12px 8px;
+}
+button {
+  cursor: pointer;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #0079ea;
+  outline-offset: 3px;
+}
+.koel-phone {
+  margin-top: 0 !important;
+}
+.demo-status {
+  margin: 16px auto 0;
+  max-width: 24em;
+  min-height: 3em;
+  color: #525252;
+  font-size: 0.8em;
+  line-height: 1.5;
+  text-align: center;
+}
+@media (max-width: 380px) {
+  body {
+    font-size: 12pt;
+    padding-inline: 8px;
+  }
+}
+.koel-phone {
+  background: #171717;
+  border: 1px solid rgba(35, 49, 61, 0.18);
+  border-radius: 32px;
+  box-shadow: 0 22px 48px rgba(35, 49, 61, 0.22);
+  margin: 1.15em auto 0;
+  max-width: 22em;
+  padding: 0.62em;
+}
+
+.koel-phone-speaker {
+  background: #2f353a;
+  border-radius: 999px;
+  height: 0.25em;
+  margin: 0.05em auto 0.48em;
+  width: 4.2em;
+}
+
+.koel-phone-screen {
+  background: #fff;
+  border-radius: 25px;
+  color: #111827;
+  height: 37em;
+  overflow: hidden;
+  position: relative;
+}
+
+.koel-app-nav {
+  align-items: center;
+  display: grid;
+  gap: 0.62em;
+  grid-template-columns: 1fr 3.25em;
+  padding: 0.9em 0.95em 0.7em;
+}
+
+.koel-counter {
+  align-items: center;
+  background: #e8e8e8;
+  border: 0;
+  border-radius: 999px;
+  color: #000;
+  display: inline-flex;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 0.82em;
+  font-weight: 1000;
+  height: 2.55em;
+  justify-content: center;
+}
+
+.koel-progress {
+  display: grid;
+  gap: 0.28em;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.koel-progress span {
+  background: #e5e5e5;
+  border-radius: 999px;
+  display: block;
+  height: 0.34em;
+}
+
+.koel-progress span.done,
+.koel-progress span.current {
+  background: #000;
+}
+
+.koel-view {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 3.55em);
+  overflow: hidden;
+  padding: 0 0.95em 0.5em;
+}
+
+.koel-video-card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.koel-video-frame {
+  aspect-ratio: 9 / 16;
+  background: #111827;
+  border: 1px solid #d4d4d8;
+  border-radius: 28px;
+  box-shadow:
+    0 0 0 0.42em #fff,
+    0 0 0 0.54em #e5e5e5;
+  flex: 1;
+  margin: 0.55em 0.55em 1em;
+  overflow: hidden;
+  position: relative;
+}
+
+.koel-video-frame video,
+.koel-video-frame img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.koel-video-controls {
+  align-items: center;
+  display: flex;
+  gap: 0.7em;
+  justify-content: space-between;
+  padding: 0 0.55em;
+}
+
+.koel-control-pill {
+  align-items: center;
+  background: #e8e8e8;
+  border: 0;
+  border-radius: 999px;
+  color: #000;
+  display: inline-flex;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 0.9em;
+  font-weight: 1000;
+  height: 2.65em;
+  justify-content: center;
+  min-width: 3.05em;
+  padding: 0 1em;
+}
+
+.koel-control-pill.primary {
+  background: #badeff;
+  color: #0079ea;
+  gap: 0.45em;
+}
+
+.koel-step-label {
+  color: #111827;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 0.72em;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.koel-prompt {
+  color: #111827;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 1.42em;
+  font-weight: 1000;
+  letter-spacing: 0;
+  line-height: 1.1;
+  margin: 0;
+  text-align: center;
+}
+
+.post-body .koel-prompt {
+  font-size: 1.42em;
+}
+
+.koel-practice {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+  padding: 2.2em 0 0;
+}
+
+.koel-word-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45em;
+  justify-content: center;
+  margin: 0.68em 0 0.75em;
+}
+
+.koel-word {
+  background: transparent;
+  border: 1px dashed #d4d4d8;
+  border-radius: 17px;
+  color: #374151;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 1.05em;
+  font-weight: 900;
+  line-height: 1.1;
+  padding: 0.5em 0.66em;
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.koel-word.live {
+  background: #0079ea;
+  border-color: #0079ea;
+  color: #fff;
+}
+
+.koel-word.scored {
+  border-style: solid;
+  color: #fff;
+}
+
+.koel-word.score-great {
+  background: #019457;
+  border-color: #019457;
+}
+
+.koel-word.score-good {
+  background: #01bf67;
+  border-color: #01bf67;
+}
+
+.koel-word.score-mid {
+  background: #40cf67;
+  border-color: #40cf67;
+}
+
+.koel-word.score-yellow {
+  background: #f7c401;
+  border-color: #f7c401;
+}
+
+.koel-word.score-ok {
+  background: #fbac27;
+  border-color: #fbac27;
+}
+
+.koel-word.score-low {
+  background: #ff9649;
+  border-color: #ff9649;
+}
+
+.koel-word.score-bad {
+  background: #f1301e;
+  border-color: #f1301e;
+}
+
+.koel-reference {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 18px;
+  color: #525252;
+  display: inline-flex;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 0.9em;
+  font-weight: 900;
+  gap: 0.45em;
+  margin-bottom: 0.65em;
+  padding: 0.62em 0.9em;
+}
+
+.koel-reference,
+.koel-reference:visited {
+  color: #525252 !important;
+}
+
+.koel-reference:disabled {
+  background: #f5f5f5;
+  color: #737373 !important;
+  cursor: wait;
+}
+
+.koel-action {
+  align-items: center;
+  background: #badeff;
+  border: 0;
+  border-radius: 24px;
+  color: #0079ea;
+  display: inline-flex;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 1.04em;
+  font-weight: 1000;
+  justify-content: center;
+  min-height: 3.05rem;
+  padding: 0.7em 1em;
+  text-decoration: none;
+  width: 100%;
+}
+
+.koel-action.recording {
+  background: #ef4444;
+  color: #fff;
+}
+
+.koel-action.secondary {
+  background: #f5f5f5;
+  color: #525252 !important;
+}
+
+.koel-action:disabled {
+  background: #e5e5e5;
+  color: #737373;
+  cursor: wait;
+}
+
+.koel-feedback {
+  margin-top: 0.35em;
+  width: 100%;
+}
+
+.koel-tips-title {
+  align-items: center;
+  color: #000;
+  display: grid;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 1.02em;
+  font-weight: 1000;
+  gap: 0.8em;
+  grid-template-columns: auto 1fr;
+  margin: 0 0 0.45em;
+}
+
+.koel-tips-title::after {
+  background: #e5e5e5;
+  content: '';
+  height: 1px;
+}
+
+.koel-tip-stack {
+  display: grid;
+  grid-template-areas: 'card';
+  margin: 0 auto;
+  min-height: 5.4em;
+  position: relative;
+}
+
+.koel-tip {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 24px;
+  box-shadow: 0 2px 0 rgba(17, 24, 39, 0.04);
+  display: none;
+  gap: 0.55em;
+  grid-area: card;
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 5em;
+  padding: 0.72em;
+}
+
+.koel-tip.active {
+  display: grid;
+}
+
+.koel-tip::before,
+.koel-tip::after {
+  background: #fff;
+  border: 1px solid #ededed;
+  border-radius: 24px;
+  bottom: -0.85em;
+  content: '';
+  height: 100%;
+  left: 0.8em;
+  position: absolute;
+  right: 0.8em;
+  z-index: -1;
+}
+
+.koel-tip::after {
+  bottom: -1.35em;
+  left: 1.35em;
+  right: 1.35em;
+}
+
+.koel-tip button {
+  align-items: center;
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  border-radius: 999px;
+  color: #111827 !important;
+  display: inline-flex;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 0.72em;
+  font-weight: 700;
+  height: 2.1em;
+  justify-content: center;
+  min-width: 3.8rem;
+  padding: 0 0.58em;
+}
+
+.koel-tip-controls {
+  align-items: center;
+  display: grid;
+  gap: 0.32em;
+  grid-template-columns: auto 1fr auto auto auto;
+  margin-top: 0.5em;
+}
+
+.koel-tip h4 {
+  color: #111827;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 0.92em;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 2.5em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.koel-tip p {
+  color: #a3a3a3;
+  display: none;
+  font-size: 0.78em;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.35;
+  margin: 0.55em 0 0;
+}
+
+.koel-tip.expanded p {
+  display: block;
+}
+
+.koel-tip-count {
+  align-items: center;
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  border-radius: 999px;
+  color: #111827;
+  display: inline-flex;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 0.72em;
+  font-weight: 700;
+  height: 2.1em;
+  justify-content: center;
+  min-width: 3.8rem;
+  padding: 0 0.58em;
+}
+
+.koel-playback {
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 24px;
+  display: grid;
+  gap: 0.5em;
+  grid-template-columns: 2em 1fr;
+  margin-top: 0.5em;
+  padding: 0.65em 0.8em;
+}
+
+.koel-playback-button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: #525252 !important;
+  display: inline-flex;
+  font-size: 1.05em;
+  height: 2em;
+  justify-content: center;
+  padding: 0;
+  width: 2em;
+}
+
+.koel-playback-button:disabled {
+  color: #111827 !important;
+}
+
+.koel-playback-wave {
+  align-items: center;
+  display: flex;
+  gap: 0.16em;
+  height: 1.6em;
+  justify-content: space-between;
+  opacity: 0.9;
+}
+
+.koel-playback-wave i {
+  background: #a3a3a3;
+  border-radius: 999px;
+  display: block;
+  height: calc(var(--bar) * 1.35em);
+  min-height: 0.28em;
+  width: 0.18em;
+}
+
+.koel-footer-actions {
+  display: grid;
+  gap: 0.5em;
+  grid-template-columns: 1fr;
+  margin-top: auto;
+  padding-top: 0.55em;
+  width: 100%;
+}
+
+.koel-practice.has-feedback {
+  justify-content: flex-end;
+  padding-top: 0.95em;
+}
+
+.koel-practice.has-feedback .koel-word-row {
+  margin-top: 0.55em;
+}
+
+.koel-practice.has-feedback .koel-footer-actions {
+  grid-template-columns: 3.4em 1fr;
+  margin-top: 0.5em;
+  padding-top: 0;
+}
+
+.koel-retry {
+  border-radius: 999px;
+  font-size: 1.5em;
+  min-height: 3.05rem;
+  padding: 0;
+}

@@ -3,6 +3,18 @@
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
         
   <url>
+    <loc>https://koellabs.com/blog/scaling-human-g2p-supervision</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Koel Labs Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-07T00:00:00-08:00</news:publication_date>
+      <news:title>Scaling Human and G2P Supervision for Robust Phonetic Transcription</news:title>
+      <news:keywords>Interspeech 2026,phonetic transcription,G2P,ASR,human annotation,pronunciation feedback</news:keywords>
+    </news:news>
+  </url>
+  <url>
     <loc>https://koellabs.com/blog/building-open-source-leaderboards</loc>
     <news:news>
       <news:publication>

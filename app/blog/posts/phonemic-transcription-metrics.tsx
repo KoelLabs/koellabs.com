@@ -247,7 +247,7 @@ PER("Bop" → "Sop") = 0.33     WPFER("Bop" → "Sop") = 0.060  // b→s: place 
           <p className="mb-4">
             For the full details, including how we use WPFER to train and evaluate our models, see
             our paper,{' '}
-            <a href="https://arxiv.org/abs/2606.16019" className="text-sky-600 hover:underline">
+            <a href="https://www.isca-archive.org/interspeech_2026/metzger26_interspeech.html" className="text-sky-600 hover:underline">
               Scaling Human and G2P Supervision for Robust Phonetic Transcription
             </a>
             .

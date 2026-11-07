@@ -136,7 +136,7 @@ export default function Models() {
                     </p>
                     <div className="mt-6 border rounded-[20px] p-2 w-full flex flex-col sm:flex-row gap-2">
                       <Link
-                        href="https://arxiv.org/abs/2606.16019"
+                        href="https://www.isca-archive.org/interspeech_2026/metzger26_interspeech.html"
                         target="_blank"
                         className="w-full"
                       >

@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       authors: ['Koel Labs', 'Alexander Metzger', 'Aruna Srivastava', 'Ruslan Mukhamedvaleev'],
       images: [
         {
-          url: post.image,
+          url: post.socialImage ?? post.image,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       card: 'summary_large_image',
       title: post.title,
       description: post.summary,
-      images: [post.image],
+      images: [post.socialImage ?? post.image],
     },
   };
 }

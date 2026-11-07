@@ -1,7 +1,8 @@
 # Development
 
 This repository serves the public Koel Labs website. Speech practice and accounts are handled by
-[Slay Speech](https://slayspeech.com). The website has no database, authentication, or inference-server dependency.
+[Slay Speech](https://slayspeech.com). Core pages build without a database, authentication, or a local
+inference server. The optional pronunciation demo calls the hosted feedback service.
 
 ## Run locally
 
@@ -36,6 +37,20 @@ This starts only the website at [localhost:3000](http://localhost:3000). Stop it
 - `npm run scan` runs the configured secret, dependency, and GitHub Actions security checks.
 
 ## Public integrations
+
+The Interspeech blog embeds `/demos/pronunciation/index.html`, a lazy-loaded standalone copy of the
+portfolio's Tin Soldier phone demo. It uses the same video, reference audio, recording flow, and
+feedback cards, and calls `https://server.koellabs.com/analyze_file`. No server credentials are needed.
+Microphone access is requested only when the visitor starts practice. Status messages identify
+sample feedback when the service is unavailable. Demo source notes are in
+`public/demos/pronunciation/README.md`.
+
+The Interspeech blog uses six SVG figures and a paper hero under `public/blog/interspeech-2026`.
+Regenerate the figures with `node scripts/generate-interspeech-figures.mjs`, and the hero with
+`node scripts/generate-interspeech-paper-hero.mjs`. The figure generator uses the existing OpenRunde
+fonts and macOS Arial/Times New Roman (font paths can be overridden via `FIGURE_*_FONT`). The hero
+reuses `/images/paper.png` from the research page. Its PNG export is required for social previews;
+the article and blog cards use SVG. Superseded raster figures are not kept.
 
 The research leaderboard reads aggregate results from the public Hugging Face Space through
 `/api/leaderboard`. Successful results are cached for an hour; failed initial reads use

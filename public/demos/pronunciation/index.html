@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Try pronunciation feedback · Slay Speech</title>
+    <link rel="stylesheet" href="phone.css" />
+    <script defer src="vendor/hls.min.js"></script>
+    <script defer src="vendor/vosk.js"></script>
+    <script defer src="story-demo.js"></script>
+  </head>
+  <body>
+    <main data-koel-demo>
+      <div class="koel-phone" aria-label="Interactive Slay Speech pronunciation demo">
+        <div class="koel-phone-speaker" aria-hidden="true"></div>
+        <div class="koel-phone-screen">
+          <div class="koel-app-nav">
+            <div class="koel-progress" data-koel-progress aria-label="Story progress"></div>
+            <span class="koel-counter" data-koel-counter>1/12</span>
+          </div>
+          <div class="koel-view" data-koel-view></div>
+        </div>
+      </div>
+      <p class="demo-status" data-koel-status-message role="status" aria-live="polite">
+        Play the story clip, or skip ahead to practice the phrase.
+      </p>
+    </main>
+  </body>
+</html>

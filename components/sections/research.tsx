@@ -27,7 +27,7 @@ const items = [
     title: "Interspeech Conference '26",
     venue: 'Accepted Paper',
     date: 'September 2026',
-    href: 'https://arxiv.org/abs/2606.16019',
+    href: 'https://www.isca-archive.org/interspeech_2026/metzger26_interspeech.html',
     image: '/images/paper.png',
     pages: ['/images/paper-p2.jpg', '/images/paper-p3.jpg'],
     alt: 'First page of the Interspeech 2026 paper Scaling Human and G2P Supervision for Robust Phonetic Transcription',
