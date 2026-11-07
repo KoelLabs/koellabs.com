@@ -115,10 +115,10 @@ export default function PostBody() {
             affected by a medical condition.
           </p>
           <BlogFigure
-            src="/blog/interspeech-2026/g2p-vs-human.svg"
+            src="/blog/interspeech-2026/g2p-vs-human.webp"
             alt="Spanish-accented speech transcribed through ASR and G2P from spelling, compared with an expert listening directly to the audio"
-            width={692}
-            height={380}
+            width={1600}
+            height={866}
           >
             G2P labels follow the spelling of “shampoo,” while an expert can label the pronunciation
             heard in the recording.
@@ -169,19 +169,19 @@ export default function PostBody() {
             stage and 3.45% with it.
           </p>
           <BlogFigure
-            src="/blog/interspeech-2026/threshold-under-30.svg"
+            src="/blog/interspeech-2026/threshold-under-30.webp"
             alt="Two training curricula using 20.4 hours each of expert and G2P labels: WPFER is 4.60% without extra G2P and 4.28% with 5,300 extra G2P hours"
-            width={692}
-            height={456}
+            width={1600}
+            height={1150}
           >
             Below 30 hours of human annotation, extra G2P reduces error. The 95% confidence
             intervals are 4.49–4.70% and 4.19–4.37%, respectively.
           </BlogFigure>
           <BlogFigure
-            src="/blog/interspeech-2026/threshold-over-30.svg"
+            src="/blog/interspeech-2026/threshold-over-30.webp"
             alt="Two training curricula using 40.8 hours of expert labels: WPFER is 3.40% without extra G2P and 3.45% with 5,300 extra G2P hours"
-            width={691}
-            height={456}
+            width={1600}
+            height={1158}
           >
             Above 30 hours of human annotation, extra G2P provides no significant gain. The 95%
             confidence intervals are 3.33–3.46% and 3.39–3.52%, respectively.
@@ -196,10 +196,10 @@ export default function PostBody() {
             check whether the model can handle new speakers and ways of speaking.
           </p>
           <BlogFigure
-            src="/blog/interspeech-2026/data.svg"
+            src="/blog/interspeech-2026/data.webp"
             alt="Dataset overview for DARPA TIMIT, EpaDB, PSST, L2-ARCTIC, Speech Ocean, Buckeye, DoReCo, and ISLE, with speakers, hours, dialects, and test-set membership"
-            width={691}
-            height={282}
+            width={1600}
+            height={629}
           >
             The benchmark includes native, non-native, and post-stroke aphasic speech.
             L2-ARCTIC&apos;s scripted and spontaneous speech appear separately in the table.
@@ -219,10 +219,10 @@ export default function PostBody() {
             indicate better performance.
           </p>
           <BlogFigure
-            src="/blog/interspeech-2026/metrics.svg"
+            src="/blog/interspeech-2026/metrics.webp"
             alt="Regular PER assigns equal penalties to substitutions in Pop, Bop, and Iop, while weighted feature error distinguishes how similar the substituted sounds are"
-            width={366}
-            height={339}
+            width={1082}
+            height={1007}
             narrow
           >
             Feature-weighted scoring distinguishes near misses from less similar sounds. Read more
@@ -241,10 +241,10 @@ export default function PostBody() {
             figure&apos;s whiskers show 95% confidence intervals.
           </p>
           <BlogFigure
-            src="/blog/interspeech-2026/unseen-accents.svg"
-            alt="ISLE WPFER comparison: XLSR plus experts 3.84%, plus ASR 3.62%, and plus ASR and G2P 3.69%, with 95% confidence intervals"
-            width={691}
-            height={124}
+            src="/blog/interspeech-2026/unseen-accents.webp"
+            alt="ISLE WPFER comparison: XLSR plus experts 3.84% and plus ASR 3.62%, with 95% confidence intervals"
+            width={1600}
+            height={180}
           >
             ASR pretraining improves performance on accents that were not present in the
             expert-labeled training data.
