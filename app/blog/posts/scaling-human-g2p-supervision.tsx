@@ -296,23 +296,32 @@ export default function PostBody() {
               </a>
               , our English-speaking practice app.
             </p>
-            <div className="flex flex-wrap gap-3 font-sans">
-              <a
-                href="https://apps.apple.com/us/app/slay-speech-english-speaking/id6766172003"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center rounded-xl border border-neutral-200 bg-neutral-950 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800"
+            <div className="mb-4 mt-2 flex w-full flex-col gap-2 gap-x-4 font-sans sm:flex-row">
+              <Button
+                asChild
+                className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto"
               >
-                Download for iOS
-              </a>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.slayspeech.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center rounded-xl border border-neutral-200 bg-neutral-950 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800"
+                <a
+                  href="https://apps.apple.com/us/app/slay-speech-english-speaking/id6766172003"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download for iOS
+                </a>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="active:scale-[97%] transition-all duration-50 w-full sm:w-auto"
               >
-                Download for Android
-              </a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.slayspeech.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download for Android
+                </a>
+              </Button>
             </div>
           </section>
         </div>
