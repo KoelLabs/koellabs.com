@@ -1,7 +1,7 @@
 """Render the SLT blog's focused SVG figures from the paper's saved results.
 
 Requires matplotlib and brotli. Input and provenance: public/blog/slt-2026/chart-data.json.
-Text is outlined with the website's fonts; no screen capture or raster charts.
+Text is outlined with the website's Inter font; no screen capture or raster charts.
 """
 from pathlib import Path
 import datetime as dt
@@ -14,13 +14,14 @@ os.environ.setdefault('MPLCONFIGDIR', str(Path(tempfile.gettempdir()) / 'koel-ma
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib.font_manager import FontProperties
-from matplotlib.patches import PathPatch
+from matplotlib.font_manager import FontProperties, fontManager
+from matplotlib.patches import FancyBboxPatch, PathPatch
 from matplotlib.path import Path as GlyphPath
 from matplotlib.textpath import text_to_path
 from matplotlib.transforms import Affine2D, Bbox
 from matplotlib.ticker import MultipleLocator
 from fontTools.ttLib import TTFont
+from fontTools.varLib.instancer import instantiateVariableFont
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,12 +41,19 @@ plt.rcParams.update({'svg.fonttype': 'path', 'svg.hashsalt': 'koel-slt-2026',
     'xtick.color': MUTED, 'ytick.color': INK, 'savefig.facecolor': WHITE})
 TMP = tempfile.TemporaryDirectory(prefix='koel-slt-fonts-')
 FONTS = {}
-for weight in ['Regular', 'Semibold']:
-    face = TTFont(ROOT / f'public/fonts/OpenRunde-{weight}.woff2')
+# The site's Inter (variable), instanced at the two weights the charts use.
+for weight, wght in [('Regular', 400), ('Semibold', 600)]:
+    face = instantiateVariableFont(TTFont(ROOT / 'app/fonts/Inter-latin.woff2'), {'wght': wght})
     face.flavor = None
+    family = f'KoelChartInter{weight}'  # unique family per weight so matplotlib can't mix them up
+    # Unique names per weight; matplotlib caches outlines by PostScript name, so a shared
+    # name would mix Regular and Semibold glyphs.
+    for name_id in (1, 4, 6, 16):
+        face['name'].setName(family, name_id, 3, 1, 0x409)
     target = Path(TMP.name) / f'{weight}.ttf'
     face.save(target)
-    FONTS[weight] = target
+    fontManager.addfont(str(target))
+    FONTS[weight] = family
 CAP_HEIGHT = face['OS/2'].sCapHeight / face['head'].unitsPerEm  # Same in both weights.
 TITLE_X, TITLE_SIZE = .055, 23
 TITLE_TRACKING, SUBTITLE_TRACKING = -.025, -.01  # em; display-heading tracking.
@@ -55,7 +63,9 @@ TOP_PAD = TITLE_INSET - (.44 - CAP_HEIGHT*TITLE_SIZE/72)
 
 
 def font(size=14, bold=False):
-    return FontProperties(fname=FONTS['Semibold' if bold else 'Regular'], size=size)
+    # The site's Inter is a Latin subset; DejaVu Sans supplies ρ, ● and ◆.
+    return FontProperties(family=[FONTS['Semibold' if bold else 'Regular'], 'DejaVu Sans'], size=size,
+                          weight='bold' if bold else 'normal')
 
 
 def write(fig, x, y, text, size=14, color=INK, bold=False, **kwargs):
@@ -86,6 +96,20 @@ def base(title, subtitle, height=6.5):
     tracked(fig, TITLE_X, 1-.44/height, title, TITLE_SIZE, TITLE_TRACKING, bold=True)
     tracked(fig, TITLE_X, 1-.79/height, subtitle, 13, SUBTITLE_TRACKING, color=MUTED)
     return fig
+
+
+BAR_RADIUS = 6/96  # inches; slight rounding, like the Interspeech post's figures
+
+
+def rounded_rect(ax, x, y, w, h, radius=BAR_RADIUS, **kwargs):
+    """Rectangle in data units with corners that stay circular despite unequal axis scales.
+    Set the axis limits before calling."""
+    W, H = ax.figure.get_size_inches()
+    box = ax.get_position()
+    x_in = box.width*W/abs(np.diff(ax.get_xlim())[0])   # inches per x unit
+    y_in = box.height*H/abs(np.diff(ax.get_ylim())[0])  # inches per y unit
+    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle=f'round,pad=0,rounding_size={radius/x_in}',
+                                mutation_aspect=x_in/y_in, linewidth=0, edgecolor='none', **kwargs))
 
 
 def style(ax, xstep=None, ystep=None):
@@ -122,8 +146,9 @@ fig = base('Accent gaps appear in every evaluation',
 ax = fig.add_axes([.405, .13, .505, .70])
 ys = np.arange(len(ROWS))[::-1]
 values = [d['meanGap'] for d in ROWS]
-ax.barh(ys, values, height=.44, color=ORANGE, alpha=.9, zorder=3)
 ax.set_xlim(0, 30); ax.set_ylim(-.7, 7.7); ax.set_yticks([])
+for y, value in zip(ys, values):
+    rounded_rect(ax, 0, y-.22, value, .44, facecolor=ORANGE, alpha=.9, zorder=3)
 ax.set_xticks([0, 10, 20, 30]); style(ax, xstep=10)
 for y, value, row in zip(ys, values, ROWS):
     ax.text(-.055, y+.15, row['label'], transform=ax.get_yaxis_transform(),
@@ -214,10 +239,10 @@ save(fig,'mean-degradation','Regressions are larger for the selected minority ac
 fig = base('Accent diversity is rarely an explicit evaluation target',
            '61 model–dataset evaluations in the audited technical reports', 4.5)
 ax=fig.add_axes([.075,.31,.85,.39]);ax.set_axis_off()
+ax.set_xlim(-.2,16);ax.set_ylim(3.9,-.4)
 for i in range(61):
     row,col=divmod(i,16)
-    ax.add_patch(plt.Rectangle((col,row),.76,.64,facecolor=BLUE if i<12 else '#e5eaf1',edgecolor='none',linewidth=0))
-ax.set_xlim(-.2,16);ax.set_ylim(3.9,-.4)
+    rounded_rect(ax,col,row,.76,.64,facecolor=BLUE if i<12 else '#e5eaf1')
 write(fig,.075,.19,'12 explicitly consider accent diversity',14,color=BLUE,bold=True)
 write(fig,.075,.09,'49 do not explicitly consider it in the audited English evaluation.',12,color=MUTED)
 save(fig,'benchmark-coverage','Accent diversity is rarely an explicit evaluation target',
