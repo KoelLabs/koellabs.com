@@ -1,0 +1,473 @@
+{
+  "updated_at": "2026-11-05",
+  "entries": [
+    {
+      "model": "Koel Labs XLSR English 01",
+      "size": "1.18 GB",
+      "average_per": "16.89%",
+      "average_fer": "3.28%",
+      "link": "https://github.com/KoelLabs/ML",
+      "submission_date": "2026-11-05",
+      "koel_labs": true
+    },
+    {
+      "model": "Koel Labs XLSR English 01 Mini",
+      "size": "338.5 MB",
+      "average_per": "16.98%",
+      "average_fer": "3.36%",
+      "link": "https://github.com/KoelLabs/ML",
+      "submission_date": "2026-11-05",
+      "koel_labs": true
+    },
+    {
+      "model": "Qwen3.8-Omni-Flash",
+      "size": "335.28 GB",
+      "average_per": "29.74%",
+      "average_fer": "5.78%",
+      "link": "https://www.qwencloud.com/models/qwen3.8-omni-flash",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Pasketti Phonetic 3rd Place Ensemble",
+      "size": "14.13 GB",
+      "average_per": "35.40%",
+      "average_fer": "5.90%",
+      "link": "https://github.com/drivendataorg/on-top-of-pasketti/tree/main/phonetic-track/3rd%20Place",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Pasketti Phonetic 1st Place Ensemble",
+      "size": "10.77 GB",
+      "average_per": "35.78%",
+      "average_fer": "6.02%",
+      "link": "https://github.com/drivendataorg/on-top-of-pasketti/tree/main/phonetic-track/1st%20Place",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "pasketti-phonetic",
+      "size": "1.18 GB",
+      "average_per": "33.36%",
+      "average_fer": "6.55%",
+      "link": "https://huggingface.co/drivendata/pasketti-phonetic",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Koel Labs XLSR English 01 Nano",
+      "size": "7.0 MB",
+      "average_per": "32.17%",
+      "average_fer": "7.14%",
+      "link": "https://huggingface.co/KoelLabs/xlsr-english-private-01/blob/f7c582e015792db290031c0916102f4e77154cc9/model_tiny_int4g16att_int8g32cnn_fp16.safetensors",
+      "submission_date": "2026-11-05",
+      "koel_labs": true
+    },
+    {
+      "model": "Vitouphy XLSR TIMIT",
+      "size": "2.35 GB",
+      "average_per": "36.36%",
+      "average_fer": "7.23%",
+      "link": "https://www.kaggle.com/code/vitouphy/phoneme-recognition-with-wav2vec2",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Facebook Wav2Vec2 53 Espeak",
+      "size": "1.18 GB",
+      "average_per": "41.76%",
+      "average_fer": "7.65%",
+      "link": "https://github.com/facebookresearch/fairseq/tree/main/examples/wav2vec#wav2vec-20",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "MrRubino XLSR 53 L2-Arctic",
+      "size": "1.18 GB",
+      "average_per": "37.11%",
+      "average_fer": "7.69%",
+      "link": "https://doi.org/10.1109/ichi61247.2024.00045",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "ZIPA Large",
+      "size": "3.09 GB",
+      "average_per": "40.22%",
+      "average_fer": "7.90%",
+      "link": "https://arxiv.org/html/2505.23170v1",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "PhoneticXeus",
+      "size": "4.28 GB",
+      "average_per": "45.96%",
+      "average_fer": "8.02%",
+      "link": "https://github.com/changelinglab/PhoneticXeus",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "ZIPA Large CRCTC NS 800k",
+      "size": "1.12 GB",
+      "average_per": "42.34%",
+      "average_fer": "8.19%",
+      "link": "https://huggingface.co/anyspeech/zipa-large-crctc-ns-800k",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "ESPnet POWSM",
+      "size": "1.28 GB",
+      "average_per": "46.26%",
+      "average_fer": "8.32%",
+      "link": "https://huggingface.co/espnet/powsm",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Wav2Vec2 CommonPhone",
+      "size": "1.18 GB",
+      "average_per": "45.89%",
+      "average_fer": "8.44%",
+      "link": "https://huggingface.co/pklumpp/Wav2Vec2_CommonPhone",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Facebook Wav2Vec2 60 Espeak",
+      "size": "1.18 GB",
+      "average_per": "44.40%",
+      "average_fer": "8.49%",
+      "link": "https://github.com/facebookresearch/fairseq/tree/main/examples/wav2vec#wav2vec-20",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "WavLM HuPER CTC",
+      "size": "1.18 GB",
+      "average_per": "36.25%",
+      "average_fer": "8.53%",
+      "link": "https://github.com/HuPER29/HuPER",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Ginic XLSR 53 Buckeye",
+      "size": "1.18 GB",
+      "average_per": "39.17%",
+      "average_fer": "8.63%",
+      "link": "https://github.com/ginic/multipa",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Facebook XLSR 53 Phon",
+      "size": "1.18 GB",
+      "average_per": "46.98%",
+      "average_fer": "8.97%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Excalibur12 Wav2Vec2 TIMIT Simplified",
+      "size": "1.18 GB",
+      "average_per": "37.42%",
+      "average_fer": "9.04%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Excalibur12 Wav2Vec2 lv60 TIMIT",
+      "size": "1.18 GB",
+      "average_per": "39.08%",
+      "average_fer": "9.41%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "BranchShine-CR",
+      "size": "98.1 MB",
+      "average_per": "46.07%",
+      "average_fer": "9.55%",
+      "link": "https://huggingface.co/nikhilnavas/branchshine-cr",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Ginic XLSR 53 Buckeye Full",
+      "size": "1.18 GB",
+      "average_per": "41.40%",
+      "average_fer": "9.61%",
+      "link": "https://huggingface.co/ginic/full_dataset_train_3_wav2vec2-large-xlsr-53-buckeye-ipa",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "DahmL XLSR MFA",
+      "size": "1.18 GB",
+      "average_per": "46.58%",
+      "average_fer": "9.76%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Wav2Vec2-base TIMIT arpabet",
+      "size": "360.2 MB",
+      "average_per": "42.00%",
+      "average_fer": "10.07%",
+      "link": "https://huggingface.co/mostafaashahin/wav2vec2-base-timit-phoneme-arpa-39-v2",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Koel Labs B0",
+      "size": "1.18 GB",
+      "average_per": "42.35%",
+      "average_fer": "10.21%",
+      "link": "https://github.com/KoelLabs/ML",
+      "submission_date": "2026-11-05",
+      "koel_labs": true
+    },
+    {
+      "model": "HuBERT Phoneme",
+      "size": "361.4 MB",
+      "average_per": "39.44%",
+      "average_fer": "10.24%",
+      "link": "https://huggingface.co/coml/hubert-phoneme-classification",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Facebook XLSR 53 BABEL",
+      "size": "1.18 GB",
+      "average_per": "51.86%",
+      "average_fer": "10.62%",
+      "link": "http://www.lrec-conf.org/lrec1998/midwich.reading.ac.uk/research/speechlab/babel/index.html",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Allophant",
+      "size": "1.21 GB",
+      "average_per": "59.00%",
+      "average_fer": "11.12%",
+      "link": "https://github.com/kgnlp/allophant",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "MultiBridge EEA Wav2Vec2-base",
+      "size": "360.2 MB",
+      "average_per": "40.52%",
+      "average_fer": "11.33%",
+      "link": "https://huggingface.co/MultiBridge/wav2vec-LnNor-IPA-ft",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "ESPnet POWSM CTC",
+      "size": "1.59 GB",
+      "average_per": "55.72%",
+      "average_fer": "11.40%",
+      "link": "https://huggingface.co/espnet/powsm_ctc",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Speech31 Wav2Vec2 TIMIT-IPA3",
+      "size": "1.18 GB",
+      "average_per": "47.68%",
+      "average_fer": "11.78%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Speech31 XLSR English IPA",
+      "size": "3.49 GB",
+      "average_per": "52.14%",
+      "average_fer": "12.03%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Speech31 TIMIT-IPA2",
+      "size": "1.18 GB",
+      "average_per": "50.43%",
+      "average_fer": "12.58%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Snu Nia Wav2Vec2 TIMIT",
+      "size": "1.18 GB",
+      "average_per": "50.43%",
+      "average_fer": "12.58%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Chihiro Taguchi XLSR japlmthufielta",
+      "size": "1.18 GB",
+      "average_per": "70.40%",
+      "average_fer": "12.70%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Vikramanantha Wav2Vec2-base LJSpeech Gruut",
+      "size": "720.4 MB",
+      "average_per": "45.62%",
+      "average_fer": "12.78%",
+      "link": "https://huggingface.co/bookbot/wav2vec2-ljspeech-gruut/tree/main",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Speech31 WavLM English IPA",
+      "size": "3.49 GB",
+      "average_per": "52.08%",
+      "average_fer": "13.09%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Speech31 Hubert English IPA",
+      "size": "1.02 GB",
+      "average_per": "54.50%",
+      "average_fer": "14.21%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Allosaurus",
+      "size": "43.6 MB",
+      "average_per": "67.41%",
+      "average_fer": "14.30%",
+      "link": "https://github.com/xinjli/allosaurus",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "SpeechBrain TIMIT wav2vec2 seq2seq",
+      "size": "1.19 GB",
+      "average_per": "51.29%",
+      "average_fer": "15.00%",
+      "link": "https://github.com/speechbrain/speechbrain/blob/develop/recipes/TIMIT/ASR/seq2seq/hparams/train_with_wav2vec2.yaml",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "WhisperPPT",
+      "size": "922.2 MB",
+      "average_per": "64.53%",
+      "average_fer": "16.68%",
+      "link": "https://github.com/smfsamir/audit-ipa",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Jubliano XLSR International 1.5",
+      "size": "1.18 GB",
+      "average_per": "67.54%",
+      "average_fer": "16.83%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "LoWhIPA Large CV",
+      "size": "6.04 GB",
+      "average_per": "83.35%",
+      "average_fer": "19.30%",
+      "link": "https://huggingface.co/jshrdt/lowhipa-large-cv",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "WhIPA Large CV",
+      "size": "5.75 GB",
+      "average_per": "90.81%",
+      "average_fer": "22.30%",
+      "link": "https://huggingface.co/jshrdt/whipa-large-cv",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Seanghay Wav2Vec2-base Khmer",
+      "size": "1.41 GB",
+      "average_per": "93.84%",
+      "average_fer": "25.83%",
+      "link": "https://huggingface.co/seanghay/wav2vec2-base-khmer-phonetisaurus",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "SNU-SLP Lab XLSR 53 TIMIT",
+      "size": "1.18 GB",
+      "average_per": "72.64%",
+      "average_fer": "26.43%",
+      "link": "N/A",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Cole Robertson Wav2Vec2 Ogma",
+      "size": "1.18 GB",
+      "average_per": "116.51%",
+      "average_fer": "28.03%",
+      "link": "https://huggingface.co/colerobertson/wav2vec2-xls-r-phoneme-300m-tr-ogma-phoneme",
+      "submission_date": "2025-11-06",
+      "koel_labs": false
+    },
+    {
+      "model": "BabAR",
+      "size": "1.06 GB",
+      "average_per": "86.44%",
+      "average_fer": "38.99%",
+      "link": "https://github.com/MarvinLvn/BabAR",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "WhIPA Base CV",
+      "size": "279.0 MB",
+      "average_per": "133.56%",
+      "average_fer": "40.67%",
+      "link": "https://huggingface.co/jshrdt/whipa-base-cv",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "IPA Whisper Base",
+      "size": "278.8 MB",
+      "average_per": "132.87%",
+      "average_fer": "49.83%",
+      "link": "https://huggingface.co/neurlang/ipa-whisper-base",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    },
+    {
+      "model": "Aditya Wav2Vec2 Librispeech",
+      "size": "1.18 GB",
+      "average_per": "158.06%",
+      "average_fer": "58.16%",
+      "link": "https://huggingface.co/Aditya3107/libri-wav2vec2-xlsr-300m-phoneme-demo",
+      "submission_date": "2026-11-05",
+      "koel_labs": false
+    }
+  ]
+}

@@ -3,272 +3,8 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, ChevronDown, ChevronsUpDown, ChevronUp } from 'lucide-react';
 import { SideCurve } from '@/components/ui/side-curve';
-
-const leaderboard = [
-  {
-    model: 'Koel Labs XLSR English 01',
-    average_per: '20.59%',
-    average_fer: '3.31%',
-    link: 'https://huggingface.co/KoelLabs/xlsr-english-01',
-    submission_date: '2025-09-03',
-    koel_labs: true,
-  },
-  {
-    model: 'Koel Labs XLSR English 01 Mini',
-    average_per: '20.80%',
-    average_fer: '3.40%',
-    link: 'https://github.com/KoelLabs/ML',
-    submission_date: '2026-05-04',
-    koel_labs: true,
-  },
-  {
-    model: 'Qwen3.8-Omni-Flash',
-    average_per: '38.79%',
-    average_fer: '5.97%',
-    link: 'https://www.qwencloud.com/models/qwen3.8-omni-flash',
-    submission_date: '2026-09-20',
-  },
-  {
-    model: 'Facebook Wav2Vec2 53 Espeak',
-    average_per: '114.40%',
-    average_fer: '7.68%',
-    link: 'https://huggingface.co/facebook/wav2vec2-xlsr-53-espeak-cv-ft',
-    submission_date: '2025-09-03',
-  },
-  {
-    model: 'Facebook Wav2Vec2 60 Espeak',
-    average_per: '116.98%',
-    average_fer: '7.96%',
-    link: 'https://huggingface.co/facebook/wav2vec2-lv-60-espeak-cv-ft',
-    submission_date: '2025-09-03',
-  },
-  {
-    model: 'MrRubino XLSR 53 L2-Arctic',
-    average_per: '58.83%',
-    average_fer: '8.12%',
-    link: 'https://huggingface.co/mrrubino/wav2vec2-large-xlsr-53-l2-arctic-phoneme',
-    submission_date: '2025-09-07',
-  },
-  {
-    model: 'Koel Labs XLSR English 01 Nano',
-    average_per: '37.63%',
-    average_fer: '8.44%',
-    link: 'https://github.com/KoelLabs/ML',
-    submission_date: '2026-09-17',
-    koel_labs: true,
-  },
-  {
-    model: 'PhoneticXeus',
-    average_per: '49.98%',
-    average_fer: '8.46%',
-    link: 'https://huggingface.co/changelinglab/PhoneticXeus',
-    submission_date: '2026-05-02',
-  },
-  {
-    model: 'Vitouphy XLSR TIMIT',
-    average_per: '59.91%',
-    average_fer: '8.55%',
-    link: 'https://huggingface.co/vitouphy/wav2vec2-xls-r-300m-timit-phoneme',
-    submission_date: '2025-09-03',
-  },
-  {
-    model: 'WavLM HuPER CTC',
-    average_per: '39.12%',
-    average_fer: '8.55%',
-    link: 'https://huggingface.co/huper29/huper_recognizer',
-    submission_date: '2026-02-16',
-  },
-  {
-    model: 'ZIPA Large',
-    average_per: '45.82%',
-    average_fer: '8.80%',
-    link: 'https://huggingface.co/anyspeech/zipa-large-crctc-500k',
-    submission_date: '2026-05-02',
-  },
-  {
-    model: 'ESPnet POWSM',
-    average_per: '50.41%',
-    average_fer: '8.88%',
-    link: 'https://huggingface.co/espnet/powsm',
-    submission_date: '2025-11-03',
-  },
-  {
-    model: 'Ginic XLSR 53 Buckeye',
-    average_per: '42.12%',
-    average_fer: '8.89%',
-    link: 'https://huggingface.co/ginic/vary_individuals_old_only_3_wav2vec2-large-xlsr-53-buckeye-ipa',
-    submission_date: '2025-09-03',
-  },
-  {
-    model: 'Facebook XLSR 53 Phon',
-    average_per: '50.01%',
-    average_fer: '9.35%',
-    link: 'https://huggingface.co/facebook/wav2vec2-xlsr-53-phon-cv-ft',
-    submission_date: '2025-09-07',
-  },
-  {
-    model: 'DahmL XLSR MFA',
-    average_per: '122.82%',
-    average_fer: '10.05%',
-    link: 'https://huggingface.co/DahmL/wav2vec2-xls-r-300m_phone-mfa_english',
-    submission_date: '2025-09-08',
-  },
-  {
-    model: 'Wav2Vec2-base TIMIT arpabet',
-    average_per: '45.14%',
-    average_fer: '10.09%',
-    link: 'https://huggingface.co/mostafaashahin/wav2vec2-base-timit-phoneme-arpa-39-v2',
-    submission_date: '2025-11-12',
-  },
-  {
-    model: 'HuBERT Phoneme',
-    average_per: '42.14%',
-    average_fer: '10.20%',
-    link: 'https://huggingface.co/coml/hubert-phoneme-classification',
-    submission_date: '2025-11-12',
-  },
-  {
-    model: 'Koel Labs B0',
-    average_per: '44.36%',
-    average_fer: '10.30%',
-    link: 'https://huggingface.co/KoelLabs/xlsr-timit-b0',
-    submission_date: '2025-09-03',
-    koel_labs: true,
-  },
-  {
-    model: 'Facebook XLSR 53 BABEL',
-    average_per: '54.83%',
-    average_fer: '10.89%',
-    link: 'https://huggingface.co/facebook/wav2vec2-xlsr-53-phon-cv-babel-ft',
-    submission_date: '2025-09-07',
-  },
-  {
-    model: 'MultiBridge EEA Wav2Vec2-base',
-    average_per: '44.72%',
-    average_fer: '11.70%',
-    link: 'https://huggingface.co/MultiBridge/wav2vec-LnNor-IPA-ft',
-    submission_date: '2025-11-23',
-  },
-  {
-    model: 'Speech31 XLSR English IPA',
-    average_per: '117.12%',
-    average_fer: '12.37%',
-    link: 'https://huggingface.co/speech31/XLS-R-300m-english-ipa',
-    submission_date: '2025-09-03',
-  },
-  {
-    model: 'Speech31 Wav2Vec2 TIMIT-IPA3',
-    average_per: '68.59%',
-    average_fer: '12.64%',
-    link: 'https://huggingface.co/speech31/wav2vec2-large-english-TIMIT-phoneme_v3',
-    submission_date: '2025-09-03',
-  },
-  {
-    model: 'Chihiro Taguchi XLSR japlmthufielta',
-    average_per: '73.07%',
-    average_fer: '12.89%',
-    link: 'https://huggingface.co/ctaguchi/wav2vec2-large-xlsr-japlmthufielta-ipa1000-ns',
-    submission_date: '2025-09-03',
-  },
-  {
-    model: 'Speech31 WavLM English IPA',
-    average_per: '118.56%',
-    average_fer: '13.29%',
-    link: 'https://huggingface.co/speech31/wavlm-large-english-ipa',
-    submission_date: '2025-09-03',
-  },
-  {
-    model: 'Snu Nia Wav2Vec2 TIMIT',
-    average_per: '141.47%',
-    average_fer: '13.46%',
-    link: 'https://huggingface.co/snu-nia-12/wav2vec2-large_nia12_phone-ipa_english',
-    submission_date: '2025-09-03',
-  },
-  {
-    model: 'Speech31 TIMIT-IPA2',
-    average_per: '141.47%',
-    average_fer: '13.46%',
-    link: 'https://huggingface.co/speech31/wav2vec2-large-TIMIT-IPA2',
-    submission_date: '2025-09-03',
-  },
-  {
-    model: 'Speech31 Hubert English IPA',
-    average_per: '109.03%',
-    average_fer: '14.16%',
-    link: 'https://huggingface.co/speech31/hubert-base-english-ipa',
-    submission_date: '2025-09-04',
-  },
-  {
-    model: 'Allosaurus',
-    average_per: '70.21%',
-    average_fer: '14.21%',
-    link: 'https://github.com/xinjli/allosaurus',
-    submission_date: '2026-05-02',
-  },
-  {
-    model: 'SNU-SLP Lab XLSR 53 TIMIT',
-    average_per: '71.75%',
-    average_fer: '14.71%',
-    link: 'https://huggingface.co/slplab/wav2vec2_xlsr50k_english_phoneme',
-    submission_date: '2025-09-08',
-  },
-  {
-    model: 'Jubliano XLSR International 1.5',
-    average_per: '83.61%',
-    average_fer: '16.46%',
-    link: 'https://huggingface.co/Jubliano/wav2vec2-large-xls-r-300m-ipa-INTERNATIONAL1.5',
-    submission_date: '2025-09-03',
-  },
-  {
-    model: 'WhisperPPT',
-    average_per: '68.12%',
-    average_fer: '17.01%',
-    link: 'https://github.com/smfsamir/audit-ipa',
-    submission_date: '2026-05-02',
-  },
-  {
-    model: 'Vikramanantha Wav2Vec2-base LJSpeech Gruut',
-    average_per: '141.09%',
-    average_fer: '22.98%',
-    link: 'https://huggingface.co/ct-vikramanantha/phoneme-scorer-v2-wav2vec2',
-    submission_date: '2025-09-07',
-  },
-  {
-    model: 'Seanghay Wav2Vec2-base Khmer',
-    average_per: '115.72%',
-    average_fer: '25.15%',
-    link: 'https://huggingface.co/seanghay/wav2vec2-base-khmer-phonetisaurus',
-    submission_date: '2025-11-03',
-  },
-  {
-    model: 'Cole Robertson Wav2Vec2 Ogma',
-    average_per: '116.51%',
-    average_fer: '28.03%',
-    link: 'https://huggingface.co/colerobertson/wav2vec2-xls-r-phoneme-300m-tr-ogma-phoneme',
-    submission_date: '2025-11-06',
-  },
-  {
-    model: 'Aditya Wav2Vec2 Librispeech',
-    average_per: '164.09%',
-    average_fer: '55.05%',
-    link: 'https://huggingface.co/Aditya3107/libri-wav2vec2-xlsr-300m-phoneme-demo',
-    submission_date: '2025-11-03',
-  },
-  {
-    model: 'Excalibur12 Wav2Vec2 TIMIT Simplified',
-    average_per: '283.05%',
-    average_fer: '57.73%',
-    link: 'https://huggingface.co/excalibur12/wav2vec2-large-lv60_phoneme-timit_english_timit-4k_simplified',
-    submission_date: '2025-09-07',
-  },
-  {
-    model: 'Excalibur12 Wav2Vec2 lv60 TIMIT',
-    average_per: '289.38%',
-    average_fer: '59.85%',
-    link: 'https://huggingface.co/excalibur12/wav2vec2-large-lv60_phoneme-timit_english_timit-4k',
-    submission_date: '2025-09-07',
-  },
-];
+import { useLeaderboard } from '@/lib/use-leaderboard';
+import { leaderboardDate, LEADERBOARD_URL } from '@/lib/leaderboard';
 
 // Small Koel Labs logomark used to mark our own models in the table (same art as the header logo)
 function KoelMark() {
@@ -332,10 +68,11 @@ function KoelMark() {
 }
 
 function formatDate(date: string) {
-  return new Date(date).toLocaleDateString('en-US', {
+  return new Date(date + 'T12:00:00Z').toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
+    timeZone: 'UTC',
   });
 }
 
@@ -348,12 +85,7 @@ function tag(status: string) {
 }
 
 type SortKey =
-  | 'model'
-  | 'average_per'
-  | 'average_per_fer'
-  | 'average_fer'
-  | 'link'
-  | 'submission_date';
+  'model' | 'size' | 'average_per' | 'average_per_fer' | 'average_fer' | 'link' | 'submission_date';
 type SortDirection = 'asc' | 'desc';
 
 function SortIndicator({ direction }: { direction: SortDirection | null }) {
@@ -384,7 +116,7 @@ function tagLink(link: string) {
   }
 
   return (
-    <a href={link} target="_blank">
+    <a href={link} target="_blank" rel="noopener noreferrer">
       <span className="bg-white transition-all inline-flex items-center px-2 w-full py-1.5 border text-sm leading-4 font-medium tracking-tight rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 sm:w-fit flex-row justify-between hover:shadow-sm group">
         {link == 'N/A' ? 'N/A' : 'Link'}
         <ArrowUpRight className="size-4 -mb-px ml-0.5" />
@@ -393,7 +125,8 @@ function tagLink(link: string) {
   );
 }
 
-export default function Leaderboard() {
+export default function Leaderboard({ preview = false }: { preview?: boolean }) {
+  const data = useLeaderboard();
   const [sortConfig, setSortConfig] = React.useState<{
     key: SortKey;
     direction: SortDirection;
@@ -412,15 +145,31 @@ export default function Leaderboard() {
     sortConfig?.key === key ? sortConfig.direction : null;
 
   const sortedLeaderboard = React.useMemo(() => {
+    const leaderboard = preview ? data.entries.slice(0, 8) : data.entries;
     if (!sortConfig) return leaderboard;
     const items = leaderboard.map((item, idx) => ({ ...item, __i: idx }));
-    items.sort((a: any, b: any) => {
+    items.sort((a, b) => {
       let cmp = 0;
       switch (sortConfig.key) {
         case 'model':
         case 'link':
           cmp = String(a[sortConfig.key]).localeCompare(String(b[sortConfig.key]));
           break;
+        case 'size': {
+          const bytes = (size: string) => {
+            const value = parseFloat(size);
+            const unit = size.match(/[KMGT]?B$/)?.[0] ?? 'B';
+            return Number.isFinite(value)
+              ? value * 1024 ** ['B', 'KB', 'MB', 'GB', 'TB'].indexOf(unit)
+              : null;
+          };
+          const aSize = bytes(a.size);
+          const bSize = bytes(b.size);
+          if (aSize === null || bSize === null)
+            return aSize === bSize ? a.__i - b.__i : aSize === null ? 1 : -1;
+          cmp = aSize - bSize;
+          break;
+        }
         case 'average_per':
         case 'average_per_fer':
           const aNum = parseFloat(String(a.average_per).replace('%', ''));
@@ -441,56 +190,59 @@ export default function Leaderboard() {
       return sortConfig.direction === 'asc' ? cmp : -cmp;
     });
     return items;
-  }, [sortConfig]);
+  }, [sortConfig, data.entries, preview]);
   return (
-    <div id="models" className="relative">
-      <SideCurve side="left" inset="top-4 bottom-4" />
-      <SideCurve side="right" inset="top-4 bottom-4" />
+    <div
+      id={preview ? undefined : 'models'}
+      className={preview ? 'relative font-sans my-12' : 'relative'}
+    >
+      {!preview && <SideCurve side="left" inset="top-4 bottom-4" />}
+      {!preview && <SideCurve side="right" inset="top-4 bottom-4" />}
 
       <div className="mx-auto">
         <div className="mx-auto absolute h-full flex justify-between z-[-1]"></div>
 
         <section
-          aria-labelledby="features-heading"
-          className="mx-auto w-full h-fit bg-neutral-50/20 backdrop-blur-md border-y border-neutral-200 overflow-hidden"
+          aria-label={preview ? 'Latest leaderboard preview' : 'Phonetic transcription leaderboard'}
+          className={
+            preview
+              ? 'w-full'
+              : 'mx-auto w-full h-fit bg-neutral-50/20 backdrop-blur-md border-y border-neutral-200 overflow-hidden'
+          }
         >
           <div
             data-cursor-opacity="0.8"
             data-cursor-size="240"
             data-cursor-color="#2A4BCC"
-            className="bg-white py-24 sm:py-32"
+            className={preview ? 'bg-white' : 'bg-white py-24 sm:py-32'}
           >
-            <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[1000] relative">
-              <p className="text-base/7 font-semibold text-sky-600 relative z-10">Leaderboard</p>
-              <h2
-                id="features-heading"
-                className="mt-2 text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
-              >
-                Setting a new standard in phonetic transcription
-              </h2>
-              {/* <ul
-                role="list"
-                data-cursor-opacity="1"
-                data-cursor-size="340"
-                className="mt-12 grid lg:p-2 z-10 grid-cols-1 lg:grid-cols-2 relative gap-4 bg-white overflow-hidden group"
-              >
-                <p className="leading-relaxed">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Quasi
-                  voluptatibus atque eum quam velit? Sequi, autem cumque consequatur laborum. Ipsum
-                  dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                </p>
-                <p className="leading-relaxed">
-                  Quisquam, quos. Quasi voluptatibus atque eum quam velit? Sequi, autem cumque
-                  consequatur laborum. Ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-                  quos. Quasi voluptatibus atque eum quam velit? Sequi, autem cumque consequatur
-                  laborum.
-                </p>
-              </ul> */}
+            <div
+              className={
+                preview
+                  ? 'relative text-sm'
+                  : 'mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 z-[1000] relative'
+              }
+            >
+              {!preview && (
+                <>
+                  <p className="text-base/7 font-semibold text-sky-600 relative z-10">
+                    Leaderboard
+                  </p>
+                  <h2
+                    id="features-heading"
+                    className="mt-2 text-balance text-4xl font-semibold tracking-tighter text-gray-950 sm:text-5xl relative z-10"
+                  >
+                    Setting a new standard in phonetic transcription
+                  </h2>
+                </>
+              )}
 
-              <div className="p-2 mt-12 border rounded-[24px] bg-white">
-                <ul
-                  role="list"
-                  className="grid grid-cols-1 gap-10 sm:gap-20 z-10 relative overflow-x-scroll rounded-2xl border"
+              <div className={`p-2 border rounded-[24px] bg-white ${preview ? '' : 'mt-12'}`}>
+                <div
+                  role="region"
+                  aria-label="Leaderboard scores"
+                  tabIndex={0}
+                  className="grid grid-cols-1 gap-10 sm:gap-20 z-10 relative overflow-x-auto rounded-2xl border"
                 >
                   <table className="border-collapse overflow-x-scroll">
                     <thead className="bg-neutral-100 border-b">
@@ -512,6 +264,25 @@ export default function Leaderboard() {
                           >
                             <span>Model</span>
                             <SortIndicator direction={getDirectionFor('model')} />
+                          </button>
+                        </th>
+                        <th
+                          className="text-center hidden sm:table-cell"
+                          aria-sort={
+                            getDirectionFor('size')
+                              ? getDirectionFor('size') === 'asc'
+                                ? 'ascending'
+                                : 'descending'
+                              : 'none'
+                          }
+                        >
+                          <button
+                            type="button"
+                            onClick={() => requestSort('size')}
+                            className="inline-flex items-center gap-1 cursor-pointer select-none justify-center w-full"
+                          >
+                            <span>Size</span>
+                            <SortIndicator direction={getDirectionFor('size')} />
                           </button>
                         </th>
                         <th
@@ -614,7 +385,7 @@ export default function Leaderboard() {
                     <tbody>
                       {sortedLeaderboard.map((item, index) => (
                         <tr
-                          key={item.model}
+                          key={`${item.model}-${item.link}-${index}`}
                           className={`border-y h-[100px] sm:h-auto last:border-b-0 ${
                             item.koel_labs
                               ? 'bg-blue-50 border-blue-300/70'
@@ -635,6 +406,15 @@ export default function Leaderboard() {
                               className={item.koel_labs ? 'font-semibold text-neutral-950' : ''}
                             >
                               {item.model}
+                            </span>
+                          </td>
+                          <td
+                            className={`text-center py-3 px-4 border-r hidden sm:table-cell ${item.koel_labs ? 'border-blue-300/70' : 'border-neutral-200'}`}
+                          >
+                            <span
+                              className={item.koel_labs ? 'font-semibold text-neutral-950' : ''}
+                            >
+                              {item.size}
                             </span>
                           </td>
                           <td
@@ -674,17 +454,18 @@ export default function Leaderboard() {
                       ))}
                     </tbody>
                   </table>
-                </ul>
+                </div>
               </div>
               <p className="text-center text-sm text-neutral-500 mt-8">
-                Last updated: September 20, 2026 from{' '}
+                {data.source === 'huggingface' ? 'Latest submissions' : 'Saved snapshot'}:{' '}
+                {leaderboardDate(data.updated_at)}.{' '}
                 <a
-                  href="https://huggingface.co/spaces/KoelLabs/IPA-Transcription-EN"
+                  href={LEADERBOARD_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sky-600 underline"
                 >
-                  https://huggingface.co/spaces/KoelLabs/IPA-Transcription-EN
+                  View {preview ? 'all models' : 'the live leaderboard'} on Hugging Face
                 </a>
               </p>
             </div>

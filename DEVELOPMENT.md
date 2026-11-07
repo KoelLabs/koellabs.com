@@ -37,6 +37,17 @@ This starts only the website at [localhost:3000](http://localhost:3000). Stop it
 
 ## Public integrations
 
+The research leaderboard reads aggregate results from the public Hugging Face Space through
+`/api/leaderboard`. Successful results are cached for an hour; failed initial reads use
+`lib/leaderboard-snapshot.json`. The website keeps its own table styling and sorting. The leaderboard
+blog preview and `/api/leaderboard/image` share this source so its hero and social image stay current.
+The image endpoint reuses the original artwork and replaces only the ranking labels. The article
+uses `?variant=hero`; the default thumbnail retains its original title. Its OpenType font is a format
+conversion of the existing `OpenRunde-Medium.woff2`, used because the PNG renderer cannot read WOFF2.
+No Hugging Face token or private evaluation data is needed. The integration uses Gradio's
+`get_leaderboard_view` call with `[["Average"], "FER"]` and validates the returned desktop table.
+If the Space changes its API or columns, update `lib/leaderboard-server.ts` and `lib/leaderboard.ts`.
+
 `/privacy` and `/terms` fetch their Markdown from `KoelLabs/.github` at request time and render it
 on the website. GitHub remains the source of truth, so document edits do not require a rebuild.
 

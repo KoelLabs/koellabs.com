@@ -1,7 +1,3 @@
-// This is the individual blog post page content. It is rendered insides [slug]/page.tsx.
-// The metadata object is used to display the blog post on the main blog page (app/blog/page.tsx).
-// It will also be used to set meta tags for SEO once I get around to adding that.
-
 import type { Metadata } from '../posts';
 import Link from 'next/link';
 import { sourceSerif } from '@/app/fonts';
@@ -11,28 +7,28 @@ import BlogHeroImage from '../blog-components/hero-image';
 import BlogSubheading from '../blog-components/subheading';
 import BlogImage from '../blog-components/image';
 import BlogDecorations from '../blog-components/decorations';
+import Leaderboard from '@/app/previews/sections-previews/leaderboard';
+import { LEADERBOARD_URL } from '@/lib/leaderboard';
 
 export const metadata: Metadata = {
   title: 'Building Open Source Hugging Face Leaderboards',
   slug: 'building-open-source-leaderboards',
   date: '2025-01-11',
   published: true,
-  image: '/images/blogLeaderboards.png',
+  image: '/api/leaderboard/image',
   summary:
-    "Sometimes, the best machine learning models are hidden in plain sight. During our work on phonemic transcription, we stumbled upon a specialized ginic model that had been finetuned on Facebook's XLSR-53 model using the Buckeye corpus. This discovery proved significant: Ginic performs 1.2x better than Facebook, and iterating on their approach, our model performs 2.2x better than ginic. However, finding this model was more a product of extensive searching than systematic discovery, highlighting a broader challenge in the phoneme transcription space.",
+    'How we built an open-source English speech-to-IPA leaderboard with Gradio, reproducible evaluation across five speech datasets, normalized PER and FER scoring, and live results from Hugging Face.',
   category: 'Technical Report',
-  tags: [
-    {
-      text: 'Hugging Face',
-      url: 'https://huggingface.co/KoelLabs',
-    },
-  ],
+  tags: [{ text: 'Hugging Face', url: 'https://huggingface.co/KoelLabs' }],
 };
+
+const source = `${LEADERBOARD_URL}/blob/main`;
+const linkClass = 'text-sky-600 hover:underline';
 
 export default function PostBody() {
   return (
     <BlogBody>
-      <div className="">
+      <div>
         <BlogHeading
           category={metadata.category}
           categoryColorClass="text-sky-600"
@@ -41,170 +37,110 @@ export default function PostBody() {
           maxWidth={600}
         />
         <BlogHeroImage
-          src="/images/blogLeaderboardsAlt.png"
-          alt="Building Open Source Leaderboards"
+          src="/api/leaderboard/image?variant=hero"
+          alt="The leading English speech-to-IPA models, ranked by average feature error rate"
         />
-        <br></br>
         <div className="relative lg:col-span-3 max-w-3xl mx-auto mt-12">
           <BlogDecorations />
           <div
             className={`relative flex h-full flex-col tracking-[-0.010em] text-lg ${sourceSerif.className}`}
           >
+            <p className="mb-8 text-sm text-neutral-500 font-sans">
+              Updated November 6, 2026. Leaderboard rankings refresh hourly from Hugging Face.
+            </p>
             <BlogSubheading>An Introduction</BlogSubheading>
             <p className="mb-4">
-              Sometimes, the best machine learning models are hidden in plain sight. During our work
-              on phonemic transcription, we stumbled upon a specialized{' '}
-              <Link
-                className="text-sky-600 hover:underline"
-                href="https://huggingface.co/ginic"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                ginic model
-              </Link>{' '}
-              that had been finetuned on{' '}
-              <Link
-                className="text-sky-600 hover:underline"
-                href="https://huggingface.co/facebook/wav2vec2-large-xlsr-53"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Facebook's XLSR-53 model
-              </Link>{' '}
-              using the Buckeye corpus. This discovery proved significant: Ginic performs 1.2x
-              better than Facebook, and iterating on their approach, our model performs 2.2x better
-              than ginic. However, finding this model was more a product of extensive searching than
-              systematic discovery, highlighting a broader challenge in the phoneme transcription
-              space that led us to build{' '}
-              <Link
-                className="text-sky-600 hover:underline"
-                href="https://huggingface.co/spaces/KoelLabs/IPA-Transcription-EN"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                this open-source leaderboard
-              </Link>
-              .
+              Comparing Speech2IPA models fairly with other systems is very involved: models use
+              different output alphabets, evaluation datasets, and scoring conventions. Yet, without
+              the ability to compare new systems accurately with prior systems, it becomes
+              impossible to measure progress.
             </p>
-            <BlogSubheading>
-              The Need for Better Model Discovery and Standardized Evaluation
-            </BlogSubheading>
-
             <p className="mb-4">
-              While leaderboards have become fundamental infrastructure in many areas of machine
-              learning - from{' '}
+              We built the{' '}
               <Link
-                href="https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard#/"
+                className={linkClass}
+                href={LEADERBOARD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sky-600 hover:underline"
               >
-                large language models
+                English Speech-to-IPA Leaderboard
               </Link>{' '}
-              to{' '}
-              <Link
-                href="https://huggingface.co/spaces/hf-audio/open_asr_leaderboard"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sky-600 hover:underline"
-              >
-                automatic speech recognition
-              </Link>{' '}
-              - the field of phonemic transcription notably lacks such standardized evaluation
-              frameworks. This gap isn't just about missing leaderboards - it reflects a broader
-              absence of unified evaluation standards and comprehensive survey papers that could
-              allow researchers and practitioners to track progress and compare approaches
-              effectively.
+              to make model discovery and comparison easier and to give the speech community a clear
+              target to work towards. It brings specialist phonetic recognizers, multilingual
+              systems, compact models, and ensembles into a shared evaluation covering native,
+              non-native, and post-stroke English speech.
             </p>
 
-            <BlogSubheading>A Streamlined Architecture for Open Evaluation</BlogSubheading>
-
+            <BlogSubheading>Reading the Leaderboard</BlogSubheading>
             <p className="mb-4">
-              To address this gap, we implemented a system that handles both the queue backend and
-              the leaderboard frontend. This design prioritizes transparency and accessibility -
-              crucial elements often missing in evaluation. Our architecture consists of two main
-              components:
+              The table shows each model&apos;s size, average phoneme error rate (PER), average
+              feature error rate (FER), repository link when supplied, and submission date. Lower
+              error rates are better. The default ranking uses average FER; the Space also supports
+              sorting by PER or model size and comparing FER for individual datasets. For each model
+              repository, the table displays its latest submission rather than every historical
+              evaluation.
             </p>
+            <Leaderboard preview />
 
-            <ul className="list-disc list-inside mb-4 pl-4">
+            <BlogSubheading>Evaluation Across Five Speech Datasets</BlogSubheading>
+            <p className="mb-4">
+              The benchmark uses a revision-pinned private test set of 500 clips, sampled as 100
+              clips from each of five datasets:
+            </p>
+            <ul className="list-disc pl-6 mb-4">
               <li className="mb-2">
-                <span className="font-semibold text-sky-600 font-sans">app.py:</span> Handles the
-                front-end logic using Gradio, providing a clean interface for viewing the
-                leaderboard, checking model status, and submitting new models
+                <strong>TIMIT:</strong> native English speech.
               </li>
               <li className="mb-2">
-                <span className="font-semibold text-sky-600 font-sans">tasks.py:</span> Manages the
-                back-end operations, interfacing with three JSON files in the queue directory:
-                <ul className="list-disc list-inside ml-4 mt-2">
-                  <li>
-                    <span className="font-semibold text-sky-600 font-sans">leaderboard.json:</span>{' '}
-                    Stores the final, processed rankings
-                  </li>
-                  <li>
-                    <span className="font-semibold text-sky-600 font-sans">tasks.json:</span> Tracks
-                    newly submitted models
-                  </li>
-                  <li>
-                    <span className="font-semibold text-sky-600 font-sans">results.json:</span>{' '}
-                    Contains detailed metadata for completed evaluations
-                  </li>
-                </ul>
+                <strong>EpaDB:</strong> English spoken by people whose first language is Spanish.
+              </li>
+              <li className="mb-2">
+                <strong>Speech Ocean:</strong> English spoken by people whose first language is
+                Mandarin.
+              </li>
+              <li className="mb-2">
+                <strong>ISLE:</strong> English spoken by people whose first language is Italian or
+                German.
+              </li>
+              <li className="mb-2">
+                <strong>PSST:</strong> speech from people with post-stroke aphasia.
               </li>
             </ul>
-
             <p className="mb-4">
-              Transparency was a key consideration in our design. Unlike some existing leaderboards
-              like{' '}
-              <Link
-                href="https://huggingface.co/spaces/hf-audio/open_asr_leaderboard"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sky-600 hover:underline"
-              >
-                Open ASR
-              </Link>{' '}
-              that require users to request model evaluation and wait, our system automates the
-              process. Most models can be evaluated on the whole test set within hours of
-              submission.
-            </p>
-
-            <p className="mb-4">
-              Additionally, the front-end leaderboard and queue backend are visible to all Hugging
-              Face users - a deliberate choice to promote transparency. The results file provides
-              detailed metadata about evaluations and model outputs, allowing users to understand
-              precisely how models perform and evaluations are conducted. that require users to
-              request model evaluation and wait, our system automates the process.
+              We score each utterance and average those scores across the test set. Dataset-specific
+              FER helps show where an overall average can hide differences between speaker groups.
+              In the Space, select datasets under <strong>Compare datasets</strong> to see their
+              scores and descriptions of the speakers they represent.
             </p>
 
             <BlogImage
-              src="/images/blogLeaderboard1.png"
-              alt="Check status of your model"
-              width={1200}
-              height={600}
-              expanded={true}
-              className="my-32 mb-36"
+              src="/images/leaderboard-2026-11.jpg"
+              alt="The Hugging Face leaderboard in desktop Chrome showing current models, size, PER, FER, and dataset controls"
+              width={1140}
+              height={908}
+              expanded={false}
+              className="my-10"
             />
 
+            <BlogSubheading>Consistent IPA and Scoring</BlogSubheading>
             <p className="mb-4">
-              This openness and automation represent a step toward the kind of standardized
-              evaluation infrastructure that has helped accelerate progress in other areas of
-              machine learning but has been notably absent in phonemic transcription.
+              Predictions and references pass through the same IPA normalization before scoring.
+              Equivalent spellings are standardized, Unicode is normalized, and whitespace, stress
+              marks, syllable dots, and tie bars are removed. Phonetic details such as vowel
+              quality, rhoticity, length, aspiration, and nasalization are retained. Models that
+              emit ARPAbet, TIMIT codes, or other supported alphabets use explicit conversion
+              adapters before this step.
             </p>
-
-            <BlogSubheading>Technical Implementation Details</BlogSubheading>
-
-            <p className="mb-4">
-              Our evaluation system measures model performance using two key metrics:
-            </p>
-
-            <ol className="list-decimal list-inside mb-4 pl-4">
-              <li className="mb-2">
-                PER (Phoneme Error Rate): Calculated using Levenshtein distance between predicted
-                and actual phoneme sequences
+            <ol className="list-decimal pl-6 mb-4">
+              <li className="mb-3">
+                <strong>PER (Phoneme Error Rate):</strong> the Levenshtein/edit distance between
+                canonical IPA strings divided by the reference string&apos;s character length. This
+                is just like character error rate (CER) but with the ipa phonemes.
               </li>
-              <li className="mb-2">
-                PWED (Phoneme Weighted Edit Distance): A more nuanced metric that considers phonemic
-                feature distances, implemented using the panphon library
+              <li className="mb-3">
+                <strong>FER (Feature Error Rate):</strong> weighted articulatory-feature edit
+                distance using Panphon. Just like PER but similar sounds can incur a smaller
+                substitution cost than very different sounds.
               </li>
             </ol>
 
@@ -219,95 +155,127 @@ export default function PostBody() {
               .
             </p>
 
+            <BlogSubheading>How the Space Works</BlogSubheading>
             <p className="mb-4">
-              We use the TIMIT speech corpus as our evaluation dataset, providing a standardized
-              benchmark widely recognized in the speech recognition community. The evaluation runs
-              on a consistent compute environment (16GB RAM, 2vCPUs) to ensure reproducibility.
+              The implementation combines a Gradio interface with background evaluation workers and
+              a Hugging Face dataset for aggregate scores. Its main components are:
             </p>
-
-            <BlogSubheading>We Need More of These Projects</BlogSubheading>
-
-            <p className="mb-4">
-              The success of platforms like the Open LLM Leaderboard, with nearly 3,000 submissions,
-              demonstrates the community's appetite for transparent model comparison. While some
-              argue that gamifying model development could lead to metric gaming, we've seen how
-              leaderboards can transform competition into collaboration. They provide standardized
-              benchmarks, foster innovation through transparency, and create an engaging entry point
-              for newcomers to the field. Most importantly, they help surface promising but
-              lesser-known models that might otherwise remain undiscovered.
-            </p>
-
-            <BlogSubheading>Looking Forward</BlogSubheading>
-
-            <p className="mb-4">
-              Creating leaderboards has historically been challenging, with many templates becoming
-              quickly outdated. Hugging Face has recently streamlined this process through their
-              Space SDK, which is ideal for evaluating models of varying sizes and computational
-              requirements. To create a leaderboard using their template:
-            </p>
-
-            <BlogImage
-              src="/images/blogLeaderboard2.png"
-              alt="Hosting your leaderboard"
-              width={1200}
-              height={600}
-              expanded={true}
-              className="my-36"
-            />
-
-            <ol className="list-decimal list-inside mb-4 pl-4 italic">
-              <li className="mb-2">
-                Navigate to{' '}
-                <Link
-                  href="https://huggingface.co/new-space"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sky-600 hover:underline"
-                >
-                  https://huggingface.co/new-space
-                </Link>
+            <ul className="list-disc pl-6 mb-4">
+              <li className="mb-3">
+                <code>app.py</code> builds the leaderboard, dataset and sort controls, model
+                submission form, sample inference interface, and status lookup.
               </li>
-              <li className="mb-2">Select "Space SDK" as the template type</li>
-              <li className="mb-2">Choose "Gradio" as the framework</li>
-              <li className="mb-2">Select "Leaderboard" from the template options</li>
+              <li className="mb-3">
+                <code>tasks.py</code> starts evaluation in a separate process, tracks submitted,
+                evaluating, completed, or failed states in memory, and collects the aggregate
+                metrics.
+              </li>
+              <li className="mb-3">
+                <code>inference.py</code> and model-specific adapters load supported architectures
+                and produce transcriptions. <code>scoring.py</code> handles verified output-alphabet
+                conversions, while <code>metrics.py</code> applies shared normalization and scoring.
+              </li>
+              <li className="mb-3">
+                <code>hf.py</code> records model revision, size, submission details, scoring policy,
+                and aggregate results in a private Hugging Face score dataset. The public interface
+                shows the resulting rankings.
+              </li>
+              <li className="mb-3">
+                <code>testset.py</code> loads the private evaluation sample at a fixed revision.
+                Evaluation audio, references, and prediction caches remain outside the public Space
+                repository.
+              </li>
+            </ul>
+            <p className="mb-4">
+              The source code and scoring rules are public; access to the private evaluation and
+              score datasets is handled by the Space&apos;s credentials. The task list is
+              process-local, so status lookup is tied to the running Space rather than a persistent
+              JSON queue. Completed aggregate results are stored in the backing dataset.
+            </p>
+
+            <BlogSubheading>Submitting and Testing a Model</BlogSubheading>
+            <ol className="list-decimal pl-6 mb-4">
               <li className="mb-2">
-                You will be asked for an access token in the UI before you create the space. This
-                can be created in{' '}
-                <Link
-                  href="https://huggingface.co/login?next=%2Fsettings%2Ftokens"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sky-600 hover:underline"
-                >
-                  your settings
-                </Link>{' '}
-                and needs read access for the leaderboard to function.
+                Open <strong>Submit Model</strong> in the Space.
+              </li>
+              <li className="mb-2">
+                Enter the model ID, a submission name, and an optional repository or project URL.
+              </li>
+              <li className="mb-2">
+                Select the supported model type and its output phonetic code. Choose IPA if the
+                model already emits IPA.
+              </li>
+              <li className="mb-2">
+                Use <strong>Test Model</strong> with a sample audio clip to check that the adapter
+                and output code work before requesting a full evaluation.
+              </li>
+              <li className="mb-2">
+                Click <strong>Submit</strong>, keep the returned task ID, and check{' '}
+                <strong>Submission Status</strong> using that ID or the model ID. Completed
+                evaluations appear in the leaderboard after refresh.
               </li>
             </ol>
-
+            <BlogImage
+              src="/images/leaderboard-submit-2026-11.jpg"
+              alt="The current Hugging Face submission form with model ID, submission name, model type, and output phonetic code"
+              width={1140}
+              height={908}
+              expanded={false}
+              className="my-10"
+            />
             <p className="mb-4">
-              For evaluating collections of smaller models that don't require extensive pre-testing,
-              our lightweight implementation offers a practical working example. It demonstrates a
-              complete end-to-end leaderboard system while maintaining simplicity in both setup and
-              maintenance. We've made our codebase publicly available - feel free to duplicate it
-              for your own specialized evaluation needs or use it as a reference implementation when
-              building more complex systems. We are actively working on adding more evaluation
-              datasets/metrics and support for more model architectures and{' '}
-              <Link
-                href="https://github.com/KoelLabs/.github/blob/main/CONTRIBUTING.md"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sky-600 hover:underline"
-              >
-                welcome contributions
-              </Link>
-              !
+              The Space runs on a basic CPU environment with 16 GB RAM and 2 vCPUs. Evaluation time
+              depends on the architecture and runtime; a full run can take hours. Larger systems and
+              specialized adapters may need a separate evaluation environment. Adding a new
+              architecture requires a compatible inference adapter and verified output conversion.
             </p>
 
+            <BlogSubheading>Reusing the Implementation</BlogSubheading>
             <p className="mb-4">
-              The path to better model evaluation shouldn't be blocked by infrastructure complexity.
-              Whether using Hugging Face's template or our simpler architecture, the goal remains
-              the same: making model discovery and comparison more accessible to the community.
+              To adapt the project, start with the{' '}
+              <Link
+                className={linkClass}
+                href={`${LEADERBOARD_URL}/tree/main`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                public source
+              </Link>{' '}
+              and follow{' '}
+              <Link
+                className={linkClass}
+                href={`${source}/DEVELOPMENT.md`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                the development guide
+              </Link>{' '}
+              for the Python environment, dependencies, dataset access, and local startup. A
+              deployment needs access to its evaluation dataset and write access to its score
+              dataset; keep those credentials in server-side secrets. Test the inference adapters
+              and scoring rules before publishing results.
+            </p>
+            <p className="mb-4">
+              We welcome contributions to model adapters, evaluation coverage, scoring tests, and
+              documentation. Visit the{' '}
+              <Link
+                className={linkClass}
+                href={`${source}/CONTRIBUTING.md`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                contribution guide
+              </Link>{' '}
+              or{' '}
+              <Link
+                className={linkClass}
+                href={`${LEADERBOARD_URL}/discussions`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                open a discussion
+              </Link>{' '}
+              to help make phonetic model discovery and comparison more accessible.
             </p>
           </div>
         </div>
