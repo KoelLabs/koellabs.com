@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from '../posts';
 import { sourceSerif } from '@/app/fonts';
@@ -7,6 +6,7 @@ import BlogHeading from '../blog-components/heading';
 import BlogHeroImage from '../blog-components/hero-image';
 import BlogSubheading from '../blog-components/subheading';
 import BlogDecorations from '../blog-components/decorations';
+import BlogFigure from '../blog-components/figure';
 import { Button } from '@/components/ui/base/button';
 
 export const metadata: Metadata = {
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   date: '2026-11-07T00:00:00-08:00',
   published: true,
   image: '/blog/interspeech-2026/paper-hero.svg',
+  imagePosition: 'top',
   socialImage: '/blog/interspeech-2026/paper-hero.png',
   summary:
     'Our Interspeech 2026 study examines when synthetic G2P labels help phonetic transcription, where expert annotation becomes more effective, and how ASR pretraining improves robustness across English accents.',
@@ -29,40 +30,6 @@ export const metadata: Metadata = {
 };
 
 const linkClass = 'text-sky-600 hover:underline';
-
-function PosterFigure({
-  name,
-  alt,
-  width,
-  height,
-  children,
-  narrow = false,
-}: {
-  name: string;
-  alt: string;
-  width: number;
-  height: number;
-  children: React.ReactNode;
-  narrow?: boolean;
-}) {
-  const src = `/blog/interspeech-2026/${name}.svg`;
-  return (
-    <figure className={`my-8 ${narrow ? 'max-w-sm mx-auto' : ''}`}>
-      <a href={src} target="_blank" rel="noopener noreferrer" aria-label={`Open figure: ${alt}`}>
-        <Image
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          unoptimized
-          sizes={narrow ? '(max-width: 420px) 100vw, 384px' : '(max-width: 768px) 100vw, 768px'}
-          className="h-auto w-full rounded-2xl border border-neutral-200"
-        />
-      </a>
-      <figcaption className="mt-3 text-sm/6 text-neutral-500 font-sans">{children}</figcaption>
-    </figure>
-  );
-}
 
 export default function PostBody() {
   return (
@@ -147,15 +114,15 @@ export default function PostBody() {
             disfluencies, such as repetitions or interrupted sounds, in non-native speech and speech
             affected by a medical condition.
           </p>
-          <PosterFigure
-            name="g2p-vs-human"
+          <BlogFigure
+            src="/blog/interspeech-2026/g2p-vs-human.svg"
             alt="Spanish-accented speech transcribed through ASR and G2P from spelling, compared with an expert listening directly to the audio"
             width={692}
             height={380}
           >
             G2P labels follow the spelling of “shampoo,” while an expert can label the pronunciation
             heard in the recording.
-          </PosterFigure>
+          </BlogFigure>
           <p className="mb-4">
             Human labels, where an expert listens to the audio and transcribes the exact
             pronunciation patterns, are the gold standard, but they cannot scale as easily as G2P
@@ -201,24 +168,24 @@ export default function PostBody() {
             however, extra G2P does not provide a significant gain: WPFER is 3.40% without that
             stage and 3.45% with it.
           </p>
-          <PosterFigure
-            name="threshold-under-30"
+          <BlogFigure
+            src="/blog/interspeech-2026/threshold-under-30.svg"
             alt="Two training curricula using 20.4 hours each of expert and G2P labels: WPFER is 4.60% without extra G2P and 4.28% with 5,300 extra G2P hours"
             width={692}
             height={456}
           >
             Below 30 hours of human annotation, extra G2P reduces error. The 95% confidence
             intervals are 4.49–4.70% and 4.19–4.37%, respectively.
-          </PosterFigure>
-          <PosterFigure
-            name="threshold-over-30"
+          </BlogFigure>
+          <BlogFigure
+            src="/blog/interspeech-2026/threshold-over-30.svg"
             alt="Two training curricula using 40.8 hours of expert labels: WPFER is 3.40% without extra G2P and 3.45% with 5,300 extra G2P hours"
             width={691}
             height={456}
           >
             Above 30 hours of human annotation, extra G2P provides no significant gain. The 95%
             confidence intervals are 3.33–3.46% and 3.39–3.52%, respectively.
-          </PosterFigure>
+          </BlogFigure>
 
           <BlogSubheading>Data</BlogSubheading>
           <p className="mb-4">
@@ -228,15 +195,15 @@ export default function PostBody() {
             include 10 hours from unseen dialects. Keeping test recordings out of training lets us
             check whether the model can handle new speakers and ways of speaking.
           </p>
-          <PosterFigure
-            name="data"
+          <BlogFigure
+            src="/blog/interspeech-2026/data.svg"
             alt="Dataset overview for DARPA TIMIT, EpaDB, PSST, L2-ARCTIC, Speech Ocean, Buckeye, DoReCo, and ISLE, with speakers, hours, dialects, and test-set membership"
             width={691}
             height={282}
           >
             The benchmark includes native, non-native, and post-stroke aphasic speech.
             L2-ARCTIC&apos;s scripted and spontaneous speech appear separately in the table.
-          </PosterFigure>
+          </BlogFigure>
 
           <BlogSubheading>Evaluation Metrics</BlogSubheading>
           <p className="mb-4">
@@ -251,8 +218,8 @@ export default function PostBody() {
             and whiskers in the figures show how precise each estimate is. Lower error rates
             indicate better performance.
           </p>
-          <PosterFigure
-            name="metrics"
+          <BlogFigure
+            src="/blog/interspeech-2026/metrics.svg"
             alt="Regular PER assigns equal penalties to substitutions in Pop, Bop, and Iop, while weighted feature error distinguishes how similar the substituted sounds are"
             width={366}
             height={339}
@@ -264,7 +231,7 @@ export default function PostBody() {
               phonetic transcription metrics guide
             </Link>
             .
-          </PosterFigure>
+          </BlogFigure>
 
           <BlogSubheading>ASR Helps on Unseen Accents</BlogSubheading>
           <p className="mb-4">
@@ -273,15 +240,15 @@ export default function PostBody() {
             both ASR and G2P gives 3.69%. All three runs use 40.8 hours of expert labels. The
             figure&apos;s whiskers show 95% confidence intervals.
           </p>
-          <PosterFigure
-            name="unseen-accents"
+          <BlogFigure
+            src="/blog/interspeech-2026/unseen-accents.svg"
             alt="ISLE WPFER comparison: XLSR plus experts 3.84%, plus ASR 3.62%, and plus ASR and G2P 3.69%, with 95% confidence intervals"
             width={691}
             height={124}
           >
             ASR pretraining improves performance on accents that were not present in the
             expert-labeled training data.
-          </PosterFigure>
+          </BlogFigure>
 
           <BlogSubheading>Limitations &amp; Future Work</BlogSubheading>
           <p className="mb-4">

@@ -13,6 +13,7 @@ export type Metadata = {
   date: string;
   published: boolean;
   image: string;
+  imagePosition?: 'top' | 'center' | 'bottom';
   socialImage?: string;
   summary: string;
   category: 'Technical Report' | 'Announcement' | 'Tutorial' | 'Language Learning' | 'Other';

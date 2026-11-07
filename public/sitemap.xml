@@ -28,6 +28,12 @@
 
   <!-- Blog posts -->
   <url>
+    <loc>https://koellabs.com/blog/connecting-the-dots-asr-gaps</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://koellabs.com/blog/scaling-human-g2p-supervision</loc>
     <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
@@ -51,4 +57,4 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-</urlset> 
+</urlset>

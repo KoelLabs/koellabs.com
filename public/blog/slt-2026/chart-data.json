@@ -1,0 +1,1157 @@
+{
+  "provenance": {
+    "paper": "https://arxiv.org/abs/2610.17761",
+    "version": "2610.17761v1",
+    "code": "https://github.com/smfsamir/longitudinal-asr-eval",
+    "sourceFiles": {
+      "data/reference/accent_scores.csv": "617d601e4380b6d77faa99ff02dfe349d271db1c4e9dccd07fc6e00f367184ed",
+      "data/allstar_results_for_plotting_0314.csv": "5d2a9187e3492ccc6dd8a08e23d3b6a2a4727fbcdf6389029fff6ffc34a58bec",
+      "data/paper_values.csv": "d6b01bb250597f1c829bf541b61174ec632d14ce46197042f2014273876a5c67"
+    },
+    "methods": "Trend means follow the paper: non-ALLSTAR WER and CER <=1 (L1 control appended afterward); ALLSTAR WER<=1, excluding utterances every model scored >1. MD uses unbounded means and all chronologically ordered model pairs with positive WER increases. MD values and significance follow corrected Table II; one-sided 1,000-replicate bootstrap rule. Fixed minority groups are those selected by the paper, not reselected at each model. Values are percentage points / WER percent as labeled."
+  },
+  "datasets": [
+    {
+      "dataset": "L2-Arctic",
+      "label": "L2-Arctic \u00b7 Read",
+      "standard": "Mainstream US English",
+      "minority": "Vietnamese English",
+      "meanGap": 17.329871726224876,
+      "rho": -0.6,
+      "p": 0.014007122329599993,
+      "standardMd": 3.9,
+      "minorityMd": 11.4,
+      "mdSignificant": true,
+      "points": [
+        {
+          "model": "Deepspeech",
+          "date": "2021-10",
+          "standard": 3.839856358238711,
+          "minority": 33.047204647204644,
+          "standardUnbounded": 3.839856358238711,
+          "minorityUnbounded": 33.047204647204644
+        },
+        {
+          "model": "WavLM Libri-100h",
+          "date": "2021-12",
+          "standard": 9.034675836146423,
+          "minority": 44.02967233100789,
+          "standardUnbounded": 9.034675836146423,
+          "minorityUnbounded": 44.146765734265735
+        },
+        {
+          "model": "Whisper Large v1",
+          "date": "2022-09",
+          "standard": 56.107068902635405,
+          "minority": 56.28191225715978,
+          "standardUnbounded": 56.107068902635405,
+          "minorityUnbounded": 121.70489267734676
+        },
+        {
+          "model": "Whisper Large v2",
+          "date": "2022-12",
+          "standard": 2.1310742634272044,
+          "minority": 17.381721307306588,
+          "standardUnbounded": 2.1310742634272044,
+          "minorityUnbounded": 17.75711556961557
+        },
+        {
+          "model": "MMS 1B All",
+          "date": "2023-05",
+          "standard": 3.4415019892961065,
+          "minority": 29.905778232155523,
+          "standardUnbounded": 3.4415019892961065,
+          "minorityUnbounded": 30.05593526843527
+        },
+        {
+          "model": "OWSM 1.0 272M",
+          "date": "2023-09",
+          "standard": 2.240024409142056,
+          "minority": 26.18240548006434,
+          "standardUnbounded": 2.240024409142056,
+          "minorityUnbounded": 26.485606985606985
+        },
+        {
+          "model": "OWSM 2.0 739M",
+          "date": "2023-10",
+          "standard": 1.0793529727353255,
+          "minority": 17.719644244644243,
+          "standardUnbounded": 1.0793529727353255,
+          "minorityUnbounded": 17.719644244644243
+        },
+        {
+          "model": "Whisper Large v3",
+          "date": "2023-11",
+          "standard": 1.0281024803083625,
+          "minority": 19.519866244866243,
+          "standardUnbounded": 1.0281024803083625,
+          "minorityUnbounded": 19.519866244866243
+        },
+        {
+          "model": "SeamlessM4T",
+          "date": "2023-12",
+          "standard": 1.8027485858368208,
+          "minority": 18.195177507677506,
+          "standardUnbounded": 1.8027485858368208,
+          "minorityUnbounded": 18.195177507677506
+        },
+        {
+          "model": "OWSM 3.1 1B",
+          "date": "2024-01",
+          "standard": 1.1058882566235506,
+          "minority": 16.53441346262715,
+          "standardUnbounded": 1.1058882566235506,
+          "minorityUnbounded": 16.6973322973323
+        },
+        {
+          "model": "Qwen2 Audio 7B",
+          "date": "2024-08",
+          "standard": 3.241869105839694,
+          "minority": 18.851552318889002,
+          "standardUnbounded": 3.241869105839694,
+          "minorityUnbounded": 19.39221519221519
+        },
+        {
+          "model": "OWSM 4.0 1B",
+          "date": "2025-05",
+          "standard": 0.9668510955275661,
+          "minority": 15.850844525844524,
+          "standardUnbounded": 0.9668510955275661,
+          "minorityUnbounded": 15.850844525844524
+        },
+        {
+          "model": "Qwen3 ASR 1.7B",
+          "date": "2025-06",
+          "standard": 3.0812365738836323,
+          "minority": 11.715109227630094,
+          "standardUnbounded": 3.0812365738836323,
+          "minorityUnbounded": 11.895584045584044
+        },
+        {
+          "model": "Canary Qwen 2.5B",
+          "date": "2025-07",
+          "standard": 1.5164131892073067,
+          "minority": 13.557819495319496,
+          "standardUnbounded": 1.5164131892073067,
+          "minorityUnbounded": 13.557819495319496
+        },
+        {
+          "model": "Google Chirp 3",
+          "date": "2025-10",
+          "standard": 1.4976261483614424,
+          "minority": 15.393090705590703,
+          "standardUnbounded": 1.4976261483614424,
+          "minorityUnbounded": 15.393090705590703
+        },
+        {
+          "model": "Omnilingual 7B",
+          "date": "2025-11",
+          "standard": 1.4554066576125397,
+          "minority": 16.681432456432457,
+          "standardUnbounded": 1.4554066576125397,
+          "minorityUnbounded": 16.681432456432457
+        }
+      ]
+    },
+    {
+      "dataset": "L2-Arctic Spontaneous",
+      "label": "L2-Arctic \u00b7 Spontaneous",
+      "standard": "Mainstream US English",
+      "minority": "Korean English",
+      "meanGap": 22.095663221582345,
+      "rho": -0.07505520795742068,
+      "p": 0.7823508285466043,
+      "standardMd": 7.5,
+      "minorityMd": 9.8,
+      "mdSignificant": true,
+      "points": [
+        {
+          "model": "Deepspeech",
+          "date": "2021-10",
+          "standard": 10.58823529411764,
+          "minority": 36.87645687645687,
+          "standardUnbounded": 10.58823529411764,
+          "minorityUnbounded": 36.87645687645687
+        },
+        {
+          "model": "WavLM Libri-100h",
+          "date": "2021-12",
+          "standard": 57.647058823529406,
+          "minority": 65.06993006993007,
+          "standardUnbounded": 57.647058823529406,
+          "minorityUnbounded": 65.06993006993007
+        },
+        {
+          "model": "Whisper Large v1",
+          "date": "2022-09",
+          "standard": 0.0,
+          "minority": 35.22144522144522,
+          "standardUnbounded": 0.0,
+          "minorityUnbounded": 35.22144522144522
+        },
+        {
+          "model": "Whisper Large v2",
+          "date": "2022-12",
+          "standard": 0.0,
+          "minority": 19.519230769230766,
+          "standardUnbounded": 0.0,
+          "minorityUnbounded": 19.519230769230766
+        },
+        {
+          "model": "MMS 1B All",
+          "date": "2023-05",
+          "standard": 0.0,
+          "minority": 36.45979020979021,
+          "standardUnbounded": 0.0,
+          "minorityUnbounded": 36.45979020979021
+        },
+        {
+          "model": "OWSM 1.0 272M",
+          "date": "2023-09",
+          "standard": 12.94117647058823,
+          "minority": 29.41433566433566,
+          "standardUnbounded": 12.94117647058823,
+          "minorityUnbounded": 29.41433566433566
+        },
+        {
+          "model": "OWSM 2.0 739M",
+          "date": "2023-10",
+          "standard": 1.17647058823529,
+          "minority": 17.596153846153843,
+          "standardUnbounded": 1.17647058823529,
+          "minorityUnbounded": 17.596153846153843
+        },
+        {
+          "model": "Whisper Large v3",
+          "date": "2023-11",
+          "standard": 0.0,
+          "minority": 18.589743589743588,
+          "standardUnbounded": 0.0,
+          "minorityUnbounded": 18.589743589743588
+        },
+        {
+          "model": "SeamlessM4T",
+          "date": "2023-12",
+          "standard": 0.0,
+          "minority": 22.368881118881117,
+          "standardUnbounded": 0.0,
+          "minorityUnbounded": 22.368881118881117
+        },
+        {
+          "model": "OWSM 3.1 1B",
+          "date": "2024-01",
+          "standard": 1.17647058823529,
+          "minority": 20.86247086247086,
+          "standardUnbounded": 1.17647058823529,
+          "minorityUnbounded": 20.86247086247086
+        },
+        {
+          "model": "Qwen2 Audio 7B",
+          "date": "2024-08",
+          "standard": 0.0,
+          "minority": 40.929487179487175,
+          "standardUnbounded": 0.0,
+          "minorityUnbounded": 40.929487179487175
+        },
+        {
+          "model": "OWSM 4.0 1B",
+          "date": "2025-05",
+          "standard": 0.0,
+          "minority": 27.718531468531467,
+          "standardUnbounded": 0.0,
+          "minorityUnbounded": 27.718531468531467
+        },
+        {
+          "model": "Qwen3 ASR 1.7B",
+          "date": "2025-06",
+          "standard": 0.0,
+          "minority": 16.506410256410255,
+          "standardUnbounded": 0.0,
+          "minorityUnbounded": 16.506410256410255
+        },
+        {
+          "model": "Canary Qwen 2.5B",
+          "date": "2025-07",
+          "standard": 0.0,
+          "minority": 11.506410256410254,
+          "standardUnbounded": 0.0,
+          "minorityUnbounded": 11.506410256410254
+        },
+        {
+          "model": "Google Chirp 3",
+          "date": "2025-10",
+          "standard": 0.0,
+          "minority": 11.506410256410254,
+          "standardUnbounded": 0.0,
+          "minorityUnbounded": 11.506410256410254
+        },
+        {
+          "model": "Omnilingual 7B",
+          "date": "2025-11",
+          "standard": 0.0,
+          "minority": 26.914335664335663,
+          "standardUnbounded": 0.0,
+          "minorityUnbounded": 26.914335664335663
+        }
+      ]
+    },
+    {
+      "dataset": "SAA",
+      "label": "Speech Accent Archive",
+      "standard": "Mainstream US English",
+      "minority": "Korean English",
+      "meanGap": 12.829924203208163,
+      "rho": -0.4205882352941176,
+      "p": 0.10476751392918707,
+      "standardMd": 11.6,
+      "minorityMd": 11.7,
+      "mdSignificant": false,
+      "points": [
+        {
+          "model": "Deepspeech",
+          "date": "2021-10",
+          "standard": 29.44221324500304,
+          "minority": 63.490196078431374,
+          "standardUnbounded": 29.44221324500304,
+          "minorityUnbounded": 67.64167205343676
+        },
+        {
+          "model": "WavLM Libri-100h",
+          "date": "2021-12",
+          "standard": 33.28988647673115,
+          "minority": 67.17931480284422,
+          "standardUnbounded": 33.28988647673115,
+          "minorityUnbounded": 70.09000049724031
+        },
+        {
+          "model": "Whisper Large v1",
+          "date": "2022-09",
+          "standard": 54.792601730083,
+          "minority": 63.78272462831287,
+          "standardUnbounded": 136.68435937401023,
+          "minorityUnbounded": 180.28280542986425
+        },
+        {
+          "model": "Whisper Large v2",
+          "date": "2022-12",
+          "standard": 16.78289274493283,
+          "minority": 21.102761617467493,
+          "standardUnbounded": 16.78289274493283,
+          "minorityUnbounded": 24.83007972419737
+        },
+        {
+          "model": "MMS 1B All",
+          "date": "2023-05",
+          "standard": 18.222956863421764,
+          "minority": 38.93290239172592,
+          "standardUnbounded": 18.222956863421764,
+          "minorityUnbounded": 42.929988563472726
+        },
+        {
+          "model": "OWSM 1.0 272M",
+          "date": "2023-09",
+          "standard": 19.37558495039294,
+          "minority": 34.95509571003736,
+          "standardUnbounded": 19.37558495039294,
+          "minorityUnbounded": 34.95509571003736
+        },
+        {
+          "model": "OWSM 2.0 739M",
+          "date": "2023-10",
+          "standard": 15.838833352474454,
+          "minority": 25.52837235797464,
+          "standardUnbounded": 15.838833352474454,
+          "minorityUnbounded": 25.52837235797464
+        },
+        {
+          "model": "Whisper Large v3",
+          "date": "2023-11",
+          "standard": 12.327008945703671,
+          "minority": 20.369144580909282,
+          "standardUnbounded": 12.327008945703671,
+          "minorityUnbounded": 23.9813203387864
+        },
+        {
+          "model": "SeamlessM4T",
+          "date": "2023-12",
+          "standard": 15.484893788265145,
+          "minority": 21.206028035630318,
+          "standardUnbounded": 15.484893788265145,
+          "minorityUnbounded": 21.206028035630318
+        },
+        {
+          "model": "OWSM 3.1 1B",
+          "date": "2024-01",
+          "standard": 13.796033153682433,
+          "minority": 25.14096099978452,
+          "standardUnbounded": 13.796033153682433,
+          "minorityUnbounded": 28.569605356935675
+        },
+        {
+          "model": "Qwen2 Audio 7B",
+          "date": "2024-08",
+          "standard": 16.088896545339075,
+          "minority": 27.851093099961876,
+          "standardUnbounded": 16.088896545339075,
+          "minorityUnbounded": 27.851093099961876
+        },
+        {
+          "model": "OWSM 4.0 1B",
+          "date": "2025-05",
+          "standard": 13.698351150243795,
+          "minority": 20.72266901154731,
+          "standardUnbounded": 13.698351150243795,
+          "minorityUnbounded": 20.72266901154731
+        },
+        {
+          "model": "Qwen3 ASR 1.7B",
+          "date": "2025-06",
+          "standard": 6.86961313853536,
+          "minority": 14.808080504079548,
+          "standardUnbounded": 6.86961313853536,
+          "minorityUnbounded": 14.808080504079548
+        },
+        {
+          "model": "Canary Qwen 2.5B",
+          "date": "2025-07",
+          "standard": 13.51197684134755,
+          "minority": 21.593323720020546,
+          "standardUnbounded": 13.51197684134755,
+          "minorityUnbounded": 21.593323720020546
+        },
+        {
+          "model": "Google Chirp 3",
+          "date": "2025-10",
+          "standard": 15.692044520106707,
+          "minority": 24.41889181708186,
+          "standardUnbounded": 15.692044520106707,
+          "minorityUnbounded": 24.41889181708186
+        },
+        {
+          "model": "Omnilingual 7B",
+          "date": "2025-11",
+          "standard": 13.39708636043497,
+          "minority": 22.808101702219346,
+          "standardUnbounded": 13.39708636043497,
+          "minorityUnbounded": 26.32647141696915
+        }
+      ]
+    },
+    {
+      "dataset": "Openslr83",
+      "label": "OpenSLR-83",
+      "standard": "Southern British English",
+      "minority": "Irish English",
+      "meanGap": 9.207587756397917,
+      "rho": -0.75,
+      "p": 0.0008197640272555872,
+      "standardMd": 8.4,
+      "minorityMd": 16.5,
+      "mdSignificant": false,
+      "points": [
+        {
+          "model": "Deepspeech",
+          "date": "2021-10",
+          "standard": 20.51704659963629,
+          "minority": 35.33049685867934,
+          "standardUnbounded": 20.51704659963629,
+          "minorityUnbounded": 35.33049685867934
+        },
+        {
+          "model": "WavLM Libri-100h",
+          "date": "2021-12",
+          "standard": 29.006484801747963,
+          "minority": 39.194067384014566,
+          "standardUnbounded": 30.67862655633553,
+          "minorityUnbounded": 39.194067384014566
+        },
+        {
+          "model": "Whisper Large v1",
+          "date": "2022-09",
+          "standard": 32.61790089200527,
+          "minority": 68.24682709923243,
+          "standardUnbounded": 100.56260629298328,
+          "minorityUnbounded": 164.52480507968124
+        },
+        {
+          "model": "Whisper Large v2",
+          "date": "2022-12",
+          "standard": 5.820322544234399,
+          "minority": 14.454629098112068,
+          "standardUnbounded": 5.820322544234399,
+          "minorityUnbounded": 16.785584083116408
+        },
+        {
+          "model": "MMS 1B All",
+          "date": "2023-05",
+          "standard": 15.304643692642234,
+          "minority": 21.396278057724057,
+          "standardUnbounded": 15.304643692642234,
+          "minorityUnbounded": 21.396278057724057
+        },
+        {
+          "model": "OWSM 1.0 272M",
+          "date": "2023-09",
+          "standard": 10.832074292691667,
+          "minority": 20.473651750422828,
+          "standardUnbounded": 10.832074292691667,
+          "minorityUnbounded": 20.473651750422828
+        },
+        {
+          "model": "OWSM 2.0 739M",
+          "date": "2023-10",
+          "standard": 6.393815958285089,
+          "minority": 15.791631646849275,
+          "standardUnbounded": 6.393815958285089,
+          "minorityUnbounded": 15.791631646849275
+        },
+        {
+          "model": "Whisper Large v3",
+          "date": "2023-11",
+          "standard": 5.641331310790424,
+          "minority": 14.882941025263005,
+          "standardUnbounded": 5.641331310790424,
+          "minorityUnbounded": 17.532295122806868
+        },
+        {
+          "model": "SeamlessM4T",
+          "date": "2023-12",
+          "standard": 6.423419424421062,
+          "minority": 11.133546876307756,
+          "standardUnbounded": 6.423419424421062,
+          "minorityUnbounded": 11.133546876307756
+        },
+        {
+          "model": "OWSM 3.1 1B",
+          "date": "2024-01",
+          "standard": 7.270464308754236,
+          "minority": 16.228036723119587,
+          "standardUnbounded": 7.270464308754236,
+          "minorityUnbounded": 16.228036723119587
+        },
+        {
+          "model": "Qwen2 Audio 7B",
+          "date": "2024-08",
+          "standard": 4.893325193999023,
+          "minority": 10.615083015556516,
+          "standardUnbounded": 4.893325193999023,
+          "minorityUnbounded": 10.615083015556516
+        },
+        {
+          "model": "OWSM 4.0 1B",
+          "date": "2025-05",
+          "standard": 6.321981676835072,
+          "minority": 10.88602719107181,
+          "standardUnbounded": 6.321981676835072,
+          "minorityUnbounded": 10.88602719107181
+        },
+        {
+          "model": "Qwen3 ASR 1.7B",
+          "date": "2025-06",
+          "standard": 5.2113241884686055,
+          "minority": 5.8879735338486014,
+          "standardUnbounded": 5.2113241884686055,
+          "minorityUnbounded": 5.8879735338486014
+        },
+        {
+          "model": "Canary Qwen 2.5B",
+          "date": "2025-07",
+          "standard": 3.712876845730605,
+          "minority": 8.843107296394493,
+          "standardUnbounded": 3.712876845730605,
+          "minorityUnbounded": 8.843107296394493
+        },
+        {
+          "model": "Google Chirp 3",
+          "date": "2025-10",
+          "standard": 3.604191497744584,
+          "minority": 9.046558871226509,
+          "standardUnbounded": 3.604191497744584,
+          "minorityUnbounded": 9.046558871226509
+        },
+        {
+          "model": "Omnilingual 7B",
+          "date": "2025-11",
+          "standard": 6.256275682336508,
+          "minority": 14.738026584866867,
+          "standardUnbounded": 6.256275682336508,
+          "minorityUnbounded": 14.738026584866867
+        }
+      ]
+    },
+    {
+      "dataset": "ALLSTAR-LPP",
+      "label": "ALLSTAR \u00b7 Little Prince",
+      "standard": "Mainstream US English",
+      "minority": "Vietnamese English",
+      "meanGap": 26.167155809202608,
+      "rho": -0.15588235294117647,
+      "p": 0.5642819694728023,
+      "standardMd": 2.5,
+      "minorityMd": 3.6,
+      "mdSignificant": true,
+      "points": [
+        {
+          "model": "Deepspeech",
+          "date": "2021-10",
+          "standard": 15.812282877727085,
+          "minority": 42.262666162415066,
+          "standardUnbounded": 15.812282877727085,
+          "minorityUnbounded": 42.262666162415066
+        },
+        {
+          "model": "WavLM Libri-100h",
+          "date": "2021-12",
+          "standard": 15.778690948784307,
+          "minority": 44.951041140542266,
+          "standardUnbounded": 16.051122897082305,
+          "minorityUnbounded": 47.33842606062835
+        },
+        {
+          "model": "Whisper Large v1",
+          "date": "2022-09",
+          "standard": 3.5534086294493,
+          "minority": 26.08788587955254,
+          "standardUnbounded": 3.6935131197229034,
+          "minorityUnbounded": 30.49268256585329
+        },
+        {
+          "model": "Whisper Large v2",
+          "date": "2022-12",
+          "standard": 3.478098011105894,
+          "minority": 26.71083194817372,
+          "standardUnbounded": 3.618305244378602,
+          "minorityUnbounded": 29.71461014143941
+        },
+        {
+          "model": "MMS 1B All",
+          "date": "2023-05",
+          "standard": 8.105229571303749,
+          "minority": 38.740465025436336,
+          "standardUnbounded": 8.105229571303749,
+          "minorityUnbounded": 38.740465025436336
+        },
+        {
+          "model": "OWSM 1.0 272M",
+          "date": "2023-09",
+          "standard": 7.977230977552879,
+          "minority": 38.41527298754704,
+          "standardUnbounded": 8.569380415540454,
+          "minorityUnbounded": 38.41527298754704
+        },
+        {
+          "model": "OWSM 2.0 739M",
+          "date": "2023-10",
+          "standard": 4.519661832578139,
+          "minority": 31.142364231496227,
+          "standardUnbounded": 4.519661832578139,
+          "minorityUnbounded": 31.142364231496227
+        },
+        {
+          "model": "Whisper Large v3",
+          "date": "2023-11",
+          "standard": 3.3802636126887853,
+          "minority": 27.226363335738334,
+          "standardUnbounded": 3.3802636126887853,
+          "minorityUnbounded": 29.22998862023252
+        },
+        {
+          "model": "SeamlessM4T",
+          "date": "2023-12",
+          "standard": 9.988295457258634,
+          "minority": 35.7538845792074,
+          "standardUnbounded": 9.988295457258634,
+          "minorityUnbounded": 35.7538845792074
+        },
+        {
+          "model": "OWSM 3.1 1B",
+          "date": "2024-01",
+          "standard": 5.53230979460818,
+          "minority": 31.774112292404972,
+          "standardUnbounded": 5.53230979460818,
+          "minorityUnbounded": 31.774112292404972
+        },
+        {
+          "model": "Qwen2 Audio 7B",
+          "date": "2024-08",
+          "standard": 6.758317073701085,
+          "minority": 30.88214882967969,
+          "standardUnbounded": 6.758317073701085,
+          "minorityUnbounded": 31.877488478098233
+        },
+        {
+          "model": "OWSM 4.0 1B",
+          "date": "2025-05",
+          "standard": 4.429934794271529,
+          "minority": 31.600909751017358,
+          "standardUnbounded": 4.429934794271529,
+          "minorityUnbounded": 31.600909751017358
+        },
+        {
+          "model": "Qwen3 Audio 14B",
+          "date": "2025-06",
+          "standard": 3.141356142720402,
+          "minority": 29.137755311535802,
+          "standardUnbounded": 3.141356142720402,
+          "minorityUnbounded": 29.137755311535802
+        },
+        {
+          "model": "Canary Qwen 2.5B",
+          "date": "2025-07",
+          "standard": 8.500643397120434,
+          "minority": 34.860698235605156,
+          "standardUnbounded": 8.500643397120434,
+          "minorityUnbounded": 37.955225535928555
+        },
+        {
+          "model": "Google Chirp 3",
+          "date": "2025-10",
+          "standard": 3.780737767376082,
+          "minority": 27.972480576340875,
+          "standardUnbounded": 3.780737767376082,
+          "minorityUnbounded": 29.88168836716183
+        },
+        {
+          "model": "Omnilingual 7B",
+          "date": "2025-11",
+          "standard": 5.27645248253547,
+          "minority": 31.168526031330913,
+          "standardUnbounded": 5.27645248253547,
+          "minorityUnbounded": 31.168526031330913
+        }
+      ]
+    },
+    {
+      "dataset": "ALLSTAR-DHR",
+      "label": "ALLSTAR \u00b7 Human Rights",
+      "standard": "Mainstream US English",
+      "minority": "Cantonese English",
+      "meanGap": 19.65245384343311,
+      "rho": -0.36176470588235293,
+      "p": 0.16855882250388438,
+      "standardMd": 1.2,
+      "minorityMd": 3.8,
+      "mdSignificant": true,
+      "points": [
+        {
+          "model": "Deepspeech",
+          "date": "2021-10",
+          "standard": 10.218138856235198,
+          "minority": 40.34717164953522,
+          "standardUnbounded": 10.218138856235198,
+          "minorityUnbounded": 41.59726874750541
+        },
+        {
+          "model": "WavLM Libri-100h",
+          "date": "2021-12",
+          "standard": 9.435044839261606,
+          "minority": 43.369701405840125,
+          "standardUnbounded": 9.435044839261606,
+          "minorityUnbounded": 44.98476383630434
+        },
+        {
+          "model": "Whisper Large v1",
+          "date": "2022-09",
+          "standard": 1.2172455426305435,
+          "minority": 17.26228436022706,
+          "standardUnbounded": 1.2172455426305435,
+          "minorityUnbounded": 17.624332973533924
+        },
+        {
+          "model": "Whisper Large v2",
+          "date": "2022-12",
+          "standard": 1.2039882682957703,
+          "minority": 15.864272406701769,
+          "standardUnbounded": 1.2039882682957703,
+          "minorityUnbounded": 17.621165198243983
+        },
+        {
+          "model": "MMS 1B All",
+          "date": "2023-05",
+          "standard": 2.5963080089846673,
+          "minority": 24.78689088422919,
+          "standardUnbounded": 2.5963080089846673,
+          "minorityUnbounded": 24.78689088422919
+        },
+        {
+          "model": "OWSM 1.0 272M",
+          "date": "2023-09",
+          "standard": 3.2486466920534904,
+          "minority": 27.106015607107437,
+          "standardUnbounded": 3.2486466920534904,
+          "minorityUnbounded": 27.427387645013958
+        },
+        {
+          "model": "OWSM 2.0 739M",
+          "date": "2023-10",
+          "standard": 1.8356769423505732,
+          "minority": 21.829670547892643,
+          "standardUnbounded": 1.8356769423505732,
+          "minorityUnbounded": 22.172365730595175
+        },
+        {
+          "model": "Whisper Large v3",
+          "date": "2023-11",
+          "standard": 1.1755668008613223,
+          "minority": 16.49995249290279,
+          "standardUnbounded": 1.1755668008613223,
+          "minorityUnbounded": 17.249547341326313
+        },
+        {
+          "model": "SeamlessM4T",
+          "date": "2023-12",
+          "standard": 5.526183148901141,
+          "minority": 18.55704985201882,
+          "standardUnbounded": 5.526183148901141,
+          "minorityUnbounded": 18.9526228455465
+        },
+        {
+          "model": "OWSM 3.1 1B",
+          "date": "2024-01",
+          "standard": 1.6781792596895544,
+          "minority": 22.423453373365728,
+          "standardUnbounded": 1.6781792596895544,
+          "minorityUnbounded": 22.86208137005194
+        },
+        {
+          "model": "Qwen2 Audio 7B",
+          "date": "2024-08",
+          "standard": 1.9240136573206765,
+          "minority": 16.28916081636895,
+          "standardUnbounded": 1.9240136573206765,
+          "minorityUnbounded": 16.28916081636895
+        },
+        {
+          "model": "OWSM 4.0 1B",
+          "date": "2025-05",
+          "standard": 1.6420953918812802,
+          "minority": 20.82469457870616,
+          "standardUnbounded": 1.6420953918812802,
+          "minorityUnbounded": 20.82469457870616
+        },
+        {
+          "model": "Qwen3 Audio 14B",
+          "date": "2025-06",
+          "standard": 1.3692654831870668,
+          "minority": 16.092821138364656,
+          "standardUnbounded": 1.3692654831870668,
+          "minorityUnbounded": 16.471331413380945
+        },
+        {
+          "model": "Canary Qwen 2.5B",
+          "date": "2025-07",
+          "standard": 1.6459906879814752,
+          "minority": 21.130244588752245,
+          "standardUnbounded": 1.6459906879814752,
+          "minorityUnbounded": 21.551511855232285
+        },
+        {
+          "model": "Google Chirp 3",
+          "date": "2025-10",
+          "standard": 1.4529734996406753,
+          "minority": 18.23390159553839,
+          "standardUnbounded": 1.4529734996406753,
+          "minorityUnbounded": 18.23390159553839
+        },
+        {
+          "model": "Omnilingual 7B",
+          "date": "2025-11",
+          "standard": 3.283364396599652,
+          "minority": 23.274657673253326,
+          "standardUnbounded": 3.283364396599652,
+          "minorityUnbounded": 23.635201715055896
+        }
+      ]
+    },
+    {
+      "dataset": "ALLSTAR-HT1",
+      "label": "ALLSTAR \u00b7 HINT 1",
+      "standard": "Mainstream US English",
+      "minority": "Nkore English",
+      "meanGap": 19.034528259360044,
+      "rho": -0.4558823529411765,
+      "p": 0.07594549116741177,
+      "standardMd": 2.3,
+      "minorityMd": 11.8,
+      "mdSignificant": true,
+      "points": [
+        {
+          "model": "Deepspeech",
+          "date": "2021-10",
+          "standard": 11.721757394208531,
+          "minority": 37.45098039215687,
+          "standardUnbounded": 11.721757394208531,
+          "minorityUnbounded": 37.45098039215687
+        },
+        {
+          "model": "WavLM Libri-100h",
+          "date": "2021-12",
+          "standard": 15.964948524601319,
+          "minority": 61.372549019607845,
+          "standardUnbounded": 15.964948524601319,
+          "minorityUnbounded": 61.372549019607845
+        },
+        {
+          "model": "Whisper Large v1",
+          "date": "2022-09",
+          "standard": 1.4087731983610499,
+          "minority": 14.705882352941178,
+          "standardUnbounded": 1.4087731983610499,
+          "minorityUnbounded": 14.705882352941178
+        },
+        {
+          "model": "Whisper Large v2",
+          "date": "2022-12",
+          "standard": 1.2496987225837553,
+          "minority": 9.80392156862745,
+          "standardUnbounded": 1.2496987225837553,
+          "minorityUnbounded": 9.80392156862745
+        },
+        {
+          "model": "MMS 1B All",
+          "date": "2023-05",
+          "standard": 5.771098027063315,
+          "minority": 55.29411764705884,
+          "standardUnbounded": 5.771098027063315,
+          "minorityUnbounded": 55.29411764705884
+        },
+        {
+          "model": "OWSM 1.0 272M",
+          "date": "2023-09",
+          "standard": 7.761939193609467,
+          "minority": 34.313725490196084,
+          "standardUnbounded": 7.761939193609467,
+          "minorityUnbounded": 34.313725490196084
+        },
+        {
+          "model": "OWSM 2.0 739M",
+          "date": "2023-10",
+          "standard": 2.098268085252899,
+          "minority": 12.941176470588239,
+          "standardUnbounded": 2.098268085252899,
+          "minorityUnbounded": 12.941176470588239
+        },
+        {
+          "model": "Whisper Large v3",
+          "date": "2023-11",
+          "standard": 1.2111352133044104,
+          "minority": 8.627450980392155,
+          "standardUnbounded": 1.2111352133044104,
+          "minorityUnbounded": 8.627450980392155
+        },
+        {
+          "model": "SeamlessM4T",
+          "date": "2023-12",
+          "standard": 4.198257755741499,
+          "minority": 28.823529411764703,
+          "standardUnbounded": 4.198257755741499,
+          "minorityUnbounded": 28.823529411764703
+        },
+        {
+          "model": "OWSM 3.1 1B",
+          "date": "2024-01",
+          "standard": 1.845367214130773,
+          "minority": 23.333333333333343,
+          "standardUnbounded": 1.845367214130773,
+          "minorityUnbounded": 23.333333333333343
+        },
+        {
+          "model": "Qwen2 Audio 7B",
+          "date": "2024-08",
+          "standard": 4.331164135936384,
+          "minority": 21.76470588235295,
+          "standardUnbounded": 4.331164135936384,
+          "minorityUnbounded": 21.76470588235295
+        },
+        {
+          "model": "OWSM 4.0 1B",
+          "date": "2025-05",
+          "standard": 1.8810040285094527,
+          "minority": 16.07843137254903,
+          "standardUnbounded": 1.8810040285094527,
+          "minorityUnbounded": 16.07843137254903
+        },
+        {
+          "model": "Qwen3 Audio 14B",
+          "date": "2025-06",
+          "standard": 1.1147264401060495,
+          "minority": 7.450980392156861,
+          "standardUnbounded": 1.1147264401060495,
+          "minorityUnbounded": 7.450980392156861
+        },
+        {
+          "model": "Canary Qwen 2.5B",
+          "date": "2025-07",
+          "standard": 6.67821799248301,
+          "minority": 21.372549019607845,
+          "standardUnbounded": 6.86740350514753,
+          "minorityUnbounded": 21.372549019607845
+        },
+        {
+          "model": "Google Chirp 3",
+          "date": "2025-10",
+          "standard": 1.3323348138966362,
+          "minority": 9.999999999999998,
+          "standardUnbounded": 1.3323348138966362,
+          "minorityUnbounded": 9.999999999999998
+        },
+        {
+          "model": "Omnilingual 7B",
+          "date": "2025-11",
+          "standard": 1.976896326137106,
+          "minority": 11.76470588235294,
+          "standardUnbounded": 1.976896326137106,
+          "minorityUnbounded": 11.76470588235294
+        }
+      ]
+    },
+    {
+      "dataset": "ALLSTAR-HT2",
+      "label": "ALLSTAR \u00b7 HINT 2",
+      "standard": "Mainstream US English",
+      "minority": "Nkore English",
+      "meanGap": 15.668616011401044,
+      "rho": -0.4558823529411765,
+      "p": 0.07594549116741177,
+      "standardMd": 2.7,
+      "minorityMd": 14.1,
+      "mdSignificant": true,
+      "points": [
+        {
+          "model": "Deepspeech",
+          "date": "2021-10",
+          "standard": 13.33711784644745,
+          "minority": 44.14835164835165,
+          "standardUnbounded": 13.33711784644745,
+          "minorityUnbounded": 44.14835164835165
+        },
+        {
+          "model": "WavLM Libri-100h",
+          "date": "2021-12",
+          "standard": 17.36843838503581,
+          "minority": 54.864612511671304,
+          "standardUnbounded": 17.43936551814912,
+          "minorityUnbounded": 56.117216117216095
+        },
+        {
+          "model": "Whisper Large v1",
+          "date": "2022-09",
+          "standard": 1.3206305327936274,
+          "minority": 5.448717948717951,
+          "standardUnbounded": 1.3206305327936274,
+          "minorityUnbounded": 5.448717948717951
+        },
+        {
+          "model": "Whisper Large v2",
+          "date": "2022-12",
+          "standard": 1.2549774574653638,
+          "minority": 7.023809523809526,
+          "standardUnbounded": 1.2549774574653638,
+          "minorityUnbounded": 7.023809523809526
+        },
+        {
+          "model": "MMS 1B All",
+          "date": "2023-05",
+          "standard": 6.595090005594492,
+          "minority": 68.83867832847422,
+          "standardUnbounded": 6.595090005594492,
+          "minorityUnbounded": 71.72619047619044
+        },
+        {
+          "model": "OWSM 1.0 272M",
+          "date": "2023-09",
+          "standard": 5.812518511205438,
+          "minority": 29.029304029304022,
+          "standardUnbounded": 5.812518511205438,
+          "minorityUnbounded": 29.029304029304022
+        },
+        {
+          "model": "OWSM 2.0 739M",
+          "date": "2023-10",
+          "standard": 1.2572810741435483,
+          "minority": 11.089743589743582,
+          "standardUnbounded": 1.2572810741435483,
+          "minorityUnbounded": 11.089743589743582
+        },
+        {
+          "model": "Whisper Large v3",
+          "date": "2023-11",
+          "standard": 1.2261822489880538,
+          "minority": 4.487179487179487,
+          "standardUnbounded": 1.2261822489880538,
+          "minorityUnbounded": 4.487179487179487
+        },
+        {
+          "model": "SeamlessM4T",
+          "date": "2023-12",
+          "standard": 3.9893704544706807,
+          "minority": 29.29584599797365,
+          "standardUnbounded": 3.9893704544706807,
+          "minorityUnbounded": 46.57509157509156
+        },
+        {
+          "model": "OWSM 3.1 1B",
+          "date": "2024-01",
+          "standard": 1.378550037845132,
+          "minority": 12.902930402930396,
+          "standardUnbounded": 1.378550037845132,
+          "minorityUnbounded": 12.902930402930396
+        },
+        {
+          "model": "Qwen2 Audio 7B",
+          "date": "2024-08",
+          "standard": 2.998157106657456,
+          "minority": 8.04945054945055,
+          "standardUnbounded": 2.998157106657456,
+          "minorityUnbounded": 8.04945054945055
+        },
+        {
+          "model": "OWSM 4.0 1B",
+          "date": "2025-05",
+          "standard": 1.426596899990128,
+          "minority": 12.37179487179487,
+          "standardUnbounded": 1.426596899990128,
+          "minorityUnbounded": 12.37179487179487
+        },
+        {
+          "model": "Qwen3 Audio 14B",
+          "date": "2025-06",
+          "standard": 0.6364563793727575,
+          "minority": 0.9615384615384612,
+          "standardUnbounded": 0.6364563793727575,
+          "minorityUnbounded": 0.9615384615384612
+        },
+        {
+          "model": "Canary Qwen 2.5B",
+          "date": "2025-07",
+          "standard": 8.298023298023281,
+          "minority": 20.119047619047624,
+          "standardUnbounded": 8.686280317240907,
+          "minorityUnbounded": 20.119047619047624
+        },
+        {
+          "model": "Google Chirp 3",
+          "date": "2025-10",
+          "standard": 0.7712179550465655,
+          "minority": 2.179487179487179,
+          "standardUnbounded": 0.7712179550465655,
+          "minorityUnbounded": 2.179487179487179
+        },
+        {
+          "model": "Omnilingual 7B",
+          "date": "2025-11",
+          "standard": 1.7735296054798122,
+          "minority": 9.33150183150183,
+          "standardUnbounded": 1.858689571198209,
+          "minorityUnbounded": 9.33150183150183
+        }
+      ]
+    }
+  ],
+  "benchmarkCoverage": {
+    "modelDatasetEvaluations": 61,
+    "multiAccentEvaluations": 12,
+    "benchmarkFamilies": 24,
+    "multiAccentFamilies": 7
+  }
+}

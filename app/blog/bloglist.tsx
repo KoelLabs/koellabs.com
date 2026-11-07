@@ -35,6 +35,7 @@ function PostCard({ post }: { post: Post }) {
             alt={`Cover image for blog post: ${post.title}`}
             src={post.image}
             className="max-h-80 top-0 object-cover object-bottom aspect-video"
+            style={post.imagePosition ? { objectPosition: post.imagePosition } : undefined}
           />
         </div>
         <div className="relative flex flex-col justify-between  overflow-hidden rounded-2xl border mt-2">

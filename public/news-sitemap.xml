@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
-        
+
+  <url>
+    <loc>https://koellabs.com/blog/connecting-the-dots-asr-gaps</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Koel Labs Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-07T00:00:00-08:00</news:publication_date>
+      <news:title>Connecting the Dots: Persistent Accent Gaps in Speech Recognition</news:title>
+      <news:keywords>IEEE SLT 2026,speech recognition,ASR,English accents,word error rate,longitudinal evaluation</news:keywords>
+    </news:news>
+  </url>
   <url>
     <loc>https://koellabs.com/blog/scaling-human-g2p-supervision</loc>
     <news:news>
@@ -25,7 +37,7 @@
       <news:title>Building Open Source Hugging Face Leaderboards</news:title>
       <news:keywords>hugging face,open source,leaderboards,speech technology,hugging face leaderboards, how to build hugging face leaderboards</news:keywords>
     </news:news>
-  </url>        
+  </url>
   <url>
     <loc>https://koellabs.com/blog/phonemic-transcription-metrics</loc>
     <news:news>
@@ -50,4 +62,4 @@
       <news:keywords>open source,pronunciation learning,language learning,mozilla,announcement</news:keywords>
     </news:news>
   </url>
-</urlset> 
+</urlset>

@@ -47,10 +47,17 @@ sample feedback when the service is unavailable. Demo source notes are in
 
 The Interspeech blog uses six SVG figures and a paper hero under `public/blog/interspeech-2026`.
 Regenerate the figures with `node scripts/generate-interspeech-figures.mjs`, and the hero with
-`node scripts/generate-interspeech-paper-hero.mjs`. The figure generator uses the existing OpenRunde
+`node scripts/generate-paper-heroes.mjs`. The figure generator uses the existing OpenRunde
 fonts and macOS Arial/Times New Roman (font paths can be overridden via `FIGURE_*_FONT`). The hero
 reuses `/images/paper.png` from the research page. Its PNG export is required for social previews;
 the article and blog cards use SVG. Superseded raster figures are not kept.
+
+The SLT blog uses focused SVG charts under `public/blog/slt-2026`. Regenerate them with
+`python3 scripts/generate-slt-figures.py` (requires Matplotlib and Brotli). Its downloadable
+`chart-data.json` stores the plotted aggregates, corrected Table II values, filtering conventions,
+source URLs, and source-file hashes. The charts keep the paper's fixed accent comparisons and
+distinguish filtered trend scores from unbounded degradation scores. The shared paper-hero script
+also generates the SLT hero from the research page's existing `/images/paperSLT.png`.
 
 The research leaderboard reads aggregate results from the public Hugging Face Space through
 `/api/leaderboard`. Successful results are cached for an hour; failed initial reads use
