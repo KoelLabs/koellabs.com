@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>Try pronunciation feedback · Slay Speech</title>
+    <link
+      rel="preload"
+      href="/fonts/OpenRunde-Semibold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preload" href="assets/iphone-17-pro.webp" as="image" />
     <link rel="stylesheet" href="phone.css" />
     <script defer src="vendor/hls.min.js"></script>
     <script defer src="vendor/vosk.js"></script>
@@ -12,15 +20,28 @@
   </head>
   <body>
     <main data-koel-demo>
-      <div class="koel-phone" aria-label="Interactive Slay Speech pronunciation demo">
-        <div class="koel-phone-speaker" aria-hidden="true"></div>
-        <div class="koel-phone-screen">
+      <div class="device" aria-label="Interactive Slay Speech pronunciation demo">
+        <div class="screen">
+          <img class="status-bar" src="assets/status-bar.png" alt="" aria-hidden="true" />
           <div class="koel-app-nav">
+            <button class="koel-exit" type="button" data-koel-exit aria-label="Restart the story">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18 15h-6v4l-7-7 7-7v4h6v6z" />
+              </svg>
+            </button>
             <div class="koel-progress" data-koel-progress aria-label="Story progress"></div>
             <span class="koel-counter" data-koel-counter>1/12</span>
           </div>
           <div class="koel-view" data-koel-view></div>
         </div>
+        <img
+          class="device-frame"
+          src="assets/iphone-17-pro.webp"
+          width="660"
+          height="1349"
+          alt=""
+          aria-hidden="true"
+        />
       </div>
       <p class="demo-status" data-koel-status-message role="status" aria-live="polite">
         Play the story clip, or skip ahead to practice the phrase.

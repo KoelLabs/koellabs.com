@@ -276,13 +276,15 @@ export default function PostBody() {
               phonetic transcription models. Choose Start Practice to use your microphone; your
               recording is sent to our servers for analysis.
             </p>
-            <iframe
-              src="/demos/pronunciation/index.html"
-              title="Interactive Slay Speech pronunciation feedback demo"
-              allow="microphone; autoplay"
-              loading="lazy"
-              className="block w-full max-w-[440px] h-[770px] mx-auto border-0"
-            />
+            <div className="my-8 rounded-2xl border border-neutral-200 bg-[#f7f7f7] px-4 pt-8 pb-2">
+              <iframe
+                src="/demos/pronunciation/index.html"
+                title="Interactive Slay Speech pronunciation feedback demo"
+                allow="microphone; autoplay"
+                loading="lazy"
+                className="block w-full h-[min(790px,calc((100vw-130px)*2.044+96px))] border-0"
+              />
+            </div>
             <p className="mt-6 mb-4">
               For more stories, translations, personalized practice, and deeper pronunciation
               feedback, download{' '}

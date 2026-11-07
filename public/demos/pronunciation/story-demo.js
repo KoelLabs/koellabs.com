@@ -75,6 +75,26 @@
   let recordedAudio = null;
   let preloadedVideo = null;
   let preloadedStepIndex = -1;
+  let playbackSpeed = 1;
+  let recordedLevels = null;
+  let sessionId = 0;
+
+  // lucide icons, matching the app's lucide-react-native set
+  const ICON_PATHS = {
+    play: '<polygon points="6 3 20 12 6 21 6 3"/>',
+    pause:
+      '<rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/>',
+    rotate: '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+    chevronDown: '<path d="m6 9 6 6 6-6"/>',
+    chevronUp: '<path d="m18 15-6-6-6 6"/>',
+    alert:
+      '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+    info: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
+  };
+
+  function icon(name) {
+    return `<svg class="icon icon-${name}" viewBox="0 0 24 24" aria-hidden="true">${ICON_PATHS[name]}</svg>`;
+  }
 
   function setStatus(message) {
     root.dataset.koelStatus = message;
@@ -132,9 +152,17 @@
     const current = mode === 'done' ? total - 1 : stepIndex * 2 + (mode === 'practice' ? 1 : 0);
     progress.innerHTML = Array.from({ length: total }, (_, index) => {
       const className = index < current ? 'done' : index === current ? 'current' : '';
-      return `<span class="${className}"></span>`;
+      // A practice step fills once it's on screen; a clip fills as it plays.
+      const fill = index === current && mode !== 'video' ? ' style="--fill: 100%"' : '';
+      return `<span class="${className}"${fill}><i></i></span>`;
     }).join('');
     counter.textContent = `${Math.min(total, current + 1)}/${total}`;
+  }
+
+  function setClipProgress(fraction) {
+    const current = progress.querySelector('span.current');
+    if (current)
+      current.style.setProperty('--fill', `${Math.max(0, Math.min(1, fraction)) * 100}%`);
   }
 
   function loadVoskModel() {
@@ -177,7 +205,9 @@
     if (score > 0.5) return 'score-yellow';
     if (score > 0.4) return 'score-ok';
     if (score > 0.3) return 'score-low';
-    return 'score-bad';
+    if (score > 0.2) return 'score-poor';
+    if (score > 0.1) return 'score-bad';
+    return 'score-worst';
   }
 
   function renderWords(step, result) {
@@ -241,9 +271,12 @@
     view.innerHTML = `
       <div class="koel-video-card">
         <div class="koel-video-frame" data-koel-video-frame></div>
-        <div class="koel-video-controls">
-          <button class="koel-control-pill primary" type="button" data-koel-watch>▶ Play</button>
-          <button class="koel-control-pill" type="button" data-koel-skip>Skip</button>
+      </div>
+      <div class="koel-video-controls">
+        <button class="koel-pill koel-pill-play" type="button" data-koel-watch></button>
+        <div class="koel-pill-group">
+          <button class="koel-pill koel-pill-speed" type="button" data-koel-speed aria-label="Playback speed"></button>
+          <button class="koel-pill" type="button" data-koel-skip>Skip</button>
         </div>
       </div>
     `;
@@ -251,13 +284,26 @@
     const frame = view.querySelector('[data-koel-video-frame]');
     const video = takePreparedVideo(stepIndex);
     frame.append(video);
+    video.playbackRate = playbackSpeed;
     const watchButton = view.querySelector('[data-koel-watch]');
+    const speedButton = view.querySelector('[data-koel-speed]');
     const skipButton = view.querySelector('[data-koel-skip]');
+
+    const setWatchState = playing => {
+      watchButton.innerHTML = `${icon(playing ? 'pause' : 'play')}<span>${playing ? 'Pause' : 'Play'}</span>`;
+    };
+    const setSpeedLabel = () => {
+      speedButton.textContent = `${playbackSpeed}x`;
+      speedButton.setAttribute('aria-label', `Playback speed ${playbackSpeed}x`);
+    };
+    setWatchState(false);
+    setSpeedLabel();
 
     const playClip = async () => {
       if (video.currentTime < start || video.currentTime >= end) video.currentTime = start;
+      video.playbackRate = playbackSpeed;
       await video.play();
-      watchButton.textContent = '▮▮ Pause';
+      setWatchState(true);
       setStatus('Playing story clip...');
     };
 
@@ -267,7 +313,7 @@
           await playClip();
         } else {
           video.pause();
-          watchButton.textContent = '▶ Play';
+          setWatchState(false);
           setStatus('Clip paused.');
         }
       } catch (error) {
@@ -275,7 +321,16 @@
         setStatus('The clip could not start. Try Play again, or skip to practice.');
       }
     });
+    // Same cycle as the app: 1.25 -> 1 -> 0.75 -> 0.5 -> 1.25
+    speedButton.addEventListener('click', () => {
+      const speeds = [1.25, 1, 0.75, 0.5];
+      playbackSpeed = speeds[(speeds.indexOf(playbackSpeed) + 1) % speeds.length];
+      video.playbackRate = playbackSpeed;
+      setSpeedLabel();
+    });
     video.addEventListener('timeupdate', () => {
+      if (mode !== 'video') return;
+      setClipProgress((video.currentTime - start) / (end - start));
       if (video.currentTime >= end) {
         video.pause();
         mode = 'practice';
@@ -287,12 +342,8 @@
         renderPractice();
       }
     });
-    video.addEventListener('pause', () => {
-      watchButton.textContent = '▶ Play';
-    });
-    video.addEventListener('play', () => {
-      watchButton.textContent = '▮▮ Pause';
-    });
+    video.addEventListener('pause', () => setWatchState(false));
+    video.addEventListener('play', () => setWatchState(true));
     video.addEventListener('error', () => {
       setStatus('Video preview is limited in this browser; pronunciation practice still works.');
     });
@@ -373,22 +424,32 @@
 
   function renderPractice() {
     updateProgress();
+    if (recordedAudio) {
+      recordedAudio.pause();
+      recordedAudio = null;
+    }
     const step = story.steps[stepIndex];
     view.innerHTML = `
       <div class="koel-practice${feedback ? ' has-feedback' : ''}">
-        <p class="koel-prompt">${escapeHtml(stepIndex === 0 ? 'Try saying this aloud!' : 'Repeat this aloud.')}</p>
-        <div class="koel-word-row" data-koel-words>${renderWords(step, feedback)}</div>
-        <button class="koel-reference" type="button" data-koel-reference>Play Audio</button>
-        <div class="koel-feedback" data-koel-feedback>${renderFeedback(feedback)}</div>
-        <div class="koel-footer-actions">
-          ${
-            feedback
-              ? `<button class="koel-action secondary koel-retry" type="button" data-koel-retry aria-label="Try again">↻</button>`
-              : ''
-          }
-          <button class="koel-action${recording ? ' recording' : ''}" type="button" data-koel-record ${
-            analyzing ? 'disabled' : ''
-          }>${recording ? 'Stop Recording' : analyzing ? 'Analyzing Pronunciation' : feedback ? 'Continue' : 'Start Practice'}</button>
+        <div class="koel-header">
+          <p class="koel-step-label">Phrase ${stepIndex + 1} of ${story.steps.length}</p>
+          <p class="koel-prompt">${escapeHtml(stepIndex === 0 ? 'Try saying this aloud!' : 'Repeat this aloud.')}</p>
+        </div>
+        <div class="koel-speaking">
+          <div class="koel-word-row" data-koel-words>${renderWords(step, feedback)}</div>
+          <button class="koel-reference" type="button" data-koel-reference>${icon('play')}<span>Play Audio</span></button>
+        </div>
+        ${renderFeedback(feedback)}
+        <div class="koel-footer">
+          ${feedback ? renderPlayback() : ''}
+          <div class="koel-footer-actions">
+            ${
+              feedback
+                ? `<button class="koel-retry" type="button" data-koel-retry aria-label="Try again">${icon('rotate')}</button>`
+                : ''
+            }
+            ${renderMainAction()}
+          </div>
         </div>
       </div>
     `;
@@ -410,12 +471,13 @@
     view.querySelector('[data-koel-reference]').addEventListener('click', event => {
       const button = event.currentTarget;
       const audio = new Audio(`${API_BASE}/${step.referenceAudio}`);
+      const label = button.querySelector('span');
       const reset = () => {
         button.disabled = false;
-        button.textContent = 'Play Audio';
+        label.textContent = 'Play Audio';
       };
       button.disabled = true;
-      button.textContent = 'Playing';
+      label.textContent = 'Playing';
       audio.addEventListener('ended', reset, { once: true });
       audio.addEventListener('error', reset, { once: true });
       void audio.play().catch(reset);
@@ -459,6 +521,21 @@
     }
   }
 
+  function renderMainAction() {
+    if (recording) {
+      const heights = [14, 22, 30, 18, 26, 12, 28, 20, 30, 16, 24, 12];
+      const bars = heights.map((h, i) => `<i style="--h: ${h}; --i: ${i}"></i>`).join('');
+      return `<button class="koel-action recording" type="button" data-koel-record><span class="koel-rec-bars" aria-hidden="true">${bars}</span><span class="sr-only">Stop Recording</span></button>`;
+    }
+    if (analyzing) {
+      return `<button class="koel-action analyzing" type="button" data-koel-record disabled><span class="koel-shimmer">Analyzing Pronunciation</span></button>`;
+    }
+    if (feedback) {
+      return `<button class="koel-action continue" type="button" data-koel-record>Continue</button>`;
+    }
+    return `<button class="koel-action" type="button" data-koel-record>Start Practice</button>`;
+  }
+
   function moveTip(delta) {
     const tips = feedback?.feedback || [];
     if (!tips.length) return;
@@ -487,55 +564,96 @@
     if (!result) return '';
     const tips = Array.isArray(result.feedback) ? result.feedback : [];
     if (!tips.length) {
-      return `<div class="koel-tips-title">Pronunciation Tips</div><div class="koel-tip-stack" data-koel-tip-stack><section class="koel-tip active"><div><h4>Great job! No major pronunciation tips for this phrase.</h4><p>Continue when you're ready.</p></div></section></div>${renderPlayback()}`;
+      return `
+        <div class="koel-tips">
+          <p class="koel-tips-title"><span>Pronunciation Tips</span><i aria-hidden="true"></i></p>
+          <div class="koel-tip-stack">
+            <section class="koel-tip">
+              <div class="koel-tip-top">
+                <span class="koel-tip-icon good">${icon('info')}</span>
+                <h4>Great job! No major pronunciation tips for this phrase.</h4>
+              </div>
+              <p class="koel-tip-hint">Continue when you're ready.</p>
+            </section>
+          </div>
+        </div>`;
     }
     const active = Math.min(activeTipIndex, tips.length - 1);
+    const expanded = expandedTipIndex === active;
+    const tip = tips[active];
+    // Cards further back sit 10pt lower and 4% smaller, like the app's swipe stack.
+    const behind = [1, 2]
+      .filter(depth => depth < tips.length)
+      .map(
+        depth =>
+          `<div class="koel-tip behind" style="--d: ${depth}; --o: ${depth === 1 ? 0.7 : 0.5}" aria-hidden="true"></div>`,
+      )
+      .join('');
+    const count =
+      tips.length > 1
+        ? `<button class="koel-tip-count" type="button" data-koel-tip-nav="1" aria-label="Tip ${active + 1} of ${tips.length}. Show next tip">${active + 1} of ${tips.length}</button>`
+        : `<span class="koel-tip-count">1 of 1</span>`;
     return `
-      <div class="koel-tips-title">Pronunciation Tips</div>
-      <div class="koel-tip-stack" data-koel-tip-stack>
-      ${tips
-        .map(
-          (tip, index) => `
-            <section class="koel-tip${index === active ? ' active' : ''}${expandedTipIndex === index ? ' expanded' : ''}">
-              <div>
+      <div class="koel-tips">
+        <p class="koel-tips-title"><span>Pronunciation Tips</span><i aria-hidden="true"></i></p>
+        <div class="koel-tip-stack" data-koel-tip-stack>
+          ${behind}
+          <section class="koel-tip${expanded ? ' expanded' : ''}">
+            <div class="koel-tip-top">
+              <span class="koel-tip-icon">${icon('alert')}</span>
               <h4>${escapeHtml(feedbackTitle(tip, result))}</h4>
-              <p>${escapeHtml(
-                expandedTipIndex === index
-                  ? tip.details || 'Try the phrase again and focus on the highlighted words.'
-                  : 'Expand for more details.',
-              )}</p>
-              <div class="koel-tip-controls">
-                <button class="koel-tip-details" type="button" data-koel-tip-toggle="${index}" aria-label="Show feedback details">Details</button>
-                <span class="koel-tip-spacer" aria-hidden="true"></span>
-                <span class="koel-tip-count">${index + 1} of ${tips.length}</span>
-                <button class="koel-tip-prev" type="button" data-koel-tip-nav="-1" aria-label="Previous feedback card" style="min-width: 3em;">&#10216;</button>
-                <button class="koel-tip-next" type="button" data-koel-tip-nav="1" aria-label="Next feedback card" style="min-width: 3em;">&#10217;</button>
-              </div>
-              </div>
-            </section>
-          `,
-        )
-        .join('')}
+              <button class="koel-tip-chevron" type="button" data-koel-tip-toggle="${active}" aria-expanded="${expanded}" aria-label="${expanded ? 'Hide' : 'Show'} tip details">${icon(expanded ? 'chevronUp' : 'chevronDown')}</button>
+            </div>
+            <p class="koel-tip-hint">${escapeHtml(
+              expanded
+                ? tip.details || 'Try the phrase again and focus on the highlighted words.'
+                : 'Expand for more details.',
+            )}</p>
+            ${count}
+          </section>
+        </div>
       </div>
-      ${renderPlayback()}
     `;
   }
+
+  const WAVE_BARS = 66;
 
   function renderPlayback() {
+    const levels = recordedLevels || placeholderLevels();
+    const bars = levels
+      .map(level => `<i style="--h: ${(2 + level * 15).toFixed(2)}"></i>`)
+      .join('');
     return `
-      <div class="koel-playback">
-        <button class="koel-playback-button" type="button" data-koel-playback aria-label="Play your recording">▶</button>
-        <span class="koel-playback-wave" aria-hidden="true">${Array.from(
-          { length: 30 },
-          (_, index) => `<i style="--bar: ${waveBarHeight(index)}"></i>`,
-        ).join('')}</span>
+      <div class="koel-playback" data-koel-playback-row>
+        <button class="koel-playback-button" type="button" data-koel-playback aria-label="Play your recording">${icon('play')}</button>
+        <span class="koel-wave" aria-hidden="true">
+          <span class="koel-wave-bars">${bars}</span>
+          <span class="koel-wave-bars played">${bars}</span>
+        </span>
       </div>
     `;
   }
 
-  function waveBarHeight(index) {
-    const heights = [0.35, 0.58, 0.82, 0.5, 0.72, 0.96, 0.64, 0.42, 0.78, 0.88];
-    return heights[index % heights.length];
+  function placeholderLevels() {
+    return Array.from({ length: WAVE_BARS }, (_, i) => {
+      const v = 0.35 + 0.3 * Math.sin(i * 0.9) + 0.25 * Math.sin(i * 0.37 + 1);
+      return Math.max(0.05, Math.min(1, v));
+    });
+  }
+
+  // Same shaping as the app's waveform: v = (bar / max) ^ 0.72
+  function computeLevels(samples) {
+    if (!samples?.length) return null;
+    const size = Math.max(1, Math.floor(samples.length / WAVE_BARS));
+    const peaks = Array.from({ length: WAVE_BARS }, (_, i) => {
+      let sum = 0;
+      const startAt = i * size;
+      const stopAt = Math.min(samples.length, startAt + size);
+      for (let j = startAt; j < stopAt; j += 1) sum += samples[j] * samples[j];
+      return Math.sqrt(sum / Math.max(1, stopAt - startAt));
+    });
+    const max = Math.max(...peaks) || 1;
+    return peaks.map(peak => Math.pow(peak / max, 0.72));
   }
 
   function setRecordedAudioBlob(blob) {
@@ -545,21 +663,37 @@
     }
     if (recordedAudioUrl) URL.revokeObjectURL(recordedAudioUrl);
     recordedAudioUrl = blob ? URL.createObjectURL(blob) : null;
+    if (!blob) recordedLevels = null;
   }
 
   function playRecordedAudio(button) {
     if (!recordedAudioUrl) return;
-    if (recordedAudio) recordedAudio.pause();
-    recordedAudio = new Audio(recordedAudioUrl);
-    button.disabled = true;
-    button.textContent = '▮▮';
-    const reset = () => {
-      button.disabled = false;
-      button.textContent = '▶';
+    const row = button.closest('[data-koel-playback-row]');
+    const setPlaying = playing => {
+      button.innerHTML = icon(playing ? 'pause' : 'play');
+      button.setAttribute('aria-label', playing ? 'Pause your recording' : 'Play your recording');
     };
-    recordedAudio.addEventListener('ended', reset, { once: true });
-    recordedAudio.addEventListener('error', reset, { once: true });
-    void recordedAudio.play().catch(reset);
+    if (recordedAudio && !recordedAudio.paused) {
+      recordedAudio.pause();
+      return;
+    }
+    if (!recordedAudio) {
+      recordedAudio = new Audio(recordedAudioUrl);
+      recordedAudio.addEventListener('timeupdate', () => {
+        const fraction = recordedAudio.duration
+          ? recordedAudio.currentTime / recordedAudio.duration
+          : 0;
+        row?.style.setProperty('--played', `${fraction * 100}%`);
+      });
+      recordedAudio.addEventListener('pause', () => setPlaying(false));
+      recordedAudio.addEventListener('play', () => setPlaying(true));
+      recordedAudio.addEventListener('ended', () => {
+        row?.style.setProperty('--played', '0%');
+        recordedAudio = null;
+        setPlaying(false);
+      });
+    }
+    void recordedAudio.play().catch(() => setPlaying(false));
   }
 
   function renderDone() {
@@ -567,25 +701,38 @@
     updateProgress();
     view.innerHTML = `
       <div class="koel-practice">
-        <p class="koel-step-label">Story Complete</p>
-        <p class="koel-prompt">Nice work. You finished the Tin Soldier demo.</p>
-        <div class="koel-feedback">
-          <div class="koel-score">The full app includes more stories, translations, review, personalized practice, detailed feedback, and more.</div>
+        <div class="koel-header">
+          <p class="koel-step-label">Story Complete</p>
+          <p class="koel-prompt">Nice work. You finished the Tin Soldier demo.</p>
+          <p class="koel-done-body">The full app includes more stories, translations, review, personalized practice, detailed feedback, and more.</p>
         </div>
-        <div class="koel-footer-actions">
-          <a class="koel-action" href="https://slayspeech.com" target="_blank" rel="noopener">Download Slay Speech</a>
-          <button class="koel-action secondary" type="button" data-koel-restart>Restart Demo</button>
+        <div class="koel-footer stacked">
+          <div class="koel-footer-actions">
+            <a class="koel-action" href="https://slayspeech.com" target="_blank" rel="noopener">Download Slay Speech</a>
+            <button class="koel-action secondary" type="button" data-koel-restart>Restart Demo</button>
+          </div>
         </div>
       </div>
     `;
-    view.querySelector('[data-koel-restart]').addEventListener('click', () => {
-      stepIndex = 0;
-      mode = 'video';
-      feedback = null;
-      currentLiveIndex = -1;
-      setRecordedAudioBlob(null);
-      renderVideo();
-    });
+    view.querySelector('[data-koel-restart]').addEventListener('click', restartDemo);
+  }
+
+  // The red exit pill restarts the story, since there is nowhere to exit to in the blog.
+  async function restartDemo() {
+    sessionId += 1;
+    view.querySelectorAll('video').forEach(video => video.pause());
+    recording = false;
+    analyzing = false;
+    await cleanupRecording();
+    stepIndex = 0;
+    mode = 'video';
+    feedback = null;
+    activeTipIndex = 0;
+    expandedTipIndex = -1;
+    currentLiveIndex = -1;
+    setRecordedAudioBlob(null);
+    setStatus('Play the story clip, or skip ahead to practice the phrase.');
+    renderVideo();
   }
 
   async function startRecording() {
@@ -691,6 +838,7 @@
     const resampled = resampleLinear(rawAudio, sourceRate, SAMPLE_RATE);
     const recordingBlob = encodeWav(resampled, SAMPLE_RATE);
     setRecordedAudioBlob(recordingBlob);
+    recordedLevels = computeLevels(resampled);
     const step = story.steps[stepIndex];
     const targetWords = wordsForPhrase(step.phrase);
     const formData = new FormData();
@@ -707,21 +855,28 @@
       }),
     );
 
+    const requestSession = sessionId;
+    let result;
     try {
       const response = await fetch(
         `${API_BASE}/analyze_file?target_words=${encodeURIComponent(JSON.stringify(targetWords))}&topk=5`,
         { method: 'POST', body: formData, signal: AbortSignal.timeout(60000) },
       );
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      feedback = await response.json();
-      setStatus('Feedback ready. The colors show word-level pronunciation scores.');
+      result = await response.json();
     } catch (error) {
+      result = null;
+    }
+    if (requestSession !== sessionId) return;
+    analyzing = false;
+    if (result) {
+      feedback = result;
+      setStatus('Feedback ready. The colors show word-level pronunciation scores.');
+    } else {
       feedback = fallbackFeedback(targetWords);
       setStatus('Live server feedback was unavailable, so this demo is showing sample feedback.');
-    } finally {
-      analyzing = false;
-      renderPractice();
     }
+    renderPractice();
   }
 
   async function cleanupRecording() {
@@ -822,6 +977,7 @@
     view.querySelectorAll('video').forEach(video => video.pause());
   });
 
+  root.querySelector('[data-koel-exit]')?.addEventListener('click', () => void restartDemo());
   renderVideo();
   if ('requestIdleCallback' in window) {
     window.requestIdleCallback(() => void loadVoskModel(), { timeout: 1400 });
