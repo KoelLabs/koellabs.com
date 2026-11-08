@@ -303,7 +303,7 @@ export default function PostBody() {
               phonetic transcription models. Choose Start Practice to use your microphone; your
               recording is sent to our servers for analysis.
             </p>
-            <div className="my-8 rounded-2xl border border-neutral-200 bg-[#f7f7f7] px-4 pt-8 pb-2">
+            <div className="my-8 rounded-2xl border border-neutral-200 bg-[#f7f7f7] pt-8 pb-2">
               <iframe
                 src="/demos/pronunciation/index.html"
                 title="Interactive Slay Speech pronunciation feedback demo"

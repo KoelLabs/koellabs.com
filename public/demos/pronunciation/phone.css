@@ -51,7 +51,8 @@ body {
     'Segoe UI',
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  padding: 8px 24px 24px;
+  /* Room for the drop shadow to fade before the iframe edge */
+  padding: 8px 40px 32px;
 }
 button {
   font: inherit;
