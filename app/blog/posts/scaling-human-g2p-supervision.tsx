@@ -51,9 +51,17 @@ export default function PostBody() {
           className={`relative flex h-full flex-col tracking-[-0.010em] text-lg ${sourceSerif.className}`}
         >
           <p className="mb-4">
-            Speech recognition identifies words. Phonetic transcription records the sounds a person
-            makes. Pronunciation feedback, speech therapy, and accent research need those details:
-            two people can say the same word differently.
+            While many speech transcription systems smooth out variations in speech to produce
+            clear, readable text, at Koel Labs we want to preserve and understand those differences,
+            from stutters and disfluencies to the pronunciation patterns that shape an accent.
+          </p>
+          <p className="mb-4">
+            For a language learner struggling with an unfamiliar sound, finding small differences in
+            pronunciation can reveal how they can be better heard. More detailed transcription can
+            also enable an abundance of applications in clinical settings for speech disorder
+            moderation and diagnosis. We build phonetic transcription models to capture these
+            individual sounds, giving learners and clinicians a more detailed picture of a person’s
+            speech.
           </p>
           <p className="mb-4">
             A phonetic model learns this task from recordings paired with sound transcriptions,
