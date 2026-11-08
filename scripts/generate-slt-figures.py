@@ -18,7 +18,7 @@ from matplotlib.font_manager import FontProperties, fontManager
 from matplotlib.patches import FancyBboxPatch, PathPatch
 from matplotlib.path import Path as GlyphPath
 from matplotlib.textpath import text_to_path
-from matplotlib.transforms import Affine2D, Bbox
+from matplotlib.transforms import Affine2D, Bbox, ScaledTranslation
 from matplotlib.ticker import MultipleLocator
 from fontTools.ttLib import TTFont
 from fontTools.varLib.instancer import instantiateVariableFont
@@ -85,10 +85,12 @@ def tracked(fig, x, y, text, size, tracking, color=INK, bold=False):
         if len(v):
             verts.extend(np.asarray(v)*scale + [gx + i*tracking*text_to_path.FONT_SCALE, gy])
             codes.extend(c)
-    width, height = fig.get_size_inches()
-    to_inches = Affine2D().scale(size/text_to_path.FONT_SCALE/72).translate(x*width, y*height)
+    # Anchor at (x, y) in figure fraction so the text moves with everything else when
+    # savefig's bbox grows the canvas in any direction.
+    transform = (Affine2D().scale(size/text_to_path.FONT_SCALE/72) + fig.dpi_scale_trans
+                 + ScaledTranslation(x, y, fig.transFigure))
     fig.patches.append(PathPatch(GlyphPath(verts, codes), facecolor=color, edgecolor='none',
-                                 lw=0, transform=to_inches + fig.dpi_scale_trans, figure=fig))
+                                 lw=0, transform=transform, figure=fig))
 
 
 def base(title, subtitle, height=6.5):
@@ -127,12 +129,14 @@ def style(ax, xstep=None, ystep=None):
 def save(fig, name, title, description):
     target = OUT / f'{name}.svg'
     width, height = fig.get_size_inches()
-    height += TOP_PAD  # Grow the canvas upward only; chart content keeps its layout.
-    fig.savefig(target, format='svg', bbox_inches=Bbox([[0, 0], [width, height]]), metadata={
+    top = height + TOP_PAD  # Grow the canvas upward only; chart content keeps its layout.
+    # Bottom inset to the lowest content equals the side inset, like the top.
+    bottom = fig.get_tightbbox(fig.canvas.get_renderer()).y0 - (TITLE_INSET - 4/96)  # 4px optical trim
+    fig.savefig(target, format='svg', bbox_inches=Bbox([[0, bottom], [width, top]]), metadata={
         'Title': title, 'Description': description, 'Creator': 'Koel Labs', 'Date': None})
     # Explicit intrinsic pixel size makes the image's dimensions unambiguous in browsers.
     text = target.read_text()
-    width, height = width*96, height*96
+    width, height = width*96, (top-bottom)*96
     text = re.sub(r'(<svg[^>]*?)width="[^"]+" height="[^"]+"',
                   lambda m: f'{m[1]}width="{round(width)}" height="{round(height)}"', text, count=1)
     target.write_text(text)

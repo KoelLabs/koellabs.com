@@ -154,7 +154,7 @@ export default function PostBody() {
           <BlogFigure
             src={`${assets}/average-gaps.svg`}
             width={960}
-            height={791}
+            height={810}
             scrollOnMobile
             alt="Average WER gaps across eight evaluations range from 9.2 points on OpenSLR-83 to 26.2 points on ALLSTAR Little Prince. Each row names the fixed minority comparison accent."
           >
@@ -184,7 +184,7 @@ export default function PostBody() {
           <BlogFigure
             src={`${assets}/gap-over-time.svg`}
             width={960}
-            height={628}
+            height={641}
             scrollOnMobile
             alt="OpenSLR-83 gap by model release date. The full-period trend declines, but the last four systems have gaps of 0.7, 5.1, 5.4, and 8.5 percentage points."
           >
@@ -203,7 +203,7 @@ export default function PostBody() {
           <BlogFigure
             src={`${assets}/regression-example.svg`}
             width={960}
-            height={599}
+            height={608}
             scrollOnMobile
             alt="From Whisper large-v2 to MMS 1B on ALLSTAR HINT 2, Nkore English WER rises from 7.0% to 71.7%, while Mainstream US English rises from 1.3% to 6.6%."
           >
@@ -226,7 +226,7 @@ export default function PostBody() {
           <BlogFigure
             src={`${assets}/mean-degradation.svg`}
             width={960}
-            height={782}
+            height={820}
             scrollOnMobile
             alt="Mean degradation is higher for the selected minority accent in all eight evaluations. Six differences are significant; Speech Accent Archive and OpenSLR-83 are not."
           >
@@ -250,7 +250,7 @@ export default function PostBody() {
           <BlogFigure
             src={`${assets}/benchmark-coverage.svg`}
             width={960}
-            height={465}
+            height={478}
             scrollOnMobile
             alt="Of 61 model-dataset evaluations audited in technical reports, 12 explicitly consider accent diversity and 49 do not."
           >
