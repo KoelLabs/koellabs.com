@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   slug: 'connecting-the-dots-asr-gaps',
   date: '2026-11-07T00:00:00-08:00',
   published: true,
-  image: `${assets}/paper-hero.svg`,
+  image: `${assets}/paper-cover.webp`,
   imagePosition: 'top',
-  socialImage: `${assets}/paper-hero.png`,
+  socialImage: `${assets}/paper-og.jpg`,
   summary:
     'We followed 16 speech recognition systems released from 2021 to 2025 across eight accent-aware evaluations. Newer systems did not reliably close accent gaps, and selected minority accents faced larger regressions.',
   category: 'Technical Report',
@@ -40,7 +40,7 @@ export default function PostBody() {
         maxWidth="4xl"
       />
       <BlogHeroImage
-        src={metadata.image}
+        src={`${assets}/paper-hero.svg`}
         alt="First page of Connecting the Dots: Enduring Performance Gaps in ASR Systems Between Standard and Minority English Varieties"
       />
       <div className="relative max-w-3xl mx-auto mt-12">

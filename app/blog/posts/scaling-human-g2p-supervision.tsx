@@ -15,9 +15,9 @@ export const metadata: Metadata = {
   slug: 'scaling-human-g2p-supervision',
   date: '2026-11-07T00:00:00-08:00',
   published: true,
-  image: '/blog/interspeech-2026/paper-hero.svg',
+  image: '/blog/interspeech-2026/paper-cover.webp',
   imagePosition: 'top',
-  socialImage: '/blog/interspeech-2026/paper-hero.png',
+  socialImage: '/blog/interspeech-2026/paper-og.jpg',
   summary:
     'Our Interspeech 2026 study examines when synthetic G2P labels help phonetic transcription, where expert annotation becomes more effective, and how ASR pretraining improves robustness across English accents.',
   category: 'Technical Report',
@@ -42,7 +42,7 @@ export default function PostBody() {
         maxWidth="4xl"
       />
       <BlogHeroImage
-        src={metadata.image}
+        src="/blog/interspeech-2026/paper-hero.svg"
         alt="First page of our Interspeech 2026 paper Scaling Human and G2P Supervision for Robust Phonetic Transcription"
       />
       <div className="relative max-w-3xl mx-auto mt-12">
