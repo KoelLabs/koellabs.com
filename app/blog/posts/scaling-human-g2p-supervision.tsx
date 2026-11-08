@@ -58,15 +58,15 @@ export default function PostBody() {
           <p className="mb-4">
             For a language learner struggling with an unfamiliar sound, finding small differences in
             pronunciation can reveal how they can be better heard. More detailed transcription can
-            also enable an abundance of applications in clinical settings for speech disorder
-            moderation and diagnosis. We build phonetic transcription models to capture these
-            individual sounds, giving learners and clinicians a more detailed picture of a person’s
-            speech.
+            also enable an abundance of applications in clinical settings for speech therapy and
+            screening of speech disorders. We build phonetic transcription models to capture these
+            individual sounds, giving learners, speech pathologists, and researchers a more detailed
+            picture of a person's speech.
           </p>
           <p className="mb-4">
-            A phonetic model learns this task from recordings paired with sound transcriptions,
-            called labels. Grapheme-to-phoneme (G2P) software generates labels from written words,
-            giving us a cheaper source of training data.
+            A phonetic transcription model learns from audio recordings paired with sound
+            transcriptions, i.e., labels. Grapheme-to-phoneme (G2P) software generates labels from
+            written words, giving us a cheaper source of training data.
           </p>
           <p className="mb-4">
             Machine-generated G2P labels are commonly used to pretrain phonetic models, giving them
