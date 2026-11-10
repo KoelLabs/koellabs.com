@@ -14,7 +14,7 @@ const code = 'https://github.com/smfsamir/longitudinal-asr-eval';
 const assets = '/blog/slt-2026';
 
 export const metadata: Metadata = {
-  title: 'Connecting the Dots: Persistent Accent Gaps in Speech Recognition',
+  title: 'Speech Recognition Keeps Improving. Why Are Some Accents Still Being Left Behind?',
   slug: 'connecting-the-dots-asr-gaps',
   date: '2026-11-07T00:00:00-08:00',
   published: true,
@@ -49,16 +49,12 @@ export default function PostBody() {
           className={`relative flex h-full flex-col tracking-[-0.010em] text-lg ${sourceSerif.className}`}
         >
           <p className="mb-4">
-            Automatic speech recognition (ASR) turns speech into written words. It powers captions,
-            voice interfaces, and transcription tools. When it works well for one accent but poorly
-            for another, access to those tools depends on how someone speaks.
-          </p>
-          <p className="mb-4">
-            It is tempting to assume that larger models and more training data will gradually close
-            these gaps. Our IEEE SLT 2026 paper, <em>Connecting the Dots</em>, tests that assumption
-            across 16 systems released from 2021 to 2025. Across eight evaluations, we find that
-            accent gaps do not reliably shrink over time. Selected minority accents also face larger
-            setbacks when a later system performs worse than an earlier one.
+            Newer AI systems are supposed to be better at understanding speech. But that improvement
+            isn't equally shared. In our study of 16 speech-recognition systems released between
+            2021 and 2025, we found that performance gaps between mainstream and underrepresented
+            English accents did not consistently narrow. Worse, when switching to a later system
+            resulted in poorer transcription, the setbacks were often substantially larger for
+            underrepresented accents.
           </p>
           <div className="mb-4 mt-2 flex w-full flex-col gap-2 gap-x-4 font-sans sm:flex-row">
             <Button
