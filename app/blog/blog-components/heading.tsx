@@ -63,7 +63,7 @@ export default function BlogHeading({
           {category}
         </h2>
       </Link>
-      <h1 className="mt-2 text-pretty text-3xl sm:text-4xl font-semibold tracking-tighter text-neutral-950 md:text-5xl text-center">
+      <h1 className="mt-2 text-balance text-3xl sm:text-4xl font-semibold tracking-tighter text-neutral-950 md:text-5xl text-center">
         {title}
       </h1>
       <div className="flex justify-center mt-7 items-center gap-1">
