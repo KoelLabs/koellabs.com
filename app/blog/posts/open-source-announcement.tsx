@@ -46,7 +46,7 @@ export default function PostBody() {
           dateISO={metadata.date}
           maxWidth="2xl"
         />
-        <BlogHeroImage src={metadata.image} alt={metadata.title} />
+        <BlogHeroImage width={2265} height={1182} src={metadata.image} alt={metadata.title} />
         <br></br>
         <div className="relative lg:col-span-3 max-w-3xl mx-auto mt-12">
           <BlogDecorations />

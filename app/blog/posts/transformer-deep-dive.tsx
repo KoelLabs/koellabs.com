@@ -36,6 +36,8 @@ export default function PostBody() {
           maxWidth={700}
         />
         <BlogHeroImage
+          width={1510}
+          height={788}
           src="/blog/transformer/blogTransformer.png"
           alt="Wav2Vec2 Architecture Diagram"
         />

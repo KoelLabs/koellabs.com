@@ -37,6 +37,8 @@ export default function PostBody() {
           maxWidth={600}
         />
         <BlogHeroImage
+          width={2265}
+          height={1182}
           src="/api/leaderboard/image?variant=hero"
           alt="The leading English speech-to-IPA models, ranked by average feature error rate"
         />

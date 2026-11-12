@@ -42,6 +42,8 @@ export default function PostBody() {
         maxWidth="4xl"
       />
       <BlogHeroImage
+        width={1200}
+        height={900}
         src="/blog/interspeech-2026/paper-hero.svg"
         alt="First page of our Interspeech 2026 paper Scaling Human and G2P Supervision for Robust Phonetic Transcription"
       />

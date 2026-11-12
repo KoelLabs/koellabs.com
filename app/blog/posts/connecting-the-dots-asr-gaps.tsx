@@ -40,6 +40,8 @@ export default function PostBody() {
         maxWidth="4xl"
       />
       <BlogHeroImage
+        width={1200}
+        height={900}
         src={`${assets}/paper-hero.svg`}
         alt="First page of Connecting the Dots: Enduring Performance Gaps in ASR Systems Between Standard and Minority English Varieties"
       />

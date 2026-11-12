@@ -42,7 +42,12 @@ export default function PostBody() {
         maxWidth="3xl"
       />
 
-      <BlogHeroImage src={metadata.image} alt="Phonemic Transcription Metrics" />
+      <BlogHeroImage
+        width={2265}
+        height={1182}
+        src={metadata.image}
+        alt="Phonemic Transcription Metrics"
+      />
       <br></br>
       <div className="relative lg:col-span-3 max-w-3xl mx-auto mt-12">
         <BlogDecorations />
@@ -247,7 +252,10 @@ PER("Bop" → "Sop") = 0.33     WPFER("Bop" → "Sop") = 0.060  // b→s: place 
           <p className="mb-4">
             For the full details, including how we use WPFER to train and evaluate our models, see
             our paper,{' '}
-            <a href="https://www.isca-archive.org/interspeech_2026/metzger26_interspeech.html" className="text-sky-600 hover:underline">
+            <a
+              href="https://www.isca-archive.org/interspeech_2026/metzger26_interspeech.html"
+              className="text-sky-600 hover:underline"
+            >
               Scaling Human and G2P Supervision for Robust Phonetic Transcription
             </a>
             .
