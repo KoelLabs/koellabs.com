@@ -66,11 +66,9 @@ export default function BlogHeading({
       <h1 className="mt-2 text-balance text-3xl sm:text-4xl font-semibold tracking-tighter text-neutral-950 md:text-5xl text-center">
         {title}
       </h1>
-      <div className="flex justify-center mt-7 items-center gap-1">
-        <div className="text-neutral-600 flex items-center gap-1.5">
-          {/* {formatDate(dateISO)} 
-          {byline ? ` • ${byline}` : ''} */}
-          <div className=" -space-x-1 overflow-hidden inline-block">
+      <div className="flex flex-col sm:flex-row justify-center mt-7 items-center gap-2 sm:gap-1 text-neutral-600">
+        <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-1.5">
+          <div className="flex shrink-0 -space-x-1">
             <img
               alt="A photo of Alexander Metzger"
               src="/images/avatar-alex.png"
@@ -87,9 +85,11 @@ export default function BlogHeading({
               className="inline-block size-6 rounded-full outline outline-1 -outline-offset-1 outline-black/5 ring-2 ring-white"
             />
           </div>
-          By Koel Labs ·
+          <span className="whitespace-nowrap">
+            By Koel Labs<span className="hidden sm:inline"> ·</span>
+          </span>
         </div>
-        <time dateTime={dateISO} className="text-neutral-600">
+        <time dateTime={dateISO} className="whitespace-nowrap">
           {formatDate(dateISO)}
         </time>
       </div>
