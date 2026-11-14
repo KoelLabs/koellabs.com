@@ -45,11 +45,9 @@ function PostCard({ post }: { post: Post }) {
             </h2>
 
             <div className="flex flex-col sm:flex-row gap-1 justify-between mt-3">
-              <div className="flex justify-center align-baseline sm:items-center gap-1 grayscale flex-col sm:flex-row text-left">
-                <div className="text-neutral-600 flex items-center gap-1.5">
-                  {/* {formatDate(dateISO)}
-            {byline ? ` • ${byline}` : ''} */}
-                  <div className=" -space-x-1 overflow-hidden inline-block">
+              <div className="flex justify-center sm:items-center gap-2 sm:gap-1 grayscale flex-col sm:flex-row sm:flex-wrap text-left">
+                <div className="text-neutral-600 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-1.5">
+                  <div className="flex shrink-0 -space-x-1">
                     <img
                       alt="A photo of Alexander Metzger"
                       src="/images/avatar-alex.png"
@@ -66,9 +64,11 @@ function PostCard({ post }: { post: Post }) {
                       className="inline-block size-6 rounded-full outline outline-1 -outline-offset-1 outline-black/5 ring-2 ring-white"
                     />
                   </div>
-                  By Koel Labs <span className="hidden sm:inline">·</span>
+                  <span className="whitespace-nowrap">
+                    By Koel Labs<span className="hidden sm:inline"> ·</span>
+                  </span>
                 </div>
-                <time dateTime={post.date} className="text-neutral-600">
+                <time dateTime={post.date} className="text-neutral-600 whitespace-nowrap">
                   {formatDate(post.date)}
                 </time>
               </div>
