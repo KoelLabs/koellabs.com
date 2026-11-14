@@ -27,3 +27,6 @@ venv
 
 # Retired inference-server checkout (kept locally, not part of the website)
 /server/
+
+# Responsive image derivatives, regenerated before dev/build
+/public/optimized/

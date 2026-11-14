@@ -1,0 +1,2418 @@
+{
+  "/blog/cnn/blogCNN.png": {
+    "sourceHash": "8f73498c19b275fbaa7d",
+    "width": 1511,
+    "height": 788,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/32a24028b8fff99e6521.webp",
+        "bytes": 17984
+      },
+      {
+        "width": 640,
+        "src": "/optimized/3d5734d493b97094cbb7.webp",
+        "bytes": 45612
+      },
+      {
+        "width": 960,
+        "src": "/optimized/0a889c9a2e730c2e4a88.webp",
+        "bytes": 80482
+      },
+      {
+        "width": 1511,
+        "src": "/optimized/9473c2a16af00391d1e9.webp",
+        "bytes": 133770
+      }
+    ]
+  },
+  "/blog/cnn/kids-drawing.png": {
+    "sourceHash": "d4c7dfe55d987dcafb46",
+    "width": 1160,
+    "height": 1354,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/a8f697182d91e84761de.webp",
+        "bytes": 61272
+      },
+      {
+        "width": 640,
+        "src": "/optimized/a86c55c033c9a08194b5.webp",
+        "bytes": 184062
+      },
+      {
+        "width": 960,
+        "src": "/optimized/048ef61a14e4ae4e4488.webp",
+        "bytes": 328622
+      },
+      {
+        "width": 1160,
+        "src": "/optimized/4ffc6a0279a1930fe72e.webp",
+        "bytes": 400702
+      }
+    ]
+  },
+  "/blog/cnn/layer-kernel.png": {
+    "sourceHash": "d262eacb3daeee9c4ee2",
+    "width": 2196,
+    "height": 1012,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/d35d69040ad5ee1022c7.webp",
+        "bytes": 12852
+      },
+      {
+        "width": 640,
+        "src": "/optimized/46a6d1467382d6564b4f.webp",
+        "bytes": 38748
+      },
+      {
+        "width": 960,
+        "src": "/optimized/4f241ee2a003c9590b86.webp",
+        "bytes": 71628
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/2228149be936bedebab0.webp",
+        "bytes": 152526
+      },
+      {
+        "width": 2196,
+        "src": "/optimized/34406f06bedf6aec0623.webp",
+        "bytes": 223948
+      }
+    ]
+  },
+  "/blog/cnn/single-chunk.png": {
+    "sourceHash": "c62fa81d25dff3a63eea",
+    "width": 2026,
+    "height": 1410,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/b173af55857d86dbb261.webp",
+        "bytes": 23214
+      },
+      {
+        "width": 640,
+        "src": "/optimized/991cfc242b46f9fe6a0c.webp",
+        "bytes": 62468
+      },
+      {
+        "width": 960,
+        "src": "/optimized/4ce0b2fd705a09468fe2.webp",
+        "bytes": 108638
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/f5f2e3302bb575fff5f8.webp",
+        "bytes": 226324
+      },
+      {
+        "width": 2026,
+        "src": "/optimized/abb76c0928a31e6831ec.webp",
+        "bytes": 283994
+      }
+    ]
+  },
+  "/blog/cnn/single-layer.png": {
+    "sourceHash": "6a786b38f1236fa72756",
+    "width": 2156,
+    "height": 726,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/b95937137947687b48ad.webp",
+        "bytes": 13878
+      },
+      {
+        "width": 640,
+        "src": "/optimized/820ac1706687e089b65d.webp",
+        "bytes": 35822
+      },
+      {
+        "width": 960,
+        "src": "/optimized/1b8efab14963cc74fd32.webp",
+        "bytes": 62864
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/e667be11be1ec715113f.webp",
+        "bytes": 130486
+      },
+      {
+        "width": 2156,
+        "src": "/optimized/85f609a4b12c7cd5a816.webp",
+        "bytes": 190252
+      }
+    ]
+  },
+  "/blog/cnn/wav2vec2-border.png": {
+    "sourceHash": "1a60914f565de3021dbb",
+    "width": 1236,
+    "height": 707,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/2b954581152fe6feb5aa.webp",
+        "bytes": 20308
+      },
+      {
+        "width": 640,
+        "src": "/optimized/9813463c66b9a9c6d4cd.webp",
+        "bytes": 50154
+      },
+      {
+        "width": 960,
+        "src": "/optimized/d2ffbc998edbfcd98a4d.webp",
+        "bytes": 89380
+      },
+      {
+        "width": 1236,
+        "src": "/optimized/3d796a928b8381c39a1e.webp",
+        "bytes": 118470
+      }
+    ]
+  },
+  "/blog/interspeech-2026/data.webp": {
+    "sourceHash": "3024e9f30312ca2a3bf9",
+    "width": 1600,
+    "height": 629,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/24bf941aeb45bd29618e.webp",
+        "bytes": 8730
+      },
+      {
+        "width": 640,
+        "src": "/optimized/9db150cd90090e313c68.webp",
+        "bytes": 28774
+      },
+      {
+        "width": 960,
+        "src": "/optimized/4004ac0fa3c2a15fb4a5.webp",
+        "bytes": 59340
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/f085a57c0ca264299b66.webp",
+        "bytes": 69392
+      }
+    ]
+  },
+  "/blog/interspeech-2026/g2p-vs-human.webp": {
+    "sourceHash": "a3373cb082abb2454ecd",
+    "width": 1600,
+    "height": 866,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/3e5ddbeb4d312fe260ff.webp",
+        "bytes": 8976
+      },
+      {
+        "width": 640,
+        "src": "/optimized/ba8d1dbf83f7148043cf.webp",
+        "bytes": 26140
+      },
+      {
+        "width": 960,
+        "src": "/optimized/e5bbea3cc95fa2751ce6.webp",
+        "bytes": 46692
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/e7b595fead4479d431f7.webp",
+        "bytes": 36636
+      }
+    ]
+  },
+  "/blog/interspeech-2026/metrics-regular.webp": {
+    "sourceHash": "f74e6ae2455ebc0c38f1",
+    "width": 1082,
+    "height": 502,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/ee0fa60e23f6a570025c.webp",
+        "bytes": 12192
+      },
+      {
+        "width": 640,
+        "src": "/optimized/260353ee136ad2597ef2.webp",
+        "bytes": 33278
+      },
+      {
+        "width": 960,
+        "src": "/optimized/dcff43ce1aa23fd73e7b.webp",
+        "bytes": 63726
+      },
+      {
+        "width": 1082,
+        "src": "/optimized/7881410a8b1809fa463d.webp",
+        "bytes": 19302
+      }
+    ]
+  },
+  "/blog/interspeech-2026/metrics-weighted.webp": {
+    "sourceHash": "5b6b02f66717c4c83f17",
+    "width": 1082,
+    "height": 502,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/1858dd761efeea86ee35.webp",
+        "bytes": 14932
+      },
+      {
+        "width": 640,
+        "src": "/optimized/067c878be169f45f30b7.webp",
+        "bytes": 40206
+      },
+      {
+        "width": 960,
+        "src": "/optimized/4f4864bb74bf2925d278.webp",
+        "bytes": 76438
+      },
+      {
+        "width": 1082,
+        "src": "/optimized/97bbbc21a5542210c7db.webp",
+        "bytes": 21726
+      }
+    ]
+  },
+  "/blog/interspeech-2026/paper-cover.webp": {
+    "sourceHash": "51d9bab6333b65485cff",
+    "width": 3200,
+    "height": 1800,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/5c705d3279479cdd7c20.webp",
+        "bytes": 15752
+      },
+      {
+        "width": 640,
+        "src": "/optimized/fe89185213b12998b29c.webp",
+        "bytes": 53176
+      },
+      {
+        "width": 960,
+        "src": "/optimized/eba679cd84c437cade6e.webp",
+        "bytes": 113080
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/62e0ea531ba6a078f52e.webp",
+        "bytes": 274390
+      },
+      {
+        "width": 1920,
+        "src": "/optimized/809bc8b1d6d493f24a13.webp",
+        "bytes": 407098
+      }
+    ]
+  },
+  "/blog/interspeech-2026/paper-hero.svg": {
+    "sourceHash": "8ee4657b0a358dc51966",
+    "width": 1200,
+    "height": 900,
+    "encoding": "lossless-svg",
+    "variants": [
+      {
+        "width": 1200,
+        "src": "/optimized/bcb7b0746ea0653ce960.svg",
+        "bytes": 181711
+      }
+    ]
+  },
+  "/blog/interspeech-2026/threshold-over-30.webp": {
+    "sourceHash": "b369a714b5756153b400",
+    "width": 1600,
+    "height": 1158,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/538dce20b6a49963083a.webp",
+        "bytes": 13322
+      },
+      {
+        "width": 640,
+        "src": "/optimized/af60272c1aed40dcdad8.webp",
+        "bytes": 42518
+      },
+      {
+        "width": 960,
+        "src": "/optimized/ad284b3de18831c6bf9d.webp",
+        "bytes": 80052
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/8eace20ef5848b0f7a17.webp",
+        "bytes": 61036
+      }
+    ]
+  },
+  "/blog/interspeech-2026/threshold-under-30.webp": {
+    "sourceHash": "ee3bcd2ac793f7f62d41",
+    "width": 1600,
+    "height": 1150,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/a6b8c1940dd8f58debd1.webp",
+        "bytes": 14708
+      },
+      {
+        "width": 640,
+        "src": "/optimized/056c71669162554fd0f5.webp",
+        "bytes": 48044
+      },
+      {
+        "width": 960,
+        "src": "/optimized/18026e5c7a1b5afa8d32.webp",
+        "bytes": 88886
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/05630cb9e2ec79711a22.webp",
+        "bytes": 67114
+      }
+    ]
+  },
+  "/blog/interspeech-2026/unseen-accents.webp": {
+    "sourceHash": "d5422792409517d2e2e1",
+    "width": 1600,
+    "height": 180,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/de528465e4071b633f22.webp",
+        "bytes": 1546
+      },
+      {
+        "width": 640,
+        "src": "/optimized/516c6600e7dbde2c1c27.webp",
+        "bytes": 5010
+      },
+      {
+        "width": 960,
+        "src": "/optimized/a59c88963231a51dd4be.webp",
+        "bytes": 8860
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/89461607f06f3f179a48.webp",
+        "bytes": 7562
+      }
+    ]
+  },
+  "/blog/slt-2026/paper-cover.webp": {
+    "sourceHash": "5bf607499447f8d53e6e",
+    "width": 3200,
+    "height": 1800,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/d588857111d1941ee2da.webp",
+        "bytes": 19912
+      },
+      {
+        "width": 640,
+        "src": "/optimized/c9fd9b87dbece3176475.webp",
+        "bytes": 66754
+      },
+      {
+        "width": 960,
+        "src": "/optimized/d5902469f573fb1efb81.webp",
+        "bytes": 142066
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/aee73211760dd5609f65.webp",
+        "bytes": 344502
+      },
+      {
+        "width": 1920,
+        "src": "/optimized/ed6efdeda6d8695be27a.webp",
+        "bytes": 507408
+      }
+    ]
+  },
+  "/blog/slt-2026/paper-hero.svg": {
+    "sourceHash": "66d0adbfd55bbf05458c",
+    "width": 1200,
+    "height": 900,
+    "encoding": "lossless-svg",
+    "variants": [
+      {
+        "width": 1200,
+        "src": "/optimized/25e05aa9abcab236331e.svg",
+        "bytes": 218619
+      }
+    ]
+  },
+  "/blog/transformer/blogTransformer.png": {
+    "sourceHash": "40bdf15646485d216de9",
+    "width": 1510,
+    "height": 788,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/81a557824cf11ca1f717.webp",
+        "bytes": 16442
+      },
+      {
+        "width": 640,
+        "src": "/optimized/8e7444fe9eefa6e564ea.webp",
+        "bytes": 42750
+      },
+      {
+        "width": 960,
+        "src": "/optimized/b1d2f35cdb76d49aad9f.webp",
+        "bytes": 74566
+      },
+      {
+        "width": 1510,
+        "src": "/optimized/74cf726e80d04f712bb3.webp",
+        "bytes": 111774
+      }
+    ]
+  },
+  "/blog/transformer/image-eight.png": {
+    "sourceHash": "edacc458ec9dfa7a3e81",
+    "width": 2520,
+    "height": 1148,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/0ad1255bf84a4544d1e6.webp",
+        "bytes": 9422
+      },
+      {
+        "width": 640,
+        "src": "/optimized/33926a0c590ab07a5fc2.webp",
+        "bytes": 25006
+      },
+      {
+        "width": 960,
+        "src": "/optimized/4e2ce921059052a74a72.webp",
+        "bytes": 50080
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/3955644efad4c599189a.webp",
+        "bytes": 97966
+      },
+      {
+        "width": 2520,
+        "src": "/optimized/fcdafef23d47e6eeabeb.webp",
+        "bytes": 181706
+      }
+    ]
+  },
+  "/blog/transformer/image-eleven.png": {
+    "sourceHash": "a5972d165ddefbc15a23",
+    "width": 1650,
+    "height": 1460,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/b1ef421d7d15c939bcd4.webp",
+        "bytes": 25342
+      },
+      {
+        "width": 640,
+        "src": "/optimized/b4d1dd9d5bbdbf490bf8.webp",
+        "bytes": 75666
+      },
+      {
+        "width": 960,
+        "src": "/optimized/aa1ce9c188a9cb1e6998.webp",
+        "bytes": 141110
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/e65f1b678f248d7e9d9f.webp",
+        "bytes": 317258
+      },
+      {
+        "width": 1650,
+        "src": "/optimized/e1b5b92764fdf2428b1b.webp",
+        "bytes": 313846
+      }
+    ]
+  },
+  "/blog/transformer/image-fifteen.png": {
+    "sourceHash": "618761a02d55929c904d",
+    "width": 1940,
+    "height": 100,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/5ea6119c3781b75c63df.webp",
+        "bytes": 4102
+      },
+      {
+        "width": 640,
+        "src": "/optimized/c2a5e4457a1dee2d4ebf.webp",
+        "bytes": 9196
+      },
+      {
+        "width": 960,
+        "src": "/optimized/09f00c62d1add0a638dd.webp",
+        "bytes": 13456
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/7d5810d66cc97eba4fbb.webp",
+        "bytes": 24082
+      },
+      {
+        "width": 1940,
+        "src": "/optimized/9b610460598ee5888173.webp",
+        "bytes": 9500
+      }
+    ]
+  },
+  "/blog/transformer/image-five.png": {
+    "sourceHash": "3565cf365827859ec6e9",
+    "width": 1992,
+    "height": 710,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/b716a3e35d2b4ab77990.webp",
+        "bytes": 11160
+      },
+      {
+        "width": 640,
+        "src": "/optimized/5dd3509e28ae34f78a56.webp",
+        "bytes": 25280
+      },
+      {
+        "width": 960,
+        "src": "/optimized/3ea3318a32a9ecee4251.webp",
+        "bytes": 43824
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/99026b1155fa3e1f0e91.webp",
+        "bytes": 83560
+      },
+      {
+        "width": 1992,
+        "src": "/optimized/e5f7797e58e2c91cd2b0.webp",
+        "bytes": 72660
+      }
+    ]
+  },
+  "/blog/transformer/image-four.png": {
+    "sourceHash": "7200c9d3d812bda44adf",
+    "width": 1538,
+    "height": 1130,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/badd887fbfa2f5305836.webp",
+        "bytes": 13824
+      },
+      {
+        "width": 640,
+        "src": "/optimized/b2a0c023a26a5918defe.webp",
+        "bytes": 31732
+      },
+      {
+        "width": 960,
+        "src": "/optimized/952bb79d298534813ed8.webp",
+        "bytes": 50932
+      },
+      {
+        "width": 1538,
+        "src": "/optimized/ea03b3ab1254b4569501.webp",
+        "bytes": 64194
+      }
+    ]
+  },
+  "/blog/transformer/image-fourteen.png": {
+    "sourceHash": "e78689ba4c8373401ff0",
+    "width": 1616,
+    "height": 142,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/1a40398d9d125b17b6f3.webp",
+        "bytes": 4376
+      },
+      {
+        "width": 640,
+        "src": "/optimized/bbcdd0e6c933fcede8cb.webp",
+        "bytes": 8770
+      },
+      {
+        "width": 960,
+        "src": "/optimized/cd4fa583a4403933460e.webp",
+        "bytes": 12812
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/bf646f728b5de6b5f990.webp",
+        "bytes": 20892
+      },
+      {
+        "width": 1616,
+        "src": "/optimized/cbbf5bf45c4b7a0c614e.webp",
+        "bytes": 6304
+      }
+    ]
+  },
+  "/blog/transformer/image-nine.png": {
+    "sourceHash": "48dd066cfa87418a8622",
+    "width": 1902,
+    "height": 1350,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/7760e8c95875226c0043.webp",
+        "bytes": 20378
+      },
+      {
+        "width": 640,
+        "src": "/optimized/4a9cb44174f0a92d7d24.webp",
+        "bytes": 65764
+      },
+      {
+        "width": 960,
+        "src": "/optimized/3796c28fdade2e060bda.webp",
+        "bytes": 122546
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/3a43305423e7e9bdc9f2.webp",
+        "bytes": 273388
+      },
+      {
+        "width": 1902,
+        "src": "/optimized/3b55aedde14c7defe02a.webp",
+        "bytes": 339042
+      }
+    ]
+  },
+  "/blog/transformer/image-one.png": {
+    "sourceHash": "efb8969abca12bcac12d",
+    "width": 2100,
+    "height": 1048,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/7dffd6c755ad632130ad.webp",
+        "bytes": 7834
+      },
+      {
+        "width": 640,
+        "src": "/optimized/7b4154f924a1f7b6314e.webp",
+        "bytes": 16182
+      },
+      {
+        "width": 960,
+        "src": "/optimized/6748c001f59d928ec62b.webp",
+        "bytes": 25290
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/013eff5c622b6b268ac7.webp",
+        "bytes": 46084
+      },
+      {
+        "width": 2100,
+        "src": "/optimized/4c70d7c976edaa6bad98.webp",
+        "bytes": 21752
+      }
+    ]
+  },
+  "/blog/transformer/image-seven.png": {
+    "sourceHash": "04e987087bc420aba6c5",
+    "width": 1594,
+    "height": 858,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/e6471c6c9c82a862df62.webp",
+        "bytes": 17438
+      },
+      {
+        "width": 640,
+        "src": "/optimized/66bfbb051793edb605fe.webp",
+        "bytes": 47614
+      },
+      {
+        "width": 960,
+        "src": "/optimized/81aba1757bf7e5576023.webp",
+        "bytes": 81642
+      },
+      {
+        "width": 1594,
+        "src": "/optimized/69645f9e88d03aec6b22.webp",
+        "bytes": 111122
+      }
+    ]
+  },
+  "/blog/transformer/image-seventeen.png": {
+    "sourceHash": "1a02bebca9a345e6f87e",
+    "width": 1950,
+    "height": 112,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/0c577a834056b528dff4.webp",
+        "bytes": 4104
+      },
+      {
+        "width": 640,
+        "src": "/optimized/bb1ca798b02d645a158e.webp",
+        "bytes": 9370
+      },
+      {
+        "width": 960,
+        "src": "/optimized/4df52d051fb21da265a4.webp",
+        "bytes": 13900
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/ab79ac63c4aaeeefb437.webp",
+        "bytes": 24892
+      },
+      {
+        "width": 1950,
+        "src": "/optimized/bf6e57acc494e5a9dfa2.webp",
+        "bytes": 10512
+      }
+    ]
+  },
+  "/blog/transformer/image-six.png": {
+    "sourceHash": "1f6711d5efe196cc6109",
+    "width": 2016,
+    "height": 564,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/32fb9c612e88ed8b2a96.webp",
+        "bytes": 9184
+      },
+      {
+        "width": 640,
+        "src": "/optimized/0d699c71a15c2a1a53b3.webp",
+        "bytes": 20854
+      },
+      {
+        "width": 960,
+        "src": "/optimized/a3f39449a207bddc2066.webp",
+        "bytes": 34474
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/66140e0d8631eda2c5ad.webp",
+        "bytes": 63876
+      },
+      {
+        "width": 2016,
+        "src": "/optimized/3918c2dce05f7f7c88e4.webp",
+        "bytes": 63028
+      }
+    ]
+  },
+  "/blog/transformer/image-sixteen.png": {
+    "sourceHash": "085bf0ecd24a336017b8",
+    "width": 1394,
+    "height": 1140,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/80ba822cec74e2625280.webp",
+        "bytes": 25956
+      },
+      {
+        "width": 640,
+        "src": "/optimized/512e533930542b8d125e.webp",
+        "bytes": 58610
+      },
+      {
+        "width": 960,
+        "src": "/optimized/f878b0071086993e7425.webp",
+        "bytes": 92836
+      },
+      {
+        "width": 1394,
+        "src": "/optimized/e98bf2c008836af09dce.webp",
+        "bytes": 36420
+      }
+    ]
+  },
+  "/blog/transformer/image-ten.png": {
+    "sourceHash": "cb7ea80309403525c925",
+    "width": 2582,
+    "height": 1766,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/7de22114dd79db719992.webp",
+        "bytes": 31874
+      },
+      {
+        "width": 640,
+        "src": "/optimized/f1416d893ed580e6bf39.webp",
+        "bytes": 93822
+      },
+      {
+        "width": 960,
+        "src": "/optimized/3733cd35d193714cefe4.webp",
+        "bytes": 161308
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/124867795453050976d9.webp",
+        "bytes": 341582
+      },
+      {
+        "width": 2560,
+        "src": "/optimized/b403bd49cc77e03b443d.webp",
+        "bytes": 711084
+      }
+    ]
+  },
+  "/blog/transformer/image-thirteen.png": {
+    "sourceHash": "a2114ec29eecd156846c",
+    "width": 2020,
+    "height": 806,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/233b81e0ef17a1561bb4.webp",
+        "bytes": 12112
+      },
+      {
+        "width": 640,
+        "src": "/optimized/0c143c5ccdc476fc385e.webp",
+        "bytes": 24448
+      },
+      {
+        "width": 960,
+        "src": "/optimized/1d9dcafcb3d6fd3176b3.webp",
+        "bytes": 35324
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/0ff6bdfd14c21dd21b0a.webp",
+        "bytes": 62010
+      },
+      {
+        "width": 2020,
+        "src": "/optimized/231a062c8f3f773b50f1.webp",
+        "bytes": 65748
+      }
+    ]
+  },
+  "/blog/transformer/image-three.png": {
+    "sourceHash": "3c76e45b4d11f04f7f92",
+    "width": 1886,
+    "height": 994,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/2883be5a50f93ebcbb89.webp",
+        "bytes": 8112
+      },
+      {
+        "width": 640,
+        "src": "/optimized/0c6736ad73c4dd157546.webp",
+        "bytes": 19270
+      },
+      {
+        "width": 960,
+        "src": "/optimized/215b46bec247758e62c5.webp",
+        "bytes": 32446
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/cdeb2652cf2f1724b804.webp",
+        "bytes": 61122
+      },
+      {
+        "width": 1886,
+        "src": "/optimized/531dbc30e4364b40df29.webp",
+        "bytes": 27014
+      }
+    ]
+  },
+  "/blog/transformer/image-twelve.png": {
+    "sourceHash": "d02e1dcd3b8364e65f6b",
+    "width": 1980,
+    "height": 720,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/fb702d47bd88245f956c.webp",
+        "bytes": 27344
+      },
+      {
+        "width": 640,
+        "src": "/optimized/f7f480854cd949a9af19.webp",
+        "bytes": 59222
+      },
+      {
+        "width": 960,
+        "src": "/optimized/18ff4b3129af1a23fe22.webp",
+        "bytes": 94214
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/773e156d441e927c8e9b.webp",
+        "bytes": 161200
+      },
+      {
+        "width": 1980,
+        "src": "/optimized/5303c9afb7e7e3bbbc1c.webp",
+        "bytes": 72972
+      }
+    ]
+  },
+  "/blog/transformer/image-two.png": {
+    "sourceHash": "a71ec50de441c725aa40",
+    "width": 1900,
+    "height": 1040,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/27e3ce99a647c62d2bb0.webp",
+        "bytes": 24756
+      },
+      {
+        "width": 640,
+        "src": "/optimized/a18b1808dc59c377fcbf.webp",
+        "bytes": 53906
+      },
+      {
+        "width": 960,
+        "src": "/optimized/3e7c880042734cf57214.webp",
+        "bytes": 79502
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/90033b0f1b44579dda3d.webp",
+        "bytes": 133866
+      },
+      {
+        "width": 1900,
+        "src": "/optimized/39c9abcf86409e717e55.webp",
+        "bytes": 43826
+      }
+    ]
+  },
+  "/images/UofW.png": {
+    "sourceHash": "60f28dee1bd86f0764c2",
+    "width": 1920,
+    "height": 1080,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/db23876e99d4d17c5bc4.webp",
+        "bytes": 12246
+      },
+      {
+        "width": 640,
+        "src": "/optimized/b403d8b6878a62c91647.webp",
+        "bytes": 29588
+      },
+      {
+        "width": 960,
+        "src": "/optimized/6ba23311f72d13731664.webp",
+        "bytes": 49820
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/9da89efaab7568e4fb18.webp",
+        "bytes": 105610
+      },
+      {
+        "width": 1920,
+        "src": "/optimized/f6f635ea188ce26b0502.webp",
+        "bytes": 83632
+      }
+    ]
+  },
+  "/images/aboutTeam.jpg": {
+    "sourceHash": "24d883a3567d949fa1be",
+    "width": 1024,
+    "height": 768,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/06214328bca6adafa08e.webp",
+        "bytes": 30306
+      },
+      {
+        "width": 640,
+        "src": "/optimized/e1d83136684409b0fbda.webp",
+        "bytes": 108560
+      },
+      {
+        "width": 960,
+        "src": "/optimized/14475688507f93e0a10d.webp",
+        "bytes": 234932
+      },
+      {
+        "width": 1024,
+        "src": "/optimized/d8c7917c0b42c4e60e5a.jpg",
+        "bytes": 202089
+      }
+    ]
+  },
+  "/images/alexShot.jpg": {
+    "sourceHash": "12ee5f902a057270f027",
+    "width": 1200,
+    "height": 1200,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/a9d7c0c9cdc058d2f947.webp",
+        "bytes": 23994
+      },
+      {
+        "width": 640,
+        "src": "/optimized/482d8f9f8a9660e8d22d.webp",
+        "bytes": 73846
+      },
+      {
+        "width": 960,
+        "src": "/optimized/da67d1435b72936a031f.webp",
+        "bytes": 132924
+      },
+      {
+        "width": 1200,
+        "src": "/optimized/ab9421a9e060b155a811.jpg",
+        "bytes": 149021
+      }
+    ]
+  },
+  "/images/arunaShot.jpg": {
+    "sourceHash": "14fc65380770edaadac5",
+    "width": 1200,
+    "height": 1200,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/6d6ac8b5fb8d50f75745.webp",
+        "bytes": 23474
+      },
+      {
+        "width": 640,
+        "src": "/optimized/7d573aa919a336b18ff7.webp",
+        "bytes": 67896
+      },
+      {
+        "width": 960,
+        "src": "/optimized/865ceffb211bbb5f0842.webp",
+        "bytes": 125646
+      },
+      {
+        "width": 1200,
+        "src": "/optimized/07996cb18b957a7765ce.jpg",
+        "bytes": 138325
+      }
+    ]
+  },
+  "/images/avatar-alex.png": {
+    "sourceHash": "0d20aa6254ccfa03d3fe",
+    "width": 256,
+    "height": 256,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 24,
+        "src": "/optimized/0ab2deb0405a7fae9eb9.webp",
+        "bytes": 1226
+      },
+      {
+        "width": 48,
+        "src": "/optimized/f063d34365eceb575494.webp",
+        "bytes": 3960
+      },
+      {
+        "width": 72,
+        "src": "/optimized/9e2eb73f268ca7f1a49f.webp",
+        "bytes": 8194
+      }
+    ]
+  },
+  "/images/avatar-aruna.png": {
+    "sourceHash": "3deae0b6d125cb08cfec",
+    "width": 256,
+    "height": 256,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 24,
+        "src": "/optimized/086c00dbecd4a9c1d222.webp",
+        "bytes": 1192
+      },
+      {
+        "width": 48,
+        "src": "/optimized/ff5db10434a816e1bd49.webp",
+        "bytes": 3844
+      },
+      {
+        "width": 72,
+        "src": "/optimized/c7cac8e2a01ae5a4d9b0.webp",
+        "bytes": 7798
+      }
+    ]
+  },
+  "/images/avatar-ruslan.png": {
+    "sourceHash": "25e8f01b85b17f95a300",
+    "width": 256,
+    "height": 256,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 24,
+        "src": "/optimized/bc6ce3ec6b459684c010.webp",
+        "bytes": 1164
+      },
+      {
+        "width": 48,
+        "src": "/optimized/49aac7260dc35e116560.webp",
+        "bytes": 3742
+      },
+      {
+        "width": 72,
+        "src": "/optimized/178d029f02baf194a743.webp",
+        "bytes": 7508
+      }
+    ]
+  },
+  "/images/bentoActionable.png": {
+    "sourceHash": "18df526392f2adae2ac2",
+    "width": 1800,
+    "height": 1251,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/bd7baa6fd3b38a831799.webp",
+        "bytes": 19422
+      },
+      {
+        "width": 640,
+        "src": "/optimized/99132b7c9bec0cf714ca.webp",
+        "bytes": 52830
+      },
+      {
+        "width": 960,
+        "src": "/optimized/ab7e042b737cd7db690c.webp",
+        "bytes": 91278
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/3a4e337291d084084ffa.webp",
+        "bytes": 194202
+      },
+      {
+        "width": 1800,
+        "src": "/optimized/1ce04c936ec04c7f82e9.webp",
+        "bytes": 145324
+      }
+    ]
+  },
+  "/images/bentoClips.png": {
+    "sourceHash": "f9a8bbe7f39bae2d058f",
+    "width": 1800,
+    "height": 1251,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/ede39df1e7a307b60c75.webp",
+        "bytes": 23926
+      },
+      {
+        "width": 640,
+        "src": "/optimized/c7289b532b4327ef64a7.webp",
+        "bytes": 56342
+      },
+      {
+        "width": 960,
+        "src": "/optimized/eb8d5c7d23782ac7526c.webp",
+        "bytes": 92990
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/37fc304bc1c55481b976.webp",
+        "bytes": 203252
+      },
+      {
+        "width": 1800,
+        "src": "/optimized/509515a2db552db51106.webp",
+        "bytes": 156110
+      }
+    ]
+  },
+  "/images/bentoComplex.png": {
+    "sourceHash": "6c28ee97bc4f627dc6db",
+    "width": 1188,
+    "height": 984,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/f63d5dac3d4f50cb4914.webp",
+        "bytes": 19628
+      },
+      {
+        "width": 640,
+        "src": "/optimized/7c9fe6923e1a5a4448ea.webp",
+        "bytes": 43784
+      },
+      {
+        "width": 960,
+        "src": "/optimized/b0708c833c012293c86b.webp",
+        "bytes": 69404
+      },
+      {
+        "width": 1188,
+        "src": "/optimized/c935f996844d2492a160.webp",
+        "bytes": 61230
+      }
+    ]
+  },
+  "/images/bentoDialect.png": {
+    "sourceHash": "b63f23cc3cda1c53c30c",
+    "width": 1188,
+    "height": 984,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/5e1b5b9cf72d08d09cf1.webp",
+        "bytes": 27124
+      },
+      {
+        "width": 640,
+        "src": "/optimized/c8ea9704a3f43b36bc3b.webp",
+        "bytes": 91062
+      },
+      {
+        "width": 960,
+        "src": "/optimized/2868bc631874bc3f9c6c.webp",
+        "bytes": 197382
+      },
+      {
+        "width": 1188,
+        "src": "/optimized/3147e9db4be6c1cadd15.webp",
+        "bytes": 129840
+      }
+    ]
+  },
+  "/images/bentoFeedback.png": {
+    "sourceHash": "ca5efad677d9c2377b22",
+    "width": 1188,
+    "height": 984,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/fe6443425cf05d53b467.webp",
+        "bytes": 19308
+      },
+      {
+        "width": 640,
+        "src": "/optimized/43ff46838830e863c173.webp",
+        "bytes": 44626
+      },
+      {
+        "width": 960,
+        "src": "/optimized/34ee49cfb3a073cef9a1.webp",
+        "bytes": 69552
+      },
+      {
+        "width": 1188,
+        "src": "/optimized/ffb3b776535565780b50.webp",
+        "bytes": 41344
+      }
+    ]
+  },
+  "/images/blog/new-look/2.jpeg": {
+    "sourceHash": "83cd44de9a890083ad4e",
+    "width": 5088,
+    "height": 3158,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/9d74e25d0888f6ff89cc.webp",
+        "bytes": 30242
+      },
+      {
+        "width": 640,
+        "src": "/optimized/3aae6c3de77390567af2.webp",
+        "bytes": 103166
+      },
+      {
+        "width": 960,
+        "src": "/optimized/c13f48d42e2838065a45.webp",
+        "bytes": 219778
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/6801ae11abc0478726d5.webp",
+        "bytes": 582958
+      },
+      {
+        "width": 2560,
+        "src": "/optimized/ea3fff6792273f72ac25.webp",
+        "bytes": 1422844
+      }
+    ]
+  },
+  "/images/blog/new-look/3.jpeg": {
+    "sourceHash": "e1d9d6104abd40e143f7",
+    "width": 5088,
+    "height": 3158,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/03acdd46e2fa6af08434.webp",
+        "bytes": 29500
+      },
+      {
+        "width": 640,
+        "src": "/optimized/81883cee1012bdcd76ff.webp",
+        "bytes": 102454
+      },
+      {
+        "width": 960,
+        "src": "/optimized/afbf1eddf3045bf8b8b1.webp",
+        "bytes": 218008
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/5e230fff6ba2750a8708.webp",
+        "bytes": 580544
+      },
+      {
+        "width": 2560,
+        "src": "/optimized/78e47fad0324a8b59bb7.webp",
+        "bytes": 1404376
+      }
+    ]
+  },
+  "/images/blog/new-look/4.jpeg": {
+    "sourceHash": "7c324e069e63b2d6e4c6",
+    "width": 5088,
+    "height": 3158,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/a38df50d9ecf006b9b09.webp",
+        "bytes": 29142
+      },
+      {
+        "width": 640,
+        "src": "/optimized/ce2cb0e18d324faded55.webp",
+        "bytes": 101840
+      },
+      {
+        "width": 960,
+        "src": "/optimized/3728ac60caaa4d879ea7.webp",
+        "bytes": 219464
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/4f79752945db71cee61e.webp",
+        "bytes": 579754
+      },
+      {
+        "width": 2560,
+        "src": "/optimized/9611ada363e0971dbae0.webp",
+        "bytes": 1413456
+      }
+    ]
+  },
+  "/images/blog/new-look/5-opt.png": {
+    "sourceHash": "0343d88ac28ffdc0ecd8",
+    "width": 1951,
+    "height": 1210,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/11e00be862d6bf0fe9e1.webp",
+        "bytes": 32912
+      },
+      {
+        "width": 640,
+        "src": "/optimized/11fe43935294bfb2ee64.webp",
+        "bytes": 120380
+      },
+      {
+        "width": 960,
+        "src": "/optimized/7e31718d88343a152e9b.webp",
+        "bytes": 262768
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/3f763e02e57ebf4764fe.webp",
+        "bytes": 721556
+      },
+      {
+        "width": 1951,
+        "src": "/optimized/a4fa988ab17617560e92.webp",
+        "bytes": 1015624
+      }
+    ]
+  },
+  "/images/blog/new-look/5.jpeg": {
+    "sourceHash": "f12bc1bd1f04968882af",
+    "width": 5088,
+    "height": 3158,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/0dcff64a5ba0647c8a53.webp",
+        "bytes": 32392
+      },
+      {
+        "width": 640,
+        "src": "/optimized/bea30a768198a7f47d84.webp",
+        "bytes": 116866
+      },
+      {
+        "width": 960,
+        "src": "/optimized/5671722ea1dedae51009.webp",
+        "bytes": 249334
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/1ed40480535413513718.webp",
+        "bytes": 656874
+      },
+      {
+        "width": 2560,
+        "src": "/optimized/30ca3994e199f78c0342.webp",
+        "bytes": 1576226
+      }
+    ]
+  },
+  "/images/blog/new-look/6.jpeg": {
+    "sourceHash": "eb9cc45026d395538fdb",
+    "width": 5088,
+    "height": 3158,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/ffa20adcfac4fb9fca2e.webp",
+        "bytes": 32508
+      },
+      {
+        "width": 640,
+        "src": "/optimized/23f0b35b5081f1ad6f4a.webp",
+        "bytes": 117126
+      },
+      {
+        "width": 960,
+        "src": "/optimized/05bfdd143b9fed530dc8.webp",
+        "bytes": 252326
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/03a064c67d5d242dd825.webp",
+        "bytes": 667296
+      },
+      {
+        "width": 2560,
+        "src": "/optimized/55500b9fb0784ea66bd4.webp",
+        "bytes": 1617850
+      }
+    ]
+  },
+  "/images/blog/new-look/7.jpeg": {
+    "sourceHash": "ba6807f4da004eff7b28",
+    "width": 5088,
+    "height": 3158,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/b12c4815e4828d769192.webp",
+        "bytes": 25996
+      },
+      {
+        "width": 640,
+        "src": "/optimized/f9299284dc4438e2bdb3.webp",
+        "bytes": 95012
+      },
+      {
+        "width": 960,
+        "src": "/optimized/9ae1c5f2d08d1f97e413.webp",
+        "bytes": 204762
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/98b0c4d09bfd97726bc6.webp",
+        "bytes": 547490
+      },
+      {
+        "width": 2560,
+        "src": "/optimized/a0e95c7b07c002fc28bb.webp",
+        "bytes": 1366412
+      }
+    ]
+  },
+  "/images/blog/new-look/8.jpeg": {
+    "sourceHash": "d42cf94879701c0f28dd",
+    "width": 5088,
+    "height": 3158,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/5d70e28b4b92b5fbe4f3.webp",
+        "bytes": 29668
+      },
+      {
+        "width": 640,
+        "src": "/optimized/70aa3e16bf281676ae75.webp",
+        "bytes": 100620
+      },
+      {
+        "width": 960,
+        "src": "/optimized/741253a267a288890b69.webp",
+        "bytes": 216012
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/4194041b06ee6738d1e3.webp",
+        "bytes": 575002
+      },
+      {
+        "width": 2560,
+        "src": "/optimized/098516fd3951b8bc351a.webp",
+        "bytes": 1404764
+      }
+    ]
+  },
+  "/images/blog/new-look/blogNewLook.png": {
+    "sourceHash": "703839919ab5ce7ab696",
+    "width": 1510,
+    "height": 788,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/bbc9e677cc5d2b19e86f.webp",
+        "bytes": 15140
+      },
+      {
+        "width": 640,
+        "src": "/optimized/968298a4b64d53d4e413.webp",
+        "bytes": 43264
+      },
+      {
+        "width": 960,
+        "src": "/optimized/cb20c88f177642afaede.webp",
+        "bytes": 81436
+      },
+      {
+        "width": 1510,
+        "src": "/optimized/c2e2f7ae74d4e01e468c.webp",
+        "bytes": 131662
+      }
+    ]
+  },
+  "/images/blogDialect.png": {
+    "sourceHash": "f50a10a788942c25c287",
+    "width": 1510,
+    "height": 788,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/b435a76fe247a1f6dc1e.webp",
+        "bytes": 10818
+      },
+      {
+        "width": 640,
+        "src": "/optimized/272c4010da9cd5c89767.webp",
+        "bytes": 32856
+      },
+      {
+        "width": 960,
+        "src": "/optimized/ef43600a99ea51f3f443.webp",
+        "bytes": 69326
+      },
+      {
+        "width": 1510,
+        "src": "/optimized/add796b7c9841c6569c0.webp",
+        "bytes": 161058
+      }
+    ]
+  },
+  "/images/blogOpenSource.png": {
+    "sourceHash": "4b03ed8f4846b40d5680",
+    "width": 2265,
+    "height": 1182,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/e837f3f0c8d641101686.webp",
+        "bytes": 11226
+      },
+      {
+        "width": 640,
+        "src": "/optimized/1f5c0f09bc7f47786fb4.webp",
+        "bytes": 26358
+      },
+      {
+        "width": 960,
+        "src": "/optimized/30b1b2da514c2827723a.webp",
+        "bytes": 46806
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/8b23d4913845738adf7a.webp",
+        "bytes": 96180
+      },
+      {
+        "width": 2265,
+        "src": "/optimized/4c75711eaed0fec9fe2f.webp",
+        "bytes": 108992
+      }
+    ]
+  },
+  "/images/blogPhonetic.png": {
+    "sourceHash": "0e52245b4cca946eefad",
+    "width": 2265,
+    "height": 1182,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/743008e0a18ca5579030.webp",
+        "bytes": 15598
+      },
+      {
+        "width": 640,
+        "src": "/optimized/506733af32411725c474.webp",
+        "bytes": 35454
+      },
+      {
+        "width": 960,
+        "src": "/optimized/0ea5b40b74ed2d4f50c7.webp",
+        "bytes": 59188
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/d55b5f4f6fe0e8cceb81.webp",
+        "bytes": 113146
+      },
+      {
+        "width": 2265,
+        "src": "/optimized/dfbbcd6bf9d8128bd46d.webp",
+        "bytes": 60248
+      }
+    ]
+  },
+  "/images/demoPitchUpdated.png": {
+    "sourceHash": "aef770d9bdffd905d1de",
+    "width": 1920,
+    "height": 1080,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/10c02995d85c88526970.webp",
+        "bytes": 19462
+      },
+      {
+        "width": 640,
+        "src": "/optimized/bc9eedea904a314360d1.webp",
+        "bytes": 45768
+      },
+      {
+        "width": 960,
+        "src": "/optimized/94c170887803f0d4a764.webp",
+        "bytes": 80286
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/9d20b8a80eaced8ecb56.webp",
+        "bytes": 189660
+      },
+      {
+        "width": 1920,
+        "src": "/optimized/13e75bd6a72052dbb565.webp",
+        "bytes": 200382
+      }
+    ]
+  },
+  "/images/frontpage/1-group.jpg": {
+    "sourceHash": "a20f90d85324d93791e9",
+    "width": 1280,
+    "height": 853,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/0921f395f3e277dd6425.webp",
+        "bytes": 25004
+      },
+      {
+        "width": 640,
+        "src": "/optimized/57f8c4a4aedaa085f9f0.webp",
+        "bytes": 73130
+      },
+      {
+        "width": 960,
+        "src": "/optimized/4268a9b878ffcd5ac695.webp",
+        "bytes": 134356
+      },
+      {
+        "width": 1280,
+        "src": "/optimized/3e13b5b2b1ddfb9016f8.webp",
+        "bytes": 198980
+      }
+    ]
+  },
+  "/images/frontpage/2-aruna.jpg": {
+    "sourceHash": "f97c02a1a389abb120c8",
+    "width": 1280,
+    "height": 853,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/6a7ab94772dc7fc0f5e9.webp",
+        "bytes": 29070
+      },
+      {
+        "width": 640,
+        "src": "/optimized/6cd70c02e9c93f9d4e71.webp",
+        "bytes": 87172
+      },
+      {
+        "width": 960,
+        "src": "/optimized/f078d98fda96e8580115.webp",
+        "bytes": 167498
+      },
+      {
+        "width": 1280,
+        "src": "/optimized/819ee835392cb2d145d8.webp",
+        "bytes": 268228
+      }
+    ]
+  },
+  "/images/frontpage/3-group.jpg": {
+    "sourceHash": "239553f313444189fdaf",
+    "width": 1280,
+    "height": 853,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/6a713afb335e7a07b291.webp",
+        "bytes": 26400
+      },
+      {
+        "width": 640,
+        "src": "/optimized/a6e0a1eb4c391f67e702.webp",
+        "bytes": 80280
+      },
+      {
+        "width": 960,
+        "src": "/optimized/fa47e7a8f328939e96d0.webp",
+        "bytes": 149422
+      },
+      {
+        "width": 1280,
+        "src": "/optimized/781aef948d9c571aaa48.webp",
+        "bytes": 223118
+      }
+    ]
+  },
+  "/images/frontpage/4-alex.jpg": {
+    "sourceHash": "67a055dd2dfd4c3ddcf3",
+    "width": 1280,
+    "height": 853,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/bd3e4c614d1659583883.webp",
+        "bytes": 15376
+      },
+      {
+        "width": 640,
+        "src": "/optimized/a732952f68d56614b6d8.webp",
+        "bytes": 43572
+      },
+      {
+        "width": 960,
+        "src": "/optimized/5924d80c7c1b0b5d709d.webp",
+        "bytes": 78924
+      },
+      {
+        "width": 1280,
+        "src": "/optimized/c3af0c650b6bd127cdaa.webp",
+        "bytes": 118830
+      }
+    ]
+  },
+  "/images/frontpage/5-group.jpg": {
+    "sourceHash": "a7e52d4b3601c09c51b4",
+    "width": 1280,
+    "height": 853,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/648990469948da15ac67.webp",
+        "bytes": 19082
+      },
+      {
+        "width": 640,
+        "src": "/optimized/7e34f8943cea49d22ce0.webp",
+        "bytes": 61450
+      },
+      {
+        "width": 960,
+        "src": "/optimized/5a6a7e67c4ce1c109d02.webp",
+        "bytes": 111978
+      },
+      {
+        "width": 1280,
+        "src": "/optimized/2ce6e4e1e08346740cd2.webp",
+        "bytes": 161748
+      }
+    ]
+  },
+  "/images/frontpage/6-ruslan.jpg": {
+    "sourceHash": "6f4ab67ebaa71dddcb02",
+    "width": 1280,
+    "height": 853,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/a3f69ec1841c59d749e8.webp",
+        "bytes": 17408
+      },
+      {
+        "width": 640,
+        "src": "/optimized/b51b7150cc1c4116c24e.webp",
+        "bytes": 52430
+      },
+      {
+        "width": 960,
+        "src": "/optimized/77c6bd798bd657c5a28a.webp",
+        "bytes": 97318
+      },
+      {
+        "width": 1280,
+        "src": "/optimized/64bcf4167c2a6e4c7970.webp",
+        "bytes": 147364
+      }
+    ]
+  },
+  "/images/frontpage/interspeech-backdrop.jpg": {
+    "sourceHash": "47477f36d9eeb9c6d1d1",
+    "width": 1280,
+    "height": 720,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/391662a0ae284f5d7e31.webp",
+        "bytes": 24564
+      },
+      {
+        "width": 640,
+        "src": "/optimized/99b973b86eae6d9701d7.webp",
+        "bytes": 74658
+      },
+      {
+        "width": 960,
+        "src": "/optimized/d9ce0f9ac60766a47397.webp",
+        "bytes": 138076
+      },
+      {
+        "width": 1280,
+        "src": "/optimized/e419fec296bf3d1e7b29.webp",
+        "bytes": 218548
+      }
+    ]
+  },
+  "/images/frontpage/interspeech-poster.jpg": {
+    "sourceHash": "f0b690a2003d3828e9d2",
+    "width": 1280,
+    "height": 720,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/aaef8525d7f492190b8e.webp",
+        "bytes": 19298
+      },
+      {
+        "width": 640,
+        "src": "/optimized/86ed1295cbf63c144c84.webp",
+        "bytes": 57336
+      },
+      {
+        "width": 960,
+        "src": "/optimized/7cefc51e0b7c427e22e4.webp",
+        "bytes": 105744
+      },
+      {
+        "width": 1280,
+        "src": "/optimized/2fbb9e3b16d9d1eaf904.webp",
+        "bytes": 154480
+      }
+    ]
+  },
+  "/images/heroSlaySpeech.png": {
+    "sourceHash": "c45bdc1401546b88384c",
+    "width": 1920,
+    "height": 1080,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/8255856cc46a080c581d.webp",
+        "bytes": 19628
+      },
+      {
+        "width": 640,
+        "src": "/optimized/d3e119de3af6b9ab1678.webp",
+        "bytes": 47678
+      },
+      {
+        "width": 960,
+        "src": "/optimized/e49be2d7bc79297af64a.webp",
+        "bytes": 82722
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/94277ddb84113bc95712.webp",
+        "bytes": 195598
+      },
+      {
+        "width": 1920,
+        "src": "/optimized/b5b750b754bf612016e3.webp",
+        "bytes": 204388
+      }
+    ]
+  },
+  "/images/huggingfaceLeaderboard.png": {
+    "sourceHash": "267f92402c725184d232",
+    "width": 1714,
+    "height": 448,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/977bbca998e8791c4eb4.webp",
+        "bytes": 8468
+      },
+      {
+        "width": 640,
+        "src": "/optimized/e66d95d095a6c42b3296.webp",
+        "bytes": 22720
+      },
+      {
+        "width": 960,
+        "src": "/optimized/2d2fa6210f08b2db47d3.webp",
+        "bytes": 43794
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/801cfb8f4155e466f126.webp",
+        "bytes": 91758
+      },
+      {
+        "width": 1714,
+        "src": "/optimized/326238c9b6acabf80366.webp",
+        "bytes": 39130
+      }
+    ]
+  },
+  "/images/interspeech.png": {
+    "sourceHash": "64b9a956a71acaaa0b93",
+    "width": 2880,
+    "height": 1620,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/35bb6c52afd86a34d00c.webp",
+        "bytes": 15858
+      },
+      {
+        "width": 640,
+        "src": "/optimized/a87805ce4d92f82e7fb6.webp",
+        "bytes": 39376
+      },
+      {
+        "width": 960,
+        "src": "/optimized/c58de3ec17bca8285966.webp",
+        "bytes": 70956
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/5f1649dded0952495fe3.webp",
+        "bytes": 155910
+      },
+      {
+        "width": 2560,
+        "src": "/optimized/49bdfa511a84d9826237.webp",
+        "bytes": 327772
+      }
+    ]
+  },
+  "/images/leaderboard-2026-11.jpg": {
+    "sourceHash": "b7de6e653b0aba80ace8",
+    "width": 1140,
+    "height": 908,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/aa78f90185641211d4d8.webp",
+        "bytes": 20770
+      },
+      {
+        "width": 640,
+        "src": "/optimized/1ac3e61f46dbc37f0461.webp",
+        "bytes": 64542
+      },
+      {
+        "width": 960,
+        "src": "/optimized/ee9f08717d36b6863c14.webp",
+        "bytes": 134506
+      },
+      {
+        "width": 1140,
+        "src": "/optimized/1ae8342ca6b9be4bbf43.jpg",
+        "bytes": 91514
+      }
+    ]
+  },
+  "/images/leaderboard-submit-2026-11.jpg": {
+    "sourceHash": "51d3436d370abac89d52",
+    "width": 1140,
+    "height": 908,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/05d423308cd242a9eaa9.webp",
+        "bytes": 8926
+      },
+      {
+        "width": 640,
+        "src": "/optimized/9994bc6e4ee9c3637933.webp",
+        "bytes": 28690
+      },
+      {
+        "width": 960,
+        "src": "/optimized/650aeda78d7f4c145b1f.webp",
+        "bytes": 55744
+      },
+      {
+        "width": 1140,
+        "src": "/optimized/faf38466e79e53925f1e.jpg",
+        "bytes": 60047
+      }
+    ]
+  },
+  "/images/models.webp": {
+    "sourceHash": "be8e8c6c8854ec29532f",
+    "width": 1160,
+    "height": 1158,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/86d2f82bcbcf8accb1fe.webp",
+        "bytes": 33862
+      },
+      {
+        "width": 640,
+        "src": "/optimized/47c10cead8eb8c98c173.webp",
+        "bytes": 83466
+      },
+      {
+        "width": 960,
+        "src": "/optimized/c1920143af47eb510bd3.webp",
+        "bytes": 167200
+      },
+      {
+        "width": 1160,
+        "src": "/optimized/2bf27986339b1fa972ae.webp",
+        "bytes": 30384
+      }
+    ]
+  },
+  "/images/paper-p2.jpg": {
+    "sourceHash": "9915d635a2eaabcb47ac",
+    "width": 720,
+    "height": 1019,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/913013fce269dfea0200.webp",
+        "bytes": 61340
+      },
+      {
+        "width": 640,
+        "src": "/optimized/9238676622a41a7ebb57.webp",
+        "bytes": 225754
+      },
+      {
+        "width": 720,
+        "src": "/optimized/4aa0ebc0d83c00261a64.jpg",
+        "bytes": 155407
+      }
+    ]
+  },
+  "/images/paper-p3.jpg": {
+    "sourceHash": "9f371a53814d1d4f5f50",
+    "width": 720,
+    "height": 1019,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/4ab5a1caa2a8b7adde65.webp",
+        "bytes": 64758
+      },
+      {
+        "width": 640,
+        "src": "/optimized/7710ca1697b303b356f4.webp",
+        "bytes": 230948
+      },
+      {
+        "width": 720,
+        "src": "/optimized/87498737df9477f396fa.jpg",
+        "bytes": 143404
+      }
+    ]
+  },
+  "/images/paper.png": {
+    "sourceHash": "68a9a54fceae5a1b1aba",
+    "width": 1420,
+    "height": 1928,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/b94a3693adf425cd4e80.webp",
+        "bytes": 54796
+      },
+      {
+        "width": 640,
+        "src": "/optimized/06305255793689983f81.webp",
+        "bytes": 177990
+      },
+      {
+        "width": 960,
+        "src": "/optimized/c0a7691fb92368763f41.webp",
+        "bytes": 324250
+      },
+      {
+        "width": 1420,
+        "src": "/optimized/429b9743c36392219bb0.webp",
+        "bytes": 135554
+      }
+    ]
+  },
+  "/images/paperSLT-p2.jpg": {
+    "sourceHash": "d0983b4592117ee18748",
+    "width": 720,
+    "height": 932,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/0d662192ddcd2db9f5cd.webp",
+        "bytes": 66238
+      },
+      {
+        "width": 640,
+        "src": "/optimized/6729231c901eef2e63eb.webp",
+        "bytes": 245590
+      },
+      {
+        "width": 720,
+        "src": "/optimized/64632101ae9c759aeec3.jpg",
+        "bytes": 164099
+      }
+    ]
+  },
+  "/images/paperSLT-p3.jpg": {
+    "sourceHash": "a07ae7809f629c7632b9",
+    "width": 720,
+    "height": 932,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/5ca7cf1bbdcd316af39a.webp",
+        "bytes": 72060
+      },
+      {
+        "width": 640,
+        "src": "/optimized/851ea94e3ae84038e435.webp",
+        "bytes": 271804
+      },
+      {
+        "width": 720,
+        "src": "/optimized/01703a4b72f473d02d76.jpg",
+        "bytes": 181458
+      }
+    ]
+  },
+  "/images/paperSLT.png": {
+    "sourceHash": "00e6d95f193055aae4e4",
+    "width": 1489,
+    "height": 1928,
+    "encoding": "lossless",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/b9c381b8582590aabba1.webp",
+        "bytes": 59890
+      },
+      {
+        "width": 640,
+        "src": "/optimized/b73554a71bafd402fb15.webp",
+        "bytes": 186912
+      },
+      {
+        "width": 960,
+        "src": "/optimized/7ffae15a404099744942.webp",
+        "bytes": 337960
+      },
+      {
+        "width": 1489,
+        "src": "/optimized/7ddefc61daa14b0b99f3.webp",
+        "bytes": 163234
+      }
+    ]
+  },
+  "/images/research.png": {
+    "sourceHash": "90a38eadaf797f2237f4",
+    "width": 4000,
+    "height": 6000,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/44f0cd646fbffe2e5ed2.webp",
+        "bytes": 28194
+      },
+      {
+        "width": 640,
+        "src": "/optimized/955f19dd69af08376505.webp",
+        "bytes": 77852
+      },
+      {
+        "width": 960,
+        "src": "/optimized/5ebf3db86058018a81c7.webp",
+        "bytes": 140292
+      },
+      {
+        "width": 1600,
+        "src": "/optimized/fb75ec335bde7e7bb811.webp",
+        "bytes": 313984
+      },
+      {
+        "width": 1920,
+        "src": "/optimized/dbc07a02f246f8bf4657.webp",
+        "bytes": 448456
+      }
+    ]
+  },
+  "/images/ruslanShot.jpg": {
+    "sourceHash": "b652388dd552b0d5db01",
+    "width": 1200,
+    "height": 1200,
+    "encoding": "photo-q95",
+    "variants": [
+      {
+        "width": 320,
+        "src": "/optimized/0119f53057654b47d999.webp",
+        "bytes": 24826
+      },
+      {
+        "width": 640,
+        "src": "/optimized/68608a14b7ec5029c502.webp",
+        "bytes": 73762
+      },
+      {
+        "width": 960,
+        "src": "/optimized/a4fa28e9a0a046607a55.webp",
+        "bytes": 136902
+      },
+      {
+        "width": 1200,
+        "src": "/optimized/03b54129fa41b0b7550b.jpg",
+        "bytes": 151386
+      }
+    ]
+  }
+}

@@ -1,3 +1,5 @@
+import StripePattern from '@/components/stripe-pattern';
+import SiteImage from '@/components/site-image';
 // Component to display the lists of blog posts by category.
 
 import React from 'react';
@@ -26,14 +28,16 @@ function formatDate(dateString: string): string {
   });
 }
 
-function PostCard({ post }: { post: Post }) {
+function PostCard({ post, priority = false }: { post: Post; priority?: boolean }) {
   return (
     <article className="relative border p-2 rounded-3xl rounded-b-2xl bg-white font-sans shadow-xs flex flex-col justify-between">
       <div>
         <div className="relative flex h-fit flex-col overflow-hidden rounded-2xl border">
-          <img
+          <SiteImage
             alt={`Cover image for blog post: ${post.title}`}
             src={post.image}
+            sizes="(max-width: 767px) calc(100vw - 52px), (max-width: 1280px) calc(50vw - 34px), 600px"
+            priority={priority}
             className="max-h-80 top-0 object-cover object-bottom aspect-video"
             style={post.imagePosition ? { objectPosition: post.imagePosition } : undefined}
           />
@@ -48,19 +52,31 @@ function PostCard({ post }: { post: Post }) {
               <div className="flex justify-center sm:items-center gap-2 sm:gap-1 grayscale flex-col sm:flex-row sm:flex-wrap text-left">
                 <div className="text-neutral-600 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-1.5">
                   <div className="flex shrink-0 -space-x-1">
-                    <img
+                    <SiteImage
                       alt="A photo of Alexander Metzger"
                       src="/images/avatar-alex.png"
+                      profile="avatar"
+                      sizes="24px"
+                      width={24}
+                      height={24}
                       className="inline-block size-6 rounded-full outline outline-1 -outline-offset-1 outline-black/5 ring-2 ring-white"
                     />
-                    <img
+                    <SiteImage
                       alt="A photo of Aruna Srivastava"
                       src="/images/avatar-aruna.png"
+                      profile="avatar"
+                      sizes="24px"
+                      width={24}
+                      height={24}
                       className="inline-block size-6 rounded-full outline outline-1 -outline-offset-1 outline-black/5 ring-2 ring-white"
                     />
-                    <img
+                    <SiteImage
                       alt="A photo of Ruslan Mukhamedvaleev"
                       src="/images/avatar-ruslan.png"
+                      profile="avatar"
+                      sizes="24px"
+                      width={24}
+                      height={24}
                       className="inline-block size-6 rounded-full outline outline-1 -outline-offset-1 outline-black/5 ring-2 ring-white"
                     />
                   </div>
@@ -191,8 +207,8 @@ function BlogList({ posts }: { posts: Post[] }) {
             {posts
               .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
               .splice(0, 2)
-              .map(post => (
-                <PostCard key={post.slug} post={post} />
+              .map((post, index) => (
+                <PostCard key={post.slug} post={post} priority={index === 0} />
               ))}
           </section>
         </div>
@@ -235,16 +251,7 @@ function BlogList({ posts }: { posts: Post[] }) {
           <div className="h-full"></div>
         </div>
         <div className="w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -318,16 +325,7 @@ export default async function BlogListWrapper() {
       </div>
       <div className="z-[3] bg-white">
         <div className="w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
         <div className="relative">
           <div id="announcements" className="mx-auto p-4 max-w-7xl py-32 z-[0]">
@@ -354,29 +352,11 @@ export default async function BlogListWrapper() {
           </div>
         </div>
         <div className="w-full h-[46px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y mt-[4.5px]">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
         <CTA />
         <div className="w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
       </div>
       <Footer />

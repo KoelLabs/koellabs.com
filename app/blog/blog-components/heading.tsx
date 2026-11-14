@@ -1,3 +1,4 @@
+import SiteImage from '@/components/site-image';
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -69,19 +70,31 @@ export default function BlogHeading({
       <div className="flex flex-col sm:flex-row justify-center mt-7 items-center gap-2 sm:gap-1 text-neutral-600">
         <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-1.5">
           <div className="flex shrink-0 -space-x-1">
-            <img
+            <SiteImage
               alt="A photo of Alexander Metzger"
               src="/images/avatar-alex.png"
+              profile="avatar"
+              sizes="24px"
+              width={24}
+              height={24}
               className="inline-block size-6 rounded-full outline outline-1 -outline-offset-1 outline-black/5 ring-2 ring-white"
             />
-            <img
+            <SiteImage
               alt="A photo of Aruna Srivastava"
               src="/images/avatar-aruna.png"
+              profile="avatar"
+              sizes="24px"
+              width={24}
+              height={24}
               className="inline-block size-6 rounded-full outline outline-1 -outline-offset-1 outline-black/5 ring-2 ring-white"
             />
-            <img
+            <SiteImage
               alt="A photo of Ruslan Mukhamedvaleev"
               src="/images/avatar-ruslan.png"
+              profile="avatar"
+              sizes="24px"
+              width={24}
+              height={24}
               className="inline-block size-6 rounded-full outline outline-1 -outline-offset-1 outline-black/5 ring-2 ring-white"
             />
           </div>

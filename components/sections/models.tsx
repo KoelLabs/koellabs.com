@@ -1,3 +1,4 @@
+import SiteImage from '@/components/site-image';
 import React from 'react';
 import { Button } from '@/components/ui/base/button';
 import Link from 'next/link';
@@ -97,9 +98,10 @@ export default function Models() {
                 <li className="relative group">
                   <Link href="/research">
                     <div className="relative p-2 aspect-square rounded-[32px] bg-white border overflow-hidden">
-                      <img
+                      <SiteImage
                         alt="Phonetic transcription model results"
                         src="/images/models.webp"
+                        sizes="(max-width: 1023px) calc(100vw - 64px), 550px"
                         className="h-full aspect-video object-cover object-top rounded-3xl border bg-white border-black/10 saturate-200"
                       />
                     </div>

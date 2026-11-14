@@ -1,5 +1,7 @@
 'use server';
 
+import StripePattern from '@/components/stripe-pattern';
+
 import Header from '@/components/ui/header';
 import CTA from '@/components/sections/cta';
 import Footer from '@/components/sections/footer';
@@ -18,16 +20,7 @@ export default async function PreviewsPage() {
       </div>
       <PreviewsHero />
       <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-t">
-        <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-          {Array(500)
-            .fill(0)
-            .map((_, i) => (
-              <div
-                key={`bottom-${i}`}
-                className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-              ></div>
-            ))}
-        </div>
+        <StripePattern />
       </div>
       <div
         data-cursor-opacity="0.8"
@@ -37,16 +30,7 @@ export default async function PreviewsPage() {
       >
         <Leaderboard />
         <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-b">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
       </div>
 
@@ -54,16 +38,7 @@ export default async function PreviewsPage() {
         <CTA />
       </div>
       <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-        <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-          {Array(500)
-            .fill(0)
-            .map((_, i) => (
-              <div
-                key={`bottom-${i}`}
-                className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-              ></div>
-            ))}
-        </div>
+        <StripePattern />
       </div>
 
       <Footer />

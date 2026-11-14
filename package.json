@@ -42,7 +42,6 @@
     "react-dom": "^18",
     "react-google-recaptcha-v3": "^1.10.1",
     "react-markdown": "^10.1.0",
-    "react-scan": "^0.4.3",
     "react-syntax-highlighter": "^16.1.0",
     "remark-gfm": "^4.0.1",
     "tailwind-merge": "^2.5.2",
@@ -63,6 +62,8 @@
     "eslint-config-prettier": "^9.1.0",
     "fixpack": "^4.0.0",
     "prettier": "^3.3.3",
+    "react-scan": "^0.4.3",
+    "sharp": "^0.34.5",
     "typescript": "~5.9.3"
   },
   "optionalDependencies": {
@@ -77,13 +78,17 @@
   },
   "private": true,
   "scripts": {
-    "build": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
+    "build": "next build && node scripts/package-standalone.mjs",
     "dev": "next dev",
     "docker": ". ./scripts/docker-run-dev.sh",
     "format": "prettier --write .",
     "license-report": "npx license-report --output=markdown --fields=name --fields=licensePeriod --fields=licenseType --fields=link --fields=author",
     "lint": "next lint",
     "scan": "gitleaks detect && npm audit && zizmor .",
-    "start": "next start"
+    "start": "next start",
+    "images:generate": "node scripts/optimize-images.mjs",
+    "predev": "npm run images:generate",
+    "prebuild": "npm run images:generate",
+    "test:images": "npm run images:generate && node --test tests/optimized-images.test.mjs"
   }
 }

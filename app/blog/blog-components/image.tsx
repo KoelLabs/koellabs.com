@@ -1,5 +1,5 @@
+import SiteImage from '@/components/site-image';
 import React from 'react';
-import Image from 'next/image';
 import { cn } from '@/lib/styles';
 
 export default function BlogImage({
@@ -33,13 +33,15 @@ export default function BlogImage({
     >
       {link && (
         <a href={link} target="_blank" className="relative group/item overflow-hidden bg-white">
-          <Image
+          <SiteImage
             src={src}
             alt={alt}
             width={width}
             height={height}
-            sizes={sizes}
-            quality={100}
+            sizes={
+              sizes ??
+              (expanded ? '(max-width: 768px) 150vw, 1152px' : '(max-width: 768px) 100vw, 768px')
+            }
             className={cn(
               'w-full h-auto border rounded-[16px]',
               expanded && 'border-[0.75px] rounded-[19px]',
@@ -61,13 +63,15 @@ export default function BlogImage({
         </a>
       )}
       {!link && (
-        <Image
+        <SiteImage
           src={src}
           alt={alt}
           width={width}
           height={height}
-          sizes={sizes}
-          quality={100}
+          sizes={
+            sizes ??
+            (expanded ? '(max-width: 768px) 150vw, 1152px' : '(max-width: 768px) 100vw, 768px')
+          }
           className={cn(
             'w-full h-auto border rounded-[16px]',
             expanded && 'border-[0.75px] rounded-[19px]',

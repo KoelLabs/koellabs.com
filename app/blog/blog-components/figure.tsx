@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import SiteImage from '@/components/site-image';
 
 export default function BlogFigure({
   src,
@@ -31,12 +31,11 @@ export default function BlogFigure({
           aria-label={`Open figure: ${alt}`}
           className={scrollOnMobile ? 'block min-w-[640px]' : undefined}
         >
-          <Image
+          <SiteImage
             src={src}
             alt={alt}
             width={width}
             height={height}
-            unoptimized
             sizes={narrow ? '(max-width: 420px) 100vw, 384px' : '(max-width: 768px) 100vw, 768px'}
             className={`h-auto w-full ${scrollOnMobile ? '' : 'rounded-2xl border border-neutral-200'}`}
           />

@@ -583,3 +583,11 @@ main {
   animation: scaleOutContent 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: top center !important;
 }
+
+.decorative-stripes {
+  background-image: repeating-linear-gradient(90deg, #e5e5e5 0 1px, transparent 1px 8.99px);
+}
+
+.dark .decorative-stripes {
+  background-image: repeating-linear-gradient(90deg, #262626 0 1px, transparent 1px 8.99px);
+}

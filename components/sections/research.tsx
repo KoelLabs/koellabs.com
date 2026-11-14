@@ -1,3 +1,4 @@
+import SiteImage from '@/components/site-image';
 import React from 'react';
 import Link from 'next/link';
 import {
@@ -172,25 +173,28 @@ export default function Research() {
                                         : '-translate-x-[40%] rotate-[6deg]'
                                     }`}
                                   >
-                                    <img
+                                    <SiteImage
                                       alt=""
                                       src={page}
+                                      sizes="(min-width: 1280px) 340px, (min-width: 1024px) 28vw, (min-width: 640px) 38vw, 55vw"
                                       className="h-full w-full object-cover object-top rounded-[10px] sm:rounded-[20px] border bg-white border-black/10 opacity-60"
                                     />
                                   </div>
                                 ))}
                                 <div className="absolute left-1/2 -translate-x-1/2 top-[12%] w-[66%] aspect-[14/19] p-1.5 rounded-[16px] sm:p-2 sm:rounded-[28px] bg-white border shadow-md">
-                                  <img
+                                  <SiteImage
                                     alt={item.alt}
                                     src={item.image}
+                                    sizes="(min-width: 1280px) 340px, (min-width: 1024px) 28vw, (min-width: 640px) 38vw, 55vw"
                                     className="h-full w-full object-cover object-top rounded-[10px] sm:rounded-[20px] border bg-white border-black/10"
                                   />
                                 </div>
                               </div>
                             ) : (
-                              <img
+                              <SiteImage
                                 alt={item.alt}
                                 src={item.image}
+                                sizes="(min-width: 1280px) 520px, (min-width: 1024px) 46vw, (min-width: 640px) 62vw, 88vw"
                                 className="w-full aspect-video max-h-[318px] sm:max-h-[650px] object-top rounded-3xl border bg-white border-black/10"
                               />
                             )}

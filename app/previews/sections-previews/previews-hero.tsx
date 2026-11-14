@@ -1,4 +1,6 @@
 'use client';
+
+import SiteImage from '@/components/site-image';
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -231,8 +233,9 @@ export default function PreviewsHero() {
                   <div className="h-[200%] w-[100%] bg-sky-700 rounded-full absolute -top-1/4 left-1/3 mix-blend-color blur-2xl  hidden group-hover/item:block"></div>
                   <div className="h-[200%] w-[100%] bg-[#2A4BCC] rounded-full absolute -bottom-1/4 -left-2/3 blur-2xl  mix-blend-color hidden group-hover/item:block"></div>
 
-                  <img
+                  <SiteImage
                     src={preview.image}
+                    sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1023px) 45vw, 360px"
                     alt={preview.title}
                     className="w-full h-full object-cover"
                   />

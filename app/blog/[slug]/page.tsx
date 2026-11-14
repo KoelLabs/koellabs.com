@@ -1,3 +1,4 @@
+import StripePattern from '@/components/stripe-pattern';
 // General layout that is shared between all blog posts goes here (e.g. footer, header, display author, etc).
 // The posts are defined in app/blog/posts/*.tsx.
 
@@ -71,30 +72,12 @@ export default async function PostPage({
           <article className="mx-auto w-full h-fit bg-neutral-50/20 border-b border-neutral-200 backdrop-blur-md relative overflow-hidden">
             <post.content />
             <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-t absolute bottom-0 left-0 mt-12">
-              <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-                {Array(500)
-                  .fill(0)
-                  .map((_, i) => (
-                    <div
-                      key={`bottom-${i}`}
-                      className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                    ></div>
-                  ))}
-              </div>
+              <StripePattern />
             </div>
           </article>
           <CTA />
           <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-            <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-              {Array(500)
-                .fill(0)
-                .map((_, i) => (
-                  <div
-                    key={`bottom-${i}`}
-                    className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                  ></div>
-                ))}
-            </div>
+            <StripePattern />
           </div>
           <Footer />
         </main>

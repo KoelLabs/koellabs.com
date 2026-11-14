@@ -1,5 +1,7 @@
 'use client';
 
+import SiteImage from '@/components/site-image';
+
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, Play, XIcon } from 'lucide-react';
@@ -83,11 +85,13 @@ export default function HeroVideoDialog({
     <div className={cn('z-1000', className)}>
       <Link href={videoSrc} target="_blank">
         <div className="relative cursor-pointer group">
-          <img
+          <SiteImage
             src={thumbnailSrc}
             alt={thumbnailAlt}
             width={1920}
             height={1080}
+            priority
+            sizes="(max-width: 500px) 450px, (max-width: 1280px) calc(100vw - 100px), 1136px"
             className="w-full transition-all duration-200 group-hover:brightness-[0.9] ease-out rounded-xl shadow-lg border"
           />
           <div className="absolute inset-0 flex items-center justify-center group-hover:scale-100 scale-[0.9] transition-all duration-200 ease-out rounded-2xl">

@@ -1,5 +1,7 @@
 'use client';
 
+import StripePattern from '@/components/stripe-pattern';
+
 import CTA from '@/components/sections/cta';
 import Footer from '@/components/sections/footer';
 import Header from '@/components/ui/header';
@@ -199,16 +201,7 @@ export default function Contact() {
 
       <div className="mx-auto py-24 sm:py-32 sm:pt-0 sm:-mt-px  z-[8] relative">
         <div className="w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
         <div className="max-w-[908px] mx-auto relative overflow-x-hidden lg:overflow-x-visible">
           <svg
@@ -322,42 +315,15 @@ export default function Contact() {
           </div>
         </div>
         <div className="w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
       </div>
       <div className="w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-        <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-          {Array(500)
-            .fill(0)
-            .map((_, i) => (
-              <div
-                key={`bottom-${i}`}
-                className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-              ></div>
-            ))}
-        </div>
+        <StripePattern />
       </div>
       <CTA />
       <div className="w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-        <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-          {Array(500)
-            .fill(0)
-            .map((_, i) => (
-              <div
-                key={`bottom-${i}`}
-                className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-              ></div>
-            ))}
-        </div>
+        <StripePattern />
       </div>
       <Footer />
     </div>

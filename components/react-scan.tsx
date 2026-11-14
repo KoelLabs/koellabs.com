@@ -1,14 +1,13 @@
 'use client';
 
-import { scan } from 'react-scan';
-import { JSX, useEffect } from 'react';
+import { useEffect } from 'react';
 
-export function ReactScan(): JSX.Element {
+export function ReactScan() {
   useEffect(() => {
-    scan({
-      enabled: true,
-    });
+    // The import is eliminated entirely from production builds.
+    if (process.env.NODE_ENV === 'development') {
+      void import('react-scan').then(({ scan }) => scan({ enabled: true }));
+    }
   }, []);
-
-  return <></>;
+  return null;
 }

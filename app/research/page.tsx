@@ -1,9 +1,12 @@
 'use server';
+
+import StripePattern from '@/components/stripe-pattern';
+
+import SiteImage from '@/components/site-image';
 import React from 'react';
 import CTA from '@/components/sections/cta';
 import Footer from '@/components/sections/footer';
 import Header from '@/components/ui/header';
-import Image from 'next/image';
 import Leaderboard from '@/app/previews/sections-previews/leaderboard';
 
 export default async function ResearchPage() {
@@ -76,9 +79,11 @@ export default async function ResearchPage() {
                   className="relative z-10 flex h-[400px] md:h-[500px] xl:h-[600px] mt-60 w-full items-center justify-center"
                 >
                   <div className="relative aspect-[14/19] h-full max-h-[2080px] p-2 rounded-[32px] bg-white border shadow-sm">
-                    <Image
+                    <SiteImage
                       alt="First page of the IEEE SLT 2026 paper Connecting the Dots: Enduring Performance Gaps in ASR Systems Between Standard and Minority English Varieties"
+                      priority
                       src="/images/paperSLT.png"
+                      sizes="(max-width: 639px) calc(100vw - 64px), (max-width: 1023px) 60vw, 590px"
                       className="h-full w-full object-contain rounded-3xl border bg-white border-black/10"
                       width={1489}
                       height={1928}
@@ -167,9 +172,10 @@ export default async function ResearchPage() {
                   className="relative z-10 flex h-[400px] md:h-[500px] xl:h-[600px] mt-60 w-full items-center justify-center"
                 >
                   <div className="relative aspect-[14/19] h-full max-h-[2080px] p-2 rounded-[32px] bg-white border shadow-sm">
-                    <Image
+                    <SiteImage
                       alt="First page of the Interspeech 2026 paper Scaling Human and G2P Supervision for Robust Phonetic Transcription"
                       src="/images/paper.png"
+                      sizes="(max-width: 639px) calc(100vw - 64px), (max-width: 1023px) 60vw, 590px"
                       className="h-full w-full object-contain rounded-3xl border bg-white border-black/10"
                       width={1420}
                       height={1928}
@@ -204,9 +210,10 @@ export default async function ResearchPage() {
                   href="https://docs.google.com/presentation/d/1vC-smwntEnyBO1tNOdMEPg4y0lKs61Wp2Vyhswu2kwU/edit?usp=sharing"
                 >
                   <div className="relative p-2 rounded-[32px] bg-white border  shadow-sm">
-                    <Image
+                    <SiteImage
                       alt="Screenshot showing the massive library of content available to practice with"
                       src="/images/interspeech.png"
+                      sizes="(max-width: 639px) calc(100vw - 64px), (max-width: 1023px) 60vw, 590px"
                       className="h-full aspect-video object-cover object-top rounded-3xl border bg-white border-black/10"
                       width={556}
                       height={313}
@@ -291,9 +298,10 @@ export default async function ResearchPage() {
                   href="https://docs.google.com/presentation/d/19v1o8X_8QxV-W1kG4dt7m1ltAXbYasK_f4srhnypF8E/edit?usp=sharing"
                 >
                   <div className="relative p-2 rounded-[32px] bg-white border  shadow-sm">
-                    <Image
+                    <SiteImage
                       alt="Screenshot showing the massive library of content available to practice with"
                       src="/images/UofW.png"
+                      sizes="(max-width: 639px) calc(100vw - 64px), (max-width: 1023px) 60vw, 590px"
                       className="h-full aspect-video object-cover object-top rounded-3xl border bg-white border-black/10"
                       width={556}
                       height={313}
@@ -341,9 +349,10 @@ export default async function ResearchPage() {
               </div>
               <div className="flex items-start justify-end lg:order-first sm:mr-8 mr-0">
                 <div className="w-full relative h-full bg-white/50 border border-neutral-200/50 rounded-[32px] p-2">
-                  <Image
+                  <SiteImage
                     alt="A photo of the Koel Labs founders, Alexander Metzger, Aruna Srivastava, and Ruslan Mukhamedvaleev standing in front of the bay bridge in San Francisco."
                     src="/images/research.png"
+                    sizes="(max-width: 639px) calc(100vw - 64px), (max-width: 1023px) 60vw, 590px"
                     width={590}
                     height={590}
                     className="w-full h-full rounded-[26px] object-cover object-right lg:max-w-none xl:row-span-2 opacity-100 bg-white xl:row-end-2 aspect-square border"
@@ -356,29 +365,11 @@ export default async function ResearchPage() {
 
         <div className="z-[3] bg-white">
           <div className="w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-            <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-              {Array(500)
-                .fill(0)
-                .map((_, i) => (
-                  <div
-                    key={`bottom-${i}`}
-                    className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                  ></div>
-                ))}
-            </div>
+            <StripePattern />
           </div>
           <CTA />
           <div className="w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-            <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-              {Array(500)
-                .fill(0)
-                .map((_, i) => (
-                  <div
-                    key={`bottom-${i}`}
-                    className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                  ></div>
-                ))}
-            </div>
+            <StripePattern />
           </div>
         </div>
         <Footer />

@@ -6,6 +6,17 @@ const __dirname = new URL('.', import.meta.url).pathname;
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: false,
+  images: {
+    minimumCacheTTL: 86400,
+  },
+  async headers() {
+    return [
+      {
+        source: '/optimized/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+    ];
+  },
   async redirects() {
     return [
       {

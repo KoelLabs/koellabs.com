@@ -1,3 +1,5 @@
+import StripePattern from '@/components/stripe-pattern';
+import SiteImage from '@/components/site-image';
 const applications = [
   {
     title: 'Phonetic Models',
@@ -84,16 +86,7 @@ export default function Applications() {
         </defs>
       </svg>
       <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-b">
-        <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-          {Array(500)
-            .fill(0)
-            .map((_, i) => (
-              <div
-                key={`bottom-${i}`}
-                className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-              ></div>
-            ))}
-        </div>
+        <StripePattern />
       </div>
       <div className="mx-auto">
         <section
@@ -163,8 +156,9 @@ export default function Applications() {
                         <div className="h-5/6 w-5/6 bg-sky-700 rounded-full absolute top-1/2 left-1/2 transition-transform blur-xl mix-blend-color scale-200 hidden group-hover/item:block z-10"></div>
                         <div className="h-5/6 w-5/6 bg-[#2A4BCC] rounded-full absolute -top-1/4 -left-1/4 transition-transform blur-xl  mix-blend-color scale-200 hidden group-hover/item:block z-10"></div>
 
-                        <img
+                        <SiteImage
                           src={preview.image}
+                          sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1023px) 45vw, 360px"
                           alt={preview.title}
                           className="w-full h-full object-cover"
                         />

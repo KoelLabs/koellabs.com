@@ -1,5 +1,9 @@
 'use client';
 
+import StripePattern from '@/components/stripe-pattern';
+
+import SiteImage from '@/components/site-image';
+
 import Header from '@/components/ui/header';
 import CTA from '@/components/sections/cta';
 import Footer from '@/components/sections/footer';
@@ -7,7 +11,6 @@ import HeroNew from '@/components/sections/hero';
 import Research from '@/components/sections/research';
 import { useRef } from 'react';
 import Models from '@/components/sections/models';
-import Image from 'next/image';
 import Autoplay from 'embla-carousel-autoplay';
 
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/base/carousel';
@@ -49,16 +52,7 @@ export default function Home() {
       >
         <Research />
         <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-b">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
       </div>
       <div
@@ -83,15 +77,13 @@ export default function Home() {
               {sliderImages.map((src, i) => (
                 <CarouselItem key={i} className="lg:basis-1/3 p-[8px] border ml-2 rounded-[20px]">
                   <div className="relative aspect-video w-full overflow-hidden ring-1 ring-neutral-200 rounded-[12px] bg-white">
-                    <Image
+                    <SiteImage
                       src={src}
                       alt={`Gallery image ${i + 1}`}
                       width={700}
                       height={600}
-                      quality={50}
                       className="object-cover rounded-lg object-right-bottom grays cale transition-all duration-150"
-                      priority={i < 4}
-                      loading={i < 4 ? undefined : 'lazy'}
+                      sizes="(min-width: 1024px) 34vw, (min-width: 500px) 100vw, 500px"
                     />
                   </div>
                 </CarouselItem>
@@ -107,16 +99,7 @@ export default function Home() {
         className="z-0 relative"
       >
         <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-t">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
         <Models />
       </div>
@@ -128,32 +111,14 @@ export default function Home() {
       >
         <Applications />
         <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
       </div>
       <div className="w-full relative">
         <CTA />
       </div>
       <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-        <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-          {Array(500)
-            .fill(0)
-            .map((_, i) => (
-              <div
-                key={`bottom-${i}`}
-                className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-              ></div>
-            ))}
-        </div>
+        <StripePattern />
       </div>
 
       <Footer />

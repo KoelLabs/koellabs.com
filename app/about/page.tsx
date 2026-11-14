@@ -1,3 +1,5 @@
+import StripePattern from '@/components/stripe-pattern';
+import SiteImage from '@/components/site-image';
 import React from 'react';
 import { Button } from '@/components/ui/base/button';
 import Header from '@/components/ui/header';
@@ -98,9 +100,11 @@ export default function About() {
                   <Signature className="mt-6 w-[57.5%] sm:w-[23%] opacity-75 text-black" />
                 </div>
                 <div className="mt-10 w-full md:max-w-lg rounded-[24px] object-cover sm:mt-16 lg:mt-0 xl:mt-8 lg:max-w-none xl:row-span-2 xl:row-end-2 p-2 bg-white/75 backdrop-blur-md border">
-                  <img
+                  <SiteImage
                     alt="A selfie of the Koel Labs founders, Aruna Srivastava, Ruslan Mukhamedvaleev, and Alexander Metzger, holding their badges at Interspeech 2026."
                     src="/images/aboutTeam.jpg"
+                    priority
+                    sizes="(min-width: 1280px) 512px, (min-width: 1024px) 48vw, (min-width: 768px) 512px, calc(100vw - 64px)"
                     className=" aspect-5/5 scale w-full md:max-w-lg rounded-2xl object-cover object-left lg:max-w-none xl:row-span-2 xl:row-end-2 border"
                   />
                   <div className="w-full h-12 rounded-2xl mt-2 border relative gap-y-2 flex items-center overflow-hidden justify-center">
@@ -136,9 +140,10 @@ export default function About() {
               >
                 {people.map(person => (
                   <li key={person.name}>
-                    <img
+                    <SiteImage
                       alt={`A photo of ${person.name}, ${person.role} at Koel Labs`}
                       src={person.imageUrl}
+                      sizes="(min-width: 1280px) 384px, (min-width: 1024px) 31vw, (min-width: 640px) 48vw, calc(100vw - 48px)"
                       className="aspect-square w-full rounded-2xl object-cover"
                     />
                     <h3 className="mt-6 text-lg/8 font-semibold tracking-tight text-gray-900">
@@ -188,31 +193,13 @@ export default function About() {
           </div>
         </div>
         <div className="w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-b">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
         <div className="w-full relative bg-white">
           <CTA />
         </div>
         <div className="w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
         <Footer />
       </div>

@@ -1,3 +1,4 @@
+import StripePattern from '@/components/stripe-pattern';
 import React, { PropsWithChildren } from 'react';
 
 export default function BlogBody({ children }: PropsWithChildren) {
@@ -40,29 +41,11 @@ export default function BlogBody({ children }: PropsWithChildren) {
           <div className="rounded-full w-full h-full border bg-white"></div>
         </div>
         <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-b absolute top-0 left-0 z-[1]">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
         <div className=" w-full h-[250px] overflow-hidden bg-neutral-50 absolute top-0 left-0"></div>
         <div className=" w-full h-[50px] overflow-hidden flex items-start justify-center bg-neutral-50 border-y absolute top-56 left-0">
-          <div className="flex h-full items-start gap-[7.99px] ml-[0.2px]">
-            {Array(500)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={`bottom-${i}`}
-                  className="h-full w-px bg-neutral-200 dark:bg-neutral-800 -mb-12"
-                ></div>
-              ))}
-          </div>
+          <StripePattern />
         </div>
       </div>
 
